@@ -9,7 +9,6 @@ func main() {
 }
 
 func singleNumber(nums []int) int {
-	// 数组从头到尾做减法 取反
 	var a = nums[0]
 	var i = 1
 	for ; i < len(nums); i++ {
