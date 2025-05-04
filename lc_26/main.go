@@ -4,7 +4,7 @@ import "fmt"
 
 // https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
 func main() {
-	arr := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4} // 输入数组
+	arr := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4, 4} // 输入数组
 	fmt.Println(removeDuplicates(arr))
 }
 
