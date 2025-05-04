@@ -8,6 +8,7 @@ func main() {
 	reverseString(byteSlice)
 }
 
+// 简单的头尾交换
 func reverseString(s []byte) {
 	fmt.Println(string(s))
 	for i, _ := range s {
