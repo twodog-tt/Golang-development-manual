@@ -62,6 +62,7 @@ func getBooks() ([]Books, error) {
 	}
 	return books, nil
 }
+
 func example1() {
 	books, err := getBooks()
 	if err != nil {
