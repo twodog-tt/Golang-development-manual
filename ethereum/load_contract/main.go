@@ -5,7 +5,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
-	store "td-homework/dapp/deploy_contract"
+	store "td-homework/ethereum/deploy_contract"
 )
 
 const (
