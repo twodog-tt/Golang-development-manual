@@ -17,12 +17,6 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	//defer func(db *sqlx.DB) {
-	//	err := db.Close()
-	//	if err != nil {
-	//		panic(err)
-	//	}
-	//}(db)
 	// 配置连接池
 	db.SetMaxOpenConns(20)           // 最大打开连接数
 	db.SetMaxIdleConns(10)           // 最大空闲连接数
