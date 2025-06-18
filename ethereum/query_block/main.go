@@ -9,6 +9,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
+// 查询区块
 func main() {
 	// 连接到 Alchemy 提供的 Sepolia 测试网节点
 	client, err := ethclient.Dial("https://eth-sepolia.g.alchemy.com/v2/Cb4j5devGl6ggzj3iEW8M67btfjB9zOa")
