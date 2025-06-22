@@ -30,7 +30,7 @@ package deploy_contract
 //	}
 //
 //	// 创建私钥（在实际应用中，您应该使用更安全的方式来管理私钥）
-//	privateKey, err := crypto.HexToECDSA("9918acdc2baf0155cad6ce75fb38462c3e090fbdc83177cf091f7905d24ce203")
+//	privateKey, err := crypto.HexToECDSA("私钥")
 //	if err != nil {
 //		log.Fatal(err)
 //	}
