@@ -2,10 +2,10 @@ package main
 
 import (
 	"log"
+	store "td-homework/ethereum/usage/deploy_contract"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
-	store "td-homework/ethereum/deploy_contract"
 )
 
 const (
