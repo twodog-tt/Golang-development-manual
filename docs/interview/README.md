@@ -40,7 +40,7 @@ gRPC、连接池、Gin 中间件、JWT、WebSocket。
 
 K8s 调度、Docker 多阶段构建、OpenTelemetry（可选，JD 含云原生时必刷）。
 
-### [08 手写题](./08-coding-senior/) — 5 题（代码见 `examples/senior/`）
+### [08 手写题](./08-coding-senior/) — 5 题（正文 + `examples/senior/`）
 
 LRU、令牌桶、优雅关闭、errgroup、连接池。
 

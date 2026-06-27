@@ -404,24 +404,29 @@ p2:
       title: 并发安全 LRU
       frequency: 5
       status: published
+      file: 08-coding-senior/S-CODE-01-concurrent-lru.md
       code_refs: [examples/senior/lru]
     - id: S-CODE-02
       title: 令牌桶限流器实现
       frequency: 5
       status: published
+      file: 08-coding-senior/S-CODE-02-token-bucket.md
       code_refs: [examples/senior/ratelimit]
     - id: S-CODE-03
       title: 优雅关闭 HTTP 服务
       frequency: 4
       status: published
+      file: 08-coding-senior/S-CODE-03-graceful-shutdown.md
       code_refs: [examples/senior/graceful_shutdown]
     - id: S-CODE-04
       title: errgroup 语义实现
       frequency: 4
       status: published
+      file: 08-coding-senior/S-CODE-04-errgroup.md
       code_refs: [examples/senior/errgroup]
     - id: S-CODE-05
       title: 连接池实现要点
       frequency: 4
       status: published
+      file: 08-coding-senior/S-CODE-05-connection-pool.md
       code_refs: [examples/senior/connpool]

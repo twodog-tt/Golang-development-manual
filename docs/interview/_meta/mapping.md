@@ -13,7 +13,11 @@
 | S-NET-03 | Gin 校验 | `gin-example/example_12/main.go` | 自定义 validator |
 | S-NET-03 | Gin 绑定 | `gin-example/example_3/main.go` | 嵌套结构体绑定 |
 | S-NET-03 | Gin JSON | `gin-example/example_1/main.go` | AsciiJSON |
-| S-CODE-01~05 | 手写题 | `examples/senior/lru`, `ratelimit`, `errgroup`, `connpool`, `graceful_shutdown` |
+| S-CODE-01 | LRU | [S-CODE-01](./08-coding-senior/S-CODE-01-concurrent-lru.md) | `examples/senior/lru/` |
+| S-CODE-02 | 令牌桶 | [S-CODE-02](./08-coding-senior/S-CODE-02-token-bucket.md) | `examples/senior/ratelimit/` |
+| S-CODE-03 | 优雅关闭 | [S-CODE-03](./08-coding-senior/S-CODE-03-graceful-shutdown.md) | `examples/senior/graceful_shutdown/` |
+| S-CODE-04 | errgroup | [S-CODE-04](./08-coding-senior/S-CODE-04-errgroup.md) | `examples/senior/errgroup/` |
+| S-CODE-05 | 连接池 | [S-CODE-05](./08-coding-senior/S-CODE-05-connection-pool.md) | `examples/senior/connpool/` |
 | — | 算法面 | `algorithm/lc_*` | LeetCode 参考实现 |
 
 ## 使用方式
