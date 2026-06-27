@@ -35,11 +35,11 @@ theme:
     - toc.follow
 
 plugins:
+  - awesome-pages
   - search:
       lang:
         - zh
         - en
-  - awesome-pages
 
 markdown_extensions:
   - admonition
@@ -54,12 +54,6 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
-
-nav:
-  - 首页: index.md
-  - 学习路线: learning-path-senior.md
-  - 题源与引用: sources.md
-  - 面试题: interview/
 
 extra:
   social:
