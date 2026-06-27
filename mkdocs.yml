@@ -24,12 +24,12 @@ theme:
         icon: material/brightness-4
         name: 浅色模式
   features:
-    - navigation.tabs
-    - navigation.tabs.sticky
     - navigation.sections
     - navigation.expand
     - navigation.indexes
     - navigation.top
+    - navigation.footer
+    - toc.integrate
     - search.suggest
     - search.highlight
     - content.code.copy

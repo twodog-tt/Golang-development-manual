@@ -1,8 +1,5 @@
-# 05 数据库与存储（学习路径入口）
+# 05 数据库与存储
 
-> 本模块文章已按 **中间件类型** 归类，请从 **[middleware/](../middleware/)** 浏览。
+本模块内容已并入左侧导航 **「中间件与数据库」**。
 
-| 类型 | 路径 |
-|------|------|
-| MySQL + GORM | [middleware/mysql/](../middleware/mysql/) |
-| Elasticsearch | [middleware/elasticsearch/](../middleware/elasticsearch/) |
+请访问：[middleware/mysql/](middleware/mysql/) · [middleware/elasticsearch/](middleware/elasticsearch/)

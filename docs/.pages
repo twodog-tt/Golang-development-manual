@@ -1,6 +1,30 @@
 nav:
   - 首页: index.md
   - 学习路线: learning-path-senior.md
-  - 题源与引用: sources.md
-  - 中间件与数据库: interview/middleware
-  - 面试题: interview
+
+  - Go 核心（P0）:
+    - 01 并发与运行时: interview/01-runtime-concurrency
+    - 02 内存与 GC: interview/02-memory-gc
+    - 03 系统设计: interview/03-system-design
+
+  - 中间件与数据库:
+    - 总览: interview/middleware/README.md
+    - MySQL 与 GORM: interview/middleware/mysql
+    - Redis: interview/middleware/redis
+    - Kafka: interview/middleware/kafka
+    - RocketMQ: interview/middleware/rocketmq
+    - Elasticsearch: interview/middleware/elasticsearch
+    - 分布式事务: interview/middleware/distributed
+
+  - 网络与服务治理: interview/06-network-governance
+  - 手写题: interview/08-coding-senior
+
+  - 工程与软技能:
+    - 07 工程与领导力: interview/07-engineering-leadership
+    - 09 云原生: interview/09-cloud-native
+
+  - 参考资料:
+    - 题源与引用: sources.md
+    - 面试题总索引: interview/README.md
+    - 代码与题目映射: interview/_meta/mapping.md
+    - 题目撰写模板: interview/_meta/template.md
