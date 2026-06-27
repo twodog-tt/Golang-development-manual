@@ -20,7 +20,7 @@
 | W1 | [并发与运行时](./interview/01-runtime-concurrency/) | 20 题 | `basis/` + `examples/senior/` | 画 GMP；讲 2 个泄漏案例 |
 | W2 | [内存与 GC](./interview/02-memory-gc/) | 15 题 | `go test -race`、`-gcflags=-m` | 读一份 heap profile |
 | W3 | [系统设计](./interview/03-system-design/) | 20 题 | 每题 15min 结构化输出 | 秒杀/幂等/缓存各 1 题口述 |
-| W4 | P1 模块 + 模拟 | 分布式/DB/网络各选 5 题 | 2 场模拟面 | 追问链不停顿 3 层 |
+| W4 | P1 模块 + 模拟 | 分布式/DB/网络/**AI** 各选 5 题 | 2 场模拟面 | 追问链不停顿 3 层 |
 
 ### 每日建议（工作日 1.5h）
 
@@ -39,7 +39,7 @@
 | 5 | [分布式与中间件](./interview/04-distributed-middleware/) |
 | 6 | [数据库与存储](./interview/05-database-storage/) + `gorm/` |
 | 7 | [网络与服务治理](./interview/06-network-governance/) + `gin-example/` |
-| 8 | [工程与领导力](./interview/07-engineering-leadership/) + [云原生](./interview/09-cloud-native/) + [手写题](./interview/08-coding-senior/) |
+| 8 | [AI 工程与编程](./interview/10-ai-engineering/) + [工程与领导力](./interview/07-engineering-leadership/) + [云原生](./interview/09-cloud-native/) + [手写题](./interview/08-coding-senior/) |
 
 ---
 

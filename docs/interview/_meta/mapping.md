@@ -23,6 +23,7 @@
 | S-CODE-03 | 优雅关闭 | [S-CODE-03](../08-coding-senior/S-CODE-03-graceful-shutdown.md) | `examples/senior/graceful_shutdown/` |
 | S-CODE-04 | errgroup | [S-CODE-04](../08-coding-senior/S-CODE-04-errgroup.md) | `examples/senior/errgroup/` |
 | S-CODE-05 | 连接池 | [S-CODE-05](../08-coding-senior/S-CODE-05-connection-pool.md) | `examples/senior/connpool/` |
+| S-AI-01～06 | AI 工程 | — | [10-ai-engineering/](../10-ai-engineering/)（待补 `examples/senior/` 示例） |
 | — | 算法面 | `algorithm/lc_*` | LeetCode 参考实现 |
 
 ## 使用方式

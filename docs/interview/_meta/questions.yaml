@@ -400,6 +400,37 @@ p1:
       frequency: 3
       status: published
       file: 06-network-governance/S-NET-05-websocket-gateway.md
+  ai_engineering:
+    - id: S-AI-01
+      title: Go 接入大模型 API：流式、重试、超时
+      frequency: 5
+      status: published
+      file: 10-ai-engineering/S-AI-01-llm-api-integration.md
+    - id: S-AI-02
+      title: RAG 架构：分块、向量检索与 Go 落地
+      frequency: 5
+      status: published
+      file: 10-ai-engineering/S-AI-02-rag-architecture.md
+    - id: S-AI-03
+      title: AI Agent 与 Function Calling
+      frequency: 5
+      status: published
+      file: 10-ai-engineering/S-AI-03-agent-tool-calling.md
+    - id: S-AI-04
+      title: Prompt 工程与 Context 窗口管理
+      frequency: 4
+      status: published
+      file: 10-ai-engineering/S-AI-04-prompt-context.md
+    - id: S-AI-05
+      title: LLM 应用安全：注入、PII、护栏
+      frequency: 5
+      status: published
+      file: 10-ai-engineering/S-AI-05-llm-security.md
+    - id: S-AI-06
+      title: LLM 可观测性、成本与延迟优化
+      frequency: 4
+      status: published
+      file: 10-ai-engineering/S-AI-06-llm-observability-cost.md
 
 p2:
   leadership:

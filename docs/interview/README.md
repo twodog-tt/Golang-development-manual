@@ -19,6 +19,7 @@
 | 模块 | 题数 | 入口 |
 |------|------|------|
 | 06 网络与服务治理 | 5 | [06-network-governance/](06-network-governance/) |
+| **10 AI 工程与编程** | **6** | [**10-ai-engineering/**](10-ai-engineering/) |
 | 08 手写题 | 5 | [08-coding-senior/](08-coding-senior/) |
 | 07 工程与领导力 | 3 | [07-engineering-leadership/](07-engineering-leadership/) |
 | 09 云原生 | 3 | [09-cloud-native/](09-cloud-native/) |

@@ -9,6 +9,7 @@
 | 首页 / 学习路线 | 入口与 4 周计划 |
 | **Go 核心（P0）** | 并发、内存、系统设计 |
 | **中间件与数据库** | MySQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
+| **AI 工程与编程** | LLM API、RAG、Agent、安全 |
 | 网络与服务治理 | gRPC、Gin、JWT |
 | 手写题 | LRU、限流等 + `examples/senior/` |
 | 工程与软技能 | 领导力、云原生 |
