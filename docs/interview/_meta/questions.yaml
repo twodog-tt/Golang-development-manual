@@ -1,0 +1,379 @@
+# Go 后端面试题单（5 年+）
+# status: published | draft | skeleton
+# frequency: 1-5（5 为最高频）
+
+p0:
+  concurrency:
+    - id: S-CONC-01
+      title: GMP 模型全貌与 1.14+ 抢占式调度演进
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-01-gmp-overview.md
+    - id: S-CONC-02
+      title: G、M、P 各自职责；去掉 P 会怎样
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-02-gmp-roles.md
+    - id: S-CONC-03
+      title: goroutine 栈增长与分裂；和 OS 线程对比
+      frequency: 4
+      status: published
+      file: 01-runtime-concurrency/S-CONC-03-goroutine-stack.md
+    - id: S-CONC-04
+      title: GOMAXPROCS 设置依据；容器 CPU limit 下的误区
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-04-gomaxprocs.md
+    - id: S-CONC-05
+      title: Channel 底层结构与有缓冲/无缓冲选型
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-05-channel.md
+    - id: S-CONC-06
+      title: Channel 死锁典型场景与排查
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-06-channel-deadlock.md
+    - id: S-CONC-07
+      title: select 语义、公平性与 default 的坑
+      frequency: 4
+      status: published
+      file: 01-runtime-concurrency/S-CONC-07-select.md
+    - id: S-CONC-08
+      title: Mutex vs RWMutex vs atomic 选型
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-08-sync-primitives.md
+    - id: S-CONC-09
+      title: sync.Map 适用场景与误用
+      frequency: 4
+      status: published
+      file: 01-runtime-concurrency/S-CONC-09-sync-map.md
+    - id: S-CONC-10
+      title: sync.Pool 原理、GC 交互与线上误用
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-10-sync-pool.md
+    - id: S-CONC-11
+      title: WaitGroup、Once、Cond 生产用法
+      frequency: 4
+      status: published
+      file: 01-runtime-concurrency/S-CONC-11-waitgroup-once-cond.md
+    - id: S-CONC-12
+      title: Context 树、取消传播、超时与泄漏
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-12-context.md
+    - id: S-CONC-13
+      title: goroutine 泄漏成因与 pprof 排查
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-13-goroutine-leak.md
+    - id: S-CONC-14
+      title: Go 内存模型与 happens-before
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-14-memory-model.md
+    - id: S-CONC-15
+      title: race detector 原理与 data race 面试表达
+      frequency: 4
+      status: published
+      file: 01-runtime-concurrency/S-CONC-15-race-detector.md
+    - id: S-CONC-16
+      title: Worker Pool 设计：队列、背压、优雅退出
+      frequency: 5
+      status: published
+      file: 01-runtime-concurrency/S-CONC-16-worker-pool.md
+    - id: S-CONC-17
+      title: Fan-out/Fan-in 与 Pipeline 瓶颈分析
+      frequency: 4
+      status: published
+      file: 01-runtime-concurrency/S-CONC-17-pipeline.md
+    - id: S-CONC-18
+      title: 高并发下 goroutine 泛滥的架构治理
+      frequency: 4
+      status: published
+      file: 01-runtime-concurrency/S-CONC-18-goroutine-governance.md
+    - id: S-CONC-19
+      title: netpoller 与阻塞 syscall 的处理
+      frequency: 4
+      status: published
+      file: 01-runtime-concurrency/S-CONC-19-netpoller.md
+    - id: S-CONC-20
+      title: Go 1.22+ loop 变量与泛型对并发代码的影响
+      frequency: 3
+      status: published
+      file: 01-runtime-concurrency/S-CONC-20-go122-generics.md
+
+  memory_gc:
+    - id: S-MEM-01
+      title: 三色标记与混合写屏障
+      frequency: 5
+      status: published
+      file: 02-memory-gc/S-MEM-01-tri-color-gc.md
+    - id: S-MEM-02
+      title: STW 阶段与 Go 1.5+ GC 演进
+      frequency: 5
+      status: published
+      file: 02-memory-gc/S-MEM-02-stw-evolution.md
+    - id: S-MEM-03
+      title: GC 触发条件与 GOGC 调优
+      frequency: 5
+      status: published
+      file: 02-memory-gc/S-MEM-03-gogc-tuning.md
+    - id: S-MEM-04
+      title: 逃逸分析与 -gcflags=-m
+      frequency: 5
+      status: published
+      file: 02-memory-gc/S-MEM-04-escape-analysis.md
+    - id: S-MEM-05
+      title: slice 底层、扩容与内存泄漏场景
+      frequency: 5
+      status: published
+      file: 02-memory-gc/S-MEM-05-slice-internals.md
+    - id: S-MEM-06
+      title: map 并发安全、扩容与 sync.Map 选型
+      frequency: 5
+      status: published
+      file: 02-memory-gc/S-MEM-06-map-internals.md
+    - id: S-MEM-07
+      title: interface 底层 eface/iface 与断言成本
+      frequency: 4
+      status: published
+      file: 02-memory-gc/S-MEM-07-interface.md
+    - id: S-MEM-08
+      title: 内存对齐与 unsafe 边界
+      frequency: 3
+      status: published
+      file: 02-memory-gc/S-MEM-08-unsafe-alignment.md
+    - id: S-MEM-09
+      title: 大对象、堆外与 OOM 排查
+      frequency: 4
+      status: published
+      file: 02-memory-gc/S-MEM-09-oom-debug.md
+    - id: S-MEM-10
+      title: pprof heap/allocs 实战解读
+      frequency: 5
+      status: published
+      file: 02-memory-gc/S-MEM-10-pprof-heap.md
+    - id: S-MEM-11
+      title: CPU profile vs execution trace 选型
+      frequency: 4
+      status: published
+      file: 02-memory-gc/S-MEM-11-pprof-vs-trace.md
+    - id: S-MEM-12
+      title: 减少 GC 压力的系统级手段
+      frequency: 4
+      status: published
+      file: 02-memory-gc/S-MEM-12-reduce-gc-pressure.md
+    - id: S-MEM-13
+      title: 延迟敏感服务的 GC 抖动治理
+      frequency: 5
+      status: published
+      file: 02-memory-gc/S-MEM-13-gc-jitter.md
+    - id: S-MEM-14
+      title: new/make 在资深面试中的升维回答
+      frequency: 3
+      status: published
+      file: 02-memory-gc/S-MEM-14-new-make.md
+    - id: S-MEM-15
+      title: defer 链、开销与错误处理
+      frequency: 4
+      status: published
+      file: 02-memory-gc/S-MEM-15-defer.md
+
+  system_design:
+    - id: S-ARCH-01
+      title: 设计支撑 10 万 QPS 的读多写少 API
+      frequency: 5
+      status: published
+      file: 03-system-design/S-ARCH-01-read-heavy-api.md
+    - id: S-ARCH-02
+      title: 秒杀：库存、超卖、热点 Key
+      frequency: 5
+      status: published
+      file: 03-system-design/S-ARCH-02-seckill.md
+    - id: S-ARCH-03
+      title: 分布式 ID：雪花、号段、UUID 取舍
+      frequency: 5
+      status: published
+      file: 03-system-design/S-ARCH-03-distributed-id.md
+    - id: S-ARCH-04
+      title: 幂等设计：接口、消息、数据库层
+      frequency: 5
+      status: published
+      file: 03-system-design/S-ARCH-04-idempotency.md
+    - id: S-ARCH-05
+      title: 最终一致 vs 强一致：业务怎么选
+      frequency: 5
+      status: published
+      file: 03-system-design/S-ARCH-05-consistency-tradeoff.md
+    - id: S-ARCH-06
+      title: 缓存穿透、击穿、雪崩治理体系
+      frequency: 5
+      status: published
+      file: 03-system-design/S-ARCH-06-cache-failure-modes.md
+    - id: S-ARCH-07
+      title: 多级缓存与本地缓存一致性
+      frequency: 4
+      status: published
+      file: 03-system-design/S-ARCH-07-multi-level-cache.md
+    - id: S-ARCH-08
+      title: 限流：令牌桶、漏桶、分布式限流
+      frequency: 5
+      status: published
+      file: 03-system-design/S-ARCH-08-rate-limiting.md
+    - id: S-ARCH-09
+      title: 熔断、降级、舱壁
+      frequency: 4
+      status: published
+      file: 03-system-design/S-ARCH-09-circuit-breaker.md
+    - id: S-ARCH-10
+      title: 消息队列：至少一次、恰好一次、顺序性
+      frequency: 5
+      status: published
+      file: 03-system-design/S-ARCH-10-mq-semantics.md
+    - id: S-ARCH-11
+      title: 延迟任务与定时任务架构
+      frequency: 4
+      status: published
+      file: 03-system-design/S-ARCH-11-delayed-jobs.md
+    - id: S-ARCH-12
+      title: 支付/订单状态机设计
+      frequency: 5
+      status: published
+      file: 03-system-design/S-ARCH-12-order-state-machine.md
+    - id: S-ARCH-13
+      title: 多活、异地容灾与 RPO/RTO
+      frequency: 4
+      status: published
+      file: 03-system-design/S-ARCH-13-multi-active-dr.md
+    - id: S-ARCH-14
+      title: 微服务拆分边界与何时不该拆
+      frequency: 4
+      status: published
+      file: 03-system-design/S-ARCH-14-microservice-boundary.md
+    - id: S-ARCH-15
+      title: API 版本、灰度发布与特性开关
+      frequency: 4
+      status: published
+      file: 03-system-design/S-ARCH-15-release-strategy.md
+    - id: S-ARCH-16
+      title: 可观测性：日志、指标、链路
+      frequency: 5
+      status: published
+      file: 03-system-design/S-ARCH-16-observability.md
+    - id: S-ARCH-17
+      title: SLO/SLI 与错误预算
+      frequency: 4
+      status: published
+      file: 03-system-design/S-ARCH-17-slo-error-budget.md
+    - id: S-ARCH-18
+      title: 容量评估与压测方法论
+      frequency: 4
+      status: published
+      file: 03-system-design/S-ARCH-18-capacity-planning.md
+    - id: S-ARCH-19
+      title: 从单体到微服务的演进与回退
+      frequency: 3
+      status: published
+      file: 03-system-design/S-ARCH-19-monolith-to-microservices.md
+    - id: S-ARCH-20
+      title: 技术选型文档怎么写（Lead 面）
+      frequency: 4
+      status: published
+      file: 03-system-design/S-ARCH-20-tech-decision-doc.md
+
+p1:
+  distributed:
+    - id: S-DIST-01
+      title: Redis 集群模式与选型
+      frequency: 5
+      status: published
+      file: 04-distributed-middleware/S-DIST-01-redis-cluster.md
+    - id: S-DIST-02
+      title: 分布式锁 Redlock 争议
+      frequency: 4
+      status: published
+      file: 04-distributed-middleware/S-DIST-02-distributed-lock.md
+    - id: S-DIST-03
+      title: 热点 Key 发现与治理
+      frequency: 5
+      status: published
+      file: 04-distributed-middleware/S-DIST-03-hot-key.md
+    - id: S-DIST-04
+      title: Kafka 消费语义与 rebalance
+      frequency: 4
+      status: published
+      file: 04-distributed-middleware/S-DIST-04-kafka-semantics.md
+    - id: S-DIST-05
+      title: 分布式事务 TCC/Saga 对比
+      frequency: 4
+      status: published
+      file: 04-distributed-middleware/S-DIST-05-distributed-transaction.md
+  database:
+    - id: S-DB-01
+      title: MySQL 索引原理与最左前缀
+      frequency: 5
+      status: published
+      file: 05-database-storage/S-DB-01-mysql-index.md
+    - id: S-DB-02
+      title: 事务隔离级别与 MVCC
+      frequency: 5
+      status: published
+      file: 05-database-storage/S-DB-02-transaction-mvcc.md
+    - id: S-DB-03
+      title: 慢查询排查与 EXPLAIN
+      frequency: 5
+      status: published
+      file: 05-database-storage/S-DB-03-slow-query.md
+    - id: S-DB-04
+      title: 分库分表策略与跨库查询
+      frequency: 4
+      status: published
+      file: 05-database-storage/S-DB-04-sharding.md
+    - id: S-DB-05
+      title: GORM 预加载 N+1 与事务陷阱
+      frequency: 4
+      status: published
+      file: 05-database-storage/S-DB-05-gorm-pitfalls.md
+      code_refs: [gorm/demo/main.go]
+  network:
+    - id: S-NET-01
+      title: gRPC vs HTTP/REST 选型
+      frequency: 4
+      status: published
+      file: 06-network-governance/S-NET-01-grpc-vs-rest.md
+    - id: S-NET-02
+      title: HTTP 连接池与 Keep-Alive
+      frequency: 4
+      status: published
+      file: 06-network-governance/S-NET-02-http-connection-pool.md
+    - id: S-NET-03
+      title: Gin 中间件链与请求生命周期
+      frequency: 4
+      status: published
+      file: 06-network-governance/S-NET-03-gin-middleware.md
+      code_refs: [gin-example/example_12/main.go]
+    - id: S-NET-04
+      title: JWT 认证与安全边界
+      frequency: 4
+      status: published
+      file: 06-network-governance/S-NET-04-jwt-auth.md
+    - id: S-NET-05
+      title: 长连接与 WebSocket 网关设计
+      frequency: 3
+      status: published
+      file: 06-network-governance/S-NET-05-websocket-gateway.md
+
+p2:
+  leadership:
+    - { id: S-LEAD-01, title: 线上事故复盘结构, frequency: 5, status: skeleton }
+    - { id: S-LEAD-02, title: 技术债识别与偿还策略, frequency: 4, status: skeleton }
+    - { id: S-LEAD-03, title: 带团队与 Code Review 文化, frequency: 4, status: skeleton }
+  coding:
+    - { id: S-CODE-01, title: 并发安全 LRU, frequency: 5, status: skeleton }
+    - { id: S-CODE-02, title: 令牌桶限流器实现, frequency: 5, status: skeleton }
+    - { id: S-CODE-03, title: 优雅关闭 HTTP 服务, frequency: 4, status: skeleton }
+    - { id: S-CODE-04, title: errgroup 语义实现, frequency: 4, status: skeleton }
+    - { id: S-CODE-05, title: 连接池实现要点, frequency: 4, status: skeleton }

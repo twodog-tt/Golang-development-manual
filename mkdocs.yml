@@ -1,0 +1,67 @@
+site_name: Go 后端面试手册
+site_description: 5年+ Go 后端面试知识库 — 并发、内存、系统设计、分布式
+site_url: https://twodog-tt.github.io/Golang-development-manual/
+repo_url: https://github.com/twodog-tt/Golang-development-manual
+repo_name: twodog-tt/Golang-development-manual
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - scheme: default
+      primary: teal
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 深色模式
+    - scheme: slate
+      primary: teal
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 浅色模式
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+  - awesome-pages
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - 首页: index.md
+  - 学习路线: learning-path-senior.md
+  - 题源与引用: sources.md
+  - 面试题: interview/
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/twodog-tt/Golang-development-manual
