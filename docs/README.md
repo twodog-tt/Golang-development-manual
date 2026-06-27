@@ -11,6 +11,7 @@
 | **中间件与数据库** | MySQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
 | **AI 工程与编程** | LLM API、RAG、Agent、MCP |
 | **解决方案架构（架构师岗）** | DDD、演进、多租户、评审、白板 |
+| **区块链与 Web3** | EVM、RPC、索引器、DeFi/NFT |
 | 网络与服务治理 | gRPC、Gin、JWT |
 | 手写题 | LRU、限流等 + `examples/senior/` |
 | 工程与软技能 | 领导力、云原生 |

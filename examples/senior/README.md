@@ -19,6 +19,7 @@
 | S-AI-01 | [llmclient/](llmclient/) | 流式 LLM Client Mock | `go test ./llmclient/...` |
 | S-AI-02 | [rag/](rag/) | 简易 RAG（分块 + 检索） | `go test ./rag/...` |
 | S-AI-07 | [mcp/](mcp/) | MCP Server（stdio） | `go test ./mcp/...` · `go run ./mcp/` |
+| S-BC-02 | [ethrpc/](ethrpc/) | 以太坊 JSON-RPC 客户端 | `go test ./ethrpc/...` |
 
 ```bash
 cd examples/senior

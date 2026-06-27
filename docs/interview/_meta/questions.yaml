@@ -444,6 +444,38 @@ p1:
       frequency: 4
       status: published
       file: 10-ai-engineering/S-AI-08-multimodal-voice.md
+  blockchain_web3:
+    - id: S-BC-01
+      title: 区块链基础与 EVM 账户模型
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-01-blockchain-evm-basics.md
+    - id: S-BC-02
+      title: Go 连接节点：JSON-RPC 与 ethclient
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-02-go-ethereum-rpc.md
+      code_refs: [examples/senior/ethrpc]
+    - id: S-BC-03
+      title: 交易签名与密钥管理
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-03-tx-signing-key-mgmt.md
+    - id: S-BC-04
+      title: 智能合约交互：ABI 与事件监听
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-04-contract-abi-events.md
+    - id: S-BC-05
+      title: 链上索引器：扫块、重组与幂等
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-05-indexer-reorg.md
+    - id: S-BC-06
+      title: DeFi / NFT 后端架构模式
+      frequency: 4
+      status: published
+      file: 12-blockchain-web3/S-BC-06-defi-backend-patterns.md
 
 p2:
   leadership:

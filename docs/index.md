@@ -1,6 +1,6 @@
 # Go 后端面试手册
 
-面向 **5 年+** Go 后端开发者的面试知识库（**103 篇正文**）；含 **架构师岗** 专题。
+面向 **5 年+** Go 后端开发者的面试知识库（**109 篇正文**）；含 **架构师岗** 与 **Web3** 专题。
 
 > **如何使用左侧导航**：点击分组标题（如「中间件与数据库」）可展开/折叠子目录；当前所在分组会自动展开。
 
@@ -12,8 +12,9 @@
 4. [网络与服务治理](interview/06-network-governance/) — gRPC、Gin、JWT
 5. [AI 工程与编程](interview/10-ai-engineering/) — LLM API、RAG、Agent、MCP
 6. [**解决方案架构（架构师岗）**](interview/11-solution-architecture/) — DDD、演进、治理、45min 白板
-7. [手写题](interview/08-coding-senior/) — LRU、限流等 + `examples/senior/`
-8. **工程与软技能** — 领导力、云原生（Lead 面）
+7. [区块链与 Web3](interview/12-blockchain-web3/) — EVM、RPC、索引器、DeFi/NFT
+8. [手写题](interview/08-coding-senior/) — LRU、限流等 + `examples/senior/`
+9. **工程与软技能** — 领导力、云原生（Lead 面）
 
 ## 中间件速查
 
