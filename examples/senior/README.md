@@ -20,6 +20,7 @@
 | S-AI-02 | [rag/](rag/) | 简易 RAG（分块 + 检索） | `go test ./rag/...` |
 | S-AI-07 | [mcp/](mcp/) | MCP Server（stdio） | `go test ./mcp/...` · `go run ./mcp/` |
 | S-BC-02 | [ethrpc/](ethrpc/) | 以太坊 JSON-RPC 客户端 | `go test ./ethrpc/...` |
+| S-BC-09 | [erc20bind/](erc20bind/) | abigen + simulated 部署转账 | `go test ./erc20bind/...` |
 
 ```bash
 cd examples/senior

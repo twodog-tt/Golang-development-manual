@@ -476,6 +476,22 @@ p1:
       frequency: 4
       status: published
       file: 12-blockchain-web3/S-BC-06-defi-backend-patterns.md
+    - id: S-BC-07
+      title: L2 扩容与跨链桥架构
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-07-l2-cross-chain-bridge.md
+    - id: S-BC-08
+      title: Account Abstraction ERC-4337 与 Go 后端
+      frequency: 4
+      status: published
+      file: 12-blockchain-web3/S-BC-08-erc4337-account-abstraction.md
+    - id: S-BC-09
+      title: go-ethereum abigen 完整合约调用实战
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-09-abigen-contract-bindings.md
+      code_refs: [examples/senior/erc20bind]
 
 p2:
   leadership:
