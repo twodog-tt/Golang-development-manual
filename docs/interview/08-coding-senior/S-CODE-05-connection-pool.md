@@ -116,4 +116,4 @@ cd examples/senior && go test ./connpool/...
 ## 延伸阅读
 
 - [database/sql DB 连接池](https://pkg.go.dev/database/sql#DB)
-- 关联：[S-DB-05 GORM 陷阱](../05-database-storage/S-DB-05-gorm-pitfalls.md)
+- 关联：[S-DB-05 GORM 陷阱](../middleware/mysql/S-DB-05-gorm-pitfalls.md)

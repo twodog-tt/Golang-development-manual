@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -26,8 +28,12 @@ jobs:
       - name: Install MkDocs
         run: pip install -r requirements-docs.txt
 
+      - name: Build site
+        run: mkdocs build
+
       - name: Deploy to gh-pages
-        run: mkdocs gh-deploy --force --message "ci: deploy docs"
-        env:
-          GIT_AUTHOR_NAME: github-actions[bot]
-          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          force_orphan: true
