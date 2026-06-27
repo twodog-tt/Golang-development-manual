@@ -493,6 +493,52 @@ p1:
       file: 12-blockchain-web3/S-BC-09-abigen-contract-bindings.md
       code_refs: [examples/senior/erc20bind]
 
+  solidity_contracts:
+    - id: S-SOLID-01
+      title: Solidity 语言基础与 storage 布局
+      frequency: 5
+      status: published
+      file: 13-solidity-contracts/S-SOLID-01-language-storage.md
+      code_refs: [examples/senior/erc20bind/contract/SimpleToken.sol]
+    - id: S-SOLID-02
+      title: 合约安全：重入、权限与 OWASP
+      frequency: 5
+      status: published
+      file: 13-solidity-contracts/S-SOLID-02-security-reentrancy.md
+      code_refs: [examples/solidity/ReentrancyGuard.sol]
+    - id: S-SOLID-03
+      title: ERC-20 / 721 / 1155 标准与实现
+      frequency: 5
+      status: published
+      file: 13-solidity-contracts/S-SOLID-03-erc-standards.md
+      code_refs: [examples/senior/erc20bind/contract/SimpleToken.sol]
+    - id: S-SOLID-04
+      title: 可升级合约：Proxy / UUPS / 存储槽
+      frequency: 5
+      status: published
+      file: 13-solidity-contracts/S-SOLID-04-upgradeable-proxy.md
+    - id: S-SOLID-05
+      title: Gas 优化与设计模式
+      frequency: 4
+      status: published
+      file: 13-solidity-contracts/S-SOLID-05-gas-optimization.md
+    - id: S-SOLID-06
+      title: Foundry 测试与审计清单
+      frequency: 5
+      status: published
+      file: 13-solidity-contracts/S-SOLID-06-testing-audit.md
+    - id: S-SOLID-07
+      title: DeFi 合约模式：AMM / Oracle / 闪电贷
+      frequency: 4
+      status: published
+      file: 13-solidity-contracts/S-SOLID-07-defi-patterns.md
+    - id: S-SOLID-08
+      title: 合约与 Go 后端架构边界
+      frequency: 5
+      status: published
+      file: 13-solidity-contracts/S-SOLID-08-contract-go-boundary.md
+      code_refs: [examples/senior/erc20bind, examples/solidity/ReentrancyGuard.sol]
+
 p2:
   leadership:
     - id: S-LEAD-01

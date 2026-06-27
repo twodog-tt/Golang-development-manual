@@ -1,21 +1,19 @@
-# Go 后端面试手册
+# Go 后端与区块链架构师面试手册
 
-面向 **5 年+** Go 后端开发者的面试知识库。
+面向 **5 年+ Go 后端 + Web3/区块链架构师** 的面试知识库（**120 篇正文**）。
 
 ## 站点导航（左侧栏）
 
 | 分组 | 内容 |
 |------|------|
-| 首页 / 学习路线 | 入口与 4 周计划 |
+| 首页 / 学习路线 | 后端 / 架构师 / Web3 分轨 |
 | **Go 核心（P0）** | 并发、内存、系统设计 |
-| **中间件与数据库** | MySQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
-| **AI 工程与编程** | LLM API、RAG、Agent、MCP |
-| **解决方案架构（架构师岗）** | DDD、演进、多租户、评审、白板 |
-| **区块链与 Web3** | EVM、RPC、索引器、DeFi/NFT |
-| 网络与服务治理 | gRPC、Gin、JWT |
-| 手写题 | LRU、限流等 + `examples/senior/` |
-| 工程与软技能 | 领导力、云原生 |
-| 参考资料 | 题源、索引、映射 |
+| **中间件与数据库** | MySQL、Redis、Kafka、RocketMQ、ES |
+| **AI 工程与编程** | LLM、RAG、Agent、MCP |
+| **解决方案架构** | DDD、演进、评审、白板 |
+| **区块链与 Web3（Go）** | RPC、索引、L2、4337、abigen |
+| **Solidity 与合约** | 安全、ERC、Proxy、Foundry、DeFi |
+| 网络 / 手写题 / 工程软技能 | gRPC、LRU、领导力、云原生 |
 
 本地预览：
 
@@ -27,7 +25,7 @@ mkdocs serve
 
 ## 可运行代码
 
-`basis/` · `gin-example/` · `gorm/` · `algorithm/` · `examples/senior/`
+`basis/` · `gin-example/` · `gorm/` · `examples/senior/` · `examples/solidity/`
 
 ## 引用与题源
 

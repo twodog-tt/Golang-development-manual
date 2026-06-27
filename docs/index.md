@@ -1,20 +1,29 @@
-# Go 后端面试手册
+# Go 后端与区块链架构师面试手册
 
-面向 **5 年+** Go 后端开发者的面试知识库（**112 篇正文**）；含 **架构师岗** 与 **Web3** 专题。
+面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 的面试知识库（**120 篇正文**）。
 
-> **如何使用左侧导航**：点击分组标题（如「中间件与数据库」）可展开/折叠子目录；当前所在分组会自动展开。
+> **定位**：Go 运行时与系统设计 + 链上工程（Solidity）+ 链下工程（Go RPC/索引）+ 解决方案架构 + AI 工程。
+
+> **如何使用左侧导航**：点击分组标题可展开/折叠子目录；当前所在分组会自动展开。
 
 ## 推荐刷题顺序
 
-1. [学习路线](learning-path-senior.md) — 4 周 / 8 周计划
+1. [学习路线](learning-path-senior.md) — 后端 / 架构师 / Web3 分轨
 2. **Go 核心（P0）** — 并发 → 内存 → 系统设计
-3. **中间件与数据库** — 按 JD 选 MySQL、Redis、MQ、ES
+3. **中间件与数据库** — MySQL、Redis、MQ、ES
 4. [网络与服务治理](interview/06-network-governance/) — gRPC、Gin、JWT
-5. [AI 工程与编程](interview/10-ai-engineering/) — LLM API、RAG、Agent、MCP
-6. [**解决方案架构（架构师岗）**](interview/11-solution-architecture/) — DDD、演进、治理、45min 白板
-7. [区块链与 Web3](interview/12-blockchain-web3/) — EVM、RPC、索引器、DeFi/NFT
-8. [手写题](interview/08-coding-senior/) — LRU、限流等 + `examples/senior/`
-9. **工程与软技能** — 领导力、云原生（Lead 面）
+5. [AI 工程与编程](interview/10-ai-engineering/) — LLM、RAG、MCP
+6. [解决方案架构](interview/11-solution-architecture/) — DDD、演进、45min 白板
+7. [区块链与 Web3（Go）](interview/12-blockchain-web3/) — RPC、索引、L2、4337
+8. [**Solidity 与合约工程**](interview/13-solidity-contracts/) — 安全、ERC、Proxy、DeFi
+9. [手写题](interview/08-coding-senior/) + **工程与软技能**
+
+## Web3 架构师速查
+
+| 链上（13） | 链下（12） |
+|------------|------------|
+| Solidity、ERC、升级、审计 | RPC、索引、签名、abigen |
+| [13-solidity-contracts](interview/13-solidity-contracts/) | [12-blockchain-web3](interview/12-blockchain-web3/) |
 
 ## 中间件速查
 
@@ -30,10 +39,10 @@
 ## 其他链接
 
 - [面试题总索引](interview/README.md)
-- [题单 YAML](interview/_meta/questions.yaml)（元数据，非正文）
+- [题单 YAML](interview/_meta/questions.yaml)
 - [代码映射](interview/_meta/mapping.md)
 - [引用来源](sources.md)
 
 ## 可运行代码
 
-`basis/` · `gin-example/` · `gorm/` · `algorithm/` · `examples/senior/`
+`basis/` · `gin-example/` · `gorm/` · `algorithm/` · `examples/senior/` · `examples/solidity/`

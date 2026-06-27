@@ -1,7 +1,7 @@
 # 5 年+ Go 后端面试学习路线
 
-> 目标读者：高级工程师 / Tech Lead / Staff / **架构师** 候选  
-> 假设：已有 3 年以上 Go 生产经验，需系统补齐**深度原理 + 架构推演 + 领导力表达**
+> 目标读者：**Go 后端** / **Tech Lead** / **区块链+后端架构师**  
+> 假设：已有 3 年以上生产经验，需补齐 **Go 深度 + 系统设计 + Solidity/链上工程**
 
 ## 能力自检（开始前）
 
@@ -101,7 +101,23 @@
 P0（必过）: 01 并发 → 02 内存 → 03 系统设计
 P1（大厂二面）: middleware + 06 网络 + 10 AI + 12 Web3（JD 相关时）
 P2（Lead 面）: 07 工程领导力 → 08 手写题 → 09 云原生
-架构师岗（P2+）: 11 解决方案架构（8 题）+ 03 系统设计 + 07 领导力
+架构师岗（P2+）: 11 解决方案架构 + 03 系统设计 + 07 领导力
+Web3 架构师: 12 区块链 Go（9 题）+ 13 Solidity（8 题）+ S-SOLID-08 边界题
+```
+
+---
+
+## Web3 架构师冲刺（6 周）
+
+| 周 | 模块 | 自测 |
+|----|------|------|
+| W1 | [12 Web3 Go](./interview/12-blockchain-web3/) S-BC-01～04 | 画 EVM 账户；跑 `ethrpc` 测试 |
+| W2 | 12 Web3 S-BC-05～09 | 跑 `erc20bind`；讲索引 reorg |
+| W3 | [13 Solidity](./interview/13-solidity-contracts/) S-SOLID-01～04 | Review 重入/Proxy 题 |
+| W4 | 13 Solidity S-SOLID-05～08 | Foundry 清单；链上链下分工口述 |
+| W5 | 11 解决方案架构 + 07 领导力 | 45min 白板（DeFi/多链场景） |
+| W6 | 模拟 | Go + Solidity 联合追问 |
+
 ```
 
 题单索引：[interview/_meta/questions.yaml](./interview/_meta/questions.yaml)

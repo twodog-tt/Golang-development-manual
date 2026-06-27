@@ -1,5 +1,5 @@
-site_name: Go 后端面试手册
-site_description: 5年+ Go 后端面试知识库 — 并发、内存、系统设计、分布式
+site_name: Go 后端与区块链架构师面试手册
+site_description: 5年+ Go 后端 + Web3 架构师知识库 — 并发、系统设计、Solidity、链上工程
 site_url: https://twodog-tt.github.io/Golang-development-manual/
 repo_url: https://github.com/twodog-tt/Golang-development-manual
 repo_name: twodog-tt/Golang-development-manual

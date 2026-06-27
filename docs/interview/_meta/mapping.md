@@ -31,6 +31,8 @@
 | S-BC-01～06 | 区块链 Web3 | — | [12-blockchain-web3/](../12-blockchain-web3/) |
 | S-BC-02 | JSON-RPC 客户端 | [S-BC-02](../12-blockchain-web3/S-BC-02-go-ethereum-rpc.md) | `examples/senior/ethrpc/` |
 | S-BC-09 | abigen ERC20 实战 | [S-BC-09](../12-blockchain-web3/S-BC-09-abigen-contract-bindings.md) | `examples/senior/erc20bind/` |
+| S-SOLID-01～08 | Solidity 合约 | — | [13-solidity-contracts/](../13-solidity-contracts/) |
+| S-SOLID-02 | 重入防护合约 | [S-SOLID-02](../13-solidity-contracts/S-SOLID-02-security-reentrancy.md) | `examples/solidity/ReentrancyGuard.sol` |
 | — | 算法面 | `algorithm/lc_*` | LeetCode 参考实现 |
 
 ## 使用方式
