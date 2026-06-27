@@ -15,8 +15,9 @@
 | [01 并发与运行时](./interview/01-runtime-concurrency/) | GMP、Channel、Context、泄漏 | P0 已发布 20 题 |
 | [02 内存与 GC](./interview/02-memory-gc/) | GC、逃逸、slice/map、pprof | P0 已发布 15 题 |
 | [03 系统设计](./interview/03-system-design/) | 高并发、缓存、MQ、多活 | P0 已发布 20 题 |
-| [04 分布式](./interview/04-distributed-middleware/) | Redis、Kafka、分布式事务 | P1 已发布 5 题 |
-| [05 数据库](./interview/05-database-storage/) | MySQL、GORM | P1 已发布 5 题 |
+| [**中间件按类型**](./interview/middleware/) | MySQL、Redis、Kafka、RocketMQ、ES | **19 题** |
+| [04 分布式](./interview/04-distributed-middleware/) | 学习路径入口 | → middleware |
+| [05 数据库](./interview/05-database-storage/) | 学习路径入口 | → middleware |
 | [06 网络治理](./interview/06-network-governance/) | gRPC、Gin、JWT | P1 已发布 5 题 |
 | [07 工程领导力](./interview/07-engineering-leadership/) | 事故、技术债、带团队 | P2 已发布 3 题 |
 | [08 手写题](./interview/08-coding-senior/) | LRU、限流、优雅退出 | 代码已发布 |

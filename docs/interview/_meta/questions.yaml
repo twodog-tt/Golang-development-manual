@@ -285,59 +285,94 @@ p0:
       file: 03-system-design/S-ARCH-20-tech-decision-doc.md
 
 p1:
-  distributed:
-    - id: S-DIST-01
-      title: Redis 集群模式与选型
-      frequency: 5
-      status: published
-      file: 04-distributed-middleware/S-DIST-01-redis-cluster.md
-    - id: S-DIST-02
-      title: 分布式锁 Redlock 争议
-      frequency: 4
-      status: published
-      file: 04-distributed-middleware/S-DIST-02-distributed-lock.md
-    - id: S-DIST-03
-      title: 热点 Key 发现与治理
-      frequency: 5
-      status: published
-      file: 04-distributed-middleware/S-DIST-03-hot-key.md
-    - id: S-DIST-04
-      title: Kafka 消费语义与 rebalance
-      frequency: 4
-      status: published
-      file: 04-distributed-middleware/S-DIST-04-kafka-semantics.md
-    - id: S-DIST-05
-      title: 分布式事务 TCC/Saga 对比
-      frequency: 4
-      status: published
-      file: 04-distributed-middleware/S-DIST-05-distributed-transaction.md
-  database:
-    - id: S-DB-01
-      title: MySQL 索引原理与最左前缀
-      frequency: 5
-      status: published
-      file: 05-database-storage/S-DB-01-mysql-index.md
-    - id: S-DB-02
-      title: 事务隔离级别与 MVCC
-      frequency: 5
-      status: published
-      file: 05-database-storage/S-DB-02-transaction-mvcc.md
-    - id: S-DB-03
-      title: 慢查询排查与 EXPLAIN
-      frequency: 5
-      status: published
-      file: 05-database-storage/S-DB-03-slow-query.md
-    - id: S-DB-04
-      title: 分库分表策略与跨库查询
-      frequency: 4
-      status: published
-      file: 05-database-storage/S-DB-04-sharding.md
-    - id: S-DB-05
-      title: GORM 预加载 N+1 与事务陷阱
-      frequency: 4
-      status: published
-      file: 05-database-storage/S-DB-05-gorm-pitfalls.md
-      code_refs: [gorm/demo/main.go]
+  middleware:
+    mysql:
+      - id: S-DB-01
+        title: MySQL 索引原理与最左前缀
+        frequency: 5
+        status: published
+        file: middleware/mysql/S-DB-01-mysql-index.md
+      - id: S-DB-02
+        title: 事务隔离级别与 MVCC
+        frequency: 5
+        status: published
+        file: middleware/mysql/S-DB-02-transaction-mvcc.md
+      - id: S-DB-03
+        title: 慢查询排查与 EXPLAIN
+        frequency: 5
+        status: published
+        file: middleware/mysql/S-DB-03-slow-query.md
+      - id: S-DB-04
+        title: 分库分表策略与跨库查询
+        frequency: 4
+        status: published
+        file: middleware/mysql/S-DB-04-sharding.md
+      - id: S-DB-05
+        title: GORM 预加载 N+1 与事务陷阱
+        frequency: 4
+        status: published
+        file: middleware/mysql/S-DB-05-gorm-pitfalls.md
+        code_refs: [gorm/demo/main.go]
+    redis:
+      - id: S-DIST-01
+        title: Redis 集群模式与选型
+        frequency: 5
+        status: published
+        file: middleware/redis/S-DIST-01-redis-cluster.md
+      - id: S-DIST-02
+        title: 分布式锁 Redlock 争议
+        frequency: 4
+        status: published
+        file: middleware/redis/S-DIST-02-distributed-lock.md
+      - id: S-DIST-03
+        title: 热点 Key 发现与治理
+        frequency: 5
+        status: published
+        file: middleware/redis/S-DIST-03-hot-key.md
+    kafka:
+      - id: S-DIST-04
+        title: Kafka 消费语义与 rebalance
+        frequency: 4
+        status: published
+        file: middleware/kafka/S-DIST-04-kafka-semantics.md
+    rocketmq:
+      - id: S-RMQ-01
+        title: RocketMQ 架构与核心概念
+        frequency: 4
+        status: published
+        file: middleware/rocketmq/S-RMQ-01-architecture.md
+      - id: S-RMQ-02
+        title: RocketMQ 顺序/事务/延迟消息
+        frequency: 5
+        status: published
+        file: middleware/rocketmq/S-RMQ-02-order-transaction-delay.md
+      - id: S-RMQ-03
+        title: RocketMQ 与 Kafka 选型对比
+        frequency: 4
+        status: published
+        file: middleware/rocketmq/S-RMQ-03-vs-kafka.md
+    elasticsearch:
+      - id: S-ES-01
+        title: Elasticsearch 倒排索引与基本原理
+        frequency: 4
+        status: published
+        file: middleware/elasticsearch/S-ES-01-inverted-index.md
+      - id: S-ES-02
+        title: Elasticsearch Mapping 查询与聚合
+        frequency: 4
+        status: published
+        file: middleware/elasticsearch/S-ES-02-mapping-query-agg.md
+      - id: S-ES-03
+        title: Elasticsearch 数据同步与运维
+        frequency: 4
+        status: published
+        file: middleware/elasticsearch/S-ES-03-sync-ops.md
+    distributed:
+      - id: S-DIST-05
+        title: 分布式事务 TCC/Saga 对比
+        frequency: 4
+        status: published
+        file: middleware/distributed/S-DIST-05-distributed-transaction.md
   network:
     - id: S-NET-01
       title: gRPC vs HTTP/REST 选型

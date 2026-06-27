@@ -1,13 +1,8 @@
-# 05 数据库与存储
+# 05 数据库与存储（学习路径入口）
 
-5 题 | P1 | [返回索引](../README.md)
+> 本模块文章已按 **中间件类型** 归类，请从 **[middleware/](../middleware/)** 浏览。
 
-| ID | 题目 | 频率 |
-|----|------|------|
-| [S-DB-01](./S-DB-01-mysql-index.md) | MySQL 索引与最左前缀 | ⭐⭐⭐⭐⭐ |
-| [S-DB-02](./S-DB-02-transaction-mvcc.md) | 事务隔离级别与 MVCC | ⭐⭐⭐⭐⭐ |
-| [S-DB-03](./S-DB-03-slow-query.md) | 慢查询排查与 EXPLAIN | ⭐⭐⭐⭐⭐ |
-| [S-DB-04](./S-DB-04-sharding.md) | 分库分表策略与跨库查询 | ⭐⭐⭐⭐ |
-| [S-DB-05](./S-DB-05-gorm-pitfalls.md) | GORM N+1 与事务陷阱 | ⭐⭐⭐⭐ |
-
-代码：`gorm/demo/main.go`、`gorm/sqlx/`
+| 类型 | 路径 |
+|------|------|
+| MySQL + GORM | [middleware/mysql/](../middleware/mysql/) |
+| Elasticsearch | [middleware/elasticsearch/](../middleware/elasticsearch/) |

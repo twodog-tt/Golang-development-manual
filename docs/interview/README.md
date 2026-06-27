@@ -16,21 +16,26 @@ GMP、Channel、Context、sync 原语、泄漏排查、并发模式。
 
 高 QPS 读服务、秒杀、幂等、缓存、限流、MQ、订单状态机、可观测性。
 
-## P1 模块（15 题，已发布）
+## P1 模块
 
-### [04 分布式与中间件](./04-distributed-middleware/) — 5 题
+### [中间件与数据库（按类型）](./middleware/) — 推荐浏览方式
 
-Redis、分布式锁、热点 Key、Kafka、分布式事务。
+| 类型 | 题数 |
+|------|------|
+| [MySQL](./middleware/mysql/) | 5 |
+| [Redis](./middleware/redis/) | 3 |
+| [Kafka](./middleware/kafka/) | 1 |
+| [RocketMQ](./middleware/rocketmq/) | 3 |
+| [Elasticsearch](./middleware/elasticsearch/) | 3 |
+| [分布式事务](./middleware/distributed/) | 1 |
 
-### [05 数据库与存储](./05-database-storage/) — 5 题
-
-索引、MVCC、慢查询、分库分表、GORM 陷阱。
+学习路径入口：[04 分布式](./04-distributed-middleware/) · [05 数据库](./05-database-storage/)
 
 ### [06 网络与服务治理](./06-network-governance/) — 5 题
 
 gRPC、连接池、Gin 中间件、JWT、WebSocket。
 
-## P2 模块（6 题，已发布）
+## P2 模块
 
 ### [07 工程与领导力](./07-engineering-leadership/) — 3 题
 
