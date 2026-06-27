@@ -368,12 +368,60 @@ p1:
 
 p2:
   leadership:
-    - { id: S-LEAD-01, title: 线上事故复盘结构, frequency: 5, status: skeleton }
-    - { id: S-LEAD-02, title: 技术债识别与偿还策略, frequency: 4, status: skeleton }
-    - { id: S-LEAD-03, title: 带团队与 Code Review 文化, frequency: 4, status: skeleton }
+    - id: S-LEAD-01
+      title: 线上事故复盘结构
+      frequency: 5
+      status: published
+      file: 07-engineering-leadership/S-LEAD-01-incident-postmortem.md
+    - id: S-LEAD-02
+      title: 技术债识别与偿还策略
+      frequency: 4
+      status: published
+      file: 07-engineering-leadership/S-LEAD-02-tech-debt.md
+    - id: S-LEAD-03
+      title: 带团队与 Code Review 文化
+      frequency: 4
+      status: published
+      file: 07-engineering-leadership/S-LEAD-03-code-review-culture.md
+  cloud_native:
+    - id: S-CLOUD-01
+      title: Kubernetes 调度与 Go 服务资源 limit
+      frequency: 4
+      status: published
+      file: 09-cloud-native/S-CLOUD-01-k8s-scheduling.md
+    - id: S-CLOUD-02
+      title: Docker 多阶段构建与 Go 镜像最佳实践
+      frequency: 4
+      status: published
+      file: 09-cloud-native/S-CLOUD-02-docker-multistage.md
+    - id: S-CLOUD-03
+      title: OpenTelemetry 与 Go 可观测性接入
+      frequency: 4
+      status: published
+      file: 09-cloud-native/S-CLOUD-03-opentelemetry.md
   coding:
-    - { id: S-CODE-01, title: 并发安全 LRU, frequency: 5, status: skeleton }
-    - { id: S-CODE-02, title: 令牌桶限流器实现, frequency: 5, status: skeleton }
-    - { id: S-CODE-03, title: 优雅关闭 HTTP 服务, frequency: 4, status: skeleton }
-    - { id: S-CODE-04, title: errgroup 语义实现, frequency: 4, status: skeleton }
-    - { id: S-CODE-05, title: 连接池实现要点, frequency: 4, status: skeleton }
+    - id: S-CODE-01
+      title: 并发安全 LRU
+      frequency: 5
+      status: published
+      code_refs: [examples/senior/lru]
+    - id: S-CODE-02
+      title: 令牌桶限流器实现
+      frequency: 5
+      status: published
+      code_refs: [examples/senior/ratelimit]
+    - id: S-CODE-03
+      title: 优雅关闭 HTTP 服务
+      frequency: 4
+      status: published
+      code_refs: [examples/senior/graceful_shutdown]
+    - id: S-CODE-04
+      title: errgroup 语义实现
+      frequency: 4
+      status: published
+      code_refs: [examples/senior/errgroup]
+    - id: S-CODE-05
+      title: 连接池实现要点
+      frequency: 4
+      status: published
+      code_refs: [examples/senior/connpool]

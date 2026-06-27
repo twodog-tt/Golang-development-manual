@@ -18,8 +18,9 @@
 | [04 分布式](./interview/04-distributed-middleware/) | Redis、Kafka、分布式事务 | P1 已发布 5 题 |
 | [05 数据库](./interview/05-database-storage/) | MySQL、GORM | P1 已发布 5 题 |
 | [06 网络治理](./interview/06-network-governance/) | gRPC、Gin、JWT | P1 已发布 5 题 |
-| [07 工程领导力](./interview/07-engineering-leadership/) | 事故、技术债、带团队 | P2 骨架 |
-| [08 手写题](./interview/08-coding-senior/) | LRU、限流、优雅退出 | P2 骨架 |
+| [07 工程领导力](./interview/07-engineering-leadership/) | 事故、技术债、带团队 | P2 已发布 3 题 |
+| [08 手写题](./interview/08-coding-senior/) | LRU、限流、优雅退出 | 代码已发布 |
+| [09 云原生](./interview/09-cloud-native/) | K8s、Docker、OTel | P2 已发布 3 题 |
 
 ## 可运行代码
 

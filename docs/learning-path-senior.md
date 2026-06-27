@@ -39,7 +39,7 @@
 | 5 | [分布式与中间件](./interview/04-distributed-middleware/) |
 | 6 | [数据库与存储](./interview/05-database-storage/) + `gorm/` |
 | 7 | [网络与服务治理](./interview/06-network-governance/) + `gin-example/` |
-| 8 | [工程与领导力](./interview/07-engineering-leadership/) + [手写题](./interview/08-coding-senior/) |
+| 8 | [工程与领导力](./interview/07-engineering-leadership/) + [云原生](./interview/09-cloud-native/) + [手写题](./interview/08-coding-senior/) |
 
 ---
 

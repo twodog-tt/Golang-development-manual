@@ -26,6 +26,16 @@
 | [05 数据库与存储](interview/05-database-storage/) | 5 |
 | [06 网络与服务治理](interview/06-network-governance/) | 5 |
 
+## P2 模块（6 题 + 手写代码）
+
+| 模块 | 题数 |
+|------|------|
+| [07 工程与领导力](interview/07-engineering-leadership/) | 3 |
+| [09 云原生](interview/09-cloud-native/) | 3 |
+| [08 手写题](interview/08-coding-senior/) | 5（`examples/senior/`） |
+
+**正文合计：76 题**（P0 55 + P1 15 + P2 领导力/云原生 6）
+
 ## 可运行代码
 
 `basis/` · `gin-example/` · `gorm/` · `algorithm/` · `examples/senior/`

@@ -30,14 +30,19 @@ Redis、分布式锁、热点 Key、Kafka、分布式事务。
 
 gRPC、连接池、Gin 中间件、JWT、WebSocket。
 
-## P1 / P2（骨架，待撰写）
+## P2 模块（6 题，已发布）
 
-- [04 分布式与中间件](./04-distributed-middleware/)
-- [05 数据库与存储](./05-database-storage/)
-- [06 网络与服务治理](./06-network-governance/)
-- [07 工程与领导力](./07-engineering-leadership/)
-- [08 手写题](./08-coding-senior/)
-- [09 云原生（可选）](./09-cloud-native/)
+### [07 工程与领导力](./07-engineering-leadership/) — 3 题
+
+事故复盘、技术债、Code Review 与带团队（Tech Lead / Staff 面）。
+
+### [09 云原生](./09-cloud-native/) — 3 题
+
+K8s 调度、Docker 多阶段构建、OpenTelemetry（可选，JD 含云原生时必刷）。
+
+### [08 手写题](./08-coding-senior/) — 5 题（代码见 `examples/senior/`）
+
+LRU、令牌桶、优雅关闭、errgroup、连接池。
 
 ## 高频 Top 10（优先背诵口述）
 
