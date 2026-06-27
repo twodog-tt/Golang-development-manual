@@ -1,6 +1,8 @@
 # Senior 面试手写题示例
 
-对应 `docs/interview/08-coding-senior/` 与题单 S-CODE-01～05。
+对应 `docs/interview/08-coding-senior/` 与 `docs/interview/10-ai-engineering/`。
+
+## 手写题（S-CODE）
 
 | 题 ID | 目录 | 说明 | 测试 |
 |-------|------|------|------|
@@ -9,6 +11,14 @@
 | S-CODE-03 | [graceful_shutdown/](graceful_shutdown/) | HTTP 优雅关闭 | `go run ./graceful_shutdown/` |
 | S-CODE-04 | [errgroup/](errgroup/) | errgroup 语义 | `go test ./errgroup/...` |
 | S-CODE-05 | [connpool/](connpool/) | channel 连接池 | `go test ./connpool/...` |
+
+## AI 工程（S-AI）
+
+| 题 ID | 目录 | 说明 | 测试 |
+|-------|------|------|------|
+| S-AI-01 | [llmclient/](llmclient/) | 流式 LLM Client Mock | `go test ./llmclient/...` |
+| S-AI-02 | [rag/](rag/) | 简易 RAG（分块 + 检索） | `go test ./rag/...` |
+| S-AI-07 | [mcp/](mcp/) | MCP Server（stdio） | `go test ./mcp/...` · `go run ./mcp/` |
 
 ```bash
 cd examples/senior

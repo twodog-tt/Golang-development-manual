@@ -406,11 +406,13 @@ p1:
       frequency: 5
       status: published
       file: 10-ai-engineering/S-AI-01-llm-api-integration.md
+      code_refs: [examples/senior/llmclient]
     - id: S-AI-02
       title: RAG 架构：分块、向量检索与 Go 落地
       frequency: 5
       status: published
       file: 10-ai-engineering/S-AI-02-rag-architecture.md
+      code_refs: [examples/senior/rag]
     - id: S-AI-03
       title: AI Agent 与 Function Calling
       frequency: 5
@@ -431,6 +433,17 @@ p1:
       frequency: 4
       status: published
       file: 10-ai-engineering/S-AI-06-llm-observability-cost.md
+    - id: S-AI-07
+      title: Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署
+      frequency: 5
+      status: published
+      file: 10-ai-engineering/S-AI-07-mcp-server-go.md
+      code_refs: [examples/senior/mcp]
+    - id: S-AI-08
+      title: 多模态与语音接入：图像、音频在 Go 服务中的工程实践
+      frequency: 4
+      status: published
+      file: 10-ai-engineering/S-AI-08-multimodal-voice.md
 
 p2:
   leadership:

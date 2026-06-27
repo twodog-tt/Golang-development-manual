@@ -107,7 +107,13 @@ func (s *RAGService) Answer(ctx context.Context, q string, userID string) (strin
 
 ## 代码示例
 
-与 [S-ES-01 倒排索引](../middleware/elasticsearch/S-ES-01-inverted-index.md)、[S-ES-03 同步运维](../middleware/elasticsearch/S-ES-03-sync-ops.md) 结合：ES 8.x `dense_vector` 可同时承担全文与向量。
+与 [S-ES-01 倒排索引](../middleware/elasticsearch/S-ES-01-inverted-index.md) 结合：生产可用 ES `dense_vector`；本仓库教学示例：
+
+```bash
+go test ./examples/senior/rag/...
+```
+
+`examples/senior/rag/` 演示分块、哈希向量、Top-K 检索与 `llmclient.MockClient` 编排。
 
 ## 延伸阅读
 

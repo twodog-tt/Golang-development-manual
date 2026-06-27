@@ -109,14 +109,14 @@ for scanner.Scan() {
 
 ## 代码示例
 
+本仓库 Mock 实现：`examples/senior/llmclient/`（`go test ./examples/senior/llmclient/...`）。
+
 ```go
 type ChatClient interface {
     StreamChat(ctx context.Context, req ChatRequest, w io.Writer) error
     Complete(ctx context.Context, req ChatRequest) (ChatResponse, error)
 }
 ```
-
-可用 `examples/senior/` 风格自研 mock 实现做单元测试。
 
 ## 延伸阅读
 
