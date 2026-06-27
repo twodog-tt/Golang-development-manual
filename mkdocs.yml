@@ -25,15 +25,16 @@ theme:
         name: 浅色模式
   features:
     - navigation.sections
-    - navigation.expand
     - navigation.indexes
     - navigation.top
     - navigation.footer
-    - toc.integrate
     - search.suggest
     - search.highlight
     - content.code.copy
     - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
 
 plugins:
   - awesome-pages
