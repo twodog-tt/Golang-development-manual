@@ -1,6 +1,6 @@
 # 5 年+ Go 后端面试学习路线
 
-> 目标读者：高级工程师 / Tech Lead / Staff 候选  
+> 目标读者：高级工程师 / Tech Lead / Staff / **架构师** 候选  
 > 假设：已有 3 年以上 Go 生产经验，需系统补齐**深度原理 + 架构推演 + 领导力表达**
 
 ## 能力自检（开始前）
@@ -10,6 +10,13 @@
 - [ ] 能在 15 分钟内设计带数字估算的高并发读接口
 - [ ] 能讲 2 个真实项目：性能优化、一致性/事故各 1 个
 - [ ] 能说明「为什么不用某中间件/某并发模型」
+
+### 架构师岗额外自检
+
+- [ ] 能画 **限界上下文图** 并说明集成关系（[S-SOL-01](./interview/11-solution-architecture/S-SOL-01-bounded-context-ddd.md)）
+- [ ] 能讲 **遗留迁移/绞杀者** 阶段与回滚（[S-SOL-02](./interview/11-solution-architecture/S-SOL-02-strangler-fig-migration.md)）
+- [ ] 能在 **45 分钟**内完成开放式白板（[S-SOL-08](./interview/11-solution-architecture/S-SOL-08-evolution-whiteboard.md)）
+- [ ] 能主持或参与 **架构评审** 并输出 ADR（[S-SOL-06](./interview/11-solution-architecture/S-SOL-06-architecture-review.md)）
 
 ---
 
@@ -39,7 +46,28 @@
 | 5 | [分布式与中间件](./interview/04-distributed-middleware/) |
 | 6 | [数据库与存储](./interview/05-database-storage/) + `gorm/` |
 | 7 | [网络与服务治理](./interview/06-network-governance/) + `gin-example/` |
-| 8 | [AI 工程与编程](./interview/10-ai-engineering/) + [工程与领导力](./interview/07-engineering-leadership/) + [云原生](./interview/09-cloud-native/) + [手写题](./interview/08-coding-senior/) |
+| 8 | [AI 工程](./interview/10-ai-engineering/) + [工程与领导力](./interview/07-engineering-leadership/) + [云原生](./interview/09-cloud-native/) + [手写题](./interview/08-coding-senior/) |
+
+---
+
+## 架构师岗冲刺（6 周，在职）
+
+> 在 **P0 系统设计 20 题** 基础上，专攻 [11 解决方案架构](./interview/11-solution-architecture/) 8 题 + 45min 白板。
+
+| 周 | 模块 | 阅读 | 练习 | 自测 |
+|----|------|------|------|------|
+| W1 | P0 复习 | 03 系统设计 10 题 + 01/02 各 5 题 | 容量估算 3 题 | 15min 秒杀/幂等口述 |
+| W2 | [解决方案架构](./interview/11-solution-architecture/) | S-SOL-01～04 | 画上下文图 + 迁移阶段图 | 讲 1 个真实拆分/迁移故事 |
+| W3 | 解决方案架构 + 中间件 | S-SOL-05～08 + middleware | 多租户 + Outbox 方案口述 | 45min 白板模拟 ×1 |
+| W4 | 领导力 + 云原生 | 07 + 09 全读 | ADR 写 1 篇 | 架构评审角色扮演 |
+| W5 | AI + 网络（可选） | 10 + 06 各 4 题 | MCP/RAG 架构串联 | 企业知识库综合题 |
+| W6 | 模拟 | 03 + 11 抽题 | 45min 白板 ×2 + 追问 | 录像复盘 |
+
+**架构师模拟题组合示例**（见 [S-SOL-08](./interview/11-solution-architecture/S-SOL-08-evolution-whiteboard.md)）：
+
+- 多租户 SaaS 订单 + 报表：S-SOL-05 + S-SOL-03 + S-ARCH-12
+- 遗留单体迁 Go 微服务：S-SOL-02 + S-SOL-01 + S-ARCH-19
+- 企业 AI 知识平台：S-SOL-05 + S-AI-02 + S-SOL-07
 
 ---
 
@@ -71,9 +99,9 @@
 
 ```
 P0（必过）: 01 并发 → 02 内存 → 03 系统设计
-P1（大厂二面）: 04 分布式 → 05 数据库 → 06 网络
-P2（Lead 面）: 07 工程领导力 → 08 手写题
-可选: 09 云原生
+P1（大厂二面）: middleware + 06 网络 + 10 AI
+P2（Lead 面）: 07 工程领导力 → 08 手写题 → 09 云原生
+架构师岗（P2+）: 11 解决方案架构（8 题）+ 03 系统设计 + 07 领导力
 ```
 
 题单索引：[interview/_meta/questions.yaml](./interview/_meta/questions.yaml)

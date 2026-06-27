@@ -27,6 +27,7 @@
 | S-AI-01 | 流式 LLM Mock | [S-AI-01](../10-ai-engineering/S-AI-01-llm-api-integration.md) | `examples/senior/llmclient/` |
 | S-AI-02 | 简易 RAG | [S-AI-02](../10-ai-engineering/S-AI-02-rag-architecture.md) | `examples/senior/rag/` |
 | S-AI-07 | MCP Server | [S-AI-07](../10-ai-engineering/S-AI-07-mcp-server-go.md) | `examples/senior/mcp/` |
+| S-SOL-01～08 | 解决方案架构 | — | [11-solution-architecture/](../11-solution-architecture/) |
 | — | 算法面 | `algorithm/lc_*` | LeetCode 参考实现 |
 
 ## 使用方式

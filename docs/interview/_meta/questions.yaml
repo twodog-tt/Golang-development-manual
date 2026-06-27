@@ -509,3 +509,44 @@ p2:
       status: published
       file: 08-coding-senior/S-CODE-05-connection-pool.md
       code_refs: [examples/senior/connpool]
+  solution_architecture:
+    - id: S-SOL-01
+      title: 限界上下文与 DDD 战略设计
+      frequency: 5
+      status: published
+      file: 11-solution-architecture/S-SOL-01-bounded-context-ddd.md
+    - id: S-SOL-02
+      title: 绞杀者模式与遗留系统迁移
+      frequency: 5
+      status: published
+      file: 11-solution-architecture/S-SOL-02-strangler-fig-migration.md
+    - id: S-SOL-03
+      title: 事件驱动、CQRS 与一致性边界
+      frequency: 5
+      status: published
+      file: 11-solution-architecture/S-SOL-03-event-driven-cqrs.md
+    - id: S-SOL-04
+      title: BFF、API 网关与服务网格职责划分
+      frequency: 4
+      status: published
+      file: 11-solution-architecture/S-SOL-04-bff-gateway-mesh.md
+    - id: S-SOL-05
+      title: 多租户 SaaS 隔离与权限架构
+      frequency: 5
+      status: published
+      file: 11-solution-architecture/S-SOL-05-multi-tenant-saas.md
+    - id: S-SOL-06
+      title: 架构评审：流程、产出与博弈
+      frequency: 5
+      status: published
+      file: 11-solution-architecture/S-SOL-06-architecture-review.md
+    - id: S-SOL-07
+      title: 安全与审计的全局架构
+      frequency: 4
+      status: published
+      file: 11-solution-architecture/S-SOL-07-security-audit-architecture.md
+    - id: S-SOL-08
+      title: 45 分钟架构演进白板模板
+      frequency: 5
+      status: published
+      file: 11-solution-architecture/S-SOL-08-evolution-whiteboard.md

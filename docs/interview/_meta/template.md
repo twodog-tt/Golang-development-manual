@@ -1,7 +1,7 @@
 ---
 id: S-MODULE-NNN
 title: 题目标题
-module: runtime-concurrency | memory-gc | system-design | distributed | database | network | leadership | coding | cloud-native | ai-engineering
+module: runtime-concurrency | memory-gc | system-design | distributed | database | network | leadership | coding | cloud-native | ai-engineering | solution-architecture
 level: senior
 frequency: 5
 go_version: "1.22+"
