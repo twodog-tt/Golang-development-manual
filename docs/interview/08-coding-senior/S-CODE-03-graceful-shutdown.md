@@ -113,3 +113,4 @@ cd examples/senior/graceful_shutdown && go run .
 
 - [net/http Server.Shutdown](https://pkg.go.dev/net/http#Server.Shutdown)
 - 关联：[S-ARCH-15 灰度发布](../03-system-design/S-ARCH-15-release-strategy.md)
+- 关联：[S-CLOUD-04 滚动发布与探针](../09-cloud-native/S-CLOUD-04-rolling-update-probes-pdb.md)

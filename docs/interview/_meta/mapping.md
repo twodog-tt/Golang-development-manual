@@ -21,6 +21,8 @@
 | S-CODE-01 | LRU | [S-CODE-01](../08-coding-senior/S-CODE-01-concurrent-lru.md) | `examples/senior/lru/` |
 | S-CODE-02 | 令牌桶 | [S-CODE-02](../08-coding-senior/S-CODE-02-token-bucket.md) | `examples/senior/ratelimit/` |
 | S-CODE-03 | 优雅关闭 | [S-CODE-03](../08-coding-senior/S-CODE-03-graceful-shutdown.md) | `examples/senior/graceful_shutdown/` |
+| S-CLOUD-04 | 滚动发布与探针 | [S-CLOUD-04](../09-cloud-native/S-CLOUD-04-rolling-update-probes-pdb.md) | `examples/senior/graceful_shutdown/` |
+| S-CLOUD-01～08 | 云原生 K8s/Docker | — | [09-cloud-native/](../09-cloud-native/) |
 | S-CODE-04 | errgroup | [S-CODE-04](../08-coding-senior/S-CODE-04-errgroup.md) | `examples/senior/errgroup/` |
 | S-CODE-05 | 连接池 | [S-CODE-05](../08-coding-senior/S-CODE-05-connection-pool.md) | `examples/senior/connpool/` |
 | S-AI-01～06 | AI 工程 | — | [10-ai-engineering/](../10-ai-engineering/) |
@@ -33,6 +35,7 @@
 | S-BC-09 | abigen ERC20 实战 | [S-BC-09](../12-blockchain-web3/S-BC-09-abigen-contract-bindings.md) | `examples/senior/erc20bind/` |
 | S-SOLID-01～08 | Solidity 合约 | — | [13-solidity-contracts/](../13-solidity-contracts/) |
 | S-SOLID-02 | 重入防护合约 | [S-SOLID-02](../13-solidity-contracts/S-SOLID-02-security-reentrancy.md) | `examples/solidity/ReentrancyGuard.sol` |
+| S-EXCH-01～09 | DEX / CEX 交易所 | — | [14-dex-cex-engineering/](../14-dex-cex-engineering/) |
 | — | 算法面 | `algorithm/lc_*` | LeetCode 参考实现 |
 
 ## 使用方式

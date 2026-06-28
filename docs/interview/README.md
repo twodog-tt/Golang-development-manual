@@ -23,9 +23,10 @@
 | **11 解决方案架构** | **8** | [**11-solution-architecture/**](11-solution-architecture/) |
 | **12 区块链与 Web3** | **9** | [**12-blockchain-web3/**](12-blockchain-web3/) |
 | **13 Solidity 与合约** | **8** | [**13-solidity-contracts/**](13-solidity-contracts/) |
+| **14 DEX / CEX 交易所** | **9** | [**14-dex-cex-engineering/**](14-dex-cex-engineering/) |
 | 08 手写题 | 5 | [08-coding-senior/](08-coding-senior/) |
 | 07 工程与领导力 | 3 | [07-engineering-leadership/](07-engineering-leadership/) |
-| 09 云原生 | 3 | [09-cloud-native/](09-cloud-native/) |
+| 09 云原生 | 8 | [09-cloud-native/](09-cloud-native/) |
 
 ## 高频 Top 10
 

@@ -115,3 +115,5 @@ http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 
 - [Kubernetes Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/)
 - [uber-go/automaxprocs](https://github.com/uber-go/automaxprocs)
+- [S-CLOUD-04 滚动发布与探针](./S-CLOUD-04-rolling-update-probes-pdb.md)
+- [S-CLOUD-07 K8s 故障排查](./S-CLOUD-07-k8s-troubleshooting.md)

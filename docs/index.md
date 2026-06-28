@@ -1,6 +1,6 @@
 # Go 后端与区块链架构师面试手册
 
-面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 的面试知识库（**120 篇正文**）。
+面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 的面试知识库（**134 篇正文**）。
 
 > **定位**：Go 运行时与系统设计 + 链上工程（Solidity）+ 链下工程（Go RPC/索引）+ 解决方案架构 + AI 工程。
 
@@ -16,14 +16,15 @@
 6. [解决方案架构](interview/11-solution-architecture/) — DDD、演进、45min 白板
 7. [区块链与 Web3（Go）](interview/12-blockchain-web3/) — RPC、索引、L2、4337
 8. [**Solidity 与合约工程**](interview/13-solidity-contracts/) — 安全、ERC、Proxy、DeFi
-9. [手写题](interview/08-coding-senior/) + **工程与软技能**
+9. [**DEX / CEX 交易所工程**](interview/14-dex-cex-engineering/) — 撮合、账务、AMM、MEV
+10. [手写题](interview/08-coding-senior/) + **工程与软技能**
 
 ## Web3 架构师速查
 
-| 链上（13） | 链下（12） |
-|------------|------------|
-| Solidity、ERC、升级、审计 | RPC、索引、签名、abigen |
-| [13-solidity-contracts](interview/13-solidity-contracts/) | [12-blockchain-web3](interview/12-blockchain-web3/) |
+| 链上（13） | 链下（12） | 交易所（14） |
+|------------|------------|--------------|
+| Solidity、ERC、升级、审计 | RPC、索引、签名、abigen | CEX 撮合/账务、DEX AMM/MEV |
+| [13-solidity-contracts](interview/13-solidity-contracts/) | [12-blockchain-web3](interview/12-blockchain-web3/) | [14-dex-cex-engineering](interview/14-dex-cex-engineering/) |
 
 ## 中间件速查
 

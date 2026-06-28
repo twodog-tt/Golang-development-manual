@@ -538,6 +538,52 @@ p1:
       status: published
       file: 13-solidity-contracts/S-SOLID-08-contract-go-boundary.md
       code_refs: [examples/senior/erc20bind, examples/solidity/ReentrancyGuard.sol]
+  dex_cex_engineering:
+    - id: S-EXCH-01
+      title: CEX 撮合引擎与订单簿架构
+      frequency: 5
+      status: published
+      file: 14-dex-cex-engineering/S-EXCH-01-cex-matching-engine.md
+    - id: S-EXCH-02
+      title: 充值、提现与链上钱包体系
+      frequency: 5
+      status: published
+      file: 14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md
+    - id: S-EXCH-03
+      title: 账户体系与资金账务（复式记账）
+      frequency: 5
+      status: published
+      file: 14-dex-cex-engineering/S-EXCH-03-account-ledger.md
+    - id: S-EXCH-04
+      title: 合约交易：保证金、强平、资金费率
+      frequency: 5
+      status: published
+      file: 14-dex-cex-engineering/S-EXCH-04-futures-margin-liquidation.md
+    - id: S-EXCH-05
+      title: 风控、反洗钱与对账体系
+      frequency: 4
+      status: published
+      file: 14-dex-cex-engineering/S-EXCH-05-risk-reconciliation.md
+    - id: S-EXCH-06
+      title: DEX AMM、流动性池与 LP 收益
+      frequency: 5
+      status: published
+      file: 14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity.md
+    - id: S-EXCH-07
+      title: DEX 聚合路由、滑点与 Gas 优化
+      frequency: 4
+      status: published
+      file: 14-dex-cex-engineering/S-EXCH-07-aggregator-slippage.md
+    - id: S-EXCH-08
+      title: MEV、抢跑与三明治攻击防护
+      frequency: 4
+      status: published
+      file: 14-dex-cex-engineering/S-EXCH-08-mev-sandwich.md
+    - id: S-EXCH-09
+      title: CEX 与 DEX 混合架构（CeDeFi）
+      frequency: 4
+      status: published
+      file: 14-dex-cex-engineering/S-EXCH-09-hybrid-cex-dex.md
 
 p2:
   leadership:
@@ -572,6 +618,32 @@ p2:
       frequency: 4
       status: published
       file: 09-cloud-native/S-CLOUD-03-opentelemetry.md
+    - id: S-CLOUD-04
+      title: 滚动发布、探针与 PodDisruptionBudget
+      frequency: 5
+      status: published
+      file: 09-cloud-native/S-CLOUD-04-rolling-update-probes-pdb.md
+      code_refs: [examples/senior/graceful_shutdown]
+    - id: S-CLOUD-05
+      title: HPA 与 Go 服务自定义指标扩缩容
+      frequency: 4
+      status: published
+      file: 09-cloud-native/S-CLOUD-05-hpa-autoscaling.md
+    - id: S-CLOUD-06
+      title: Ingress、Gateway API 与南北向流量
+      frequency: 4
+      status: published
+      file: 09-cloud-native/S-CLOUD-06-ingress-gateway.md
+    - id: S-CLOUD-07
+      title: K8s 故障排查：OOMKilled、CrashLoop 与 Evicted
+      frequency: 5
+      status: published
+      file: 09-cloud-native/S-CLOUD-07-k8s-troubleshooting.md
+    - id: S-CLOUD-08
+      title: ConfigMap、Secret 与 Go 配置热更新
+      frequency: 4
+      status: published
+      file: 09-cloud-native/S-CLOUD-08-configmap-secret.md
   coding:
     - id: S-CODE-01
       title: 并发安全 LRU

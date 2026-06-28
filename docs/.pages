@@ -22,6 +22,7 @@ nav:
   - 解决方案架构（架构师岗）: interview/11-solution-architecture
   - 区块链与 Web3: interview/12-blockchain-web3
   - Solidity 与合约工程: interview/13-solidity-contracts
+  - DEX / CEX 交易所工程: interview/14-dex-cex-engineering
 
   - 工程与软技能:
     - 07 工程与领导力: interview/07-engineering-leadership
