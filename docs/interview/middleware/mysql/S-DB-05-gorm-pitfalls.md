@@ -117,7 +117,7 @@ func transfer(db *gorm.DB, from, to uint, amount int64) error {
 }
 ```
 
-可运行示例见 [`gorm/demo/main.go`](../../../../gorm/demo/main.go)（关联查询、钩子与 Preload SQL 日志）。
+可运行示例见 [`gorm/demo/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/gorm/demo/main.go)（关联查询、钩子与 Preload SQL 日志）。
 
 ## 延伸阅读
 

@@ -111,7 +111,7 @@ type Job[T any] struct {
 jobs := make(chan Job[Order], 128)
 ```
 
-见 [`basis/goroutine/main.go`](../../../basis/goroutine/main.go) 中闭包与 WaitGroup 模式。
+见 [`basis/goroutine/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/goroutine/main.go) 中闭包与 WaitGroup 模式。
 
 ## 延伸阅读
 

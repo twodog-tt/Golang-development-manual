@@ -109,7 +109,7 @@ func walkIter(root *Node) {
 }
 ```
 
-见 [`basis/goroutine/main.go`](../../../basis/goroutine/main.go)。
+见 [`basis/goroutine/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/goroutine/main.go)。
 
 ## 延伸阅读
 

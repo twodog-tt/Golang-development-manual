@@ -90,7 +90,7 @@ uint256 b;
 
 ## 代码示例
 
-本仓库 [SimpleToken.sol](../../../examples/senior/erc20bind/contract/SimpleToken.sol)：`mapping` 存余额。
+本仓库 [SimpleToken.sol](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/senior/erc20bind/contract/SimpleToken.sol)：`mapping` 存余额。
 
 ## 延伸阅读
 

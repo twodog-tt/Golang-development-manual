@@ -115,7 +115,7 @@ func pool(ctx context.Context, jobs <-chan Job, n int) {
 }
 ```
 
-见 [`basis/goroutine/main.go`](../../../basis/goroutine/main.go) 中 `dispatcher` 任务调度。
+见 [`basis/goroutine/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/goroutine/main.go) 中 `dispatcher` 任务调度。
 
 ## 延伸阅读
 

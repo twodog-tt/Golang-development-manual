@@ -97,7 +97,7 @@ func GetSession(id string) (*Session, bool) {
 }
 ```
 
-并发原语基础见 [`basis/sync/main.go`](../../../basis/sync/main.go)。
+并发原语基础见 [`basis/sync/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/sync/main.go)。
 
 ## 延伸阅读
 

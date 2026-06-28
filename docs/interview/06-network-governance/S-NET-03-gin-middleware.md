@@ -48,7 +48,7 @@ flowchart TB
 
 - **全链路 Trace**：最外层中间件从 header 取/生成 trace id，注入 `context`，传给 gRPC/DB。
 - **JWT 鉴权**：Auth 中间件解析 token，`c.Set("claims")`；业务 `c.MustGet`；失败 `Abort`。
-- **自定义验证**：如 [`gin-example/example_12/main.go`](../../../gin-example/example_12/main.go) 注册 `bookabledate` validator，在 Handler 内 `ShouldBindWith` 触发校验链。
+- **自定义验证**：如 [`gin-example/example_12/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/gin-example/example_12/main.go) 注册 `bookabledate` validator，在 Handler 内 `ShouldBindWith` 触发校验链。
 
 ## 排查与工具
 
@@ -110,7 +110,7 @@ func main() {
 }
 ```
 
-绑定与自定义 validator 见 [`gin-example/example_12/main.go`](../../../gin-example/example_12/main.go)；中间件 `Use` 模式见 [`gin-example/example_11/main.go`](../../../gin-example/example_11/main.go)。
+绑定与自定义 validator 见 [`gin-example/example_12/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/gin-example/example_12/main.go)；中间件 `Use` 模式见 [`gin-example/example_11/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/gin-example/example_11/main.go)。
 
 ## 延伸阅读
 

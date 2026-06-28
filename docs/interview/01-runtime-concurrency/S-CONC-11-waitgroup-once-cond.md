@@ -116,7 +116,7 @@ for _, task := range tasks {
 wg.Wait()
 ```
 
-见 [`basis/goroutine/main.go`](../../../basis/goroutine/main.go)、[`basis/sync/main.go`](../../../basis/sync/main.go)。
+见 [`basis/goroutine/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/goroutine/main.go)、[`basis/sync/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/sync/main.go)。
 
 ## 延伸阅读
 

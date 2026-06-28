@@ -105,7 +105,7 @@ func SafeGo(ctx context.Context, fn func(context.Context) error) error {
 }
 ```
 
-并发任务见 [`basis/goroutine/main.go`](../../../basis/goroutine/main.go)。
+并发任务见 [`basis/goroutine/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/goroutine/main.go)。
 
 ## 延伸阅读
 

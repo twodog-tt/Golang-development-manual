@@ -94,7 +94,7 @@ go func() { x++ }()
 go func() { x++ }()
 ```
 
-修复见 [`basis/sync/main.go`](../../../basis/sync/main.go) Mutex/atomic 计数器。
+修复见 [`basis/sync/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/sync/main.go) Mutex/atomic 计数器。
 
 ## 延伸阅读
 

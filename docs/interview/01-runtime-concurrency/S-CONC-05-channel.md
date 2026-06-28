@@ -107,7 +107,7 @@ case <-ctx.Done():
 }
 ```
 
-可运行示例：[`basis/channel/main.go`](../../../basis/channel/main.go)（`firstChannel` / `secondChannel`）。
+可运行示例：[`basis/channel/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/channel/main.go)（`firstChannel` / `secondChannel`）。
 
 ## 延伸阅读
 

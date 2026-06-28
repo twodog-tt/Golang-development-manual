@@ -102,7 +102,7 @@ func blockSyscall() {
 }
 ```
 
-调度与并发任务见 [`basis/goroutine/main.go`](../../../basis/goroutine/main.go)。
+调度与并发任务见 [`basis/goroutine/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/goroutine/main.go)。
 
 ## 延伸阅读
 

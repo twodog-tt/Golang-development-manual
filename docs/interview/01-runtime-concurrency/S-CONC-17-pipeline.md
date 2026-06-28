@@ -110,7 +110,7 @@ func fanIn(ctx context.Context, chans ...<-chan Result) <-chan Result {
 }
 ```
 
-多服务并行见 [`gin-example/example_28/main.go`](../../../gin-example/example_28/main.go)。
+多服务并行见 [`gin-example/example_28/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/gin-example/example_28/main.go)。
 
 ## 延伸阅读
 

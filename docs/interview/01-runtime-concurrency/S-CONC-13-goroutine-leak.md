@@ -111,7 +111,7 @@ func worker(ctx context.Context) {
 }
 ```
 
-并发模式参考 [`basis/goroutine/main.go`](../../../basis/goroutine/main.go)。
+并发模式参考 [`basis/goroutine/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/goroutine/main.go)。
 
 ## 延伸阅读
 

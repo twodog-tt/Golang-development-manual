@@ -102,7 +102,7 @@ type SafeMap struct {
 }
 ```
 
-可运行：[`basis/sync/main.go`](../../../basis/sync/main.go)（`counter` / `counter2`）。
+可运行：[`basis/sync/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/sync/main.go)（`counter` / `counter2`）。
 
 ## 延伸阅读
 

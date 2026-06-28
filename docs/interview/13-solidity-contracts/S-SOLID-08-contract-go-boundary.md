@@ -16,7 +16,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **区块链架构师**划分：**链上 = 资产规则与不变量**；**Go = 编排、索引、UX、风控、密钥流程**。忌「链下算完链上只存结果无校验」。本题串联 [13 Solidity](./README.md) 与 [12 Web3 Go](../12-blockchain-web3/README.md)。
+> **区块链架构师**划分：**链上 = 资产规则与不变量**；**Go = 编排、索引、UX、风控、密钥流程**。忌「链下算完链上只存结果无校验」。本题串联 [13 Solidity](./index.md) 与 [12 Web3 Go](../12-blockchain-web3/index.md)。
 
 ## 3 分钟版（一面深度）
 
@@ -97,8 +97,8 @@ Go PR → 绑定更新 → integration test (simulated/fork)
 
 ## 代码示例
 
-- 合约：[ReentrancyGuard.sol](../../../examples/solidity/ReentrancyGuard.sol)
-- Go 绑定：[erc20bind](../../../examples/senior/erc20bind/)
+- 合约：[ReentrancyGuard.sol](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/solidity/ReentrancyGuard.sol)
+- Go 绑定：[erc20bind](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/senior/erc20bind)
 
 ## 延伸阅读
 

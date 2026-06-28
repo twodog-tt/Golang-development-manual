@@ -96,7 +96,7 @@ func consumer() {
 }
 ```
 
-见 [`basis/sync/main.go`](../../../basis/sync/main.go)。
+见 [`basis/sync/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/sync/main.go)。
 
 ## 延伸阅读
 

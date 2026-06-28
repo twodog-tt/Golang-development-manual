@@ -83,7 +83,7 @@ event Transfer(address indexed from, address indexed to, uint256 value);
 
 ## 代码示例
 
-[SimpleToken.sol](../../../examples/senior/erc20bind/contract/SimpleToken.sol) — 教学用最小实现；生产用 OZ `ERC20`.
+[SimpleToken.sol](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/senior/erc20bind/contract/SimpleToken.sol) — 教学用最小实现；生产用 OZ `ERC20`.
 
 ## 延伸阅读
 

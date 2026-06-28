@@ -126,7 +126,7 @@ bal, _ := token.BalanceOf(&bind.CallOpts{Context: ctx}, userAddr)
 go test ./examples/senior/erc20bind/...
 ```
 
-见 [examples/senior/erc20bind/README.md](../../../examples/senior/erc20bind/README.md)。
+见 [examples/senior/erc20bind](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/erc20bind)。
 
 ## 延伸阅读
 

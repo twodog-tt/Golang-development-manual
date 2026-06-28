@@ -98,7 +98,7 @@ case <-timer.C:
 }
 ```
 
-Channel 基础见 [`basis/channel/main.go`](../../../basis/channel/main.go)。
+Channel 基础见 [`basis/channel/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/channel/main.go)。
 
 ## 延伸阅读
 

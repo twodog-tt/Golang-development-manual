@@ -8,7 +8,7 @@ nav:
     - 03 系统设计: interview/03-system-design
 
   - 中间件与数据库:
-    - 总览: interview/middleware/README.md
+    - 总览: interview/middleware
     - MySQL 与 GORM: interview/middleware/mysql
     - Redis: interview/middleware/redis
     - Kafka: interview/middleware/kafka
@@ -30,6 +30,6 @@ nav:
 
   - 参考资料:
     - 题源与引用: sources.md
-    - 面试题总索引: interview/README.md
-    - 代码与题目映射: interview/_meta/mapping.md
-    - 题目撰写模板: interview/_meta/template.md
+    - 面试题总索引: interview
+    - 代码与题目映射: interview/_meta/mapping
+    - 题目撰写模板: interview/_meta/template

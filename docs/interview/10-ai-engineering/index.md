@@ -1,6 +1,6 @@
 # 10 AI 工程与编程
 
-8 题 | P1 扩展（2024+ 高频） | [返回索引](../README.md)
+8 题 | P1 扩展（2024+ 高频） | [返回索引](../index.md)
 
 > 面向 **Go 后端** 在业务中接入大模型、RAG、Agent 的面试场景；偏工程落地，非算法研究员方向。
 
@@ -27,7 +27,7 @@
 
 - JD 含 **AI 应用 / 大模型 / Copilot / MCP / 智能客服**
 - 二面问「RAG 怎么做的」「能不能写 MCP Server」「语音怎么接」
-- 与 [S-ARCH-16](../03-system-design/S-ARCH-16-observability.md)、[S-CLOUD-03](../09-cloud-native/S-CLOUD-03-opentelemetry.md)、[S-ES 系列](../middleware/elasticsearch/) 交叉复习
+- 与 [S-ARCH-16](../03-system-design/S-ARCH-16-observability.md)、[S-CLOUD-03](../09-cloud-native/S-CLOUD-03-opentelemetry.md)、[S-ES 系列](../middleware/elasticsearch/index.md) 交叉复习
 
 ## 推荐刷题顺序
 

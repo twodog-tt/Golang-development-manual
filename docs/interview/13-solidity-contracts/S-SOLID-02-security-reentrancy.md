@@ -48,7 +48,7 @@ function withdraw(uint256 amount) external nonReentrant {
 }
 ```
 
-本仓库示例：[ReentrancyGuard.sol](../../../examples/solidity/ReentrancyGuard.sol)
+本仓库示例：[ReentrancyGuard.sol](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/solidity/ReentrancyGuard.sol)
 
 **高频漏洞清单**
 

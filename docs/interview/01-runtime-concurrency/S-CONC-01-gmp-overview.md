@@ -110,7 +110,7 @@ func heavyWork(ctx context.Context, n int) error {
 }
 ```
 
-可运行示例见 [`basis/goroutine/main.go`](../../../basis/goroutine/main.go)（任务调度与 WaitGroup）。
+可运行示例见 [`basis/goroutine/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/goroutine/main.go)（任务调度与 WaitGroup）。
 
 ## 延伸阅读
 
