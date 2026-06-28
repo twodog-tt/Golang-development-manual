@@ -125,7 +125,7 @@
 
 ## 引用规则
 
-1. 每题 YAML `sources` 字段至少 1 个外链或官方文档；详见 [题目撰写模板](interview/_meta/template/)。
+1. 每题 YAML `sources` 字段至少 1 个外链或官方文档；详见 [题目撰写模板](interview/_meta/template.md)。
 2. 博客、面经类内容只链出，正文用自己的话归纳，**不整段搬运**。
 3. 标注 `go_version` / Solidity 版本，避免泛型、loop 变量、PUSH0 等说法过时。
 4. **系统设计 / 架构题**：注明假设（QPS、一致性、地域），便于读者复现推演。
