@@ -15,6 +15,9 @@ sources:
 
 # 链上索引器：扫块、重组与幂等
 
+!!! tip "⭐ 重点准备"
+    与 **CoinRoll / Digifinex 链上监听** 履历高度匹配，见 [Gary 题单](../../resume-focus-gary.md)。
+
 ## 30 秒版（开场）
 
 > **索引器** = 持续同步链上数据到 DB，供 API 查询。必须处理 **链重组（reorg）**：回滚受影响块并重扫。生产关键词：**确认数、checkpoint、幂等写入、lag 监控**。

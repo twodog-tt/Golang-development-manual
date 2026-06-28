@@ -1,6 +1,6 @@
 # 12 区块链与 Web3
 
-9 题 | P1 扩展（Web3 / 链上后端 JD） | [返回索引](../../interview-catalog.md)
+10 题 | P1 扩展（Web3 / 链上后端 JD） | [返回索引](../../interview-catalog.md) · **⭐ [Gary 重点题单](../../resume-focus-gary.md)**
 
 > 面向 **Go 后端** 做链上数据索引、钱包、DApp 中台、交易所/ NFT 业务；偏 **工程落地**，非密码学研究员方向。
 
@@ -15,6 +15,7 @@
 | [S-BC-07](./S-BC-07-l2-cross-chain-bridge.md) | L2 扩容与跨链桥架构 | ⭐⭐⭐⭐⭐ |
 | [S-BC-08](./S-BC-08-erc4337-account-abstraction.md) | Account Abstraction ERC-4337 | ⭐⭐⭐⭐ |
 | [S-BC-09](./S-BC-09-abigen-contract-bindings.md) | go-ethereum abigen 完整实战 | ⭐⭐⭐⭐⭐ |
+| [S-BC-10](./S-BC-10-mpc-tss-custody.md) | MPC/TSS 与 CEX 托管签名 | ⭐⭐⭐⭐⭐ |
 
 ## 可运行代码
 

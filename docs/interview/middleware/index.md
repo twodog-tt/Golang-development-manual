@@ -1,6 +1,6 @@
 # 中间件与数据库（按类型浏览）
 
-按 **MySQL / Redis / Kafka / RocketMQ / Elasticsearch** 分类，便于按 JD 或技术栈刷题。
+按 **MySQL / Redis / Kafka / RocketMQ / RabbitMQ / Elasticsearch** 分类，便于按 JD 或技术栈刷题。
 
 | 类型 | 题数 | 入口 |
 |------|------|------|
@@ -8,6 +8,7 @@
 | [Redis](./redis/index.md) | 3 | 集群、分布式锁、热点 Key |
 | [Kafka](./kafka/index.md) | 1 | 消费语义、Rebalance |
 | [RocketMQ](./rocketmq/index.md) | 3 | 架构、事务/顺序/延迟、与 Kafka 对比 |
+| [RabbitMQ](./rabbitmq/index.md) | 1 | 链上监听与业务异步拆分 |
 | [Elasticsearch](./elasticsearch/index.md) | 3 | 倒排索引、DSL、同步运维 |
 | [分布式事务](./distributed/index.md) | 1 | TCC / Saga |
 

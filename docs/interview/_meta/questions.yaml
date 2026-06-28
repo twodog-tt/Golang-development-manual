@@ -351,6 +351,13 @@ p1:
         frequency: 4
         status: published
         file: middleware/rocketmq/S-RMQ-03-vs-kafka.md
+    rabbitmq:
+      - id: S-RAB-01
+        title: RabbitMQ 拆分链上监听与业务写入
+        frequency: 5
+        status: published
+        resume_focus: true
+        file: middleware/rabbitmq/S-RAB-01-exchange-async-pipeline.md
     elasticsearch:
       - id: S-ES-01
         title: Elasticsearch 倒排索引与基本原理
@@ -492,6 +499,12 @@ p1:
       status: published
       file: 12-blockchain-web3/S-BC-09-abigen-contract-bindings.md
       code_refs: [examples/senior/erc20bind]
+    - id: S-BC-10
+      title: MPC/TSS 与 CEX 托管签名架构
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 12-blockchain-web3/S-BC-10-mpc-tss-custody.md
 
   solidity_contracts:
     - id: S-SOLID-01
@@ -584,6 +597,24 @@ p1:
       frequency: 4
       status: published
       file: 14-dex-cex-engineering/S-EXCH-09-hybrid-cex-dex.md
+    - id: S-EXCH-10
+      title: 链上成交事件驱动 K 线与行情聚合
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation.md
+    - id: S-EXCH-11
+      title: WebSocket 行情 Hub 与连接治理
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-11-websocket-market-hub.md
+    - id: S-EXCH-12
+      title: Token 发行平台：毕业、分账与返佣提现
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-12-token-launch-rebate.md
 
 p2:
   leadership:

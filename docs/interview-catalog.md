@@ -1,6 +1,7 @@
 # 面试题索引
 
-> 左侧导航已按 **学习路径 + 中间件类型** 组织；本题单为速查表。
+> 左侧导航已按 **学习路径 + 中间件类型** 组织；本题单为速查表。  
+> **⭐ 履历定制**：[Gary 重点准备题单](../resume-focus-gary.md)
 
 ## Go 核心（P0，55 题）
 
@@ -10,9 +11,9 @@
 | 02 内存与 GC | 15 | [02-memory-gc/](interview/02-memory-gc/index.md) |
 | 03 系统设计 | 20 | [03-system-design/](interview/03-system-design/index.md) |
 
-## 中间件与数据库（19 题）
+## 中间件与数据库（20 题）
 
-见 **[middleware/](interview/middleware/index.md)** 目录：MySQL(5)、Redis(3)、Kafka(1)、RocketMQ(3)、ES(3)、分布式事务(1)。
+见 **[middleware/](interview/middleware/index.md)** 目录：MySQL(5)、Redis(3)、Kafka(1)、RocketMQ(3)、RabbitMQ(1)、ES(3)、分布式事务(1)。
 
 ## 其他模块
 

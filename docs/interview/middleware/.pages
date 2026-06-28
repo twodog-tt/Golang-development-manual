@@ -4,5 +4,6 @@ nav:
   - redis
   - kafka
   - rocketmq
+  - rabbitmq
   - elasticsearch
   - distributed

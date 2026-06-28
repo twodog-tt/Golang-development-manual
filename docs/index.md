@@ -1,8 +1,10 @@
 # Go 后端与区块链架构师面试手册
 
-面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 的面试知识库（**134 篇正文**）。
+面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 的面试知识库（**139 篇正文**）。
 
 > **定位**：Go 运行时与系统设计 + 链上工程（Solidity）+ 链下工程（Go RPC/索引）+ 解决方案架构 + AI 工程。
+>
+> **⭐ 根据你的履历定制**：[Gary 重点准备题单](resume-focus-gary.md)（Web3 交易所 / 钱包）
 
 > **如何使用左侧导航**：点击分组标题可展开/折叠子目录；当前所在分组会自动展开。
 
@@ -39,6 +41,7 @@
 
 ## 其他链接
 
+- [Gary 重点准备题单](resume-focus-gary.md)
 - [面试题总索引](interview-catalog.md)
 - [题单 YAML](interview/_meta/questions.yaml)
 - [代码映射](interview/_meta/mapping.md)
