@@ -1,6 +1,6 @@
 # 07 工程与领导力
 
-3 题 | P2 | 面向 Tech Lead / Staff 面 | [返回索引](../index.md)
+3 题 | P2 | 面向 Tech Lead / Staff 面 | [返回索引](../../interview-catalog.md)
 
 | ID | 题目 | 频率 |
 |----|------|------|

@@ -39,7 +39,7 @@
 
 ## 其他链接
 
-- [面试题总索引](interview/index.md)
+- [面试题总索引](interview-catalog.md)
 - [题单 YAML](interview/_meta/questions.yaml)
 - [代码映射](interview/_meta/mapping/)
 - [引用来源](sources.md)

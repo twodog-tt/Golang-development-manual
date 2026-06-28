@@ -1,6 +1,6 @@
 # 13 Solidity 与合约工程
 
-8 题 | P1 扩展（**区块链架构师 / 全栈 Web3**） | [返回索引](../index.md)
+8 题 | P1 扩展（**区块链架构师 / 全栈 Web3**） | [返回索引](../../interview-catalog.md)
 
 > 面向 **Go 后端 + 区块链架构师**：能设计、Review、审计 Solidity，并与 [12 Web3 Go 层](../12-blockchain-web3/index.md) 协作。偏 **合约工程与安全**，非纯理论研究。
 

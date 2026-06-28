@@ -1,0 +1,44 @@
+# 面试题索引
+
+> 左侧导航已按 **学习路径 + 中间件类型** 组织；本题单为速查表。
+
+## Go 核心（P0，55 题）
+
+| 模块 | 题数 | 入口 |
+|------|------|------|
+| 01 并发与运行时 | 20 | [01-runtime-concurrency/](interview/01-runtime-concurrency/index.md) |
+| 02 内存与 GC | 15 | [02-memory-gc/](interview/02-memory-gc/index.md) |
+| 03 系统设计 | 20 | [03-system-design/](interview/03-system-design/index.md) |
+
+## 中间件与数据库（19 题）
+
+见 **[middleware/](interview/middleware/index.md)** 目录：MySQL(5)、Redis(3)、Kafka(1)、RocketMQ(3)、ES(3)、分布式事务(1)。
+
+## 其他模块
+
+| 模块 | 题数 | 入口 |
+|------|------|------|
+| 06 网络与服务治理 | 5 | [06-network-governance/](interview/06-network-governance/index.md) |
+| **10 AI 工程与编程** | **8** | [**10-ai-engineering/**](interview/10-ai-engineering/index.md) |
+| **11 解决方案架构** | **8** | [**11-solution-architecture/**](interview/11-solution-architecture/index.md) |
+| **12 区块链与 Web3** | **9** | [**12-blockchain-web3/**](interview/12-blockchain-web3/index.md) |
+| **13 Solidity 与合约** | **8** | [**13-solidity-contracts/**](interview/13-solidity-contracts/index.md) |
+| **14 DEX / CEX 交易所** | **9** | [**14-dex-cex-engineering/**](interview/14-dex-cex-engineering/index.md) |
+| 08 手写题 | 5 | [08-coding-senior/](interview/08-coding-senior/index.md) |
+| 07 工程与领导力 | 3 | [07-engineering-leadership/](interview/07-engineering-leadership/index.md) |
+| 09 云原生 | 8 | [09-cloud-native/](interview/09-cloud-native/index.md) |
+
+## 高频 Top 10
+
+1. [S-CONC-01 GMP](interview/01-runtime-concurrency/S-CONC-01-gmp-overview.md)
+2. [S-CONC-05 Channel](interview/01-runtime-concurrency/S-CONC-05-channel.md)
+3. [S-CONC-12 Context](interview/01-runtime-concurrency/S-CONC-12-context.md)
+4. [S-CONC-13 goroutine 泄漏](interview/01-runtime-concurrency/S-CONC-13-goroutine-leak.md)
+5. [S-MEM-01 三色标记 GC](interview/02-memory-gc/S-MEM-01-tri-color-gc.md)
+6. [S-MEM-04 逃逸分析](interview/02-memory-gc/S-MEM-04-escape-analysis.md)
+7. [S-ARCH-02 秒杀](interview/03-system-design/S-ARCH-02-seckill.md)
+8. [S-ARCH-04 幂等](interview/03-system-design/S-ARCH-04-idempotency.md)
+9. [S-ARCH-06 缓存三大问题](interview/03-system-design/S-ARCH-06-cache-failure-modes.md)
+10. [S-ARCH-10 MQ 语义](interview/03-system-design/S-ARCH-10-mq-semantics.md)
+
+题单元数据：[questions.yaml](interview/_meta/questions.yaml)
