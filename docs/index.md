@@ -41,7 +41,7 @@
 
 - [面试题总索引](interview-catalog.md)
 - [题单 YAML](interview/_meta/questions.yaml)
-- [代码映射](interview/_meta/mapping/)
+- [代码映射](interview/_meta/mapping.md)
 - [引用来源](sources.md)
 
 ## 可运行代码

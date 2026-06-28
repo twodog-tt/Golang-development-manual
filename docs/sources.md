@@ -2,7 +2,7 @@
 
 本手册面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 面试准备。正文均为自研表述；外部资料仅作题源与延伸阅读，**不整段搬运**。
 
-> 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) · 代码映射：[interview/_meta/mapping/](interview/_meta/mapping/)
+> 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) · 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
 ## 手册覆盖范围（134 题）
 

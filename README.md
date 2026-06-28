@@ -9,7 +9,7 @@
 | 步骤 | 链接 |
 |------|------|
 | 1. 学习路线（4 周 / 8 周） | [docs/learning-path-senior.md](./docs/learning-path-senior.md) |
-| 2. 面试题索引 | [docs/interview/README.md](./docs/interview/README.md) |
+| 2. 面试题索引 | [docs/interview-catalog.md](./docs/interview-catalog.md) |
 | 3. 题单与元数据 | [docs/interview/_meta/questions.yaml](./docs/interview/_meta/questions.yaml) |
 | 4. 代码 ↔ 题目映射 | [docs/interview/_meta/mapping.md](./docs/interview/_meta/mapping.md) |
 
