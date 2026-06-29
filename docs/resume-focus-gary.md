@@ -11,7 +11,7 @@
 
 | 经历 | 面试常问 | 对应题目 |
 |------|----------|----------|
-| **CoinRoll DEX** | 链上索引、事件幂等、K 线、WebSocket 行情、RabbitMQ、UUPS 合约、返佣提现 | P0 区块 Web3 + DEX 专题 |
+| **CoinRoll DEX** | 链上索引、事件幂等、K 线、WebSocket 行情、RabbitMQ、UUPS 合约、返佣提现 | [P0 区块 Web3 + DEX 专题](#p0-25)（[12 Web3](interview/12-blockchain-web3/index.md) · [14 DEX](interview/14-dex-cex-engineering/index.md)） |
 | **Digifinex CEX** | 多链充提、reorg、MPC/TSS、热冷钱包、提现风控 | [S-EXCH-02](interview/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md)、[S-BC-10](interview/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) |
 | **滴滴风控** | 实时风控、ES、MQ、限流熔断 | [S-ARCH-08](interview/03-system-design/S-ARCH-08-rate-limiting.md)、[S-ES 系列](interview/middleware/elasticsearch/index.md) |
 
