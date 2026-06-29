@@ -82,6 +82,7 @@
 | 🔶 [S-ARCH-16](interview/03-system-design/S-ARCH-16-observability.md) | 可观测性 |
 | 🔶 [S-ARCH-15](interview/03-system-design/S-ARCH-15-release-strategy.md) | 灰度发布 |
 | 🔶 [S-RMQ-02](interview/middleware/rocketmq/S-RMQ-02-order-transaction-delay.md) | RocketMQ 事务/顺序 |
+| 🔶 [S-RMQ-04](interview/middleware/rocketmq/S-RMQ-04-ops-troubleshooting.md) | RocketMQ 堆积与死信排障 |
 | 🔶 [S-DIST-04](interview/middleware/kafka/S-DIST-04-kafka-semantics.md) | Kafka 消费语义 |
 | 🔶 [S-KAFKA-01](interview/middleware/kafka/S-KAFKA-01-architecture-storage.md) | Kafka 架构与 ISR |
 | 🔶 [S-KAFKA-02](interview/middleware/kafka/S-KAFKA-02-producer-reliability.md) | Producer acks 与幂等 |

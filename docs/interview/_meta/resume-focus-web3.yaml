@@ -49,6 +49,7 @@ p1_strengthen:
   - id: S-ARCH-16
   - id: S-ARCH-15
   - id: S-RMQ-02
+  - id: S-RMQ-04
   - id: S-KAFKA-01
   - id: S-KAFKA-02
   - id: S-KAFKA-03

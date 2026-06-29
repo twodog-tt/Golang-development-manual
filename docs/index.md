@@ -1,6 +1,6 @@
 # Go 后端与区块链架构师面试手册
 
-面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 的面试知识库（**142 篇正文**）。
+面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 的面试知识库（**143 篇正文**）。
 
 > **定位**：Go 运行时与系统设计 + 链上工程（Solidity）+ 链下工程（Go RPC/索引）+ 解决方案架构 + AI 工程。
 >
@@ -35,7 +35,7 @@
 | [MySQL + GORM](interview/middleware/mysql/index.md) | 5 | 索引、MVCC、慢查询、分库分表 |
 | [Redis](interview/middleware/redis/index.md) | 3 | 集群、分布式锁、热点 Key |
 | [Kafka](interview/middleware/kafka/index.md) | 4 | 架构、Producer、消费语义 |
-| [RocketMQ](interview/middleware/rocketmq/index.md) | 3 | 架构、事务/顺序/延迟 |
+| [RocketMQ](interview/middleware/rocketmq/index.md) | 4 | 架构、事务/顺序/延迟、排障 |
 | [Elasticsearch](interview/middleware/elasticsearch/index.md) | 3 | 倒排索引、DSL、同步 |
 | [分布式事务](interview/middleware/distributed/index.md) | 1 | TCC / Saga |
 

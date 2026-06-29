@@ -1,6 +1,6 @@
 # Go 后端与区块链架构师面试手册
 
-面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 的面试知识库（**142 篇正文**）。
+面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 的面试知识库（**143 篇正文**）。
 
 **在线阅读**：https://twodog-tt.github.io/Golang-development-manual/
 
@@ -18,7 +18,7 @@
 | 4. 代码 ↔ 题目映射 | [docs/interview/_meta/mapping.md](./docs/interview/_meta/mapping.md) |
 | 5. 题源与引用规范 | [docs/sources.md](./docs/sources.md) |
 
-## 模块概览（142 题）
+## 模块概览（143 题）
 
 ### Go 核心（P0，55 题）
 
@@ -30,7 +30,7 @@
 
 ### 中间件与数据库（19 题）
 
-见 [middleware/](./docs/interview/middleware/index.md)：MySQL(5)、Redis(3)、Kafka(4)、RocketMQ(3)、RabbitMQ(1)、ES(3)、分布式事务(1)。
+见 [middleware/](./docs/interview/middleware/index.md)：MySQL(5)、Redis(3)、Kafka(4)、RocketMQ(4)、RabbitMQ(1)、ES(3)、分布式事务(1)。
 
 ### 扩展模块
 

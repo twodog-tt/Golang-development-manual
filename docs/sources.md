@@ -4,14 +4,14 @@
 
 > 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) · 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
-## 手册覆盖范围（142 题）
+## 手册覆盖范围（143 题）
 
 | 模块 | 题数 | 说明 |
 |------|------|------|
 | 01 并发与运行时 | 20 | GMP、Channel、Context、pprof |
 | 02 内存与 GC | 15 | 三色标记、逃逸、sync.Pool |
 | 03 系统设计 | 20 | 秒杀、缓存、MQ、多活、SLO |
-| 中间件与数据库 | 22 | MySQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
+| 中间件与数据库 | 23 | MySQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
 | 06 网络与服务治理 | 5 | gRPC、Gin、JWT、WebSocket |
 | 08 手写题 | 5 | LRU、限流、优雅关闭、errgroup |
 | 10 AI 工程与编程 | 8 | LLM、RAG、Agent、MCP |

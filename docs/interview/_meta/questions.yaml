@@ -366,6 +366,11 @@ p1:
         frequency: 4
         status: published
         file: middleware/rocketmq/S-RMQ-03-vs-kafka.md
+      - id: S-RMQ-04
+        title: RocketMQ 运维排障：堆积、重试与死信
+        frequency: 5
+        status: published
+        file: middleware/rocketmq/S-RMQ-04-ops-troubleshooting.md
     rabbitmq:
       - id: S-RAB-01
         title: RabbitMQ 拆分链上监听与业务写入

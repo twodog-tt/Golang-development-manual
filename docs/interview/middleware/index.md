@@ -7,7 +7,7 @@
 | [MySQL + GORM](./mysql/index.md) | 5 | 索引、MVCC、慢查询、分库分表、GORM |
 | [Redis](./redis/index.md) | 3 | 集群、分布式锁、热点 Key |
 | [Kafka](./kafka/index.md) | 4 | 架构、Producer、消费语义、交易总线 |
-| [RocketMQ](./rocketmq/index.md) | 3 | 架构、事务/顺序/延迟、与 Kafka 对比 |
+| [RocketMQ](./rocketmq/index.md) | 4 | 架构、事务/顺序/延迟、选型、排障 |
 | [RabbitMQ](./rabbitmq/index.md) | 1 | 链上监听与业务异步拆分 |
 | [Elasticsearch](./elasticsearch/index.md) | 3 | 倒排索引、DSL、同步运维 |
 | [分布式事务](./distributed/index.md) | 1 | TCC / Saga |

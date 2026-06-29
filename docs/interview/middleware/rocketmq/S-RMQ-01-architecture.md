@@ -93,3 +93,4 @@ _, err := producer.SendSync(ctx, msg)
 
 - [RocketMQ 领域模型](https://rocketmq.apache.org/docs/domainModel/02message/)
 - 对比：[S-RMQ-03 vs Kafka](./S-RMQ-03-vs-kafka.md)
+- 排障：[S-RMQ-04 堆积与死信](./S-RMQ-04-ops-troubleshooting.md)

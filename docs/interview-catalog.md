@@ -11,9 +11,9 @@
 | 02 内存与 GC | 15 | [02-memory-gc/](interview/02-memory-gc/index.md) |
 | 03 系统设计 | 20 | [03-system-design/](interview/03-system-design/index.md) |
 
-## 中间件与数据库（22 题）
+## 中间件与数据库（23 题）
 
-见 **[middleware/](interview/middleware/index.md)** 目录：MySQL(5)、Redis(3)、Kafka(4)、RocketMQ(3)、RabbitMQ(1)、ES(3)、分布式事务(1)。
+见 **[middleware/](interview/middleware/index.md)** 目录：MySQL(5)、Redis(3)、Kafka(4)、RocketMQ(4)、RabbitMQ(1)、ES(3)、分布式事务(1)。
 
 ## 其他模块
 

@@ -12,7 +12,7 @@
 | S-DIST-01～03 | Redis | — | [middleware/redis/](../middleware/redis/index.md) |
 | S-DIST-04 | Kafka 消费语义 | — | [middleware/kafka/](../middleware/kafka/index.md) |
 | S-KAFKA-01～03 | Kafka 架构/Producer/交易总线 | — | [middleware/kafka/](../middleware/kafka/index.md) |
-| S-RMQ-01～03 | RocketMQ | — | [middleware/rocketmq/](../middleware/rocketmq/index.md) |
+| S-RMQ-01～04 | RocketMQ | — | [middleware/rocketmq/](../middleware/rocketmq/index.md) |
 | S-RAB-01 | RabbitMQ 交易所异步 | — | [middleware/rabbitmq/](../middleware/rabbitmq/index.md) |
 | S-ES-01～03 | Elasticsearch | — | [middleware/elasticsearch/](../middleware/elasticsearch/index.md) |
 | S-DIST-05 | 分布式事务 | — | [middleware/distributed/](../middleware/distributed/index.md) |
