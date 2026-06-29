@@ -10,7 +10,8 @@
 | S-MEM-05 | slice | `basis/point/main.go` | 指针与 slice 引用 |
 | S-DB-05 | GORM | `gorm/demo/main.go` | 见 [middleware/mysql/S-DB-05](../middleware/mysql/S-DB-05-gorm-pitfalls.md) |
 | S-DIST-01～03 | Redis | — | [middleware/redis/](../middleware/redis/index.md) |
-| S-DIST-04 | Kafka | — | [middleware/kafka/](../middleware/kafka/index.md) |
+| S-DIST-04 | Kafka 消费语义 | — | [middleware/kafka/](../middleware/kafka/index.md) |
+| S-KAFKA-01～03 | Kafka 架构/Producer/交易总线 | — | [middleware/kafka/](../middleware/kafka/index.md) |
 | S-RMQ-01～03 | RocketMQ | — | [middleware/rocketmq/](../middleware/rocketmq/index.md) |
 | S-RAB-01 | RabbitMQ 交易所异步 | — | [middleware/rabbitmq/](../middleware/rabbitmq/index.md) |
 | S-ES-01～03 | Elasticsearch | — | [middleware/elasticsearch/](../middleware/elasticsearch/index.md) |

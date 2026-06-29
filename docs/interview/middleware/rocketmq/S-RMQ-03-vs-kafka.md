@@ -85,5 +85,6 @@ quadrantChart
 ## 延伸阅读
 
 - [Kafka 文档](https://kafka.apache.org/documentation/)
+- [S-KAFKA-01 架构与 ISR](../kafka/S-KAFKA-01-architecture-storage.md)
 - [Kafka 消费语义](../kafka/S-DIST-04-kafka-semantics.md)
 - [MQ 通用语义](../../03-system-design/S-ARCH-10-mq-semantics.md)

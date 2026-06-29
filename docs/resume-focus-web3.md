@@ -83,6 +83,9 @@
 | 🔶 [S-ARCH-15](interview/03-system-design/S-ARCH-15-release-strategy.md) | 灰度发布 |
 | 🔶 [S-RMQ-02](interview/middleware/rocketmq/S-RMQ-02-order-transaction-delay.md) | RocketMQ 事务/顺序 |
 | 🔶 [S-DIST-04](interview/middleware/kafka/S-DIST-04-kafka-semantics.md) | Kafka 消费语义 |
+| 🔶 [S-KAFKA-01](interview/middleware/kafka/S-KAFKA-01-architecture-storage.md) | Kafka 架构与 ISR |
+| 🔶 [S-KAFKA-02](interview/middleware/kafka/S-KAFKA-02-producer-reliability.md) | Producer acks 与幂等 |
+| 🔶 [S-KAFKA-03](interview/middleware/kafka/S-KAFKA-03-trade-event-bus.md) | 交易事件总线与 lag |
 | 🔶 [S-ES-01](interview/middleware/elasticsearch/S-ES-01-inverted-index.md) | ES 倒排索引 |
 | 🔶 [S-ES-03](interview/middleware/elasticsearch/S-ES-03-sync-ops.md) | ES 数据同步 |
 | 🔶 [S-CLOUD-04](interview/09-cloud-native/S-CLOUD-04-rolling-update-probes-pdb.md) | 滚动发布与探针 |

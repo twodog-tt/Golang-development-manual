@@ -330,6 +330,21 @@ p1:
         status: published
         file: middleware/redis/S-DIST-03-hot-key.md
     kafka:
+      - id: S-KAFKA-01
+        title: Kafka 架构与存储：Topic、Partition、ISR
+        frequency: 5
+        status: published
+        file: middleware/kafka/S-KAFKA-01-architecture-storage.md
+      - id: S-KAFKA-02
+        title: Kafka Producer 可靠性：acks、幂等与分区键
+        frequency: 5
+        status: published
+        file: middleware/kafka/S-KAFKA-02-producer-reliability.md
+      - id: S-KAFKA-03
+        title: Kafka 交易事件总线：成交广播与 lag 治理
+        frequency: 4
+        status: published
+        file: middleware/kafka/S-KAFKA-03-trade-event-bus.md
       - id: S-DIST-04
         title: Kafka 消费语义与 rebalance
         frequency: 4

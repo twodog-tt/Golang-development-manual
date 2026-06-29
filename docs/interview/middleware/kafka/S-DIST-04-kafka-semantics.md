@@ -123,3 +123,6 @@ for {
 - [Kafka Consumer Configs](https://kafka.apache.org/documentation/#consumerconfigs)
 - [Cooperative Rebalancing](https://www.confluent.io/blog/cooperative-rebalancing-in-kafka-streams-consumer-ksqldb/)
 - [kafka-go Reader](https://github.com/segmentio/kafka-go#reader)
+- [S-KAFKA-01 架构与 ISR](./S-KAFKA-01-architecture-storage.md)
+- [S-KAFKA-02 Producer 可靠性](./S-KAFKA-02-producer-reliability.md)
+- [S-KAFKA-03 交易事件总线](./S-KAFKA-03-trade-event-bus.md)
