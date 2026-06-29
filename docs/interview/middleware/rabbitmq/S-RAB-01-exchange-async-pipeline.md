@@ -15,7 +15,7 @@ sources:
 ---
 
 !!! tip "⭐ 重点准备"
-    与 **CoinRoll RabbitMQ 异步链路** 履历高度匹配，见 [Gary 题单](../../../resume-focus-gary.md)。
+    Web3 交易所 / 钱包方向高频题，见 [重点准备题单](../../../resume-focus-web3.md)。
 
 # RabbitMQ 拆分链上监听与业务写入
 
@@ -26,7 +26,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：AMQP 模型 Exchange → Queue → Consumer；比 Kafka 更重 **路由灵活性**（direct/topic）。
-2. **为什么**：CoinRoll 类需 **多下游** 同事件不同处理速度；监听不能 blocked 在慢 SQL。
+2. **为什么**：DEX 后端常需 **多下游** 同事件不同处理速度；监听不能 blocked 在慢 SQL。
 3. **怎么做**：`block.events` topic exchange；routing key `swap.{token}`；各业务独立 queue + consumer 组。
 
 ## 10 分钟版（拓扑）

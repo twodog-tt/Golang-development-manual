@@ -14,7 +14,7 @@ sources:
 ---
 
 !!! tip "⭐ 重点准备"
-    与 **CoinRoll K 线 / 成交流水** 履历高度匹配，见 [Gary 题单](../../resume-focus-gary.md)。
+    Web3 交易所 / 钱包方向高频题，见 [重点准备题单](../../resume-focus-web3.md)。
 
 # 链上成交事件驱动 K 线与行情聚合
 
@@ -66,7 +66,7 @@ repo.UpsertKline(k)
 
 ## 生产场景
 
-- **CoinRoll 类**：TokenBought/TokenSold + Pancake Swap 统一入流水表
+- **DEX 平台**：Token 买卖事件 + 外盘 Swap 统一入流水表
 - **排行榜**：24h volume 物化视图或 Redis ZSET
 - **市场异动**：窗口内涨跌幅超阈值推 [S-EXCH-11](./S-EXCH-11-websocket-market-hub.md)
 

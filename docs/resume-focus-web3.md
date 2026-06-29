@@ -1,66 +1,63 @@
-# Gary 重点准备题单
+# Web3 交易所重点准备题单
 
-> 根据 [Gary 简历](https://github.com/twodog-tt)（CoinRoll DEX · Digifinex CEX 钱包 · 滴滴风控）生成的 **个性化刷题路径**。  
-> 元数据：[resume-focus-gary.yaml](interview/_meta/resume-focus-gary.yaml)
-
-**图例**：⭐ **P0 必背**（简历项目直接会问） · 🔶 **P1 强化**（二面 / 架构延伸） · ○ **P2 基础**（Go 核心保底）
+**图例**：⭐ **P0 必背**（岗位高频） · 🔶 **P1 强化**（二面 / 架构延伸） · ○ **P2 基础**（Go 核心保底）
 
 ---
 
-## 按工作经历对齐
+## 按技术场景速查
 
-| 经历 | 面试常问 | 对应题目 |
-|------|----------|----------|
-| **CoinRoll DEX** | 链上索引、事件幂等、K 线、WebSocket 行情、RabbitMQ、UUPS 合约、返佣提现 | [P0 区块 Web3 + DEX 专题](#p0-25)（[12 Web3](interview/12-blockchain-web3/index.md) · [14 DEX](interview/14-dex-cex-engineering/index.md)） |
-| **Digifinex CEX** | 多链充提、reorg、MPC/TSS、热冷钱包、提现风控 | [S-EXCH-02](interview/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md)、[S-BC-10](interview/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) |
-| **滴滴风控** | 实时风控、ES、MQ、限流熔断 | [S-ARCH-08](interview/03-system-design/S-ARCH-08-rate-limiting.md)、[S-ES 系列](interview/middleware/elasticsearch/index.md) |
+| 面试常问 | 对应题目 |
+|----------|----------|
+| 链上索引、事件幂等、K 线、WebSocket 行情、RabbitMQ、UUPS 合约、返佣提现 | [P0 区块 Web3 + DEX 专题](#p0-25)（[12 Web3](interview/12-blockchain-web3/index.md) · [14 DEX](interview/14-dex-cex-engineering/index.md)） |
+| 多链充提、reorg、MPC/TSS、热冷钱包、提现风控 | [S-EXCH-02](interview/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md)、[S-BC-10](interview/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) |
+| 实时风控、ES、MQ、限流熔断 | [S-ARCH-08](interview/03-system-design/S-ARCH-08-rate-limiting.md)、[S-ES 系列](interview/middleware/elasticsearch/index.md) |
 
 ---
 
 ## P0 必背（25 题）
 
-优先按 **CoinRoll → Digifinex → 通用工程** 口述，每题准备 **1 个生产案例**。
+优先按 **DEX 链上交易 → CEX 钱包托管 → 通用工程** 口述，每题准备 **1 个生产案例**。
 
 ### 链上索引与 Web3 Go
 
-| 题 ID | 题目 | 简历锚点 |
-|-------|------|----------|
+| 题 ID | 题目 | 关键技术点 |
+|-------|------|------------|
 | ⭐ [S-BC-05](interview/12-blockchain-web3/S-BC-05-indexer-reorg.md) | 链上索引器：扫块、重组与幂等 | 区块游标、tx_hash+log_index |
-| ⭐ [S-BC-10](interview/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) | MPC/TSS 与 CEX 托管签名 | Digifinex 提现签名 |
+| ⭐ [S-BC-10](interview/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) | MPC/TSS 与 CEX 托管签名 | 门限签名、提现链路 |
 | ⭐ [S-BC-04](interview/12-blockchain-web3/S-BC-04-contract-abi-events.md) | ABI 与事件监听 | Swap/TokenCreated 等 |
-| ⭐ [S-BC-02](interview/12-blockchain-web3/S-BC-02-go-ethereum-rpc.md) | JSON-RPC 与 ethclient | BSC/Ethereum 多链 RPC |
+| ⭐ [S-BC-02](interview/12-blockchain-web3/S-BC-02-go-ethereum-rpc.md) | JSON-RPC 与 ethclient | 多链 RPC Client |
 | ⭐ [S-BC-03](interview/12-blockchain-web3/S-BC-03-tx-signing-key-mgmt.md) | 交易签名与密钥管理 | KMS/HSM |
 | ⭐ [S-BC-09](interview/12-blockchain-web3/S-BC-09-abigen-contract-bindings.md) | abigen 合约调用 | 合约集成 |
 
 ### DEX / CEX 业务
 
-| 题 ID | 题目 | 简历锚点 |
-|-------|------|----------|
+| 题 ID | 题目 | 关键技术点 |
+|-------|------|------------|
 | ⭐ [S-EXCH-02](interview/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md) | 充值提现与钱包体系 | 多链充提、确认数 |
 | ⭐ [S-EXCH-03](interview/14-dex-cex-engineering/S-EXCH-03-account-ledger.md) | 账户与复式记账 | 账务、返佣 |
 | ⭐ [S-EXCH-05](interview/14-dex-cex-engineering/S-EXCH-05-risk-reconciliation.md) | 风控与对账 | 黑名单、审计 |
-| ⭐ [S-EXCH-06](interview/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity.md) | DEX AMM 与 LP | PancakeV2 |
+| ⭐ [S-EXCH-06](interview/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity.md) | DEX AMM 与 LP | 恒定乘积、外盘迁移 |
 | ⭐ [S-EXCH-10](interview/14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation.md) | 链上事件驱动 K 线 | K 线、排行榜 |
 | ⭐ [S-EXCH-11](interview/14-dex-cex-engineering/S-EXCH-11-websocket-market-hub.md) | WebSocket 行情 Hub | 实时推送 |
-| ⭐ [S-EXCH-12](interview/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate.md) | Token 发行与返佣提现 | CoinRoll 核心业务 |
+| ⭐ [S-EXCH-12](interview/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate.md) | Token 发行与返佣提现 | 毕业、分账、提现 |
 
 ### 合约与 API
 
-| 题 ID | 题目 | 简历锚点 |
-|-------|------|----------|
+| 题 ID | 题目 | 关键技术点 |
+|-------|------|------------|
 | ⭐ [S-SOLID-04](interview/13-solidity-contracts/S-SOLID-04-upgradeable-proxy.md) | UUPS 可升级合约 | 灰度迁移/回滚 |
 | ⭐ [S-SOLID-02](interview/13-solidity-contracts/S-SOLID-02-security-reentrancy.md) | 合约安全 | Operator/暂停 |
-| ⭐ [S-SOLID-08](interview/13-solidity-contracts/S-SOLID-08-contract-go-boundary.md) | 合约与 Go 边界 | Admin-Serv 分层 |
+| ⭐ [S-SOLID-08](interview/13-solidity-contracts/S-SOLID-08-contract-go-boundary.md) | 合约与 Go 边界 | 链上链下分层 |
 | ⭐ [S-NET-05](interview/06-network-governance/S-NET-05-websocket-gateway.md) | WebSocket 网关 | 长连接治理 |
-| ⭐ [S-NET-03](interview/06-network-governance/S-NET-03-gin-middleware.md) | Gin 中间件 | CoinRoll API |
+| ⭐ [S-NET-03](interview/06-network-governance/S-NET-03-gin-middleware.md) | Gin 中间件 | REST API 分层 |
 | ⭐ [S-RAB-01](interview/middleware/rabbitmq/S-RAB-01-exchange-async-pipeline.md) | RabbitMQ 拆分链上链路 | 监听与写入解耦 |
 
 ### 数据与稳定性
 
-| 题 ID | 题目 | 简历锚点 |
-|-------|------|----------|
+| 题 ID | 题目 | 关键技术点 |
+|-------|------|------------|
 | ⭐ [S-ARCH-04](interview/03-system-design/S-ARCH-04-idempotency.md) | 幂等设计 | 事件、提现重试 |
-| ⭐ [S-DB-05](interview/middleware/mysql/S-DB-05-gorm-pitfalls.md) | GORM 陷阱 | Gin+GORM 核心库 |
+| ⭐ [S-DB-05](interview/middleware/mysql/S-DB-05-gorm-pitfalls.md) | GORM 陷阱 | ORM 与事务 |
 | ⭐ [S-DB-02](interview/middleware/mysql/S-DB-02-transaction-mvcc.md) | 事务与 MVCC | 账务一致性 |
 | ⭐ [S-DIST-01](interview/middleware/redis/S-DIST-01-redis-cluster.md) | Redis 集群 | 行情缓存 |
 | ⭐ [S-DIST-02](interview/middleware/redis/S-DIST-02-distributed-lock.md) | 分布式锁 | 提现排队 |
@@ -123,13 +120,13 @@
 | D4 | Token 发行 + AMM + 合约升级 | S-EXCH-12、S-EXCH-06、S-SOLID-04 |
 | D5 | 账务 + 风控 + GORM | S-EXCH-03、S-EXCH-05、S-DB-05、S-DB-02 |
 | D6 | Gin API + 可观测 + 发布 | S-NET-03、S-ARCH-16、S-CLOUD-04、S-CODE-03 |
-| D7 | 模拟面：用 CoinRoll 项目串讲全链路 | S-SOLID-08 + 白板画架构图 |
+| D7 | 模拟面：DEX 全链路白板串讲 | S-SOLID-08 + 架构图 |
 
 ---
 
 ## 口述模板（每题 3 分钟）
 
-1. **业务背景**：CoinRoll / Digifinex 里我负责哪块  
+1. **业务背景**：你在项目中负责哪块、解决什么问题  
 2. **架构决策**：为什么 WebSocket 优先、为什么 MQ 拆链路、为什么 N 确认  
 3. **故障案例**：reorg 回滚 / 提现重试 / RPC 抖动 — 怎么发现、怎么修  
 4. **指标**：lag、P99、连接数、对账差异率

@@ -14,7 +14,7 @@ sources:
 ---
 
 !!! tip "⭐ 重点准备"
-    与 **CoinRoll Token 发行 / 返佣 / 提现** 履历高度匹配，见 [Gary 题单](../../resume-focus-gary.md)。
+    Web3 交易所 / 钱包方向高频题，见 [重点准备题单](../../resume-focus-web3.md)。
 
 # Token 发行平台：毕业、分账与返佣提现
 
@@ -25,7 +25,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：TokenCreated → 内盘交易 → TokenGraduated → 外盘流动性；SplitPayment 分账；Withdrawal 提佣金。
-2. **为什么**：CoinRoll 类 BSC 发币平台核心业务流程。
+2. **为什么**：BSC/Ethereum 发币 + 内盘交易平台的典型业务流程。
 3. **怎么做**：索引事件更新 Token 状态；返佣表按成交累加；提现走风控 + 合约 Vault/Operator。
 
 ## 10 分钟版（状态机）

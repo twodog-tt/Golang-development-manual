@@ -1,6 +1,6 @@
 # 12 区块链与 Web3
 
-10 题 | P1 扩展（Web3 / 链上后端 JD） | [返回索引](../../interview-catalog.md) · **⭐ [Gary 重点题单](../../resume-focus-gary.md)**
+10 题 | P1 扩展（Web3 / 链上后端 JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
 
 > 面向 **Go 后端** 做链上数据索引、钱包、DApp 中台、交易所/ NFT 业务；偏 **工程落地**，非密码学研究员方向。
 

@@ -1,6 +1,6 @@
 # 14 DEX / CEX 交易所工程
 
-12 题 | P1 扩展（**交易所 / 做市 / 合约后端** JD） | [返回索引](../../interview-catalog.md) · **⭐ [Gary 重点题单](../../resume-focus-gary.md)**
+12 题 | P1 扩展（**交易所 / 做市 / 合约后端** JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
 
 > 面向 **CEX 撮合与资金系统（Go）** + **DEX 链上协议（Solidity）** 工程师，及 **交易所架构师** 全栈面试。
 
@@ -28,7 +28,7 @@
 |----|------|------|
 | [S-EXCH-09](./S-EXCH-09-hybrid-cex-dex.md) | CEX/DEX 混合与流动性整合 | ⭐⭐⭐⭐ |
 
-## CoinRoll / 行情专题（履历匹配）
+## 行情与链上数据专题
 
 | ID | 题目 | 频率 |
 |----|------|------|

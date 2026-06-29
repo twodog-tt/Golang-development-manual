@@ -15,7 +15,7 @@ sources:
 ---
 
 !!! tip "⭐ 重点准备"
-    与 **CoinRoll WebSocket 行情 Hub** 履历高度匹配，见 [Gary 题单](../../resume-focus-gary.md)。
+    Web3 交易所 / 钱包方向高频题，见 [重点准备题单](../../resume-focus-web3.md)。
 
 # WebSocket 行情 Hub 与连接治理
 
@@ -56,7 +56,7 @@ flowchart TB
 - 优雅关闭：广播 `going away` + 等待 `terminationGracePeriod`
 - 指标：`ws_connections`、`subscribe_count`、`write_queue_depth`
 
-## 生产场景（CoinRoll 类）
+## 生产场景
 
 - **连接恢复**：客户端带 `last_seq` 补拉 HTTP 缺口再 SUB
 - **健康检查**：`/health` 返回连接数、各 topic 订阅数

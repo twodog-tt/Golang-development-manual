@@ -15,7 +15,7 @@ sources:
 # 充值、提现与链上钱包体系
 
 !!! tip "⭐ 重点准备"
-    与 **Digifinex 多链充提 / 冷热钱包** 履历高度匹配，见 [Gary 题单](../../resume-focus-gary.md)。
+    Web3 交易所 / 钱包方向高频题，见 [重点准备题单](../../resume-focus-web3.md)。
 
 ## 30 秒版（开场）
 

@@ -16,7 +16,7 @@ sources:
 # 链上索引器：扫块、重组与幂等
 
 !!! tip "⭐ 重点准备"
-    与 **CoinRoll / Digifinex 链上监听** 履历高度匹配，见 [Gary 题单](../../resume-focus-gary.md)。
+    Web3 交易所 / 钱包方向高频题，见 [重点准备题单](../../resume-focus-web3.md)。
 
 ## 30 秒版（开场）
 
