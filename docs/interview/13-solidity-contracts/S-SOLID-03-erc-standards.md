@@ -35,6 +35,16 @@ sources:
 | ERC-721 | 唯一 id | safeTransferFrom + onERC721Received | 艺术品 NFT |
 | ERC-1155 | id + 数量 | safeBatchTransferFrom | 游戏道具 |
 
+```mermaid
+sequenceDiagram
+  participant U as 用户
+  participant T as ERC20
+  participant S as Spender/DEX
+  U->>T: approve(spender, amount)
+  S->>T: transferFrom(user, pool, amount)
+  T-->>U: Transfer 事件
+```
+
 **ERC-20 面试要点**
 
 ```solidity

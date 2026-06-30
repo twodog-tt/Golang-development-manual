@@ -24,7 +24,7 @@ sources:
 
 1. **是什么**：`acks=0/1/all` 控制 broker 确认深度；幂等 Producer（PID + sequence）防 **单分区重复**；Key hash 绑定 partition。
 2. **为什么**：网络抖动、broker 切换会导致重试重复；交易所 **orderId / symbol** 的 key 选错会破坏顺序或打爆单 partition。
-3. **怎么做**：生产 `acks=all` + `min.insync.replicas≥2`；开启 `enable.idempotence=true`；`max.in.flight.requests.per.connection=1` 若需严格单分区顺序；消费端仍要业务幂等。
+3. **怎么做**：生产 `acks=all` + `min.insync.replicas≥2`；开启 `enable.idempotence=true`（**sarama / confluent-kafka-go**）；幂等开启后 `max.in.flight` 可 ≤5 且仍保序；**kafka-go 无原生幂等 Producer**，需业务去重；消费端仍要幂等。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -34,7 +34,7 @@ sources:
 |------|------|------|------------|
 | 0 | 不等 broker 确认 | 最低 | 最高 |
 | 1 | Leader 写入即返回 | 中 | Leader 宕机未同步 |
-| all/-1 | ISR 全部确认 | 较高 | 最低（配合 minISR） |
+| all/-1 | 至少 **min.insync.replicas** 个 ISR 副本确认 | 较高 | 最低（配合 minISR） |
 
 **幂等 Producer**
 
@@ -87,8 +87,8 @@ sequenceDiagram
 ## 追问链
 
 1. **幂等 Producer 和 DB 唯一键？** → Producer 防 **重复发**；消费仍可能重复 **处理**，要 DB/Redis 去重。
-2. **max.in.flight=5 为何影响顺序？** → 重试可能导致后发的先到；严格顺序设 1 或单线程发送。
-3. **Go 客户端？** → `segmentio/kafka-go` Writer；`IBM/sarama` SyncProducer/AsyncProducer。
+2. **max.in.flight 与顺序？** → **未开幂等**时，>1 可能乱序；**开启幂等 Producer** 后单分区内可 ≤5 且保持顺序（broker 按 sequence 去重重试）。
+3. **Go 客户端？** → `segmentio/kafka-go`（无原生幂等 Producer，靠业务去重）；`IBM/sarama` / `confluent-kafka-go` 支持 `enable.idempotence`。
 4. **和 [S-DIST-04](./S-DIST-04-kafka-semantics.md) 关系？** → 本题 Producer；DIST-04 消费 + rebalance。
 
 ## 反模式与事故
@@ -111,8 +111,9 @@ w := &kafka.Writer{
 err := w.WriteMessages(ctx, kafka.Message{
     Key:   []byte(withdrawID),
     Value: payload,
-    // kafka-go 通过 Transport 配置幂等；sarama 用 Config.Producer.Idempotent = true
 })
+// kafka-go 无 enable.idempotence；资金类建议 sarama:
+// config.Producer.Idempotent = true; config.Net.MaxOpenRequests = 1
 ```
 
 ## 延伸阅读

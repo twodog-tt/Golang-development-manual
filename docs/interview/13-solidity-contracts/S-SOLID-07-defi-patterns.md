@@ -27,15 +27,27 @@ sources:
 
 ## 10 分钟版
 
-**AMM（Uniswap V2 简）**
+**AMM（Uniswap V2，含 0.3% fee）**
 
 ```
-x * y = k
-amountOut = (amountIn * 997 * y) / (x * 1000 + amountIn * 997)  // 0.3% fee
+amountOut = (amountIn * 997 * y) / (x * 1000 + amountIn * 997)
 ```
 
-- ** impermanent loss**：LP 相对 HODL 的机会成本
+```mermaid
+sequenceDiagram
+  participant A as 攻击合约
+  participant P as AMM Pool
+  participant O as Oracle
+  A->>P: 闪电贷借入
+  A->>P: 大额 swap 操纵价格
+  A->>O: 读取被操纵价格
+  Note over A: 若仅用 spot 价则被套利
+  A->>P: 还闪电贷
+```
+
 - **V3 集中流动性**：架构更复杂，Gas 不同
+
+- **无常损失（IL）**：LP 相对 HODL 的机会成本
 
 **Oracle**
 

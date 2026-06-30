@@ -26,9 +26,10 @@ sources:
 
 ## 10 分钟版
 
-**Uniswap V2 swap（无手续费简化）**
+**Uniswap V2 swap（含 0.3% 手续费）**
 
-- `amountOut = (amountIn * 997 * reserveOut) / (reserveIn * 1000 + amountIn * 997)`（0.3% fee）
+- `amountOut = (amountIn * 997 * reserveOut) / (reserveIn * 1000 + amountIn * 997)`
+- 无手续费简化版：`amountOut = amountIn * reserveOut / (reserveIn + amountIn)`
 
 ```mermaid
 flowchart LR

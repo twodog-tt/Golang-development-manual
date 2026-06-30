@@ -52,7 +52,7 @@ flowchart LR
 
 **1.14 抢占**：runtime 向目标 M 发信号，在栈扫描安全点插入抢占逻辑，使长时间 CPU 密集循环也能被切走。注意：**unsafe/汇编 边界、cgo、部分 runtime 锁持有** 仍可能延迟抢占。
 
-**与 GC**：`STW mark assist`、写屏障期间调度仍运行，但 P 可能参与 GC 辅助标记；高分配 + 高 GOMAXPROCS 会放大 assist 压力。
+**与 GC**：**mark assist** 发生在**并发标记阶段**（mutator 分配时辅助标记），不是 STW 专属；写屏障期间调度仍运行，高分配 + 高 GOMAXPROCS 会放大 assist 压力。
 
 ## 生产场景
 

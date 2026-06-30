@@ -47,11 +47,12 @@ flowchart LR
 | 环境 | 建议 |
 |------|------|
 | 裸机/VM 独占 | 默认或略小于核数（留核给系统/网卡） |
-| K8s CPU limit | `GOMAXPROCS = ceil(limit cores)`，如 2.5 → 3 |
+| K8s CPU limit | 对齐 quota 核数；Go 1.25+ 默认可 cgroup 感知（见下） |
+| limit < 1 CPU | 注意 Go 1.25 默认 **GOMAXPROCS 下限常为 2**（除非可见核/亲和性更低） |
 | Burstable 无 limit | 按 request 保守设置，或默认 + 监控 |
 | 混部 | 显式压低，避免 assist 抢占邻居 |
 
-**Go 1.25**：runtime 改进 cgroup 感知（面试可答「新版本自动对齐 quota，仍建议在关键服务显式验证」）。
+**Go 1.25**：runtime 可按 cgroup CPU quota 自动设置 GOMAXPROCS（向上取整）；**下限通常为 2**。若已通过环境变量 / `runtime.GOMAXPROCS()` 显式设置，或 `GODEBUG=containermaxprocs=0`，则不会自动覆盖。关键服务仍建议显式验证与监控。
 
 **与 GC**：GOMAXPROCS 越大，并行标记 worker 越多，**STW 可能缩短**但 CPU 占用Spread；quota 下反而加剧 throttle。
 

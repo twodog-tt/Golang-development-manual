@@ -27,6 +27,18 @@ sources:
 
 ## 10 分钟版（优化清单）
 
+```mermaid
+flowchart LR
+  subgraph cold["冷访问 (高 Gas)"]
+    SLOAD["SLOAD 2100+"]
+    SSTORE["SSTORE 20000+"]
+  end
+  subgraph warm["暖访问 EIP-2929"]
+    WLOAD["SLOAD ~100"]
+  end
+  cold -->|"同 tx 再次读"| warm
+```
+
 | 技巧 | 说明 |
 |------|------|
 | 变量打包 | 多个 uint128 同 slot |

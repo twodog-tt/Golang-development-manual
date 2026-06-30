@@ -41,7 +41,8 @@ flowchart LR
 | Topic | 逻辑分类，如 `ORDER_TOPIC` |
 | Tag | 子过滤，如 `create` / `pay` |
 | Queue | Topic 下分片，顺序消息绑定单 Queue |
-| Consumer Group | 同组竞争消费；不同组各自全量（广播语义） |
+| Consumer Group | 同组 **集群消费**（一条消息只被一个实例消费）；**不同 Group 各自独立消费全量**（类似 Kafka 多订阅） |
+| MessageModel | `CLUSTERING`（默认，负载均衡）vs `BROADCASTING`（同组每实例全量） |
 | Offset | 消费进度，Broker 或本地管理 |
 
 **存储**：CommitLog 顺序写 + ConsumeQueue 定长索引（类似 Kafka 分区日志思想，实现不同）。

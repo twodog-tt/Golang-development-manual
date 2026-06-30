@@ -51,7 +51,7 @@ flowchart TB
 
 **内存**：元素存于 `buf` 连续数组；`T` 含指针时 GC 扫描 channel。
 
-**select**：多 channel 伪随机顺序 + 单锁尝试，避免全局死锁（见 S-CONC-07）。
+**select**：按 **channel 地址排序**依次加锁（`sellock`），再 **伪随机**轮询就绪 case，避免全局死锁（见 S-CONC-07）。
 
 ## 生产场景
 

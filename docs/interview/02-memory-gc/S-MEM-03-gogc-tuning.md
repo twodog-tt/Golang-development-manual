@@ -107,8 +107,9 @@ import (
 func initGCTuning() {
     // 容器 memory limit 512Mi 时示例
     debug.SetMemoryLimit(450 * 1024 * 1024) // 软限制 ~450Mi
-    debug.SetGCPercent(100)                   // 或压测后调整
-    log.Printf("GOGC=%d", debug.SetGCPercent(-1)) // 读当前值需 SetGCPercent 技巧
+    prev := debug.SetGCPercent(100)           // 返回上一个 GOGC 值
+    log.Printf("GOGC was %d, now 100", prev)
+    // 注意：SetGCPercent(-1) 会关闭 GC，不能用来“只读”
 }
 ```
 

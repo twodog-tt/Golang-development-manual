@@ -42,6 +42,20 @@ sources:
 - `mapping` / 动态数组：单独槽公式，不连续 packing
 - 继承：按 **C3 线性化** 顺序排列状态变量
 
+```mermaid
+flowchart TB
+  subgraph slot0["Slot 0 (32 bytes)"]
+    A["uint128 a"]
+    C["uint128 c"]
+  end
+  subgraph slot1["Slot 1"]
+    B["uint256 b"]
+  end
+  subgraph slotN["mapping(k)"]
+    M["slot = keccak256(k . slot_map)"]
+  end
+```
+
 ```solidity
 // 优化前：3 slots
 uint128 a;

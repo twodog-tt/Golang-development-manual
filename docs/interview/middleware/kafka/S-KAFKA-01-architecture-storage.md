@@ -45,7 +45,7 @@ flowchart TB
 | HW | High Watermark；消费者可见的最大 offset |
 | Segment | 日志分段文件 + 索引，便于 retention 删除 |
 
-**写入路径**：Producer → Leader 追加 → Follower replicate → ISR 全部 ack（`acks=all`）→ 返回成功。
+**写入路径**：Producer → Leader 追加 → Follower replicate → **`acks=all` 时至少 `min.insync.replicas` 个 ISR 副本确认** → 返回成功。
 
 **Partition 数规划**
 

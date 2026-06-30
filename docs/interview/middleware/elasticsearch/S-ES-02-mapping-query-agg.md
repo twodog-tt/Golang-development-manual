@@ -25,6 +25,17 @@ sources:
 2. **查询**：`match` 全文；`term` 精确 keyword；`range` 范围；`bool` 组合；**filter context** 可缓存不打分。
 3. **聚合**：`terms` 分桶、`date_histogram` 按时间、`avg/sum` 指标；**pipeline agg** 二次计算。
 
+```mermaid
+flowchart TB
+  Q[Query DSL] --> B[bool]
+  B --> M[must: 打分]
+  B --> F[filter: 可缓存不打分]
+  B --> S[should: 可选]
+  Q --> A[Aggregations]
+  A --> T[terms 桶]
+  A --> H[date_histogram]
+```
+
 ## 10 分钟版（示例）
 
 **典型商品搜索 DSL**

@@ -18,13 +18,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> **顺序消息**：同一 **MessageQueue** 内 FIFO，用 **ShardingKey**（如 orderId）选 Queue。**事务消息**：半消息 → 本地事务 → commit/rollback，解决 **发消息与写库一致性**。**延迟消息**：固定 **18 个延迟级别**（非任意时间），适合关单、重试。面试高频：**与 Kafka 顺序分区、Outbox 模式对比**。
+> **顺序消息**：同一 **MessageQueue** 内 FIFO，用 **ShardingKey**（如 orderId）选 Queue。**事务消息**：半消息 → 本地事务 → commit/rollback，解决 **发消息与写库一致性**。**延迟消息**：**4.x** 为固定 **18 个延迟级别**；**5.0+** 支持任意时刻定时（timer）。面试高频：**与 Kafka 顺序分区、Outbox 模式对比**。
 
 ## 3 分钟版（一面深度）
 
 1. **顺序**：全局顺序单 Queue（吞吐低）；分区顺序用 ShardingKey hash 到固定 Queue；消费端 **MessageListenerOrderly** 单线程 per Queue。
 2. **事务**：`sendMessageInTransaction` → Broker 存半消息（对消费者不可见）→ 执行本地事务 → `commit` 可见或 `rollback` 删除；Broker 会 **回查** 本地事务状态。
-3. **延迟**：`message.setDelayTimeLevel(3)` 非 timestamp；级别 1s 5s 10s… 到 2h；精确调度大量任务需 **时间轮 + 自建** 或外部调度。
+3. **延迟**：**RocketMQ 4.x**：`setDelayTimeLevel(n)`，18 档（1s…2h），非任意 timestamp。**5.0+**：支持 `DELIVERY_TIMESTAMP` 任意时刻；老系统仍常见 18 档。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -51,7 +51,15 @@ sequenceDiagram
 |------|--------|-----|
 | 顺序 | ShardingKey 同 key 同 Queue | 消费失败阻塞该 Queue |
 | 事务 | 回查接口必须可靠 | 回查风暴、状态不明 |
-| 延迟 | 仅预设 level | 非任意 delay 需自建 |
+| 延迟 4.x | 18 固定级别 | 非任意 timestamp |
+| 延迟 5.x | timer 任意时刻 | API 与 4.x 不同 |
+
+```mermaid
+flowchart LR
+  P[Producer] -->|delay level / timer| SCH[Schedule]
+  SCH -->|到期| Q[MessageQueue]
+  Q --> C[Consumer]
+```
 
 ## 生产场景
 

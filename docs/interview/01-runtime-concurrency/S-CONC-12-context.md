@@ -83,7 +83,7 @@ flowchart TB
 
 - 只用 `WithTimeout` 不设 DB `QueryContext`，超时仅 HTTP 返回。
 - `ctx.Value` 存 logger/DB，测试与类型断言地狱。
-- 每次循环 `WithTimeout` 不 `cancel()` → timer 与 goroutine 泄漏。
+- 每次循环 `WithTimeout` 不 `cancel()` → **子 Context 与 timer 泄漏至超时**（`go vet` lostcancel）；现代实现不一定会泄漏独立 goroutine，但仍必须 `defer cancel()`。
 
 ## 代码示例
 
