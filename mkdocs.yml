@@ -37,6 +37,9 @@ extra_css:
   - stylesheets/extra.css
   - stylesheets/mock-interview.css
 
+extra_javascript:
+  - javascript/mock-interview.js
+
 plugins:
   - awesome-pages
   - search:

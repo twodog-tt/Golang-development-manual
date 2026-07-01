@@ -81,14 +81,32 @@
     return pool[pool.length - 1];
   }
 
-  function baseUrl() {
+  function siteBaseUrl() {
+    const configEl = document.getElementById("__config");
+    if (configEl) {
+      try {
+        const config = JSON.parse(configEl.textContent);
+        if (config.base) {
+          return new URL(config.base + "/", window.location.href).href;
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+    if (typeof __md_scope !== "undefined") {
+      return new URL(__md_scope, window.location.href).href;
+    }
     const base = document.querySelector("base");
     if (base && base.href) return base.href;
-    return window.location.origin + window.location.pathname.replace(/[^/]*$/, "");
+    return window.location.origin + "/";
   }
 
   function answerUrl(path) {
-    return new URL(path, baseUrl()).href;
+    return new URL(path, siteBaseUrl()).href;
+  }
+
+  function dataUrl() {
+    return new URL("data/questions.json", siteBaseUrl()).href;
   }
 
   function markFamiliar(id) {
@@ -226,7 +244,7 @@
   async function init() {
     root.innerHTML = '<p class="mock-interview-loading">正在加载题库…</p>';
     try {
-      const res = await fetch(new URL("data/questions.json", baseUrl()));
+      const res = await fetch(dataUrl());
       if (!res.ok) throw new Error(res.statusText);
       const data = await res.json();
       catalog = data.questions || [];

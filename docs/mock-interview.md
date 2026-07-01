@@ -1,8 +1,6 @@
 ---
 hide:
   - toc
-extra_javascript:
-  - javascript/mock-interview.js
 ---
 
 # 模拟面试
