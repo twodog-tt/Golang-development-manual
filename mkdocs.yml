@@ -35,6 +35,7 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/mock-interview.css
 
 plugins:
   - awesome-pages

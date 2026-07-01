@@ -1,0 +1,1437 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-01T11:27:37Z",
+  "count": 143,
+  "questions": [
+    {
+      "id": "S-AI-01",
+      "title": "Go 接入大模型 API：流式、重试、超时",
+      "frequency": 5,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": false,
+      "url": "interview/10-ai-engineering/S-AI-01-llm-api-integration/",
+      "prompt": "大模型调用本质是 **高延迟、不可靠的 HTTP/RPC**；Go 侧用 **Context 超时**、**SSE 流式**、**指数退避重试** 和 **连接池复用**。生产关键词：**OpenAI 兼容协议、首 token 延迟 TTFT、429 限流、断路器**。"
+    },
+    {
+      "id": "S-AI-02",
+      "title": "RAG 架构：分块、向量检索与 Go 落地",
+      "frequency": 5,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": false,
+      "url": "interview/10-ai-engineering/S-AI-02-rag-architecture/",
+      "prompt": "**RAG（检索增强生成）** = 用户问题 → **Embedding 检索** 相关文档片段 → 拼进 Prompt → LLM 生成。生产关键词：**分块策略、Hybrid 检索、重排序 Rerank、引用溯源**。"
+    },
+    {
+      "id": "S-AI-03",
+      "title": "AI Agent 与 Function Calling",
+      "frequency": 5,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": false,
+      "url": "interview/10-ai-engineering/S-AI-03-agent-tool-calling/",
+      "prompt": "**Agent** = LLM + **工具调用循环**（规划→执行→观察→再规划）。**Function Calling / Tool Use** 让模型输出结构化 `tool_calls`，由 Go 服务执行真实 API。生产关键词：**ReAct、最大步数、人机确认、MCP 协议**。"
+    },
+    {
+      "id": "S-AI-04",
+      "title": "Prompt 工程与 Context 窗口管理",
+      "frequency": 4,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": false,
+      "url": "interview/10-ai-engineering/S-AI-04-prompt-context/",
+      "prompt": "**Prompt 工程**在后端侧体现为：**System 模板化、Few-shot 可配置、结构化输出约束**；**Context 管理**是控制 token 预算 — 摘要、滑动窗口、优先级裁剪。生产关键词：**tiktoken、JSON mode、prompt 版本化、A/B**。"
+    },
+    {
+      "id": "S-AI-05",
+      "title": "LLM 应用安全：注入、PII、护栏",
+      "frequency": 5,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": false,
+      "url": "interview/10-ai-engineering/S-AI-05-llm-security/",
+      "prompt": "LLM 应用安全 = **Prompt 注入**（用户覆盖 system 指令）+ **敏感数据泄露**（PII 进训练/日志）+ **过度授权的工具**。生产关键词：**OWASP LLM Top 10、输入输出护栏、最小权限 tool、红队测试**。"
+    },
+    {
+      "id": "S-AI-06",
+      "title": "LLM 可观测性、成本与延迟优化",
+      "frequency": 4,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": false,
+      "url": "interview/10-ai-engineering/S-AI-06-llm-observability-cost/",
+      "prompt": "LLM 服务要观测 **TTFT、tokens、成本、工具步数**；优化靠 **缓存、小模型路由、批处理、流式**。生产关键词：**GenAI 语义约定、Prompt 缓存、semantic cache、模型降级**。"
+    },
+    {
+      "id": "S-AI-07",
+      "title": "Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署",
+      "frequency": 5,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": false,
+      "url": "interview/10-ai-engineering/S-AI-07-mcp-server-go/",
+      "prompt": "**MCP（Model Context Protocol）** 用 JSON-RPC 把 **工具、资源、提示** 标准化暴露给 Cursor/Claude 等宿主。Go 用官方 **`modelcontextprotocol/go-sdk`** 注册 Tool，**stdio** 给 IDE 子进程挂载，**Streamable HTTP** 给远程服务。生产关键词：**类型安全 AddTool、权限边界、结构化输出**。"
+    },
+    {
+      "id": "S-AI-08",
+      "title": "多模态与语音接入：图像、音频在 Go 服务中的工程实践",
+      "frequency": 4,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": false,
+      "url": "interview/10-ai-engineering/S-AI-08-multimodal-voice/",
+      "prompt": "多模态 = 同一对话里传 **文本 + 图片 + 音频**；Go 后端负责 **上传校验、转码、流式转发、计费**。语音链路常见 **ASR（Whisper）→ LLM → TTS**。生产关键词：**multipart 限大小、base64 vs 对象存储 URL、实时语音 WebSocket**。"
+    },
+    {
+      "id": "S-ARCH-01",
+      "title": "设计支撑 10 万 QPS 的读多写少 API",
+      "frequency": 5,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-01-read-heavy-api/",
+      "prompt": "10 万 QPS 读多写少 API 的核心是 **CDN + 多级缓存 + 读写分离 + 水平扩展**，把 95%+ 流量挡在 DB 之外。生产关键词：**缓存命中率 > 95%、P99 < 50ms、写路径异步化**。"
+    },
+    {
+      "id": "S-ARCH-02",
+      "title": "秒杀：库存、超卖、热点 Key",
+      "frequency": 5,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-02-seckill/",
+      "prompt": "秒杀本质是 **有限库存 + 瞬时超高并发**，核心用 **预减库存（Redis Lua）+ 异步下单 + 热点隔离** 防超卖与打穿。生产关键词：**库存扣减原子性、排队削峰、热点 Key 分片**。"
+    },
+    {
+      "id": "S-ARCH-03",
+      "title": "分布式 ID：雪花、号段、UUID 取舍",
+      "frequency": 5,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-03-distributed-id/",
+      "prompt": "分布式 ID 要在 **全局唯一、趋势递增、高性能、可运维** 之间取舍：订单用 **雪花/号段**（索引友好），日志追踪用 **UUID v7**。生产关键词：**时钟回拨、WorkerId 分配、号段双 Buffer**。"
+    },
+    {
+      "id": "S-ARCH-04",
+      "title": "幂等设计：接口、消息、数据库层",
+      "frequency": 5,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-04-idempotency/",
+      "prompt": "幂等 = **同一业务操作执行多次，结果与执行一次相同**。在至少一次投递的网络里，必须在 **API 幂等键、MQ 去重、DB 唯一约束** 三层落地。生产关键词：**Idempotency-Key、状态机、唯一索引**。"
+    },
+    {
+      "id": "S-ARCH-05",
+      "title": "最终一致 vs 强一致：业务怎么选",
+      "frequency": 5,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-05-consistency-tradeoff/",
+      "prompt": "**强一致**用在对的钱/库存/权限；**最终一致**用在 Feed、计数、搜索索引。面试要讲清 **CAP 在分区时的选择** 和 **业务可接受的延迟窗口**。生产关键词：**Saga、Outbox、读己之写**。"
+    },
+    {
+      "id": "S-ARCH-06",
+      "title": "缓存穿透、击穿、雪崩治理体系",
+      "frequency": 5,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-06-cache-failure-modes/",
+      "prompt": "**穿透**查不存在的数据、**击穿**热点 Key 过期、**雪崩**大量 Key 同时失效——三板斧分别是 **布隆过滤器/空值缓存、互斥锁/singleflight、随机 TTL/多级缓存**。生产关键词：**回源率、热点隔离、熔断降级**。"
+    },
+    {
+      "id": "S-ARCH-07",
+      "title": "多级缓存与本地缓存一致性",
+      "frequency": 4,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-07-multi-level-cache/",
+      "prompt": "多级缓存 = **L1 进程内 + L2 Redis + L3 DB/CDN**，用延迟换 QPS；一致性靠 **TTL + 主动失效（Pub/Sub、MQ）+ 版本号**。生产关键词：**本地缓存命中率、失效风暴、内存上限**。"
+    },
+    {
+      "id": "S-ARCH-08",
+      "title": "限流：令牌桶、漏桶、分布式限流",
+      "frequency": 5,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-08-rate-limiting/",
+      "prompt": "**令牌桶**允许突发、**漏桶**平滑输出；生产网关常用 **令牌桶 + 分布式 Redis/Envoy** 按用户/IP/接口维度限流。生产关键词：**429、配额、Warm-up、分级限流**。"
+    },
+    {
+      "id": "S-ARCH-09",
+      "title": "熔断、降级、舱壁",
+      "frequency": 4,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-09-circuit-breaker/",
+      "prompt": "**熔断**在下游故障时快速失败避免拖死线程；**降级**返回兜底数据；**舱壁**隔离资源池防扩散。生产关键词：**半开探测、错误率阈值、超时**。"
+    },
+    {
+      "id": "S-ARCH-10",
+      "title": "消息队列：至少一次、恰好一次、顺序性",
+      "frequency": 5,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-10-mq-semantics/",
+      "prompt": "分布式 MQ **真正常见的是至少一次（At-Least-Once）**；恰好一次（Exactly-Once）需 **幂等消费 + 事务/outbox** 在业务层实现；顺序性靠 **单分区单消费者** 或业务序号。生产关键词：**消费幂等、DLQ、consumer lag**。"
+    },
+    {
+      "id": "S-ARCH-11",
+      "title": "延迟任务与定时任务架构",
+      "frequency": 4,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-11-delayed-jobs/",
+      "prompt": "延迟任务 = **在 T 时刻后执行一次**（订单超时关单）；定时任务 = **周期执行**（对账）。常见实现：**Redis ZSET 时间轮、MQ 延迟消息、DB 扫描 + 分布式锁**。生产关键词：**时间精度、重复执行、miss 补偿**。"
+    },
+    {
+      "id": "S-ARCH-12",
+      "title": "支付/订单状态机设计",
+      "frequency": 5,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-12-order-state-machine/",
+      "prompt": "订单/支付用 **有限状态机（FSM）** 约束合法迁移，配合 **乐观锁 version + 幂等回调** 防并发乱序。生产关键词：**PENDING→PAID→SHIPPED、非法迁移拒绝、补偿关单**。"
+    },
+    {
+      "id": "S-ARCH-13",
+      "title": "多活、异地容灾与 RPO/RTO",
+      "frequency": 4,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-13-multi-active-dr/",
+      "prompt": "**RPO** = 可丢多少数据（Recovery Point Objective）；**RTO** = 恢复要多久。多活是双城同时接流量；冷备 RTO 长、成本低。生产关键词：**同城双活、异地多活、单元化、数据复制 lag**。"
+    },
+    {
+      "id": "S-ARCH-14",
+      "title": "微服务拆分边界与何时不该拆",
+      "frequency": 4,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-14-microservice-boundary/",
+      "prompt": "拆分边界按 **业务域（Bounded Context）+ 变更频率 + 团队 Conway 定律**，不是按表或按层。过早拆分带来 **分布式事务、链路延迟、运维爆炸**。生产关键词：**高内聚低耦合、数据所有权、API 契约**。"
+    },
+    {
+      "id": "S-ARCH-15",
+      "title": "API 版本、灰度发布与特性开关",
+      "frequency": 4,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-15-release-strategy/",
+      "prompt": "**API 版本**保兼容（URL `/v2` 或 Header）；**灰度**用小流量验证新版本；**Feature Flag** 在运行时开关行为无需发版。生产关键词：**向后兼容、可回滚、Flag 生命周期**。"
+    },
+    {
+      "id": "S-ARCH-16",
+      "title": "可观测性：日志、指标、链路",
+      "frequency": 5,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-16-observability/",
+      "prompt": "可观测性三板斧：**Metrics 告警、Logs 细节、Traces 因果**；Go 生产标配 **OpenTelemetry + Prometheus + 结构化 JSON 日志**。生产关键词：**RED/USE 方法、trace_id 贯通、采样**。"
+    },
+    {
+      "id": "S-ARCH-17",
+      "title": "SLO/SLI 与错误预算",
+      "frequency": 4,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-17-slo-error-budget/",
+      "prompt": "**SLI** 是可测量指标（如成功率）；**SLO** 是目标（99.9%）；**错误预算** = 1 - SLO，预算耗尽则停功能保稳定。生产关键词：**多窗口 burn rate、用户感知、发布门禁**。"
+    },
+    {
+      "id": "S-ARCH-18",
+      "title": "容量评估与压测方法论",
+      "frequency": 4,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-18-capacity-planning/",
+      "prompt": "容量规划 = **业务预测 × 单实例能力 × 冗余系数**；压测验证 **拐点 QPS、P99、资源饱和点**。生产关键词：**30% Headroom、阶梯加压、全链路、生产流量回放**。"
+    },
+    {
+      "id": "S-ARCH-19",
+      "title": "从单体到微服务的演进与回退",
+      "frequency": 3,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-19-monolith-to-microservices/",
+      "prompt": "演进用 **绞杀者模式（Strangler Fig）**：新能力新服务，老模块逐步迁移；保留 **回退路径** 与 **数据双写对账**。生产关键词：**模块化单体先行、不是为拆而拆、可逆决策**。"
+    },
+    {
+      "id": "S-ARCH-20",
+      "title": "技术选型文档怎么写（Lead 面）",
+      "frequency": 4,
+      "module": "03 系统设计",
+      "module_key": "system_design",
+      "resume_focus": false,
+      "url": "interview/03-system-design/S-ARCH-20-tech-decision-doc/",
+      "prompt": "Lead 面考察 **结构化决策能力**：ADR/技术选型文档讲清 **背景、目标、备选方案、权衡、决策、后果、回滚**。生产关键词：**可逆性、数据驱动、利益相关方对齐**。"
+    },
+    {
+      "id": "S-BC-01",
+      "title": "区块链基础与 EVM 账户模型",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "interview/12-blockchain-web3/S-BC-01-blockchain-evm-basics/",
+      "prompt": "以太坊是 **状态机**：交易改变世界状态。两类账户：**EOA**（私钥控制，发交易）与 **合约账户**（代码+存储）。Gas 计量计算与存储成本。Go 后端关键词：**nonce 顺序、finality、链 ID 防重放**。"
+    },
+    {
+      "id": "S-BC-02",
+      "title": "Go 连接节点：JSON-RPC 与 ethclient",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "interview/12-blockchain-web3/S-BC-02-go-ethereum-rpc/",
+      "prompt": "链上数据通过 **JSON-RPC 2.0** 访问（HTTP/WebSocket/IPC）。Go 生产用 **go-ethereum/ethclient** 封装；自研网关可用最小 HTTP 客户端。生产关键词：**WS 订阅、限流、多节点 failover、context 超时**。"
+    },
+    {
+      "id": "S-BC-03",
+      "title": "交易签名与密钥管理",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "interview/12-blockchain-web3/S-BC-03-tx-signing-key-mgmt/",
+      "prompt": "交易由 **私钥 ECDSA 签名** 后广播；后端热钱包必须 **HSM/KMS、最小权限、nonce 队列**。生产关键词：**EIP-155 chainId、离线签名、代签分离、never log private key**。"
+    },
+    {
+      "id": "S-BC-04",
+      "title": "智能合约交互：ABI 与事件监听",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "interview/12-blockchain-web3/S-BC-04-contract-abi-events/",
+      "prompt": "调合约 = **ABI 编码 calldata** + 发 tx 或 `eth_call`；监听业务靠 **Event Logs**（`Transfer` 等）。Go 用 **abigen** 生成绑定。生产关键词：**topics 索引、receipt logs、合约地址白名单**。"
+    },
+    {
+      "id": "S-BC-05",
+      "title": "链上索引器：扫块、重组与幂等",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "interview/12-blockchain-web3/S-BC-05-indexer-reorg/",
+      "prompt": "**索引器** = 持续同步链上数据到 DB，供 API 查询。必须处理 **链重组（reorg）**：回滚受影响块并重扫。生产关键词：**确认数、checkpoint、幂等写入、lag 监控**。"
+    },
+    {
+      "id": "S-BC-06",
+      "title": "DeFi / NFT 后端架构模式",
+      "frequency": 4,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "interview/12-blockchain-web3/S-BC-06-defi-backend-patterns/",
+      "prompt": "Web3 后端 = **链上结算 + 链下体验**：索引器、报价 API、元数据、风控。DeFi 重 **Oracle/滑点/MEV**；NFT 重 **元数据/IPFS/版税**。Go 常做 **聚合 API、任务队列、对账**。生产关键词：**链上链下一致性、价格延迟、合规 KYT**。"
+    },
+    {
+      "id": "S-BC-07",
+      "title": "L2 扩容与跨链桥架构",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "interview/12-blockchain-web3/S-BC-07-l2-cross-chain-bridge/",
+      "prompt": "**L2** 在以太坊外批量执行，把 **状态根/证明** 提交 L1 结算；分 **Optimistic Rollup**（欺诈证明）与 **ZK Rollup**（有效性证明）。**跨链桥** 是额外信任层，不是「官方 ETH 转账」。Go 后端关键词：**chainId、finality 差异、桥事件索引、L1↔L2 消息延迟**。"
+    },
+    {
+      "id": "S-BC-08",
+      "title": "Account Abstraction ERC-4337 与 Go 后端",
+      "frequency": 4,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "interview/12-blockchain-web3/S-BC-08-erc4337-account-abstraction/",
+      "prompt": "**ERC-4337** 在不改共识的前提下实现 **智能合约钱包**：用户提交 **UserOperation**，**Bundler** 打包上链，**Paymaster** 可代付 Gas，**EntryPoint** 统一入口。Go 后端关键词：**UserOp 构造、Bundler RPC、会话密钥、Gas 赞助策略**。"
+    },
+    {
+      "id": "S-BC-09",
+      "title": "go-ethereum abigen 完整合约调用实战",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "interview/12-blockchain-web3/S-BC-09-abigen-contract-bindings/",
+      "prompt": "生产路径：**Solidity → solc 出 ABI/BIN → abigen 生成 Go → Deploy/Call/FilterLogs**。单测用 **simulated.Backend** 不上测试网。与 [S-BC-04 ABI 理论](./S-BC-04-contract-abi-events.md) 配套，本题是 **可运行闭环**。"
+    },
+    {
+      "id": "S-BC-10",
+      "title": "MPC/TSS 与 CEX 托管签名架构",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": true,
+      "url": "interview/12-blockchain-web3/S-BC-10-mpc-tss-custody/",
+      "prompt": "CEX 热钱包不能 **单点私钥**：用 **MPC（多方计算）/ TSS（门限签名）** 把密钥拆成碎片，多方协同出签而不还原完整私钥。Go 后端负责 **提现状态机、调用签名服务、广播与确认**。生产关键词：**门限 m-of-n、KMS/HSM、冷签名延迟、审计留痕**。"
+    },
+    {
+      "id": "S-CLOUD-01",
+      "title": "Kubernetes 调度与 Go 服务资源 limit",
+      "frequency": 4,
+      "module": "09 云原生",
+      "module_key": "cloud_native",
+      "resume_focus": false,
+      "url": "interview/09-cloud-native/S-CLOUD-01-k8s-scheduling/",
+      "prompt": "K8s **Scheduler** 按 Request/Limit、亲和性、污点容忍选 Node；Go 服务必须让 **GOMAXPROCS 与 CPU limit 对齐**，否则 throttle 下 P99 爆炸。生产关键词：**requests≠limits 的 Burstable、liveness/readiness 探针、HPA 指标**。"
+    },
+    {
+      "id": "S-CLOUD-02",
+      "title": "Docker 多阶段构建与 Go 镜像最佳实践",
+      "frequency": 4,
+      "module": "09 云原生",
+      "module_key": "cloud_native",
+      "resume_focus": false,
+      "url": "interview/09-cloud-native/S-CLOUD-02-docker-multistage/",
+      "prompt": "Go 静态编译适合 **multi-stage**：builder 阶段编译，runtime 用 **distroless/scratch** 缩小攻击面。生产关键词：**CGO_ENABLED=0、-trimpath -ldflags=-s -w、非 root 用户、镜像扫描**。"
+    },
+    {
+      "id": "S-CLOUD-03",
+      "title": "OpenTelemetry 与 Go 可观测性接入",
+      "frequency": 4,
+      "module": "09 云原生",
+      "module_key": "cloud_native",
+      "resume_focus": false,
+      "url": "interview/09-cloud-native/S-CLOUD-03-opentelemetry/",
+      "prompt": "**OpenTelemetry（OTel）** 统一 Traces、Metrics、Logs 的采集与导出；Go 用 `otel` SDK + **OTLP** 推到 Collector/Jaeger/Prometheus。生产关键词：**W3C traceparent 传播、采样率、高基数 label 控制、与 slog 关联 trace_id**。"
+    },
+    {
+      "id": "S-CLOUD-04",
+      "title": "滚动发布、探针与 PodDisruptionBudget",
+      "frequency": 5,
+      "module": "09 云原生",
+      "module_key": "cloud_native",
+      "resume_focus": false,
+      "url": "interview/09-cloud-native/S-CLOUD-04-rolling-update-probes-pdb/",
+      "prompt": "K8s **Deployment 滚动发布** 按 `maxSurge` / `maxUnavailable` 替换 Pod；**readiness** 控制是否接流量，**liveness** 控制是否重启；**PDB** 保证维护/发布时最少可用副本。Go 服务必须配合 **SIGTERM 优雅关闭**（[S-CODE-03](../08-coding-senior/S-CODE-03-graceful-shutdown.md)）。生产关键词：**preStop、terminationGracePeriodSeconds、readiness 查依赖**。"
+    },
+    {
+      "id": "S-CLOUD-05",
+      "title": "HPA 与 Go 服务自定义指标扩缩容",
+      "frequency": 4,
+      "module": "09 云原生",
+      "module_key": "cloud_native",
+      "resume_focus": false,
+      "url": "interview/09-cloud-native/S-CLOUD-05-hpa-autoscaling/",
+      "prompt": "**HPA** 根据 CPU、内存或 **自定义指标**（QPS、队列 lag、goroutine 数）自动改 Deployment 副本数。Go 服务注意：**CPU 被 cgroup throttle 时 HPA 失真**；高并发 I/O 型更适合 **Prometheus + prometheus-adapter** 按 QPS/latency 扩。生产关键词：**稳定窗口、扩缩容速率、min/maxReplicas、与 PDB 对齐**。"
+    },
+    {
+      "id": "S-CLOUD-06",
+      "title": "Ingress、Gateway API 与南北向流量",
+      "frequency": 4,
+      "module": "09 云原生",
+      "module_key": "cloud_native",
+      "resume_focus": false,
+      "url": "interview/09-cloud-native/S-CLOUD-06-ingress-gateway/",
+      "prompt": "**南北向流量** 从公网进集群：传统 **Ingress**（nginx/ALB）或新 **Gateway API**（更细粒度路由）。Go 服务通常 ClusterIP + Ingress 暴露 HTTP/gRPC。生产关键词：**TLS 终止、超时与 body 限制、path 路由、WebSocket 升级、gRPC 需 backend protocol 注解**。"
+    },
+    {
+      "id": "S-CLOUD-07",
+      "title": "K8s 故障排查：OOMKilled、CrashLoop 与 Evicted",
+      "frequency": 5,
+      "module": "09 云原生",
+      "module_key": "cloud_native",
+      "resume_focus": false,
+      "url": "interview/09-cloud-native/S-CLOUD-07-k8s-troubleshooting/",
+      "prompt": "Pod 异常三件套：**OOMKilled**（内存超 limit）、**CrashLoopBackOff**（进程反复退出）、**Evicted**（节点磁盘/内存压力驱逐）。Go 服务排查路径：`kubectl describe pod` → Events → 日志 → **pprof heap/goroutine**（[S-MEM-10](../02-memory-gc/S-MEM-10-pprof-heap.md)）。生产关键词：**Last State、Exit Code 137、previous logs、ephemeral debug container**。"
+    },
+    {
+      "id": "S-CLOUD-08",
+      "title": "ConfigMap、Secret 与 Go 配置热更新",
+      "frequency": 4,
+      "module": "09 云原生",
+      "module_key": "cloud_native",
+      "resume_focus": false,
+      "url": "interview/09-cloud-native/S-CLOUD-08-configmap-secret/",
+      "prompt": "**ConfigMap** 存非敏感配置，**Secret** 存密钥（Base64 非加密）；挂载为 **环境变量** 或 **Volume 文件**。Go 服务推荐：**启动读 env + 可选文件 watch 热更**；Secret **不进镜像**（[S-CLOUD-02](./S-CLOUD-02-docker-multistage.md)）。生产关键词：**12-Factor、Reloader、immutable Secret、敏感配置轮换**。"
+    },
+    {
+      "id": "S-CODE-01",
+      "title": "并发安全 LRU",
+      "frequency": 5,
+      "module": "08 手写题",
+      "module_key": "coding",
+      "resume_focus": false,
+      "url": "interview/08-coding-senior/S-CODE-01-concurrent-lru/",
+      "prompt": "LRU = **最近最少使用**淘汰。经典实现：**哈希表 + 双向链表**，Get/Put 均 **O(1)**。Go 用 `map` + `container/list`，并发版加 **`sync.Mutex`** 包住临界区。面试关键词：**MoveToFront、超容量删 Back、更新已存在 key**。"
+    },
+    {
+      "id": "S-CODE-02",
+      "title": "令牌桶限流器实现",
+      "frequency": 5,
+      "module": "08 手写题",
+      "module_key": "coding",
+      "resume_focus": false,
+      "url": "interview/08-coding-senior/S-CODE-02-token-bucket/",
+      "prompt": "**令牌桶**：以速率 **rate** 向桶中放令牌，上限 **burst**；请求消耗 1 令牌，无令牌则拒绝或等待。允许 **平滑限流 + 短时 burst**。Go 手写：`lastRefill` 记录时间，每次 `Allow` 先 **按 elapsed 补令牌** 再扣减。"
+    },
+    {
+      "id": "S-CODE-03",
+      "title": "优雅关闭 HTTP 服务",
+      "frequency": 4,
+      "module": "08 手写题",
+      "module_key": "coding",
+      "resume_focus": false,
+      "url": "interview/08-coding-senior/S-CODE-03-graceful-shutdown/",
+      "prompt": "**优雅关闭** = 收到 SIGTERM/SIGINT 后 **停止接新请求**，**等存量请求完成** 再退出。Go 标准做法：`signal.Notify` 阻塞 → `Server.Shutdown(ctx)`（带超时）→ 区分 `http.ErrServerClosed`。Handler 内应监听 **`r.Context().Done()`**。"
+    },
+    {
+      "id": "S-CODE-04",
+      "title": "errgroup 语义实现",
+      "frequency": 4,
+      "module": "08 手写题",
+      "module_key": "coding",
+      "resume_focus": false,
+      "url": "interview/08-coding-senior/S-CODE-04-errgroup/",
+      "prompt": "**errgroup** = **WaitGroup + 首个 error + Context 取消**。`WithContext` 派生可取消 ctx；任一 `Go(fn)` 返回 error → **`errOnce` 记录 + cancel**；`Wait` 等全部结束并返回该 error。面试关键词：**errOnce、cancel 传播、Wait 后再 cancel 一次无害**。"
+    },
+    {
+      "id": "S-CODE-05",
+      "title": "连接池实现要点",
+      "frequency": 4,
+      "module": "08 手写题",
+      "module_key": "coding",
+      "resume_focus": false,
+      "url": "interview/08-coding-senior/S-CODE-05-connection-pool/",
+      "prompt": "连接池 **复用昂贵连接**（TCP、DB），控制 **最大空闲数**。本实现用 **buffered channel** 存空闲连接：`Get` 先 `select` 取 channel，空则 `factory()` 新建；`Put` 能塞回则复用，否则 `Close` 丢弃。关键词：**maxIdle、Close 关池、ctx 超时**。"
+    },
+    {
+      "id": "S-CONC-01",
+      "title": "GMP 模型全貌与 1.14+ 抢占式调度演进",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-01-gmp-overview/",
+      "prompt": "Go 用 **G（goroutine）+ M（OS 线程）+ P（逻辑处理器）** 做用户态调度；**1.14 起基于信号的异步抢占** 解决了长时间纯计算不 yield 导致其他 G 饿死的问题。生产关键词：**P 数量 = GOMAXPROCS**，调度公平性与 STW/GC 协同。"
+    },
+    {
+      "id": "S-CONC-02",
+      "title": "G、M、P 各自职责；去掉 P 会怎样",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-02-gmp-roles/",
+      "prompt": "**G 干活，M 跑腿，P 发工牌**：只有绑了 P 的 M 才能执行 Go 代码。**P 被摘掉**（syscall、GC、GOMAXPROCS 调小）时，该 M 上的 G 回全局队列或让出，P 转给别的 M 继续跑队列。生产关键词：**P 是并行度上限**。"
+    },
+    {
+      "id": "S-CONC-03",
+      "title": "goroutine 栈增长与分裂；和 OS 线程对比",
+      "frequency": 4,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-03-goroutine-stack/",
+      "prompt": "Goroutine **初始栈约 2KB**，按需 **分段复制扩容**（连续栈，copy stack）；线程栈通常 **MB 级固定预留**。百万 goroutine 可行主要靠小栈 + 动态增长。生产关键词：**深递归/大栈局部变量 → 栈扩容成本与 OOM**。"
+    },
+    {
+      "id": "S-CONC-04",
+      "title": "GOMAXPROCS 设置依据；容器 CPU limit 下的误区",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-04-gomaxprocs/",
+      "prompt": "**GOMAXPROCS** 决定并行 P 的数量，默认 `runtime.NumCPU()`；容器里 **CPU limit ≠ 可见核数**，未对齐会导致 throttle 与 GC/调度失真。生产关键词：**automaxprocs / Go 1.25+ 自动感知 cgroup**。"
+    },
+    {
+      "id": "S-CONC-05",
+      "title": "Channel 底层结构与有缓冲/无缓冲选型",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-05-channel/",
+      "prompt": "Channel 底层是 **`hchan`**：环形队列 + `sendq/recvq` 等待链表 + 互斥锁；**无缓冲**是同步握手（直接 goroutine 交接），**有缓冲**解耦生产者与消费者。生产关键词：**关闭语义、nil channel 永久阻塞、背压容量**。"
+    },
+    {
+      "id": "S-CONC-06",
+      "title": "Channel 死锁典型场景与排查",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-06-channel-deadlock/",
+      "prompt": "Go **运行时只检测全局死锁**（所有 goroutine 阻塞），报 `fatal error: all goroutines are asleep - deadlock!`；**局部死锁**（部分 G 阻塞、部分空转）不会自动报。生产关键词：**无缓冲握手顺序、忘记 close、main 提前退出**。"
+    },
+    {
+      "id": "S-CONC-07",
+      "title": "select 语义、公平性与 default 的坑",
+      "frequency": 4,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-07-select/",
+      "prompt": "**select** 在多个 channel 操作上择一执行；多路就绪时 **伪随机公平**（`fastrand` 打乱顺序）。**default** 使 select 非阻塞，易 **忙等 CPU** 或 **丢事件**。生产关键词：**超时分支、nil case 禁用、单 select 多 case 持锁范围**。"
+    },
+    {
+      "id": "S-CONC-08",
+      "title": "Mutex vs RWMutex vs atomic 选型",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-08-sync-primitives/",
+      "prompt": "**Mutex** 互斥写与复杂不变量；**RWMutex** 读多写少但写饥饿风险；**atomic** 适合简单计数/标志/fence，无锁但语义窄。生产关键词：**defer Unlock、RWMutex 写放大、atomic 与 race 无关误用**。"
+    },
+    {
+      "id": "S-CONC-09",
+      "title": "sync.Map 适用场景与误用",
+      "frequency": 4,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-09-sync-map/",
+      "prompt": "**sync.Map** 为 **读多写少、key 相对稳定** 的并发 map 优化：只读 `read` 原子快照 + `dirty` 增量。不适合 **频繁写、计数器、强一致遍历**。生产关键词：**session 缓存、类型断言开销、不如分片 map**。"
+    },
+    {
+      "id": "S-CONC-10",
+      "title": "sync.Pool 原理、GC 交互与线上误用",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-10-sync-pool/",
+      "prompt": "**sync.Pool** 是 **按 P 缓存的临时对象池**，减轻分配压力；**GC 时会清空 Pool**（每轮 STW 关联清理），不保证 Get 能拿到。生产关键词：**Reset 复用对象、勿池化有状态连接、GC 后冷启动抖动**。"
+    },
+    {
+      "id": "S-CONC-11",
+      "title": "WaitGroup、Once、Cond 生产用法",
+      "frequency": 4,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-11-waitgroup-once-cond/",
+      "prompt": "**WaitGroup** 等一组 goroutine 结束；**Once** 保证初始化单次；**Cond** 等条件成立（需配合锁）。生产关键词：**Add 先于 go、Wait 前勿 Add、Once 慢路径阻塞所有调用**。"
+    },
+    {
+      "id": "S-CONC-12",
+      "title": "Context 树、取消传播、超时与泄漏",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-12-context/",
+      "prompt": "**context** 在调用链传递 **取消、超时、请求域值**；子节点取消会向下传播，**父不能感知子取消**。生产关键词：**WithCancel 必须 cancel()、WithTimeout 防 goroutine 泄漏、不要把 Context 塞进结构体**。"
+    },
+    {
+      "id": "S-CONC-13",
+      "title": "goroutine 泄漏成因与 pprof 排查",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-13-goroutine-leak/",
+      "prompt": "**Goroutine 泄漏** = 数量单调涨、永不退出，占栈内存并拖慢调度。常见根因：**channel 无人读、缺 ctx 取消、WaitGroup/锁等待、定时器未 Stop**。生产关键词：**goroutine 指标、heap/goroutine profile、trace 看 stuck G**。"
+    },
+    {
+      "id": "S-CONC-14",
+      "title": "Go 内存模型与 happens-before",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-14-memory-model/",
+      "prompt": "Go 内存模型定义：**若事件 A happens-before B，则 A 的写对 B 可见**。同步原语（mutex、channel、atomic、Once）建立 hb 边；**无同步的数据竞态 = 未定义行为**。生产关键词：**不要靠直觉排序、race 与 hb 互补**。"
+    },
+    {
+      "id": "S-CONC-15",
+      "title": "race detector 原理与 data race 面试表达",
+      "frequency": 4,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-15-race-detector/",
+      "prompt": "**Race Detector** 基于 **ThreadSanitizer**，在访问时插桩记录 **happens-before**，发现无 hb 的并发读写。**5–10× 内存、2–20× CPU** 开销，用于 **测试/预发**，非全量生产。生产关键词：**CI `-race`、竞态报告=真实 bug**。"
+    },
+    {
+      "id": "S-CONC-16",
+      "title": "Worker Pool 设计：队列、背压、优雅退出",
+      "frequency": 5,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-16-worker-pool/",
+      "prompt": "**Worker Pool** 用 **固定数量 goroutine** 消费任务队列，实现 **并发上限与背压**。Go 可用 **buffered channel + N worker** 或 **`semaphore.Weighted`**。生产关键词：**队列长度、拒绝策略、优雅关停**。"
+    },
+    {
+      "id": "S-CONC-17",
+      "title": "Fan-out/Fan-in 与 Pipeline 瓶颈分析",
+      "frequency": 4,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-17-pipeline/",
+      "prompt": "**Pipeline** 用 stage + channel 串联处理；**fan-out** 多 worker 读同一 stage 输出，**fan-in** 合并多路结果（merge channel / errgroup）。生产关键词：**stage 背压、ctx 取消贯穿、errgroup 首错即停**。"
+    },
+    {
+      "id": "S-CONC-18",
+      "title": "高并发下 goroutine 泛滥的架构治理",
+      "frequency": 4,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-18-goroutine-governance/",
+      "prompt": "**Goroutine 轻量不等于无限**：需 **并发预算**（semaphore、worker 池、连接池对齐）、**可观测**（`go_goroutines`）、**编码规范**（禁止裸 go 无界）。生产关键词：**每请求 goroutine 上限、async 边界审计**。"
+    },
+    {
+      "id": "S-CONC-19",
+      "title": "netpoller 与阻塞 syscall 的处理",
+      "frequency": 4,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-19-netpoller/",
+      "prompt": "**Netpoller** 用 epoll/kqueue/IOCP 把 **网络 IO** 与调度器集成：socket 未就绪时 G 挂起不占 P 忙等，就绪后变 runnable。**纯阻塞 syscall**（文件 IO、部分 DNS）仍会占 M。生产关键词：**goroutine 多但线程不多靠 netpoller；阻塞 IO 要线程池或异步**。"
+    },
+    {
+      "id": "S-CONC-20",
+      "title": "Go 1.22+ loop 变量与泛型对并发代码的影响",
+      "frequency": 3,
+      "module": "01 并发与运行时",
+      "module_key": "concurrency",
+      "resume_focus": false,
+      "url": "interview/01-runtime-concurrency/S-CONC-20-go122-generics/",
+      "prompt": "**Go 1.22+** 每轮循环 **创建新的循环变量副本**，修复经典 `go func(){ use i }()` bug；**泛型**让并发容器/池类型安全，但不改变 GMP 语义。生产关键词：**升级后闭包行为变化、GODEBUG=loopvar 兼容、泛型 sync 封装**。"
+    },
+    {
+      "id": "S-DB-01",
+      "title": "MySQL 索引原理与最左前缀",
+      "frequency": 5,
+      "module": "MySQL",
+      "module_key": "mysql",
+      "resume_focus": false,
+      "url": "interview/middleware/mysql/S-DB-01-mysql-index/",
+      "prompt": "InnoDB 默认 **B+Tree 聚簇索引**（主键即数据）；二级索引叶子存主键值需 **回表**。**联合索引 (a,b,c) 遵循最左前缀**：能用到 a、ab、abc 条件，跳过 b 直接用 c 往往失效。生产关键词：**覆盖索引、索引下推 ICP、选择性、前缀索引**。"
+    },
+    {
+      "id": "S-DB-02",
+      "title": "事务隔离级别与 MVCC",
+      "frequency": 5,
+      "module": "MySQL",
+      "module_key": "mysql",
+      "resume_focus": false,
+      "url": "interview/middleware/mysql/S-DB-02-transaction-mvcc/",
+      "prompt": "InnoDB 默认 **REPEATABLE READ + MVCC**，快照读不加锁；当前读（`SELECT FOR UPDATE`）走锁。**四种隔离级别**权衡脏读/不可重复读/幻读；RR 下 InnoDB 用 **next-key lock（记录+间隙）** 防幻读。生产关键词：**长事务、undo 链、间隙锁死锁**。"
+    },
+    {
+      "id": "S-DB-03",
+      "title": "慢查询排查与 EXPLAIN",
+      "frequency": 5,
+      "module": "MySQL",
+      "module_key": "mysql",
+      "resume_focus": false,
+      "url": "interview/middleware/mysql/S-DB-03-slow-query/",
+      "prompt": "慢 SQL 治理链路：**slow log 发现 → EXPLAIN 看计划 → 索引/改写 SQL → 验证 rows 与 latency**。重点字段：`type`（访问方式）、`key`（实际索引）、`rows`（估算扫描行）、`Extra`（Using filesort/temporary）。生产关键词：**回表、深分页、隐式转换、统计信息过期**。"
+    },
+    {
+      "id": "S-DB-04",
+      "title": "分库分表策略与跨库查询",
+      "frequency": 4,
+      "module": "MySQL",
+      "module_key": "mysql",
+      "resume_focus": false,
+      "url": "interview/middleware/mysql/S-DB-04-sharding/",
+      "prompt": "单库瓶颈时 **垂直拆库**（按业务）或 **水平分片**（按 shard key 取模/范围）。核心：**选对 shard key**（高基数、查询必带）、避免跨片事务与 join。生产关键词：**扩容 rebalance、全局 ID、跨库分页、双写迁移**。"
+    },
+    {
+      "id": "S-DB-05",
+      "title": "GORM 预加载 N+1 与事务陷阱",
+      "frequency": 4,
+      "module": "MySQL",
+      "module_key": "mysql",
+      "resume_focus": false,
+      "url": "interview/middleware/mysql/S-DB-05-gorm-pitfalls/",
+      "prompt": "**N+1**：查 N 条主记录后对每条再查关联，SQL 爆炸。GORM 用 **`Preload`/`Joins`** 预加载；`Find` 嵌套 struct 不会自动加载。**事务陷阱**：`Transaction` 回调里须用 `tx`；钩子 `AfterCreate` 里默认 DB 可能不在同一事务。生产关键词：**Session、Clauses、连接池、软删 Scope**。"
+    },
+    {
+      "id": "S-DIST-01",
+      "title": "Redis 集群模式与选型",
+      "frequency": 5,
+      "module": "Redis",
+      "module_key": "redis",
+      "resume_focus": false,
+      "url": "interview/middleware/redis/S-DIST-01-redis-cluster/",
+      "prompt": "Redis 部署分 **单机、主从、Sentinel、Cluster** 四档：读多写少用主从+Sentinel 保 HA；数据量/吞吐超单机用 **Cluster 16384 slot 分片**。Go 侧用 `go-redis`，Cluster 客户端需感知 MOVED/ASK 重定向。生产关键词：**slot 迁移、脑裂、连接池、Pipeline 跨 slot 限制**。"
+    },
+    {
+      "id": "S-DIST-02",
+      "title": "分布式锁 Redlock 争议",
+      "frequency": 4,
+      "module": "Redis",
+      "module_key": "redis",
+      "resume_focus": false,
+      "url": "interview/middleware/redis/S-DIST-02-distributed-lock/",
+      "prompt": "分布式锁解决 **多进程/多机互斥**；Redis 单节点 `SET key NX PX` + Lua 续期/释放是主流；**Redlock 多主 quorum** 被 Kleppmann 质疑在时钟与 GC 下不安全。生产关键词：**锁粒度、TTL、 fencing token、可重入与死锁**。"
+    },
+    {
+      "id": "S-DIST-03",
+      "title": "热点 Key 发现与治理",
+      "frequency": 5,
+      "module": "Redis",
+      "module_key": "redis",
+      "resume_focus": false,
+      "url": "interview/middleware/redis/S-DIST-03-hot-key/",
+      "prompt": "**热点 Key** 是 QPS 远超平均的单个或少量 key，打满单 Redis 节点/单 CPU。治理：**发现（monitor/hotkeys 采样）→ 拆分（logical shard）→ 本地缓存 + 单飞（singleflight）→ 限流降级**。生产关键词：**大促 SKU、明星用户、配置中心全局 key**。"
+    },
+    {
+      "id": "S-DIST-04",
+      "title": "Kafka 消费语义与 rebalance",
+      "frequency": 4,
+      "module": "Kafka",
+      "module_key": "kafka",
+      "resume_focus": false,
+      "url": "interview/middleware/kafka/S-DIST-04-kafka-semantics/",
+      "prompt": "Kafka 消费分 **at-most-once / at-least-once / 近似 exactly-once**（事务 + idempotent producer）；Consumer Group 通过 **Rebalance** 分配 partition。**Rebalance 期间停止消费**，是 P99 毛刺常见根因。生产关键词：**手动 commit、cooperative-sticky、处理幂等**。"
+    },
+    {
+      "id": "S-DIST-05",
+      "title": "分布式事务 TCC/Saga 对比",
+      "frequency": 4,
+      "module": "分布式事务",
+      "module_key": "distributed",
+      "resume_focus": false,
+      "url": "interview/middleware/distributed/S-DIST-05-distributed-transaction/",
+      "prompt": "跨服务/跨库无法用单机 ACID，常用 **Saga（长事务 + 补偿）** 或 **TCC（Try-Confirm-Cancel 资源预留）**；2PC/XA 强一致但阻塞、不适合高并发微服务。生产关键词：**最终一致、幂等、空补偿、悬挂、业务可补偿性**。"
+    },
+    {
+      "id": "S-ES-01",
+      "title": "Elasticsearch 倒排索引与基本原理",
+      "frequency": 4,
+      "module": "Elasticsearch",
+      "module_key": "elasticsearch",
+      "resume_focus": false,
+      "url": "interview/middleware/elasticsearch/S-ES-01-inverted-index/",
+      "prompt": "ES 基于 **Lucene**，核心是 **倒排索引**：词项 → 文档 ID 列表，支持全文检索。数据按 **Index → Type(7.x 前) / 无 type → Document → Field** 组织；分片 **Primary + Replica** 水平扩展。面试关键词：**分片路由、近实时 NRT、segment merge**。"
+    },
+    {
+      "id": "S-ES-02",
+      "title": "Elasticsearch Mapping 查询与聚合",
+      "frequency": 4,
+      "module": "Elasticsearch",
+      "module_key": "elasticsearch",
+      "resume_focus": false,
+      "url": "interview/middleware/elasticsearch/S-ES-02-mapping-query-agg/",
+      "prompt": "**Mapping** 定义字段类型：`text`（分词全文）vs `keyword`（精确、聚合）；**Query DSL** 组合 `bool`（must/should/filter）；**Aggregation** 做指标与桶统计。生产关键词：**filter 不评分、nested、高基数 cardinality 慎用**。"
+    },
+    {
+      "id": "S-ES-03",
+      "title": "Elasticsearch 数据同步与运维",
+      "frequency": 4,
+      "module": "Elasticsearch",
+      "module_key": "elasticsearch",
+      "resume_focus": false,
+      "url": "interview/middleware/elasticsearch/S-ES-03-sync-ops/",
+      "prompt": "ES 数据通常 **从 MySQL 同步**（Canal/Debezium → MQ → ES Consumer，或 Logstash/Flink）。原则：**MySQL 为源、ES 可重建**；同步延迟可接受则 **近实时搜索**。运维关注 **分片均衡、磁盘 watermark、集群颜色、版本升级**。"
+    },
+    {
+      "id": "S-EXCH-01",
+      "title": "CEX 撮合引擎与订单簿架构",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": false,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-01-cex-matching-engine/",
+      "prompt": "CEX 核心 = **订单簿 + 撮合引擎**：价格优先、时间优先（Pro-Rata 等变体）。Go 负责 **API 接入、风控预检、持久化、行情推送**；撮合环可 **单线程 per symbol** 或 Rust/C++ 内核 + Go 编排。生产关键词：**幂等订单 ID、串行撮合、WAL 恢复**。"
+    },
+    {
+      "id": "S-EXCH-02",
+      "title": "充值、提现与链上钱包体系",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": false,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet/",
+      "prompt": "CEX 充提 = **链上监听 + 内部账务入账 + 提现审核 + 热冷钱包签名广播**。架构师要讲清 **确认数、memo/tag、链重组回滚、提现状态机**。与 [S-BC-05 索引器](../12-blockchain-web3/S-BC-05-indexer-reorg.md) 同源，但多 **人工审核与风控**。"
+    },
+    {
+      "id": "S-EXCH-03",
+      "title": "账户体系与资金账务（复式记账）",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": false,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-03-account-ledger/",
+      "prompt": "交易所资金 **不能** 只改 `users.balance` 一行：需 **复式记账**（借贷平衡）+ **账户类型**（现货/合约/冻结/手续费）。撮合成交、充提、强平都产生 **账务流水**。生产关键词：**不可变流水、TCC/本地事务、对账不平零容忍**。"
+    },
+    {
+      "id": "S-EXCH-04",
+      "title": "合约交易：保证金、强平、资金费率",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": false,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-04-futures-margin-liquidation/",
+      "prompt": "**永续合约** = 杠杆仓位 + **标记价格** 算盈亏 + **资金费率** 多空平衡 + **强平** 防穿仓。Go 后端：**标记价服务、风险引擎、强平队列、保险基金**。面试关键词：**逐仓/全仓、维持保证金、ADL 自动减仓**。"
+    },
+    {
+      "id": "S-EXCH-05",
+      "title": "风控、反洗钱与对账体系",
+      "frequency": 4,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": false,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-05-risk-reconciliation/",
+      "prompt": "交易所风控 = **交易前（限额/频率/自成交）+ 交易后（异常盈利/对敲）+ 资金（充提 KYT/AML）+ 对账（链上 vs 内部账本）**。架构师要讲 **规则引擎可配置、实时+离线、审计留痕**。"
+    },
+    {
+      "id": "S-EXCH-06",
+      "title": "DEX AMM、流动性池与 LP 收益",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": false,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity/",
+      "prompt": "DEX 无订单簿撮合（AMM 类）= **x·y=k 恒定乘积**（或 Curve 稳定币曲线）+ **LP 代币** 代表池份额。工程师要懂 **swap 公式、滑点、无常损失、手续费分配**。链上合约见 [S-SOLID-07](../13-solidity-contracts/S-SOLID-07-defi-patterns.md)；Go 侧做 **索引、报价 API、路由**。"
+    },
+    {
+      "id": "S-EXCH-07",
+      "title": "DEX 聚合路由、滑点与 Gas 优化",
+      "frequency": 4,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": false,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-07-aggregator-slippage/",
+      "prompt": "**聚合器**（1inch、Paraswap）在多个池/路径间找最优 **amountOut** 或 **amountIn**，可能 **多跳 split**。Go 后端：**路径搜索、链下模拟、Gas 估算、slippage 保护参数**。用户设 `amountOutMin` 防滑点；`deadline` 防挂单过久。"
+    },
+    {
+      "id": "S-EXCH-08",
+      "title": "MEV、抢跑与三明治攻击防护",
+      "frequency": 4,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": false,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-08-mev-sandwich/",
+      "prompt": "**MEV** = 区块生产者/搜索者通过 **交易排序** 获利（夹单、清算抢跑、DEX 套利）。用户大额 swap 易遭 **三明治**：前跑抬高价 → 用户成交 → 后跑卖出。防护：**私有交易通道（Flashbots Protect）、slippage 限制、分批、TWAP**。"
+    },
+    {
+      "id": "S-EXCH-09",
+      "title": "CEX 与 DEX 混合架构（CeDeFi）",
+      "frequency": 4,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": false,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-09-hybrid-cex-dex/",
+      "prompt": "**CeDeFi / 混合交易所** = CEX 体验（托管账户、法币、低延迟）+ DEX 资产（链上提现、Wallet Connect、链上赚币）。架构师要画清 **两条资金链**：站内账务 vs 链上钱包；以及 **合规、对账、用户教育** 边界。"
+    },
+    {
+      "id": "S-EXCH-10",
+      "title": "链上成交事件驱动 K 线与行情聚合",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation/",
+      "prompt": "DEX 无中心化撮合日志，**K 线来自链上 Swap/Trade 事件**。索引器解析成交 → **按时间窗口聚合 OHLCV** → 写时序表/Redis → API/WebSocket 推送。生产关键词：**事件顺序、窗口边界、迟到事件、幂等 (tx_hash, log_index)**。"
+    },
+    {
+      "id": "S-EXCH-11",
+      "title": "WebSocket 行情 Hub 与连接治理",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-11-websocket-market-hub/",
+      "prompt": "**行情 Hub** = 管理订阅关系 + 将 K 线/成交/异动 **广播** 到已连接客户端。Go 常用 `map[topic]set<conn>` + goroutine per conn 读循环。生产关键词：**订阅鉴权、心跳踢线、背压、连接恢复、跨 Pod 广播**。"
+    },
+    {
+      "id": "S-EXCH-12",
+      "title": "Token 发行平台：毕业、分账与返佣提现",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate/",
+      "prompt": "**Launchpad + 内置 DEX** 后端 = 项目方发 Token → 曲线/池内交易 → **毕业（Graduated）** 迁到外盘（如 Pancake）→ **返佣结算** + **佣金提现（Withdrawal）**。链上事件驱动状态机；Go 管 **权限、风控、批量发放、Gas 监控**。"
+    },
+    {
+      "id": "S-KAFKA-01",
+      "title": "Kafka 架构与存储：Topic、Partition、ISR",
+      "frequency": 5,
+      "module": "Kafka",
+      "module_key": "kafka",
+      "resume_focus": false,
+      "url": "interview/middleware/kafka/S-KAFKA-01-architecture-storage/",
+      "prompt": "Kafka 是 **分布式 commit log**：Topic 按 **Partition** 水平切分，每条消息追加到分区末尾；**Leader + ISR 副本** 保证可用与一致性。消费并行度 = partition 数；**分区内有序、跨分区无序**。生产关键词：**ISR、HW/LEO、replication.factor、min.insync.replicas**。"
+    },
+    {
+      "id": "S-KAFKA-02",
+      "title": "Kafka Producer 可靠性：acks、幂等与分区键",
+      "frequency": 5,
+      "module": "Kafka",
+      "module_key": "kafka",
+      "resume_focus": false,
+      "url": "interview/middleware/kafka/S-KAFKA-02-producer-reliability/",
+      "prompt": "Producer 可靠性靠 **`acks` + `retries` + 幂等 Producer**；与 [S-ARCH-04 幂等](../../03-system-design/S-ARCH-04-idempotency.md) 配合才能端到端不重复。**Partition Key** 决定消息进哪个 partition，影响 **顺序与热点**。生产关键词：**acks=all、enable.idempotence、max.in.flight、key 设计**。"
+    },
+    {
+      "id": "S-KAFKA-03",
+      "title": "Kafka 交易事件总线：成交广播与 lag 治理",
+      "frequency": 4,
+      "module": "Kafka",
+      "module_key": "kafka",
+      "resume_focus": false,
+      "url": "interview/middleware/kafka/S-KAFKA-03-trade-event-bus/",
+      "prompt": "交易所常见 **撮合 → Kafka 成交 topic → 多下游**（账务、风控、行情、WebSocket）。Kafka 做 **持久化事件总线**，Consumer Group 各自 lag 独立。生产关键词：**symbol 分区、consumer lag、HPA 扩缩 rebalance、WS 网关 fan-out**。"
+    },
+    {
+      "id": "S-LEAD-01",
+      "title": "线上事故复盘结构",
+      "frequency": 5,
+      "module": "07 工程与领导力",
+      "module_key": "leadership",
+      "resume_focus": false,
+      "url": "interview/07-engineering-leadership/S-LEAD-01-incident-postmortem/",
+      "prompt": "复盘目标不是追责，而是 **还原时间线 → 找根因 → 可执行改进项**。资深回答用 **5W1H + 时间线 + 行动项（含 Owner/DDL）**；强调 **Blameless** 与 **错误预算/SLI 关联**。Lead 面考察：能否推动跨团队落地。"
+    },
+    {
+      "id": "S-LEAD-02",
+      "title": "技术债识别与偿还策略",
+      "frequency": 4,
+      "module": "07 工程与领导力",
+      "module_key": "leadership",
+      "resume_focus": false,
+      "url": "interview/07-engineering-leadership/S-LEAD-02-tech-debt/",
+      "prompt": "技术债是 **为短期速度牺牲的长期维护成本**。资深回答要会 **分类（故意/无意）、量化影响（变更 lead time、故障率）、偿还策略（绞杀者、增量重构、预算 20%）**；Lead 面看能否在业务压力下 **谈妥优先级**。"
+    },
+    {
+      "id": "S-LEAD-03",
+      "title": "带团队与 Code Review 文化",
+      "frequency": 4,
+      "module": "07 工程与领导力",
+      "module_key": "leadership",
+      "resume_focus": false,
+      "url": "interview/07-engineering-leadership/S-LEAD-03-code-review-culture/",
+      "prompt": "Tech Lead 的核心是 **提效他人**：清晰标准、有效 CR、成长路径。资深回答强调 **CR 看设计/可维护性/测试，不只格式**；Go 团队应有 **uber-go/guide 或团队 style guide**；5 年+ 需举例 **你如何通过 CR/结对提升 junior 质量**。"
+    },
+    {
+      "id": "S-MEM-01",
+      "title": "三色标记与混合写屏障",
+      "frequency": 5,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-01-tri-color-gc/",
+      "prompt": "Go GC 是**并发三色标记-清除**：白=未访问，灰=已访问待扫描，黑=已扫描完毕；**混合写屏障**（Yuasa + Dijkstra）保证并发标记期间不丢活对象，从而消除二次 STW rescan。生产关键词：**mark assist、写屏障开销、GC 与 mutator 并发**。"
+    },
+    {
+      "id": "S-MEM-02",
+      "title": "STW 阶段与 Go 1.5+ GC 演进",
+      "frequency": 5,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-02-stw-evolution/",
+      "prompt": "**STW（Stop The World）** 是 GC 需要暂停所有 goroutine 以做全局一致操作的阶段；Go 自 1.5 起以**并发标记**为主，STW 从毫秒级降到亚毫秒级，但**从未归零**。生产关键词：**sweep termination、栈扫描、P99 毛刺**。"
+    },
+    {
+      "id": "S-MEM-03",
+      "title": "GC 触发条件与 GOGC 调优",
+      "frequency": 5,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-03-gogc-tuning/",
+      "prompt": "GC 由**堆增长触发**：下次 GC 目标堆 ≈ 上次 GC 后存活 × (1 + GOGC/100)；默认 **GOGC=100** 即存活翻倍再 GC。**GOMEMLIMIT**（1.19+）设软上限，与 GOGC 协同避免 OOM。生产关键词：**吞吐 vs 堆占用、assist、容器 memory limit**。"
+    },
+    {
+      "id": "S-MEM-04",
+      "title": "逃逸分析与 -gcflags=-m",
+      "frequency": 5,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-04-escape-analysis/",
+      "prompt": "**逃逸分析**决定变量分配在栈还是堆：若编译器无法证明生命周期不超出函数，则**逃逸到堆**，增加 GC 压力。用 **`go build -gcflags=-m`** 看决策。生产关键词：**少逃逸、interface/fmt/闭包/closing over loop**。"
+    },
+    {
+      "id": "S-MEM-05",
+      "title": "slice 底层、扩容与内存泄漏场景",
+      "frequency": 5,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-05-slice-internals/",
+      "prompt": "**slice 是三元组**（pointer, len, cap）描述底层数组的视图；**扩容**通常 `<256` 翻倍、之后约 1.25 倍。泄漏高发于 **subslice 持有大数组引用**、**未 drain 的 channel+slice**、**全局缓存截断不当**。生产关键词：**cap>>len、copy 裁剪、sync.Pool 长度**。"
+    },
+    {
+      "id": "S-MEM-06",
+      "title": "map 并发安全、扩容与 sync.Map 选型",
+      "frequency": 5,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-06-map-internals/",
+      "prompt": "**内置 map 非并发安全**，并发读写 panic；读多写少可用 **`sync.Map`** 或 **`RWMutex+map`**。底层 **hmap + bucket**，负载因子超阈值 **增量扩容**，迭代顺序随机。生产关键词：**fatal error: concurrent map、扩容 STW 短暂、Swiss Table（1.24+）**。"
+    },
+    {
+      "id": "S-MEM-07",
+      "title": "interface 底层 eface/iface 与断言成本",
+      "frequency": 4,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-07-interface/",
+      "prompt": "空接口 **`interface{}`/`any` 是 eface**（type, data）；带方法的接口是 **iface**（itab, data）。**类型断言**需查 itab 或 type 相等，失败走 slow path；**频繁 dynamic dispatch** 阻碍内联。生产关键词：**少 interface 热点、type switch、具体类型 API**。"
+    },
+    {
+      "id": "S-MEM-08",
+      "title": "内存对齐与 unsafe 边界",
+      "frequency": 3,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-08-unsafe-alignment/",
+      "prompt": "Go 按类型 **alignment** 布局 struct，错误 padding 会浪费内存或导致 **atomic 64 位未对齐 panic**（32 位架构）。**unsafe** 可绕过类型系统做指针算术，但需自己保证 **GC 可见性、对齐、uintptr 不长期持有**。生产关键词：**unsafe.Pointer 规则、字段重排、零拷贝边界**。"
+    },
+    {
+      "id": "S-MEM-09",
+      "title": "大对象、堆外与 OOM 排查",
+      "frequency": 4,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-09-oom-debug/",
+      "prompt": "**OOM** 常是 RSS（堆+栈+runtime+堆外）超 cgroup limit，而非单纯「GC 没回收」。**大对象**（≥32KB 等阈值）走 dedicated span，加剧堆碎片与 GC 标记成本。**堆外**：mmap、cgo、DirectByteBuffer 类库不计入 HeapAlloc。生产关键词：**GOMEMLIMIT、RSS vs HeapInuse、pprof+smem**。"
+    },
+    {
+      "id": "S-MEM-10",
+      "title": "pprof heap/allocs 实战解读",
+      "frequency": 5,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-10-pprof-heap/",
+      "prompt": "**heap** 看当前存活（inuse），**allocs** 看历史累计分配（含已释放）；排查泄漏用 heap，排查 GC 压力用 allocs。采样基于 **rate** 默认 512KB 一次。生产关键词：**inuse_space vs alloc_space、top -cum、base profile 对比**。"
+    },
+    {
+      "id": "S-MEM-11",
+      "title": "CPU profile vs execution trace 选型",
+      "frequency": 4,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-11-pprof-vs-trace/",
+      "prompt": "**CPU profile** 回答「**哪段代码耗 CPU**」，采样统计、可长期开；**execution trace** 回答「**时间线上发生了什么**」——调度、GC STW、网络阻塞、锁等待。生产关键词：**profile 找热点、trace 找毛刺与等待**。"
+    },
+    {
+      "id": "S-MEM-12",
+      "title": "减少 GC 压力的系统级手段",
+      "frequency": 4,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-12-reduce-gc-pressure/",
+      "prompt": "降 GC 压力本质是 **降堆分配速率与存活对象**；系统级手段包括 **对象池、预分配、值语义、零拷贝、批处理、协议选型（Protobuf vs JSON）**。调 GOGC 是最后旋钮，不是第一选择。生产关键词：**alloc_rate、B/op、存活集大小**。"
+    },
+    {
+      "id": "S-MEM-13",
+      "title": "延迟敏感服务的 GC 抖动治理",
+      "frequency": 5,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-13-gc-jitter/",
+      "prompt": "**GC 抖动** 指 P99/P999 延迟被 STW、mark assist、sweep 争抢打断；治理需 **降存活集、平滑分配、GOMEMLIMIT、版本升级**，而非简单堆内存「越大越好」。生产关键词：**pause 分位、assist 毛刺、与 CPU throttle 叠加**。"
+    },
+    {
+      "id": "S-MEM-14",
+      "title": "new/make 在资深面试中的升维回答",
+      "frequency": 3,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-14-new-make/",
+      "prompt": "**`new(T)`** 分配零值 T 的堆内存，返回 `*T`；**`make`** 仅用于 **slice、map、channel**，初始化内部结构并返回 **T 本身（非指针）**。资深答法要接上 **逃逸、nil 语义、与 composite literal 对比**。生产关键词：**make 带 cap、new 很少手写**。"
+    },
+    {
+      "id": "S-MEM-15",
+      "title": "defer 链、开销与错误处理",
+      "frequency": 4,
+      "module": "02 内存与 GC",
+      "module_key": "memory_gc",
+      "resume_focus": false,
+      "url": "interview/02-memory-gc/S-MEM-15-defer/",
+      "prompt": "**defer** 注册函数在 **return 之前、panic 传播之前** LIFO 执行；实现为 **defer 链表**（栈上 open defer 或堆上 defer 结构，视版本与逃逸而定）。热路径大量 defer 有开销；错误处理常用 **defer + named return +闭包捕获 err**。生产关键词：**open defer、1.14 优化、别在循环里无脑 defer**。"
+    },
+    {
+      "id": "S-NET-01",
+      "title": "gRPC vs HTTP/REST 选型",
+      "frequency": 4,
+      "module": "06 网络与服务治理",
+      "module_key": "network",
+      "resume_focus": false,
+      "url": "interview/06-network-governance/S-NET-01-grpc-vs-rest/",
+      "prompt": "**gRPC**：HTTP/2 + Protobuf，强类型、双向流、多路复用，适合 **内部微服务**。**REST/JSON**：人类可读、浏览器友好、生态广，适合 **对外 API/BFF**。Go 用 `google.golang.org/grpc` 或 **Connect**（兼容 gRPC/gRPC-Web）。生产关键词：**超时、重试幂等、负载均衡、TLS/mTLS**。"
+    },
+    {
+      "id": "S-NET-02",
+      "title": "HTTP 连接池与 Keep-Alive",
+      "frequency": 4,
+      "module": "06 网络与服务治理",
+      "module_key": "network",
+      "resume_focus": false,
+      "url": "interview/06-network-governance/S-NET-02-http-connection-pool/",
+      "prompt": "Go `http.Client` 默认 **`Transport` 连接池**：`MaxIdleConnsPerHost` 默认 2 易成瓶颈；**Keep-Alive** 复用 TCP 减握手。生产须 **共享一个 Client/Transport**，设 `MaxIdleConns`、`IdleConnTimeout`、`ResponseHeaderTimeout`。关键词：**TIME_WAIT、FD 耗尽、HTTP/2 单连接多路复用**。"
+    },
+    {
+      "id": "S-NET-03",
+      "title": "Gin 中间件链与请求生命周期",
+      "frequency": 4,
+      "module": "06 网络与服务治理",
+      "module_key": "network",
+      "resume_focus": false,
+      "url": "interview/06-network-governance/S-NET-03-gin-middleware/",
+      "prompt": "Gin 请求走 **Engine → Router → Middleware 链 → Handler**；中间件通过 **`c.Next()`** 驱动后续执行，可在前后插入逻辑。`c.Abort()` 跳过剩余 handler。生产关键词：**Recovery、Auth、TraceID、Timeout、Request-scoped 值**。"
+    },
+    {
+      "id": "S-NET-04",
+      "title": "JWT 认证与安全边界",
+      "frequency": 4,
+      "module": "06 网络与服务治理",
+      "module_key": "network",
+      "resume_focus": false,
+      "url": "interview/06-network-governance/S-NET-04-jwt-auth/",
+      "prompt": "**JWT** 是自包含声明（Header.Payload.Signature），服务端用密钥验签即可无状态鉴权。**边界**：JWT 适合 **传递身份与权限声明**，不是 session 存储；无法主动吊销（除非短 TTL + 黑名单/版本号）。生产关键词：**HS256 vs RS256、exp/nbf、aud/iss、密钥轮换、勿放敏感数据**。"
+    },
+    {
+      "id": "S-NET-05",
+      "title": "长连接与 WebSocket 网关设计",
+      "frequency": 3,
+      "module": "06 网络与服务治理",
+      "module_key": "network",
+      "resume_focus": false,
+      "url": "interview/06-network-governance/S-NET-05-websocket-gateway/",
+      "prompt": "**WebSocket** 在单 TCP 上全双工长连接，适合 **实时推送、IM、行情**。网关职责：**连接管理、鉴权、心跳、广播/房间、与 MQ 桥接**。Go 常用 **gorilla/websocket** 或 **nhooyr.io/websocket**。生产关键词：**单机连接上限、水平扩展、sticky session、背压、优雅下线**。"
+    },
+    {
+      "id": "S-RAB-01",
+      "title": "RabbitMQ 拆分链上监听与业务写入",
+      "frequency": 5,
+      "module": "RabbitMQ",
+      "module_key": "rabbitmq",
+      "resume_focus": true,
+      "url": "interview/middleware/rabbitmq/S-RAB-01-exchange-async-pipeline/",
+      "prompt": "链上 **RPC 扫块** 与 **业务写库** 必须解耦：监听进程只负责解析 logs → 发 **RabbitMQ** → 多消费者处理 K 线、持仓、返佣、排行榜。生产关键词：**Publisher Confirm、手动 ACK、DLX 死信、prefetch、队列隔离**。"
+    },
+    {
+      "id": "S-RMQ-01",
+      "title": "RocketMQ 架构与核心概念",
+      "frequency": 4,
+      "module": "RocketMQ",
+      "module_key": "rocketmq",
+      "resume_focus": false,
+      "url": "interview/middleware/rocketmq/S-RMQ-01-architecture/",
+      "prompt": "RocketMQ 是 **NameServer（路由）+ Broker（存储）+ Producer/Consumer** 的分布式消息中间件。消息按 **Topic** 分类，队列 **Queue** 是消费并行单元；消费组 **Consumer Group** 负载均衡。与 Kafka 相比更强调 **事务消息、延迟消息、顺序消息** 开箱能力。Go 常用 `apache/rocketmq-client-go` 或社区封装。"
+    },
+    {
+      "id": "S-RMQ-02",
+      "title": "RocketMQ 顺序/事务/延迟消息",
+      "frequency": 5,
+      "module": "RocketMQ",
+      "module_key": "rocketmq",
+      "resume_focus": false,
+      "url": "interview/middleware/rocketmq/S-RMQ-02-order-transaction-delay/",
+      "prompt": "**顺序消息**：同一 **MessageQueue** 内 FIFO，用 **ShardingKey**（如 orderId）选 Queue。**事务消息**：半消息 → 本地事务 → commit/rollback，解决 **发消息与写库一致性**。**延迟消息**：**4.x** 为固定 **18 个延迟级别**；**5.0+** 支持任意时刻定时（timer）。面试高频：**与 Kafka 顺序分区、Outbox 模式对比**。"
+    },
+    {
+      "id": "S-RMQ-03",
+      "title": "RocketMQ 与 Kafka 选型对比",
+      "frequency": 4,
+      "module": "RocketMQ",
+      "module_key": "rocketmq",
+      "resume_focus": false,
+      "url": "interview/middleware/rocketmq/S-RMQ-03-vs-kafka/",
+      "prompt": "**Kafka** 强项：**超高吞吐、日志流、生态（Flink/Connect）**；分区有序、副本 ISR。**RocketMQ** 强项：**事务消息、延迟级别、Tag 过滤、国内运维经验**。Go 后端选 MQ 看 **语义需求** 而非单纯 QPS。面试答：**场景 + 一致性 + 运维 + 团队熟悉度**。"
+    },
+    {
+      "id": "S-RMQ-04",
+      "title": "RocketMQ 运维排障：堆积、重试与死信",
+      "frequency": 5,
+      "module": "RocketMQ",
+      "module_key": "rocketmq",
+      "resume_focus": false,
+      "url": "interview/middleware/rocketmq/S-RMQ-04-ops-troubleshooting/",
+      "prompt": "RocketMQ 线上问题集中在 **消费堆积、重复消费、消息进死信、Broker 磁盘满**。排查路径：**Console 看 diff（堆积量）→ 消费 TPS vs 生产 TPS → 慢消费/失败重试 → DLQ**。生产关键词：**maxReconsumeTimes、%DLQ% 主题、CommitLog 磁盘、resetOffset 慎用**。"
+    },
+    {
+      "id": "S-SOL-01",
+      "title": "限界上下文与 DDD 战略设计",
+      "frequency": 5,
+      "module": "11 解决方案架构",
+      "module_key": "solution_architecture",
+      "resume_focus": false,
+      "url": "interview/11-solution-architecture/S-SOL-01-bounded-context-ddd/",
+      "prompt": "架构师先画 **限界上下文（Bounded Context）**，再谈微服务：每个上下文有 **统一语言 + 数据所有权 + 独立演进**。集成用 **上下文映射**（ACL、防腐层、Published Language）。与 [S-ARCH-14](../03-system-design/S-ARCH-14-microservice-boundary.md) 的区别：本题为 **战略设计**，不是「拆几个服务」。"
+    },
+    {
+      "id": "S-SOL-02",
+      "title": "绞杀者模式与遗留系统迁移",
+      "frequency": 5,
+      "module": "11 解决方案架构",
+      "module_key": "solution_architecture",
+      "resume_focus": false,
+      "url": "interview/11-solution-architecture/S-SOL-02-strangler-fig-migration/",
+      "prompt": "**绞杀者（Strangler Fig）**：新系统像藤蔓一样 **逐路由、逐能力** 替换旧系统，而不是 Big Bang 重写。架构师要讲清 **流量切换、双写/对账、回滚开关**。生产关键词：**Facade 路由、特性开关、影子流量**。"
+    },
+    {
+      "id": "S-SOL-03",
+      "title": "事件驱动、CQRS 与一致性边界",
+      "frequency": 5,
+      "module": "11 解决方案架构",
+      "module_key": "solution_architecture",
+      "resume_focus": false,
+      "url": "interview/11-solution-architecture/S-SOL-03-event-driven-cqrs/",
+      "prompt": "**事件驱动**解耦生产者与消费者；**CQRS** 读写模型分离，支撑复杂查询与写路径优化。架构师必须讲清 **何时最终一致、Outbox 怎么保证至少一次、读模型延迟可接受否**。生产关键词：**领域事件、Transactional Outbox、幂等消费**。"
+    },
+    {
+      "id": "S-SOL-04",
+      "title": "BFF、API 网关与服务网格职责划分",
+      "frequency": 4,
+      "module": "11 解决方案架构",
+      "module_key": "solution_architecture",
+      "resume_focus": false,
+      "url": "interview/11-solution-architecture/S-SOL-04-bff-gateway-mesh/",
+      "prompt": "**BFF** 为前端/渠道聚合领域 API；**API 网关** 管南北向（鉴权、限流、路由）；**Service Mesh** 管东西向（mTLS、重试、可观测）。架构师面试忌 **三层叠同样逻辑**。生产关键词：**渠道隔离、网关无状态、Mesh 不跑业务逻辑**。"
+    },
+    {
+      "id": "S-SOL-05",
+      "title": "多租户 SaaS 隔离与权限架构",
+      "frequency": 5,
+      "module": "11 解决方案架构",
+      "module_key": "solution_architecture",
+      "resume_focus": false,
+      "url": "interview/11-solution-architecture/S-SOL-05-multi-tenant-saas/",
+      "prompt": "多租户架构师要定 **隔离模型**（共享库共享表 / 共享库独立 schema / 独立库）+ **租户上下文贯穿全链路** + **RLS/中间件防越权**。生产关键词：**tenant_id、数据泄露 0 容忍、 noisy neighbor 配额**。"
+    },
+    {
+      "id": "S-SOL-06",
+      "title": "架构评审：流程、产出与博弈",
+      "frequency": 5,
+      "module": "11 解决方案架构",
+      "module_key": "solution_architecture",
+      "resume_focus": false,
+      "url": "interview/11-solution-architecture/S-SOL-06-architecture-review/",
+      "prompt": "架构师不只是画架构图，还要 **主持评审**：输入清晰、备选对比、风险显式、决策可追溯。产出 = **架构说明 + ADR + 非功能验收标准**。面试考察：**如何处理反对意见、如何说「不」**。与 [S-ARCH-20 ADR](../03-system-design/S-ARCH-20-tech-decision-doc.md) 互补：20 讲文档怎么写，本题讲 **评审怎么开**。"
+    },
+    {
+      "id": "S-SOL-07",
+      "title": "安全与审计的全局架构",
+      "frequency": 4,
+      "module": "11 解决方案架构",
+      "module_key": "solution_architecture",
+      "resume_focus": false,
+      "url": "interview/11-solution-architecture/S-SOL-07-security-audit-architecture/",
+      "prompt": "架构师定义 **零信任边界**：默认不信任内网、**最小权限**、全链路 **审计不可篡改**。覆盖认证授权、密钥、PII、供应链（SBOM）。Go 服务：**mTLS、JWT 短 TTL、Secret 不进镜像**。与 [S-AI-05 LLM 安全](../10-ai-engineering/S-AI-05-llm-security.md)、[S-SOL-05 多租户](./S-SOL-05-multi-tenant-saas.md) 形成安全三角。"
+    },
+    {
+      "id": "S-SOL-08",
+      "title": "45 分钟架构演进白板模板",
+      "frequency": 5,
+      "module": "11 解决方案架构",
+      "module_key": "solution_architecture",
+      "resume_focus": false,
+      "url": "interview/11-solution-architecture/S-SOL-08-evolution-whiteboard/",
+      "prompt": "架构师终面常给 **开放式业务题**（设计 IM / 外卖 / 企业知识平台），45 分钟考察 **澄清 → 估算 → MVP → 扩展 → 非功能 → 演进**。本模板整合 [03 系统设计](../03-system-design/index.md) 单题能力，形成 **完整叙事**；不是新知识点，而是 **面试交付结构**。"
+    },
+    {
+      "id": "S-SOLID-01",
+      "title": "Solidity 语言基础与 storage 布局",
+      "frequency": 5,
+      "module": "13 Solidity 与合约",
+      "module_key": "solidity_contracts",
+      "resume_focus": false,
+      "url": "interview/13-solidity-contracts/S-SOLID-01-language-storage/",
+      "prompt": "Solidity 运行在 **EVM** 上：数据分 **storage**（持久、贵）、**memory**（临时）、**calldata**（只读入参）。架构师要懂 **storage 槽位、打包、继承线性化**，否则升级合约会 **存储冲突**。与 [S-BC-01 EVM 账户](../12-blockchain-web3/S-BC-01-blockchain-evm-basics.md) 衔接。"
+    },
+    {
+      "id": "S-SOLID-02",
+      "title": "合约安全：重入、权限与 OWASP",
+      "frequency": 5,
+      "module": "13 Solidity 与合约",
+      "module_key": "solidity_contracts",
+      "resume_focus": false,
+      "url": "interview/13-solidity-contracts/S-SOLID-02-security-reentrancy/",
+      "prompt": "智能合约 **不可篡改、资产即代码**；架构师必须掌握 **Checks-Effects-Interactions、ReentrancyGuard、最小权限**。经典：**The DAO 重入**。Go 层不能替代链上校验（[S-SOLID-08](./S-SOLID-08-contract-go-boundary.md)）。"
+    },
+    {
+      "id": "S-SOLID-03",
+      "title": "ERC-20 / 721 / 1155 标准与实现",
+      "frequency": 5,
+      "module": "13 Solidity 与合约",
+      "module_key": "solidity_contracts",
+      "resume_focus": false,
+      "url": "interview/13-solidity-contracts/S-SOLID-03-erc-standards/",
+      "prompt": "**ERC-20** 同质化代币；**ERC-721** NFT 唯一 id；**ERC-1155** 半同质化批量。架构师选型 + Review **approve/transferFrom、回调、元数据**。Go 索引靠 **Transfer/TransferSingle 事件**（[S-BC-04](../12-blockchain-web3/S-BC-04-contract-abi-events.md)）。"
+    },
+    {
+      "id": "S-SOLID-04",
+      "title": "可升级合约：Proxy / UUPS / 存储槽",
+      "frequency": 5,
+      "module": "13 Solidity 与合约",
+      "module_key": "solidity_contracts",
+      "resume_focus": false,
+      "url": "interview/13-solidity-contracts/S-SOLID-04-upgradeable-proxy/",
+      "prompt": "**代理模式**：用户调 **Proxy 地址**（不变），`delegatecall` 到 **Implementation**（可升级）。架构师必讲 **EIP-1967 槽位、存储冲突、初始化器 disable**。模式：**Transparent vs UUPS**。"
+    },
+    {
+      "id": "S-SOLID-05",
+      "title": "Gas 优化与设计模式",
+      "frequency": 4,
+      "module": "13 Solidity 与合约",
+      "module_key": "solidity_contracts",
+      "resume_focus": false,
+      "url": "interview/13-solidity-contracts/S-SOLID-05-gas-optimization/",
+      "prompt": "Gas = 链上 CPU+存储计费。架构师在 **可读 vs 成本** 间权衡：storage packing、calldata、`immutable`、事件代替 storage、批量操作。过度优化牺牲审计性时不值得。"
+    },
+    {
+      "id": "S-SOLID-06",
+      "title": "Foundry 测试与审计清单",
+      "frequency": 5,
+      "module": "13 Solidity 与合约",
+      "module_key": "solidity_contracts",
+      "resume_focus": false,
+      "url": "interview/13-solidity-contracts/S-SOLID-06-testing-audit/",
+      "prompt": "**Foundry**（forge）是 Solidity 原生测试框架：**单元测试、fuzz、fork 主网、invariant**。架构师交付前跑 **Slither + 测试覆盖 + 审计 checklist**。与 Go 的 `go test` 文化对称（[S-BC-09](../12-blockchain-web3/S-BC-09-abigen-contract-bindings.md) 用 Go 测绑定）。"
+    },
+    {
+      "id": "S-SOLID-07",
+      "title": "DeFi 合约模式：AMM / Oracle / 闪电贷",
+      "frequency": 4,
+      "module": "13 Solidity 与合约",
+      "module_key": "solidity_contracts",
+      "resume_focus": false,
+      "url": "interview/13-solidity-contracts/S-SOLID-07-defi-patterns/",
+      "prompt": "DeFi 架构师要懂 **AMM 恒定乘积、Oracle 喂价、闪电贷单 tx 原子性**。Solidity 层定 **价格与清算规则**；Go 层做 **聚合展示与风控**，不能替代链上数学（[S-SOLID-08](./S-SOLID-08-contract-go-boundary.md)）。"
+    },
+    {
+      "id": "S-SOLID-08",
+      "title": "合约与 Go 后端架构边界",
+      "frequency": 5,
+      "module": "13 Solidity 与合约",
+      "module_key": "solidity_contracts",
+      "resume_focus": false,
+      "url": "interview/13-solidity-contracts/S-SOLID-08-contract-go-boundary/",
+      "prompt": "**区块链架构师**划分：**链上 = 资产规则与不变量**；**Go = 编排、索引、UX、风控、密钥流程**。忌「链下算完链上只存结果无校验」。本题串联 [13 Solidity](./index.md) 与 [12 Web3 Go](../12-blockchain-web3/index.md)。"
+    }
+  ]
+}

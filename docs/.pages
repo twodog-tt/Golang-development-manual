@@ -1,6 +1,7 @@
 nav:
   - 首页: index.md
   - 学习路线: learning-path-senior.md
+  - 模拟面试: mock-interview.md
 
   - Go 核心（P0）:
     - 01 并发与运行时: interview/01-runtime-concurrency

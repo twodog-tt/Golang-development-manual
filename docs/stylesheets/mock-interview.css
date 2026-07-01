@@ -1,0 +1,143 @@
+/* 模拟面试模块 */
+
+.mock-interview-page {
+  margin-top: 0.5rem;
+}
+
+.mock-interview-intro {
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 1.25rem;
+  max-width: 52rem;
+}
+
+.mock-interview-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.mock-interview-stats strong {
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+}
+
+.mock-interview-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.mock-interview-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.mock-interview-filter select {
+  min-width: 12rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+  color: var(--md-default-fg-color);
+  font: inherit;
+}
+
+.mock-interview-card {
+  max-width: 52rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+  box-shadow: 0 0.15rem 0.6rem rgba(0, 0, 0, 0.06);
+}
+
+.mock-interview-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.mock-interview-id {
+  font-family: var(--md-code-font, monospace);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--md-primary-fg-color);
+}
+
+.mock-interview-module {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color--light);
+}
+
+.mock-interview-badge {
+  font-size: 0.72rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+}
+
+.mock-interview-badge-focus {
+  background: rgba(255, 171, 0, 0.18);
+  color: #e65100;
+}
+
+[data-md-color-scheme="slate"] .mock-interview-badge-focus {
+  color: #ffb74d;
+}
+
+.mock-interview-title {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.mock-interview-prompt {
+  margin: 0 0 1rem;
+  padding: 1rem 1.1rem;
+  border-left: 4px solid var(--md-primary-fg-color);
+  background: var(--md-default-bg-color);
+  border-radius: 0 0.35rem 0.35rem 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--md-default-fg-color);
+}
+
+.mock-interview-meta {
+  margin: 0 0 1.25rem;
+  font-size: 0.78rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.mock-interview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.mock-interview-actions .md-button {
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.mock-interview-btn-secondary {
+  opacity: 0.9;
+}
+
+.mock-interview-empty,
+.mock-interview-loading {
+  color: var(--md-default-fg-color--light);
+}

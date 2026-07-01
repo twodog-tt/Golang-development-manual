@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths:
       - 'docs/**'
+      - 'scripts/**'
       - 'mkdocs.yml'
       - 'requirements-docs.txt'
       - '.github/workflows/docs.yml'
@@ -27,6 +28,9 @@ jobs:
 
       - name: Install MkDocs
         run: pip install -r requirements-docs.txt
+
+      - name: Generate mock interview data
+        run: python scripts/generate_mock_interview_data.py
 
       - name: Build site
         run: mkdocs build

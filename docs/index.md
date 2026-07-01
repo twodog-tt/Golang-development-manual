@@ -11,15 +11,16 @@
 ## 推荐刷题顺序
 
 1. [学习路线](learning-path-senior.md) — 后端 / 架构师 / Web3 分轨
-2. **Go 核心（P0）** — 并发 → 内存 → 系统设计
-3. **中间件与数据库** — MySQL、Redis、MQ、ES
-4. [网络与服务治理](interview/06-network-governance/index.md) — gRPC、Gin、JWT
-5. [AI 工程与编程](interview/10-ai-engineering/index.md) — LLM、RAG、MCP
-6. [解决方案架构](interview/11-solution-architecture/index.md) — DDD、演进、45min 白板
-7. [区块链与 Web3（Go）](interview/12-blockchain-web3/index.md) — RPC、索引、L2、4337
-8. [**Solidity 与合约工程**](interview/13-solidity-contracts/index.md) — 安全、ERC、Proxy、DeFi
-9. [**DEX / CEX 交易所工程**](interview/14-dex-cex-engineering/index.md) — 撮合、账务、AMM、MEV
-10. [手写题](interview/08-coding-senior/index.md) + **工程与软技能**
+2. [**模拟面试**](mock-interview.md) — 随机抽题，标记熟练度，跳转完整解析
+3. **Go 核心（P0）** — 并发 → 内存 → 系统设计
+4. **中间件与数据库** — MySQL、Redis、MQ、ES
+5. [网络与服务治理](interview/06-network-governance/index.md) — gRPC、Gin、JWT
+6. [AI 工程与编程](interview/10-ai-engineering/index.md) — LLM、RAG、MCP
+7. [解决方案架构](interview/11-solution-architecture/index.md) — DDD、演进、45min 白板
+8. [区块链与 Web3（Go）](interview/12-blockchain-web3/index.md) — RPC、索引、L2、4337
+9. [**Solidity 与合约工程**](interview/13-solidity-contracts/index.md) — 安全、ERC、Proxy、DeFi
+10. [**DEX / CEX 交易所工程**](interview/14-dex-cex-engineering/index.md) — 撮合、账务、AMM、MEV
+11. [手写题](interview/08-coding-senior/index.md) + **工程与软技能**
 
 ## Web3 架构师速查
 
