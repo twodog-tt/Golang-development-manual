@@ -125,4 +125,4 @@ Gin 中间件在 `c.Set("claims", claims)` 后 `c.Next()`，失败则 `AbortWith
 
 - [RFC 7519 JWT](https://datatracker.ietf.org/doc/html/rfc7519)
 - [golang-jwt/jwt](https://github.com/golang-jwt/jwt)
-- [OWASP JWT Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html)
+- [OWASP JSON Web Token Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_Cheat_Sheet.html)

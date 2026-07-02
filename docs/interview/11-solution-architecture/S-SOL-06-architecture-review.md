@@ -10,7 +10,7 @@ status: published
 code_refs: []
 sources:
   - https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
-  - https://adr.github.io/
+  - https://github.com/joelparkerhenderson/architecture-decision-record
   - https://www.sei.cmu.edu/our-work/software-architecture/
 ---
 
@@ -103,4 +103,4 @@ flowchart LR
 ## 延伸阅读
 
 - [Documenting Architecture Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
-- [ADR GitHub](https://adr.github.io/)
+- [ADR GitHub](https://github.com/joelparkerhenderson/architecture-decision-record)

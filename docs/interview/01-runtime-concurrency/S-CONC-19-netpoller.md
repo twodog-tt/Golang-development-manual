@@ -106,4 +106,4 @@ go func() {
 
 - [runtime/netpoll.go](https://go.dev/src/runtime/netpoll.go)
 - [Issue: block on file IO](https://github.com/golang/go/issues/19093)
-- [掘金：Go netpoller](https://juejin.cn/post/6844904079988232205)
+- [Draveness：网络轮询器 netpoll](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-gmp/)

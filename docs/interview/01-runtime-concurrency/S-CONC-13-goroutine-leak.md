@@ -117,4 +117,4 @@ func worker(ctx context.Context) {
 
 - [Profiling Go Programs](https://go.dev/blog/pprof)
 - [net/http/pprof](https://pkg.go.dev/net/http/pprof)
-- [掘金：Go goroutine 泄漏实战](https://juejin.cn/post/6844903840752300039)
+- [Go 官方 Diagnostics 指南](https://go.dev/doc/diagnostics)

@@ -106,4 +106,4 @@ func Encode(v any) ([]byte, error) {
 
 - [sync.Pool 文档](https://pkg.go.dev/sync#Pool)
 - [Go 1.13 release notes - Pool](https://go.dev/doc/go1.13)
-- [掘金：sync.Pool 原理](https://juejin.cn/post/6844903840752300039)
+- [Draveness：sync.Pool 实现](https://draveness.me/golang/docs/part3-runtime/ch07-memory/golang-sync-pool/)

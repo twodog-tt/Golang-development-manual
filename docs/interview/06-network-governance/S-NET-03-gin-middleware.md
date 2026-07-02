@@ -10,8 +10,8 @@ status: published
 code_refs:
   - gin-example/example_12/main.go
 sources:
-  - https://gin-gonic.com/docs/examples/custom-middleware/
-  - https://gin-gonic.com/docs/examples/using-middleware/
+  - https://pkg.go.dev/github.com/gin-gonic/gin#hdr-Custom_Middleware
+  - https://github.com/gin-gonic/gin/blob/master/docs/doc.md
 ---
 
 # Gin 中间件链与请求生命周期
@@ -114,6 +114,6 @@ func main() {
 
 ## 延伸阅读
 
-- [Gin Custom Middleware](https://gin-gonic.com/docs/examples/custom-middleware/)
-- [Gin Using Middleware](https://gin-gonic.com/docs/examples/using-middleware/)
+- [Gin Custom Middleware（pkg.go.dev）](https://pkg.go.dev/github.com/gin-gonic/gin#hdr-Custom_Middleware)
+- [Gin 官方文档](https://github.com/gin-gonic/gin/blob/master/docs/doc.md)
 - [Gin Context API](https://pkg.go.dev/github.com/gin-gonic/gin#Context)

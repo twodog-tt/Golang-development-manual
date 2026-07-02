@@ -116,5 +116,5 @@ func heavyWork(ctx context.Context, n int) error {
 
 - [Go 调度器设计文档（proposal）](https://github.com/golang/proposal/blob/master/design/24543-non-cooperative-preemption.md)
 - [Effective Go: Goroutines](https://go.dev/doc/effective_go#goroutines)
-- [掘金：深入理解 Go 调度器 GMP](https://juejin.cn/post/6844904079988232205)
+- [Draveness：GMP 调度器](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-gmp/)
 - [Go 1.14 Release Notes - Preemption](https://go.dev/doc/go1.14)

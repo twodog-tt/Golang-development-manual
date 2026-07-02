@@ -11,7 +11,7 @@ code_refs: []
 sources:
   - https://go.dev/doc/diagnostics
   - https://pkg.go.dev/runtime/trace
-  - https://go.dev/blog/execution-tracer
+  - https://go.dev/doc/diagnostics#execution-tracer
 ---
 
 # CPU profile vs execution trace 选型
@@ -133,5 +133,5 @@ go tool trace trace.out
 ## 延伸阅读
 
 - [Diagnostics 官方指南](https://go.dev/doc/diagnostics)
-- [Execution Tracer 博客](https://go.dev/blog/execution-tracer)
+- [Go Diagnostics：Execution Tracer](https://go.dev/doc/diagnostics#execution-tracer)
 - [High Performance Go Workshop - Profiling](https://dave.cheney.net/high-performance-go-workshop/dotgo-paris.html)

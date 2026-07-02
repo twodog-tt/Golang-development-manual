@@ -11,7 +11,7 @@ code_refs: [examples/solidity/ReentrancyGuard.sol]
 sources:
   - https://swcregistry.io/
   - https://github.com/crytic/slither
-  - https://consensys.github.io/smart-contract-best-practices/
+  - https://github.com/ConsensysDiligence/smart-contract-best-practices
 ---
 
 # 合约安全：重入、权限与 OWASP
@@ -94,4 +94,4 @@ function withdraw(uint256 amount) external nonReentrant {
 ## 延伸阅读
 
 - [SWC Registry](https://swcregistry.io/)
-- [Consensys Best Practices](https://consensys.github.io/smart-contract-best-practices/)
+- [Consensys Diligence 合约安全指南](https://github.com/ConsensysDiligence/smart-contract-best-practices)

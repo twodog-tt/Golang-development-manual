@@ -74,6 +74,21 @@
 - 跨链桥「乐观/原生」安全假设（S-BC-07）随协议变化
 - LLM 成本模型（S-AI-06）随定价变动
 
+## 延伸阅读链接维护（2026-07）
+
+全库 **延伸阅读** 外链已扫描；**34 题**中失效或迁移链接已替换，主要类型：
+
+| 类型 | 处理 |
+|------|------|
+| 掘金文章（404） | 替换为 [Draveness](https://draveness.me/golang/) / 官方 Go 文档 |
+| RocketMQ 旧路径 | 更新为 5.x 文档（`domainModel/01main`、`03fifomessage`、`10consumerretrypolicy`） |
+| OWASP 重命名 | `JSON_Web_Token_Cheat_Sheet`、`Multi_Tenant_Security_Cheat_Sheet` |
+| Fowler 拼写 | `blinking` → `bliki/FeatureToggle` |
+| Consensys | 迁移至 `ConsensysDiligence/smart-contract-best-practices` |
+| 其他 404 | Shopify 模块化单体、Elastic ingest、Ethereum reorg、InfoQ 等换官方可用链接 |
+
+OpenAI / MySQL 官方文档在部分环境可能返回 403（反爬），浏览器一般可正常打开，已保留官方 URL。
+
 ## 维护方式
 
 新增题目请遵循 [template.md](template.md)：`30s / 3min / 10min` + 追问链 + 反模式；架构/流程类 **优先加 Mermaid**。

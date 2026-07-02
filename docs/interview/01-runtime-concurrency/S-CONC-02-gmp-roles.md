@@ -11,7 +11,7 @@ code_refs:
   - basis/goroutine/main.go
 sources:
   - https://go.dev/src/runtime/proc.go
-  - https://github.com/golang/proposal/blob/master/design/12416-cpu-cores.md
+  - https://github.com/golang/go/issues/12416
 ---
 
 # G、M、P 角色与 P 被移除时会发生什么
@@ -107,5 +107,5 @@ func blockSyscall() {
 ## 延伸阅读
 
 - [runtime/proc.go（源码）](https://go.dev/src/runtime/proc.go)
-- [Design: GOMAXPROCS vs CPU cores](https://github.com/golang/proposal/blob/master/design/12416-cpu-cores.md)
-- [掘金：GMP 模型详解](https://juejin.cn/post/6844904079988232205)
+- [Go Issue #12416：GOMAXPROCS](https://github.com/golang/go/issues/12416)
+- [Draveness：GMP 调度器](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-gmp/)

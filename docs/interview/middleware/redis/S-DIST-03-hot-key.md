@@ -125,4 +125,4 @@ func GetProduct(ctx context.Context, rdb *redis.Client, id string) (Product, err
 
 - [Redis Latency Optimization](https://redis.io/docs/latest/operate/oss_and_stack/management/optimization/latency/)
 - [singleflight 包文档](https://pkg.go.dev/golang.org/x/sync/singleflight)
-- [大厂热点 Key 治理实践（掘金）](https://juejin.cn/post/6844903818319745032)
+- [Redis 延迟优化官方文档](https://redis.io/docs/latest/operate/oss_and_stack/management/optimization/latency/)

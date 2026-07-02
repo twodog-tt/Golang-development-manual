@@ -10,7 +10,7 @@ status: published
 code_refs: []
 sources:
   - https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html
-  - https://dev.mysql.com/doc/refman/8.0/en/innodb-mvcc.html
+  - https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html
 ---
 
 # 事务隔离级别与 MVCC
@@ -108,5 +108,5 @@ err = tx.QueryRowContext(ctx,
 ## 延伸阅读
 
 - [InnoDB Isolation Levels](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html)
-- [InnoDB MVCC](https://dev.mysql.com/doc/refman/8.0/en/innodb-mvcc.html)
+- [InnoDB 事务隔离级别](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html)
 - [MySQL 锁与 MVCC（极客时间摘要）](https://time.geekbang.org/column/article/696613)

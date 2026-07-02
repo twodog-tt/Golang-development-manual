@@ -119,4 +119,4 @@ func (h *Handler) Handle(ctx context.Context, msg *kafka.Message) error {
 ## 延伸阅读
 
 - [Kafka Semantics](https://kafka.apache.org/documentation/#semantics)
-- [RocketMQ 设计文档](https://rocketmq.apache.org/docs/domainModel/02message/)
+- [RocketMQ 领域模型](https://rocketmq.apache.org/docs/domainModel/01main/)

@@ -114,4 +114,4 @@ case <-ctx.Done():
 - [Go spec: Channel types](https://go.dev/ref/spec#Channel_types)
 - [runtime/chan.go](https://go.dev/src/runtime/chan.go)
 - [A Tour of Go: Channels](https://go.dev/tour/concurrency/2)
-- [掘金：图解 Go channel](https://juejin.cn/post/6844903840752300039)
+- [Draveness：Go Channel 实现](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-channel/)

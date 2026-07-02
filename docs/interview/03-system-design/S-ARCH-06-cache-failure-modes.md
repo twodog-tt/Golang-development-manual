@@ -9,7 +9,7 @@ tags: [cache, penetration, breakdown, avalanche, bloom-filter]
 status: published
 code_refs: []
 sources:
-  - https://redis.io/docs/latest/develop/reference/patterns/
+  - https://redis.io/docs/latest/develop/use/patterns/
 ---
 
 # 缓存穿透、击穿、雪崩治理体系
@@ -130,5 +130,5 @@ func (c *Cache) Get(ctx context.Context, id int64) (*Item, error) {
 
 ## 延伸阅读
 
-- [Redis Cache Patterns](https://redis.io/docs/latest/develop/reference/patterns/)
+- [Redis 使用模式](https://redis.io/docs/latest/develop/use/patterns/)
 - [Google SRE - Cache Strategies](https://sre.google/sre-book/load-balancing-frontend/)

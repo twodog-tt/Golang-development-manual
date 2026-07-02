@@ -10,7 +10,7 @@ status: published
 code_refs: []
 sources:
   - https://rocketmq.apache.org/docs/deploymentOperations/02admintool/
-  - https://rocketmq.apache.org/docs/featureBehavior/03retrypolicy/
+  - https://rocketmq.apache.org/docs/featureBehavior/10consumerretrypolicy/
   - https://rocketmq.apache.org/docs/deploymentOperations/04message/
 ---
 
@@ -132,7 +132,7 @@ func (h *Handler) Consume(ctx context.Context, msgs ...*primitive.MessageExt) (c
 
 ## 延伸阅读
 
-- [RocketMQ 重试策略](https://rocketmq.apache.org/docs/featureBehavior/03retrypolicy/)
+- [RocketMQ 消费重试策略](https://rocketmq.apache.org/docs/featureBehavior/10consumerretrypolicy/)
 - [mqadmin 工具](https://rocketmq.apache.org/docs/deploymentOperations/02admintool/)
 - [S-RMQ-01 架构](./S-RMQ-01-architecture.md)
 - [S-RMQ-02 事务/顺序/延迟](./S-RMQ-02-order-transaction-delay.md)

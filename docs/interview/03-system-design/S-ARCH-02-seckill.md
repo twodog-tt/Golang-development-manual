@@ -9,7 +9,7 @@ tags: [seckill, inventory, hot-key, oversell, redis]
 status: published
 code_refs: []
 sources:
-  - https://redis.io/docs/latest/develop/use-cases/fraud/
+  - https://redis.io/docs/latest/develop/use/patterns/distributed-locks/
 ---
 
 # 秒杀：库存、超卖、热点 Key
@@ -130,5 +130,5 @@ func (s *SeckillService) TryDeduct(ctx context.Context, skuID string, userID int
 
 ## 延伸阅读
 
-- [Redis 原子操作与 Lua](https://redis.io/docs/latest/develop/use-cases/fraud/)
-- [阿里秒杀架构演进（公开分享）](https://developer.aliyun.com/article/759799)
+- [Redis 分布式锁模式](https://redis.io/docs/latest/develop/use/patterns/distributed-locks/)
+- [阿里秒杀架构实践](https://developer.aliyun.com/article/1052538)

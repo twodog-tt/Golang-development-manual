@@ -9,7 +9,7 @@ tags: [rocketmq, nameserver, broker, topic, middleware]
 status: published
 code_refs: []
 sources:
-  - https://rocketmq.apache.org/docs/domainModel/02message/
+  - https://rocketmq.apache.org/docs/domainModel/01main/
   - https://rocketmq.apache.org/docs/introduction/01quickstart/
 ---
 
@@ -92,6 +92,6 @@ _, err := producer.SendSync(ctx, msg)
 
 ## 延伸阅读
 
-- [RocketMQ 领域模型](https://rocketmq.apache.org/docs/domainModel/02message/)
+- [RocketMQ 领域模型](https://rocketmq.apache.org/docs/domainModel/01main/)
 - 对比：[S-RMQ-03 vs Kafka](./S-RMQ-03-vs-kafka.md)
 - 排障：[S-RMQ-04 堆积与死信](./S-RMQ-04-ops-troubleshooting.md)

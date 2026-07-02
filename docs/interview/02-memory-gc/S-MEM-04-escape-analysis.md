@@ -128,4 +128,4 @@ func build(n int) []int {
 
 - [Go FAQ: stack or heap](https://go.dev/doc/faq#stack_or_heap)
 - [Command-line compile flags](https://pkg.go.dev/cmd/compile)
-- [Dave Cheney: Stack vs Heap](https://dave.cheney.net/2017/08/06/go-on-the-stack-or-the-heap)
+- [Go FAQ：栈还是堆](https://go.dev/doc/faq#stack_or_heap)

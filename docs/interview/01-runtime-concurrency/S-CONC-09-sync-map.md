@@ -103,4 +103,4 @@ func GetSession(id string) (*Session, bool) {
 
 - [sync.Map 文档](https://pkg.go.dev/sync#Map)
 - [Go maps in action](https://go.dev/blog/maps)
-- [掘金：sync.Map 源码解析](https://juejin.cn/post/6844903840752300039)
+- [Draveness：sync.Map 实现](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-sync-map/)

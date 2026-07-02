@@ -10,7 +10,7 @@ status: published
 code_refs: []
 sources:
   - https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/
-  - https://www.quicknode.com/guides/ethereum-development/transactions/how-to-handle-reorgs
+  - https://ethereum.org/developers/docs/consensus-mechanisms/pos/attack-and-defense/#reorgs
 ---
 
 # 链上索引器：扫块、重组与幂等
@@ -109,4 +109,4 @@ Worker 用 `context` + graceful shutdown；见 [S-CODE-03 优雅退出](../08-co
 ## 延伸阅读
 
 - [PoS 与 finality](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/)
-- [Handling reorgs](https://www.quicknode.com/guides/ethereum-development/transactions/how-to-handle-reorgs)
+- [Ethereum PoS 重组与防御](https://ethereum.org/developers/docs/consensus-mechanisms/pos/attack-and-defense/#reorgs)

@@ -9,7 +9,7 @@ tags: [rate-limit, token-bucket, leaky-bucket, redis, sentinel]
 status: published
 code_refs: []
 sources:
-  - https://sentinelguard.io/zh-cn/docs/golang/flow-control/
+  - https://github.com/alibaba/sentinel-golang
   - https://pkg.go.dev/golang.org/x/time/rate
 ---
 
@@ -123,5 +123,5 @@ func RateLimitMiddleware(next http.Handler) http.Handler {
 ## 延伸阅读
 
 - [golang.org/x/time/rate](https://pkg.go.dev/golang.org/x/time/rate)
-- [Sentinel Go 流控](https://sentinelguard.io/zh-cn/docs/golang/flow-control/)
+- [Sentinel Golang](https://github.com/alibaba/sentinel-golang)
 - [Envoy Rate Limit Service](https://www.envoyproxy.io/docs/envoy/latest/configuration/other_features/rate_limit)

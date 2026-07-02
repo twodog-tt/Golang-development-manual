@@ -134,5 +134,5 @@ mux.Handle("/v2/order", v2Handler)
 
 ## 延伸阅读
 
-- [Feature Toggles - Fowler](https://martinfowler.com/blinking/feature-toggles.html)
-- [Argo Rollouts](https://argoproj.github.io/rollouts/)
+- [Feature Toggles（Martin Fowler）](https://martinfowler.com/bliki/FeatureToggle.html)
+- [Argo Rollouts 文档](https://argo-rollouts.readthedocs.io/)

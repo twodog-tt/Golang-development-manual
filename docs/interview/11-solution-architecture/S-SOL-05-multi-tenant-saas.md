@@ -10,7 +10,7 @@ status: published
 code_refs: []
 sources:
   - https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/overview
-  - https://cheatsheetseries.owasp.org/cheatsheets/Multitenant_Security_Cheat_Sheet.html
+  - https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html
 ---
 
 # 多租户 SaaS 隔离与权限架构
@@ -112,4 +112,4 @@ Gin 中间件注入 tenant 后，`c.Request = c.Request.WithContext(WithTenant(.
 ## 延伸阅读
 
 - [Azure Multitenant guidance](https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/overview)
-- [OWASP Multitenant Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multitenant_Security_Cheat_Sheet.html)
+- [OWASP Multi Tenant Security](https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html)

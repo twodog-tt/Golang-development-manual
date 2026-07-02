@@ -123,4 +123,4 @@ func (h *OrderHandler) Get(w http.ResponseWriter, r *http.Request) {
 
 - [Strangler Fig Application - Fowler](https://martinfowler.com/bliki/StranglerFigApplication.html)
 - [MonolithFirst - Fowler](https://martinfowler.com/bliki/MonolithFirst.html)
-- [Shopify 模块化单体（公开分享）](https://shopify.engineering/deconstructing-monolith-designing-software-maximum-speed)
+- [Shopify 模块化单体（公开分享）](https://shopify.engineering/deconstructing-monolith-designing-software-maximizes-developer-productivity)

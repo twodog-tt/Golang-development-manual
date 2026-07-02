@@ -123,4 +123,4 @@ func HealthHandler(w http.ResponseWriter, r *http.Request) {
 ## 延伸阅读
 
 - [AWS Disaster Recovery](https://aws.amazon.com/disaster-recovery/)
-- [阿里云单元化架构实践（公开资料）](https://developer.aliyun.com/article/715043)
+- [阿里云单元化架构实践](https://developer.aliyun.com/article/698308)

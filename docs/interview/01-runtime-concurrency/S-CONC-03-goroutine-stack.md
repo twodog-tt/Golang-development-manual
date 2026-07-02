@@ -115,4 +115,4 @@ func walkIter(root *Node) {
 
 - [runtime/stack.go](https://go.dev/src/runtime/stack.go)
 - [Stack copying and goroutines（旧文仍有助于理解）](https://go.dev/blog/slices-intro)
-- [掘金：Goroutine 栈空间管理](https://juejin.cn/post/6844903834299592712)
+- [Draveness：Goroutine 与栈](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-goroutine/)

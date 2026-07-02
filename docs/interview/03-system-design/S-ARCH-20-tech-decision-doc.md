@@ -10,7 +10,7 @@ status: published
 code_refs: []
 sources:
   - https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
-  - https://adr.github.io/
+  - https://github.com/joelparkerhenderson/architecture-decision-record
 ---
 
 # 技术选型文档怎么写（Lead 面）
@@ -78,7 +78,7 @@ flowchart TB
 
 | 工具 | 用途 |
 |------|------|
-| ADR 模板 | [adr.github.io](https://adr.github.io/) |
+| ADR 模板 | [architecture-decision-record](https://github.com/joelparkerhenderson/architecture-decision-record) |
 | Mermaid / 架构图 | 沟通 |
 | PoC + 压测数据 | 支撑决策 |
 | RACI | 谁批准 |
@@ -139,5 +139,5 @@ Accepted (2025-03-01)
 ## 延伸阅读
 
 - [Documenting Architecture Decisions - Nygard](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
-- [ADR GitHub Organization](https://adr.github.io/)
-- [Amazon Two-Way vs One-Way Doors](https://aws.amazon.com/blogs/enterprise-strategy/one-way-vs-two-way-door-decisions/)
+- [ADR GitHub Organization](https://github.com/joelparkerhenderson/architecture-decision-record)
+- [Bezos 2016 股东信（单向/双向门）](https://www.aboutamazon.com/news/company-news/2016-letter-to-shareholders)

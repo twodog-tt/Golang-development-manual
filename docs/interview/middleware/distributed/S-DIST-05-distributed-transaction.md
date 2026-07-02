@@ -127,4 +127,4 @@ func RunSaga(ctx context.Context, steps []Step) error {
 
 - [Saga Pattern (microservices.io)](https://microservices.io/patterns/data/saga.html)
 - [DTM 文档](https://dtm.pub/app/practice.html)
-- [分布式事务解决方案（InfoQ）](https://www.infoq.cn/article/solution-of-distributed-transaction)
+- [Saga 模式（microservices.io）](https://microservices.io/patterns/data/saga.html)

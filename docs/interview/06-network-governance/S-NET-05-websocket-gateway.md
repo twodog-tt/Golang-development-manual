@@ -127,4 +127,4 @@ Hub 维护 `register/unregister/broadcast` channel，见常见 gorilla chat demo
 
 - [RFC 6455 WebSocket](https://datatracker.ietf.org/doc/html/rfc6455)
 - [gorilla/websocket](https://github.com/gorilla/websocket)
-- [百万 WebSocket 连接实践（掘金）](https://juejin.cn/post/6844904001234567890)
+- [gorilla/websocket 文档](https://pkg.go.dev/github.com/gorilla/websocket)

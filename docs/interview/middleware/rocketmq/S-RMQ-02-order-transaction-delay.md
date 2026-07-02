@@ -9,7 +9,7 @@ tags: [rocketmq, order-message, transaction, delay, middleware]
 status: published
 code_refs: []
 sources:
-  - https://rocketmq.apache.org/docs/featureBehavior/04orderlymessage/
+  - https://rocketmq.apache.org/docs/featureBehavior/03fifomessage/
   - https://rocketmq.apache.org/docs/featureBehavior/04transactionmessage/
   - https://rocketmq.apache.org/docs/featureBehavior/02delaymessage/
 ---
@@ -106,6 +106,6 @@ msg.WithDelayTimeLevel(3)
 
 ## 延伸阅读
 
-- [顺序消息](https://rocketmq.apache.org/docs/featureBehavior/04orderlymessage/)
+- [RocketMQ 顺序消息（FIFO）](https://rocketmq.apache.org/docs/featureBehavior/03fifomessage/)
 - [事务消息](https://rocketmq.apache.org/docs/featureBehavior/04transactionmessage/)
 - 关联：[S-ARCH-11 延迟任务](../../03-system-design/S-ARCH-11-delayed-jobs.md)

@@ -9,7 +9,7 @@ tags: [elasticsearch, sync, canal, cluster, ops]
 status: published
 code_refs: []
 sources:
-  - https://www.elastic.co/guide/en/elasticsearch/reference/current/sync-data.html
+  - https://www.elastic.co/docs/solutions/search/ingest-for-search
   - https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-cluster.html
 ---
 
@@ -86,5 +86,5 @@ flowchart LR
 
 ## 延伸阅读
 
-- [Sync data into Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/sync-data.html)
+- [Elasticsearch 数据写入](https://www.elastic.co/docs/solutions/search/ingest-for-search)
 - 关联：[S-DB-04 分库分表](../mysql/S-DB-04-sharding.md)

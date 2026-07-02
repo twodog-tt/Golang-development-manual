@@ -103,4 +103,4 @@ func good() {
 
 - [Effective Go: Channels](https://go.dev/doc/effective_go#channels)
 - [Go 内存模型与 channel](https://go.dev/ref/mem#chan)
-- [掘金：Go 死锁排查](https://juejin.cn/post/6844903840752300039)
+- [Draveness：Go 死锁检测](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-deadlock/)

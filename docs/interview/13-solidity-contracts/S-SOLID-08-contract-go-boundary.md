@@ -9,7 +9,7 @@ tags: [architecture, solidity, golang, web3-architect, boundary]
 status: published
 code_refs: [examples/senior/erc20bind, examples/solidity/ReentrancyGuard.sol]
 sources:
-  - https://consensys.github.io/smart-contract-best-practices/development-recommendations/offensive/
+  - https://github.com/ConsensysDiligence/smart-contract-best-practices
 ---
 
 # 合约与 Go 后端架构边界
@@ -102,4 +102,4 @@ Go PR → 绑定更新 → integration test (simulated/fork)
 
 ## 延伸阅读
 
-- [Consensys: On-chain vs Off-chain](https://consensys.github.io/smart-contract-best-practices/development-recommendations/offensive/)
+- [Consensys Diligence 合约安全指南](https://github.com/ConsensysDiligence/smart-contract-best-practices)
