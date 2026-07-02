@@ -1,0 +1,52 @@
+/* ── 可折叠侧边栏：分组标题与展开指示 ── */
+
+/* 一级分组（Go 核心、中间件等）加粗，与叶子节点区分 */
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav__link {
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--md-default-fg-color);
+  margin-top: 0.35rem;
+}
+
+/* 分组标题 hover */
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav__link:hover {
+  color: var(--md-primary-fg-color);
+}
+
+/* 展开/折叠箭头：稍大、更易点 */
+.md-nav--primary .md-nav__item--section > .md-nav__link .md-nav__icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+/* 展开状态箭头旋转（Material 用 checkbox，:checked 即展开） */
+.md-nav--primary .md-nav__item--section > .md-nav__link:has(+ input:checked) .md-nav__icon,
+.md-nav--primary .md-nav__item--section > input:checked ~ .md-nav__link .md-nav__icon {
+  transform: rotate(90deg);
+}
+
+/* 子级缩进与分隔线，层级更清晰 */
+.md-nav--primary .md-nav__item--nested > .md-nav {
+  border-left: 1px solid var(--md-default-fg-color--lightest);
+  margin-left: 0.55rem;
+  padding-left: 0.25rem;
+}
+
+/* 二级分组（如 MySQL、Redis） */
+.md-nav--primary .md-nav__item--section .md-nav__item--section > .md-nav__link {
+  font-weight: 500;
+  font-size: 0.68rem;
+}
+
+/* 当前页高亮 */
+.md-nav__link--active {
+  font-weight: 600;
+}
+
+/* 叶子节点字号略小，减少视觉噪音 */
+.md-nav--primary .md-nav__item:not(.md-nav__item--section) > .md-nav__link {
+  font-size: 0.68rem;
+}
