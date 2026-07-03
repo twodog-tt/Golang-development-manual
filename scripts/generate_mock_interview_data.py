@@ -31,6 +31,7 @@ MODULE_LABELS: dict[str, str] = {
     "blockchain_web3": "12 区块链与 Web3",
     "solidity_contracts": "13 Solidity 与合约",
     "dex_cex_engineering": "14 DEX / CEX",
+    "microservices_exchange": "15 微服务（交易所）",
     "leadership": "07 工程与领导力",
     "cloud_native": "09 云原生",
     "coding": "08 手写题",

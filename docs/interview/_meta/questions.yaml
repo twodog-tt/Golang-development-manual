@@ -659,6 +659,43 @@ p1:
       status: published
       resume_focus: true
       file: 14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position.md
+  microservices_exchange:
+    - id: S-MSVC-01
+      title: 交易所微服务全链路白板（CEX+DEX）
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 15-microservices-exchange/S-MSVC-01-exchange-microservices-whiteboard.md
+    - id: S-MSVC-02
+      title: 交易域服务拆分与限界上下文
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 15-microservices-exchange/S-MSVC-02-domain-decomposition.md
+    - id: S-MSVC-03
+      title: 服务发现与 gRPC 通信治理
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 15-microservices-exchange/S-MSVC-03-discovery-grpc-governance.md
+    - id: S-MSVC-04
+      title: Database per Service 与跨服务一致性
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 15-microservices-exchange/S-MSVC-04-database-per-service.md
+    - id: S-MSVC-05
+      title: API 网关、BFF 与交易流量治理
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 15-microservices-exchange/S-MSVC-05-gateway-bff-traffic.md
+    - id: S-MSVC-06
+      title: 事件总线与异步服务边界（交易所）
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 15-microservices-exchange/S-MSVC-06-event-bus-async-boundary.md
 
 p2:
   leadership:

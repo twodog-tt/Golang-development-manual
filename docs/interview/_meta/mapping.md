@@ -38,6 +38,7 @@
 | S-SOLID-01～08 | Solidity 合约 | — | [13-solidity-contracts/](../13-solidity-contracts/index.md) |
 | S-SOLID-02 | 重入防护合约 | [S-SOLID-02](../13-solidity-contracts/S-SOLID-02-security-reentrancy.md) | `examples/solidity/ReentrancyGuard.sol` |
 | S-EXCH-01～16 | DEX / CEX 交易所 | — | [14-dex-cex-engineering/](../14-dex-cex-engineering/index.md) |
+| S-MSVC-01～06 | 微服务（交易所场景） | — | [15-microservices-exchange/](../15-microservices-exchange/index.md) |
 | — | 算法面 | `algorithm/lc_*` | LeetCode 参考实现 |
 
 ## 使用方式

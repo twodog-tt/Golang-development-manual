@@ -4,7 +4,7 @@
 
 > 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) · 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
-## 手册覆盖范围（147 题）
+## 手册覆盖范围（153 题）
 
 | 模块 | 题数 | 说明 |
 |------|------|------|
@@ -18,7 +18,8 @@
 | 11 解决方案架构 | 8 | DDD、演进、评审、白板 |
 | 12 区块链与 Web3（Go） | 9 | RPC、索引、L2、4337、abigen |
 | 13 Solidity 与合约 | 8 | 安全、ERC、Proxy、DeFi |
-| 14 DEX / CEX 交易所 | 9 | 撮合、账务、AMM、MEV |
+| 14 DEX / CEX 交易所 | 16 | 撮合、账务、AMM、MEV、架构白板 |
+| 15 微服务（交易所场景） | 6 | 服务拆分、gRPC、数据隔离、网关、事件总线 |
 | 07 工程与领导力 | 3 | 复盘、技术债、Code Review |
 | 09 云原生 | 8 | K8s、Docker、OTel、排障 |
 

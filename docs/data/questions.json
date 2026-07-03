@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-07-03T10:09:32Z",
-  "count": 147,
+  "generated_at": "2026-07-03T13:51:22Z",
+  "count": 153,
   "questions": [
     {
       "id": "S-AI-01",
@@ -1212,6 +1212,66 @@
       "resume_focus": false,
       "url": "interview/02-memory-gc/S-MEM-15-defer/",
       "prompt": "**defer** 注册函数在 **return 之前、panic 传播之前** LIFO 执行；实现为 **defer 链表**（栈上 open defer 或堆上 defer 结构，视版本与逃逸而定）。热路径大量 defer 有开销；错误处理常用 **defer + named return +闭包捕获 err**。生产关键词：**open defer、1.14 优化、别在循环里无脑 defer**。"
+    },
+    {
+      "id": "S-MSVC-01",
+      "title": "交易所微服务全链路白板（CEX+DEX）",
+      "frequency": 5,
+      "module": "15 微服务（交易所）",
+      "module_key": "microservices_exchange",
+      "resume_focus": true,
+      "url": "interview/15-microservices-exchange/S-MSVC-01-exchange-microservices-whiteboard/",
+      "prompt": "交易所微服务 = **按业务能力拆服务**（订单、撮合、账务、钱包、行情、索引），**同步 gRPC 走资金关键路径短链**，**异步 MQ 走成交/链上事件扇出**。CEX 与 DEX **分域部署、可共用用户与网关**；忌「一个 order-service 包打天下」。关键词：**限界上下文、事件驱动账务、BFF 聚合查询**。"
+    },
+    {
+      "id": "S-MSVC-02",
+      "title": "交易域服务拆分与限界上下文",
+      "frequency": 5,
+      "module": "15 微服务（交易所）",
+      "module_key": "microservices_exchange",
+      "resume_focus": true,
+      "url": "interview/15-microservices-exchange/S-MSVC-02-domain-decomposition/",
+      "prompt": "交易所拆微服务应 **按限界上下文** 而非按表或按团队人头。CEX 核心域：**订单、撮合、账务、钱包、风控、行情**；DEX 核心域：**索引、行情读模型、Launchpad、返佣**。上下文映射关系决定 **gRPC 同步 vs MQ 异步**。关键词：**聚合根不跨库事务、防腐层 ACL**。"
+    },
+    {
+      "id": "S-MSVC-03",
+      "title": "服务发现与 gRPC 通信治理",
+      "frequency": 5,
+      "module": "15 微服务（交易所）",
+      "module_key": "microservices_exchange",
+      "resume_focus": true,
+      "url": "interview/15-microservices-exchange/S-MSVC-03-discovery-grpc-governance/",
+      "prompt": "交易所内网大量 **gRPC 短链路**（BFF→order、order→risk、wallet→ledger 查询）。服务发现常见：**K8s DNS + Headless Service**、**Consul/etcd**、或 **Mesh（xDS）**。Go 侧必配：**超时、重试（仅幂等）、keepalive、客户端 LB、OTel trace 透传**。关键词：**不用裸 IP、metadata 传 trace_id/user_id**。"
+    },
+    {
+      "id": "S-MSVC-04",
+      "title": "Database per Service 与跨服务一致性",
+      "frequency": 5,
+      "module": "15 微服务（交易所）",
+      "module_key": "microservices_exchange",
+      "resume_focus": true,
+      "url": "interview/15-microservices-exchange/S-MSVC-04-database-per-service/",
+      "prompt": "交易所微服务 **一服务一库**：`order_db`、`ledger_db`、`wallet_db`、`indexer_db`。**禁止跨库 JOIN**；一致性靠 **事件（MQ）+ Saga + 幂等 + 对账**。CEX 成交入账、DEX 充提入账、返佣结算都是 **最终一致** 典型场景。关键词：**Outbox、幂等键、日终对账兜底**。"
+    },
+    {
+      "id": "S-MSVC-05",
+      "title": "API 网关、BFF 与交易流量治理",
+      "frequency": 5,
+      "module": "15 微服务（交易所）",
+      "module_key": "microservices_exchange",
+      "resume_focus": true,
+      "url": "interview/15-microservices-exchange/S-MSVC-05-gateway-bff-traffic/",
+      "prompt": "**API 网关** 挡南北向（鉴权、WAF、全局限流）；**BFF** 按 App/Web/OpenAPI 渠道 **聚合** order+market+wallet 接口；**交易流量治理** 在网关+BFF+服务三层：**按用户/IP/symbol 限流、熔断、灰度、超时**。忌网关里跑账务逻辑。关键词：**渠道隔离、无状态网关、敏感接口单独桶**。"
+    },
+    {
+      "id": "S-MSVC-06",
+      "title": "事件总线与异步服务边界（交易所）",
+      "frequency": 5,
+      "module": "15 微服务（交易所）",
+      "module_key": "microservices_exchange",
+      "resume_focus": true,
+      "url": "interview/15-microservices-exchange/S-MSVC-06-event-bus-async-boundary/",
+      "prompt": "交易所 **成交、链上日志、充提状态** 适合走 **Kafka/RocketMQ** 扇出；**下单风控、余额冻结** 走同步 gRPC。Topic 按 **领域事件** 划分：`trade.matched`、`deposit.confirmed`、`chain.swap`、`withdraw.status`。关键词：**分区键保序、消费幂等、Outbox、DLQ 补账**。"
     },
     {
       "id": "S-NET-01",

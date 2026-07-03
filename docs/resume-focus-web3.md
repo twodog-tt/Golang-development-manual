@@ -9,12 +9,13 @@
 | 面试常问 | 对应题目 |
 |----------|----------|
 | 链上索引、事件幂等、K 线、WebSocket 行情、RabbitMQ、UUPS 合约、返佣提现、**完整架构白板** | [P0 区块 Web3 + DEX 专题](#p0-25)（[12 Web3](interview/12-blockchain-web3/index.md) · [14 DEX](interview/14-dex-cex-engineering/index.md)） |
+| 微服务拆分、gRPC 治理、Database per Service、网关 BFF、事件总线 | [15 微服务（交易所）](interview/15-microservices-exchange/index.md) |
 | 多链充提、reorg、MPC/TSS、热冷钱包、提现风控 | [S-EXCH-02](interview/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md)、[S-BC-10](interview/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) |
 | 实时风控、ES、MQ、限流熔断 | [S-ARCH-08](interview/03-system-design/S-ARCH-08-rate-limiting.md)、[S-ES 系列](interview/middleware/elasticsearch/index.md) |
 
 ---
 
-## P0 必背（25 题）
+## P0 必背（31 题）
 
 优先按 **DEX 链上交易 → CEX 钱包托管 → 通用工程** 口述，每题准备 **1 个生产案例**。
 
@@ -49,6 +50,17 @@
 | ⭐ [S-EXCH-14](interview/14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture.md) | Web3 交易所全栈 | Indexer·K线·WS·返佣·链上链下边界 |
 | ⭐ [S-EXCH-15](interview/14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery.md) | 清结算与 HA | 三层对账·T+0·RPO/RTO·提现熔断 |
 | ⭐ [S-EXCH-16](interview/14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position.md) | 永续撮合与仓位引擎 | 单向/双向持仓·Reduce-Only·撮合+仓位同线程 |
+
+### 微服务（交易所场景）
+
+| 题 ID | 题目 | 关键技术点 |
+|-------|------|------------|
+| ⭐ [S-MSVC-01](interview/15-microservices-exchange/S-MSVC-01-exchange-microservices-whiteboard.md) | 交易所微服务全链路白板 | CEX+DEX 服务边界·同步/异步选型 |
+| ⭐ [S-MSVC-02](interview/15-microservices-exchange/S-MSVC-02-domain-decomposition.md) | 域拆分与限界上下文 | order/matching/ledger/wallet/indexer |
+| ⭐ [S-MSVC-03](interview/15-microservices-exchange/S-MSVC-03-discovery-grpc-governance.md) | 服务发现与 gRPC 治理 | K8s DNS·超时·幂等重试 |
+| ⭐ [S-MSVC-04](interview/15-microservices-exchange/S-MSVC-04-database-per-service.md) | Database per Service | Outbox·Saga·成交入账 |
+| ⭐ [S-MSVC-05](interview/15-microservices-exchange/S-MSVC-05-gateway-bff-traffic.md) | 网关 BFF 与流量治理 | 限流维度·渠道隔离 |
+| ⭐ [S-MSVC-06](interview/15-microservices-exchange/S-MSVC-06-event-bus-async-boundary.md) | 事件总线与异步边界 | Topic 划分·trade.matched·chain.swap |
 
 ### 合约与 API
 
@@ -134,7 +146,7 @@
 | D4 | Token 发行 + AMM + 合约升级 | S-EXCH-12、S-EXCH-06、S-SOLID-04 |
 | D5 | 账务 + 风控 + GORM | S-EXCH-03、S-EXCH-05、S-DB-05、S-DB-02 |
 | D6 | Gin API + 可观测 + 发布 | S-NET-03、S-ARCH-16、S-CLOUD-04、S-CODE-03 |
-| D7 | 模拟面：交易所完整架构白板 | S-EXCH-13 或 S-EXCH-14 + S-EXCH-15 |
+| D7 | 模拟面：交易所完整架构白板 | S-EXCH-13 或 S-EXCH-14 + S-MSVC-01 + S-EXCH-15 |
 
 ---
 

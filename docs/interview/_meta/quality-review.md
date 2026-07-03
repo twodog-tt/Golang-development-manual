@@ -1,6 +1,6 @@
 # 习题质量审查记录
 
-> 全库 **147 题**（`questions.yaml`）· 审查日期：2026-06  
+> 全库 **153 题**（`questions.yaml`）· 审查日期：2026-06  
 > 题单源数据：[questions.yaml](questions.yaml)
 
 ## 模块分布
@@ -19,7 +19,8 @@
 | 11 解决方案架构 | 8 | [11-solution-architecture](../11-solution-architecture/index.md) |
 | 12 区块链 Web3 | 10 | [12-blockchain-web3](../12-blockchain-web3/index.md) |
 | 13 Solidity | 8 | [13-solidity-contracts](../13-solidity-contracts/index.md) |
-| 14 DEX/CEX | 12 | [14-dex-cex-engineering](../14-dex-cex-engineering/index.md) |
+| 14 DEX/CEX | 16 | [14-dex-cex-engineering](../14-dex-cex-engineering/index.md) |
+| 15 微服务（交易所） | 6 | [15-microservices-exchange](../15-microservices-exchange/index.md) |
 
 **状态**：全部 `status: published`；无 draft/skeleton。
 
@@ -27,7 +28,7 @@
 
 | 指标 | 数量 |
 |------|------|
-| 含 Mermaid 图 | 147 / 147 |
+| 含 Mermaid 图 | 153 / 153 |
 | 本次补图 | 6 题（见下表） |
 
 原先无图的 5 题 + RocketMQ 延迟路径图已补齐。
