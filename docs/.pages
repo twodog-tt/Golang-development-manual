@@ -3,38 +3,42 @@ nav:
   - 学习路线: learning-path-senior.md
   - 模拟面试: mock-interview.md
 
-  - Go 核心（P0）:
+  - 基础 · Go 语言与编码:
     - 01 并发与运行时: interview/01-runtime-concurrency
     - 02 内存与 GC: interview/02-memory-gc
+    - 08 手写题: interview/08-coding-senior
+
+  - 进阶 · 网络与中间件:
+    - 06 网络与服务治理: interview/06-network-governance
+    - 中间件与数据库:
+      - 总览: interview/middleware
+      - MySQL 与 GORM: interview/middleware/mysql
+      - Redis: interview/middleware/redis
+      - Kafka: interview/middleware/kafka
+      - RocketMQ: interview/middleware/rocketmq
+      - RabbitMQ: interview/middleware/rabbitmq
+      - Elasticsearch: interview/middleware/elasticsearch
+      - 分布式事务: interview/middleware/distributed
+
+  - 高阶 · 系统设计与架构:
     - 03 系统设计: interview/03-system-design
-
-  - 中间件与数据库:
-    - 总览: interview/middleware
-    - MySQL 与 GORM: interview/middleware/mysql
-    - Redis: interview/middleware/redis
-    - Kafka: interview/middleware/kafka
-    - RocketMQ: interview/middleware/rocketmq
-    - RabbitMQ: interview/middleware/rabbitmq
-    - Elasticsearch: interview/middleware/elasticsearch
-    - 分布式事务: interview/middleware/distributed
-
-  - 网络与服务治理: interview/06-network-governance
-  - 手写题: interview/08-coding-senior
-  - AI 工程与编程: interview/10-ai-engineering
-  - 解决方案架构（架构师岗）: interview/11-solution-architecture
-  - 区块链与 Web3: interview/12-blockchain-web3
-  - Solidity 与合约工程: interview/13-solidity-contracts
-  - DEX / CEX 交易所工程: interview/14-dex-cex-engineering
-  - 15 微服务（交易所场景）: interview/15-microservices-exchange
-
-  - 工程与软技能:
-    - 07 工程与领导力: interview/07-engineering-leadership
     - 09 云原生: interview/09-cloud-native
+    - 11 解决方案架构: interview/11-solution-architecture
+    - 15 微服务（交易所场景）: interview/15-microservices-exchange
+
+  - 专题 · Web3 与交易所:
+    - 12 区块链与 Web3: interview/12-blockchain-web3
+    - 13 Solidity 与合约工程: interview/13-solidity-contracts
+    - 14 DEX / CEX 交易所工程: interview/14-dex-cex-engineering
+
+  - 综合 · 领导力与 AI:
+    - 07 工程与领导力: interview/07-engineering-leadership
+    - 10 AI 工程与编程: interview/10-ai-engineering
 
   - 参考资料:
     - Web3 交易所重点准备: resume-focus-web3.md
-    - 题源与引用: sources.md
     - 面试题总索引: interview-catalog.md
+    - 题源与引用: sources.md
     - 代码与题目映射: interview/_meta/mapping
     - 题目撰写模板: interview/_meta/template
     - 习题质量审查: interview/_meta/quality-review

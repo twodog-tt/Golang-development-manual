@@ -6,21 +6,19 @@
 >
 > **⭐ Web3 交易所 / 钱包方向**：[重点准备题单](resume-focus-web3.md)
 
-> **如何使用左侧导航**：点击分组标题可展开/折叠子目录；当前所在分组会自动展开。
+> **如何使用左侧导航**：菜单按 **基础 → 进阶 → 高阶 → 专题** 排列；点击分组标题可展开/折叠子目录。
 
-## 推荐刷题顺序
+## 推荐刷题顺序（由易到难）
 
-1. [学习路线](learning-path-senior.md) — 后端 / 架构师 / Web3 分轨
-2. [**模拟面试**](mock-interview.md) — 随机抽题，标记熟练度，跳转完整解析
-3. **Go 核心（P0）** — 并发 → 内存 → 系统设计
-4. **中间件与数据库** — MySQL、Redis、MQ、ES
-5. [网络与服务治理](interview/06-network-governance/index.md) — gRPC、Gin、JWT
-6. [AI 工程与编程](interview/10-ai-engineering/index.md) — LLM、RAG、MCP
-7. [解决方案架构](interview/11-solution-architecture/index.md) — DDD、演进、45min 白板
-8. [区块链与 Web3（Go）](interview/12-blockchain-web3/index.md) — RPC、索引、L2、4337
-9. [**Solidity 与合约工程**](interview/13-solidity-contracts/index.md) — 安全、ERC、Proxy、DeFi
-10. [**DEX / CEX 交易所工程**](interview/14-dex-cex-engineering/index.md) — 撮合、账务、AMM、MEV
-11. [手写题](interview/08-coding-senior/index.md) + **工程与软技能**
+| 层级 | 模块 | 说明 |
+|------|------|------|
+| **基础** | [01 并发](interview/01-runtime-concurrency/index.md) → [02 内存](interview/02-memory-gc/index.md) → [08 手写题](interview/08-coding-senior/index.md) | Go 语言深度 + 编码 |
+| **进阶** | [06 网络](interview/06-network-governance/index.md) → [中间件](interview/middleware/index.md) | API、gRPC、DB/缓存/MQ |
+| **高阶** | [03 系统设计](interview/03-system-design/index.md) → [09 云原生](interview/09-cloud-native/index.md) → [11 解决方案架构](interview/11-solution-architecture/index.md) → [15 微服务](interview/15-microservices-exchange/index.md) | 架构白板、K8s、服务治理 |
+| **专题** | [12 Web3](interview/12-blockchain-web3/index.md) → [13 Solidity](interview/13-solidity-contracts/index.md) → [14 交易所](interview/14-dex-cex-engineering/index.md) | 链上链下 + 交易业务 |
+| **综合** | [07 领导力](interview/07-engineering-leadership/index.md) · [10 AI](interview/10-ai-engineering/index.md) | 软技能与 AI 专项 |
+
+快捷入口：[学习路线](learning-path-senior.md) · [**模拟面试**](mock-interview.md) · [Web3 重点题单](resume-focus-web3.md)
 
 ## Web3 架构师速查
 
