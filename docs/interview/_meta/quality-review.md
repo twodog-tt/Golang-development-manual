@@ -1,6 +1,6 @@
 # 习题质量审查记录
 
-> 全库 **143 题**（`questions.yaml`）· 审查日期：2026-06  
+> 全库 **146 题**（`questions.yaml`）· 审查日期：2026-06  
 > 题单源数据：[questions.yaml](questions.yaml)
 
 ## 模块分布

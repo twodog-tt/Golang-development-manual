@@ -1,8 +1,18 @@
 # 14 DEX / CEX 交易所工程
 
-12 题 | P1 扩展（**交易所 / 做市 / 合约后端** JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
+15 题 | P1 扩展（**交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
 
 > 面向 **CEX 撮合与资金系统（Go）** + **DEX 链上协议（Solidity）** 工程师，及 **交易所架构师** 全栈面试。
+
+## 完整架构白板（架构师必练）
+
+| ID | 题目 | 频率 |
+|----|------|------|
+| [S-EXCH-13](./S-EXCH-13-cex-end-to-end-architecture.md) | **CEX 端到端交易系统架构（45min）** | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-14](./S-EXCH-14-web3-exchange-fullstack-architecture.md) | **Web3 交易所全栈（链上+链下）** | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-15](./S-EXCH-15-settlement-ha-disaster-recovery.md) | **清结算、对账与高可用** | ⭐⭐⭐⭐⭐ |
+
+> 三道题分别覆盖 **CEX 全链路**、**Web3/DEX 全栈**、**资金正确性与容灾**；面试时可按 JD 选 1 题深讲，其余作关联引用。
 
 ## CEX（中心化，Go 后端为主）
 
@@ -44,13 +54,18 @@
 | [S-BC-05 索引器](../12-blockchain-web3/S-BC-05-indexer-reorg.md) | DEX 成交/充值监听 |
 | [S-ARCH-04 幂等](../03-system-design/S-ARCH-04-idempotency.md) | 充提、撮合幂等 |
 | [S-ARCH-08 限流](../03-system-design/S-ARCH-08-rate-limiting.md) | 交易 API 防刷 |
+| [S-SOL-08 白板模板](../11-solution-architecture/S-SOL-08-evolution-whiteboard.md) | 45min 答题结构 |
 
 ## 推荐刷题顺序
 
-CEX 撮合 → 账务 → 充提 → 合约 → 风控 → DEX AMM → 聚合/MEV → 混合架构
+**架构师**：EXCH-13 → EXCH-14 → EXCH-15 → 按需下钻 01/03/05/10
+
+**CEX 后端**：撮合 → 账务 → 充提 → 合约 → 风控 → EXCH-13 串讲
+
+**Web3 后端**：EXCH-14 → 10/11/12 → BC-05 → SOLID-04/08
 
 ## 岗位自测
 
 - **CEX 后端**：能讲清撮合、账务、充提、强平四条链路
 - **DEX 协议**：能画 AMM、讲清 LP 风险与 Oracle
-- **架构师**：能对比 CEX/DEX 信任模型与一致性边界（[S-SOLID-08](../13-solidity-contracts/S-SOLID-08-contract-go-boundary.md)）
+- **架构师**：能在 **45 分钟**内画完 CEX 或 Web3 全栈，并讲清对账与 HA（EXCH-13/14/15）

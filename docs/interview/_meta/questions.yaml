@@ -635,6 +635,24 @@ p1:
       status: published
       resume_focus: true
       file: 14-dex-cex-engineering/S-EXCH-12-token-launch-rebate.md
+    - id: S-EXCH-13
+      title: CEX 端到端交易系统架构（45 分钟白板）
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-13-cex-end-to-end-architecture.md
+    - id: S-EXCH-14
+      title: Web3 交易所全栈架构（链上 DEX + 链下 Go）
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture.md
+    - id: S-EXCH-15
+      title: 交易所清结算、对账与高可用架构
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery.md
 
 p2:
   leadership:

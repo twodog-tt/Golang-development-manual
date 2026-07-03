@@ -37,7 +37,7 @@
 | S-BC-09 | abigen ERC20 实战 | [S-BC-09](../12-blockchain-web3/S-BC-09-abigen-contract-bindings.md) | `examples/senior/erc20bind/` |
 | S-SOLID-01～08 | Solidity 合约 | — | [13-solidity-contracts/](../13-solidity-contracts/index.md) |
 | S-SOLID-02 | 重入防护合约 | [S-SOLID-02](../13-solidity-contracts/S-SOLID-02-security-reentrancy.md) | `examples/solidity/ReentrancyGuard.sol` |
-| S-EXCH-01～12 | DEX / CEX 交易所 | — | [14-dex-cex-engineering/](../14-dex-cex-engineering/index.md) |
+| S-EXCH-01～15 | DEX / CEX 交易所 | — | [14-dex-cex-engineering/](../14-dex-cex-engineering/index.md) |
 | — | 算法面 | `algorithm/lc_*` | LeetCode 参考实现 |
 
 ## 使用方式

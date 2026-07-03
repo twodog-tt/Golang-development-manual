@@ -4,7 +4,7 @@
 
 > 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) · 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
-## 手册覆盖范围（143 题）
+## 手册覆盖范围（146 题）
 
 | 模块 | 题数 | 说明 |
 |------|------|------|

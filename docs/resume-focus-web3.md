@@ -8,7 +8,7 @@
 
 | 面试常问 | 对应题目 |
 |----------|----------|
-| 链上索引、事件幂等、K 线、WebSocket 行情、RabbitMQ、UUPS 合约、返佣提现 | [P0 区块 Web3 + DEX 专题](#p0-25)（[12 Web3](interview/12-blockchain-web3/index.md) · [14 DEX](interview/14-dex-cex-engineering/index.md)） |
+| 链上索引、事件幂等、K 线、WebSocket 行情、RabbitMQ、UUPS 合约、返佣提现、**完整架构白板** | [P0 区块 Web3 + DEX 专题](#p0-25)（[12 Web3](interview/12-blockchain-web3/index.md) · [14 DEX](interview/14-dex-cex-engineering/index.md)） |
 | 多链充提、reorg、MPC/TSS、热冷钱包、提现风控 | [S-EXCH-02](interview/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md)、[S-BC-10](interview/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) |
 | 实时风控、ES、MQ、限流熔断 | [S-ARCH-08](interview/03-system-design/S-ARCH-08-rate-limiting.md)、[S-ES 系列](interview/middleware/elasticsearch/index.md) |
 
@@ -40,6 +40,14 @@
 | ⭐ [S-EXCH-10](interview/14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation.md) | 链上事件驱动 K 线 | K 线、排行榜 |
 | ⭐ [S-EXCH-11](interview/14-dex-cex-engineering/S-EXCH-11-websocket-market-hub.md) | WebSocket 行情 Hub | 实时推送 |
 | ⭐ [S-EXCH-12](interview/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate.md) | Token 发行与返佣提现 | 毕业、分账、提现 |
+
+### 完整架构白板（架构师 / 终面）
+
+| 题 ID | 题目 | 关键技术点 |
+|-------|------|------------|
+| ⭐ [S-EXCH-13](interview/14-dex-cex-engineering/S-EXCH-13-cex-end-to-end-architecture.md) | CEX 端到端交易系统 | 撮合·账务·充提·行情·45min 白板 |
+| ⭐ [S-EXCH-14](interview/14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture.md) | Web3 交易所全栈 | Indexer·K线·WS·返佣·链上链下边界 |
+| ⭐ [S-EXCH-15](interview/14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery.md) | 清结算与 HA | 三层对账·T+0·RPO/RTO·提现熔断 |
 
 ### 合约与 API
 
@@ -124,7 +132,7 @@
 | D4 | Token 发行 + AMM + 合约升级 | S-EXCH-12、S-EXCH-06、S-SOLID-04 |
 | D5 | 账务 + 风控 + GORM | S-EXCH-03、S-EXCH-05、S-DB-05、S-DB-02 |
 | D6 | Gin API + 可观测 + 发布 | S-NET-03、S-ARCH-16、S-CLOUD-04、S-CODE-03 |
-| D7 | 模拟面：DEX 全链路白板串讲 | S-SOLID-08 + 架构图 |
+| D7 | 模拟面：交易所完整架构白板 | S-EXCH-13 或 S-EXCH-14 + S-EXCH-15 |
 
 ---
 
