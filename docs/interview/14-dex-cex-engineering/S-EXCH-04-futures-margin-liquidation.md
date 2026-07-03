@@ -81,4 +81,5 @@ flowchart LR
 
 ## 延伸阅读
 
+- [S-EXCH-16 永续撮合与仓位引擎](./S-EXCH-16-perpetual-matching-position.md)
 - [S-SOLID-07 DeFi 模式](../13-solidity-contracts/S-SOLID-07-defi-patterns.md)（链上清算对比）

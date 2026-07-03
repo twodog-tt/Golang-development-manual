@@ -1,6 +1,6 @@
 # 14 DEX / CEX 交易所工程
 
-15 题 | P1 扩展（**交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
+16 题 | P1 扩展（**交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
 
 > 面向 **CEX 撮合与资金系统（Go）** + **DEX 链上协议（Solidity）** 工程师，及 **交易所架构师** 全栈面试。
 
@@ -11,8 +11,9 @@
 | [S-EXCH-13](./S-EXCH-13-cex-end-to-end-architecture.md) | **CEX 端到端交易系统架构（45min）** | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-14](./S-EXCH-14-web3-exchange-fullstack-architecture.md) | **Web3 交易所全栈（链上+链下）** | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-15](./S-EXCH-15-settlement-ha-disaster-recovery.md) | **清结算、对账与高可用** | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-16](./S-EXCH-16-perpetual-matching-position.md) | **永续合约撮合与仓位引擎** | ⭐⭐⭐⭐⭐ |
 
-> 三道题分别覆盖 **CEX 全链路**、**Web3/DEX 全栈**、**资金正确性与容灾**；面试时可按 JD 选 1 题深讲，其余作关联引用。
+> 架构白板 + **永续撮合**（EXCH-16）与专题题（01/04）配合使用。
 
 ## CEX（中心化，Go 后端为主）
 
@@ -22,6 +23,7 @@
 | [S-EXCH-02](./S-EXCH-02-deposit-withdraw-wallet.md) | 充值、提现与链上钱包体系 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-03](./S-EXCH-03-account-ledger.md) | 账户体系与资金账务（复式记账） | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-04](./S-EXCH-04-futures-margin-liquidation.md) | 合约：保证金、强平、资金费率 | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-16](./S-EXCH-16-perpetual-matching-position.md) | **永续合约撮合与仓位引擎** | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-05](./S-EXCH-05-risk-reconciliation.md) | 风控、对账与合规审计 | ⭐⭐⭐⭐⭐ |
 
 ## DEX（去中心化，合约 + 索引）
@@ -58,9 +60,9 @@
 
 ## 推荐刷题顺序
 
-**架构师**：EXCH-13 → EXCH-14 → EXCH-15 → 按需下钻 01/03/05/10
+**架构师**：EXCH-13 → **EXCH-16** → EXCH-04 → EXCH-15 → 按需下钻 01/03/05
 
-**CEX 后端**：撮合 → 账务 → 充提 → 合约 → 风控 → EXCH-13 串讲
+**合约后端**：**EXCH-16** → EXCH-04 → EXCH-01 → EXCH-03
 
 **Web3 后端**：EXCH-14 → 10/11/12 → BC-05 → SOLID-04/08
 

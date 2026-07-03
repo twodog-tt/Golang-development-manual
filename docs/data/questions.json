@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-07-03T07:08:04Z",
-  "count": 146,
+  "generated_at": "2026-07-03T10:09:32Z",
+  "count": 147,
   "questions": [
     {
       "id": "S-AI-01",
@@ -992,6 +992,16 @@
       "resume_focus": true,
       "url": "interview/14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery/",
       "prompt": "交易所 **资金正确性 > 性能**。架构师需讲清：**T+0 清结算**（成交→账务→可提余额）、**三层对账**（账务内部、账务↔钱包、平台↔链上）、**高可用**（撮合 symbol 分片、MQ 多副本、撮合主备）。关键词：**不可变流水、日终批处理、热钱包负债模型、RPO/RTO**。"
+    },
+    {
+      "id": "S-EXCH-16",
+      "title": "永续合约撮合与仓位引擎架构",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position/",
+      "prompt": "**永续撮合** 与现货共用 **订单簿 + 价格时间优先**，但成交后必须 **同步更新仓位、冻结保证金、已实现盈亏**——因此主流实现是 **「撮合 + 仓位引擎」同 symbol 单写者**，与现货 **分实例/分队列**。关键语义：**单向/双向持仓、开平仓、Reduce-Only、强平单插队**。标记价 **不参与撮合定价**，只服务风控与盈亏（[S-EXCH-04](./S-EXCH-04-futures-margin-liquidation.md)）。"
     },
     {
       "id": "S-KAFKA-01",

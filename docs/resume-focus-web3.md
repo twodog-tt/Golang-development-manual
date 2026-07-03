@@ -48,6 +48,7 @@
 | ⭐ [S-EXCH-13](interview/14-dex-cex-engineering/S-EXCH-13-cex-end-to-end-architecture.md) | CEX 端到端交易系统 | 撮合·账务·充提·行情·45min 白板 |
 | ⭐ [S-EXCH-14](interview/14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture.md) | Web3 交易所全栈 | Indexer·K线·WS·返佣·链上链下边界 |
 | ⭐ [S-EXCH-15](interview/14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery.md) | 清结算与 HA | 三层对账·T+0·RPO/RTO·提现熔断 |
+| ⭐ [S-EXCH-16](interview/14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position.md) | 永续撮合与仓位引擎 | 单向/双向持仓·Reduce-Only·撮合+仓位同线程 |
 
 ### 合约与 API
 
@@ -78,6 +79,7 @@
 | 题 ID | 题目 |
 |-------|------|
 | 🔶 [S-EXCH-01](interview/14-dex-cex-engineering/S-EXCH-01-cex-matching-engine.md) | CEX 撮合引擎 |
+| 🔶 [S-EXCH-16](interview/14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position.md) | 永续撮合与仓位引擎 |
 | 🔶 [S-EXCH-07](interview/14-dex-cex-engineering/S-EXCH-07-aggregator-slippage.md) | 聚合路由与滑点 |
 | 🔶 [S-EXCH-08](interview/14-dex-cex-engineering/S-EXCH-08-mev-sandwich.md) | MEV 与三明治 |
 | 🔶 [S-EXCH-09](interview/14-dex-cex-engineering/S-EXCH-09-hybrid-cex-dex.md) | CeDeFi 混合 |
