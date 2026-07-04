@@ -1,3 +1,13 @@
 title: 13 Solidity 与合约工程
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-SOLID-01: S-SOLID-01-language-storage.md
+  - S-SOLID-02: S-SOLID-02-security-reentrancy.md
+  - S-SOLID-03: S-SOLID-03-erc-standards.md
+  - S-SOLID-04: S-SOLID-04-upgradeable-proxy.md
+  - S-SOLID-05: S-SOLID-05-gas-optimization.md
+  - S-SOLID-06: S-SOLID-06-testing-audit.md
+  - S-SOLID-07: S-SOLID-07-defi-patterns.md
+  - S-SOLID-08: S-SOLID-08-contract-go-boundary.md

@@ -1,3 +1,10 @@
 title: 08 手写题
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-CODE-01: S-CODE-01-concurrent-lru.md
+  - S-CODE-02: S-CODE-02-token-bucket.md
+  - S-CODE-03: S-CODE-03-graceful-shutdown.md
+  - S-CODE-04: S-CODE-04-errgroup.md
+  - S-CODE-05: S-CODE-05-connection-pool.md

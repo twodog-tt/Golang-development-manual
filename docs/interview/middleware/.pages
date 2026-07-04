@@ -1,5 +1,7 @@
 title: 中间件与数据库
+collapse: false
 nav:
+  - index.md
   - mysql
   - redis
   - kafka

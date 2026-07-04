@@ -1,3 +1,8 @@
 title: 07 工程与领导力
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-LEAD-01: S-LEAD-01-incident-postmortem.md
+  - S-LEAD-02: S-LEAD-02-tech-debt.md
+  - S-LEAD-03: S-LEAD-03-code-review-culture.md

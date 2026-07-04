@@ -1,3 +1,10 @@
 title: 06 网络与服务治理
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-NET-01: S-NET-01-grpc-vs-rest.md
+  - S-NET-02: S-NET-02-http-connection-pool.md
+  - S-NET-03: S-NET-03-gin-middleware.md
+  - S-NET-04: S-NET-04-jwt-auth.md
+  - S-NET-05: S-NET-05-websocket-gateway.md

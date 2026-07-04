@@ -1,6 +1,9 @@
 title: RocketMQ
+collapse: false
+collapse_single_pages: false
 nav:
-  - S-RMQ-01-architecture.md
-  - S-RMQ-02-order-transaction-delay.md
-  - S-RMQ-03-vs-kafka.md
-  - S-RMQ-04-ops-troubleshooting.md
+  - index.md
+  - S-RMQ-01: S-RMQ-01-architecture.md
+  - S-RMQ-02: S-RMQ-02-order-transaction-delay.md
+  - S-RMQ-03: S-RMQ-03-vs-kafka.md
+  - S-RMQ-04: S-RMQ-04-ops-troubleshooting.md

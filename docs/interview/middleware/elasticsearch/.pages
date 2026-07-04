@@ -1,3 +1,8 @@
 title: Elasticsearch
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-ES-01: S-ES-01-inverted-index.md
+  - S-ES-02: S-ES-02-mapping-query-agg.md
+  - S-ES-03: S-ES-03-sync-ops.md

@@ -1,3 +1,6 @@
 title: RabbitMQ
+collapse: false
+collapse_single_pages: false
 nav:
-  - S-RAB-01-exchange-async-pipeline.md
+  - index.md
+  - S-RAB-01: S-RAB-01-exchange-async-pipeline.md

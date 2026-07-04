@@ -1,3 +1,25 @@
 title: 03 系统设计
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-ARCH-01: S-ARCH-01-read-heavy-api.md
+  - S-ARCH-02: S-ARCH-02-seckill.md
+  - S-ARCH-03: S-ARCH-03-distributed-id.md
+  - S-ARCH-04: S-ARCH-04-idempotency.md
+  - S-ARCH-05: S-ARCH-05-consistency-tradeoff.md
+  - S-ARCH-06: S-ARCH-06-cache-failure-modes.md
+  - S-ARCH-07: S-ARCH-07-multi-level-cache.md
+  - S-ARCH-08: S-ARCH-08-rate-limiting.md
+  - S-ARCH-09: S-ARCH-09-circuit-breaker.md
+  - S-ARCH-10: S-ARCH-10-mq-semantics.md
+  - S-ARCH-11: S-ARCH-11-delayed-jobs.md
+  - S-ARCH-12: S-ARCH-12-order-state-machine.md
+  - S-ARCH-13: S-ARCH-13-multi-active-dr.md
+  - S-ARCH-14: S-ARCH-14-microservice-boundary.md
+  - S-ARCH-15: S-ARCH-15-release-strategy.md
+  - S-ARCH-16: S-ARCH-16-observability.md
+  - S-ARCH-17: S-ARCH-17-slo-error-budget.md
+  - S-ARCH-18: S-ARCH-18-capacity-planning.md
+  - S-ARCH-19: S-ARCH-19-monolith-to-microservices.md
+  - S-ARCH-20: S-ARCH-20-tech-decision-doc.md

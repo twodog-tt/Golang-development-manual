@@ -1,3 +1,13 @@
 title: 10 AI 工程与编程
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-AI-01: S-AI-01-llm-api-integration.md
+  - S-AI-02: S-AI-02-rag-architecture.md
+  - S-AI-03: S-AI-03-agent-tool-calling.md
+  - S-AI-04: S-AI-04-prompt-context.md
+  - S-AI-05: S-AI-05-llm-security.md
+  - S-AI-06: S-AI-06-llm-observability-cost.md
+  - S-AI-07: S-AI-07-mcp-server-go.md
+  - S-AI-08: S-AI-08-multimodal-voice.md

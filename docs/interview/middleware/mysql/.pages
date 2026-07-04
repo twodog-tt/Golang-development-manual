@@ -1,3 +1,10 @@
 title: MySQL
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-DB-01: S-DB-01-mysql-index.md
+  - S-DB-02: S-DB-02-transaction-mvcc.md
+  - S-DB-03: S-DB-03-slow-query.md
+  - S-DB-04: S-DB-04-sharding.md
+  - S-DB-05: S-DB-05-gorm-pitfalls.md

@@ -1,3 +1,13 @@
 title: 11 解决方案架构
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-SOL-01: S-SOL-01-bounded-context-ddd.md
+  - S-SOL-02: S-SOL-02-strangler-fig-migration.md
+  - S-SOL-03: S-SOL-03-event-driven-cqrs.md
+  - S-SOL-04: S-SOL-04-bff-gateway-mesh.md
+  - S-SOL-05: S-SOL-05-multi-tenant-saas.md
+  - S-SOL-06: S-SOL-06-architecture-review.md
+  - S-SOL-07: S-SOL-07-security-audit-architecture.md
+  - S-SOL-08: S-SOL-08-evolution-whiteboard.md

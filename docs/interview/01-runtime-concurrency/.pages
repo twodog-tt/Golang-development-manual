@@ -1,3 +1,25 @@
 title: 01 并发与运行时
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-CONC-01: S-CONC-01-gmp-overview.md
+  - S-CONC-02: S-CONC-02-gmp-roles.md
+  - S-CONC-03: S-CONC-03-goroutine-stack.md
+  - S-CONC-04: S-CONC-04-gomaxprocs.md
+  - S-CONC-05: S-CONC-05-channel.md
+  - S-CONC-06: S-CONC-06-channel-deadlock.md
+  - S-CONC-07: S-CONC-07-select.md
+  - S-CONC-08: S-CONC-08-sync-primitives.md
+  - S-CONC-09: S-CONC-09-sync-map.md
+  - S-CONC-10: S-CONC-10-sync-pool.md
+  - S-CONC-11: S-CONC-11-waitgroup-once-cond.md
+  - S-CONC-12: S-CONC-12-context.md
+  - S-CONC-13: S-CONC-13-goroutine-leak.md
+  - S-CONC-14: S-CONC-14-memory-model.md
+  - S-CONC-15: S-CONC-15-race-detector.md
+  - S-CONC-16: S-CONC-16-worker-pool.md
+  - S-CONC-17: S-CONC-17-pipeline.md
+  - S-CONC-18: S-CONC-18-goroutine-governance.md
+  - S-CONC-19: S-CONC-19-netpoller.md
+  - S-CONC-20: S-CONC-20-go122-generics.md

@@ -1,3 +1,11 @@
 title: 15 微服务（交易所场景）
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-MSVC-01: S-MSVC-01-exchange-microservices-whiteboard.md
+  - S-MSVC-02: S-MSVC-02-domain-decomposition.md
+  - S-MSVC-03: S-MSVC-03-discovery-grpc-governance.md
+  - S-MSVC-04: S-MSVC-04-database-per-service.md
+  - S-MSVC-05: S-MSVC-05-gateway-bff-traffic.md
+  - S-MSVC-06: S-MSVC-06-event-bus-async-boundary.md

@@ -1,3 +1,20 @@
 title: 02 内存与 GC
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-MEM-01: S-MEM-01-tri-color-gc.md
+  - S-MEM-02: S-MEM-02-stw-evolution.md
+  - S-MEM-03: S-MEM-03-gogc-tuning.md
+  - S-MEM-04: S-MEM-04-escape-analysis.md
+  - S-MEM-05: S-MEM-05-slice-internals.md
+  - S-MEM-06: S-MEM-06-map-internals.md
+  - S-MEM-07: S-MEM-07-interface.md
+  - S-MEM-08: S-MEM-08-unsafe-alignment.md
+  - S-MEM-09: S-MEM-09-oom-debug.md
+  - S-MEM-10: S-MEM-10-pprof-heap.md
+  - S-MEM-11: S-MEM-11-pprof-vs-trace.md
+  - S-MEM-12: S-MEM-12-reduce-gc-pressure.md
+  - S-MEM-13: S-MEM-13-gc-jitter.md
+  - S-MEM-14: S-MEM-14-new-make.md
+  - S-MEM-15: S-MEM-15-defer.md

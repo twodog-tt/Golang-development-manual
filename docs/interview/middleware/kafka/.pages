@@ -1,6 +1,9 @@
 title: Kafka
+collapse: false
+collapse_single_pages: false
 nav:
-  - S-KAFKA-01-architecture-storage.md
-  - S-KAFKA-02-producer-reliability.md
-  - S-DIST-04-kafka-semantics.md
-  - S-KAFKA-03-trade-event-bus.md
+  - index.md
+  - S-KAFKA-01: S-KAFKA-01-architecture-storage.md
+  - S-KAFKA-02: S-KAFKA-02-producer-reliability.md
+  - S-KAFKA-03: S-KAFKA-03-trade-event-bus.md
+  - S-DIST-04: S-DIST-04-kafka-semantics.md

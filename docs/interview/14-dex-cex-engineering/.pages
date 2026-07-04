@@ -1,3 +1,21 @@
 title: 14 DEX / CEX 交易所工程
+collapse: false
+collapse_single_pages: false
 nav:
-  - ...
+  - index.md
+  - S-EXCH-01: S-EXCH-01-cex-matching-engine.md
+  - S-EXCH-02: S-EXCH-02-deposit-withdraw-wallet.md
+  - S-EXCH-03: S-EXCH-03-account-ledger.md
+  - S-EXCH-04: S-EXCH-04-futures-margin-liquidation.md
+  - S-EXCH-05: S-EXCH-05-risk-reconciliation.md
+  - S-EXCH-06: S-EXCH-06-dex-amm-liquidity.md
+  - S-EXCH-07: S-EXCH-07-aggregator-slippage.md
+  - S-EXCH-08: S-EXCH-08-mev-sandwich.md
+  - S-EXCH-09: S-EXCH-09-hybrid-cex-dex.md
+  - S-EXCH-10: S-EXCH-10-kline-event-aggregation.md
+  - S-EXCH-11: S-EXCH-11-websocket-market-hub.md
+  - S-EXCH-12: S-EXCH-12-token-launch-rebate.md
+  - S-EXCH-13: S-EXCH-13-cex-end-to-end-architecture.md
+  - S-EXCH-14: S-EXCH-14-web3-exchange-fullstack-architecture.md
+  - S-EXCH-15: S-EXCH-15-settlement-ha-disaster-recovery.md
+  - S-EXCH-16: S-EXCH-16-perpetual-matching-position.md
