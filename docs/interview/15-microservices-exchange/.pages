@@ -3,9 +3,9 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-MSVC-01: S-MSVC-01-exchange-microservices-whiteboard.md
-  - S-MSVC-02: S-MSVC-02-domain-decomposition.md
-  - S-MSVC-03: S-MSVC-03-discovery-grpc-governance.md
-  - S-MSVC-04: S-MSVC-04-database-per-service.md
-  - S-MSVC-05: S-MSVC-05-gateway-bff-traffic.md
-  - S-MSVC-06: S-MSVC-06-event-bus-async-boundary.md
+  - "交易所微服务全链路白板（CEX+DEX）": S-MSVC-01-exchange-microservices-whiteboard.md
+  - "交易域服务拆分与限界上下文": S-MSVC-02-domain-decomposition.md
+  - "服务发现与 gRPC 通信治理": S-MSVC-03-discovery-grpc-governance.md
+  - "Database per Service 与跨服务一致性": S-MSVC-04-database-per-service.md
+  - "API 网关、BFF 与交易流量治理": S-MSVC-05-gateway-bff-traffic.md
+  - "事件总线与异步服务边界（交易所）": S-MSVC-06-event-bus-async-boundary.md

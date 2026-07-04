@@ -3,23 +3,23 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-CONC-01: S-CONC-01-gmp-overview.md
-  - S-CONC-02: S-CONC-02-gmp-roles.md
-  - S-CONC-03: S-CONC-03-goroutine-stack.md
-  - S-CONC-04: S-CONC-04-gomaxprocs.md
-  - S-CONC-05: S-CONC-05-channel.md
-  - S-CONC-06: S-CONC-06-channel-deadlock.md
-  - S-CONC-07: S-CONC-07-select.md
-  - S-CONC-08: S-CONC-08-sync-primitives.md
-  - S-CONC-09: S-CONC-09-sync-map.md
-  - S-CONC-10: S-CONC-10-sync-pool.md
-  - S-CONC-11: S-CONC-11-waitgroup-once-cond.md
-  - S-CONC-12: S-CONC-12-context.md
-  - S-CONC-13: S-CONC-13-goroutine-leak.md
-  - S-CONC-14: S-CONC-14-memory-model.md
-  - S-CONC-15: S-CONC-15-race-detector.md
-  - S-CONC-16: S-CONC-16-worker-pool.md
-  - S-CONC-17: S-CONC-17-pipeline.md
-  - S-CONC-18: S-CONC-18-goroutine-governance.md
-  - S-CONC-19: S-CONC-19-netpoller.md
-  - S-CONC-20: S-CONC-20-go122-generics.md
+  - "GMP 模型全貌与 1.14+ 抢占式调度演进": S-CONC-01-gmp-overview.md
+  - "G、M、P 各自职责；去掉 P 会怎样": S-CONC-02-gmp-roles.md
+  - "goroutine 栈增长与分裂；和 OS 线程对比": S-CONC-03-goroutine-stack.md
+  - "GOMAXPROCS 设置依据；容器 CPU limit 下的误区": S-CONC-04-gomaxprocs.md
+  - "Channel 底层结构与有缓冲/无缓冲选型": S-CONC-05-channel.md
+  - "Channel 死锁典型场景与排查": S-CONC-06-channel-deadlock.md
+  - "select 语义、公平性与 default 的坑": S-CONC-07-select.md
+  - "Mutex vs RWMutex vs atomic 选型": S-CONC-08-sync-primitives.md
+  - "sync.Map 适用场景与误用": S-CONC-09-sync-map.md
+  - "sync.Pool 原理、GC 交互与线上误用": S-CONC-10-sync-pool.md
+  - "WaitGroup、Once、Cond 生产用法": S-CONC-11-waitgroup-once-cond.md
+  - "Context 树、取消传播、超时与泄漏": S-CONC-12-context.md
+  - "goroutine 泄漏成因与 pprof 排查": S-CONC-13-goroutine-leak.md
+  - "Go 内存模型与 happens-before": S-CONC-14-memory-model.md
+  - "race detector 原理与 data race 面试表达": S-CONC-15-race-detector.md
+  - "Worker Pool 设计：队列、背压、优雅退出": S-CONC-16-worker-pool.md
+  - "Fan-out/Fan-in 与 Pipeline 瓶颈分析": S-CONC-17-pipeline.md
+  - "高并发下 goroutine 泛滥的架构治理": S-CONC-18-goroutine-governance.md
+  - "netpoller 与阻塞 syscall 的处理": S-CONC-19-netpoller.md
+  - "Go 1.22+ loop 变量与泛型对并发代码的影响": S-CONC-20-go122-generics.md

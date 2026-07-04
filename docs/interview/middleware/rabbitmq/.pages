@@ -3,4 +3,4 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-RAB-01: S-RAB-01-exchange-async-pipeline.md
+  - "RabbitMQ 拆分链上监听与业务写入": S-RAB-01-exchange-async-pipeline.md

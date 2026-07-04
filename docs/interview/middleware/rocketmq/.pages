@@ -3,7 +3,7 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-RMQ-01: S-RMQ-01-architecture.md
-  - S-RMQ-02: S-RMQ-02-order-transaction-delay.md
-  - S-RMQ-03: S-RMQ-03-vs-kafka.md
-  - S-RMQ-04: S-RMQ-04-ops-troubleshooting.md
+  - "RocketMQ 架构与核心概念": S-RMQ-01-architecture.md
+  - "RocketMQ 顺序/事务/延迟消息": S-RMQ-02-order-transaction-delay.md
+  - "RocketMQ 与 Kafka 选型对比": S-RMQ-03-vs-kafka.md
+  - "RocketMQ 运维排障：堆积、重试与死信": S-RMQ-04-ops-troubleshooting.md

@@ -3,11 +3,11 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-AI-01: S-AI-01-llm-api-integration.md
-  - S-AI-02: S-AI-02-rag-architecture.md
-  - S-AI-03: S-AI-03-agent-tool-calling.md
-  - S-AI-04: S-AI-04-prompt-context.md
-  - S-AI-05: S-AI-05-llm-security.md
-  - S-AI-06: S-AI-06-llm-observability-cost.md
-  - S-AI-07: S-AI-07-mcp-server-go.md
-  - S-AI-08: S-AI-08-multimodal-voice.md
+  - "Go 接入大模型 API：流式、重试、超时": S-AI-01-llm-api-integration.md
+  - "RAG 架构：分块、向量检索与 Go 落地": S-AI-02-rag-architecture.md
+  - "AI Agent 与 Function Calling": S-AI-03-agent-tool-calling.md
+  - "Prompt 工程与 Context 窗口管理": S-AI-04-prompt-context.md
+  - "LLM 应用安全：注入、PII、护栏": S-AI-05-llm-security.md
+  - "LLM 可观测性、成本与延迟优化": S-AI-06-llm-observability-cost.md
+  - "Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署": S-AI-07-mcp-server-go.md
+  - "多模态与语音接入：图像、音频在 Go 服务中的工程实践": S-AI-08-multimodal-voice.md

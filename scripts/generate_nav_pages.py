@@ -81,8 +81,14 @@ def iter_questions(node, chain: list[str] | None = None):
                 yield from iter_questions(value, chain + [key])
 
 
+def yaml_quote(s: str) -> str:
+    """YAML 双引号字符串，避免标题含冒号时破坏 awesome-pages 解析。"""
+    return '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
 def nav_label(item: dict) -> str:
-    return item["id"]
+    """侧栏显示题目标题，不显示编号。"""
+    return item["title"]
 
 
 def write_module_pages(rel_dir: str, items: list[dict]) -> None:
@@ -101,7 +107,7 @@ def write_module_pages(rel_dir: str, items: list[dict]) -> None:
 
     for item in items:
         basename = Path(item["file"]).name
-        lines.append(f"  - {nav_label(item)}: {basename}")
+        lines.append(f"  - {yaml_quote(nav_label(item))}: {basename}")
 
     out = pages_dir / ".pages"
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")

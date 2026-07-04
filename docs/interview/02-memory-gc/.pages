@@ -3,18 +3,18 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-MEM-01: S-MEM-01-tri-color-gc.md
-  - S-MEM-02: S-MEM-02-stw-evolution.md
-  - S-MEM-03: S-MEM-03-gogc-tuning.md
-  - S-MEM-04: S-MEM-04-escape-analysis.md
-  - S-MEM-05: S-MEM-05-slice-internals.md
-  - S-MEM-06: S-MEM-06-map-internals.md
-  - S-MEM-07: S-MEM-07-interface.md
-  - S-MEM-08: S-MEM-08-unsafe-alignment.md
-  - S-MEM-09: S-MEM-09-oom-debug.md
-  - S-MEM-10: S-MEM-10-pprof-heap.md
-  - S-MEM-11: S-MEM-11-pprof-vs-trace.md
-  - S-MEM-12: S-MEM-12-reduce-gc-pressure.md
-  - S-MEM-13: S-MEM-13-gc-jitter.md
-  - S-MEM-14: S-MEM-14-new-make.md
-  - S-MEM-15: S-MEM-15-defer.md
+  - "三色标记与混合写屏障": S-MEM-01-tri-color-gc.md
+  - "STW 阶段与 Go 1.5+ GC 演进": S-MEM-02-stw-evolution.md
+  - "GC 触发条件与 GOGC 调优": S-MEM-03-gogc-tuning.md
+  - "逃逸分析与 -gcflags=-m": S-MEM-04-escape-analysis.md
+  - "slice 底层、扩容与内存泄漏场景": S-MEM-05-slice-internals.md
+  - "map 并发安全、扩容与 sync.Map 选型": S-MEM-06-map-internals.md
+  - "interface 底层 eface/iface 与断言成本": S-MEM-07-interface.md
+  - "内存对齐与 unsafe 边界": S-MEM-08-unsafe-alignment.md
+  - "大对象、堆外与 OOM 排查": S-MEM-09-oom-debug.md
+  - "pprof heap/allocs 实战解读": S-MEM-10-pprof-heap.md
+  - "CPU profile vs execution trace 选型": S-MEM-11-pprof-vs-trace.md
+  - "减少 GC 压力的系统级手段": S-MEM-12-reduce-gc-pressure.md
+  - "延迟敏感服务的 GC 抖动治理": S-MEM-13-gc-jitter.md
+  - "new/make 在资深面试中的升维回答": S-MEM-14-new-make.md
+  - "defer 链、开销与错误处理": S-MEM-15-defer.md

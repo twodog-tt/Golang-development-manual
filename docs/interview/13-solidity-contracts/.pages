@@ -3,11 +3,11 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-SOLID-01: S-SOLID-01-language-storage.md
-  - S-SOLID-02: S-SOLID-02-security-reentrancy.md
-  - S-SOLID-03: S-SOLID-03-erc-standards.md
-  - S-SOLID-04: S-SOLID-04-upgradeable-proxy.md
-  - S-SOLID-05: S-SOLID-05-gas-optimization.md
-  - S-SOLID-06: S-SOLID-06-testing-audit.md
-  - S-SOLID-07: S-SOLID-07-defi-patterns.md
-  - S-SOLID-08: S-SOLID-08-contract-go-boundary.md
+  - "Solidity 语言基础与 storage 布局": S-SOLID-01-language-storage.md
+  - "合约安全：重入、权限与 OWASP": S-SOLID-02-security-reentrancy.md
+  - "ERC-20 / 721 / 1155 标准与实现": S-SOLID-03-erc-standards.md
+  - "可升级合约：Proxy / UUPS / 存储槽": S-SOLID-04-upgradeable-proxy.md
+  - "Gas 优化与设计模式": S-SOLID-05-gas-optimization.md
+  - "Foundry 测试与审计清单": S-SOLID-06-testing-audit.md
+  - "DeFi 合约模式：AMM / Oracle / 闪电贷": S-SOLID-07-defi-patterns.md
+  - "合约与 Go 后端架构边界": S-SOLID-08-contract-go-boundary.md

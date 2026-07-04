@@ -3,4 +3,4 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-DIST-05: S-DIST-05-distributed-transaction.md
+  - "分布式事务 TCC/Saga 对比": S-DIST-05-distributed-transaction.md

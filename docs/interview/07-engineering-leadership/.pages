@@ -3,6 +3,6 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-LEAD-01: S-LEAD-01-incident-postmortem.md
-  - S-LEAD-02: S-LEAD-02-tech-debt.md
-  - S-LEAD-03: S-LEAD-03-code-review-culture.md
+  - "线上事故复盘结构": S-LEAD-01-incident-postmortem.md
+  - "技术债识别与偿还策略": S-LEAD-02-tech-debt.md
+  - "带团队与 Code Review 文化": S-LEAD-03-code-review-culture.md

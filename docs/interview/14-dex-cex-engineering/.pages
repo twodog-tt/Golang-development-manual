@@ -3,19 +3,19 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-EXCH-01: S-EXCH-01-cex-matching-engine.md
-  - S-EXCH-02: S-EXCH-02-deposit-withdraw-wallet.md
-  - S-EXCH-03: S-EXCH-03-account-ledger.md
-  - S-EXCH-04: S-EXCH-04-futures-margin-liquidation.md
-  - S-EXCH-05: S-EXCH-05-risk-reconciliation.md
-  - S-EXCH-06: S-EXCH-06-dex-amm-liquidity.md
-  - S-EXCH-07: S-EXCH-07-aggregator-slippage.md
-  - S-EXCH-08: S-EXCH-08-mev-sandwich.md
-  - S-EXCH-09: S-EXCH-09-hybrid-cex-dex.md
-  - S-EXCH-10: S-EXCH-10-kline-event-aggregation.md
-  - S-EXCH-11: S-EXCH-11-websocket-market-hub.md
-  - S-EXCH-12: S-EXCH-12-token-launch-rebate.md
-  - S-EXCH-13: S-EXCH-13-cex-end-to-end-architecture.md
-  - S-EXCH-14: S-EXCH-14-web3-exchange-fullstack-architecture.md
-  - S-EXCH-15: S-EXCH-15-settlement-ha-disaster-recovery.md
-  - S-EXCH-16: S-EXCH-16-perpetual-matching-position.md
+  - "CEX 撮合引擎与订单簿架构": S-EXCH-01-cex-matching-engine.md
+  - "充值、提现与链上钱包体系": S-EXCH-02-deposit-withdraw-wallet.md
+  - "账户体系与资金账务（复式记账）": S-EXCH-03-account-ledger.md
+  - "合约交易：保证金、强平、资金费率": S-EXCH-04-futures-margin-liquidation.md
+  - "风控、反洗钱与对账体系": S-EXCH-05-risk-reconciliation.md
+  - "DEX AMM、流动性池与 LP 收益": S-EXCH-06-dex-amm-liquidity.md
+  - "DEX 聚合路由、滑点与 Gas 优化": S-EXCH-07-aggregator-slippage.md
+  - "MEV、抢跑与三明治攻击防护": S-EXCH-08-mev-sandwich.md
+  - "CEX 与 DEX 混合架构（CeDeFi）": S-EXCH-09-hybrid-cex-dex.md
+  - "链上成交事件驱动 K 线与行情聚合": S-EXCH-10-kline-event-aggregation.md
+  - "WebSocket 行情 Hub 与连接治理": S-EXCH-11-websocket-market-hub.md
+  - "Token 发行平台：毕业、分账与返佣提现": S-EXCH-12-token-launch-rebate.md
+  - "CEX 端到端交易系统架构（45 分钟白板）": S-EXCH-13-cex-end-to-end-architecture.md
+  - "Web3 交易所全栈架构（链上 DEX + 链下 Go）": S-EXCH-14-web3-exchange-fullstack-architecture.md
+  - "交易所清结算、对账与高可用架构": S-EXCH-15-settlement-ha-disaster-recovery.md
+  - "永续合约撮合与仓位引擎架构": S-EXCH-16-perpetual-matching-position.md

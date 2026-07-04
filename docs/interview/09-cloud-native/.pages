@@ -3,11 +3,11 @@ collapse: false
 collapse_single_pages: false
 nav:
   - index.md
-  - S-CLOUD-01: S-CLOUD-01-k8s-scheduling.md
-  - S-CLOUD-02: S-CLOUD-02-docker-multistage.md
-  - S-CLOUD-03: S-CLOUD-03-opentelemetry.md
-  - S-CLOUD-04: S-CLOUD-04-rolling-update-probes-pdb.md
-  - S-CLOUD-05: S-CLOUD-05-hpa-autoscaling.md
-  - S-CLOUD-06: S-CLOUD-06-ingress-gateway.md
-  - S-CLOUD-07: S-CLOUD-07-k8s-troubleshooting.md
-  - S-CLOUD-08: S-CLOUD-08-configmap-secret.md
+  - "Kubernetes 调度与 Go 服务资源 limit": S-CLOUD-01-k8s-scheduling.md
+  - "Docker 多阶段构建与 Go 镜像最佳实践": S-CLOUD-02-docker-multistage.md
+  - "OpenTelemetry 与 Go 可观测性接入": S-CLOUD-03-opentelemetry.md
+  - "滚动发布、探针与 PodDisruptionBudget": S-CLOUD-04-rolling-update-probes-pdb.md
+  - "HPA 与 Go 服务自定义指标扩缩容": S-CLOUD-05-hpa-autoscaling.md
+  - "Ingress、Gateway API 与南北向流量": S-CLOUD-06-ingress-gateway.md
+  - "K8s 故障排查：OOMKilled、CrashLoop 与 Evicted": S-CLOUD-07-k8s-troubleshooting.md
+  - "ConfigMap、Secret 与 Go 配置热更新": S-CLOUD-08-configmap-secret.md
