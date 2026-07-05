@@ -1,5 +1,4 @@
 title: 面试专题
-collapse: false
 nav:
   - 基础 · Go 语言与编码:
     - 01-runtime-concurrency

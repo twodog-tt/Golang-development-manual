@@ -26,7 +26,6 @@ theme:
   features:
     - navigation.sections
     - navigation.indexes
-    - navigation.expand
     - navigation.top
     - navigation.footer
     - search.suggest

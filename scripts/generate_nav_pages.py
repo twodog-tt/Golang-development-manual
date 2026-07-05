@@ -98,7 +98,6 @@ def write_module_pages(rel_dir: str, items: list[dict]) -> None:
 
     lines = [
         f"title: {title}",
-        "collapse: false",
         "collapse_single_pages: false",
         "nav:",
     ]
@@ -115,7 +114,7 @@ def write_module_pages(rel_dir: str, items: list[dict]) -> None:
 
 
 def write_interview_pages() -> None:
-    lines = ["title: 面试专题", "collapse: false", "nav:"]
+    lines = ["title: 面试专题", "nav:"]
     for group_title, modules in INTERVIEW_GROUPS:
         lines.append(f"  - {group_title}:")
         for mod in modules:
@@ -129,7 +128,6 @@ def write_interview_pages() -> None:
 def write_middleware_pages() -> None:
     lines = [
         "title: 中间件与数据库",
-        "collapse: false",
         "nav:",
         "  - index.md",
         "  - mysql",
