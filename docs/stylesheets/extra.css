@@ -1,5 +1,29 @@
 /* ── 可折叠侧边栏：分组标题与展开指示 ── */
 
+/*
+ * Material 在深层导航下会给「含活跃后代的祖先」打上 md-toggle--indeterminate，
+ * 但同级兄弟分组也会被误标 indeterminate，触发主题规则全部展开。
+ * 仅保留 :checked 或子树含当前页 (.md-nav__link--active) 的展开。
+ */
+@media screen and (min-width: 76.25em) {
+  .md-nav--primary
+    .md-nav__toggle.md-toggle--indeterminate:not(:checked)
+    ~ .md-nav:not(:has(.md-nav__link--active)) {
+    display: grid !important;
+    grid-template-rows: minmax(0rem, 0fr) !important;
+    opacity: 0 !important;
+    visibility: collapse !important;
+    pointer-events: none;
+  }
+
+  .md-nav--primary .md-nav__toggle:checked ~ .md-nav {
+    grid-template-rows: minmax(0.4rem, 1fr) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto;
+  }
+}
+
 /* 一级分组（Go 核心、中间件等）加粗，与叶子节点区分 */
 .md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav__link {
   font-weight: 600;

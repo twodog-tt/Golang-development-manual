@@ -38,6 +38,7 @@ extra_css:
   - stylesheets/mock-interview.css
 
 extra_javascript:
+  - javascript/nav-accordion.js
   - javascript/mock-interview.js
 
 plugins:
