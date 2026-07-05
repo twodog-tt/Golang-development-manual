@@ -576,6 +576,7 @@ p1:
       title: CEX 撮合引擎与订单簿架构
       frequency: 5
       status: published
+      resume_focus: true
       file: 14-dex-cex-engineering/S-EXCH-01-cex-matching-engine.md
     - id: S-EXCH-02
       title: 充值、提现与链上钱包体系

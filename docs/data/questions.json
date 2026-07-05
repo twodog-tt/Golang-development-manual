@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-03T13:51:22Z",
+  "generated_at": "2026-07-05T11:08:57Z",
   "count": 153,
   "questions": [
     {
@@ -849,9 +849,9 @@
       "frequency": 5,
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
-      "resume_focus": false,
+      "resume_focus": true,
       "url": "interview/14-dex-cex-engineering/S-EXCH-01-cex-matching-engine/",
-      "prompt": "CEX 核心 = **订单簿 + 撮合引擎**：价格优先、时间优先（Pro-Rata 等变体）。Go 负责 **API 接入、风控预检、持久化、行情推送**；撮合环可 **单线程 per symbol** 或 Rust/C++ 内核 + Go 编排。生产关键词：**幂等订单 ID、串行撮合、WAL 恢复**。"
+      "prompt": "CEX 现货核心 = **内存订单簿（Order Book）+ 单 symbol 单写者撮合循环**：**价格优先、时间优先**；支持限价/市价/IOC/FOK/Post-only 等。Go 常做 **OMS、风控预检、WAL 持久化、行情 fan-out**；撮合热路径 **无锁单线程 per symbol**（或 Rust/C++ 内核 + Go 编排）。生产关键词：**clientOrderId 幂等、串行撮合、先 WAL 再异步账务、depth 增量推送**。"
     },
     {
       "id": "S-EXCH-02",
