@@ -13,6 +13,8 @@ code_refs:
 sources:
   - https://go.dev/src/runtime/proc.go
   - https://go.dev/src/runtime/runtime2.go
+  - https://go.dev/s/go11sched
+  - https://golang.design/under-the-hood/en/part3concurrency/ch09sched/steal/
   - https://github.com/golang/go/issues/12416
   - https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-gmp/
 ---
@@ -269,28 +271,114 @@ flowchart TB
 | 阻塞在 `Read`/cgo | ✅（但会 handoff P） | ✅（本身就在阻塞） |
 | 把 G 放入全局队列 | ✅ | ✅（exitsyscall 路径） |
 
-### 本地 runq、全局 runq 与 Work Stealing
+### 本地 runq 结构（环形队列）
+
+P 的 `runq` 是 **长度 256 的环形数组**，用 `runqhead` / `runqtail` 维护：
+
+| 字段 | 含义 |
+|------|------|
+| `runqhead` | **队头** — 所有者 M 下次 `runqget` 取 G 的位置（FIFO 出队侧） |
+| `runqtail` | **队尾** — `runqput` 新 G 入队的位置 |
+| `runq[256]` | 固定容量；`t - h == 256` 时表示本地队列已满 |
+
+**所有者操作**：`runqput` 在 **tail** 入队；`runqget` 从 **head** 出队（另有高优先级 `runnext` 槽位，见 [S-CONC-01](./S-CONC-01-gmp-overview.md)）。
+
+### 本地 runq 满时：`runqputslow` 推一半到全局（源码级）
+
+当 `runqput` 发现 `t - h == 256` 无法再入队时，调用 **`runqputslow`**（`runtime/proc.go`）。这是「slow」的原因：需要 **`sched.lock` 全局锁**，批量转移而非逐个入全局队列。
+
+**结论（以 Go 1.22+ `runtime/proc.go` 为准）**：
+
+1. **移出的是从 `runqhead` 开始的前半段**（共 128 个 G），**不是**从 tail 开始的后半段。
+2. **留在本地的是靠近 tail 的后半段**（128 个 G），加上随后新 G 可继续入 tail。
+3. 触发溢出的 **新 G** 也一并进入本次 batch（共 **129** 个 G 进全局）。
+4. **顺序打乱**：仅当 **`randomizeScheduler`** 为真时执行（当前实现中 **`randomizeScheduler = raceenabled`**，即 **`-race` 检测构建** 才会 Fisher-Yates 洗牌）；**普通生产构建通常不打乱**。
+
+```mermaid
+flowchart TB
+  subgraph Before[本地 runq 已满 256 个 G]
+    direction LR
+    H[runqhead] --> F1[G0 最老]
+    F1 --> F2[G1 ...]
+    F2 --> Mid[...]
+    Mid --> B1[G127]
+    B1 --> B2[G128 ... 较新]
+    B2 --> T[runqtail]
+  end
+  subgraph Action[runqputslow]
+    A1["n = (t-h)/2 = 128"]
+    A2["batch[0..127] = runq[h..h+127] 前半段"]
+    A3["CAS runqhead: h → h+128"]
+    A4["batch[128] = 触发溢出的新 G"]
+    A5["-race 时 Fisher-Yates 洗牌 batch"]
+    A6["schedlink 串成链表 → globrunqputbatch"]
+  end
+  subgraph After[操作后]
+    LocalKeep["本地保留后半 128 个 靠近 tail"]
+    GlobalBatch["全局队列收到 129 个 G 的 batch"]
+  end
+  Before --> Action
+  Action --> After
+```
+
+**源码伪逻辑**（对应 `runqputslow`）：
+
+```go
+// runtime/proc.go — 仅 owner P 执行
+func runqputslow(pp *p, gp *g, h, t uint32) bool {
+    n := (t - h) / 2                    // 满队列时 n == 128
+    for i := uint32(0); i < n; i++ {
+        batch[i] = pp.runq[(h+i) % 256] // 从 head 起取前半段
+    }
+    atomic.CasRel(&pp.runqhead, h, h+n) // head 前移，后半段留本地
+    batch[n] = gp                       // 当前要入队的新 G
+
+    if randomizeScheduler {             // 仅 raceenabled 时为 true
+        for i := uint32(1); i <= n; i++ {
+            j := cheaprandn(i + 1)
+            batch[i], batch[j] = batch[j], batch[i] // Fisher-Yates
+        }
+    }
+    // batch[0]..batch[n] 用 schedlink 串链，globrunqputbatch 挂到全局 runq
+}
+```
+
+| 步骤 | 行为 | 面试易错点 |
+|------|------|------------|
+| 取哪一半 | **`runq[(h+i)]`，i=0..127** — **head 侧前半** | ❌ 常见误答「推 tail 后半段」 |
+| 本地剩什么 | **head 推进 128**，tail 不动 → **tail 侧后半留本地** | 与「推后半」说法相反 |
+| 新 G | 进入 `batch[n]`，随 batch 进全局 | 不是单独再入本地 |
+| 全局入队 | `schedlink` 链成 `gQueue`，`globrunqputbatch` 批量挂全局 | 需 `sched.lock`，故 slow |
+| 洗牌 | `-race` 下 Fisher-Yates 打乱 batch 顺序 | 生产默认可视为**保持 batch 内相对顺序** |
+
+**与经典 Cilk 双端队列对比**：Cilk 是 owner 一端 pop、thief 从**对端** steal；Go 的本地 runq 是 **FIFO 环形队列**，overflow 与 steal 都从 **head 侧取一半**（实现更简单，见 [Go: Under the Hood §9.2](https://golang.design/under-the-hood/en/part3concurrency/ch09sched/steal/)）。
+
+### Work Stealing 与全局兜底
 
 ```mermaid
 flowchart LR
-  NewG[go func 新建 G] -->|优先| Local[P.runq 本地队列]
-  Local -->|容量 256 满| PushHalf[推一半到全局]
-  PushHalf --> Global[(全局 runq)]
-  Local -->|M 从头部取| Exec[execute G]
-  Empty{本地空?} -->|是| Steal[偷其他 P 尾部约一半]
+  NewG[go func 新建 G] -->|优先 tail| Local[P.runq 本地队列]
+  Local -->|256 满| Slow[runqputslow 前半+新G → 全局]
+  Slow --> Global[(全局 runq)]
+  Local -->|head 出队| Exec[execute G]
+  Empty{本地空?} -->|是| GlobalFirst[每 61 tick 或取全局]
+  GlobalFirst --> Steal[runqsteal 偷他 P head 侧一半]
   Steal -->|偷到| Exec
-  Steal -->|未偷到| Global
-  Global -->|批量取| Exec
+  Steal -->|未偷到| Net[netpoller]
+  Global --> Exec
   Exec --> Empty
 ```
 
-| 策略 | 细节 | 面试考点 |
+**Work stealing**（`runqsteal` → `runqgrab`）：从受害者 P 的 **`runqhead` 侧取约一半**（同样 `n = (t-h) - (t-h)/2`），CAS 推进受害者 head；偷来的 G 挂到**窃取者本地 tail**，立即执行其中一个。这与 overflow 一样取的是 **head 前半**，不是 Cilk 式「从 tail 偷」。
+
+| 策略 | 细节 | 源码函数 |
 |------|------|----------|
-| **本地优先** | 新 G 入当前 P 的 runq 尾部 | 减少跨 P 迁移，缓存友好 |
-| **满则分流** | 本地满（256）时推一半到全局 | 避免单 P 过载 |
-| **所有者取头** | M 从本地队列**头部**取 G | FIFO 本地 |
-| **偷取取尾** | 空闲 P 从其他 P **尾部**偷约一半 | 降低与所有者的争用 |
-| **全局兜底** | 偷失败则取全局 runq | 新 P 创建、GOMAXPROCS 变化后 G 的归宿 |
+| **本地优先** | 新 G `runqput` 入 **tail** | `runqput` |
+| **满则分流** | **head 前半 128 + 新 G** → 全局 batch | `runqputslow` |
+| **所有者取头** | `runqget` 从 **head** FIFO 出队 | `runqget` |
+| **Work stealing** | 偷受害者 **head 侧一半**，写入自己 **tail** | `runqsteal` / `runqgrab` |
+| **全局公平** | 每 **61** 次调度 tick 优先看全局队列 | `findRunnable` |
+| **全局兜底** | 本地空且偷失败 → `globrunqget` | `findRunnable` |
 
 ### GOMAXPROCS 调小时 P 销毁流程
 
@@ -404,9 +492,10 @@ stateDiagram-v2
 5. **去掉 P 后 M 能跑 Go 代码吗？** → **不能**执行用户代码；只能 runtime / 等 acquirep。
 6. **syscall 时 G 去哪了？** → G 状态 `_Gsyscall`，M 无 P 阻塞；P 给其他 M。
 7. **exitsyscall 后拿不到 P 呢？** → G 改 `_Grunnable` 入全局队列，M park 或继续找活。
-8. **work stealing 偷哪一端？** → 偷其他 P **尾部**约一半；所有者从**头部**取。
-9. **GOMAXPROCS 从 8 改 4 会怎样？** → 销毁 P4–7，runq 中 G 迁全局，mcache flush。
-10. **netpoller 与 P 关系？** → 网络 G 等待不占 P；就绪后入队仍需 P 执行（[S-CONC-19](./S-CONC-19-netpoller.md)）。
+8. **work stealing 偷哪一端？** → 偷受害者 **head 侧约一半**（`runqgrab`）；所有者从 **head** 取；偷来的 G 挂到窃取者 **tail**（非 Cilk 双端 deque）。
+9. **本地 runq 满推哪一半到全局？** → **`runqputslow` 推 head 前半 128 个 + 新 G**；**tail 后半留本地**；`-race` 下 batch Fisher-Yates 洗牌。
+10. **GOMAXPROCS 从 8 改 4 会怎样？** → 销毁 P4–7，runq 中 G 迁全局，mcache flush。
+11. **netpoller 与 P 关系？** → 网络 G 等待不占 P；就绪后入队仍需 P 执行（[S-CONC-19](./S-CONC-19-netpoller.md)）。
 
 ## 反模式与事故
 
