@@ -22,7 +22,7 @@ sources:
 
 1. **是什么**：SLI 量化可靠性；SLO 对用户的承诺；错误预算允许「 planned 不可靠」换发布速度。
 2. **为什么**：100% 可用不现实且昂贵；需要数据驱动「能否发版、能否做 risky 变更」。
-3. **怎么做**：选关键路径 SLI（可用性、延迟）；28 天滚动窗口；Alert 用 burn rate 多窗口；预算 <20% 冻结非紧急发布。
+3. **怎么做**：选关键路径 SLI（可用性、延迟）；设滚动窗口；Alert 用多窗口 burn rate。是否在预算剩余 20% 时冻结发布属于团队 policy 示例，不是 SRE 公式的一部分。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -39,7 +39,7 @@ flowchart TB
 
 | SLI | 测量 | 典型 SLO |
 |-----|------|----------|
-| 可用性 | `2xx+3xx` / 总请求（或排除 4xx） | 99.9% |
+| 可用性 | 好事件 / 有效请求；按业务区分预期 4xx、限流和服务端失败 | 99.9% |
 | 延迟 | 请求 < 300ms 的比例 | 99% < 300ms |
 | 正确性 | 业务成功 / 总请求 | 99.99% |
 
@@ -119,8 +119,12 @@ func statusClass(code int) string {
         return "5xx"
     case code >= 400:
         return "4xx"
-    default:
+    case code >= 300:
+        return "3xx"
+    case code >= 200:
         return "2xx"
+    default:
+        return "other"
     }
 }
 ```

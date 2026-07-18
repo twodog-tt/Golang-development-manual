@@ -18,3 +18,9 @@ nav:
   - "Web3 交易所全栈架构（链上 DEX + 链下 Go）": S-EXCH-14-web3-exchange-fullstack-architecture.md
   - "交易所清结算、对账与高可用架构": S-EXCH-15-settlement-ha-disaster-recovery.md
   - "永续合约撮合与仓位引擎架构": S-EXCH-16-perpetual-matching-position.md
+  - "Go 可运行确定性撮合引擎：价格时间优先与订单语义": S-EXCH-17-runnable-deterministic-matching-engine.md
+  - "撮合 WAL、快照与确定性回放：崩溃一致性实战": S-EXCH-18-wal-snapshot-replay.md
+  - "行情序号、快照桥接与 Gap Recovery": S-EXCH-19-market-data-sequence-gap-recovery.md
+  - "FIX Session：序号、Resend、Gap Fill 与断线恢复": S-EXCH-20-fix-session-sequence-recovery.md
+  - "STP 自成交防护：撮合语义、账户边界与监控合规": S-EXCH-21-self-trade-prevention-surveillance.md
+  - "集合竞价与撮合性能验证：清算价、分配和 Benchmark": S-EXCH-22-call-auction-performance-validation.md

@@ -1,0 +1,24 @@
+{
+  "fixture_kind": "minimized-rest-contract",
+  "node_version": "1.47.1",
+  "chain_id": "4",
+  "hash": "0xabababababababababababababababababababababababababababababababab",
+  "expected_outcome": "SUCCEEDED",
+  "readiness": {
+    "chain_id": "4",
+    "epoch": "7",
+    "ledger_version": "100",
+    "oldest_ledger_version": "0",
+    "ledger_timestamp": "1700000000000000",
+    "block_height": "90",
+    "node_role": "validator"
+  },
+  "transaction": {
+    "type": "user_transaction",
+    "hash": "0xabababababababababababababababababababababababababababababababab",
+    "version": "99",
+    "success": true,
+    "vm_status": "Executed successfully"
+  }
+}
+

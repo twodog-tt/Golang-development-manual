@@ -10,5 +10,8 @@ nav:
     - 题源与引用: sources.md
     - 代码与题目映射: interview/_meta/mapping
     - 题目撰写模板: interview/_meta/template
+    - 角色优先级与证据: interview/_meta/role-priority-matrix
+    - P0 技术纠错审计: interview/_meta/technical-corrections-audit
     - 习题质量审查: interview/_meta/quality-review
+    - 知识图谱: interview/_meta/p0-knowledge-graph
 

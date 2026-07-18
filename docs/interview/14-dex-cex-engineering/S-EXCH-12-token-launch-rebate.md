@@ -20,7 +20,9 @@ sources:
 
 ## 30 秒版（开场）
 
-> **Launchpad + 内置 DEX** 后端 = 项目方发 Token → 曲线/池内交易 → **毕业（Graduated）** 迁到外盘（如 Pancake）→ **返佣结算** + **佣金提现（Withdrawal）**。链上事件驱动状态机；Go 管 **权限、风控、批量发放、Gas 监控**。
+> 在某些 bonding-curve Launchpad 中，“毕业”表示达到协议阈值后迁移或创建外部
+> 流动性池；这不是所有发币平台的通用标准。Go 后端应把 canonical 链上状态、
+> 产品规则版本、返佣账本和提现状态机分开，事件只是索引输入，不能忽略 reorg。
 
 ## 3 分钟版（一面深度）
 
@@ -48,20 +50,25 @@ stateDiagram-v2
 
 **返佣链路**
 
-1. 成交事件 → 计算邀请人比例 → 写 `rebate_pending`
-2. 定时批量上链或链下结算（产品规则）
-3. 失败重试 + `rebate_id` 幂等
+1. canonical 成交/结算事件 + 当时生效的 policy version → 生成确定性 `rebate_id`
+2. 在同一账务事务中写 append-only 返佣分录和待领取状态，金额使用定点整数
+3. 链上可采用用户 claim/Merkle root 或批量发放；链下可进入内部账本。两种模式都要
+   防重复 claim、支持冲正/重放，并绑定 root/epoch/policy version
 
 **提现风控**（与 [S-EXCH-05](./S-EXCH-05-risk-reconciliation.md) 联动）
 
 - 黑名单地址、单日额度、异常交易关联
-- Gas 费监控：批量发放前估算 `estimateGas`
+- Gas 费监控：批量发放前 estimate/simulate，但状态会变化，仍需 gas cap、
+  批次大小上限、失败拆批和链上执行结果核验
 
 ## 生产场景
 
-- **合约升级 UUPS**：[S-SOLID-04](../13-solidity-contracts/S-SOLID-04-upgradeable-proxy.md) 灰度迁移事件兼容
+- **合约升级 UUPS**：[S-SOLID-04](../13-solidity-contracts/S-SOLID-04-upgradeable-proxy.md)
+  通过 timelock/multisig、暂停演练和 ABI 兼容检查降低风险；同一 Proxy 的升级交易
+  生效后不是传统服务按流量比例灰度
 - **治理投票**：链上提案 + 索引投票权
-- **运营后台**：Admin-Serv 调 Operator 暂停交易
+- **运营后台**：后台只发起经 RBAC、双人复核/多签或 timelock 批准的操作；
+  Admin 服务不应持有可单点暂停、升级或转移资产的裸权限
 
 ## 追问链
 

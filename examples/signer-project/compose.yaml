@@ -1,0 +1,25 @@
+services:
+  softhsm-signer:
+    build:
+      context: .
+      dockerfile: docker/softhsm/Dockerfile
+    environment:
+      SOFTHSM2_TOKEN_DIR: /var/lib/softhsm/tokens
+      PKCS11_TOKEN_LABEL: signer-project
+      PKCS11_SO_PIN: "12345678"
+      PKCS11_USER_PIN: "123456"
+      PKCS11_OBJECT_ID: signer-project-p256
+      PKCS11_OBJECT_LABEL: signer-project-p256
+      SIGNER_DB: /var/lib/signer/fence.db
+      SIGNER_KEY_ID: softhsm-p256
+      SIGNER_OWNER: worker-hsm
+      SIGNER_EPOCH: "1"
+      SIGNER_REQUEST_ID: hsm-request-1
+      SIGNER_MESSAGE: hello SoftHSM2
+    volumes:
+      - softhsm_tokens:/var/lib/softhsm/tokens
+      - signer_state:/var/lib/signer
+
+volumes:
+  softhsm_tokens:
+  signer_state:

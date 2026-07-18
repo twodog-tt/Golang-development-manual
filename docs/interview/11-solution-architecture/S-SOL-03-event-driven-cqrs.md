@@ -18,7 +18,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **事件驱动**解耦生产者与消费者；**CQRS** 读写模型分离，支撑复杂查询与写路径优化。架构师必须讲清 **何时最终一致、Outbox 怎么保证至少一次、读模型延迟可接受否**。生产关键词：**领域事件、Transactional Outbox、幂等消费**。
+> **事件驱动**与 **CQRS** 是可独立采用的模式：CQRS 只要求命令模型与查询模型分离，不必然等于 Event Sourcing；事件驱动也不必然所有数据都最终一致。采用异步投影时，要讲清 outbox 的原子边界、至少一次投递、读模型新鲜度与读己之写。
 
 ## 3 分钟版（一面深度）
 
@@ -46,7 +46,7 @@ flowchart LR
 | 维度 | 请求驱动 | 事件驱动 |
 |------|----------|----------|
 | 耦合 | 同步依赖 | 时间解耦 |
-| 一致性 | 易强一致 | 最终一致 |
+| 一致性 | 同步调用不自动等于强一致 | 异步消费者通常形成最终一致窗口 |
 | 适用 | 实时反馈 | 通知、审计、读模型刷新 |
 
 **CQRS 何时上**
@@ -54,7 +54,7 @@ flowchart LR
 | 上 | 不上 |
 |----|------|
 | 读写比极端、查询模型复杂 | 简单 CRUD |
-| 多视图（C 端列表 vs B 端报表） | 强一致读自己的写 |
+| 多视图（C 端列表 vs B 端报表） | 必须无延迟读己之写且无法接受回源/等待投影 |
 | 与 Event Sourcing 配合审计 | 团队无 MQ 运维能力 |
 
 **Transactional Outbox（Go 伪代码）**
@@ -69,6 +69,8 @@ func (s *OrderService) Create(ctx context.Context, cmd CreateOrderCmd) error {
     })
 }
 ```
+
+Outbox 保证的是“业务状态与待发布事件意图”在同一个本地事务提交；relay 仍可能重复发送，消费者必须幂等。对外发布前还应区分内部领域事件与稳定的 integration event，避免把聚合内部结构直接泄露成长期契约。
 
 ## 生产场景
 
@@ -91,7 +93,7 @@ func (s *OrderService) Create(ctx context.Context, cmd CreateOrderCmd) error {
 
 ## 追问链
 
-1. **读己之写？** → 写后短 TTL 读主库 / 带 version 强制读新。
+1. **读己之写？** → 返回写模型结果；短时间回源写库；或让客户端携带 version，查询端等待投影达到该 version 后再返回/超时降级。
 2. **事件乱序？** → 分区键 order_id；版本号丢弃旧事件。
 3. **Outbox 堆积？** → Relay 扩容；监控 outbox 表深度。
 4. **和分布式事务？** → 优先 Saga + 事件，避免 2PC（[S-DIST-05](../middleware/distributed/S-DIST-05-distributed-transaction.md)）。
@@ -104,7 +106,7 @@ func (s *OrderService) Create(ctx context.Context, cmd CreateOrderCmd) error {
 
 ## 代码示例
 
-消费端幂等键：`consumer_id + event_id` 存 Redis/DB。
+消费端幂等键通常为 `consumer_id + event_id`；若消费同时更新数据库投影，应把 inbox 去重记录与投影更新放在同一个数据库事务，单独先写 Redis 仍会留下双写窗口。
 
 ## 延伸阅读
 

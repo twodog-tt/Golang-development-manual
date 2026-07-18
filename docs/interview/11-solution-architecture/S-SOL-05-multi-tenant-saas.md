@@ -23,7 +23,7 @@ sources:
 
 1. **是什么**：一套部署服务多个客户（tenant），逻辑或物理隔离数据与配置。
 2. **为什么**：B 端 SaaS、内部平台化面试高频；与 [S-AI-05 RAG ACL](../10-ai-engineering/S-AI-05-llm-security.md) 同属权限边界题。
-3. **怎么做**：请求入口解析 tenant（JWT claim / 子域名）；GORM scope 自动 `WHERE tenant_id=?`；敏感租户独立库。
+3. **怎么做**：从已认证身份与服务端映射解析 tenant，不能信任 body/query 自报；应用层 fail-closed scope + 数据库 RLS/复合键等纵深防御；需要更强隔离的租户可使用独立凭证、库、集群或部署。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -64,13 +64,16 @@ func WithTenant(ctx context.Context, id string) context.Context {
     return context.WithValue(ctx, tenantKey{}, id)
 }
 
-func TenantScope(db *gorm.DB, ctx context.Context) *gorm.DB {
-    tid, _ := ctx.Value(tenantKey{}).(string)
-    return db.Where("tenant_id = ?", tid)
+func TenantScope(db *gorm.DB, ctx context.Context) (*gorm.DB, error) {
+    tid, ok := ctx.Value(tenantKey{}).(string)
+    if !ok || tid == "" {
+        return nil, ErrMissingTenant // 缺 tenant 必须 fail closed
+    }
+    return db.Where("tenant_id = ?", tid), nil
 }
 ```
 
-中间件：每个 handler 从 JWT 取 `tenant_id`，**禁止**客户端 body 传 tenant 覆盖。
+中间件：从已完成 iss/aud/签名校验的身份中解析 tenant，并再次验证用户对 tenant 的 membership；禁止客户端 body 覆盖。仅靠开发者记得调用 scope 容易漏，关键表还应使用 RLS、带 tenant_id 的唯一键/外键与跨租户测试。
 
 ## 生产场景
 
@@ -90,20 +93,20 @@ func TenantScope(db *gorm.DB, ctx context.Context) *gorm.DB {
 |------------|------------|
 | 快 | 运维爆炸 |
 
-**演进路径**：共享表 → 大客户 silo → 混合（80% 共享 + 20% VIP 独立）。
+**演进路径**：可从共享表演进到部分租户 silo 的混合模式；比例由合规、噪声、成本与迁移能力决定。
 
 ## 追问链
 
 1. **子域名 tenant 解析？** → `acme.app.com` → tenant=acme；通配证书 + 网关路由。
 2. **跨 tenant 运营后台？** → 超级管理员 break-glass + 全审计。
-3. **缓存隔离？** → Redis key 前缀 `t:{id}:`。
-4. **MQ 隔离？** → topic 带 tenant 或 共享 topic + header filter。
+3. **缓存隔离？** → key 必须含 tenant 防碰撞，还要限制租户配额、保护管理命令和凭证；key 前缀本身不是访问控制。
+4. **MQ 隔离？** → 可按监管/规模选择独立 topic/cluster，或共享 topic 携带 tenant；消费者仍必须授权和校验，客户端 header filter 不是安全边界。
 
 ## 反模式与事故
 
 - **忘记 scope** → IDOR 看他人订单，架构师责任
 - **tenant_id 来自 query 参数** → 伪造
-- **共享连接串** → VIP 客户不接受
+- 宣称“独立库”却共享高权限凭证、备份和运维边界 → 实际隔离强度低于承诺
 
 ## 代码示例
 

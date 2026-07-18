@@ -17,12 +17,15 @@ sources:
 
 ## 30 秒版（开场）
 
-> **Foundry**（forge）是 Solidity 原生测试框架：**单元测试、fuzz、fork 主网、invariant**。架构师交付前跑 **Slither + 测试覆盖 + 审计 checklist**。与 Go 的 `go test` 文化对称（[S-BC-09](../12-blockchain-web3/S-BC-09-abigen-contract-bindings.md) 用 Go 测绑定）。
+> **Foundry**（forge）支持 **单元测试、fuzz、fork、invariant**。交付前要组合
+> 静态分析、属性测试、权限/升级演练、部署参数复核与人工审计。任何工具、覆盖率或
+> 审计报告都只能降低风险，不能证明合约“绝对安全”。
 
 ## 3 分钟版（一面深度）
 
 1. **是什么**：`forge test`、`forge script`、Solidity 写测试（cheatcodes）。
-2. **为什么**：链上不可 rollback；测试是最后防线。
+2. **为什么**：已最终确认的交易不能像普通数据库那样随意回滚，漏洞修复还受
+   upgradeability、治理和资产迁移约束；测试是多层防线之一，不是最后保证。
 3. **怎么做**：单测 + fuzz + 主网 fork 集成 + 外部审计。
 
 ## 10 分钟版（测试金字塔）
@@ -62,17 +65,22 @@ function testFuzz_Deposit(uint96 amount) public {
 
 **架构师审计清单（发布前）**
 
-- [ ] Slither 无 critical/high
-- [ ] 100% 关键路径单测 + fuzz
+- [ ] 对 Slither 等静态分析结果逐项 triage；“没有 high”不等于没有漏洞
+- [ ] 关键资产不变量、权限边界、失败路径有单测 + fuzz/invariant；覆盖率仅作缺口信号
 - [ ] 升级布局 validate（若 proxy）
-- [ ] 权限与 pause 机制
+- [ ] 权限、timelock/multisig、pause 与恢复流程
+- [ ] Oracle stale/decimals/sequencer、外部回调和经济攻击场景
 - [ ] 事件完整供 Go 索引
-- [ ] 文档：部署地址、角色、参数范围
+- [ ] pin solc、optimizer、via-IR、EVM target、依赖 commit、fork block 与部署参数
+- [ ] 文档：部署地址、chainId、实现/代理、角色、参数范围和验证方法
 
 ## 生产场景
 
-- CI：`forge test --via-ir` 与 solc 版本 pin
+- CI 使用与部署一致的 solc/optimizer/via-IR/EVM 配置；不能只在 CI 临时打开
+  `--via-ir` 而部署使用另一套字节码
 - 部署 script：`forge script` + multisig 执行
+- fork 测试固定 block number，并记录 RPC/链状态假设；“今天 fork 通过”不保证未来
+  外部协议版本仍兼容
 
 ## 追问链
 
@@ -84,7 +92,9 @@ function testFuzz_Deposit(uint96 amount) public {
 ## 反模式
 
 - **仅 happy path 测试**
-- **主网未 fork 测 DeFi 组合**
+- **把主网 fork 当成完整测试** → fork 只覆盖某个历史状态，仍需 mock、边界、
+  adversarial 与 invariant 测试
+- **把外部审计当免责保证** → 修复项、部署字节码和审计 commit 不一致仍会失效
 
 ## 代码示例
 

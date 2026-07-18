@@ -1,0 +1,10 @@
+title: 18 Web3 支付与稳定币
+collapse_single_pages: false
+nav:
+  - index.md
+  - "Web3 支付状态机、幂等、Webhook 与冲正": S-PAY-01-payment-state-idempotency-reversal.md
+  - "稳定币发行人控制、跨链转移与结算风险": S-PAY-02-stablecoin-issuer-crosschain-risk.md
+  - "Treasury、流动性与多链资金再平衡": S-PAY-03-treasury-liquidity-rebalancing.md
+  - "支付账本、清结算与三方对账": S-PAY-04-ledger-clearing-settlement-reconciliation.md
+  - "KYC/KYB、Travel Rule 与制裁筛查架构": S-PAY-05-compliance-travel-rule-sanctions.md
+  - "机构托管、DvP 清算、RWA 生命周期与 ISO 20022": S-PAY-06-institutional-custody-rwa-iso20022.md

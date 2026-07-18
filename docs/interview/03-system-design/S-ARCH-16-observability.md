@@ -56,7 +56,7 @@ flowchart LR
 
 **容量估算**
 
-- Trace 采样：100% 存储 10 万 QPS × 10 span × 1KB ≈ **1 GB/s** 不可承受 → **头部采样 1~10%** + 错误全采。
+- Trace 采样：100% 存储 10 万 QPS × 10 span × 1KB ≈ **1 GB/s** 不可承受。头采样可在入口提前控成本，但当时还不知道最终是否错误；若要优先保留错误/慢链路，应使用 Collector tail sampling，并为缓存完整 trace 的成本与丢弃策略做容量设计。
 - 日志：10 万 QPS × 500B/条 ≈ **50 MB/s**，需异步写 + 采样 debug。
 
 ## 生产场景
@@ -117,7 +117,8 @@ func HandleOrder(ctx context.Context, id int64) error {
 
     slog.InfoContext(ctx, "processing order",
         slog.Int64("order_id", id),
-        // trace_id 由 slog OTel handler 自动注入
+        // 标准 slog 不会自动注入 trace_id；
+        // 需自定义/第三方 OTel-aware Handler 从 ctx 提取 SpanContext。
     )
     return process(ctx, id)
 }

@@ -1,0 +1,36 @@
+{
+  "fixture_kind": "minimized-rpc-contract",
+  "node_version": "3.1.14",
+  "genesis_hash": "localnet-genesis-n-minus-1",
+  "expected_outcome": "SUCCEEDED",
+  "responses": {
+    "getHealth": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": "ok"
+    },
+    "getGenesisHash": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": "localnet-genesis-n-minus-1"
+    },
+    "getSignatureStatuses": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "context": {
+          "slot": 41
+        },
+        "value": [
+          {
+            "slot": 40,
+            "confirmations": 0,
+            "err": null,
+            "confirmationStatus": "confirmed"
+          }
+        ]
+      }
+    }
+  }
+}
+

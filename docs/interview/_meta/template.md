@@ -1,17 +1,23 @@
 ---
 id: S-MODULE-NNN
 title: 题目标题
-module: runtime-concurrency | memory-gc | system-design | distributed | database | network | leadership | coding | cloud-native | ai-engineering | solution-architecture | blockchain-web3 | solidity-contracts | dex-cex-engineering
+module: runtime-concurrency | memory-gc | system-design | distributed | database | postgresql | network | leadership | coding | cloud-native | ai-engineering | solution-architecture | blockchain-web3 | solidity-contracts | dex-cex-engineering | go-production-engineering | multichain-wallet | web3-payments-stablecoin | node-rpc-staking | protocol-consensus-security | security-engineering
 level: senior
 frequency: 5
 go_version: "1.22+"
 tags: []
 status: draft
+resume_focus: false
 code_refs: []
 sources: []
 ---
 
 # 题目标题
+
+> 新增题目后还要更新
+> [questions.yaml](./questions.yaml) 与
+> [role-evidence.yaml](./role-evidence.yaml)。岗位 P0/P1/P2 和证据标签以中央元数据为准，
+> 不在每篇正文重复维护；没有真实测试、localnet、硬件或生产验收时，不得写成“已验证”。
 
 ## 30 秒版（开场）
 
@@ -63,3 +69,12 @@ sources: []
 ## 延伸阅读
 
 - [标题](https://example.com)
+
+## 发布前自检
+
+- [ ] 30 秒版先说范围、不变量和失败边界，没有绝对化结论
+- [ ] 追问链至少覆盖一次“为什么不选另一个方案”
+- [ ] `sources` 优先官方规范、源代码或产品文档，并标明版本敏感点
+- [ ] SQL/配置/代码片段与目标版本一致
+- [ ] 有 `code_refs` 只代表关联 artifact；测试/harness/外部验收按中央证据标签声明
+- [ ] Staff/项目案例中的数字来自本人真实证据，模板数字使用占位符

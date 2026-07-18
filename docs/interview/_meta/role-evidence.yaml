@@ -1,0 +1,621 @@
+# 角色化优先级与证据标签的唯一事实源。
+#
+# 优先级计算：
+#   1. shared.p0 + role.p0 => 该岗位 P0
+#   2. shared.p1 + role.p1（扣除已进入 P0 的题）=> 该岗位 P1
+#   3. 其余 published 题 => 该岗位 P2
+#
+# questions.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
+
+schema_version: 1
+updated_at: "2026-07-17"
+default_priority: p2
+priority_precedence: [p0, p1, p2]
+
+shared:
+  p0:
+    - S-CONC-01
+    - S-CONC-05
+    - S-CONC-06
+    - S-CONC-08
+    - S-CONC-12
+    - S-CONC-13
+    - S-CONC-14
+    - S-CONC-18
+    - S-CONC-19
+    - S-MEM-01
+    - S-MEM-03
+    - S-MEM-04
+    - S-MEM-05
+    - S-MEM-06
+    - S-MEM-09
+    - S-MEM-10
+    - S-GOENG-01
+    - S-GOENG-02
+    - S-GOENG-03
+    - S-GOENG-04
+    - S-GOENG-05
+    - S-GOENG-06
+    - S-CODE-03
+    - S-CODE-04
+    - S-CODE-06
+    - S-CODE-07
+    - S-NET-06
+    - S-NET-07
+    - S-DB-06
+    - S-DB-07
+    - S-PG-02
+    - S-PG-03
+    - S-ARCH-04
+    - S-ARCH-05
+    - S-ARCH-10
+    - S-ARCH-12
+    - S-ARCH-16
+    - S-ARCH-17
+    - S-ARCH-18
+    - S-ARCH-20
+  p1:
+    - S-CONC-02
+    - S-CONC-03
+    - S-CONC-04
+    - S-CONC-07
+    - S-CONC-09
+    - S-CONC-10
+    - S-CONC-11
+    - S-CONC-15
+    - S-CONC-16
+    - S-CONC-17
+    - S-CONC-20
+    - S-MEM-02
+    - S-MEM-07
+    - S-MEM-08
+    - S-MEM-11
+    - S-MEM-12
+    - S-MEM-13
+    - S-MEM-14
+    - S-MEM-15
+    - S-ARCH-01
+    - S-ARCH-02
+    - S-ARCH-03
+    - S-ARCH-06
+    - S-ARCH-07
+    - S-ARCH-08
+    - S-ARCH-09
+    - S-ARCH-11
+    - S-ARCH-13
+    - S-ARCH-14
+    - S-ARCH-15
+    - S-ARCH-19
+    - S-CODE-01
+    - S-CODE-02
+    - S-CODE-05
+    - S-NET-01
+    - S-NET-02
+    - S-NET-03
+    - S-NET-04
+    - S-NET-05
+    - S-DB-01
+    - S-DB-02
+    - S-DB-03
+    - S-DB-04
+    - S-DB-05
+    - S-PG-01
+    - S-DIST-01
+    - S-DIST-02
+    - S-DIST-03
+    - S-DIST-04
+    - S-DIST-05
+    - S-KAFKA-01
+    - S-KAFKA-02
+    - S-KAFKA-03
+    - S-CLOUD-01
+    - S-CLOUD-03
+    - S-CLOUD-04
+    - S-CLOUD-07
+    - S-CLOUD-09
+    - S-CLOUD-10
+    - S-SEC-01
+    - S-SEC-03
+    - S-SEC-04
+    - S-LEAD-01
+
+roles:
+  senior_go_backend:
+    label: 资深 Go 后端
+    objective: 语言与运行时不失分，并能独立负责数据库、分布式系统和生产发布。
+    p0:
+      - S-CONC-02
+      - S-CONC-04
+      - S-CONC-15
+      - S-CONC-20
+      - S-MEM-12
+      - S-CODE-01
+      - S-CODE-02
+      - S-CODE-05
+      - S-NET-02
+      - S-DB-01
+      - S-DB-02
+      - S-DB-03
+      - S-PG-01
+      - S-DIST-02
+      - S-DIST-04
+      - S-KAFKA-02
+      - S-CLOUD-04
+      - S-CLOUD-07
+      - S-CLOUD-09
+      - S-CLOUD-10
+      - S-ARCH-08
+      - S-ARCH-09
+    p1:
+      - S-RMQ-01
+      - S-RMQ-02
+      - S-RMQ-03
+      - S-RMQ-04
+      - S-RAB-01
+      - S-ES-01
+      - S-ES-02
+      - S-ES-03
+      - S-CLOUD-02
+      - S-CLOUD-05
+      - S-CLOUD-06
+      - S-CLOUD-08
+      - S-MSVC-01
+      - S-MSVC-02
+      - S-MSVC-03
+      - S-MSVC-04
+      - S-MSVC-05
+      - S-MSVC-06
+      - S-SOL-01
+      - S-SOL-02
+      - S-SOL-03
+      - S-SOL-06
+      - S-SOL-08
+      - S-LEAD-02
+      - S-LEAD-03
+      - S-LEAD-04
+      - S-LEAD-05
+      - S-BC-01
+      - S-BC-02
+      - S-BC-05
+
+  wallet_custody:
+    label: 多链钱包与托管
+    objective: 保留链特有交易语义，并把签名、策略、恢复和资金生命周期讲成一个控制系统。
+    p0:
+      - S-WALLET-01
+      - S-WALLET-02
+      - S-WALLET-03
+      - S-WALLET-04
+      - S-WALLET-05
+      - S-WALLET-06
+      - S-WALLET-07
+      - S-WALLET-08
+      - S-WALLET-09
+      - S-WALLET-10
+      - S-WALLET-11
+      - S-BC-03
+      - S-BC-05
+      - S-BC-10
+      - S-BC-12
+      - S-SEC-01
+      - S-SEC-02
+      - S-SEC-04
+      - S-NODE-02
+      - S-NODE-05
+      - S-NODE-09
+      - S-PAY-03
+      - S-PAY-04
+      - S-PAY-05
+      - S-PROTO-04
+    p1:
+      - S-BC-01
+      - S-BC-02
+      - S-BC-04
+      - S-BC-07
+      - S-BC-08
+      - S-BC-09
+      - S-BC-11
+      - S-PAY-01
+      - S-PAY-02
+      - S-PAY-06
+      - S-NODE-01
+      - S-NODE-03
+      - S-NODE-04
+      - S-NODE-06
+      - S-NODE-07
+      - S-NODE-08
+      - S-NODE-10
+      - S-PROTO-01
+      - S-PROTO-02
+      - S-PROTO-03
+      - S-SOLID-01
+      - S-SOLID-02
+      - S-SOLID-03
+      - S-SOLID-04
+      - S-SOLID-06
+      - S-SOLID-08
+      - S-CLOUD-08
+      - S-LEAD-04
+      - S-LEAD-05
+
+  payments_stablecoin:
+    label: 支付与稳定币
+    objective: 串起支付状态机、账本、链确认、清结算、合规和机构资金边界。
+    p0:
+      - S-PAY-01
+      - S-PAY-02
+      - S-PAY-03
+      - S-PAY-04
+      - S-PAY-05
+      - S-PAY-06
+      - S-WALLET-01
+      - S-WALLET-06
+      - S-WALLET-07
+      - S-WALLET-11
+      - S-EXCH-02
+      - S-EXCH-03
+      - S-EXCH-05
+      - S-EXCH-15
+      - S-BC-03
+      - S-BC-05
+      - S-BC-10
+      - S-BC-12
+      - S-SEC-01
+      - S-SEC-02
+      - S-SEC-04
+      - S-NODE-02
+      - S-NODE-05
+      - S-SOL-03
+      - S-SOL-06
+    p1:
+      - S-WALLET-02
+      - S-WALLET-03
+      - S-WALLET-04
+      - S-WALLET-05
+      - S-WALLET-08
+      - S-WALLET-09
+      - S-WALLET-10
+      - S-EXCH-01
+      - S-EXCH-13
+      - S-EXCH-16
+      - S-BC-01
+      - S-BC-02
+      - S-BC-04
+      - S-BC-07
+      - S-BC-08
+      - S-BC-09
+      - S-BC-11
+      - S-NODE-01
+      - S-NODE-03
+      - S-NODE-04
+      - S-NODE-06
+      - S-NODE-07
+      - S-NODE-08
+      - S-NODE-10
+      - S-PROTO-01
+      - S-PROTO-03
+      - S-PROTO-04
+      - S-SOL-01
+      - S-SOL-02
+      - S-SOL-04
+      - S-SOL-05
+      - S-SOL-07
+      - S-SOL-08
+      - S-CLOUD-08
+      - S-LEAD-04
+      - S-LEAD-05
+
+  node_rpc_indexer:
+    label: 节点、RPC 与 Indexer
+    objective: 掌握节点生命周期、共识/最终性、canonical 数据、列存和跨版本兼容。
+    p0:
+      - S-NODE-01
+      - S-NODE-02
+      - S-NODE-03
+      - S-NODE-04
+      - S-NODE-05
+      - S-NODE-06
+      - S-NODE-07
+      - S-NODE-08
+      - S-NODE-09
+      - S-NODE-10
+      - S-BC-02
+      - S-BC-05
+      - S-BC-07
+      - S-BC-11
+      - S-BC-12
+      - S-PROTO-01
+      - S-PROTO-02
+      - S-PROTO-03
+      - S-PROTO-04
+      - S-WALLET-01
+      - S-WALLET-03
+      - S-WALLET-04
+      - S-WALLET-05
+      - S-WALLET-09
+      - S-WALLET-10
+      - S-WALLET-11
+      - S-SEC-01
+      - S-SEC-03
+      - S-SEC-04
+      - S-CLOUD-04
+      - S-CLOUD-07
+      - S-CLOUD-09
+      - S-CLOUD-10
+    p1:
+      - S-BC-01
+      - S-BC-03
+      - S-BC-04
+      - S-BC-08
+      - S-BC-09
+      - S-BC-10
+      - S-WALLET-02
+      - S-WALLET-06
+      - S-WALLET-07
+      - S-WALLET-08
+      - S-SEC-02
+      - S-SOLID-01
+      - S-SOLID-04
+      - S-SOLID-06
+      - S-SOLID-08
+      - S-CLOUD-02
+      - S-CLOUD-03
+      - S-CLOUD-05
+      - S-CLOUD-06
+      - S-CLOUD-08
+      - S-EXCH-10
+      - S-EXCH-11
+      - S-EXCH-19
+      - S-PAY-02
+      - S-PAY-03
+      - S-SOL-06
+      - S-SOL-07
+      - S-SOL-08
+      - S-LEAD-04
+      - S-LEAD-05
+
+  exchange_engineering:
+    label: 交易所工程
+    objective: 用确定性状态机贯通撮合、行情、账本、清算、风控、充提与恢复。
+    p0:
+      - S-EXCH-01
+      - S-EXCH-02
+      - S-EXCH-03
+      - S-EXCH-04
+      - S-EXCH-05
+      - S-EXCH-10
+      - S-EXCH-11
+      - S-EXCH-13
+      - S-EXCH-15
+      - S-EXCH-16
+      - S-EXCH-17
+      - S-EXCH-18
+      - S-EXCH-19
+      - S-EXCH-20
+      - S-EXCH-21
+      - S-EXCH-22
+      - S-MSVC-01
+      - S-MSVC-03
+      - S-MSVC-04
+      - S-MSVC-06
+      - S-PAY-04
+      - S-WALLET-01
+      - S-WALLET-06
+      - S-WALLET-07
+      - S-NODE-02
+      - S-NODE-05
+      - S-SEC-01
+      - S-SEC-02
+    p1:
+      - S-EXCH-06
+      - S-EXCH-07
+      - S-EXCH-08
+      - S-EXCH-09
+      - S-EXCH-12
+      - S-EXCH-14
+      - S-MSVC-02
+      - S-MSVC-05
+      - S-PAY-01
+      - S-PAY-03
+      - S-PAY-05
+      - S-PAY-06
+      - S-WALLET-02
+      - S-WALLET-03
+      - S-WALLET-08
+      - S-WALLET-09
+      - S-WALLET-10
+      - S-WALLET-11
+      - S-BC-03
+      - S-BC-05
+      - S-BC-07
+      - S-BC-10
+      - S-BC-12
+      - S-NODE-01
+      - S-NODE-03
+      - S-NODE-04
+      - S-NODE-07
+      - S-NODE-09
+      - S-NODE-10
+      - S-PROTO-01
+      - S-PROTO-03
+      - S-PROTO-04
+      - S-SEC-03
+      - S-SEC-04
+      - S-SOL-01
+      - S-SOL-03
+      - S-SOL-06
+      - S-SOL-07
+      - S-SOL-08
+      - S-CLOUD-08
+      - S-LEAD-04
+      - S-LEAD-05
+
+  staff_architect:
+    label: Staff / 后端架构师
+    objective: 证明跨团队技术战略、风险治理、渐进迁移和可量化组织影响力。
+    p0:
+      - S-LEAD-01
+      - S-LEAD-02
+      - S-LEAD-03
+      - S-LEAD-04
+      - S-LEAD-05
+      - S-SOL-01
+      - S-SOL-02
+      - S-SOL-03
+      - S-SOL-06
+      - S-SOL-07
+      - S-SOL-08
+      - S-ARCH-01
+      - S-ARCH-08
+      - S-ARCH-13
+      - S-ARCH-15
+      - S-ARCH-19
+      - S-CLOUD-04
+      - S-CLOUD-07
+      - S-CLOUD-09
+      - S-CLOUD-10
+      - S-SEC-01
+      - S-SEC-03
+      - S-SEC-04
+      - S-NODE-02
+      - S-NODE-04
+      - S-NODE-10
+      - S-PAY-04
+      - S-PAY-06
+      - S-EXCH-13
+      - S-EXCH-15
+      - S-MSVC-01
+      - S-MSVC-02
+      - S-MSVC-04
+      - S-PG-01
+    p1:
+      - S-SOL-04
+      - S-SOL-05
+      - S-CLOUD-01
+      - S-CLOUD-02
+      - S-CLOUD-03
+      - S-CLOUD-05
+      - S-CLOUD-06
+      - S-CLOUD-08
+      - S-SEC-02
+      - S-MSVC-03
+      - S-MSVC-05
+      - S-MSVC-06
+      - S-NODE-01
+      - S-NODE-03
+      - S-NODE-05
+      - S-NODE-06
+      - S-NODE-08
+      - S-NODE-09
+      - S-PAY-01
+      - S-PAY-02
+      - S-PAY-03
+      - S-PAY-05
+      - S-EXCH-01
+      - S-EXCH-03
+      - S-EXCH-04
+      - S-EXCH-05
+      - S-EXCH-16
+      - S-EXCH-17
+      - S-EXCH-18
+      - S-WALLET-01
+      - S-WALLET-06
+      - S-WALLET-07
+      - S-BC-07
+      - S-BC-11
+      - S-BC-12
+      - S-PROTO-01
+      - S-PROTO-02
+      - S-PROTO-03
+      - S-PROTO-04
+
+evidence:
+  basis:
+    default: source_anchored
+    labels:
+      source_anchored: 正文给出可回查资料；资料质量仍需结合 volatility 复核。
+      experience_pattern: 组织或案例题以可迁移的方法论为主，不能冒充本人经历。
+  reproducibility:
+    default: explanation_only
+    precedence:
+      - external_acceptance
+      - integration_harness
+      - deterministic_test
+      - illustrative_artifact
+      - explanation_only
+    derive_illustrative_artifact_from_nonempty_code_refs: true
+    deterministic_test:
+      - S-CODE-01
+      - S-CODE-02
+      - S-CODE-03
+      - S-CODE-04
+      - S-CODE-05
+      - S-CODE-06
+      - S-CODE-07
+      - S-BC-12
+      - S-EXCH-01
+      - S-EXCH-17
+      - S-EXCH-18
+      - S-EXCH-19
+      - S-EXCH-20
+      - S-EXCH-21
+      - S-EXCH-22
+      - S-WALLET-02
+      - S-PAY-01
+      - S-NODE-02
+      - S-NODE-07
+      - S-SEC-04
+    integration_harness:
+      - S-WALLET-07
+      - S-WALLET-08
+      - S-WALLET-09
+      - S-WALLET-10
+      - S-WALLET-11
+      - S-NODE-09
+      - S-SEC-02
+    external_acceptance: []
+    labels:
+      explanation_only: 只有结构化解释、SQL 或配置片段，不代表运行验收。
+      illustrative_artifact: 仓库存在关联代码或配置，未自动等价于测试通过。
+      deterministic_test: 存在不依赖外部服务的确定性测试或回放门禁。
+      integration_harness: 存在 localnet、testnet、HSM/MPC 或故障注入 harness；覆盖范围看正文。
+      external_acceptance: 有真实厂商、生产环境或外部系统的具名验收记录。
+  volatility:
+    default: stable
+    version_sensitive_prefixes:
+      - S-AI-
+      - S-BC-
+      - S-SOLID-
+      - S-WALLET-
+      - S-NODE-
+      - S-PROTO-
+      - S-CLOUD-
+    version_sensitive:
+      - S-CONC-04
+      - S-CONC-20
+      - S-PG-01
+      - S-PG-03
+      - S-SEC-03
+    vendor_or_regulatory_sensitive:
+      - S-PAY-02
+      - S-PAY-05
+      - S-PAY-06
+      - S-WALLET-07
+      - S-WALLET-11
+      - S-NODE-09
+      - S-SEC-02
+      - S-SEC-03
+      - S-SEC-04
+      - S-CLOUD-09
+      - S-CLOUD-10
+    labels:
+      stable: 核心机制相对稳定，仍以目标版本行为为准。
+      version_sensitive: 协议、运行时、SDK 或产品行为会随版本变化。
+      vendor_or_regulatory_sensitive: 还受厂商能力、地区规则或法律意见影响。
+
+experience_pattern:
+  - S-LEAD-01
+  - S-LEAD-02
+  - S-LEAD-03
+  - S-LEAD-04
+  - S-LEAD-05

@@ -32,7 +32,7 @@ sources:
 
 | 维度 | CPU profile | Execution trace |
 |------|-------------|-----------------|
-| 开销 | 低（~5% 可调） | 较高，短 capture |
+| 开销 | 通常较低，仍需在本服务压测 | 较高且数据量增长快，宜短 capture |
 | 粒度 | 函数/指令采样 | 事件级时间线 |
 | 擅长 | 热点、GC assist CPU | STW、调度延迟、block |
 | 可视化 | flame graph | trace viewer 时间条 |
@@ -56,7 +56,7 @@ flowchart TD
 **profile 关键视图**
 
 - **flat/cum**：谁耗 CPU。
-- 与 **mutex/block profile** 配合（需 `runtime.SetBlockProfileRate`）。
+- 与 **mutex/block profile** 配合：block profile 用 `runtime.SetBlockProfileRate`，mutex profile 用 `runtime.SetMutexProfileFraction`，两者不是同一个开关。
 
 ## 生产场景
 

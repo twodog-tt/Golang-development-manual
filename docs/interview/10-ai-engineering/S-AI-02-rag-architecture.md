@@ -18,11 +18,11 @@ sources:
 
 ## 30 秒版（开场）
 
-> **RAG（检索增强生成）** = 用户问题 → **Embedding 检索** 相关文档片段 → 拼进 Prompt → LLM 生成。生产关键词：**分块策略、Hybrid 检索、重排序 Rerank、引用溯源**。
+> **RAG（检索增强生成）** = 用户问题 → 检索相关资料 → 把受控上下文交给模型生成。检索可组合 dense embedding、BM25、metadata filter 和 rerank。RAG 能提高可追溯性与时效性，但不自动保证答案正确，也不能替代权限控制。
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：用外部知识库弥补模型幻觉与知识截止；检索层与生成层解耦。
+1. **是什么**：用外部知识库补充模型上下文，减少仅凭参数记忆回答；检索层与生成层解耦。
 2. **为什么**：企业文档私有、需可审计答案；纯微调成本高、更新慢。
 3. **怎么做**：Ingest（解析→分块→向量化→入库）+ Query（改写→召回→Rerank→组装 Prompt）；Go 常负责 **API 编排、任务队列、权限过滤**。
 
@@ -53,11 +53,14 @@ flowchart LR
 
 ```go
 func (s *RAGService) Answer(ctx context.Context, q string, userID string) (string, error) {
-    // 1. ACL：先按 userID 过滤可见 doc_id 集合
-    allowed := s.acl.VisibleDocIDs(ctx, userID)
+    // 1. ACL/tenant filter 必须进入检索查询，不能先全局 Top-K 再事后过滤。
+    filter, err := s.acl.SearchFilter(ctx, userID)
+    if err != nil {
+        return "", err
+    }
 
     // 2. 向量检索（可叠加 BM25 hybrid）
-    chunks, err := s.vector.Search(ctx, q, allowed, 20)
+    chunks, err := s.vector.Search(ctx, q, filter, 20)
     if err != nil { return "", err }
 
     // 3. Rerank（可选小模型或 cross-encoder）
@@ -86,22 +89,22 @@ func (s *RAGService) Answer(ctx context.Context, q string, userID string) (strin
 | 向量库 | 适用 |
 |--------|------|
 | Elasticsearch | 已有 ES、要 Hybrid 全文+向量 |
-| pgvector | 数据量中小、事务一致 |
-| Milvus/Qdrant | 纯向量、亿级规模 |
+| pgvector | 希望与 PostgreSQL 数据、事务和运维体系共存；容量取决于索引与集群设计 |
+| Milvus/Qdrant | 独立向量检索系统，适合需要专门扩展与索引能力的场景 |
 
 **何时不用 RAG**：强实时数据（用 API 查库）；极小知识集（直接塞进 system prompt）。
 
 ## 追问链
 
 1. **Embedding 模型换了怎么办？** → 全量 re-embed；双写过渡期。
-2. **怎么防幻觉？** → 要求「仅根据上下文回答」+ 无上下文拒答 + 引用段落。
+2. **怎么降低无依据回答？** → 检索质量评估、无足够证据时拒答、引用可核验片段、结构化事实校验；一句“仅根据上下文”不是安全保证。
 3. **长文档表格怎么处理？** → 结构化抽取或 HTML 表转 Markdown 再分块。
 4. **和微调怎么选？** → 风格/格式用微调；事实知识用 RAG。
 
 ## 反模式与事故
 
 - **chunk 无元数据** → 无法做权限过滤，**数据泄露**
-- **检索 Top-1** → 召回不足；一般 Top-10 再 Rerank 到 3～5
+- 机械固定 Top-K → 不同问题、chunk 大小和模型预算需要不同候选数；用离线评估与 token budget 调参
 - **query 不改写** → 口语化问题检索差；可加 HyDE 或 query expansion
 - **ingest 与线上 embedding 模型不一致** → 检索几乎随机
 

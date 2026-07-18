@@ -2,6 +2,7 @@
 package ratelimit
 
 import (
+	"context"
 	"sync"
 	"time"
 )
@@ -15,6 +16,7 @@ type TokenBucket struct {
 	lastRefill time.Time
 }
 
+// NewTokenBucket 对编程错误使用 panic；生产库也可改成返回 (*TokenBucket, error)。
 func NewTokenBucket(ratePerSec float64, burst int) *TokenBucket {
 	if ratePerSec <= 0 || burst <= 0 {
 		panic("ratelimit: rate and burst must be positive")
@@ -52,9 +54,54 @@ func (tb *TokenBucket) Allow() bool {
 	return true
 }
 
-// Wait 阻塞直到获得令牌或 ctx 取消（生产可用 time.Timer + select）。
-func (tb *TokenBucket) Wait() {
-	for !tb.Allow() {
-		time.Sleep(time.Millisecond)
+// Wait 阻塞直到获得一个令牌或 ctx 取消。
+func (tb *TokenBucket) Wait(ctx context.Context) error {
+	if ctx == nil {
+		panic("ratelimit: nil context")
 	}
+
+	for {
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		default:
+		}
+
+		wait := tb.takeOrDelay()
+		if wait == 0 {
+			return nil
+		}
+
+		timer := time.NewTimer(wait)
+		select {
+		case <-timer.C:
+		case <-ctx.Done():
+			if !timer.Stop() {
+				select {
+				case <-timer.C:
+				default:
+				}
+			}
+			return ctx.Err()
+		}
+	}
+}
+
+// takeOrDelay 在令牌可用时消费一个令牌，否则返回理论等待时间。
+// 多个 waiter 醒来后仍需重新竞争和计算。
+func (tb *TokenBucket) takeOrDelay() time.Duration {
+	tb.mu.Lock()
+	defer tb.mu.Unlock()
+
+	tb.refill()
+	if tb.tokens >= 1 {
+		tb.tokens--
+		return 0
+	}
+
+	wait := time.Duration((1 - tb.tokens) / tb.rate * float64(time.Second))
+	if wait <= 0 {
+		return time.Nanosecond
+	}
+	return wait
 }

@@ -2,4 +2,4 @@ title: 分布式事务
 collapse_single_pages: false
 nav:
   - index.md
-  - "分布式事务 TCC/Saga 对比": S-DIST-05-distributed-transaction.md
+  - "分布式事务 TCC vs Saga": S-DIST-05-distributed-transaction.md

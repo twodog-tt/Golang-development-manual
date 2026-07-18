@@ -1,6 +1,6 @@
 # 12 区块链与 Web3
 
-10 题 | P1 扩展（Web3 / 链上后端 JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
+12 题 | P1 扩展（Web3 / 链上后端 JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
 
 > 面向 **Go 后端** 做链上数据索引、钱包、DApp 中台、交易所/ NFT 业务；偏 **工程落地**，非密码学研究员方向。
 
@@ -16,6 +16,8 @@
 | [S-BC-08](./S-BC-08-erc4337-account-abstraction.md) | Account Abstraction ERC-4337 | ⭐⭐⭐⭐ |
 | [S-BC-09](./S-BC-09-abigen-contract-bindings.md) | go-ethereum abigen 完整实战 | ⭐⭐⭐⭐⭐ |
 | [S-BC-10](./S-BC-10-mpc-tss-custody.md) | MPC/TSS 与 CEX 托管签名 | ⭐⭐⭐⭐⭐ |
+| [S-BC-11](./S-BC-11-rollup-finality-da-proof-security.md) | Rollup Finality、DA、证明与强制退出 | ⭐⭐⭐⭐⭐ |
+| [S-BC-12](./S-BC-12-cross-chain-message-bridge-security.md) | 跨链消息认证、重放与限额 | ⭐⭐⭐⭐⭐ |
 
 ## 可运行代码
 
@@ -23,6 +25,7 @@
 |-------|------|------|
 | S-BC-02 | `examples/senior/ethrpc/` | `go test ./examples/senior/ethrpc/...` |
 | S-BC-09 | `examples/senior/erc20bind/` | `go test ./examples/senior/erc20bind/...` |
+| S-BC-12 | `examples/senior/bridgeguard/` | `go test -race ./examples/senior/bridgeguard/...` |
 
 ## 适用场景
 
@@ -32,4 +35,5 @@
 
 ## 推荐刷题顺序
 
-EVM → RPC → 签名 → ABI 理论 → **abigen 实战** → 索引器 → L2/桥 → 4337 → DeFi 架构
+EVM → RPC → 签名 → ABI 理论 → **abigen 实战** → 索引器 → L2 概览 →
+**Rollup 安全边界** → **跨链消息安全** → 4337 → DeFi 架构

@@ -15,18 +15,17 @@ sources:
   - https://go.dev/doc/effective_go#goroutines
   - https://github.com/golang/proposal/blob/master/design/24543-non-cooperative-preemption.md
   - https://go.dev/doc/go1.14
-  - https://go.dev/doc/go1.21
 ---
 
 # GMP 模型与 1.14 以来抢占式调度
 
 ## 30 秒版（开场）
 
-> Go 调度器 = **G（goroutine 任务）+ M（OS 线程）+ P（逻辑处理器 / 本地 runq）** 的 M:N 模型：**海量 G 复用少量 M**，真正并行度由 **`GOMAXPROCS` = P 数量** 决定。**1.14 前**主要靠函数边界**协作式**让出；**1.14+** 用 `SIGURG` 在 safe-point **异步抢占** CPU 密集循环；**1.21+** 收紧无函数调用的循环抢占。生产关键词：**work stealing、syscall 时 P handoff、mark assist 与调度协同**。
+> Go 调度器 = **G（goroutine 任务）+ M（OS 线程）+ P（逻辑处理器 / 本地 runq）** 的 M:N 模型：海量 G 复用一组 M，真正执行 Go 代码的并行上限由 **`GOMAXPROCS` = 活跃 P 数**决定。Go 1.14+ 引入异步抢占，改善无函数调用的 CPU 热循环长期占用 P；Unix 类系统常用信号实现，但这是平台相关的 runtime 细节。
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：GMP 是 Go runtime 的三层调度抽象。G 是用户态协程（~2KB 起栈，见 [S-CONC-03](./S-CONC-03-goroutine-stack.md)）；M 是跑在 CPU 上的内核线程；P 是「工牌」——持有本地运行队列 `runq`（容量 256）、`mcache`（小对象分配缓存），**无 P 的 M 不能执行 Go 用户代码**。
+1. **是什么**：GMP 是 Go runtime 的三层调度抽象。G 是用户态协程（~2KB 起栈，见 [S-CONC-03](./S-CONC-03-goroutine-stack.md)）；M 对应 OS 线程；P 是「工牌」——持有本地运行队列 `runq`（当前实现容量 256）、`mcache` 等资源，**无 P 的 M 不能执行 Go 用户代码**。
 2. **为什么**：线程切换走内核、栈 MB 级，无法承载百万连接；P 的本地队列 + work stealing 降低全局锁竞争，比单纯 G-M 模型更易扩展（详见 [S-CONC-02](./S-CONC-02-gmp-roles.md)）。
 3. **怎么做**：调度循环从 P 的 `runq` 取 G 执行；本地空则偷其他 P 或全局队列；阻塞 syscall 时 M 与 P 解绑、P 移交；网络 IO 走 netpoller 不占 P 忙等（[S-CONC-19](./S-CONC-19-netpoller.md)）；GC 与抢占 tick 触发重新调度。
 
@@ -79,7 +78,7 @@ flowchart TB
 |----------|------|
 | M 执行 Go 代码 | 必须先 `acquirep` 绑定某个 P |
 | G 运行 | 挂在某个 M 上，且该 M 已绑 P |
-| P 与 M | 多对一（某时刻一个 P 最多绑一个 M） |
+| P 与 M | 某一时刻一个 P 至多绑定一个 M，一个 M 也至多绑定一个 P；绑定关系会随调度变化 |
 | M 与 G | 一对多（M 切换执行不同 G） |
 
 ### G 状态机（调度视角）
@@ -149,8 +148,8 @@ flowchart TD
 flowchart LR
   subgraph P1[P₁ runq 满 256]
     direction TB
-    H1[头部: 本 M 取用]
-    T1[尾部: 被偷取]
+    H1[head: owner 取用 / thief CAS 偷取]
+    T1[tail: owner 放入新 G]
   end
   subgraph P2[P₂ runq 空]
     direction TB
@@ -159,7 +158,7 @@ flowchart LR
   Global[(全局 runq)]
   NewG[新 G] -->|优先| P1
   NewG -->|本地满 推一半| Global
-  P2 -->|steal 从尾部偷一半| T1
+  P2 -->|steal 从 head 侧 CAS 取约一半| H1
   P2 -->|仍空| Global
   H1 --> M1[M₁ 执行]
 ```
@@ -168,7 +167,7 @@ flowchart LR
 |------|------|
 | **本地优先** | 减少缓存失效；同 P 上连续执行相关 G |
 | **全局兜底** | 本地满时批量转移，避免单 P 过载 |
-| **偷取** | 从**其他 P 队列尾部**偷约一半，降低与所有者竞争 |
+| **偷取** | 当前实现从受害 P 的 **head 侧** CAS 取约一半；owner 也从 head 取，因此并非经典 Cilk 的双端 deque |
 | **FIFO 本地** | 所有者从头部取；新 G 入尾部 |
 
 ### 阻塞 Syscall 时 P 移交（handoff）
@@ -179,14 +178,13 @@ sequenceDiagram
   participant M as M 线程
   participant P as P 逻辑处理器
   participant M2 as 其他 M
-  participant P2 as 其他 P
 
   G->>M: 进入阻塞 syscall
   M->>M: entersyscall
   M->>P: 解绑 P handoff
   P->>M2: 唤醒或交给空闲 M
   M2->>P: acquirep
-  M2->>P2: 继续执行 runq 中其他 G
+  M2->>P: 继续执行该 P.runq 中其他 G
   Note over M: M 阻塞在内核，无 P
   M->>M: syscall 返回 exitsyscall
   M->>P: 尝试重新 acquirep
@@ -210,7 +208,7 @@ flowchart TB
   end
   subgraph After[1.14+ — 异步抢占]
     A1[sysmon 检测运行过久]
-    A1 --> A2[向 M 发 SIGURG]
+    A1 --> A2[请求异步抢占]
     A2 --> A3[在安全点插入抢占]
     A3 --> A4[G 变 runnable 重新调度]
   end
@@ -220,18 +218,17 @@ flowchart TB
 | 版本 | 抢占方式 | 让出点 | 典型问题 |
 |------|----------|--------|----------|
 | **< 1.14** | 协作式 | 函数调用、channel、锁、GC safe-point | 大循环饿死同 P 其他 G |
-| **1.14～1.20** | **异步抢占**（`SIGURG`） | 栈扫描 safe-point + 原协作点 | cgo/汇编边界延迟抢占 |
-| **1.21+** | 收紧循环抢占 | 更多无调用循环场景 | 仍非硬实时 |
-| **1.22+** | 持续演进 | 与 GC、栈增长协同 | unsafe 长临界区仍危险 |
+| **1.14+** | **异步抢占**（Unix 类系统常用信号） | 异步安全点 + 原协作点 | 外部 C 代码、部分汇编/runtime 临界区仍不能按普通 Go 代码抢占 |
 
-**安全点（safe-point）**：GC 与抢占需要能安全扫描栈、切换 G 的代码位置；**无 safe-point 的热循环**历史上是抢占盲区，1.21 后显著改善。
+**安全点（safe-point）**：GC 与抢占需要能安全扫描栈、切换 G 的代码位置；Go 1.14 的异步抢占显著缩小了纯计算循环的抢占盲区，但 Go 调度仍不是硬实时调度。
 
 **不能完全抢占的情况（面试加分）**
 
-- 长时间持有 **runtime 内部锁**（如部分 map 写路径历史问题）
-- **cgo** 执行期间
-- **汇编** 无栈帧信息代码
-- `runtime.LockOSThread` 绑死 M 的 G
+- runtime 的 `nosplit`/关键临界区
+- 正在执行的 **C/外部代码**；该 M 不受 Go 调度器直接抢占，但调用通常会释放 P 供其他 M 使用
+- 缺少可用栈图或异步安全点的 **汇编代码**
+
+`runtime.LockOSThread` 只固定 G 与 M 的绑定，本身并不等于“该 G 不可抢占”。
 
 ### 抢占时序（1.14+ 简化）
 
@@ -247,7 +244,7 @@ sequenceDiagram
     Sys->>G: 运行时间超阈值?
   end
   Sys->>RT: 请求抢占
-  RT->>M: pthread_kill SIGURG
+  RT->>M: Unix 类系统可用 pthread_kill/SIGURG
   M->>M: 信号处理进入 runtime
   M->>G: 当前 PC 可 safe-point?
   alt 是
@@ -339,7 +336,7 @@ runtime.GOMAXPROCS(8)              // 设置 P 数量上限
 3. **1.14 前后抢占差异？** → 协作式仅边界让出；异步抢占覆盖长循环。
 4. **syscall 时发生什么？** → M 阻塞，P handoff，避免占槽（见 handoff 图）。
 5. **GOMAXPROCS=1 还能并发吗？** → CPU 并行度为 1；IO 阻塞时其他 G 可上 P。
-6. **work stealing 偷哪一端？** → 偷**其他 P 尾部**，所有者从**头部**取，减少争用。
+6. **work stealing 偷哪一端？** → 当前实现从受害 P 的 **head 侧** CAS 取约一半；所有者也从 head 取，细节以对应 Go 版本源码为准。
 7. **sysmon 做什么？** → 监控抢占、netpoll、GC 触发、释放闲置 P 等。
 8. **netpoller 与调度的关系？** → 网络 G 等待不占 P；就绪后入队等 P 执行（[S-CONC-19](./S-CONC-19-netpoller.md)）。
 9. **mark assist 会停调度吗？** → 不停世界；在运行中插入标记工作，分配多 assist 重。

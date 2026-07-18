@@ -18,11 +18,15 @@ sources:
 
 ## 30 秒版（开场）
 
-> **Netpoller** 用 epoll/kqueue/IOCP 把 **网络 IO** 与调度器集成：socket 未就绪时 G 挂起不占 P 忙等，就绪后变 runnable。**纯阻塞 syscall**（文件 IO、部分 DNS）仍会占 M。生产关键词：**goroutine 多但线程不多靠 netpoller；阻塞 IO 要线程池或异步**。
+> **Netpoller** 用 epoll/kqueue/IOCP 等平台后端把可轮询 **网络 IO** 与调度器集成：
+> socket 未就绪时 G 挂起并释放 P，就绪后变 runnable。**纯阻塞 syscall** 可能让执行它的
+> M 阻塞；runtime 通常会把 P 交给别的 M，但线程资源并没有被 netpoll 消除。生产关键词：
+> **网络等待 G 不等于一连接一线程；磁盘、cgo 和 resolver 路径要单独限并发**。
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：runtime 与 `internal/poll` 协作的网络轮询器，默认 edge-triggered。
+1. **是什么**：runtime 与 `internal/poll` 协作的网络轮询器。Linux 当前实现使用 epoll
+   的 edge-triggered 模式，其他平台后端和细节不同；这不是 `net.Conn` API 契约。
 2. **为什么**：数万连接若每连接阻塞一线程，M 爆炸；非阻塞 + 多路复用复用少量线程。
 3. **怎么做**：`net` 包底层 `pollDesc`；Read/Write 遇 `EAGAIN` 则 `gopark` 注册 poll；就绪 `netpoll` 唤醒 G。
 
@@ -31,14 +35,14 @@ sources:
 ```mermaid
 sequenceDiagram
   participant G as Goroutine
-  participant P as netpoller
+  participant NP as netpoller
   participant K as kernel
   G->>K: non-blocking read
   K-->>G: EAGAIN
-  G->>P: park on pollDesc
+  G->>NP: park on pollDesc
   Note over G: G waiting, P released
-  K->>P: fd ready
-  P->>G: unpark runnable
+  K->>NP: fd ready
+  NP->>G: unpark runnable
 ```
 
 **走 netpoller 的**：TCP/UDP `net.Conn`、accept、常见 listen。
@@ -47,14 +51,17 @@ sequenceDiagram
 
 - 普通文件 `os.File` Read/Write（部分平台用 thread pool 模拟，实现因 OS 而异）
 - 无 `SetNonblock` 的自定义 fd
-- 部分 cgo / 同步 DNS（可用 `net.Resolver` 纯 Go 或异步）
+- cgo 阻塞调用；DNS 是否走纯 Go resolver 或 cgo resolver 取决于平台、构建和配置，不能
+  只看到 `net.Resolver` 就断言不会占线程
 
 **syscall 与 P**：阻塞 syscall → `entersyscall` → P handoff；netpoller 路径短阻塞，很快返回。
 
 ## 生产场景
 
-- **C10K 网关**：百万 G，线程数 ~GOMAXPROCS+少量，靠 netpoller。
-- **同步读大文件**：每请求 `go` + `ioutil.ReadFile`，M 涨、吞吐差 → 改 `io.Copy` 或限流。
+- **C10K 网关**：大量等待网络的 goroutine 不需要一一对应 OS 线程；实际线程数还受
+  syscall、cgo、GC、profiling 和 runtime 后台线程影响，不能背成固定
+  `GOMAXPROCS + N`。
+- **同步读大文件**：每请求 `go` + `os.ReadFile` 仍会占用执行阻塞文件 IO 的 M；优先限制磁盘并发。文件直传 socket 时可评估 `io.Copy`/sendfile 降低用户态拷贝，但它不把普通磁盘 IO 自动变成 netpoller 异步 IO。
 - **故障**：fd 泄漏 → netpoller 注册数涨，最终 `too many open files`。
 
 ## 排查与工具
@@ -75,7 +82,9 @@ sequenceDiagram
 ## 追问链
 
 1. **netpoller 与 select？** → 不同层；net 在 poll 层，select 是 chan。
-2. **边缘触发丢事件？** → runtime 处理 level/edge 细节，应用无感。
+2. **边缘触发会不会丢事件？** → Linux runtime 必须把非阻塞 FD 消耗到 `EAGAIN` 并正确
+   维护 poll 状态；`net.Conn` 用户得到阻塞式 API，但自定义 FD/`SyscallConn` 代码不能
+   假设 runtime 会替错误的读写循环兜底。
 3. **Deadline 如何实现？** → poll 注册 timer，超时唤醒。
 4. **Listen backlog 满？** → 与 netpoller 无关，accept 仍调度。
 5. **文件 netpoller 未来？** → io_uring 等逐步改进（关注 Go release）。

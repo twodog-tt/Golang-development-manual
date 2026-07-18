@@ -22,7 +22,7 @@ sources:
 
 1. **是什么**：版本 = 契约演进；灰度 = 按比例/用户切新版本；Flag = 配置中心控制功能开闭。
 2. **为什么**：大爆炸发布风险高；A/B 实验；紧急关功能比回滚镜像快。
-3. **怎么做**：Additive 变更优先；双写/read fallback；K8s Argo Rollouts/ Istio 权重；LaunchDarkly/自研 Flag 服务 + 缓存。
+3. **怎么做**：Additive 变更优先，但新增字段也可能破坏严格反序列化客户端，仍需契约测试；数据迁移采用 expand-migrate-contract；Argo Rollouts/Istio 控流；Flag 服务定义安全默认值、owner 和清理日期。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -62,7 +62,7 @@ flowchart LR
 
 **容量估算**
 
-- 灰度 10% 到 100 Pod 集群 → 先 **10 Pod 新版本**，错误率采样需足够（至少 1 万请求/5min）。
+- “10% 流量”不等于“恰好 10% Pod”：副本数由容量与故障冗余决定，路由权重由网关/mesh 控制。样本量应按基线错误率、允许回归幅度和统计置信度计算，不能固定背 1 万请求。
 
 ## 生产场景
 
@@ -92,7 +92,7 @@ flowchart LR
 
 1. **破坏性变更怎么发？** → 新版本 endpoint；旧版只增不删字段；deprecation 周期。
 2. **灰度失败自动回滚条件？** → 5xx 率 > 基线 2 倍或 P99 > SLO。
-3. **Flag 太多怎么办？** → 定期清理；技术债 sprint；Flag 默认 off。
+3. **Flag 太多怎么办？** → 定期清理并设 owner/expiry；失败默认应回到已验证的安全行为，不是所有类型都机械地 default off。
 4. **Go 如何读 Flag？** → 启动拉配置 + 长轮询/Watch；本地 atomic.Value 缓存。
 5. **客户端版本和 API 版本？** → Mobile 强绑 App 版本；后端需多版本共存。
 
@@ -117,6 +117,7 @@ func (f *FeatureFlags) Enabled(key string) bool {
 
 func (f *FeatureFlags) Watch(ctx context.Context, pull func() map[string]bool) {
     t := time.NewTicker(10 * time.Second)
+    defer t.Stop()
     for {
         select {
         case <-ctx.Done():

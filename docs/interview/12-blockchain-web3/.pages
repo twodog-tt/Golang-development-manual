@@ -12,3 +12,5 @@ nav:
   - "Account Abstraction ERC-4337 与 Go 后端": S-BC-08-erc4337-account-abstraction.md
   - "go-ethereum abigen 完整合约调用实战": S-BC-09-abigen-contract-bindings.md
   - "MPC/TSS 与 CEX 托管签名架构": S-BC-10-mpc-tss-custody.md
+  - "Rollup 安全边界：Finality、数据可用性、证明与强制退出": S-BC-11-rollup-finality-da-proof-security.md
+  - "跨链消息与桥安全：认证、重放、限额与故障恢复": S-BC-12-cross-chain-message-bridge-security.md

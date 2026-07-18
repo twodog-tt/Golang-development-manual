@@ -76,7 +76,7 @@ flowchart LR
 ### K8s Headless 示例（口述）
 
 - `matching-svc` Headless：`dns:///matching-svc.trading.svc.cluster.local`
-- Go `grpc.Dial` + `round_robin` 负载到各撮合 Pod（每 Pod 负责 symbol 子集时改 **自定义 resolver**）
+- Go `grpc.NewClient` + `round_robin` 负载到各撮合 Pod（每 Pod 负责 symbol 子集时改 **自定义 resolver/自定义 LB policy**）
 
 ## 生产场景
 
@@ -99,14 +99,20 @@ flowchart LR
 ## 代码示例
 
 ```go
-conn, err := grpc.Dial(
+conn, err := grpc.NewClient(
     "dns:///order-svc.trading.svc.cluster.local:50051",
     grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`),
-    grpc.WithUnaryInterceptor(otelgrpc.UnaryClientInterceptor()),
+    grpc.WithStatsHandler(otelgrpc.NewClientHandler()),
 )
-ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)
+if err != nil {
+    return err
+}
+defer conn.Close()
+
+client := pb.NewRiskClient(conn)
+callCtx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)
 defer cancel()
-_, err = client.PreCheckRisk(ctx, req)
+_, err = client.PreCheckRisk(callCtx, req)
 ```
 
 ## 延伸阅读

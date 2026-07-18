@@ -1,0 +1,39 @@
+{
+  "fixture_kind": "minimized-rpc-contract",
+  "node_version": "0.38.22",
+  "reported_version": "0.38.22",
+  "chain_id": "sdk-compat-localnet",
+  "hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "expected_outcome": "SUCCEEDED",
+  "responses": {
+    "status": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "node_info": {
+          "id": "node-n-minus-1",
+          "network": "sdk-compat-localnet",
+          "version": "0.38.22"
+        },
+        "sync_info": {
+          "latest_block_height": "81",
+          "catching_up": false
+        }
+      }
+    },
+    "tx": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "height": "80",
+        "index": "0",
+        "tx_result": {
+          "code": "0",
+          "codespace": "",
+          "log": "ok"
+        }
+      }
+    }
+  }
+}

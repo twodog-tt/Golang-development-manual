@@ -16,7 +16,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> 分布式 MQ **真正常见的是至少一次（At-Least-Once）**；恰好一次（Exactly-Once）需 **幂等消费 + 事务/outbox** 在业务层实现；顺序性靠 **单分区单消费者** 或业务序号。生产关键词：**消费幂等、DLQ、consumer lag**。
+> 分布式 MQ **最常见的是至少一次（At-Least-Once）**。Kafka EOS 能覆盖 Kafka topic 之间的 read-process-write 事务，但不会自动把外部数据库、支付 API 等副作用纳入同一事务；业务上的“效果恰好一次”仍需本地事务、幂等键、outbox/inbox 与状态机。
 
 ## 3 分钟版（一面深度）
 
@@ -42,25 +42,25 @@ flowchart LR
 |------|------|----------|------|
 | At-Most-Once | 可能丢 | 低 | 日志采集可丢 |
 | At-Least-Once | 可能重复 | 中 | 默认，需幂等 |
-| Exactly-Once | 不丢不重 | 高 | Kafka EOS + 幂等表 |
+| Exactly-Once / Effectively-Once | 在明确边界内不重复产生可见效果 | 高 | Kafka EOS（Kafka 内）或业务事务 + 幂等 |
 | 顺序 | 分区内有序 | 降并行 | 订单状态变更 |
 
 **Kafka 要点**
 
 - **幂等 Producer**：`enable.idempotence=true`，PID+序列号防 broker 重试重复。
-- **事务**：跨分区 atomic write，消费-生产共存（read-process-write）。
+- **事务**：可原子提交多个 Kafka 分区写入及消费 offset，适合 Kafka 内 read-process-write；外部 DB 写不在该事务中。
 - **Consumer**：先处理再 commit offset；crash 后重复消费 → **必须幂等**。
 
 **容量估算**
 
-- 订单 1 万 TPS，消息 1KB → 10 MB/s 吞吐，3 副本 Kafka 集群 3 节点足够。
+- 订单 1 万 TPS、消息 1KB 只给出约 10 MB/s 原始载荷；还需计算副本、保留期、压缩、峰值、磁盘 IOPS、故障冗余与分区并行度，不能据此断言“三节点足够”。
 - Consumer lag 目标 < 1000 条或 < 1s；lag 10 万需 **扩 consumer 或优化处理**（注意分区数上限）。
 
 ## 生产场景
 
 - **订单创建 → 库存/积分/通知**：At-Least-Once + `order_id` 幂等。
-- **Binlog CDC**：顺序性按表主键 hash 分区。
-- **延迟消息**：RocketMQ 延迟级别或 Kafka 时间轮 + 内部 topic。
+- **Binlog CDC**：源端通常按日志位置读取；重新按主键分区后只保同一 key 的顺序，可能失去跨 key/跨表事务顺序。
+- **延迟消息**：RocketMQ 5.x 支持定时/延时消息；Kafka 没有通用的原生延时队列，通常用 delay topics、应用调度器或流处理状态实现。
 
 ## 排查与工具
 
@@ -101,20 +101,20 @@ flowchart LR
 // 幂等消费骨架
 func (h *Handler) Handle(ctx context.Context, msg *kafka.Message) error {
     bizID := extractBizID(msg)
-    inserted, err := h.repo.TryInsertProcessed(ctx, bizID)
-    if err != nil {
-        return err // 可重试
-    }
-    if !inserted {
-        return nil // 已处理，跳过
-    }
-    if err := h.process(ctx, msg); err != nil {
-        _ = h.repo.DeleteProcessed(ctx, bizID) // 或标记 failed 供重试
-        return err
-    }
-    return nil
+    return h.repo.WithTx(ctx, func(tx Tx) error {
+        inserted, err := tx.TryInsertProcessed(bizID)
+        if err != nil {
+            return err
+        }
+        if !inserted {
+            return nil
+        }
+        return h.processInTx(ctx, tx, msg)
+    })
 }
 ```
+
+只有当去重记录和业务变更在同一本地事务中提交，才能关闭“标记成功但业务未做”与“业务已做但标记未写”的崩溃窗口。外部 HTTP/链上交易等副作用需继续传递业务幂等键并记录状态，不能由这张表单独兜底。
 
 ## 延伸阅读
 

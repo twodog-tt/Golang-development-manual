@@ -1,0 +1,75 @@
+name: signer-etcd-integration
+
+x-etcd-common: &etcd-common
+  image: gcr.io/etcd-development/etcd:v3.6.12@sha256:3c2ced08f23b1183e8bd4613064c3fb6b8db5057a4d1f13c3518c76e357a07a8
+  restart: "no"
+  healthcheck:
+    test:
+      - CMD
+      - /usr/local/bin/etcdctl
+      - --endpoints=http://127.0.0.1:2379
+      - endpoint
+      - health
+    interval: 2s
+    timeout: 2s
+    retries: 30
+
+services:
+  signer-etcd-1:
+    <<: *etcd-common
+    command:
+      - /usr/local/bin/etcd
+      - --name=signer-etcd-1
+      - --data-dir=/etcd-data
+      - --listen-client-urls=http://0.0.0.0:2379
+      - --advertise-client-urls=http://signer-etcd-1:2379
+      - --listen-peer-urls=http://0.0.0.0:2380
+      - --initial-advertise-peer-urls=http://signer-etcd-1:2380
+      - --initial-cluster=signer-etcd-1=http://signer-etcd-1:2380,signer-etcd-2=http://signer-etcd-2:2380,signer-etcd-3=http://signer-etcd-3:2380
+      - --initial-cluster-state=new
+      - --initial-cluster-token=signer-fence-integration-v1
+    ports:
+      - 127.0.0.1:12379:2379
+    volumes:
+      - signer_etcd_1:/etcd-data
+
+  signer-etcd-2:
+    <<: *etcd-common
+    command:
+      - /usr/local/bin/etcd
+      - --name=signer-etcd-2
+      - --data-dir=/etcd-data
+      - --listen-client-urls=http://0.0.0.0:2379
+      - --advertise-client-urls=http://signer-etcd-2:2379
+      - --listen-peer-urls=http://0.0.0.0:2380
+      - --initial-advertise-peer-urls=http://signer-etcd-2:2380
+      - --initial-cluster=signer-etcd-1=http://signer-etcd-1:2380,signer-etcd-2=http://signer-etcd-2:2380,signer-etcd-3=http://signer-etcd-3:2380
+      - --initial-cluster-state=new
+      - --initial-cluster-token=signer-fence-integration-v1
+    ports:
+      - 127.0.0.1:22379:2379
+    volumes:
+      - signer_etcd_2:/etcd-data
+
+  signer-etcd-3:
+    <<: *etcd-common
+    command:
+      - /usr/local/bin/etcd
+      - --name=signer-etcd-3
+      - --data-dir=/etcd-data
+      - --listen-client-urls=http://0.0.0.0:2379
+      - --advertise-client-urls=http://signer-etcd-3:2379
+      - --listen-peer-urls=http://0.0.0.0:2380
+      - --initial-advertise-peer-urls=http://signer-etcd-3:2380
+      - --initial-cluster=signer-etcd-1=http://signer-etcd-1:2380,signer-etcd-2=http://signer-etcd-2:2380,signer-etcd-3=http://signer-etcd-3:2380
+      - --initial-cluster-state=new
+      - --initial-cluster-token=signer-fence-integration-v1
+    ports:
+      - 127.0.0.1:32379:2379
+    volumes:
+      - signer_etcd_3:/etcd-data
+
+volumes:
+  signer_etcd_1:
+  signer_etcd_2:
+  signer_etcd_3:

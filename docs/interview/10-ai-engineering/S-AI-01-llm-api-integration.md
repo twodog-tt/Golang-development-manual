@@ -103,7 +103,7 @@ for scanner.Scan() {
 ## 反模式与事故
 
 - **无超时** → goroutine 泄漏、连接占满
-- **每个请求 `http.Client{}`** → TLS 握手开销巨大
+- **每个请求新建自定义 `http.Transport`** → 连接池无法复用，TCP/TLS 握手开销巨大（多个零值 `http.Client{}` 仍共享 `DefaultTransport`）
 - **重试幂等性未考虑** → 重复扣费、重复写库
 - **把完整 API Key 打日志** → 安全事故
 

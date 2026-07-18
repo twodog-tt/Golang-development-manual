@@ -24,7 +24,7 @@ sources:
 
 1. **是什么**：Redis 提供多种拓扑——主从复制同步数据，Sentinel 监控主节点故障并自动 failover，Cluster 将 key 按 CRC16 mod 16384 映射到 slot 再分配到节点。
 2. **为什么**：单机有内存与 QPS 上限；主从解决读扩展但不自动切主；Sentinel 补 HA；Cluster 同时解决水平扩展与高可用（每个 master 可挂 slave）。
-3. **怎么做**：<10GB、QPS<10 万、可接受分钟级 RTO → Sentinel；>10GB 或需线性扩展 → Cluster；强一致跨 key 事务用 Hash Tag `{user:123}:profile` 同 slot。
+3. **怎么做**：数据和写吞吐能由单主承载时可选 Sentinel；需要分片容量/写吞吐时选 Cluster。容量阈值必须压测。Hash Tag 让多 key 落同 slot，从而可执行 Lua/MULTI，但不把 Redis 异步复制变成故障下的线性一致存储。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -39,17 +39,23 @@ sources:
 
 ```mermaid
 flowchart TB
-  Client[go-redis Client] --> Proxy{路由}
-  Proxy -->|MOVED| NodeA[Master A slot 0-5460]
-  Proxy -->|ASK 迁移中| NodeB[Master B slot 5461-10922]
-  NodeA --> SlaveA[Replica]
-  NodeB --> SlaveB[Replica]
-  Sentinel[Sentinel ×3] -.->|监控 failover| NodeA
+  subgraph cluster[Redis Cluster 方案]
+    Client[go-redis ClusterClient] --> Router{slot 路由}
+    Router -->|MOVED/ASK| NodeA[Master A slot 0-5460]
+    Router --> NodeB[Master B slot 5461-10922]
+    NodeA --> ReplicaA[Replica A]
+    NodeB --> ReplicaB[Replica B]
+  end
+  subgraph sentinel[Sentinel 方案（非 Cluster 组件）]
+    App2[普通 Redis Client] --> Primary[Single Primary]
+    Primary --> Replica[Replica]
+    Sentinels[Sentinel quorum] -.->|监控与 failover| Primary
+  end
 ```
 
-**Cluster 要点**：Gossip 传播拓扑；`CLUSTER NODES` 看 slot 分布；扩缩容时 slot migrate 产生 ASK；多 key 事务/`MGET` 需同 slot。Sentinel：quorum 过半同意才 failover，注意 **down-after-milliseconds** 与 **min-replicas-to-write** 防脑裂丢写。
+**Cluster 要点**：Gossip 传播拓扑；`CLUSTER NODES` 看 slot 分布；扩缩容时 slot migrate 产生 ASK；服务端多 key 命令与事务通常要求同 slot。Sentinel 的 `quorum` 用于客观下线判断，真正授权 failover 还需多数 Sentinel；`min-replicas-to-write` 只能降低分区时继续写旧主的风险，不能保证零丢写。
 
-**Go 客户端**：`redis.NewClusterClient` 维护 slot→node 缓存；`ForEachShard` 做全节点扫描；Pipeline 默认单节点，跨 slot 需拆分。
+**Go 客户端**：`redis.NewClusterClient` 维护 slot→node 缓存；Cluster pipeline 可由客户端按节点拆批，但跨 slot 的事务和原子多 key 操作仍受限制。
 
 ## 生产场景
 
@@ -82,7 +88,7 @@ flowchart TB
 
 1. **Cluster 如何算 slot？** → `CRC16(key) mod 16384`；Hash Tag 只对 `{}` 内部分哈希。
 2. **MOVED 和 ASK 区别？** → MOVED 永久迁移完成；ASK 临时重定向，迁移窗口内。
-3. **Sentinel 脑裂怎么办？** → `min-replicas-to-write`、奇数节点、同 AZ 部署；旧主恢复后变 slave。
+3. **Sentinel 脑裂怎么办？** → Sentinel 和 Redis 副本跨故障域部署、使用多数派并设置 `min-replicas-to-write` 等保护；旧主恢复后应被重配置为 replica，但网络分区窗口仍可能有已确认写丢失。
 4. **go-redis 连接池参数？** → `PoolSize`、`MinIdleConns`、`ReadTimeout`；Cluster 每节点独立池。
 5. **RDB 还是 AOF？** → 缓存可 RDB+短 AOF；持久化队列倾向 AOF everysec。
 

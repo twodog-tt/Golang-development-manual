@@ -9,21 +9,23 @@ tags: [mysql, index, b-tree, leftmost-prefix, covering-index]
 status: published
 code_refs: []
 sources:
-  - https://dev.mysql.com/doc/refman/8.0/en/optimization-indexes.html
-  - https://dev.mysql.com/doc/refman/8.0/en/explain-output.html
+  - https://dev.mysql.com/doc/refman/8.4/en/optimization-indexes.html
+  - https://dev.mysql.com/doc/refman/8.4/en/innodb-index-types.html
+  - https://dev.mysql.com/doc/refman/8.4/en/innodb-online-ddl-operations.html
+  - https://dev.mysql.com/doc/refman/8.4/en/explain-output.html
 ---
 
 # MySQL 索引原理与最左前缀
 
 ## 30 秒版（开场）
 
-> InnoDB 默认 **B+Tree 聚簇索引**（主键即数据）；二级索引叶子存主键值需 **回表**。**联合索引 (a,b,c) 遵循最左前缀**：能用到 a、ab、abc 条件，跳过 b 直接用 c 往往失效。生产关键词：**覆盖索引、索引下推 ICP、选择性、前缀索引**。
+> InnoDB 默认用 **B+Tree 聚簇索引**组织行；二级索引叶子保存索引列和聚簇索引键，只有查询未被二级索引覆盖时才需要 **回表**。**联合索引 `(a,b,c)` 遵循最左前缀**：通常能利用 `a`、`a,b`、`a,b,c` 定位，跳过 `a` 只按 `b/c` 查询往往不能使用普通前缀定位。生产关键词：**覆盖索引、索引下推 ICP、选择性、前缀索引**。
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：索引是有序数据结构，加速 WHERE/JOIN/ORDER BY；InnoDB 表数据按主键 B+Tree 组织，二级索引是独立 B+Tree。
-2. **为什么**：全表扫描 O(n)；合适索引将查找降为 O(log n)；错误索引导致写放大与优化器选错计划。
-3. **怎么做**：WHERE/ORDER BY 高频列建联合索引；高选择性列放左；避免 `SELECT *` 促回表；用 `EXPLAIN` 看 `type/key/rows/Extra`。
+1. **是什么**：索引是有序数据结构，加速 WHERE/JOIN/ORDER BY；InnoDB 优先按主键 B+Tree 组织表数据。没有主键时，会选择第一个所有列均为 `NOT NULL` 的唯一索引；仍没有则生成隐藏的 `GEN_CLUST_INDEX`。二级索引是独立 B+Tree。
+2. **为什么**：全表扫描通常随行数增长；合适 B+Tree 能先定位范围再扫描命中行。实际成本还取决于命中行数、回表随机 I/O、缓存和数据分布，不能只背成固定的 `O(log n)`。
+3. **怎么做**：按真实 WHERE/JOIN/ORDER BY 组合设计联合索引。列顺序通常先考虑等值条件、范围边界和排序需求，再看选择性；“选择性最高的一律放最左”不是通用规则。用 `EXPLAIN ANALYZE` 和线上分布验证。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -31,9 +33,9 @@ sources:
 
 | 概念 | 说明 |
 |------|------|
-| 聚簇索引 | 叶子存完整行，一张表一个 |
-| 二级索引 | 叶子存索引列 + 主键 |
-| 回表 | 二级索引查主键再查聚簇 |
+| 聚簇索引 | 叶子存完整行，一张表一个；优先使用主键，缺失时按唯一非空索引/隐藏索引规则选择 |
+| 二级索引 | 叶子存索引列 + 聚簇索引键；聚簇索引是主键时通常表现为“存主键” |
+| 回表 | 二级索引未覆盖所需列时，再按聚簇索引键读取完整行 |
 | 覆盖索引 | 查询列全在索引中，Extra: Using index |
 | ICP | 5.6+ 存储引擎层过滤，减少回表 |
 
@@ -43,12 +45,12 @@ flowchart TB
   SQL --> Opt[优化器]
   Opt -->|走 idx_age_city| Sec[二级索引 B+Tree]
   Sec -->|叶子得主键 id| Clu[聚簇索引]
-  Clu --> Row[返回 name 需回表 unless 覆盖]
+  Clu --> Row[当前索引未覆盖 name，回表后返回]
 ```
 
 **最左前缀**：索引 `(age, city, status)` — `WHERE age=20` ✓；`WHERE age=20 AND city='BJ'` ✓；`WHERE city='BJ'` ✗（除非优化器 index skip scan 8.0.13+ 特定场景）；`WHERE age=20 ORDER BY city` ✓ 可利用索引排序。
 
-**失效常见**：对列函数/隐式类型转换 `phone=13800138000`（phone varchar）；`LIKE '%abc'`；OR 跨不同索引；不等于 `!=` 大数据集；联合索引中间列范围后右侧失效。
+**常见限制**：对列函数/不匹配的隐式转换可能妨碍索引；`LIKE '%abc'` 不能用普通 B+Tree 前缀定位；联合索引遇到范围列后，右侧列通常不能继续缩小索引扫描区间，但仍可能用于 ICP 过滤或覆盖查询，不能笼统说“全部失效”。
 
 ## 生产场景
 
@@ -80,16 +82,16 @@ flowchart TB
 ## 追问链
 
 1. **为什么用 B+Tree 不用 B-Tree？** → 叶子链表便于范围扫描；非叶子不存数据，扇出大。
-2. **主键为何推荐自增？** → 顺序插入减少页分裂；随机 UUID 致碎片。
-3. **一个表多少索引？** → 写多读少慎加；通常 3~5 个联合索引覆盖 80% SQL。
+2. **为什么常见自增主键？一定要用吗？** → 单调键通常能减少随机页写和页分裂，但也可能形成尾页热点、暴露规模，并不适合所有分布式 ID 场景。随机 UUID 通常更分散且索引更宽，应按写入局部性、分片和安全需求取舍。
+3. **一个表多少索引？** → 没有通用 3~5 个上限；按读收益、写放大、存储和重复前缀评估，并用真实 workload 验证。
 4. **Hash 索引？** → Memory 引擎支持；InnoDB 自适应 Hash 内部用，无用户 Hash 索引。
 5. **Change Buffer？** → 二级索引非唯一、页不在 buffer 时延迟合并，写优化。
 
 ## 反模式与事故
 
 - 每个 WHERE 列各建单列索引——优化器 merge 效率差、占空间。
-- `SELECT *` 导致必回表——覆盖索引失效。
-- 上线大表加索引未 `ALGORITHM=INPLACE` 评估——锁表数小时。
+- `SELECT *` 往往让二级索引难以覆盖并增加回表/网络开销，但若本来走聚簇索引就不存在“二次回表”；应按计划解释。
+- 把 `ALGORITHM=INPLACE` 当成“无锁/瞬时完成”——`INPLACE` 不等于 `INSTANT`，也不自动等于 `LOCK=NONE`；是否允许并发 DML 取决于具体操作和 MySQL 版本，开始/结束阶段的 metadata lock、旧事务与资源开销仍可能阻塞业务。上线前要显式验证算法、锁级别和回滚方案。
 - 凭直觉建 `(created_at, user_id)` 而查询总是先 `user_id`——最左原则用反。
 
 ## 代码示例
@@ -109,6 +111,8 @@ Go/GORM 侧确保 `Where("tenant_id = ?", id).Order("created_at desc")` 与索�
 
 ## 延伸阅读
 
-- [MySQL Index Optimization](https://dev.mysql.com/doc/refman/8.0/en/optimization-indexes.html)
-- [EXPLAIN Output](https://dev.mysql.com/doc/refman/8.0/en/explain-output.html)
+- [MySQL Index Optimization](https://dev.mysql.com/doc/refman/8.4/en/optimization-indexes.html)
+- [InnoDB Clustered and Secondary Indexes](https://dev.mysql.com/doc/refman/8.4/en/innodb-index-types.html)
+- [InnoDB Online DDL Operations](https://dev.mysql.com/doc/refman/8.4/en/innodb-online-ddl-operations.html)
+- [EXPLAIN Output](https://dev.mysql.com/doc/refman/8.4/en/explain-output.html)
 - [高性能 MySQL 索引章节](https://www.oreilly.com/library/view/high-performance-mysql/9780596101718/)

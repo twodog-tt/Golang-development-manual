@@ -33,8 +33,8 @@ flowchart TB
   GW -->|20% 流量| NewSvc[新 order-service]
   NewSvc --> NewDB[(order_db)]
   Mono --> OldDB[(monolith_db)]
-  CDC[CDC / 双写] --> NewDB
-  CDC --> OldDB
+  OldDB -->|CDC 回填/增量同步| NewDB
+  Mono -.->|受控双写阶段| NewDB
 ```
 
 **演进阶段**
@@ -51,7 +51,7 @@ flowchart TB
 **容量与成本变化**
 
 - 单体 20 人团队 1 套 CI/CD；拆 5 服务 → **5 套流水线、5× 监控、5× On-call 认知**。
-- RPC 增加：单体内存调用 ~μs → gRPC **1~3ms**，需合并读或 BFF。
+- RPC 会引入序列化、网络、排队和故障模式；实际增加几十微秒还是数毫秒取决于部署与负载，应以同环境 trace/压测为准。
 
 **Go 单体模块化示例结构**
 
@@ -83,7 +83,7 @@ flowchart TB
 |------|------|--------|
 | Strangler | 渐进、可回退 | 大爆炸重写 |
 | 模块化单体 | 中小团队长期 | 多团队抢仓库 |
-| 大 bang 重写 | — | 几乎总是失败 |
+| 大 bang 重写 | 只有遗留系统无法渐进切割且有完整隔离条件时才考虑 | 风险高、回退困难 |
 | 合并回单体 | 拆分失败、团队缩小 | 已大规模单元化 |
 
 ## 追问链
@@ -113,7 +113,9 @@ func (h *OrderHandler) Get(w http.ResponseWriter, r *http.Request) {
             json.NewEncoder(w).Encode(order)
             return
         }
-        slog.Warn("fallback to monolith", slog.String("err", err.Error()))
+        // 仅在错误已分类为“新服务暂不可用”、旧系统容量充足且语义兼容时回退。
+        // 对超时/过载无条件 fallback 可能把同一流量再打向旧系统，形成放大。
+        slog.Warn("controlled fallback to monolith", slog.String("err", err.Error()))
     }
     h.monolith.Get(w, r) // 回退路径
 }

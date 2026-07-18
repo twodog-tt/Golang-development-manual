@@ -42,7 +42,7 @@ flowchart LR
 并发数 N = 到达率 λ × 平均响应时间 W
 ```
 
-- 例：QPS=1000，P99=200ms → 并发 N ≈ 1000 × 0.2 = **200**（连接池、goroutine 需 >200）。
+- Little 定律使用的是**长期平均**在系统时间 W，不是 P99。例：到达率 1000/s、平均响应时间 200ms，则平均在途请求约 **200**；连接池和并发上限还要结合分布、排队、下游 fan-out 与目标分位单独压测。
 
 **容量估算模板**
 
@@ -50,7 +50,7 @@ flowchart LR
 |----|-----------|
 | 峰值 QPS | 日常 × 3~10（大促 ×10~50） |
 | 单 Pod QPS | 压测 P99<50ms 时最大稳定 QPS |
-| Pod 数 | `ceil(QPS_peak / qps_pod × 1.3)` |
+| Pod 数 | `ceil(QPS_peak / qps_pod × headroom)`；headroom 由故障域和发布策略决定 |
 | DB 连接 | Pod数 × 每Pod连接 ≤ DB max_connections×0.7 |
 | 带宽 | QPS × 响应字节 × 8 |
 | Redis | QPS / 单分片能力(3~5万) |

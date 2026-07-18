@@ -22,7 +22,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **Mapping**：上线前定好；改字段类型通常需 **reindex**；`dynamic` 可关防字段爆炸。
-2. **查询**：`match` 全文；`term` 精确 keyword；`range` 范围；`bool` 组合；**filter context** 可缓存不打分。
+2. **查询**：`match` 全文；`term` 精确 keyword；`range` 范围；`bool` 组合；filter context 不参与相关性评分，符合条件且重复使用的过滤器可能由 Elasticsearch 自动缓存，并非所有 filter 都必然命中缓存。
 3. **聚合**：`terms` 分桶、`date_histogram` 按时间、`avg/sum` 指标；**pipeline agg** 二次计算。
 
 ```mermaid
@@ -66,8 +66,8 @@ flowchart TB
 
 **深度分页**
 
-- 避免 `from=10000` → 用 **`search_after`** + sort tiebreaker
-- 全量导出 → scroll（旧）/ **PIT + search_after**（新）
+- 默认 `index.max_result_window` 为 10,000，深分页避免大 `from` → 用 **PIT + search_after** 和稳定唯一 tiebreaker
+- Scroll 适合批量遍历/重建等场景；面向用户的深分页优先 PIT + search_after
 
 ## 生产场景
 
@@ -98,14 +98,14 @@ flowchart TB
 
 ## 反模式与事故
 
-- **高基数 terms 聚合**（user_id）→ 内存 OOM
-- **wildcard 前导 `*abc`** → 极慢
+- 高基数 `terms` 聚合缺少 size/shard_size 与内存评估 → 可能非常昂贵；可考虑 composite aggregation 分页
+- 普通 keyword 上前导 wildcard 往往昂贵，并可能受 `search.allow_expensive_queries` 限制；特定 wildcard field/索引设计另论
 - **nested 滥用** → 查询复杂、性能差
 
 ## 代码示例
 
 ```go
-// olivere/elastic 风格示意
+// olivere/elastic（第三方客户端）风格示意；官方客户端为 go-elasticsearch
 searchService := client.Search().Index("products").
     Query(elastic.NewBoolQuery().
         Must(elastic.NewMatchQuery("title", "手机")).

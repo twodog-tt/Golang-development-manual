@@ -19,7 +19,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> LRU = **最近最少使用**淘汰。经典实现：**哈希表 + 双向链表**，Get/Put 均 **O(1)**。Go 用 `map` + `container/list`，并发版加 **`sync.Mutex`** 包住临界区。面试关键词：**MoveToFront、超容量删 Back、更新已存在 key**。
+> LRU = **最近最少使用**淘汰。经典实现：**哈希表 + 双向链表**，Get/Put 的期望/平均复杂度为 **O(1)**。Go 用 `map` + `container/list`，并发版加 **`sync.Mutex`** 包住“查 map + 改链表”的完整临界区。面试关键词：**MoveToFront、超容量删 Back、更新已存在 key**。
 
 ## 3 分钟版（一面深度）
 
@@ -52,8 +52,8 @@ flowchart LR
 
 | 操作 | 时间 | 空间 |
 |------|------|------|
-| Get | O(1) | — |
-| Put | O(1) | O(capacity) |
+| Get | 平均 O(1) | — |
+| Put | 平均 O(1) | O(capacity) |
 
 ## 生产场景
 

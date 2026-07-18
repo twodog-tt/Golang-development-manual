@@ -44,21 +44,23 @@ flowchart LR
 | 模式 | 用途 |
 |------|------|
 | Topic Exchange | 按事件类型/Token 路由 |
-| 手动 ACK | 处理成功再 ack；失败 nack 重试 |
-| DLX + TTL |  poison message 进死信队列人工处理 |
+| 手动 ACK | 处理成功再 ack；失败按错误类型选择重试或停车 |
+| DLX + TTL | `requeue=false` 后由死信交换机进入延迟重试/parking queue |
 | Prefetch | 限制 unacked 防 OOM |
 
 **Go 客户端要点**（`amqp091-go`）
 
 ```go
-ch.Qos(prefetch, 0, false) // 公平分发
+ch.Qos(prefetch, 0, false) // 限制未确认消息数，不保证绝对公平
 deliveries, _ := ch.Consume(queue, "", false) // autoAck=false
 for d := range deliveries {
     if err := handle(d.Body); err != nil {
-        d.Nack(false, true) // requeue 或进 DLX
+        // requeue=true 会回原队列，毒消息可能立即热循环；
+        // requeue=false 才会在配置了 DLX 时进入死信/延迟重试拓扑。
+        _ = d.Nack(false, false)
         continue
     }
-    d.Ack(false)
+    _ = d.Ack(false)
 }
 ```
 
@@ -69,8 +71,8 @@ for d := range deliveries {
 
 ## 追问链
 
-1. **消息丢失？** → Publisher Confirm + 持久化 queue + 消费手动 ACK。
-2. **顺序性？** → 单 queue 单 consumer；或按 token 分片 queue。
+1. **消息丢失？** → Publisher Confirm + durable/quorum queue + persistent message + 消费手动 ACK；仍要处理连接恢复和 confirm 未知结果导致的重复发布。
+2. **顺序性？** → 单 queue + Single Active Consumer 可保持主要交付顺序，但 redelivery、优先级和失败重试会影响观察到的顺序；业务仍应带 sequence。
 3. **和 RocketMQ 对比？** → 国内 CEX 常见 Kafka/RocketMQ；BSC DEX 项目常用 RabbitMQ 轻量部署。
 
 ## 反模式

@@ -18,7 +18,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **sync.Map** 为 **读多写少、key 相对稳定** 的并发 map 优化：只读 `read` 原子快照 + `dirty` 增量。不适合 **频繁写、计数器、强一致遍历**。生产关键词：**session 缓存、类型断言开销、不如分片 map**。
+> `sync.Map` 主要优化两类负载：key 只写一次后读很多次，或不同 goroutine 访问彼此不相交的 key 集合。它不是“所有读多写少都更快”，也不提供一致快照；与 `map+Mutex/RWMutex` 必须按真实负载 benchmark。
 
 ## 3 分钟版（一面深度）
 
@@ -40,6 +40,7 @@ flowchart LR
 
 - 配置/元数据缓存，写入一次读多次
 - 每个 key 只写一次（如连接表 `connID -> Conn`）
+- 多 goroutine 并发读写不相交的 key，减少锁竞争
 
 **不适合**
 
@@ -71,16 +72,16 @@ flowchart LR
 
 ## 追问链
 
-1. **Range 能修改吗？** → 勿在 Range 内 Delete/Store 同 map（文档警告）。
+1. **Range 回调能修改同一个 Map 吗？** → 可以，文档明确允许回调调用任意 Map 方法；但 Range 不是一致快照，当前 key 可能反映遍历期间任一时刻的映射。
 2. **类型安全？** → 否，用泛型封装或 `xsync.MapOf`（第三方）。
 3. **与 map+sync.RWMutex 性能？** → 因负载而异，必须 benchmark。
 4. **nil value？** → 可存；Load 需区分不存在与零值（用 ok）。
-5. **能 LoadOrStore 做单飞吗？** → 可以，注意闭包内初始化成本。
+5. **能用 LoadOrStore 代替 singleflight 吗？** → 不能完整替代。它只原子决定哪个 value 被保存；多个调用者仍可能提前重复执行昂贵初始化，也不负责共享 error/结果生命周期。
 
 ## 反模式与事故
 
 - 把 sync.Map 当 **通用并发 map** 全局替换。
-- Range 里做 RPC 导致 **全局遍历卡死**。
+- Range 回调里做 RPC → 当前遍历长时间不返回；虽不阻塞其他 Map 方法，仍会拖住调用方并放大资源占用。
 - value 存指针，外部无拷贝修改 → 数据竞态。
 
 ## 代码示例

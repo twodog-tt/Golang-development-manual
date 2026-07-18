@@ -45,7 +45,7 @@ flowchart TB
 | HW | High Watermark；消费者可见的最大 offset |
 | Segment | 日志分段文件 + 索引，便于 retention 删除 |
 
-**写入路径**：Producer → Leader 追加 → Follower replicate → **`acks=all` 时至少 `min.insync.replicas` 个 ISR 副本确认** → 返回成功。
+**写入路径**：Producer → Leader 追加 → Follower replicate。`acks=all` 会等待当前 ISR 全部复制到位；`min.insync.replicas` 规定 ISR 至少还剩多少成员时才接受这种写入。它不是“只等 minISR 个副本”的计数参数。
 
 **Partition 数规划**
 
@@ -103,10 +103,12 @@ writer := &kafka.Writer{
     Topic:    "trade.matched",
     Balancer: &kafka.Hash{}, // 按 Message.Key 哈希
 }
-_ = writer.WriteMessages(ctx, kafka.Message{
+if err := writer.WriteMessages(ctx, kafka.Message{
     Key:   []byte("BTC-USDT"),
     Value: payload,
-})
+}); err != nil {
+    return err
+}
 ```
 
 ## 延伸阅读

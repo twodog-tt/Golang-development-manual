@@ -18,13 +18,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> LLM 服务要观测 **TTFT、tokens、成本、工具步数**；优化靠 **缓存、小模型路由、批处理、流式**。生产关键词：**GenAI 语义约定、Prompt 缓存、semantic cache、模型降级**。
+> LLM 服务要观测 **TTFT、总时延、tokens、成本、工具步数与质量指标**。缓存、模型路由、batch 和 streaming 都有适用边界；尤其 semantic cache 必须纳入 tenant、权限、prompt/model 版本与数据时效，不能只按向量相似度跨用户复用答案。
 
 ## 3 分钟版（一面深度）
 
 1. **是什么**：在传统 RED 指标外，增加 token 级、生成级维度；LLMOps 平台（Langfuse/LangSmith）做 trace 与评估。
 2. **为什么**：按 token 计费，一次 Agent 十步可烧掉普通 API 百倍成本；P99 延迟直接影响留存。
-3. **怎么做**：每次调用记 `model`、`input_tokens`、`output_tokens`、`latency_ms`、`trace_id`；相同 system+问题走 **语义缓存**；简单意图路由到小模型。
+3. **怎么做**：每次调用记录 provider/model、operation、input/output/cache/reasoning tokens（以 provider 实际返回为准）、TTFT、总时延、重试、错误和估算成本；内容、tool 参数和结果默认不全量入 span。通过评估集决定路由与缓存，不凭启发式直接上线。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -51,9 +51,10 @@ flowchart LR
 **OTel GenAI 语义（示意）**
 
 ```go
-ctx, span := tracer.Start(ctx, "chat.completions",
+ctx, span := tracer.Start(ctx, "chat",
     trace.WithAttributes(
-        attribute.String("gen_ai.system", "openai"),
+        attribute.String("gen_ai.operation.name", "chat"),
+        attribute.String("gen_ai.provider.name", provider),
         attribute.String("gen_ai.request.model", model),
     ))
 defer span.End()
@@ -64,13 +65,15 @@ span.SetAttributes(
 )
 ```
 
+GenAI semantic conventions 仍在演进，属性名和稳定性应锁定到项目采用的 semconv/instrumentation 版本；prompt、tool arguments/results 可能含敏感信息，默认不记录正文。
+
 **成本优化手段**
 
 | 手段 | 效果 |
 |------|------|
-| Prompt 缓存（OpenAI 等） | 重复 system 省 input 价 |
-| 语义缓存（Redis+embedding） | 相似问题直接返回答案 |
-| 模型路由 | 80% 简单问句用小模型 |
+| Provider prompt caching | 对重复前缀可能降低延迟/费用，规则与价格以具体 provider 为准 |
+| 语义缓存（Redis+embedding） | 仅对可安全复用的请求；key 必须含租户、权限、版本和时效 |
+| 模型路由 | 用离线/在线质量门槛把合适请求送到较小模型 |
 | 压缩历史 | 减 input tokens |
 | 限制 max_tokens | 防输出失控 |
 
@@ -100,14 +103,14 @@ span.SetAttributes(
 
 1. **和 S-ARCH-16 可观测性关系？** → LLM 是慢依赖，span 要单独标 `gen_ai.*`；SLO 用 TTFT+P95 总时长。
 2. **缓存错了怎么办？** → TTL + 版本号；关键业务不走缓存或人工审核。
-3. **批处理 API？** → 非实时场景 50% 折扣类；Go worker 聚合请求。
+3. **批处理 API？** → 非实时任务可利用 provider batch/异步接口提高吞吐或降低成本，但折扣、完成窗口与限制是动态产品能力，不能背固定比例。
 4. **私有化 GPU 成本？** → CapEx vs 云 API；要看利用率与运维人力。
 
 ## 反模式与事故
 
 - **无 token 预算告警** → 单月账单惊呆财务
 - **生产开 debug 全量记 prompt** → 存储与合规双爆
-- **所有流量上大模型** → 浪费；路由层是必选项
+- 未经评估就让全部流量上最贵模型，或反过来强行路由小模型 → 成本或质量失控；路由层是否值得引入取决于流量和质量收益
 - **忽略失败重试成本** → 重试 doubling 费用
 
 ## 代码示例
@@ -115,9 +118,13 @@ span.SetAttributes(
 与 [S-CLOUD-03 OpenTelemetry](../09-cloud-native/S-CLOUD-03-opentelemetry.md) 结合：同一 `trace_id` 串起 API → RAG → LLM → Tool。
 
 ```go
-metrics.Counter("llm_tokens_total", "type").Add(float64(tokens), metric.WithAttributes(
-    attribute.String("model", model),
-    attribute.String("type", "input"),
+tokenCounter, err := meter.Int64Counter("gen_ai.client.token.usage")
+if err != nil {
+    return err
+}
+tokenCounter.Add(ctx, int64(tokens), metric.WithAttributes(
+    attribute.String("gen_ai.request.model", model),
+    attribute.String("gen_ai.token.type", "input"), // 应与项目采用的 semconv 版本对齐
 ))
 ```
 

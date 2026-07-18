@@ -1,0 +1,25 @@
+{
+  "fixture_kind": "negative-contract",
+  "node_version": "future-breaking",
+  "digest": "11111111111111111111111111111111",
+  "responses": {
+    "Transaction": {
+      "data": {
+        "transaction": {
+          "digest": "11111111111111111111111111111111",
+          "effects": {
+            "status": "FINALIZED_SUCCESS",
+            "executionError": null,
+            "transaction": {
+              "digest": "11111111111111111111111111111111"
+            },
+            "checkpoint": {
+              "sequenceNumber": 99
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

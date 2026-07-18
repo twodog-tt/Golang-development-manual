@@ -18,12 +18,12 @@ sources:
 
 ## 30 秒版（开场）
 
-> **顺序消息**：同一 **MessageQueue** 内 FIFO，用 **ShardingKey**（如 orderId）选 Queue。**事务消息**：半消息 → 本地事务 → commit/rollback，解决 **发消息与写库一致性**。**延迟消息**：**4.x** 为固定 **18 个延迟级别**；**5.0+** 支持任意时刻定时（timer）。面试高频：**与 Kafka 顺序分区、Outbox 模式对比**。
+> **顺序消息**：同一消息组/Queue 内维持 FIFO；**事务消息**：半消息 → 本地事务 → commit/rollback/回查，缩小“写库成功但消息未发”的窗口，最终仍依赖本地事务状态、回查和消费幂等；**延迟消息**要区分 4.x 固定级别与 5.x 定时时间戳及其范围限制。
 
 ## 3 分钟版（一面深度）
 
 1. **顺序**：全局顺序单 Queue（吞吐低）；分区顺序用 ShardingKey hash 到固定 Queue；消费端 **MessageListenerOrderly** 单线程 per Queue。
-2. **事务**：`sendMessageInTransaction` → Broker 存半消息（对消费者不可见）→ 执行本地事务 → `commit` 可见或 `rollback` 删除；Broker 会 **回查** 本地事务状态。
+2. **事务**：`sendMessageInTransaction` → Broker 存半消息（对消费者不可见）→ 执行本地事务 → `commit` 后可见或 `rollback` 后丢弃；若 broker 没拿到确定结果会**回查**本地事务状态。
 3. **延迟**：**RocketMQ 4.x**：`setDelayTimeLevel(n)`，18 档（1s…2h），非任意 timestamp。**5.0+**：支持 `DELIVERY_TIMESTAMP` 任意时刻；老系统仍常见 18 档。
 
 ## 10 分钟版（原理 + 图示）
@@ -52,7 +52,7 @@ sequenceDiagram
 | 顺序 | ShardingKey 同 key 同 Queue | 消费失败阻塞该 Queue |
 | 事务 | 回查接口必须可靠 | 回查风暴、状态不明 |
 | 延迟 4.x | 18 固定级别 | 非任意 timestamp |
-| 延迟 5.x | timer 任意时刻 | API 与 4.x 不同 |
+| 延迟 5.x | 按定时时间戳投递 | 有最大时间范围等 broker 限制，API 与 4.x 不同 |
 
 ```mermaid
 flowchart LR
@@ -85,7 +85,7 @@ flowchart LR
 
 1. **顺序消息消费失败？** → 重试阻塞同 Queue；需 skip 策略或 DLQ + 人工。
 2. **事务回查做什么？** → 查本地事务表/订单状态，返回 COMMIT/ROLLBACK/UNKNOWN。
-3. **延迟不准？** → level 粒度粗；海量定时用 Redis ZSET 或时间轮。
+3. **延迟不准？** → 4.x level 粒度粗；5.x 到期时间也不等于业务代码精确在该毫秒执行，仍受 broker/consumer 排队影响。海量同一时刻任务还会形成峰值。
 4. **和 Kafka 事务？** → Kafka 事务是 broker 层原子写多分区；RocketMQ 是业务本地事务 + 半消息。
 
 ## 反模式与事故

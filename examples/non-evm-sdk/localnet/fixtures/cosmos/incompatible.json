@@ -1,0 +1,24 @@
+{
+  "fixture_kind": "negative-contract",
+  "node_version": "future-breaking",
+  "responses": {
+    "status": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "node_info": {
+          "id": "node-future",
+          "network": "sdk-compat-localnet",
+          "version": "future"
+        },
+        "sync_info": {
+          "latest_block_height": {
+            "value": "101"
+          },
+          "catching_up": false
+        }
+      }
+    }
+  }
+}
+

@@ -30,3 +30,11 @@ func TestErrGroup_Success(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestErrGroup_ZeroGroupIsUsable(t *testing.T) {
+	var g Group
+	g.Go(func() error { return errors.New("boom") })
+	if err := g.Wait(); err == nil || err.Error() != "boom" {
+		t.Fatalf("want boom, got %v", err)
+	}
+}

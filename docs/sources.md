@@ -2,26 +2,34 @@
 
 本手册面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 面试准备。正文均为自研表述；外部资料仅作题源与延伸阅读，**不整段搬运**。
 
-> 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) · 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
+> 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) ·
+> [角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
+> 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
-## 手册覆盖范围（153 题）
+## 手册覆盖范围（215 题）
 
 | 模块 | 题数 | 说明 |
 |------|------|------|
 | 01 并发与运行时 | 20 | GMP、Channel、Context、pprof |
 | 02 内存与 GC | 15 | 三色标记、逃逸、sync.Pool |
+| 16 Go 生产工程 | 6 | 错误契约、接口、测试、工具链、供应链 |
 | 03 系统设计 | 20 | 秒杀、缓存、MQ、多活、SLO |
-| 中间件与数据库 | 23 | MySQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
-| 06 网络与服务治理 | 5 | gRPC、Gin、JWT、WebSocket |
-| 08 手写题 | 5 | LRU、限流、优雅关闭、errgroup |
+| 中间件与数据库 | 26 | MySQL、PostgreSQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
+| 06 网络与服务治理 | 7 | Linux/epoll/TCP、gRPC、Gin、JWT、WebSocket |
+| 08 手写题 | 7 | LRU、限流、连接池、Singleflight、有界批处理 |
 | 10 AI 工程与编程 | 8 | LLM、RAG、Agent、MCP |
 | 11 解决方案架构 | 8 | DDD、演进、评审、白板 |
-| 12 区块链与 Web3（Go） | 9 | RPC、索引、L2、4337、abigen |
+| 12 区块链与 Web3（Go） | 12 | RPC、索引、Rollup/DA/finality、跨链消息安全、4337、MPC |
+| 17 多链钱包与托管 | 11 | Bitcoin、Solana/Cosmos/Aptos/Sui Go 实战、归集 |
+| 18 Web3 支付与稳定币 | 6 | 状态机、稳定币、账本、机构托管、DvP、RWA/ISO 20022 |
+| 19 节点、RPC 与 Staking | 10 | EL/CL、RPC HA、canonical merge、trace、ClickHouse/lakehouse、在线 SDK |
+| 20 协议、共识与安全 | 4 | PoS/BFT、fork choice、PeerDAS、状态迁移 |
+| 21 Web3 安全工程 | 4 | 威胁模型、signer fencing、SBOM/provenance、事件响应 |
 | 13 Solidity 与合约 | 8 | 安全、ERC、Proxy、DeFi |
-| 14 DEX / CEX 交易所 | 16 | 撮合、账务、AMM、MEV、架构白板 |
+| 14 DEX / CEX 交易所 | 22 | 撮合/WAL、行情恢复、FIX、STP、竞价与性能 |
 | 15 微服务（交易所场景） | 6 | 服务拆分、gRPC、数据隔离、网关、事件总线 |
-| 07 工程与领导力 | 3 | 复盘、技术债、Code Review |
-| 09 云原生 | 8 | K8s、Docker、OTel、排障 |
+| 07 工程与领导力 | 5 | 复盘、技术债、Code Review、Staff 战略与迁移 |
+| 09 云原生 | 10 | K8s、Docker、OTel、Terraform、Helm/GitOps |
 
 ## 主要参考来源
 
@@ -56,6 +64,8 @@
 | Martin Fowler | https://martinfowler.com/ | DDD、Strangler Fig、演进 |
 | Microservices.io | https://microservices.io/ | Saga、BFF、边界模式 |
 | Google SRE Workbook | https://sre.google/workbook/ | SLO、错误预算、容量 |
+| Software Engineering at Google | https://abseil.io/resources/swe-book/ | Design Doc、Large-Scale Change 与组织机制 |
+| Google Engineering Practices | https://google.github.io/eng-practices/ | Review、冲突处理与小步变更 |
 | ADR 实践 | https://adr.github.io/ | 架构决策记录 |
 | AWS 架构博客 | https://aws.amazon.com/blogs/architecture/ | 多活、限流、发布 |
 
@@ -64,6 +74,9 @@
 | 来源 | 链接 | 用途 |
 |------|------|------|
 | MySQL 官方文档 | https://dev.mysql.com/doc/ | 索引、事务、MVCC |
+| PostgreSQL 官方文档 | https://www.postgresql.org/docs/current/ | MVCC/VACUUM、SSI、WAL 与复制 |
+| pgx/pgxpool | https://pkg.go.dev/github.com/jackc/pgx/v5/pgxpool | Go 连接池与事务生命周期 |
+| Linux man-pages | https://man7.org/linux/man-pages/ | FD、epoll、TCP、listen |
 | Redis 文档 | https://redis.io/docs/ | 集群、分布式锁 |
 | Kafka 文档 | https://kafka.apache.org/documentation/ | 消费语义、Rebalance |
 | RocketMQ 文档 | https://rocketmq.apache.org/docs/ | 事务消息、顺序 |
@@ -91,6 +104,9 @@
 | Google distroless | https://github.com/GoogleContainerTools/distroless | 最小运行时镜像 |
 | OpenTelemetry Go | https://opentelemetry.io/docs/languages/go/ | Traces、Metrics |
 | uber-go/automaxprocs | https://github.com/uber-go/automaxprocs | 容器内 GOMAXPROCS |
+| Terraform 文档 | https://developer.hashicorp.com/terraform | State、Module、Drift、Import |
+| Helm 文档 | https://helm.sh/docs/ | Chart、CRD、Release 与 Rollback |
+| Argo CD 文档 | https://argo-cd.readthedocs.io/en/stable/ | Auto-sync、Wave、Window 与健康 |
 
 ### 区块链、EVM 与 Go 链下工程
 
@@ -102,6 +118,53 @@
 | DeFi 概述 | https://ethereum.org/en/defi/ | 链上金融概念 |
 | Chainlink 文档 | https://docs.chain.link/ | Oracle 与价格喂价 |
 | Flashbots 文档 | https://docs.flashbots.net/ | MEV 与私有交易 |
+
+### 多链钱包、支付与节点基础设施
+
+| 来源 | 链接 | 用途 |
+|------|------|------|
+| Bitcoin Developer Guide | https://developer.bitcoin.org/devguide/ | UTXO、钱包、支付处理 |
+| Bitcoin BIPs | https://github.com/bitcoin/bips | PSBT、RBF 等协议/策略背景 |
+| Solana Docs | https://solana.com/docs | Account、PDA、交易与 RPC |
+| Cosmos SDK Docs | https://docs.cosmos.network/sdk/ | Modules、交易、Sequence、升级 |
+| IBC Protocol | https://ibcprotocol.dev/ | Light client、packet、ack/timeout |
+| Sui Docs | https://docs.sui.io/ | Object model、交易与节点 |
+| Aptos Docs | https://aptos.dev/ | Account、Resource、交易与节点 |
+| Circle Developer Docs | https://developers.circle.com/ | 稳定币合约与 CCTP |
+| OP Stack Docs | https://docs.optimism.io/ | Rollup finality、outage、fault proof |
+| Arbitrum Nitro Whitepaper | https://docs.arbitrum.io/nitro-whitepaper.pdf | Rollup、delayed inbox 与强制包含 |
+| Ethereum Consensus Specs | https://github.com/ethereum/consensus-specs | LMD-GHOST、FFG、弱主观性、Fulu |
+| Ethereum Execution Specs | https://github.com/ethereum/execution-specs | 执行层升级与 fork 规则 |
+| EIP-4844 / EIP-7594 | https://eips.ethereum.org/EIPS/eip-7594 | Blob、KZG、PeerDAS |
+| CometBFT Consensus Spec | https://github.com/cometbft/cometbft/blob/main/spec/consensus/consensus.md | Round、Prevote、Precommit、Lock |
+| Cosmos SDK Upgrades | https://docs.cosmos.network/sdk/latest/guides/upgrades/upgrade | Upgrade handler 与 store migration |
+| Aptos Go SDK | https://github.com/aptos-labs/aptos-go-sdk | 官方 Go SDK、BCS 与交易签名 |
+| Sui Releases | https://github.com/MystenLabs/sui/releases | 协议版本与 Address Balance 能力演进 |
+| Sui RPC Migration | https://docs.sui.io/references/sui-api | JSON-RPC 弃用、gRPC/GraphQL 能力迁移 |
+| EIP-1898 | https://eips.ethereum.org/EIPS/eip-1898 | Block-hash 一致读取与 canonical 约束 |
+| Geth EVM Tracing | https://geth.ethereum.org/docs/developers/evm-tracing/ | Trace 重执行、历史状态与 client 边界 |
+| ClickHouse MergeTree | https://clickhouse.com/docs/engines/table-engines/mergetree-family/mergetree | 链数据排序键、分区、part 与 merge |
+| Apache Iceberg | https://iceberg.apache.org/docs/latest/ | Raw lake、snapshot、schema/partition evolution |
+| ISO 20022 Message Definitions | https://www.iso20022.org/iso-20022-message-definitions | pain/pacs/camt 消息与版本 |
+| Swift ISO 20022 Standards | https://www.swift.com/standards/iso-20022/iso-20022-standards | CBPR+/HVPS+ 使用与消息/结算边界 |
+| CPMI-IOSCO PFMI | https://www.bis.org/cpmi/publ/d101.htm | 清算、结算、finality 与 FMI 原则 |
+| BIS Tokenisation | https://www.bis.org/cpmi/publ/d225.pdf | Tokenisation、settlement asset、DvP/PvP |
+| FATF Virtual Assets | https://www.fatf-gafi.org/en/topics/virtual-assets.html | Travel Rule 与风险框架 |
+| OFAC Virtual Currency Guidance | https://ofac.treasury.gov/system/files/126/virtual_currency_guidance_brochure.pdf | 制裁合规工程边界 |
+
+### 安全工程与软件供应链
+
+| 来源 | 链接 | 用途 |
+|------|------|------|
+| OWASP Threat Modeling | https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html | 资产、边界、攻击者与 abuse case |
+| NIST SP 800-207 | https://csrc.nist.gov/pubs/sp/800/207/final | Zero Trust 与资源访问决策 |
+| NIST SP 800-57 | https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final | 密钥生命周期与管理边界 |
+| NIST SP 800-61r3 | https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.800-61r3.pdf | CSF 2.0 事件响应与恢复 |
+| SLSA v1.2 | https://slsa.dev/spec/v1.2/build-track-basics | Build L1/L2/L3 与 provenance |
+| SPDX specifications | https://spdx.dev/use/specifications/ | SBOM 标准与当前稳定版 |
+| SPDX 3.1-RC1 announcement | https://spdx.dev/spdx-3-1-ontology-and-schema-available-for-review/ | 3.1 候选版状态与适用边界 |
+| EIP-3030 | https://eips.ethereum.org/EIPS/eip-3030 | 远程 signer API 的验证与威胁边界 |
+| EIP-3076 | https://eips.ethereum.org/EIPS/eip-3076 | Slashing protection 迁移与历史低水位 |
 
 ### Solidity 与合约工程
 
@@ -118,7 +181,10 @@
 
 | 来源 | 链接 | 用途 |
 |------|------|------|
-| 撮合引擎概念（Investopedia） | https://www.investopedia.com/terms/m/matchingengine.asp | CEX 订单簿 |
+| Coinbase Matching Engine | https://docs.cdp.coinbase.com/exchange/concepts/matching-engine | 价格时间优先与 maker 价格 |
+| FIX Session Layer | https://www.fixtrading.org/standards/fix-session-layer-online/ | MsgSeqNum、Resend、Gap Fill |
+| Binance WebSocket Streams | https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams | Depth snapshot 与序号桥接 |
+| Nasdaq Opening/Closing Cross | https://www.nasdaqtrader.com/content/ProductsServices/Trading/Crosses/openclose_faqs.pdf | 集合竞价清算价与不平衡 |
 | Binance 永续合约 FAQ | https://www.binance.com/en/support/faq/perpetual-futures-contracts | 资金费率、强平 |
 | 1inch 聚合协议 | https://docs.1inch.io/docs/aggregation-protocol/introduction | DEX 路由 |
 | FATF 建议 | https://www.fatf-gafi.org/en/topics/fatf-recommendations.html | AML/KYT 合规框架 |

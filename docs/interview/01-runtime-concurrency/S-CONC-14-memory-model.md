@@ -18,7 +18,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> Go 内存模型定义：**若事件 A happens-before B，则 A 的写对 B 可见**。同步原语（mutex、channel、atomic、Once）建立 hb 边；**无同步的数据竞态 = 未定义行为**。生产关键词：**不要靠直觉排序、race 与 hb 互补**。
+> Go 内存模型定义：若事件 A happens-before B，则 A 的写对 B 可见。同步原语建立 hb 边；含数据竞态的程序是错误程序，结果不可靠，但 Go 不应简单表述成 C/C++ 式“编译器可以任意做任何事”。无竞态程序享有 DRF-SC 保证。
 
 ## 3 分钟版（一面深度）
 
@@ -40,8 +40,9 @@ flowchart LR
 - `go` 语句 happens-before goroutine 开始执行
 - channel：send hb recv（同一 channel）；close hb recv 返回零值
 - `sync.Mutex`：Unlock hb 后续 Lock
-- `sync/atomic`：同一变量原子操作有全序
-- `sync.Once`：Do 返回 hb 后续 Do
+- `sync/atomic`：原子操作表现为顺序一致的总序；当一个原子操作观察到另一个操作的效果时，二者建立同步关系
+- `sync.Once`：由某次 `Do` 执行的函数 `f` 完成，synchronized-before 任意
+  `once.Do(f)` 调用返回
 
 **不保证**：普通变量无同步时的顺序；**不等于**时间先后。
 
@@ -51,7 +52,7 @@ flowchart LR
 
 - **双重检查单例**无 Once：偶发 nil 指针。
 - **标志位退出**：`done=true` 无 atomic/mutex，worker 看不见。
-- **批处理**：主 goroutine 写 slice，子 goroutine 读，无 Wait/chan。
+- **批处理**：子 goroutine 写 slice 结果，主 goroutine 未经 Wait/channel 就读取；或启动后双方继续并发读写底层数组。
 
 ## 排查与工具
 
@@ -61,12 +62,12 @@ flowchart LR
 ## 架构取舍
 
 - **消息传递**（chan）优先于 **共享内存**（锁）—— Effective Go 精神，但高性能热点仍用锁/atomic。
-- **不可变数据** 跨 goroutine：无 hb 也安全（只读发布）。
+- **不可变数据** 跨 goroutine：构造完成后仍需安全发布，例如在 `go` 语句之前完成写入、通过 channel 发送、锁或 atomic pointer 发布；“发布后只读”不能替代发布时的 hb。
 
 ## 追问链
 
 1. **chan 发送指针 hb 吗？** → send hb recv，指针指向内容对接收者可见（若之后无别的写）。
-2. **RWMutex 读与读？** → RLock hb 后续 RLock 无写时可见。
+2. **两个 RLock 之间有 hb 吗？** → 没有一般性的 RLock→RLock 规则。RWMutex 的保证通过 writer 的 Unlock/Lock 以及 RUnlock→后续 Lock 建立；共享数据仍必须遵守完整加锁协议。
 3. **atomic 能替代 mutex 吗？** → 仅单变量操作有全序。
 4. **happens-before 与 wall clock？** → 无关。
 5. **init 函数 hb？** → package init hb main。
@@ -74,7 +75,9 @@ flowchart LR
 ## 反模式与事故
 
 - `sleep` 当同步手段。
-- 以为 `int` 赋值原子（非 atomic 在 32 位可能撕裂）。
+- 以为“机器字大小的普通读写不会撕裂”就等于并发安全。即使某次 `int` 读只能观察到实际
+  写入过的值，无同步并发读写仍是 data race；大于机器字的 `int64`（在 32 位平台）以及
+  slice/interface/string 等多字结构还可能被分步读写，产生不一致组合。
 - 忽略 struct 字段重排可见性，只锁了部分字段访问。
 
 ## 代码示例
@@ -85,11 +88,11 @@ var data string
 
 func producer() {
     data = "ok"
-    ready.Store(true) // release
+    ready.Store(true) // Go atomic 为顺序一致操作
 }
 
 func consumer() {
-    for !ready.Load() { // acquire
+    for !ready.Load() {
         runtime.Gosched()
     }
     _ = data // 安全可见

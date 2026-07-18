@@ -18,11 +18,12 @@ sources:
 
 ## 30 秒版（开场）
 
-> **context** 在调用链传递 **取消、超时、请求域值**；子节点取消会向下传播，**父不能感知子取消**。生产关键词：**WithCancel 必须 cancel()、WithTimeout 防 goroutine 泄漏、不要把 Context 塞进结构体**。
+> **context** 在调用链传递取消、deadline 和请求域元数据；父取消向下传播，子取消不会反向取消父。`WithTimeout` 只有在下游实际监听 `Done` 或使用 `QueryContext/Do(req.WithContext)` 等 API 时才会停止工作。
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：不可变树节点：`Context` 接口 `Done/Err/Deadline/Value`。
+1. **是什么**：从父 Context 派生出的调用树；接口提供 `Done/Err/Deadline/Value`，并可被
+   多个 goroutine 并发调用。不要把“派生后调用方不修改”误说成内部对象永远不可变。
 2. **为什么**：统一取消 HTTP/RPC/DB 子调用，避免孤儿 goroutine。
 3. **怎么做**：请求入口 `context.Background()` 或框架提供；派生 `WithCancel/WithTimeout/WithDeadline/WithValue`；下游 `select ctx.Done()`。
 
@@ -46,7 +47,8 @@ flowchart TB
 | WithTimeout/Deadline | 到时自动 cancel |
 | WithValue | 传 requestID 等，**少用大对象** |
 
-**传播规则**：仅向下；`cancel()` 关闭 `Done` channel，所有监听者收到。
+**传播规则**：仅向下；调用 `cancel()` 会安排派生 Context 的 `Done` 关闭并取消其子树，
+但 `CancelFunc` 不等待下游工作退出，而且规范允许 `Done` 在 cancel 返回后异步关闭。
 
 **Value 约定**：仅 request scope；key 用未导出类型防冲突。
 
@@ -54,11 +56,12 @@ flowchart TB
 
 - **网关超时 3s**：下游 DB 仍跑 30s → 未传 ctx 或未检查 `QueryContext`。
 - **gRPC**：`metadata` + `IncomingContext` 派生子 ctx。
-- **泄漏**：`WithCancel` 无 defer cancel，子树常驻。
+- **资源泄漏**：不调用返回的 `CancelFunc`，父会继续引用子树，相关 timer/资源会保留到
+  父取消；这不等同于“每次都额外泄漏一个 goroutine”。
 
 ## 排查与工具
 
-- goroutine profile：栈含 `context.WithCancel` 创建点
+- goroutine profile：定位未退出 goroutine 正阻塞在哪；Context 本身通常不会额外创建一个可直接看到的 goroutine
 - 日志对比 request 结束与后台任务存活时间
 - `net/http` `BaseContext` / `Shutdown` 配合
 
@@ -77,13 +80,15 @@ flowchart TB
 2. **Done 关闭后能读 Err 吗？** → `context.Canceled` 或 `DeadlineExceeded`。
 3. **父 cancel 子会怎样？** → 子也取消。
 4. **子 cancel 父？** → 不会。
-5. **WithoutCancel（1.21+）？** → 派生去掉取消，保留 value。
+5. **WithoutCancel（1.21+）？** → 保留父 Value，但没有 Deadline、Done 为 nil、Err 永远为 nil；适合明确需要脱离父取消的任务，仍应另设自己的生命周期。
+6. **CancelFunc 会等 goroutine 停止吗？** → 不会；它只发出取消信号并释放关联关系/计时器，
+   调用方若需要等待退出还要使用 `WaitGroup`、`errgroup` 或结果 channel。
 
 ## 反模式与事故
 
 - 只用 `WithTimeout` 不设 DB `QueryContext`，超时仅 HTTP 返回。
-- `ctx.Value` 存 logger/DB，测试与类型断言地狱。
-- 每次循环 `WithTimeout` 不 `cancel()` → **子 Context 与 timer 泄漏至超时**（`go vet` lostcancel）；现代实现不一定会泄漏独立 goroutine，但仍必须 `defer cancel()`。
+- 把 DB client 等依赖通过 `ctx.Value` 注入；Value 应限于请求域元数据，request-scoped logger 也要有清晰约定。
+- 循环中创建 `WithTimeout` 后不及时 `cancel()` → 子节点与 timer 保留到超时。长循环内应每轮显式调用 `cancel()`，不要把大量 `defer cancel()` 堆到函数末尾。
 
 ## 代码示例
 

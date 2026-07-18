@@ -32,7 +32,7 @@ sources:
 
 | 列 | 关注 |
 |----|------|
-| type | system>const>eq_ref>ref>range>index>ALL，至少 ref |
+| type | 访问方法线索，不应只按固定排行榜判好坏；结合实际 rows、loops 与耗时 |
 | key | NULL 表示未走期望索引 |
 | rows | 估算行数，乘 join 数爆炸 |
 | filtered | 8.0 过滤百分比 |
@@ -84,7 +84,7 @@ flowchart TB
 ## 追问链
 
 1. **type=index 和 ALL？** → index 扫整棵二级索引树；ALL 全表，通常更差。
-2. **Using filesort 一定慢？** → 内存 sort buffer 小则磁盘；可看 `max_length_for_sort_data`。
+2. **Using filesort 一定慢？** → 不一定；它表示不能按目标索引顺序直接返回，需要额外排序，可能完全在内存完成。看实际行数、`EXPLAIN ANALYZE`、`Sort_merge_passes` 和临时空间；`max_length_for_sort_data` 在 MySQL 8.0.20 起已废弃且不再生效。
 3. **rows 很大但很快？** → 估算偏差，用 ANALYZE 或 ANALYZE TABLE。
 4. **如何查正在跑的慢 SQL？** → `SHOW PROCESSLIST` / `sys.session`。
 5. **Go database/sql 慢？** → 查连接池、N+1、未用 context 超时。

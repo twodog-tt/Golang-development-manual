@@ -18,7 +18,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **heap** 看当前存活（inuse），**allocs** 看历史累计分配（含已释放）；排查泄漏用 heap，排查 GC 压力用 allocs。采样基于 **rate** 默认 512KB 一次。生产关键词：**inuse_space vs alloc_space、top -cum、base profile 对比**。
+> **heap** 看当前仍在使用的分配（inuse），**allocs** 看累计分配（含已释放）；排查泄漏偏向 heap，排查 GC 压力偏向 allocs。内存 profile 按分配字节概率采样，默认平均约每 512 KiB 采一个样本，不是机械地“每 512 KiB 必采一次”。
 
 ## 3 分钟版（一面深度）
 
@@ -37,7 +37,7 @@ sources:
 | alloc_space | 累计分配字节 | GC CPU 高 |
 | alloc_objects | 累计分配次数 | 热点构造 |
 
-**采样机制**：每分配约 `MemProfileRate`（默认 512KB）记录一次栈，小对象可能漏样；调低 rate 更准但更慢。
+**采样机制**：以 `MemProfileRate`（默认 512 KiB）为平均采样间隔做概率采样，再按权重估算总体。短时、小样本热点可能被低估；调低 rate 会提高开销，且应在尽可能早的启动阶段设置。
 
 ```mermaid
 flowchart LR
@@ -51,7 +51,7 @@ flowchart LR
 
 ```bash
 go tool pprof -http=:0 'http://localhost:6060/debug/pprof/heap?gc=1'
-go tool pprof -alloc_objects -top http://localhost:6060/debug/pprof/allocs
+go tool pprof -sample_index=alloc_objects -top http://localhost:6060/debug/pprof/allocs
 go tool pprof -base heap1.prof heap2.prof   # 差分
 ```
 
@@ -88,7 +88,7 @@ go tool pprof -base heap1.prof heap2.prof   # 差分
 1. **heap 与 allocs endpoint 区别？** → 同一 profile 源，默认视图 index 不同。
 2. **为何 `?gc=1`？** → 去掉待回收垃圾，inuse 更接近真实存活。
 3. **flat 0 cum 高？** → 分配在深层 callee，父函数 cum 高。
-4. **采样失真？** → 超大对象必记，小对象低估，需结合 `-m` 与 bench。
+4. **采样失真？** → 大分配被采中的概率更高，但不能说“必记”；短时小对象热点需结合 bench、逃逸报告与更长采样。
 5. **生产 overhead？** → 默认很低；rate 过小或频繁 gc=1 会增加成本。
 
 ## 反模式与事故

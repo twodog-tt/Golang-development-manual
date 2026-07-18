@@ -18,7 +18,10 @@ sources:
 
 ## 30 秒版（开场）
 
-> Go **运行时只检测全局死锁**（所有 goroutine 阻塞），报 `fatal error: all goroutines are asleep - deadlock!`；**局部死锁**（部分 G 阻塞、部分空转）不会自动报。生产关键词：**无缓冲握手顺序、忘记 close、main 提前退出**。
+> Go runtime 能报告的是进程已无可继续运行路径的一类**全局死锁**，典型报错为
+> `fatal error: all goroutines are asleep - deadlock!`；**局部死锁**（部分 G 永久阻塞，
+> 但还有 G、timer、网络/cgo 等活动路径）不会自动报。`main` 返回会直接结束进程，不是死锁。
+> 生产关键词：**无缓冲握手顺序、忘记 close、循环等待、取消路径缺失**。
 
 ## 3 分钟版（一面深度）
 
@@ -41,9 +44,11 @@ flowchart LR
 | 单 G 无缓冲自收发 | 立即 fatal deadlock |
 | 缓冲满且无消费者 | send 阻塞，若仅相关 G 全阻塞 → fatal |
 | 只 send 不 close，range 永远等 | 消费者挂起（若还有其他 runnable G 不 fatal） |
-| 环形等待 A→B→C→A | 部分系统表现为活锁或超时 |
+| 环形等待 A→B→C→A | 相关 goroutine 永久挂起；若系统仍有其他活动，不一定触发 runtime 全局死锁 |
 
-**runtime 检测条件**：`checkdead` 发现所有 G 处于 `_Gwaiting` 且无 netpoll 事件、无 cgo 回调等。
+**runtime 检测边界**：`checkdead` 主要从是否还有 running M/G 出发，并继续考虑 timer、
+netpoll、cgo callback、`c-shared/c-archive` 等特殊路径。它不是 channel 专用的等待图检测器，
+也不能证明业务局部一定有进展。
 
 **与 mutex 死锁区别**：channel 无死锁检测器；mutex 循环等待同样可能只表现为 hang。
 
@@ -63,15 +68,17 @@ flowchart LR
 ## 架构取舍
 
 - **同步改异步**：用 errgroup + context 替代双向阻塞握手。
-- **超时必备**：`select` + `time.After` 或 `context`（注意 After 泄漏，用 `NewTimer`）。
+- **超时必备**：优先使用 `context`；也可用 `time.After`/`NewTimer`。Go 1.23+ 可回收不再被引用的未触发 timer，旧语言版本或高频循环仍应注意 timer 分配，并在需要复用/停止时用 `NewTimer`。
 - **不宜**：用无缓冲 chan 做「函数返回值」替代 —— 用 future 模式也要防无人读。
 
 ## 追问链
 
-1. **两个 G 互相无缓冲 send？** → 都阻塞，通常 fatal deadlock。
+1. **两个 G 互相无缓冲 send？** → 两者会形成局部死锁；只有整个 Go 程序也没有其他
+   可运行或可唤醒路径时，runtime 才会报全局 deadlock。
 2. **有缓冲 size 1 会死锁吗？** → 可能，若双方都先 send 满或后 recv 空。
 3. **close 能解开吗？** → recv 得零值；blocked send 仍可能 panic 若已 close。
-4. **select 能防死锁吗？** → 仅当某分支可进 default 或超时。
+4. **select 能防死锁吗？** → 只有可执行的取消/超时/default 分支才能避免该次永久阻塞；
+   `default` 还可能制造 busy loop，且不能自动消除系统中的循环等待。
 5. **和 sync.Mutex 组合？** → 持锁等 chan 常见死锁，锁顺序要一致。
 
 ## 反模式与事故

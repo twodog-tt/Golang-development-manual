@@ -11,6 +11,7 @@ code_refs: []
 sources:
   - https://go.dev/doc/gc-guide
   - https://go.dev/doc/go1.19
+  - https://go.dev/doc/go1.26
   - https://github.com/golang/proposal/blob/master/design/44167-gc-pacer-redesign.md
 ---
 
@@ -24,7 +25,7 @@ sources:
 
 1. **是什么**：并发 GC 仍会在分配尖峰触发 assist，或在 sweep term 产生短 STW，表现为尾延迟尖刺。
 2. **为什么**：延迟敏感服务（交易、游戏、广告竞价）SLO 在毫秒级，亚毫秒 STW 叠加队列即超时。
-3. **怎么做**：压测看 `gc/pause` P99；trace 对齐尖刺；控分配 burst；设 memory limit；必要时隔离或 `GOGC` 略降换更稳堆曲线。
+3. **怎么做**：压测看 `/gc/pauses:seconds` 与请求尾延迟；trace 对齐尖刺；控制分配 burst；合理设置 memory limit。调 GOGC 的方向必须通过 CPU、RSS、assist 和 P99 一起验证。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -52,12 +53,14 @@ sequenceDiagram
 
 **pacer（1.19+ 改进）**：根据 `GOMEMLIMIT` 与 GOGC 动态调节触发点，减少「堆暴涨后连环 GC」。
 
+**Go 1.26 Green Tea**：默认收集器通过更好的标记/扫描局部性降低不少 GC-heavy 工作负载的 CPU 开销，但收益并非所有负载相同，也不代表 STW、assist 或尾延迟自动按同一比例下降。延迟服务仍必须用自己的对象图、CPU 型号和限额配置做升级前后对照。
+
 **治理 playbook**
 
-1. 基线：固定 RPS 压测，记录 P50/P99/P999 与 `gc/pause:seconds`。
+1. 基线：固定 RPS 压测，记录 P50/P99/P999 与 `/gc/pauses:seconds`。
 2. trace 5s 捕获尖刺时刻是否 STW/assist。
 3. 降 burst 分配（批处理改队列平滑）。
-4. 调 `GOMEMLIMIT` ≈ 0.9×limit，必要时 `GOGC=50~80` 换频率。
+4. 根据进程内非 Go 内存和峰值留 headroom 设置 `GOMEMLIMIT`；围绕默认 GOGC 做多组实验，不预设“50~80 一定更稳”。
 5. 升级 Go 小版本获 pacer/GC 修复。
 
 ## 生产场景
@@ -81,17 +84,17 @@ sequenceDiagram
 | 方案 | 适用 | 不适用 |
 |------|------|--------|
 | 分配隔离（批处理另进程） | 混合负载 | 运维复杂 |
-| 略降 GOGC | 要稳延迟、CPU 有余 | CPU 已紧 |
+| 略降 GOGC | 需要压低堆峰值、CPU 有余，且压测证实尾延迟改善 | CPU 已紧或 assist/GC 频率反而恶化 |
 | 超大堆换少 GC | 吞吐批处理 | 延迟敏感 |
 | 非 Go 处理极热路径 | 极端 | 过早 |
 
 ## 追问链
 
 1. **assist 如何体现在 trace？** → mutator 时间片执行 `gcAssistAlloc`。
-2. **GOMEMLIMIT 如何减抖动？** → 提前触发 GC，避免撞 hard limit 连环 GC。
-3. **能否禁用 GC？** → `GOGC=off` 仅特殊 job，在线不可用。
+2. **GOMEMLIMIT 如何影响抖动？** → 合理值可约束 runtime 内存并降低撞 cgroup limit 的风险；设得过低会 GC thrashing，反而放大抖动。
+3. **能否禁用 GC？** → `GOGC=off` 只关闭堆增长触发，有限 GOMEMLIMIT 仍可触发；仅适合生命周期和峰值都可证明的特殊任务。
 4. **和 netpoller 延迟区分？** → trace network vs GC 视图。
-5. **SLO 多少 GC 可接受？** → 业务定；常要求 P99 pause < 1ms 且 assist 可忽略。
+5. **SLO 多少 GC 可接受？** → 没有通用阈值，应从端到端预算倒推，并同时计入 STW、assist、排队与 CPU throttle。
 
 ## 反模式与事故
 
@@ -125,3 +128,4 @@ func startSmoothedWorkers(n int, q <-chan Job) {
 - [Go GC Guide - Latency](https://go.dev/doc/gc-guide)
 - [GC Pacer Redesign（proposal）](https://github.com/golang/proposal/blob/master/design/44167-gc-pacer-redesign.md)
 - [Go 1.19 GOMEMLIMIT](https://go.dev/doc/go1.19)
+- [Go 1.26 Release Notes - Green Tea GC](https://go.dev/doc/go1.26)

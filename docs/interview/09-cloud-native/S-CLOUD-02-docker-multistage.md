@@ -18,12 +18,12 @@ sources:
 
 ## 30 秒版（开场）
 
-> Go 静态编译适合 **multi-stage**：builder 阶段编译，runtime 用 **distroless/scratch** 缩小攻击面。生产关键词：**CGO_ENABLED=0、-trimpath -ldflags=-s -w、非 root 用户、镜像扫描**。
+> Go 很适合 **multi-stage**：builder 阶段编译，runtime 只保留二进制和必需运行时文件。`distroless/scratch` 可缩小攻击面，但 `CGO_ENABLED=0`、剥离符号和极简镜像都应根据依赖、调试与合规需求选择，而不是机械套用。
 
 ## 3 分钟版（一面深度）
 
 1. **是什么**：Multi-stage Dockerfile 在前一 stage 编译，最终镜像只 COPY 二进制，不含编译器与源码。
-2. **为什么**：镜像从 1GB+ golang 降到 **10～30MB**；减少 CVE 面；加快拉取与启动。
+2. **为什么**：避免把编译器、源码和构建缓存带入生产镜像；通常能显著减小体积与 CVE 面，但最终大小取决于二进制、证书、时区和动态库。
 3. **怎么做**：`FROM golang AS builder` → `go build` → `FROM gcr.io/distroless/static` → `USER nonroot`；CI 中 SBOM + Trivy 扫描。
 
 ## 10 分钟版（原理 + 图示）
@@ -57,9 +57,9 @@ ENTRYPOINT ["/app"]
 
 | 选项 | 作用 |
 |------|------|
-| CGO_ENABLED=0 | 纯静态，便于 scratch/distroless |
+| CGO_ENABLED=0 | 使用纯 Go 路径时通常便于静态部署；若依赖 CGO 则不能强关 |
 | -trimpath | 去除本地路径，可复现构建 |
-| -ldflags -s -w |  strip 符号，缩小体积 |
+| -ldflags -s -w | 去除符号/调试信息以缩小体积；会降低离线调试与符号化能力，需权衡 |
 | nonroot | 降低容器逃逸影响 |
 
 ## 生产场景
@@ -87,7 +87,7 @@ ENTRYPOINT ["/app"]
 
 ## 追问链
 
-1. **scratch 和 distroless 区别？** → scratch 空文件系统；distroless 含 ca-certificates、tzdata 等最小集。
+1. **scratch 和 distroless 区别？** → scratch 是空文件系统，证书、时区、用户信息都要自行复制；distroless 按具体变体提供一组最小运行时文件，不能假设所有变体内容相同。
 2. **如何传 build 版本号？** → `-ldflags "-X main.version=$GIT_SHA"`。
 3. **vendor 构建？** → `COPY vendor vendor` + `go build -mod=vendor` 可离线 reproducible。
 4. **镜像层缓存优化？** → 先 COPY go.mod sum 再 download，后 COPY 源码。
@@ -97,7 +97,7 @@ ENTRYPOINT ["/app"]
 - **runtime 仍用 golang 镜像** → 巨大、多 CVE
 - **root 用户运行** → 安全风险
 - **把 .git、密钥 COPY 进镜像** → 泄漏
-- **未固定 base 镜像 digest** → 供应链漂移
+- 只写可变 tag 且没有升级流程 → 同一 Dockerfile 随时间得到不同基础镜像；可 pin digest，并由自动化定期更新和扫描
 
 ## 代码示例
 

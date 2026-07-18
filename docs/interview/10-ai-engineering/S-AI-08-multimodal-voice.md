@@ -24,7 +24,7 @@ sources:
 
 1. **是什么**：Vision 模型读图答问；ASR 把语音转文本；TTS 把回复合成语音；部分模型支持 **音频输入直接理解**（原生多模态）。
 2. **为什么**：客服、质检、会议助手、电商以图搜款 — JD  increasingly 要求「接过大模型 + 语音/图像」。
-3. **怎么做**：小图 base64 内联；大图走 **S3/OSS URL** + 短期签名；音频用 `audio/wav`/`webm` 上传或流式 chunk；Go `http.MaxBytesReader` 限体积。
+3. **怎么做**：按 provider 限制选择 base64 或对象存储短期签名 URL；上传入口在解析 multipart 前用 `http.MaxBytesReader` 限制总大小，并实际解码/探测 MIME、像素、时长和压缩炸弹；流式链路传播客户端取消。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -41,7 +41,7 @@ sequenceDiagram
   API-->>App: JSON / SSE / 音频流
 ```
 
-**OpenAI 兼容消息结构（Go 侧组装）**
+**某些 Chat Completions 兼容 API 的消息结构（示意）**
 
 ```go
 // 图像：推荐 URL 方式（省请求体）
@@ -63,21 +63,24 @@ msg := map[string]any{
 **语音 ASR（Whisper 类 API）**
 
 ```go
-req, _ := http.NewRequestWithContext(ctx, http.MethodPost, baseURL+"/audio/transcriptions", body)
+req, err := http.NewRequestWithContext(ctx, http.MethodPost, baseURL+"/audio/transcriptions", body)
+if err != nil {
+    return err
+}
 req.Header.Set("Authorization", "Bearer "+apiKey)
 // multipart: file + model=whisper-1 + language=zh
 ```
 
 **TTS 流式播放**
 
-- 请求 `response_format: opus/mp3`，`stream: true`
-- Go 用 `io.Copy` 转发到客户端，或边收边推 WebSocket
+- 请求 provider 支持的音频格式；有些 API 直接以 chunked HTTP body 返回音频，并不存在通用的 `stream: true` 请求字段
+- Go 可边读上游 body 边写下游，并处理 flush、背压、写超时和客户端 `ctx.Done()`
 
 | 能力 | 典型延迟 | Go 注意点 |
 |------|----------|-----------|
-| 图像理解 | 1～5s | `detail=high` token 暴涨 |
-| ASR | 实时因子 0.3～1x | 16kHz mono 足够客服 |
-| TTS | 首包 200～500ms | 流式降低等待 |
+| 图像理解 | 与模型、图片尺寸和 detail 相关 | 高 detail 通常增加 token/费用 |
+| ASR | 与模型、音频长度、并发和实时模式相关 | 采样率/声道按来源与模型要求预处理 |
+| TTS | 关注首字节与播放缓冲 | 流式可降低体感等待 |
 | 实时语音 API | 双向流 | 独立 WebSocket，与文本 Chat 分离 |
 
 ## 生产场景
@@ -104,7 +107,7 @@ req.Header.Set("Authorization", "Bearer "+apiKey)
 
 ## 追问链
 
-1. **图片 base64 还是 URL？** → 小图(<1MB)可 base64；大图 URL + HTTPS + 短 TTL 签名。
+1. **图片 base64 还是 URL？** → 由 provider 请求大小、隐私和网络路径决定；URL 使用 HTTPS、短 TTL、最小对象权限，并防止把内部任意 URL 暴露给 provider。
 2. **实时语音和批处理 ASR？** → 实时用 WebSocket/专用 Realtime API；离线批处理用文件 API 更便宜。
 3. **如何防恶意上传？** → 限制 MIME、尺寸、时长；病毒扫描；异步队列处理。
 4. **和 [S-AI-01](./S-AI-01-llm-api-integration.md) 流式关系？** → 同一套 ctx 超时与连接池；TTS/Chat 共用 `http.Client` 要注意 body 类型不同。
@@ -112,7 +115,7 @@ req.Header.Set("Authorization", "Bearer "+apiKey)
 ## 反模式与事故
 
 - **无限 multipart** → 内存 OOM
-- **高清图全用 detail=high** → 费用十倍
+- 不经评估所有图片都用最高 detail → token、延迟和费用显著上升
 - **ASR 结果直接执行 SQL** → 语音注入
 - **TTS 全量缓存用户隐私对话** → 合规风险
 

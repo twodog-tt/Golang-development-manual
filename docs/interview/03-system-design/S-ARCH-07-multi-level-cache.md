@@ -16,7 +16,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> 多级缓存 = **L1 进程内 + L2 Redis + L3 DB/CDN**，用延迟换 QPS；一致性靠 **TTL + 主动失效（Pub/Sub、MQ）+ 版本号**。生产关键词：**本地缓存命中率、失效风暴、内存上限**。
+> 多级缓存通常是请求进入应用前的 **CDN/边缘缓存**，加上应用内 **L1 本地缓存**、共享 **L2 Redis**，最后回源权威 DB。TTL、失效消息和版本号只能把不一致窗口变得可控，不会自动提供强一致。
 
 ## 3 分钟版（一面深度）
 
@@ -43,8 +43,8 @@ flowchart LR
 |------|------|--------|------|
 | TTL only | 秒~分钟 | 低 | 配置、字典 |
 | Delete + Pub/Sub | 百 ms | 中 | 商品信息 |
-| 版本号比对 | 实时 | 高 | 库存近似 |
-| Can not | — | — | 强一致库存（勿用 L1） |
+| 版本号/因果 token | 可检测或缩短陈旧窗口 | 高 | 需要读己之写的读模型 |
+| 不使用 L1 | 由权威存储决定 | — | 强一致余额、库存扣减 |
 
 **容量估算**
 
@@ -52,14 +52,14 @@ flowchart LR
 |------|--------|-------------|
 | L1 条目 | 1 万条 × 2KB = 20MB | 各 Pod 独立，总内存 600MB |
 | L2 Redis | 100GB 集群 | 共享 |
-| L1 命中率目标 | 60~80%（热点集中时） | 减轻 Redis 30~50% QPS |
+| L1 命中率示例 | 70%（取决于热点分布） | Redis 承担剩余约 30% 请求 |
 
-- 30 Pod × 10 万 QPS = 300 万总 QPS；L1 命中 70% → Redis 90 万 QPS → 仍可能需要 CDN。
+- 若**全集群**入口为 10 万 QPS，L1 命中 70%，则 Redis 约承接 3 万 QPS（忽略 CDN 命中和回填流量），不是“每个 Pod 都收到 10 万 QPS”。
 
 ## 生产场景
 
 - **商品 SKU 基础信息**：变更少，L1 TTL 5min + 变更消息失效。
-- **用户权限**：登录时加载到 L1，权限变更 Pub/Sub 踢掉。
+- **用户权限**：若缓存，需短 TTL、版本校验和紧急撤权通道；高风险授权决策应读权威策略或可证明及时失效的系统。
 - **Feed 时间线**：不适合 L1（个性化太强），仅 L2+CDN。
 
 ## 排查与工具
@@ -85,7 +85,7 @@ flowchart LR
 1. **Pub/Sub 丢消息怎么办？** → TTL 兜底 + 版本号；或改用 MQ。
 2. **L1 和 L2 同时 miss 怎么办？** → singleflight 合并回源，只打一次 DB。
 3. **多机房 L1 怎么失效？** → 跨机房 MQ / Redis Streams 广播。
-4. **bigcache vs Ristretto？** → Ristretto 并发更好、支持 TinyLFU；bigcache 零 GC 压力。
+4. **bigcache vs Ristretto？** → 两者策略、数据表示和命中率取舍不同；bigcache 通过减少堆指针降低 GC 扫描压力，但不是“零 GC/零内存成本”。
 5. **Go GC 和本地缓存？** → 存 []byte 而非大 struct 指针，减少扫描压力。
 
 ## 反模式与事故
@@ -127,4 +127,4 @@ func (c *TwoLevelCache) Invalidate(ctx context.Context, key string) error {
 ## 延伸阅读
 
 - [Ristretto 高性能本地缓存](https://github.com/dgraph-io/ristretto)
-- [bigcache - 零 GC 开销](https://github.com/allegro/bigcache)
+- [bigcache](https://github.com/allegro/bigcache)

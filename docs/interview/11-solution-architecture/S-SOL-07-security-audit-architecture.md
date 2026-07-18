@@ -18,7 +18,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> 架构师定义 **零信任边界**：默认不信任内网、**最小权限**、全链路 **审计不可篡改**。覆盖认证授权、密钥、PII、供应链（SBOM）。Go 服务：**mTLS、JWT 短 TTL、Secret 不进镜像**。与 [S-AI-05 LLM 安全](../10-ai-engineering/S-AI-05-llm-security.md)、[S-SOL-05 多租户](./S-SOL-05-multi-tenant-saas.md) 形成安全三角。
+> 架构师定义零信任与最小权限边界，并让审计日志 **追加写、访问受控、可检测篡改且满足留存策略**。mTLS 认证工作负载身份，但不自动授予业务权限；JWT、密钥、PII、供应链与恢复流程都要有独立控制。
 
 ## 3 分钟版（一面深度）
 
@@ -45,14 +45,14 @@ flowchart TB
 |----|------|
 | 身份 | SSO、MFA、服务账号 rotation |
 | 授权 | RBAC/ABAC；[S-NET-04 JWT](../06-network-governance/S-NET-04-jwt-auth.md) 边界 |
-| 数据 | TLS1.3、字段级加密 PII、脱敏日志 |
+| 数据 | 按兼容与合规策略设置 TLS 最低版本、敏感字段保护、脱敏日志 |
 | 供应链 | 依赖扫描、最小 base 镜像、SBOM |
 | 审计 | who/when/what/tenant；WORM 或 hash 链 |
 
 **Go 落地清单**
 
-- `crypto/tls` 最低版本；禁用 weak cipher
-- JWT：RS256、短 access + refresh rotation
+- `crypto/tls` 设置组织批准的最低版本与 cipher policy
+- JWT：使用经批准的非对称算法（如 RSA/ECDSA/EdDSA）、短 access + refresh rotation
 - SQL：参数化；ORM 仍防 raw 拼接
 - 容器：非 root、read-only rootfs
 
@@ -77,7 +77,7 @@ flowchart TB
 
 - OWASP ASVS L2 自检
 - 渗透测试、SAST/DAST CI
-- 审计：ELK + 只追加索引
+- 审计：独立权限域、append-only/WORM 或签名/hash 链、集中 SIEM 与定期完整性验证
 
 ## 架构取舍
 
@@ -89,10 +89,10 @@ flowchart TB
 
 ## 追问链
 
-1. **服务间还要鉴权吗？** → 要；Mesh mTLS + service identity。
+1. **服务间还要鉴权吗？** → 要；mTLS/service identity 先认证调用方，再由服务或 policy engine 做 operation/resource authorization。
 2. **审计日志谁删？** → 运维无删权限；break-glass 双审批。
-3. **GDPR 删除权？** → 架构预留 soft delete + 物理擦除 job。
-4. **Go supply chain？** → `go.sum`、Dependabot、私有 proxy。
+3. **GDPR 删除权？** → 按适用法规实现删除/匿名化工作流、索引与缓存清理、备份过期和法律留存例外；soft delete 本身不是物理擦除。
+4. **Go supply chain？** → `go.sum` 校验模块内容一致性但不代表依赖可信或无漏洞；结合 `govulncheck`、依赖审查、构建 provenance/SBOM、签名与受控 proxy。
 
 ## 反模式与事故
 

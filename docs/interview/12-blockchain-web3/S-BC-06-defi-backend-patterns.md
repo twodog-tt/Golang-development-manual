@@ -11,7 +11,8 @@ code_refs: []
 sources:
   - https://ethereum.org/en/defi/
   - https://ethereum.org/en/nft/
-  - https://chain.link/
+  - https://docs.chain.link/data-feeds/using-data-feeds
+  - https://docs.chain.link/data-feeds/l2-sequencer-feeds
 ---
 
 # DeFi / NFT 后端架构模式
@@ -24,7 +25,7 @@ sources:
 
 1. **是什么**：用户通过前端签 tx；后端提供数据、缓存、业务规则，不替代链上清算。
 2. **为什么**：架构师/Web3 后端面问「swap 报价怎么来」「NFT 图片存哪」。
-3. **怎么做**：读路径走索引+RPC；写路径用户签或平台热钱包；Oracle 价格多源聚合。
+3. **怎么做**：读路径走可回溯索引 + 指定 block 的 RPC；写路径由用户签名或受控平台钱包。报价与风控可组合多源数据，但链上结算最终以合约实际读取的 oracle/pool 状态为准。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -55,13 +56,14 @@ flowchart TB
 |------|------|
 | Metadata API | tokenURI 解析 JSON |
 | 媒体 | IPFS CID + CDN 缓存 |
-| 版税 | EIP-2981 / 市场约定 |
+| 版税 | EIP-2981 仅表达 royalty 信息，是否执行取决于市场/协议 |
 | 铸造队列 | 平台代 mint + Gas 管理 |
 
 **Oracle 注意**
 
-- Chainlink 等链上 feed + 链下缓存 TTL
-- 滞后价格导致 **清算/报价** 偏差 — 架构上要有 staleness 检查
+- Chainlink 等链上 feed 必须绑定明确的网络、feed 地址、资产对和版本，并校验 `answer`、`decimals`、`updatedAt` 及业务允许的范围。staleness 阈值要依据该 feed 公布的 heartbeat/deviation 与业务风险制定，不存在所有 feed 通用的秒数
+- 在使用受支持 L2 的 feed 时，还要检查对应 sequencer uptime feed，并在 sequencer 恢复后执行 grace period；链下缓存不能把过期或停机期间的值重新包装成“新价格”
+- 报价 API 还应带 quote block、expiry、slippage assumptions，并在发送前重新模拟
 
 **跨链桥（简述）**
 
@@ -100,11 +102,11 @@ flowchart TB
 
 - **后端替用户 unlimited approve**
 - **Oracle 单源无 staleness 检查** → 错误清算
-- **metadata 可篡改** → 未校验 CID 与链上 tokenURI
+- 把 IPFS/CDN 当成天然不可变 → CID 内容寻址，但 tokenURI/baseURI、网关和合约本身仍可能升级；展示端要记录解析来源与版本
 
 ## 代码示例
 
-报价 API 返回 `{to, data, value, gasEstimate}` 供前端 `eth_sendTransaction`，后端 **不持用户私钥**。
+报价 API 可返回 `{chainId, to, data, value, quoteBlock, expiresAt, gasEstimate}` 供钱包复核和签名；前端仍应校验目标地址、chain、模拟结果和最小输出，gas estimate 不是上限保证。
 
 ## 延伸阅读
 

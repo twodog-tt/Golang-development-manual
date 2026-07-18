@@ -23,7 +23,7 @@ sources:
 
 1. **是什么**：访问高度倾斜的 key，在 Cluster 中仍落单 slot/单节点，成为瓶颈；表现为一节点 CPU 100%、延迟尖刺、其他 slot 空闲。
 2. **为什么**：业务天然热点（秒杀库存、热搜榜、全站开关）；缓存设计未打散；Pipeline 放大单 key 压力。
-3. **怎么做**：写扩散 `key:{id}:{0..N}` 随机读；读热点用 **local cache + TTL jitter**；写热点用 **MQ 串行化** 或 Redis Lua 单 key 原子；前置 **SDK 采样** 上报 TopN。
+3. **怎么做**：只读/可复制值可写扩散到多个副本 key 后随机读，并设计版本化更新与回退；读热点再加 local cache + singleflight。不可随意复制余额/库存等强一致写热点，通常需串行化、分配 token 或重构权威边界。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -84,7 +84,7 @@ flowchart LR
 1. **hotkeys 原理？** → 扫描采样 key 访问频率，非精确全量。
 2. **分片后如何保证不超卖？** → 启动时总库存分配到各 shard，Lua 内 shard 内原子扣，总和≤真实库存。
 3. **本地缓存如何失效？** → Redis Pub/Sub、etcd watch、短 TTL + jitter。
-4. **singleflight 坑？** → 第一个请求失败会拖垮同批；需 `Forget` 或包装错误。
+4. **singleflight 坑？** → 同一批请求共享首个调用的结果，包括错误；调用完成后 key 会自动移除。`Forget` 是允许旧调用未结束时启动新调用，不是失败后的通用修复，应结合错误缓存、超时和回源限流设计。
 5. **Cluster 热点迁不走？** → 只能拆 key 或加本地层，slot 迁移不治本。
 
 ## 反模式与事故
@@ -109,6 +109,8 @@ func GetProduct(ctx context.Context, rdb *redis.Client, id string) (Product, err
         return v.(Product), nil
     }
     v, err, _ := g.Do(id, func() (any, error) {
+        // 前提：写路径已把同一版本的商品值复制到 8 个 replica key；
+        // miss 时还应回退其他副本或权威存储。
         shard := fmt.Sprintf("product:%s:%d", id, rand.Intn(8))
         return fetchFromRedis(ctx, rdb, shard)
     })

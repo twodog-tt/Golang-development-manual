@@ -18,13 +18,16 @@ sources:
 
 ## 30 秒版（开场）
 
-> 交易所拆微服务应 **按限界上下文** 而非按表或按团队人头。CEX 核心域：**订单、撮合、账务、钱包、风控、行情**；DEX 核心域：**索引、行情读模型、Launchpad、返佣**。上下文映射关系决定 **gRPC 同步 vs MQ 异步**。关键词：**聚合根不跨库事务、防腐层 ACL**。
+> 交易所先按业务语言、规则和一致性边界识别限界上下文，再决定进程和数据库部署。
+> bounded context、微服务和数据库不是必然 1:1。聚合通常定义单事务一致性边界；
+> 跨聚合/上下文通过 API、事件和对账协作，避免无意的跨库写事务。
 
 ## 3 分钟版（一面深度）
 
 1. **是什么**：用 DDD 战略设计划分交易所服务边界与集成模式。
 2. **为什么**：拆错边界会导致分布式事务地狱、对账对不上、发布耦合。
-3. **怎么做**：每个上下文独立数据库；跨上下文用 ID 引用 + 事件；禁止跨库 JOIN。
+3. **怎么做**：每份数据有唯一写入 owner；服务通过 API/事件访问。可共享物理数据库
+   或构建只读投影，但禁止绕过 owner 直接跨 schema 修改；分析 JOIN 放到读模型/数仓。
 
 ## 10 分钟版
 
@@ -69,7 +72,7 @@ flowchart LR
 | 发布-订阅 | ME → Ledger | Kafka `trade.matched` |
 | 开放主机服务 OHS | OMS → ME | gRPC `SubmitOrder` |
 | 防腐层 ACL | Launch → 链上 Factory | abigen + 版本适配 |
-| 共享内核 | **避免** | 共用 user 表是大坑 |
+| 共享内核 | 谨慎、小而稳定 | 可共享经过治理的 ID/基础类型；共享可写 user 表会模糊 owner |
 
 ### 服务清单与职责（面试白板表）
 
@@ -88,8 +91,8 @@ flowchart LR
 
 | 信号 | 建议 |
 |------|------|
-| 团队 < 15 人 | 模块化单体 + 2～3 关键服务独立 |
-| 强一致下单+扣款在同一请求 | 勿拆成跨服务 2PC |
+| 团队较小、领域和扩展边界尚未稳定 | 模块化单体 + 少量需要隔离的服务；不要用固定人数作为硬阈值 |
+| 强一致 reservation 是一个自然事务边界 | 优先共置账户聚合或调用权威 reserve 接口；是否使用分布式事务需按参与者和延迟评估，不能先按服务数量机械拆分 |
 | 链上索引 < 3 人维护 | indexer + kline 可同部署，逻辑分包 |
 
 参见 [S-ARCH-14](../03-system-design/S-ARCH-14-microservice-boundary.md)
@@ -98,13 +101,15 @@ flowchart LR
 
 | 维度 | CEX | DEX |
 |------|-----|-----|
-| 真相源 | 撮合 WAL + 账务流水 | 链上日志 + Indexer 游标 |
-| 延迟敏感 | matching-svc | indexer-svc（块延迟） |
+| 真相源 | 撮合日志权威记录订单执行；账务流水权威记录资产余额 | canonical 区块/receipt/state；Indexer 游标只是消费进度，不是真相源 |
+| 主要时延约束 | matching/order acceptance 的尾延迟 | 链最终性、RPC 新鲜度、索引 lag 与查询 SLO |
 | 扩展维度 | per symbol | per chain_id |
 
 ## 生产场景
 
-- **返佣要读成交**：rebate-svc 消费 `TradeEvent` 或 `SwapEvent`，**不调** ledger 内部接口
+- **返佣要读成交**：根据规则消费 `TradeEvent`、`SwapEvent` 或更合适的
+  `TradeSettled`；若返佣要求账务已结算，就不能只看原始撮合事件。服务不应读取
+  ledger 私有表，可通过公开事件/API 获得结算状态
 - **钱包入账**：wallet-svc 发 `DepositConfirmed` → ledger-svc 消费入账
 - **合约升级**：Launch 上下文通过 ACL 适配新旧 ABI
 

@@ -24,7 +24,7 @@ sources:
 
 1. **是什么**：OTel 是 CNCF 可观测性标准；Go 通过 `go.opentelemetry.io/otel` 埋点，Exporter 发到后端。
 2. **为什么**：微服务下 **跨服务排障** 靠 Trace；5 年+ 需讲清 **三支柱如何关联**（同一 trace_id 串日志）。
-3. **怎么做**：HTTP/gRPC 中间件自动创建 span；`otel.SetTracerProvider` + `BatchSpanProcessor`；生产 **ParentBased + 1%～10% 采样**；metrics 避免 `user_id` 等高基数 label。
+3. **怎么做**：HTTP/gRPC instrumentation 创建 span；`otel.SetTracerProvider` + batch processor；采样策略按流量、错误预算与后端成本设计，常用 ParentBased + 比例头采样，或把完整候选 trace 送到 Collector 做尾采样；metrics 避免 `user_id` 等高基数属性。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -49,7 +49,7 @@ import (
 )
 
 func initTracer(ctx context.Context, endpoint string) (*sdktrace.TracerProvider, error) {
-    exp, err := otlptracegrpc.New(ctx, otlptracegrpc.WithEndpoint(endpoint), otlptracegrpc.WithInsecure())
+    exp, err := otlptracegrpc.New(ctx, otlptracegrpc.WithEndpoint(endpoint), tlsOption)
     if err != nil {
         return nil, err
     }
@@ -66,12 +66,12 @@ func initTracer(ctx context.Context, endpoint string) (*sdktrace.TracerProvider,
 }
 ```
 
-**Gin 中间件**：使用 `otelgin.Middleware("service-name")` 自动创建 span 并传播 context。
+其中 `tlsOption` 在生产应使用 TLS credentials；`WithInsecure()` 只适合明确受控的本地/受信链路。Gin 可用 `otelgin.Middleware("service-name")` 创建 span 并传播 context。
 
 ## 生产场景
 
 - 支付链路 5 跳：缺 Trace → 无法定位慢在 DB 还是下游 RPC
-- **高 QPS**：100% 采样拖垮 Collector → 头采样 + tail sampling（Collector 侧）
+- **高 QPS**：全量保留成本过高。若 SDK 已在头采样阶段丢弃 trace，Collector 的尾采样无法“找回”错误 trace；要做错误优先尾采样，应让候选 trace 到达 Collector，并配置 memory limiter、队列和容量保护
 - 日志：slog 注入 `trace_id`、`span_id` 便于 Loki 查询
 
 ## 排查与工具
@@ -94,8 +94,8 @@ func initTracer(ctx context.Context, endpoint string) (*sdktrace.TracerProvider,
 ## 追问链
 
 1. **Trace 和 Log 怎么关联？** → context 中 trace_id 写入 slog 字段；同一 request 共享。
-2. **采样策略？** → 错误 span 100%（tail sampling）；正常流量比例采样。
-3. **context 传播跨 goroutine？** → 显式 `trace.ContextWithSpan`；异步任务传 ctx。
+2. **采样策略？** → 头采样便宜但看不到最终错误；尾采样可按错误/延迟决策但需要缓冲完整 trace。所谓“错误全留”是策略目标，不是无成本保证。
+3. **context 传播跨 goroutine？** → 直接把包含 span 的 `context.Context` 显式传入 goroutine/下游调用；不要无理由改用 `context.Background()` 或手工复制 span。
 4. **与 Prometheus 关系？** → OTel metrics 可 export 为 Prometheus 格式；长期可统一 OTLP。
 
 ## 反模式与事故

@@ -74,7 +74,7 @@ flowchart LR
 
 ## 追问链
 
-1. **refresh 和 flush？** → refresh 打开新 segment 可查；flush 落盘 translog。
+1. **refresh 和 flush？** → refresh 让新的 Lucene segment 对搜索可见；flush 执行 Lucene commit 并开始新的 translog generation。translog 是否每次请求 fsync 由 durability 配置决定，不是等 flush 才“落盘”。
 2. **分片数怎么定？** → 单分片 20～50GB 经验；过多分片元数据开销大。
 3. **脑裂？** → 7.x+ 用 master 选举；需 `minimum_master_nodes` 历史概念。
 4. **Go 写入 bulk？** → `BulkProcessor` 批量、背压、失败重试。
