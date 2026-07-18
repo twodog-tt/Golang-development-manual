@@ -1,0 +1,25 @@
+{
+  "fixture_kind": "negative-contract",
+  "node_version": "future-breaking",
+  "responses": {
+    "getSignatureStatuses": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "context": {
+          "slot": 99
+        },
+        "value": [
+          {
+            "slot": 98,
+            "err": null,
+            "confirmationStatus": {
+              "level": "confirmed"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+

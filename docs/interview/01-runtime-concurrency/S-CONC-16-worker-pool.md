@@ -43,7 +43,7 @@ flowchart LR
 
 | 维度 | 选项 |
 |------|------|
-| 队列 | 无界 channel（危险）、有界、丢弃、阻塞 |
+| 队列 | 内建 channel 只有无缓冲或固定容量；“无界队列”需额外 slice/list 实现，若无硬上限会转化为内存风险 |
 | Worker 数 | 固定、按 CPU、按下游连接池 |
 | 结果 | 另一 `results chan`、callback、errgroup |
 | 动态 | 一般避免，用 sem 弹性即可 |

@@ -1,0 +1,8 @@
+title: 20 协议、共识与安全
+collapse_single_pages: false
+nav:
+  - index.md
+  - "Ethereum PoS、Fork Choice、Finality 与弱主观性": S-PROTO-01-ethereum-pos-fork-choice-finality.md
+  - "BFT / CometBFT：轮次、锁、安全性与活性": S-PROTO-02-bft-cometbft-round-lock-safety-liveness.md
+  - "Blob、DA 与 PeerDAS：从 EIP-4844 到 Fusaka": S-PROTO-03-blob-da-peerdas-security.md
+  - "协议升级、状态迁移与不可回滚边界": S-PROTO-04-protocol-upgrade-state-migration.md

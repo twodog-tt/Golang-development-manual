@@ -11,7 +11,9 @@ resume_focus: true
 code_refs: []
 sources:
   - https://go.dev/blog/ismmkeynote
+  - https://go.dev/blog/greenteagc
   - https://go.dev/doc/gc-guide
+  - https://go.dev/doc/go1.26
   - https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md
   - https://researcher.watson.ibm.com/researcher/files/us-pgroves/ISMM98.pdf
   - https://www.cs.kent.ac.uk/people/staff/rej/gc.html
@@ -24,14 +26,18 @@ sources:
 > Go GC 是**并发三色标记-清除**：白=未访问，灰=已扫描入口待展开，黑=已扫描完毕。**并发标记时 mutator 会改指针**，单靠三色不够，需要写屏障：
 > - **插入写屏障（Dijkstra）**：写入新指针时 **shade(新值)**，防「黑→白」漏标；
 > - **删除写屏障（Yuasa）**：覆盖旧指针时 **shade(旧值)**，防「删引用丢活对象」；
-> - **混合写屏障（Go 1.8+）**：堆上 `*slot = ptr` 时 **shade(新) + shade(旧)**，配合 mark 起点 **STW 扫栈**，去掉 1.5 的 stack rescan STW。
+> - **混合写屏障（Go 1.8+）**：堆上 `*slot = ptr` 时总是 **shade(旧值)**；仅当当前 goroutine 的栈还未扫描（仍为灰色）时再 **shade(新值)**。栈扫描属于并发标记工作，扫描某个 goroutine 时只暂停该 goroutine，从而去掉 mark termination 的全栈重扫。
+> - **Go 1.26 的 Green Tea** 默认改变的是标记/扫描工作的组织方式与局部性，Go GC 仍属于 tracing mark-sweep；不要误答成“改成分代 GC”或“对象会被移动压缩”。
 > 生产关键词：**mark assist、写屏障开销、wbBuf、GC 与 mutator 并发**。
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：三色标记是可达性分析的染色抽象——从根出发传播，最终**白色=可回收**。写屏障是编译器在**堆指针写入点**插入的 runtime 钩子，在并发标记期间把可能「漏标」的对象标灰（`shade`）。
-2. **为什么**：全 STW 标记 pause 高；纯并发标记时 mutator 改边，可能破坏「不存在黑→白直接引用」的不变式，**误回收仍存活对象**。
-3. **怎么做**：Go 1.8 起对**堆**用混合写屏障；**goroutine 栈在 mark 开始时 STW 扫描并视为黑色**，并发标记期间**栈上指针写入不触发堆写屏障**（见 [proposal 17503](https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md)）。详见 [S-MEM-02](./S-MEM-02-stw-evolution.md) 的 STW 阶段。
+1. **是什么**：三色标记是可达性分析的染色抽象——从根出发传播，最终**白色=可回收**。
+   写屏障是编译器在需要屏障的**堆或全局指针写入点**插入的 runtime 钩子；普通栈写是重要
+   例外。并发标记期间，屏障把可能「漏标」的对象标灰（`shade`）。
+2. **为什么**：全 STW 标记 pause 高；纯并发标记时 mutator 会增删引用，若没有正确的屏障与根扫描协议，GC 可能漏掉仍可达对象。
+3. **怎么做**：Go 1.8 起对**堆指针写入**使用混合写屏障。各 goroutine 的栈在并发标记早期分别扫描；扫描某个栈时暂停该 goroutine，扫完后该栈视为黑色。栈上普通指针写入不执行堆写屏障，因此堆屏障会根据“当前栈是否已扫描”决定是否还要 shade 新值（见 [proposal 17503](https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md)）。
+4. **版本边界**：Go 1.26 默认启用 Green Tea，将小对象的标记/扫描工作按 page/span 聚合以改善缓存局部性与 CPU 扩展性。它优化“灰对象工作如何组织”，不推翻可达性、写屏障与 mark-sweep 的正确性模型；收益随对象布局、CPU 与负载变化，不能背成固定百分比。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -43,16 +49,16 @@ flowchart TB
   Gray -->|扫描出边| Black[黑对象 扫描完毕]
   Gray -->|发现新引用| Gray
   White[白对象 尚未可达] -->|mark 结束| Sweep[并发 sweep 清除]
-  Black -.->|禁止直接指向| White
+  Black -.->|并发改边需屏障保证安全| White
 ```
 
 | 颜色 | 含义 | 标记阶段行为 |
 |------|------|--------------|
 | **白** | 尚未被 GC 访问 | mark 结束仍白 → 可回收 |
 | **灰** | 已发现，出边未扫完 | 在 work queue 中等待扫描 |
-| **黑** | 已发现且出边已扫完 | 不应再指向白（需写屏障维护） |
+| **黑** | 已发现且出边已扫完 | 后续改边必须满足收集器采用的不变式 |
 
-**强三色不变式（面试必背）**：标记结束时，**不存在**「黑色对象直接指向白色对象、且中间没有灰色路径」的引用链。
+**不要背成“任何时刻都绝不允许黑指向白”**。这是常见的**强三色不变式**；Go 的混合写屏障实际维护的是**弱三色不变式**：黑对象可以暂时指向白对象，但该白对象必须受到灰对象路径保护，最终仍会被扫描。
 
 ### 并发标记为何需要写屏障
 
@@ -74,7 +80,7 @@ sequenceDiagram
 |------|------|------------|
 | **黑→白漏标** | 黑对象已扫完，mutator 新写入指向白对象 | **插入写屏障** |
 | **删引用丢对象** | 灰对象尚未扫完，mutator 覆盖 slot 删掉唯一灰→白路径 | **删除写屏障** |
-| **栈上指针变动** | 栈在并发期改指针，难用堆屏障覆盖 | **mark 起点 STW 扫栈** |
+| **栈上指针变动** | 栈写入没有堆写屏障，未扫描栈可能隐藏新引用 | 并发扫描各栈；栈仍灰时，堆写额外 shade 新值 |
 
 ---
 
@@ -105,7 +111,7 @@ flowchart LR
 |------|------|
 | 别名 | Dijkstra barrier、插入屏障、增量更新 barrier |
 | 伪代码 | `shade(new); *slot = new` |
-| 单独使用的局限 | 无法覆盖「覆盖写删掉旧引用导致白对象失联」场景 |
+| 单独使用时 | 必须配套相应的根/栈扫描协议；不能只看一条 store 规则判断整个 GC 是否正确 |
 
 **典型漏标场景（面试白板）**
 
@@ -140,8 +146,8 @@ flowchart TB
 | 项目 | 说明 |
 |------|------|
 | 别名 | Yuasa barrier、删除屏障、快照-at-the-beginning 风格 |
-| 伪代码 | `old = *slot; shade(old); *slot = new; shade(new)`（混合时） |
-| 单独使用的局限 | 不处理「黑对象新插入指向白对象」 |
+| 伪代码 | `old = *slot; shade(old); *slot = new` |
+| 单独使用时 | 属于 snapshot-at-the-beginning 思路，也必须配套根/栈处理协议 |
 
 **典型漏标场景**
 
@@ -154,13 +160,14 @@ flowchart TB
 
 ### 混合写屏障（Hybrid — Go 1.8+ 实际采用）
 
-Go 在**堆指针写入**时同时应用 **Dijkstra + Yuasa**：
+Go 的规则不是“每次无条件 shade 旧值和新值”。按设计文档可简化为：
 
 ```
 // 堆上指针赋值（并发标记期间，写屏障开启）
 writePointer(slot, ptr):
     shade(*slot)   // Yuasa：删除/覆盖屏障，保护旧引用
-    shade(ptr)     // Dijkstra：插入屏障，保护新引用
+    if current stack is grey:
+        shade(ptr) // 当前栈尚未扫描时，保护新引用
     *slot = ptr
 ```
 
@@ -168,29 +175,29 @@ writePointer(slot, ptr):
 flowchart TD
   Store["堆上 *slot = ptr"]
   Store --> Yuasa["shade(旧值) Yuasa 删除屏障"]
-  Store --> Dijkstra["shade(新值) Dijkstra 插入屏障"]
+  Store --> StackState{"当前 G 的栈尚未扫描?"}
+  StackState -->|是| Dijkstra["shade(新值) 插入屏障部分"]
+  StackState -->|否| Done
   Yuasa --> WB[wbBuf 批量缓冲]
   Dijkstra --> WB
   WB --> Worker[GC worker 标灰并入队]
   Store --> Done[完成写入]
 ```
 
-| 对比项 | 仅插入（Dijkstra） | 仅删除（Yuasa） | **混合（Go）** |
-|--------|-------------------|-----------------|----------------|
-| 黑→白新写入 | ✅ | ❌ | ✅ |
-| 覆盖删旧引用 | ❌ | ✅ | ✅ |
-| 需 stack rescan STW | 通常还需要 | 通常还需要 | **不需要**（配合 STW 初扫栈） |
-| mutator 开销 | 较低 | 较低 | **略高**（两次 shade） |
-| Go 版本 | 未单独采用 | 未单独采用 | **1.8+** |
+| 对比项 | 插入（Dijkstra） | 删除（Yuasa） | **Go 混合屏障** |
+|--------|------------------|---------------|------------------|
+| store 时关注 | 新值 | 旧值 | 旧值 + 条件性新值 |
+| 典型思想 | 增量更新 | 起始快照 | 结合两者并利用栈颜色 |
+| 是否能单独描述完整 GC | 否，还需根/栈协议 | 否，还需根/栈协议 | **配套并发栈扫描，无需 mark termination 重扫栈** |
+| Go 版本 | 概念模型 | 概念模型 | **1.8+** |
 
-**为何 Go 选混合 + STW 扫栈，而不是只选一种屏障？**
+**为何 Go 采用该混合方案？**
 
 | 方案 | 结果 |
 |------|------|
 | 无屏障 | 并发标记不安全，必误回收 |
-| 仅 Dijkstra | 覆盖写删边场景仍可能漏标 |
-| 仅 Yuasa | 黑对象新插白引用仍可能漏标 |
-| 混合 + mark 起点 STW 扫栈 | 堆上安全；栈当黑处理；**去掉 1.5 的 stack rescan STW** |
+| 只描述某一种 store 屏障 | 还不能回答栈和根如何在并发期保持安全 |
+| Go 混合屏障 + 并发栈扫描 | 维护弱三色不变式，并**去掉 Go 1.5 的 mark termination stack rescan STW** |
 
 ### 栈 vs 堆：写屏障策略差异（Go 特有）
 
@@ -198,19 +205,19 @@ flowchart TD
 flowchart LR
   subgraph Heap[堆指针写入]
     H1[并发标记期间]
-    H1 --> H2[混合写屏障 shade 旧+新]
+    H1 --> H2[shade 旧值；栈灰时再 shade 新值]
   end
   subgraph Stack[栈指针写入]
-    S1[mark 起点 STW]
-    S1 --> S2[全栈扫描 栈上对象视为已处理]
+    S1[并发标记早期]
+    S1 --> S2[逐个暂停 G 并扫描其栈]
     S2 --> S3[并发标记期间 栈写入不触发堆屏障]
   end
 ```
 
 | 位置 | 并发标记期间 | 原因 |
 |------|--------------|------|
-| **堆** `*slot = ptr` | ✅ 混合写屏障 | 堆对象可能被多个 goroutine 共享，变动频繁 |
-| **栈** 局部变量/参数 | ❌ 不触发堆写屏障 | mark 开始时 STW 已扫描；栈是 goroutine 私有 |
+| **堆/全局** `*slot = ptr` | ✅ 需要相应写屏障 | 保护被覆盖的旧值，并在当前栈仍灰时保护新值 |
+| **栈** 局部变量/参数 | ❌ 不触发堆写屏障 | 每个 goroutine 的栈会单独扫描；扫完即保持黑色 |
 | **栈上指针首次逃逸到堆** | ✅ 写入堆字段时触发 | 逃逸赋值本质是堆写 |
 
 这与 [S-CONC-02](../01-runtime-concurrency/S-CONC-02-gmp-roles.md) 中 P 的 `wbBuf`（写屏障缓冲）配合：每个 P 批量收集 shade 请求，降低屏障同步开销。
@@ -227,9 +234,9 @@ sequenceDiagram
   GC->>WB: 开启写屏障
   GC->>M: 恢复运行
   loop 并发标记
-    M->>WB: 堆指针写入 shade 旧+新
+    M->>WB: 堆指针写入 shade 旧；栈灰时 shade 新
     M->>GC: mark assist 分配时辅助标记
-    GC->>GC: 扫描灰对象
+    GC->>GC: 扫描根、goroutine 栈与灰对象
   end
   GC->>M: STW Mark Termination
   GC->>WB: 关闭写屏障
@@ -260,16 +267,16 @@ sequenceDiagram
 | 版本 | 标记 | 写屏障 | 栈处理 | 额外 STW |
 |------|------|--------|--------|----------|
 | **≤1.4** | STW 标记 | 无 | STW 扫 | 长 pause |
-| **1.5** | 并发三色 | 无/不完整 | 并发期需 **stack rescan** | rescan STW |
-| **1.8+** | 并发三色 | **堆混合写屏障** | mark 起点 STW 扫栈 | 仅 setup/term |
+| **1.5** | 并发三色 | 并发写屏障 | mark termination 需 **stack rescan** | rescan STW |
+| **1.8+** | 并发三色 | **堆混合写屏障** | 并发标记时逐个扫描栈 | 仅 setup/term |
 | **1.12+** | 同上 | 同上 | 同上 | 优化 term STW 长度 |
 
 ### 弱三色 vs 强三色
 
 | 模型 | 不变式 | Go 选择 |
 |------|--------|---------|
-| **弱三色** | 允许黑→白，但要求白对象「曾从灰可达」等弱条件 | 未采用 |
-| **强三色** | 不允许黑→白 | **混合写屏障 + STW 扫栈** 维护 |
+| **弱三色** | 允许黑→白，但白对象必须受灰色路径保护 | **Go 混合写屏障维护** |
+| **强三色** | 不允许黑→白 | 常见教学模型，不是 Go 混合屏障的准确表述 |
 
 ---
 
@@ -277,7 +284,7 @@ sequenceDiagram
 
 | 场景 | 现象 | 与写屏障关系 | 策略 |
 |------|------|--------------|------|
-| 指针密集图/链表改边 | GC CPU 高、`runtime.wb*` 热点 | 每次堆写触发 shade×2 | 批量构建、少改指针、结构换 slice |
+| 指针密集图/链表改边 | GC CPU 高、`runtime.wb*` 热点 | 每次堆写至少处理旧值，栈灰时还处理新值 | 批量构建、少改指针、结构换 slice |
 | JSON 反序列化风暴 | mark assist + 写屏障叠加 | 大量新指针写入堆 | 降分配、对象池、流式解析 |
 | 延迟敏感 API | P99 毛刺 | STW term + assist，非写屏障单次开销主导 | trace 对齐；调 GOGC/GOMEMLIMIT |
 | 误以为无 STW | 监控只有 sweep | 忽略 mark setup/term | `GODEBUG=gctrace=1` |
@@ -289,7 +296,7 @@ sequenceDiagram
 | `GODEBUG=gctrace=1` | 每轮 STW、assist 占比、堆大小 |
 | `go tool trace` | STW 窗口、mark assist 与请求重叠 |
 | `pprof` CPU | `runtime.gc*`、`runtime.wbBufFlush*` 热点 |
-| `runtime/metrics` | `gc/pause:seconds` 分位 |
+| `runtime/metrics` | `/gc/pauses:seconds` 直方图 |
 
 路径：GC CPU 高 → pprof 看 wb vs assist → 若 wb 高则查指针写入频率 → 减堆写或改数据结构。
 
@@ -307,9 +314,10 @@ sequenceDiagram
 1. **三色各代表什么？** → 白未访问、灰待扫描、黑已扫完；结束仍白则清除。
 2. **插入写屏障解决什么？** → 黑对象新写入指向白对象时 `shade(新)`，防漏标。
 3. **删除写屏障解决什么？** → 覆盖堆指针前 `shade(旧)`，防删边导致白对象失联。
-4. **Go 为何用混合而非单种？** → 单独 Dijkstra 或 Yuasa 都不足以覆盖两种漏标；混合 + STW 扫栈去 rescan。
-5. **栈上指针写入要屏障吗？** → 并发标记期间**不**触发堆屏障；mark 起点 STW 已扫栈。
-6. **写屏障谁插入？** → **编译器**在堆指针 store 点插入对 `runtime` 的调用。
+4. **Go 为何用混合屏障？** → 将删除屏障与条件性插入屏障结合，并配套并发栈扫描，去掉 mark termination 的全栈重扫。
+5. **栈上指针写入要屏障吗？** → 普通栈写不触发堆写屏障；GC 会逐个暂停 goroutine 扫栈，堆屏障还会根据当前栈颜色保护新值。
+6. **写屏障谁插入？** → **编译器**在需要屏障的堆/全局指针 store 点插入 runtime
+   序列；栈写入、初始化优化等存在实现层面的省略条件。
 7. **写屏障何时开启？** → 并发 mark 从 setup 到 termination 之间。
 8. **shade 做什么？** → 白→灰并入队，保证后续被扫描。
 9. **清除（sweep）要 STW 吗？** → 主体并发；见 [S-MEM-02](./S-MEM-02-stw-evolution.md)。
@@ -340,7 +348,7 @@ func buildListSlow(n int) *Node {
     head := &Node{}
     cur := head
     for i := 0; i < n; i++ {
-        cur.next = &Node{data: [16]byte{byte(i)}} // 每次 shade 旧+新
+        cur.next = &Node{data: [16]byte{byte(i)}} // 每次处理旧值；当前栈灰时还处理新值
         cur = cur.next
     }
     return head.next
@@ -381,6 +389,8 @@ func churnPointers(n int) {
 - [S-MEM-13 GC 抖动](./S-MEM-13-gc-jitter.md) — P99 毛刺治理
 - [S-CONC-02 G/M/P 与 wbBuf](../01-runtime-concurrency/S-CONC-02-gmp-roles.md) — P 上的写屏障缓冲
 - [Go GC Guide（官方）](https://go.dev/doc/gc-guide)
+- [The Green Tea Garbage Collector](https://go.dev/blog/greenteagc)
+- [Go 1.26 Release Notes](https://go.dev/doc/go1.26)
 - [Eliminating Stack Re-Scan（proposal 17503）](https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md)
 - [ISM 2019: Go GC 演讲](https://go.dev/blog/ismmkeynote)
 - [Dijkstra 等：On-the-fly GC（ISMM 98）](https://researcher.watson.ibm.com/researcher/files/us-pgroves/ISMM98.pdf)

@@ -1,0 +1,47 @@
+{
+  "fixture_kind": "minimized-rpc-contract",
+  "node_version": "0.38.23",
+  "reported_version": "0.38.22",
+  "chain_id": "sdk-compat-localnet",
+  "hash": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+  "expected_outcome": "FAILED",
+  "responses": {
+    "status": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "node_info": {
+          "id": "node-n",
+          "network": "sdk-compat-localnet",
+          "version": "0.38.22",
+          "protocol_version": {
+            "p2p": "8",
+            "block": "11",
+            "app": "0"
+          }
+        },
+        "sync_info": {
+          "latest_block_height": 91,
+          "catching_up": false,
+          "earliest_block_height": "1"
+        }
+      }
+    },
+    "tx": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "hash": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+        "height": 90,
+        "index": 1,
+        "tx_result": {
+          "code": 12,
+          "codespace": "bank",
+          "log": "execution rejected",
+          "events": []
+        },
+        "proof": null
+      }
+    }
+  }
+}

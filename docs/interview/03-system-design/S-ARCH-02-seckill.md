@@ -22,7 +22,7 @@ sources:
 
 1. **是什么**：限时限量促销，峰值 QPS 可达平时 100~1000 倍，库存通常几百~几万件，参与用户百万级。
 2. **为什么**：DB 行锁无法支撑 10 万+ 并发扣库存；热点 SKU 成为 Redis/DB 单点；超卖一次即信任危机。
-3. **怎么做**：活动页静态化 + CDN；秒杀请求先进 MQ/令牌桶排队；Redis 预扣库存（Lua 原子 DECR）；成功后再异步创建订单；失败快速返回。
+3. **怎么做**：活动页静态化 + CDN；网关先做身份、限购和 admission control；Redis Lua 原子完成“库存预留 + 用户幂等 + 写入待处理记录”，再由 worker 异步创建订单。Redis 与外部 MQ 之间若双写，必须有可重试的 reservation log 与对账。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -40,24 +40,24 @@ sources:
 flowchart TB
   User[用户] --> CDN[静态活动页]
   User --> GW[网关限流 + 验证码]
-  GW --> Queue[MQ / 内存队列]
+  GW --> Lua[Redis Lua 预留库存 + 幂等]
+  Lua -->|成功并写 reservation stream| Queue[Redis Stream / Durable Queue]
   Queue --> Worker[秒杀 Worker × N]
-  Worker --> Lua[Redis Lua 扣库存]
-  Lua -->|成功| OrderMQ[订单 MQ]
+  Worker --> OrderMQ[可选订单事件]
   Lua -->|失败| Fail[快速失败]
-  OrderMQ --> OrderSvc[订单服务] --> DB[(MySQL)]
+  Worker --> OrderSvc[订单服务] --> DB[(MySQL)]
   OrderSvc --> Pay[支付超时回滚库存]
 ```
 
 **防超卖三板斧**
 
-1. **Redis Lua 原子扣减**：`if stock > 0 then decr; return 1 else return 0 end`，避免 read-modify-write 竞态。
-2. **DB 最终校验**：订单落库时用 `UPDATE stock SET n=n-1 WHERE id=? AND n>0`，影响行数=0 则回滚 Redis。
+1. **Redis Lua 原子预留**：同一脚本检查库存和用户限购，扣减后写入带 `reservation_id` 的待处理记录，避免“扣了库存但进程在发 MQ 前崩溃”。
+2. **权威库存边界**：必须明确 Redis 是 admission/reservation 层还是权威库存。若 DB 仍做条件扣减，按 `reservation_id` 幂等落单并对账；不要把两个独立计数器都叫“强一致库存”。
 3. **幂等**：用户+活动维度幂等键，防重复下单。
 
 **热点 Key 治理**
 
-- **库存分片**：`stock:{sku}:0` ~ `stock:{sku}:9` 各存 1/10，扣减随机选片。
+- **库存分片**：可按配额把 token 分到多个 shard，但随机命中空 shard 会产生“假售罄”；需要重试其他 shard、配额再平衡或本地批量领 token，并接受复杂度。
 - **请求合并**：网关层令牌桶，每秒只放行库存数倍请求。
 - **页面分层**：按钮置灰 + 排队页，减少无效请求。
 
@@ -70,7 +70,7 @@ flowchart TB
 
 | 工具 | 用途 |
 |------|------|
-| Redis MONITOR / 慢日志 | Lua 脚本耗时 |
+| Redis SLOWLOG / LATENCY | Lua 脚本耗时；避免在繁忙生产实例长期开 `MONITOR` |
 | MQ 消费 lag | 订单积压 |
 | 业务对账 | Redis 扣减量 vs DB 订单量 |
 | 压测 | 模拟 10 万并发验证不超卖 |
@@ -104,29 +104,42 @@ flowchart TB
 ## 代码示例
 
 ```go
-// Redis Lua 原子扣库存
-const decrStockLua = `
+// 三个 key 使用同一 Redis Cluster hash tag，确保 Lua 可在一个 slot 原子执行。
+const reserveStockLua = `
+if redis.call('SISMEMBER', KEYS[2], ARGV[1]) == 1 then
+  return 2
+end
 local stock = tonumber(redis.call('GET', KEYS[1]) or '0')
 if stock > 0 then
   redis.call('DECR', KEYS[1])
+  redis.call('SADD', KEYS[2], ARGV[1])
+  redis.call('XADD', KEYS[3], '*',
+    'reservation_id', ARGV[2], 'user_id', ARGV[1])
   return 1
 end
 return 0
 `
 
-func (s *SeckillService) TryDeduct(ctx context.Context, skuID string, userID int64) (bool, error) {
-    key := "seckill:stock:" + skuID
-    res, err := s.rdb.Eval(ctx, decrStockLua, []string{key}).Int()
+func (s *SeckillService) TryReserve(
+    ctx context.Context, skuID string, userID int64, reservationID string,
+) (bool, error) {
+    tag := "{" + skuID + "}"
+    keys := []string{
+        "seckill:" + tag + ":stock",
+        "seckill:" + tag + ":users",
+        "seckill:" + tag + ":reservations",
+    }
+    res, err := s.rdb.Eval(
+        ctx, reserveStockLua, keys, userID, reservationID,
+    ).Int()
     if err != nil {
         return false, err
     }
-    if res == 1 {
-        _ = s.orderMQ.Publish(ctx, OrderEvent{SkuID: skuID, UserID: userID})
-        return true, nil
-    }
-    return false, nil
+    return res == 1 || res == 2, nil // 2 表示同一用户已成功预留，幂等返回
 }
 ```
+
+worker 从 Stream/待处理表消费后，以 `reservation_id` 唯一约束创建订单；失败重试，超时 reservation 由补偿任务释放。若改用 Kafka，需保留同等可恢复的本地记录，不能忽略 `Publish` 错误后直接丢失库存。
 
 ## 延伸阅读
 

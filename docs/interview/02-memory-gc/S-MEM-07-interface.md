@@ -22,8 +22,8 @@ sources:
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：interface 是指针大小的类型描述 + 数据指针；iface 的 itab 缓存 `(动态类型, 接口类型)` 的方法表。
-2. **为什么**：实现多态与解耦；代价是装箱、间接调用、逃逸与 GC 扫描指针。
+1. **是什么**：interface 值在当前实现中通常由两个机器字组成：类型/方法表信息与数据字；iface 的 itab 描述 `(动态类型, 接口类型)` 的方法表。
+2. **为什么**：实现多态与解耦；潜在代价包括值复制或装箱、间接调用，以及在特定上下文中发生逃逸。
 3. **怎么做**：热路径用泛型/代码生成/具体类型；断言用 `v, ok := x.(T)`；避免层层 `interface{}` 传递。
 
 ## 10 分钟版（原理 + 图示）
@@ -36,7 +36,7 @@ iface { *itab, unsafe.Pointer data }
 itab  { inter *InterfaceType, _type *Type, hash uint32, fun [1]uintptr }
 ```
 
-**赋值装箱**：具体值赋给 interface 时，小值可能直接存在 data（word 内），大值则 data 指向堆拷贝。
+**赋值装箱**：具体值赋给 interface 时，data 是一个实现级数据字。某些“直接接口”类型可直接放入该数据字；其他值通常通过一份存储来引用。那份存储可能位于静态区、栈或堆，取决于类型、逃逸分析与编译器优化，不能背成“小值内联、大值必上堆”。
 
 ```mermaid
 flowchart LR
@@ -85,9 +85,9 @@ flowchart LR
 
 1. **eface 与 iface 区别？** → 有无 itab/方法集。
 2. **为何 nil 指针赋 interface 不是 nil？** → data 与 type 二元组，type 已设置。
-3. **itab 何时生成？** → 首次 (T, I) 组合，全局缓存。
+3. **itab 何时生成？** → 编译/链接期可预生成一部分，runtime 也会按需构造并缓存；不要依赖具体时机。
 4. **接口比较？** → 可比较 type+value；slice/map 作 dynamic type 不可比。
-5. **泛型消除 interface 吗？** → 单态化减少 boxing，但非零成本抽象仍有。
+5. **泛型消除 interface 吗？** → 可减少动态装箱，但 Go 编译器可能使用类型形状与 dictionary，也可能做专门化；不能简单等同于 C++ 式“全部单态化”。
 
 ## 反模式与事故
 

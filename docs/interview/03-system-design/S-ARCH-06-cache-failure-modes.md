@@ -115,18 +115,28 @@ func (c *Cache) Get(ctx context.Context, id int64) (*Item, error) {
         item, err := c.db.Find(ctx, id)
         if errors.Is(err, ErrNotFound) {
             ttl := time.Duration(30+rand.Intn(30)) * time.Second // jitter
-            c.rdb.Set(ctx, key, "NULL", ttl)
+            _ = c.rdb.Set(ctx, key, "NULL", ttl).Err()
             return nil, ErrNotFound
         }
-        b, _ := json.Marshal(item)
+        if err != nil {
+            return nil, err
+        }
+        b, err := json.Marshal(item)
+        if err != nil {
+            return nil, err
+        }
         ttl := 300*time.Second + time.Duration(rand.Intn(60))*time.Second
-        c.rdb.Set(ctx, key, b, ttl)
+        _ = c.rdb.Set(ctx, key, b, ttl).Err() // 缓存失败不应伪装成 DB 成功失败
         return item, nil
     })
-    // ...
-    return v.(*Item), err
+    if err != nil {
+        return nil, err
+    }
+    return v.(*Item), nil
 }
 ```
+
+`singleflight.Group` 只合并**单进程内**同 Key 请求；多 Pod 超热点仍需 L1、分布式租约或让 DB/下游具备明确的回源保护。
 
 ## 延伸阅读
 

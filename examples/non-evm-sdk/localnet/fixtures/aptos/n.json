@@ -1,0 +1,29 @@
+{
+  "fixture_kind": "minimized-rest-contract",
+  "node_version": "1.48.2",
+  "chain_id": "4",
+  "hash": "0xcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+  "expected_outcome": "FAILED",
+  "readiness": {
+    "chain_id": 4,
+    "epoch": 8,
+    "ledger_version": 120,
+    "oldest_ledger_version": 0,
+    "ledger_timestamp": 1700000001000000,
+    "block_height": 110,
+    "node_role": "validator",
+    "ledger_commit_hash": "0xadditive"
+  },
+  "transaction": {
+    "type": "user_transaction",
+    "hash": "0xcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+    "version": 119,
+    "success": false,
+    "vm_status": "Move abort",
+    "events": [],
+    "future_additive_field": {
+      "ignored": true
+    }
+  }
+}
+

@@ -18,7 +18,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **defer** 注册函数在 **return 之前、panic 传播之前** LIFO 执行；实现为 **defer 链表**（栈上 open defer 或堆上 defer 结构，视版本与逃逸而定）。热路径大量 defer 有开销；错误处理常用 **defer + named return +闭包捕获 err**。生产关键词：**open defer、1.14 优化、别在循环里无脑 defer**。
+> **defer** 注册调用，在函数返回或 panic 展开时按 LIFO 执行。编译器/runtime 可能采用 **open-coded defer**、栈上 `_defer` 或堆上 `_defer`，不能统一描述成“一个堆链表”。Go 1.14 起多数常见 defer 已接近普通调用成本，但循环中 defer 仍会累积到外层函数退出。
 
 ## 3 分钟版（一面深度）
 
@@ -51,19 +51,19 @@ flowchart TD
 
 **开销（面试表述）**
 
-- 早期：堆分配 defer 结构；1.13+ **open defer** 优化部分场景减分配。
+- Go 1.14 起，编译器可对满足条件的场景使用 **open-coded defer**；其他场景可能使用栈上或堆上的 `_defer` 记录。
 - 极热微函数：百万次 defer 可测到 ns 级差异，通常不是首要瓶颈。
 - **循环中 defer**：defer 累积到函数结束才执行，可能耗尽 fd/连接。
 
 **panic/recover**
 
-- `recover` 仅在 **defer 直接调用的函数栈** 内有效。
+- `recover` 只有在 panic 展开期间，由**被 defer 的函数直接调用**时才会停止 panic；再套一层普通 helper 调用通常拿不到该 panic。
 - 业务错误用 `error` 返回，非 panic。
 
 ## 生产场景
 
 - **DB 事务**：`defer tx.Rollback()` + 成功 `Commit` 覆盖；注意 Rollback 忽略 ErrTxDone。
-- **HTTP handler**：循环里 `defer resp.Body.Close()` 导致连接池耗尽。
+- **HTTP client**：循环里 `defer resp.Body.Close()` 会把释放推迟到外层函数结束；如需复用 HTTP/1.x 连接，还应在合适场景读到 EOF 或显式 drain 后关闭。
 - **可观测**：fd 泄漏、too many open files；pprof 见 defer 相关分配（通常次要）。
 
 ## 排查与工具
@@ -97,7 +97,7 @@ flowchart TD
 
 - `for { f, _ := os.Open(); defer f.Close() }` —— 经典 fd 泄漏题。
 - 用 panic/recover 做正常流程控制。
-- `defer mu.Unlock()` 前 early return 忘记 err 路径仍执行 Unlock——其实 defer 正确，反而说明 defer 价值。
+- 用 named result + defer 隐式覆盖原错误，却没有明确记录 close/rollback 错误优先级。
 
 ## 代码示例
 

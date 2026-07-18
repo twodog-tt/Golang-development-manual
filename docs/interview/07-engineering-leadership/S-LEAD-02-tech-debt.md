@@ -10,7 +10,7 @@ status: published
 code_refs: []
 sources:
   - https://martinfowler.com/bliki/TechnicalDebt.html
-  - https://github.com/golang-standards/project-layout
+  - https://go.dev/doc/modules/layout
   - https://go.dev/doc/effective_go
 ---
 
@@ -52,7 +52,7 @@ quadrantChart
 
 - `main` 包几千行、无 `internal/` 边界
 - handler 直接调 DB，无 service 层
-- 错误 `%v` 吞 stack、无 `errors.Is/As`
+- 包装错误时用 `%v` 丢失 error chain，导致 `errors.Is/As` 无法继续匹配；应按边界使用 `%w`（Go error 本身并不自动携带 stack）
 - 无 `-race` CI、无 benchmark 基线
 - `vendor/` 与 `go.mod` 长期不同步
 
@@ -65,8 +65,8 @@ quadrantChart
 ## 排查与工具
 
 - 静态分析：`staticcheck`、`golangci-lint` 技术债报告
-- 依赖：`go mod outdated`、Dependabot
-- 代码复杂度：cyclomatic、包耦合（`go dep graph`）
+- 依赖：`go list -m -u all`、`govulncheck`、Dependabot/Renovate
+- 代码复杂度：cyclomatic、包依赖图（`go mod graph`，或专门的静态分析工具）
 - 文档：ADR（Architecture Decision Record）记录「为何欠债」
 
 ## 架构取舍
@@ -108,4 +108,5 @@ func CreateOrder(ctx context.Context, req *Request) (*Order, error) {
 ## 延伸阅读
 
 - [Martin Fowler — Technical Debt](https://martinfowler.com/bliki/TechnicalDebt.html)
-- [Go project layout 参考](https://github.com/golang-standards/project-layout)
+- [Go 官方模块布局指南](https://go.dev/doc/modules/layout)
+- `golang-standards/project-layout` 是社区示例仓库，不是 Go 官方标准，不能把目录结构背成唯一规范

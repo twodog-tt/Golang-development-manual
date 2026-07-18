@@ -5,3 +5,5 @@ nav:
   - "线上事故复盘结构": S-LEAD-01-incident-postmortem.md
   - "技术债识别与偿还策略": S-LEAD-02-tech-debt.md
   - "带团队与 Code Review 文化": S-LEAD-03-code-review-culture.md
+  - "Staff 技术战略、无职权影响力与案例表达": S-LEAD-04-staff-strategy-influence-case.md
+  - "跨团队高风险迁移、灰度切换与回滚边界": S-LEAD-05-cross-team-migration-case.md

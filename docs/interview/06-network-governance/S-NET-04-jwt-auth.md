@@ -18,13 +18,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> **JWT** 是自包含声明（Header.Payload.Signature），服务端用密钥验签即可无状态鉴权。**边界**：JWT 适合 **传递身份与权限声明**，不是 session 存储；无法主动吊销（除非短 TTL + 黑名单/版本号）。生产关键词：**HS256 vs RS256、exp/nbf、aud/iss、密钥轮换、勿放敏感数据**。
+> **JWT** 是签名声明（Header.Payload.Signature）；Header/Payload 只是 Base64URL 编码，**不是加密**。服务端可本地验签，但一旦还要查 token version、黑名单或权限实时状态，系统就不再完全无状态。生产关键词：**算法白名单、exp/nbf、aud/iss、kid 与密钥轮换、最小化 claims**。
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：Base64URL 编码的三段 token；Payload 含 `sub/exp/iat/custom claims`；Signature 防篡改。
+1. **是什么**：Base64URL 编码的三段 token；Payload 含 `sub/exp/iat/custom claims`；Signature 用于完整性与签发者认证，不提供保密性。
 2. **为什么**：水平扩展无 sticky session；跨服务传递用户身份；移动端/SPA 常见 Bearer token。
-3. **怎么做**：Access token 短（15m~2h）+ Refresh token 长（HttpOnly Cookie 或安全存储）；RS256 私钥签发公钥验；网关验签后传内部 header；敏感操作 **二次验证**；logout 用 token 版本或 Redis 黑名单。
+3. **怎么做**：Access token 短期 + Refresh token 较长期并 rotation；非对称签名时签发方持私钥、验证方持公钥；用 `kid` 支持轮换。网关向内传身份时必须先剥离外部同名 header，并用 mTLS、受信网络或重新签名的内部凭证保护这一跳；敏感操作做 **二次验证**。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -49,7 +49,7 @@ sequenceDiagram
 **安全边界**
 
 - **不该做**：在 JWT 存密码、信用卡；无 exp；alg=none；密钥硬编码仓库。
-- **该做**：`Validate` 校验签名+exp+nbf+iss+aud；时钟 skew 容忍；密钥 KMS/轮换；HTTPS only；CSRF 对 Cookie 型 refresh 用 SameSite。
+- **该做**：算法白名单 + 签名 + exp/nbf/iss/aud 校验；设置有限 clock skew；密钥放 KMS/HSM 并支持重叠轮换；HTTPS only。Cookie 型 refresh 除 `HttpOnly/Secure/SameSite` 外，还要按场景校验 Origin 或使用 CSRF token。
 - **与 Session**：Session 可服务端立即失效；JWT 需补充机制（短 TTL、refresh rotation、token family 检测重放）。
 
 ## 生产场景
@@ -86,6 +86,7 @@ sequenceDiagram
 3. **HS256 vs RS256？** → 对称 vs 非对称；微服务用 RS256 公钥分发。
 4. **XSS 偷 token？** → HttpOnly refresh + CSP；access 放内存缩短窗口。
 5. **Go 怎么验？** → `jwt.ParseWithClaims` + `Valid()` + 自定义 `Claims`。
+6. **`kid` 怎么用？** → 只在本地受信 key set/JWKS 中查找；不要按 token 中任意 `jku/x5u` URL 下载密钥。
 
 ## 反模式与事故
 
@@ -105,17 +106,25 @@ type Claims struct {
     jwt.RegisteredClaims
 }
 
-func parseToken(tokenStr string, key any) (*Claims, error) {
-    token, err := jwt.ParseWithClaims(tokenStr, &Claims{}, func(t *jwt.Token) (any, error) {
-        if t.Method.Alg() != jwt.SigningMethodRS256.Alg() {
-            return nil, fmt.Errorf("unexpected alg")
-        }
-        return key, nil
-    })
+func parseToken(tokenStr string, key *rsa.PublicKey) (*Claims, error) {
+    claims := &Claims{}
+    token, err := jwt.ParseWithClaims(
+        tokenStr,
+        claims,
+        func(t *jwt.Token) (any, error) { return key, nil },
+        jwt.WithValidMethods([]string{jwt.SigningMethodRS256.Alg()}),
+        jwt.WithIssuer("https://auth.example.com"),
+        jwt.WithAudience("orders-api"),
+        jwt.WithExpirationRequired(),
+        jwt.WithLeeway(30*time.Second),
+    )
     if err != nil {
         return nil, err
     }
-    return token.Claims.(*Claims), nil
+    if !token.Valid {
+        return nil, errors.New("invalid token")
+    }
+    return claims, nil
 }
 ```
 

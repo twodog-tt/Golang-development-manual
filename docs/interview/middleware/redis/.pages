@@ -3,5 +3,5 @@ collapse_single_pages: false
 nav:
   - index.md
   - "Redis 集群模式与选型": S-DIST-01-redis-cluster.md
-  - "分布式锁 Redlock 争议": S-DIST-02-distributed-lock.md
+  - "分布式锁与 Redlock 争议": S-DIST-02-distributed-lock.md
   - "热点 Key 发现与治理": S-DIST-03-hot-key.md

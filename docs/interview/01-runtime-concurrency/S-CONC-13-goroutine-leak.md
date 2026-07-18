@@ -5,12 +5,13 @@ module: runtime-concurrency
 level: senior
 frequency: 5
 go_version: "1.22+"
-tags: [goroutine-leak, pprof, debugging, observability]
+tags: [goroutine-leak, pprof, debugging, observability, go1.26]
 status: published
 code_refs:
   - basis/goroutine/main.go
 sources:
   - https://go.dev/blog/pprof
+  - https://go.dev/doc/go1.26
   - https://pkg.go.dev/net/http/pprof
   - https://github.com/fortytw2/leaktest
 ---
@@ -19,7 +20,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **Goroutine 泄漏** = 数量单调涨、永不退出，占栈内存并拖慢调度。常见根因：**channel 无人读、缺 ctx 取消、WaitGroup/锁等待、定时器未 Stop**。生产关键词：**goroutine 指标、heap/goroutine profile、trace 看 stuck G**。
+> **Goroutine 泄漏** = 本应结束的 goroutine 长期无法退出。常见根因是 channel 无对端、缺取消路径、锁/WaitGroup 永久等待、网络调用无 deadline 或后台 ticker 循环没有 stop 信号。Go 1.26 提供实验性 `goroutineleak` profile，但它只能检测一类可证明无法再唤醒的阻塞泄漏，不替代生命周期设计、常规 goroutine profile 与指标趋势。
 
 ## 3 分钟版（一面深度）
 
@@ -33,9 +34,9 @@ sources:
 flowchart TB
   Leak[泄漏来源] --> C1[channel send/recv 永久阻塞]
   Leak --> C2[ctx 未取消的后台循环]
-  Leak --> C3[time.After 堆积]
+  Leak --> C3[ticker/后台循环无退出信号]
   Leak --> C4[Mutex 死锁]
-  Leak --> C5[HTTP body 未读完]
+  Leak --> C5[网络调用无 deadline / Body 未关闭导致连接资源滞留]
 ```
 
 **典型栈特征**
@@ -58,20 +59,46 @@ flowchart TB
 
 ## 排查与工具
 
+`net/http/pprof` 注册 handler，但仍需启动受保护的 HTTP listener；不要把调试端点直接暴露到公网：
+
+```go
+import (
+    "log"
+    "net/http"
+    _ "net/http/pprof"
+)
+
+func startPprof() {
+    go func() {
+        log.Print(http.ListenAndServe("127.0.0.1:6060", nil))
+    }()
+}
+```
+
 ```bash
-# 开启 pprof
-import _ "net/http/pprof"
-go tool pprof http://localhost:6060/debug/pprof/goroutine
+go tool pprof http://127.0.0.1:6060/debug/pprof/goroutine
 
 # 对比两次快照
-curl -o g1.prof ':6060/debug/pprof/goroutine'
+curl -o g1.prof 'http://127.0.0.1:6060/debug/pprof/goroutine'
 # ... 压测 ...
-curl -o g2.prof ':6060/debug/pprof/goroutine'
+curl -o g2.prof 'http://127.0.0.1:6060/debug/pprof/goroutine'
 go tool pprof -base g1.prof g2.prof
 ```
 
 - `go tool trace`：长时间无完成的 G
 - 单元测试：`leaktest` 检测测试结束 G 数
+
+**Go 1.26 实验性泄漏画像**
+
+```bash
+# 构建时启用；不是运行时动态开关
+GOEXPERIMENT=goroutineleakprofile go build ./...
+
+# 使用 net/http/pprof 时会增加该端点
+go tool pprof http://localhost:6060/debug/pprof/goroutineleak
+```
+
+runtime 借助 GC 可达性判断：若 goroutine 阻塞在某个并发原语上，且该原语不可能再被可运行 goroutine 触达或唤醒，就可报告为泄漏。它无法完备检测所有泄漏，例如阻塞对象仍被全局变量或可运行 goroutine 持有时可能漏报；CPU 空转、业务上“永不结束”但运行时仍可唤醒的 goroutine 也不能仅靠该 profile 定性。
 
 ## 架构取舍
 
@@ -81,14 +108,17 @@ go tool pprof -base g1.prof g2.prof
 | worker 池 | 上限固定 G |
 | semaphore | 限制并发 fan-out |
 | 连接超时 | TCP/HTTP idle |
+| Go 1.26 `goroutineleak` profile | 补充发现可证明永久阻塞的泄漏；当前需实验开关 |
 
 ## 追问链
 
 1. **泄漏与高并发正常阻塞？** → 看是否随时间单调增且不回落。
 2. **main 退出 G 呢？** → 进程结束全杀；泄漏指长跑服务。
-3. **pprof 采样影响？** → 低开销，生产可短时开。
+3. **pprof 采样影响？** → 不能承诺固定“低开销”；完整 goroutine 栈采集和文本输出会随
+   goroutine 数、栈深和频率增长。生产应鉴权、限频，并先评估高峰期影响。
 4. **如何定位创建点？** → debug=2 看全栈，搜业务包名。
 5. **runtime.SetFinalizer 能救吗？** → 不能替代正确生命周期。
+6. **Go 1.26 的 leak profile 能发现全部泄漏吗？** → 不能。它基于可达性证明一类永久阻塞，只是证据之一；还要结合 goroutine 数趋势、普通 profile、trace 与业务生命周期。
 
 ## 反模式与事故
 
@@ -104,7 +134,10 @@ func worker(ctx context.Context) {
         select {
         case <-ctx.Done():
             return
-        case job := <-jobs:
+        case job, ok := <-jobs:
+            if !ok {
+                return
+            }
             handle(job)
         }
     }
@@ -117,4 +150,5 @@ func worker(ctx context.Context) {
 
 - [Profiling Go Programs](https://go.dev/blog/pprof)
 - [net/http/pprof](https://pkg.go.dev/net/http/pprof)
+- [Go 1.26 Release Notes - Experimental goroutine leak profile](https://go.dev/doc/go1.26)
 - [Go 官方 Diagnostics 指南](https://go.dev/doc/diagnostics)

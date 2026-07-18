@@ -119,8 +119,11 @@ func (h *Handler) Consume(ctx context.Context, msgs ...*primitive.MessageExt) (c
     for _, m := range msgs {
         if err := process(m); err != nil {
             if isPoison(err) {
-                // 记录 DLQ 上下文后返回 Success，避免阻塞；或依赖 maxReconsumeTimes 进 DLQ
-                log.Error("poison", "msgId", m.MsgId, "err", err)
+                // 只有在异常记录/补偿任务已可靠持久化后才能返回 Success；
+                // 只打印日志再 Success 会永久跳过这条业务消息。
+                if savePoisonForRepair(ctx, m, err) != nil {
+                    return consumer.ConsumeRetryLater, nil
+                }
                 return consumer.ConsumeSuccess, nil
             }
             return consumer.ConsumeRetryLater, nil

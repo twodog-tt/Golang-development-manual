@@ -18,7 +18,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **slice 是三元组**（pointer, len, cap）描述底层数组的视图；**扩容**通常 `<256` 翻倍、之后约 1.25 倍。泄漏高发于 **subslice 持有大数组引用**、**未 drain 的 channel+slice**、**全局缓存截断不当**。生产关键词：**cap>>len、copy 裁剪、sync.Pool 长度**。
+> **slice 是三元组**（pointer, len, cap）描述底层数组的视图；扩容在当前 runtime 中小容量倾向翻倍，大容量从约 2 倍平滑过渡到约 1.25 倍，最终容量还受分配器规格影响。泄漏高发于 **subslice 持有大数组引用**和 **Pool 留住超大 buffer/指针槽**。
 
 ## 3 分钟版（一面深度）
 
@@ -34,19 +34,24 @@ sources:
 ptr *array  | len int | cap int
 ```
 
-**扩容规则（Go 1.18+ 近似）**
+**扩容规则（当前 runtime 的近似，不属于语言规范）**
 
 | 条件 | 新 cap |
 |------|--------|
-| oldCap < 256 | double |
-| else | min( oldCap + oldCap/4, 所需 ) |
+| 所需容量 `> 2×oldCap` | 直接以所需容量为候选 |
+| `oldCap < 256` | 候选容量约为 `2×oldCap` |
+| 更大 slice | 使用平滑公式逐步从约 2× 过渡到约 1.25×，直到满足所需容量 |
+| 最终结果 | 还会按元素大小和 allocator size class 向上取整 |
 
 ```mermaid
 flowchart LR
   S1["s[0:10:1000]"] --> Arr[底层数组 cap=1000]
-  S2["s[0:10:10] copy"] --> Arr2[小数组]
+  S2["s[0:10:10]"] --> Arr
+  Copy["append([]T(nil), s[:10]...)"] --> Arr2[独立小数组]
   Note1[仅 10 元素在用但 1000 无法 GC]
 ```
+
+三索引切片 `s[:n:n]` **只限制 cap，阻止后续 append 原地覆盖共享数组**；它仍指向原来的大数组，不能解决长期持有导致的内存滞留。要释放大数组，必须复制出所需数据并丢弃所有旧引用。
 
 **典型泄漏场景**
 
@@ -67,15 +72,15 @@ flowchart LR
 |------|------|
 | `pprof heap` | 看 slice 底层类型占用 |
 | `go build -gcflags=-m` | append 链是否多余分配 |
-| 代码审查 | `[:n:n]` 三索引切片 |
+| 代码审查 | subslice 是否长期持有大数组；Pool 是否丢弃超大 cap |
 
-路径：RSS 高 → heap 看大 []byte → 搜 subslice/Pool → copy 或三索引切片修复。
+路径：RSS 高 → heap 看大 `[]byte` → 搜 subslice/Pool → 长期持有小片段时复制；超大 Pool buffer 直接丢弃。
 
 ## 架构取舍
 
 | 方案 | 适用 | 不适用 |
 |------|------|--------|
-| 三索引 `s[low:high:max]` | 明确限制 cap | 每次都要 API 语义清晰 |
+| 三索引 `s[low:high:max]` | 限制 append 可用容量，隔离修改语义 | 不能释放原底层数组 |
 | 单独 `make` + `copy` | 长期持有小子集 | 一次性大拷贝成本 |
 | `bytes.Buffer` / ring buffer | 流式 IO | 随机访问 |
 | sync.Pool | 复用 []byte | 存指针 slice 未清零 |
@@ -85,8 +90,8 @@ flowchart LR
 1. **append 是否修改原 slice？** → len/cap 够则原地，否则新数组，原 slice 不变。
 2. **`s[:0]` 与 `s=nil`？** → 前者 cap 仍在，底层数组仍可达。
 3. **传 slice 到 goroutine？** → 共享底层数组，需并发写保护或 copy。
-4. **delete slice 元素释放内存？** → 对指针元素置 nil，否则 GC 仍引用对象。
-5. **strings 与 []byte 转换？** → 1.20+ `unsafe` 优化与 `strings.Clone` 场景。
+4. **移除 slice 元素后对象会释放吗？** → 若底层数组的未使用槽仍保存指针，需置 nil 或 `clear`，否则对象仍可达。
+5. **string 与 []byte 转换一定分配吗？** → 语义上会产生可独立使用的值；编译器可对特定只读、非逃逸场景做优化，不能依赖它作为 API 保证。
 
 ## 反模式与事故
 
@@ -109,10 +114,7 @@ func clipFirstKB(data []byte) []byte {
 }
 
 func clearPtrSlice(s []*Item) {
-    for i := range s {
-        s[i] = nil
-    }
-    s = s[:0]
+    clear(s) // Go 1.21+；调用方若要缩 len，仍需自己执行 s = s[:0]
 }
 ```
 

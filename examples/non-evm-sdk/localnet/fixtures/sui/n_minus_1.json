@@ -1,0 +1,36 @@
+{
+  "fixture_kind": "minimized-graphql-contract",
+  "node_version": "1.74.1",
+  "chain_identifier": "sui-localnet-n-minus-1",
+  "digest": "11111111111111111111111111111111",
+  "expected_outcome": "SUCCEEDED",
+  "responses": {
+    "Readiness": {
+      "data": {
+        "chainIdentifier": "sui-localnet-n-minus-1",
+        "checkpoint": {
+          "sequenceNumber": "70",
+          "digest": "checkpoint-n-minus-1"
+        }
+      }
+    },
+    "Transaction": {
+      "data": {
+        "transaction": {
+          "digest": "11111111111111111111111111111111",
+          "effects": {
+            "status": "SUCCESS",
+            "executionError": null,
+            "transaction": {
+              "digest": "11111111111111111111111111111111"
+            },
+            "checkpoint": {
+              "sequenceNumber": "69"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

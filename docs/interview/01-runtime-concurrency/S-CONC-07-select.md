@@ -12,6 +12,7 @@ code_refs:
 sources:
   - https://go.dev/ref/spec#Select_statements
   - https://go.dev/src/runtime/select.go
+  - https://go.dev/doc/go1.23
 ---
 
 # select 语义、公平性与 default 陷阱
@@ -45,7 +46,7 @@ flowchart TD
 
 **与 for-select 模式**：事件循环标准写法；注意 `break` 只跳出 select 不跳出 for。
 
-**timer 陷阱**：`time.After` 在循环里每次新建 timer，**堆泄漏**；用 `time.NewTimer` + `Stop` + drain。
+**timer 陷阱**：`time.After` 在高频循环里每次都会创建 timer，可能造成大量分配。Go 1.23+（且主模块语言版本为 1.23+）可回收不再引用的未触发 timer，且 timer channel 改为同步 channel；旧语义下未触发 timer 不能提前回收。需要复用、Reset 或主动停止时使用 `time.NewTimer`，并按目标 Go 版本遵守 `Stop/Reset` 规则。
 
 ## 生产场景
 
@@ -80,7 +81,7 @@ flowchart TD
 ## 反模式与事故
 
 - default 轮询导致 **一核 100%**，监控却显示「QPS 正常」。
-- 循环 `time.After` 导致 **timer 堆积**，几分钟后 OOM。
+- 高频循环无脑 `time.After` → 旧语义下 timer 堆积，新语义下也会制造分配与调度压力。
 - 在 select 里持锁做重逻辑，放大锁竞争。
 
 ## 代码示例

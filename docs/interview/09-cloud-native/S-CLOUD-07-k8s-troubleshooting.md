@@ -45,16 +45,16 @@ flowchart TD
 
 | Code | 含义 |
 |------|------|
-| 137 | SIGKILL，常见 **OOMKilled** 或 grace 超时强杀 |
-| 143 | SIGTERM，正常优雅退出 |
-| 1 | 应用 panic / os.Exit(1) |
-| 2 | 参数/用法错误 |
+| 137 | 常见约定为 128+9，即 SIGKILL；可能是 OOM、grace 超时或外部强杀 |
+| 143 | 常见约定为 128+15，即 SIGTERM；是否“正常”要看退出流程 |
+| 1 | 应用自定义的一般错误，含义由程序决定 |
+| 2 | Go 未恢复 panic 常见为 2，也可能是应用/命令自身定义；不要只凭数字定因 |
 
 **OOMKilled（Go 特有）**
 
 | 原因 | 处理 |
 |------|------|
-| memory limit 过低 | 压测定峰值 + 30% 余量 |
+| memory limit 过低 | 按工作集峰值、GC 波动、非 Go 内存和 SLO 留经验证的余量 |
 | goroutine 泄漏 | pprof goroutine（[S-CONC-13](../01-runtime-concurrency/S-CONC-13-goroutine-leak.md)） |
 | 缓存无界 | 限大小、LRU |
 | GOGC 不当 | 调 GOGC 或升 limit（[S-MEM-03](../02-memory-gc/S-MEM-03-gogc-tuning.md)） |
@@ -105,15 +105,15 @@ go tool pprof -top heap.prof
 
 | 策略 | 说明 |
 |------|------|
-| Guaranteed QoS | OOM 优先杀 BestEffort，非关键 |
-| VPA 推荐 limit | 长期修正 request（与 HPA 分工） |
+| QoS + Priority | 会影响 eviction/OOM 风险排序，但不能保证关键 Pod 永不被杀 |
+| VPA recommendation | 可辅助修正 requests；是否自动改 requests/limits 由 update policy/resource policy 决定 |
 | 集中日志 | Loki/ELK 查 previous 实例 |
 
 ## 追问链
 
 1. **137 一定是 OOM 吗？** → 也可能是 grace 超时 SIGKILL；看 `reason: OOMKilled`。
 2. **如何抓 Crash 前瞬间？** → `--previous`、preStop hook 打日志、Sentry/panic hook。
-3. **节点 NotReady 上 Pod 怎样？** → 可能 Evicted 或 Unknown；看 controller 重建。
+3. **节点 NotReady 上 Pod 怎样？** → Pod 状态可能转 Unknown；Node controller 在 toleration 超时后发起驱逐，控制器再创建替代 Pod。与资源压力 `Evicted` 不是同一个结论。
 4. **生产能 kubectl exec pprof 吗？** → 建议独立 admin 端口 + NetworkPolicy 限制；或 sidecar 采集。
 
 ## 反模式与事故

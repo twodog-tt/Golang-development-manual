@@ -10,7 +10,8 @@ status: published
 code_refs: []
 sources:
   - https://kubernetes.io/docs/concepts/scheduling-eviction/
-  - https://go.dev/doc/effective_go
+  - https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+  - https://go.dev/blog/container-aware-gomaxprocs
   - https://github.com/uber-go/automaxprocs
 ---
 
@@ -18,13 +19,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> K8s **Scheduler** 按 Request/Limit、亲和性、污点容忍选 Node；Go 服务必须让 **GOMAXPROCS 与 CPU limit 对齐**，否则 throttle 下 P99 爆炸。生产关键词：**requests≠limits 的 Burstable、liveness/readiness 探针、HPA 指标**。
+> K8s **Scheduler 主要按 resource requests**、亲和性、污点容忍等选择 Node；CPU/memory limits 主要由 kubelet/container runtime 通过 cgroup 执行。Go 服务应验证 **GOMAXPROCS 与有效 CPU 配额**，避免严重不匹配造成 throttling 与尾延迟。Go 1.25+ 在 Linux 容器中默认感知 cgroup CPU limit。
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：Scheduler 过滤（Filter）+ 打分（Score）选 Pod 所在 Node；Go 容器需配置 `resources.requests/limits`，并理解 CFS quota。
+1. **是什么**：Scheduler 过滤（Filter）+ 打分（Score）选 Pod 所在 Node；资源可调度性看 requests，limits 决定运行时上限和 QoS 等行为。
 2. **为什么**：5 年+ 后端多数跑 K8s；不懂 limit 会导致 **CPU 节流、OOMKilled、GOMAXPROCS 过大**。
-3. **怎么做**：CPU request 按常态用量、limit 留 burst；内存 limit 略高于 heap+栈峰值；使用 **automaxprocs** 或 Go 1.25+ 自动感知；readiness 接 `/healthz` 含依赖检查。
+3. **怎么做**：requests/limits 根据压测和生产分位数设定；内存预算除 Go heap/stack 外还要覆盖 runtime、mmap、CGO、内核记账等。Go 1.24 及更早可用 **automaxprocs**，Go 1.25+ 默认自动感知 CPU limit，但显式设置 `GOMAXPROCS` 会关闭该默认行为。readiness 只判断实例当前是否有能力接流量，外部依赖检查要避免“一处依赖故障使所有副本同时摘流量”。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -80,23 +81,23 @@ import _ "go.uber.org/automaxprocs" // 或监控 GOMAXPROCS 与 cgroup
 
 | QoS 类 | 说明 |
 |--------|------|
-| Guaranteed | request=limit，关键服务 |
+| Guaranteed | 每个容器都为 CPU 与 memory 设置 request=limit；是否适合仍看容量与运维策略 |
 | Burstable | 常见 Go 微服务 |
-| BestEffort | 批任务，易被驱逐 |
+| BestEffort | 未设置 CPU/memory request 与 limit，节点压力下驱逐优先级通常更差 |
 
 **何时不用 K8s**：极简边缘、强实时单机、团队无 SRE 能力 → 评估 VM/裸机。
 
 ## 追问链
 
-1. **request 和 limit 怎么定？** → request 保调度；limit 防 noisy neighbor；用生产 P95 用量 + 压测。
+1. **request 和 limit 怎么定？** → request 影响调度和 CPU HPA 利用率基线；limit 约束运行时资源。使用历史分布、压测、SLO 和节点超卖策略共同决定，不背固定倍数。
 2. **liveness 和 readiness 区别？** → liveness 失败重启；readiness 失败摘流量。
 3. **Pod 被驱逐？** → 节点压力、优先级、是否 BestEffort。
-4. **Go 1.22+ 在容器里 GOMAXPROCS？** → 运行时逐步改进 cgroup 感知；仍建议显式验证。
+4. **不同 Go 版本在容器里 GOMAXPROCS？** → Go 1.24 及更早默认看主机逻辑 CPU；Go 1.25+ 在 Linux 默认取逻辑 CPU、affinity 与 cgroup CPU limit 的约束值并周期更新，但 CPU request 不参与。
 
 ## 反模式与事故
 
 - **未设 memory limit** → 拖垮节点
-- **readiness 只 ping 200** 不查 DB → 流量打进坏实例
+- readiness 永远 200，实例已无法完成核心请求仍接流量；反过来深度检查共享依赖也可能造成全体摘流量，需按降级能力设计
 - **HPA 仅 CPU** 忽略 goroutine 泄漏型内存涨
 
 ## 代码示例

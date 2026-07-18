@@ -2,8 +2,10 @@ title: 06 网络与服务治理
 collapse_single_pages: false
 nav:
   - index.md
+  - "Linux 进程、文件描述符、epoll 与 Go netpoll": S-NET-06-linux-fd-epoll-netpoll.md
+  - "TCP 建连、队列、TIME_WAIT 与故障排查": S-NET-07-tcp-lifecycle-queues-timewait.md
   - "gRPC vs HTTP/REST 选型": S-NET-01-grpc-vs-rest.md
   - "HTTP 连接池与 Keep-Alive": S-NET-02-http-connection-pool.md
   - "Gin 中间件链与请求生命周期": S-NET-03-gin-middleware.md
   - "JWT 认证与安全边界": S-NET-04-jwt-auth.md
-  - "长连接与 WebSocket 网关设计": S-NET-05-websocket-gateway.md
+  - "WebSocket 网关设计": S-NET-05-websocket-gateway.md

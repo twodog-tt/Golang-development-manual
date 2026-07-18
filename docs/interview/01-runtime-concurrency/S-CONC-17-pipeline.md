@@ -18,13 +18,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> **Pipeline** 用 stage + channel 串联处理；**fan-out** 多 worker 读同一 stage 输出，**fan-in** 合并多路结果（merge channel / errgroup）。生产关键词：**stage 背压、ctx 取消贯穿、errgroup 首错即停**。
+> **Pipeline** 用 stage + channel 串联处理；fan-out 让多个 worker 竞争消费，fan-in 把多个结果流合并。`errgroup` 适合管理一组 goroutine 的生命周期和首错取消，但它本身不是结果 fan-in channel。
 
 ## 3 分钟版（一面深度）
 
 1. **是什么**：数据流经多个处理阶段，每阶段可由 goroutine 并行。
 2. **为什么**：分解复杂流式任务（ETL、聚合 RPC）；清晰背压边界。
-3. **怎么做**：每 stage `func(in <-chan T) <-chan U`；fan-out 启动 N 个相同 worker 消费 `in`；fan-in `select` 或单 goroutine merge。
+3. **怎么做**：每个 stage 同时监听输入与 `ctx.Done()`；fan-out 启动有界 worker；fan-in 常为每个输入启动一个转发 goroutine，再由 WaitGroup 在全部结束后关闭输出。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -81,7 +81,7 @@ flowchart LR
 
 ## 反模式与事故
 
-- 中间 channel 无缓冲且无并行 consumer → 串行化。
+- 把无缓冲 channel 一概当性能问题 → 它提供同步背压，是否需要缓冲应由吞吐、突发和内存预算决定
 - merge 未处理 ctx，上游退出 merge 永久阻塞。
 - 每元素 fan-out 一 goroutine。
 

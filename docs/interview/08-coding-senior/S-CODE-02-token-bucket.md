@@ -19,7 +19,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **令牌桶**：以速率 **rate** 向桶中放令牌，上限 **burst**；请求消耗 1 令牌，无令牌则拒绝或等待。允许 **平滑限流 + 短时 burst**。Go 手写：`lastRefill` 记录时间，每次 `Allow` 先 **按 elapsed 补令牌** 再扣减。
+> **令牌桶**：以速率 **rate** 补充令牌，上限 **burst**；请求消耗 1 令牌，无令牌则拒绝或等待。它限制长期平均速率，同时允许短时 burst，**不保证输出流量平滑**；严格整形更接近漏桶。Go 手写：每次 `Allow` 先按 elapsed 补令牌再扣减。
 
 ## 3 分钟版（一面深度）
 
@@ -71,7 +71,7 @@ tokens = min(burst, tokens + (now - lastRefill).Seconds() * rate)
 
 ## 追问链
 
-1. **Wait 怎么实现？** → `select` + `time.Timer` + `ctx.Done()`，或循环 sleep（示例简化版）。
+1. **Wait 怎么实现？** → 在锁内计算缺少令牌所需时间，锁外用 `time.Timer` 等待，并同时监听 `ctx.Done()`；唤醒后重新计算，避免 busy loop。
 2. **AllowN(n) 呢？** → 补令牌后若 `tokens >= n` 扣 n。
 3. **多 goroutine 并发？** → Mutex；高 QPS 可分片或 atomic（实现复杂）。
 4. **和 semaphore 区别？** → 信号量控制并发数；令牌桶控制 **速率**。
@@ -81,6 +81,7 @@ tokens = min(burst, tokens + (now - lastRefill).Seconds() * rate)
 - **不 cap burst** → 令牌无限涨，失去限流意义
 - **用 int 令牌不用 float** → 低速率（0.5 QPS）精度差
 - **分布式各机独立桶** → 总 QPS = N × limit，需 Redis 协调
+- 构造时接受 `rate<=0` 或 `burst<=0` → 除零、永久拒绝或错误容量；必须校验参数
 
 ## 代码示例
 
@@ -96,6 +97,10 @@ func (tb *TokenBucket) Allow() bool {
 	}
 	tb.tokens -= 1
 	return true
+}
+
+func (tb *TokenBucket) Wait(ctx context.Context) error {
+    // 实现见示例：计算等待时间，Timer + ctx，醒来后循环复核。
 }
 ```
 

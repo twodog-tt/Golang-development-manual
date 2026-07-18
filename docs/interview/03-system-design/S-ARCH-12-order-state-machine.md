@@ -22,7 +22,7 @@ sources:
 
 1. **是什么**：每个订单处于唯一状态；事件驱动状态迁移；非法 `(from, event)` 拒绝。
 2. **为什么**：支付回调重复、MQ 乱序、用户取消与支付成功并发——无状态机会出现「已发货又取消」。
-3. **怎么做**：表字段 `status` + `version`；`UPDATE ... WHERE id=? AND status=? AND version=?`；状态图文档化；Side effect（扣库存）在迁移成功后发 MQ。
+3. **怎么做**：表字段 `status` + `version`；`UPDATE ... WHERE id=? AND status=? AND version=?`；状态图文档化；状态迁移与 outbox 同一事务提交，再由 relay 发 MQ，避免“状态成功但事件丢失”。
 
 ## 10 分钟版（原理 + 图示）
 

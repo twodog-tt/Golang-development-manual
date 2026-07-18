@@ -47,13 +47,14 @@ flowchart LR
 
 | Topic | 生产者 | 消费者 | 分区键 |
 |-------|--------|--------|--------|
-| `trade.matched` | matching | ledger, market, risk | `symbol` 或 `trade_id` |
+| `trade.matched` | matching | ledger, market, risk | 需要保留撮合顺序时用 `symbol/orderBookId`；`trade_id` 会把相邻成交随机打散 |
 | `order.lifecycle` | order-svc | 审计、推送 | `user_id` |
 | `chain.swap` | indexer | kline, rebate | `pool_address` |
-| `chain.deposit` | indexer/wallet | ledger | `user_id` |
+| `chain.deposit` | indexer/wallet | ledger | 按链上地址/账户或已归属的 account_id；归属前未必有 user_id |
 | `withdraw.status` | wallet | ledger, notify | `withdraw_id` |
 
-**分区键原则**：需 **单用户/单 symbol 有序** 的用对应 key；全局有序则单分区（慎用）。
+**分区键原则**：先写出业务需要的顺序域，再选 key。单分区只提供该 topic/partition
+中的顺序，并要求生产者正确处理重试与 epoch；它不提供跨 topic、跨数据库的“全局顺序”。
 
 ### 同步 vs 异步决策表
 
@@ -69,10 +70,10 @@ flowchart LR
 
 | 机制 | 说明 |
 |------|------|
-| Outbox | order/ledger 同库写 outbox，relay 发 Kafka |
+| Outbox | 每个服务在自己的本地事务中写业务表 + outbox，relay/CDC 发 Kafka |
 | 幂等 | `uk(event_id)` 或业务键 `trade_id` |
-| DLQ | ledger 消费失败进死信，告警 + 人工补账 |
-| 重放 | 新 consumer group 从 offset 重建读模型 |
+| DLQ | 对可跳过的独立事件可死信；资金/有序流应暂停或隔离相关 key/partition，保留原 offset、原因和可控重放 |
+| 重放 | 需要 immutable 原始事件、schema/规则版本和确定性处理；新 group 从 offset 开始只是机制，不自动保证能重建 |
 
 参见 [S-KAFKA-02](../middleware/kafka/S-KAFKA-02-producer-reliability.md)、[S-RAB-01](../middleware/rabbitmq/S-RAB-01-exchange-async-pipeline.md)
 
@@ -88,15 +89,16 @@ flowchart LR
 
 | 维度 | Kafka | RocketMQ |
 |------|-------|----------|
-| 吞吐 | 成交广播、日志 | 高 |
+| 吞吐/生态 | 高吞吐日志与流处理生态成熟 | 高吞吐消息，事务/顺序/延时能力取决于使用模式与版本 |
 | 顺序 | 分区内有序 | 单 Queue 有序 |
-| 延迟消息 | 外部调度 | 原生 delay level |
+| 延迟消息 | 通常配合调度器或专用延时 topic | 内置延时/定时消息能力，精度与限制按版本确认 |
 | 典型用途 | trade 总线 | 充提通知、关单 |
 
 ## 生产场景
 
 - **lag 堆积**：ledger consumer 扩容；临时降级非关键消费者（数仓）
-- **重复消息**：账务仍幂等；行情可多写无害
+- **重复消息**：账务必须幂等；depth delta、K 线 volume 等行情写也可能被重复累计，
+  应使用 event id/sequence/version，而不是假设“多写无害”
 - **消息过大**：深度快照走对象存储，MQ 只传引用
 
 ## 追问链
@@ -124,6 +126,9 @@ type OutboxEvent struct {
 }
 // 定时或 CDC 扫描 unpublished → Kafka Publish → 标记 published
 ```
+
+“发布成功但标记 published 前宕机”仍会重复发送，因此 Outbox 解决丢消息窗口，
+不是 exactly-once；消费者和 relay 都要接受重复。
 
 ## 延伸阅读
 

@@ -17,14 +17,16 @@ MARKER_START = "<!-- QUESTION_TABLE_START -->"
 MARKER_END = "<!-- QUESTION_TABLE_END -->"
 
 MODULE_ORDER: list[tuple[str, list[tuple[str, str]]]] = [
-    ("基础 · Go 语言与编码", [
+    ("基础 · Go 语言与生产工程", [
         ("01 并发与运行时", "concurrency"),
         ("02 内存与 GC", "memory_gc"),
+        ("16 Go 生产工程", "go_production_engineering"),
         ("08 手写题", "coding"),
     ]),
     ("进阶 · 网络与中间件", [
         ("06 网络与服务治理", "network"),
         ("MySQL", "mysql"),
+        ("PostgreSQL", "postgresql"),
         ("Redis", "redis"),
         ("Kafka", "kafka"),
         ("RocketMQ", "rocketmq"),
@@ -38,8 +40,13 @@ MODULE_ORDER: list[tuple[str, list[tuple[str, str]]]] = [
         ("11 解决方案架构", "solution_architecture"),
         ("15 微服务（交易所）", "microservices_exchange"),
     ]),
-    ("专题 · Web3 与交易所", [
+    ("专题 · Web3 核心基础设施", [
         ("12 区块链与 Web3", "blockchain_web3"),
+        ("17 多链钱包与托管", "multichain_wallet"),
+        ("18 Web3 支付与稳定币", "web3_payments"),
+        ("19 节点、RPC 与 Staking", "node_rpc_staking"),
+        ("20 协议、共识与安全", "protocol_consensus_security"),
+        ("21 Web3 安全工程", "security_engineering"),
         ("13 Solidity 与合约", "solidity_contracts"),
         ("14 DEX / CEX 交易所", "dex_cex_engineering"),
     ]),

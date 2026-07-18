@@ -29,8 +29,15 @@ DIR_TITLES: dict[str, str] = {
     "13-solidity-contracts": "13 Solidity 与合约工程",
     "14-dex-cex-engineering": "14 DEX / CEX 交易所工程",
     "15-microservices-exchange": "15 微服务（交易所场景）",
+    "16-go-production-engineering": "16 Go 生产工程",
+    "17-multichain-wallet": "17 多链钱包与托管",
+    "18-web3-payments-stablecoin": "18 Web3 支付与稳定币",
+    "19-node-rpc-staking": "19 节点、RPC 与 Staking",
+    "20-protocol-consensus-security": "20 协议、共识与安全",
+    "21-security-engineering": "21 Web3 安全工程",
     "middleware": "中间件与数据库",
     "middleware/mysql": "MySQL",
+    "middleware/postgresql": "PostgreSQL",
     "middleware/redis": "Redis",
     "middleware/kafka": "Kafka",
     "middleware/rocketmq": "RocketMQ",
@@ -41,13 +48,28 @@ DIR_TITLES: dict[str, str] = {
 
 # interview/.pages 二级分组（使用目录 basename，供 awesome-pages 匹配 Section）
 INTERVIEW_GROUPS: list[tuple[str, list[str]]] = [
-    ("基础 · Go 语言与编码", ["01-runtime-concurrency", "02-memory-gc", "08-coding-senior"]),
+    (
+        "基础 · Go 语言与生产工程",
+        ["01-runtime-concurrency", "02-memory-gc", "16-go-production-engineering", "08-coding-senior"],
+    ),
     ("进阶 · 网络与中间件", ["06-network-governance", "middleware"]),
     (
         "高阶 · 系统设计与架构",
         ["03-system-design", "09-cloud-native", "11-solution-architecture", "15-microservices-exchange"],
     ),
-    ("专题 · Web3 与交易所", ["12-blockchain-web3", "13-solidity-contracts", "14-dex-cex-engineering"]),
+    (
+        "专题 · Web3 核心基础设施",
+        [
+            "12-blockchain-web3",
+            "17-multichain-wallet",
+            "18-web3-payments-stablecoin",
+            "19-node-rpc-staking",
+            "20-protocol-consensus-security",
+            "21-security-engineering",
+            "13-solidity-contracts",
+            "14-dex-cex-engineering",
+        ],
+    ),
     ("综合 · 领导力与 AI", ["07-engineering-leadership", "10-ai-engineering"]),
 ]
 
@@ -63,7 +85,10 @@ ROOT_PAGES = """nav:
     - 题源与引用: sources.md
     - 代码与题目映射: interview/_meta/mapping
     - 题目撰写模板: interview/_meta/template
+    - 角色优先级与证据: interview/_meta/role-priority-matrix
+    - P0 技术纠错审计: interview/_meta/technical-corrections-audit
     - 习题质量审查: interview/_meta/quality-review
+    - 知识图谱: interview/_meta/p0-knowledge-graph
 """
 
 
@@ -131,6 +156,7 @@ def write_middleware_pages() -> None:
         "nav:",
         "  - index.md",
         "  - mysql",
+        "  - postgresql",
         "  - redis",
         "  - kafka",
         "  - rocketmq",

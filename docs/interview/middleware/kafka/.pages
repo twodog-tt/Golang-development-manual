@@ -5,4 +5,4 @@ nav:
   - "Kafka 架构与存储：Topic、Partition、ISR": S-KAFKA-01-architecture-storage.md
   - "Kafka Producer 可靠性：acks、幂等与分区键": S-KAFKA-02-producer-reliability.md
   - "Kafka 交易事件总线：成交广播与 lag 治理": S-KAFKA-03-trade-event-bus.md
-  - "Kafka 消费语义与 rebalance": S-DIST-04-kafka-semantics.md
+  - "Kafka 消费语义与 Rebalance": S-DIST-04-kafka-semantics.md

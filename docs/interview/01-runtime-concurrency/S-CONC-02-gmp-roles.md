@@ -23,7 +23,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **G 干活，M 跑腿，P 发工牌**：G 是 goroutine 任务；M 是 OS 线程（可多于 P）；P 是逻辑 CPU 槽位（`≈ GOMAXPROCS`），持有 **本地 runq** 与 **mcache**。**无 P 的 M 不能执行 Go 用户代码**。P 被摘掉时（syscall、GOMAXPROCS 调小、STW），G 回全局队列或让出，P 转给其他 M 继续跑本地队列。生产关键词：**P = 并行度上限、handoff、work stealing、M 膨胀 ≠ 并行提升**。
+> **G 干活，M 跑腿，P 发工牌**：G 是 goroutine 任务；M 是 OS 线程；P 是逻辑执行槽位，活跃数量等于 `GOMAXPROCS`，持有本地 runq 与 mcache。已知会阻塞的 syscall 路径可主动 handoff P；普通 syscall 先把 P 标成 syscall 状态，持续阻塞时再由 sysmon 尝试 retake。STW 是停止 P 上的 mutator 工作，不是把所有 P “移除”。
 
 ## 3 分钟版（一面深度）
 
@@ -32,7 +32,7 @@ sources:
    - **M（Machine）**：对应一个 OS 线程（`pthread`），含 `g0` 系统栈用于 runtime 调度；**数量可远大于 P**（阻塞 syscall、cgo 时常见）。
    - **P（Processor）**：逻辑处理器，**活跃 P 数 = GOMAXPROCS**；持有 **本地 runq**（256 容量）、**mcache**（小对象分配缓存）、defer 池等；是 **并行执行 Go 代码的槽位**。
 2. **为什么需要 P**：纯 G-M 模型全局 runq 锁竞争严重；P 的本地队列 + work stealing 降低锁争用，并把 **并行度** 与 **线程数** 解耦——100 个阻塞 M 也不等于 100 路 CPU 并行。
-3. **怎么做**：M 执行 Go 代码前必须 `acquirep(P)`；`entersyscall` 时 M 与 P **解绑 handoff**；`exitsyscall` 尝试 `acquirep` 或把 G 入全局队列；本地 runq 空则偷其他 P 或取全局队列（详见 [S-CONC-01](./S-CONC-01-gmp-overview.md) 总览）。
+3. **怎么做**：M 执行普通 Go 代码前必须绑定 P。`entersyscallblock` 这类已知阻塞路径会先 handoff P；普通 `entersyscall` 则让 P 进入 syscall 状态，若调用持续阻塞且有调度需要，sysmon 才尝试 retake。`exitsyscall` 走快速恢复或重新获得 P，失败时再把 G 变为 runnable。该过程不是“每次系统调用一进入就立即创建新 M”。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -81,7 +81,7 @@ flowchart TB
 |----------|------|
 | M 执行 Go 用户代码 | **必须先 `acquirep` 绑定 P** |
 | G 处于 `_Grunning` | 挂在某 M 上，且该 M 已绑 P |
-| P 与 M | 某时刻 **一个 P 最多绑一个 M**（多对一） |
+| P 与 M | 某时刻是 **至多一对一绑定**；随时间可重新配对 |
 | M 与 G | 某时刻 **一个 M 最多跑一个 G**（除 g0） |
 | P 与 G | G 在 P 的 runq 等待，或被 M 执行 |
 
@@ -105,13 +105,13 @@ flowchart LR
     M2[curg 当前 G]
     M3[线程本地 TLS]
   end
-  P2 -->|无 P 时| Slow[central cache 全局锁]
+  P2 --> Fast[P.mcache 分配快路径]
   P1 -->|满时推一半| GlobalQ[(全局 runq)]
 ```
 
 | 资源 | 归属 | 无 P 时影响 |
 |------|------|-------------|
-| 小对象堆分配 | P.mcache | 走 central cache，**分配变慢、锁竞争** |
+| 小对象堆分配 | P.mcache | M 无 P 时不能运行普通 Go 用户代码，也就不存在“用户分配自动降级到 mcentral” |
 | 就绪 G 队列 | P.runq + 全局 runq | G 仍可入全局队列，等有 P 的 M 来取 |
 | 网络 IO 等待 | netpoller（全局） | 不占 P；就绪后 G 入队 |
 | 线程栈 | M | M 仍存在，但只能等 syscall 返回或 park |
@@ -158,10 +158,11 @@ stateDiagram-v2
   Created --> HasP: acquirep 成功
   HasP --> Running: execute G
   Running --> HasP: G 结束 / 切换
-  Running --> Handoff: entersyscall 阻塞 syscall
-  Handoff --> NoP: P 移交 wakep
-  NoP --> Blocked: M 阻塞在内核
-  Blocked --> TryP: exitsyscall 返回
+  Running --> SyscallWithP: entersyscall，P 标为 syscall
+  Running --> BlockedNoP: entersyscallblock，主动 release/handoff P
+  SyscallWithP --> HasP: syscall 很快返回，exitsyscall fast path
+  SyscallWithP --> BlockedNoP: 持续阻塞时 sysmon 按条件 retake P
+  BlockedNoP --> TryP: syscall 返回，原 M 已无 P
   TryP --> HasP: acquirep 成功
   TryP --> GlobalQ: 拿不到 P G 入全局队列
   GlobalQ --> Parked: M park 休眠
@@ -177,18 +178,24 @@ stateDiagram-v2
 | 无 P（exitsyscall 后） | **暂不能**，尝试 acquirep | 竞争 P 或 G 入全局队列 |
 | Parked | **不能** | 无 G、spin 超时后休眠 |
 
-### P 被移除的四大场景（决策树）
+### P 与 M 解绑、P 停止或数量调整的场景（决策树）
+
+下面几种动作不能都叫“移除 P”：syscall 主要改变 P/M 绑定，STW 改变 P 的运行状态，
+`GOMAXPROCS` 缩小才会停用多余 P；`Gosched`/抢占通常只重新调度 G。
 
 ```mermaid
 flowchart TD
   Start([P 与 M 解绑]) --> Reason{原因?}
-  Reason -->|阻塞 syscall| S1[entersyscall handoff]
-  Reason -->|GOMAXPROCS 减小| S2[procresize 销毁多余 P]
+  Reason -->|已知阻塞 syscall| S1[entersyscallblock handoff]
+  Reason -->|普通 syscall 持续阻塞| S1b[sysmon best-effort retake]
+  Reason -->|GOMAXPROCS 减小| S2[procresize 停用多余 P]
   Reason -->|GC STW| S3[所有 P 暂停调度]
   Reason -->|抢占 / Gosched| S4[G 重新入队 P 仍保留]
 
   S1 --> A1[P 转给 wakep 唤醒的 M]
   S1 --> A2[原 M 无 P 阻塞在内核]
+  S1b --> A1
+  S1b --> A2
   S2 --> B1[P 上 runq 的 G 迁移到全局]
   S2 --> B2[mcache  flush 回 central]
   S3 --> C1[Mutator 停 STW 极短]
@@ -204,12 +211,13 @@ flowchart TD
 
 | 场景 | 触发函数 / 条件 | P 去向 | G 去向 | M 去向 |
 |------|-----------------|--------|--------|--------|
-| **阻塞 syscall** | `entersyscall` / `entersyscallblock` | handoff 给其他 M | 随 M 进 `_Gsyscall` | 阻塞在内核，**无 P** |
-| **GOMAXPROCS↓** | `runtime.GOMAXPROCS(n)` n 更小 | 多余 P 销毁 | runq 中 G → 全局队列 | 不受影响 |
+| **已知阻塞 syscall** | `entersyscallblock` | 先 release/handoff；有工作时启动 M | 随 M 进 `_Gsyscall` | 阻塞在内核，**无 P** |
+| **普通 syscall** | `entersyscall` | 先处于 syscall 状态；持续阻塞时 sysmon 按条件 retake | 随 M 进 `_Gsyscall` | P 被 retake 后才成为无 P |
+| **GOMAXPROCS↓** | `runtime.GOMAXPROCS(n)` n 更小 | 多余 P 停用并清理资源 | runq 中 G → 全局队列 | 多余 M 可能 park |
 | **GC STW** | mark termination 等 | 全部 P 参与同步 | 暂停 | 暂停 |
 | **主动让出** | `Gosched`、抢占 | P **保留** | G 重新入队 | M 继续调度 |
 
-### 阻塞 Syscall 时 P 移交（handoff 时序）
+### 已知阻塞 Syscall 的 P 移交时序
 
 ```mermaid
 sequenceDiagram
@@ -221,12 +229,12 @@ sequenceDiagram
   participant Q as runq / 全局队列
 
   G->>M: 调用阻塞 syscall
-  M->>RT: entersyscall
+  M->>RT: entersyscallblock
   RT->>P: 保存 runq 状态
   RT->>M: 解绑 P statusHandoff
-  RT->>M2: wakep 唤醒或创建 M
+  RT->>M2: 若存在可运行工作则唤醒或创建 M
   M2->>P: acquirep
-  M2->>Q: 继续消费 P.runq 中其他 G
+  M2->>Q: 消费 P.runq / 全局队列中的 G
   Note over M: M 阻塞在内核 无 P 不能跑 Go 代码
   M->>RT: syscall 返回 exitsyscall
   RT->>P: 尝试 acquirep
@@ -240,7 +248,8 @@ sequenceDiagram
 
 **要点**：
 
-- syscall 期间 **P 不会闲着**——这是 Go 高吞吐的关键。
+- 已知阻塞路径会主动 handoff；普通 syscall 的 P 可能短暂保留在 syscall 状态，sysmon
+  在持续阻塞且满足条件时才 retake，不能承诺“syscall 期间 P 一定不闲”。
 - **M 数膨胀**（线程多）≠ **并行 Go 代码多**；并行仍 ≤ GOMAXPROCS。
 - 网络 IO 走 netpoller，**不占 P 忙等**（[S-CONC-19](./S-CONC-19-netpoller.md)）。
 
@@ -267,7 +276,7 @@ flowchart TB
 | 操作 | 有 P | 无 P |
 |------|------|------|
 | 执行 `go func()` 用户逻辑 | ✅ | ❌ |
-| 小对象 `new`/`make` 走 mcache | ✅ | ❌（需 central cache） |
+| 小对象 `new`/`make` 走 mcache | ✅ | ❌（无 P 不能执行这段 Go 用户代码） |
 | 阻塞在 `Read`/cgo | ✅（但会 handoff P） | ✅（本身就在阻塞） |
 | 把 G 放入全局队列 | ✅ | ✅（exitsyscall 路径） |
 
@@ -380,7 +389,7 @@ flowchart LR
 | **全局公平** | 每 **61** 次调度 tick 优先看全局队列 | `findRunnable` |
 | **全局兜底** | 本地空且偷失败 → `globrunqget` | `findRunnable` |
 
-### GOMAXPROCS 调小时 P 销毁流程
+### GOMAXPROCS 调小时 P 缩减流程
 
 ```mermaid
 sequenceDiagram
@@ -391,10 +400,10 @@ sequenceDiagram
   participant M as 各 M
 
   App->>RT: GOMAXPROCS 8 → 4
-  RT->>P_old: 标记待销毁 P4..P7
+  RT->>P_old: 停用 P4..P7
   RT->>P_old: 将 runq 中 G 批量迁入 Global
   RT->>P_old: mcache flush 到 central cache
-  RT->>P_old: 释放 P 对象
+  RT->>P_old: 清理/释放多余 P 资源
   Note over M: 现有 M 继续绑定 P0..P3
   M->>Global: 从全局队列取被迁移的 G
 ```
@@ -405,27 +414,24 @@ sequenceDiagram
 | mcache flush | 小对象缓存归还 central | 可能短暂增加分配延迟 |
 | 并行度立即下降 | 同时 running G 上限变为新值 | 配合 [S-CONC-04](./S-CONC-04-gomaxprocs.md) 对齐容器 CPU |
 
-### mcache 与 P 的绑定（去掉 P 的隐性代价）
+### mcache 与 P 的绑定
 
 ```mermaid
 flowchart TB
   Alloc[堆小对象分配]
-  Alloc --> HasP{当前 M 有 P?}
-  HasP -->|是| MC[P.mcache 无锁分配]
-  HasP -->|否| CC[mcache.central 全局锁]
+  Alloc --> MC[P.mcache 分配快路径]
+  MC -->|当前 size class 无可用 span| CC[mcentral 补充 span]
   MC --> Span[mspan]
   CC --> Span
-  P_removed[P 被 handoff] --> NoMC[M 失去 mcache 访问]
-  NoMC --> CC
 ```
 
 | 级别 | 路径 | 锁竞争 |
 |------|------|--------|
-| P.mcache | 32KB 以下小对象 | **无锁**（Per-P） |
+| P.mcache | 当前 runtime 归类为 small object 的分配 | **无锁快路径**（Per-P；大小边界是实现细节） |
 | mcentral | mcache 不足时补 span | 按 size class 分锁 |
 | mheap | 大对象 / mcentral 不足 | 全局锁 |
 
-**面试加分**：大量阻塞 syscall 导致 M 频繁无 P，不仅 **并行度下降**，还可能 **拖慢堆分配**——这与「M 多线程但 CPU 不高」现象一致。
+**面试加分**：大量阻塞 syscall 会让 M 数量膨胀，但只要 P 能及时 handoff，Go 代码并行上限仍由 `GOMAXPROCS` 决定。不能回答成“无 P 的 M 会继续执行用户代码，只是分配退化到全局锁”。
 
 ### G 状态与 P 的关系
 
@@ -435,7 +441,7 @@ stateDiagram-v2
   Runnable --> Running: M acquirep 后执行
   Running --> Runnable: 抢占 / Gosched P 仍可用
   Running --> Waiting: chan / net / sleep
-  Running --> Syscall: 阻塞 syscall P handoff
+  Running --> Syscall: entersyscall；P 可暂处 syscall 状态或被 handoff/retake
   Waiting --> Runnable: 事件就绪 仍需 P
   Syscall --> Runnable: exitsyscall 重新入队
   Running --> Dead: 返回
@@ -447,14 +453,14 @@ stateDiagram-v2
 | `_Grunnable` | **需要** P 才能变 Running | 在 runq 等待 |
 | `_Grunning` | 已占用 P | 通过绑 P 的 M 执行 |
 | `_Gwaiting` | 不需要（不占 P） | netpoller / chan 阻塞 |
-| `_Gsyscall` | **P 已 handoff** | M 阻塞，G 随 M |
+| `_Gsyscall` | 不执行普通 Go 用户代码；P 可能暂处 `_Psyscall`，也可能已被主动 handoff 或由 sysmon retake | G 随 syscall M，返回后走 `exitsyscall` |
 
 ## 生产场景
 
 | 场景 | 现象 | 根因 | 排查 / 策略 |
 |------|------|------|-------------|
-| 同步文件 IO 风暴 | `Threads` 飙高、CPU 低 | 每阻塞 G 占一 M，P 被 handoff | 改异步 IO、io_uring、限并发 |
-| DNS 同步解析 | 毛刺 + 线程多 | `net.Resolver` 阻塞 syscall | 自定义 Resolver、缓存、Pure Go 解析 |
+| 同步文件 IO 风暴 | `Threads` 飙高、CPU 低 | 每个阻塞 G 占一 M；P 可被主动 handoff 或由 sysmon 后续 retake | 评估异步/可轮询 IO 路径并限制并发 |
+| DNS 解析线程膨胀 | 毛刺 + 线程多 | 选中了 cgo resolver 或底层解析调用阻塞；纯 Go resolver 通常走网络 poller | 先用 `GODEBUG=netdns`/trace 确认路径，再决定强制 Go resolver、缓存或隔离 |
 | cgo 阻塞 SDK | M ≫ GOMAXPROCS | cgo 占 M 不进 netpoller | sidecar 隔离、进程池 |
 | 滚动改 GOMAXPROCS | P99 尖刺 | 全局队列瞬时堆积 | 小步调整、预热、HPA 对齐 quota |
 | 容器 thread limit | `exceeds thread limit` | M 膨胀触顶 | 升 ulimit 或减少阻塞源 |
@@ -477,10 +483,10 @@ stateDiagram-v2
 
 | 方案 | 适用 | 不适用 |
 |------|------|--------|
-| 默认 netpoller 路径 | TCP/UDP 高并发 | 已走 blocking fd 的 legacy |
+| 默认 netpoller 路径 | Go `net` 包管理的 pollable TCP/UDP FD | 普通文件、cgo 或绕过 poller 的阻塞调用 |
 | 有界 worker + 阻塞 IO 池 | 必须同步阻塞 | 简单 CRUD 过度设计 |
 | 进程外 cgo / 阻塞库 | 隔离 M 膨胀 | 运维简单优先 |
-| `automaxprocs` | K8s 容器 | 裸机通常默认即可 |
+| `automaxprocs` | 旧工具链或明确希望库在启动时固定设置 P 数 | Go 1.25+ 已启用 runtime 容器感知且希望保留动态更新时；库会显式设置 `GOMAXPROCS` |
 | 调大 GOMAXPROCS | CPU 密集、核数明确 | 已超过 cgroup quota |
 
 ## 追问链
@@ -494,7 +500,7 @@ stateDiagram-v2
 7. **exitsyscall 后拿不到 P 呢？** → G 改 `_Grunnable` 入全局队列，M park 或继续找活。
 8. **work stealing 偷哪一端？** → 偷受害者 **head 侧约一半**（`runqgrab`）；所有者从 **head** 取；偷来的 G 挂到窃取者 **tail**（非 Cilk 双端 deque）。
 9. **本地 runq 满推哪一半到全局？** → **`runqputslow` 推 head 前半 128 个 + 新 G**；**tail 后半留本地**；`-race` 下 batch Fisher-Yates 洗牌。
-10. **GOMAXPROCS 从 8 改 4 会怎样？** → 销毁 P4–7，runq 中 G 迁全局，mcache flush。
+10. **GOMAXPROCS 从 8 改 4 会怎样？** → runtime 通过 STW 调整活跃 P；多余 P 的 runq 迁移、缓存清理，多余 M 可能 park。
 11. **netpoller 与 P 关系？** → 网络 G 等待不占 P；就绪后入队仍需 P 执行（[S-CONC-19](./S-CONC-19-netpoller.md)）。
 
 ## 反模式与事故
@@ -549,7 +555,7 @@ func blockSyscallDemo() {
 	for i := 0; i < 1000; i++ {
 		go func() {
 			var b [1]byte
-			_, _ = syscall.Read(syscall.Stdin, b[:]) // 每 G 占一 M，P 被 handoff
+			_, _ = syscall.Read(syscall.Stdin, b[:]) // 每个阻塞 G 占一 M；P 可被主动 handoff 或后续 retake
 		}()
 	}
 	// 此时 runtime 中 M 数可远大于 GOMAXPROCS
@@ -563,8 +569,12 @@ func retuneGOMAXPROCS() {
 	old := runtime.GOMAXPROCS(0)
 	fmt.Printf("before: GOMAXPROCS=%d\n", old)
 
-	// 生产慎用：减半可能导致 P 销毁、runq 迁移
-	runtime.GOMAXPROCS(old / 2)
+	// 生产慎用：缩小会在 STW 中停用多余 P、迁移 runq。
+	next := old / 2
+	if next < 1 {
+		next = 1
+	}
+	runtime.GOMAXPROCS(next)
 	fmt.Printf("after: GOMAXPROCS=%d\n", runtime.GOMAXPROCS(0))
 }
 ```

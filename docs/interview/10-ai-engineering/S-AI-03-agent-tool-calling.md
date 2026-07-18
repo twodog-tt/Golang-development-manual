@@ -18,13 +18,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> **Agent** = LLM + **工具调用循环**（规划→执行→观察→再规划）。**Function Calling / Tool Use** 让模型输出结构化 `tool_calls`，由 Go 服务执行真实 API。生产关键词：**ReAct、最大步数、人机确认、MCP 协议**。
+> **Agent** 通常是模型、状态和工具执行器组成的受控循环；并不要求固定采用 ReAct。Function Calling / Tool Use 让模型提出结构化调用，但这些参数仍是 **不可信输入**，必须由 Go 服务做 schema、身份、权限和业务状态校验后才可执行。
 
 ## 3 分钟版（一面深度）
 
 1. **是什么**：模型不直接改数据库，而是声明要调用的函数及参数；宿主程序校验后执行并回传 `tool` 结果。
 2. **为什么**：弥补 LLM 不能访问实时数据、不能执行副作用；把 **确定性逻辑留在代码里**。
-3. **怎么做**：注册 tools schema（JSON Schema）→ chat 请求带 `tools` → 解析 `tool_calls` → Go 执行 → 把结果作为 `role: tool` 消息续聊；设 **max_steps** 防死循环。
+3. **怎么做**：注册 tool schema → 模型提出 `tool_calls` → 宿主验证名称、参数、用户授权与幂等键 → 执行并返回经过裁剪的结果 → 继续循环；设置 max steps、总 deadline、token/成本预算和高风险审批。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -52,11 +52,16 @@ func (a *Agent) Run(ctx context.Context, messages []Message) (string, error) {
         }
 
         for _, tc := range resp.ToolCalls {
+            if err := a.schemas.Validate(tc.Name, tc.Args); err != nil {
+                return "", fmt.Errorf("invalid tool arguments: %w", err)
+            }
             if !a.policy.Allow(tc.Name, tc.Args) {
                 return "", fmt.Errorf("tool denied: %s", tc.Name)
             }
             out, err := a.tools.Execute(ctx, tc.Name, tc.Args)
-            if err != nil { out = map[string]any{"error": err.Error()} }
+            if err != nil {
+                out = safeToolError(err) // 不把内部堆栈、SQL、凭证回送给模型
+            }
             messages = append(messages, toolResultMessage(tc.ID, out))
         }
     }
@@ -68,7 +73,7 @@ func (a *Agent) Run(ctx context.Context, messages []Message) (string, error) {
 
 | 原则 | 说明 |
 |------|------|
-| 幂等 | 读操作优先；写操作要 confirm |
+| 幂等 | 重试可能发生；写操作使用幂等键/状态机，高风险操作再加确认 |
 | 小粒度 | 一个 tool 一件事，便于模型选择 |
 | 强类型 | Args 用 JSON Schema 校验 |
 | 可观测 | 每步记 span：tool_name、latency |
@@ -98,7 +103,7 @@ func (a *Agent) Run(ctx context.Context, messages []Message) (string, error) {
 ## 追问链
 
 1. **和 RAG 关系？** → RAG 是检索增强；Agent 可 **把 RAG 封装成一个 tool**（`search_knowledge_base`）。
-2. **并行 tool_calls？** → 模型可能一次返回多个；无依赖的可 `errgroup` 并行。
+2. **并行 tool_calls？** → 只有在调用之间无数据依赖、无顺序要求且副作用不会冲突时才能并行；否则按 DAG/状态机顺序执行。
 3. **MCP 是什么？** → Model Context Protocol，标准化 **工具/资源/提示** 的宿主-服务器协议，利于 Cursor 等生态。
 4. **怎么防 Agent 乱跑？** → max_steps、allowlist、敏感操作 HITL（human-in-the-loop）。
 
@@ -108,6 +113,7 @@ func (a *Agent) Run(ctx context.Context, messages []Message) (string, error) {
 - **无步数上限** → 无限循环烧 token
 - **把 SQL 生成交给模型直接执行** → 注入风险；用参数化查询 + 只读账号
 - **工具返回巨大 JSON** → 撑爆 context；要摘要或分页
+- 只依赖模型生成的 JSON Schema 合法性 → 类型合法不代表当前用户有权执行，也不代表金额、资源状态等业务约束合法
 
 ## 代码示例
 

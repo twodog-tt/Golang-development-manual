@@ -87,12 +87,12 @@ type Group struct {
 
 1. **为何 errOnce？** → 多 goroutine 同时失败，只保留首个有意义。
 2. **子任务如何感知取消？** → `fn` 内 `select <-ctx.Done()` 或传 ctx 给 HTTP/DB。
-3. **SetLimit(n) 呢？** → 官方扩展：信号量限制并发，手写可加 buffered channel。
-4. **Wait 返回 nil 但 ctx 已 cancel？** → 正常；cancel 也可能由外部 parent 触发。
+3. **SetLimit(n) 呢？** → 官方扩展：`Go` 在达到上限时会阻塞；有任务运行时不能修改 limit。若不希望阻塞提交方可看 `TryGo`。
+4. **Wait 返回 nil 但 ctx 已 cancel？** → `Wait` 只返回任务函数报告的首个 error。若 parent 已取消但所有函数都忽略取消并返回 nil，`Wait` 仍可返回 nil；任务应把 `ctx.Err()` 向上返回。
 
 ## 反模式与事故
 
-- **Go 里 panic 不 recover** → 进程崩溃；生产应用 `defer recover` 转 error
+- 官方 `errgroup` 不把 panic 自动转成 error。只应在明确的进程/请求边界按策略 recover、保留堆栈并告警；不要在每个任务里无差别吞掉 panic
 - **不用 ctx 仍调阻塞 IO** → cancel 无效，Wait  hung
 - **在 Go 外再开 goroutine 不 Wait** → 泄漏
 

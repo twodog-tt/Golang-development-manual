@@ -18,7 +18,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **MCP（Model Context Protocol）** 用 JSON-RPC 把 **工具、资源、提示** 标准化暴露给 Cursor/Claude 等宿主。Go 用官方 **`modelcontextprotocol/go-sdk`** 注册 Tool，**stdio** 给 IDE 子进程挂载，**Streamable HTTP** 给远程服务。生产关键词：**类型安全 AddTool、权限边界、结构化输出**。
+> **MCP（Model Context Protocol）** 基于 JSON-RPC 标准化工具、资源、提示等能力。Go 可用官方 `modelcontextprotocol/go-sdk`；stdio 适合本地子进程，Streamable HTTP 适合远程服务。远程部署还必须处理协议版本、认证授权、Origin 校验、会话与超时，不能只把 stdio server 换成 HTTP listener。
 
 ## 3 分钟版（一面深度）
 
@@ -53,7 +53,9 @@ func greet(ctx context.Context, req *mcp.CallToolRequest, in greetInput) (
 
 server := mcp.NewServer(&mcp.Implementation{Name: "my-svc", Version: "1.0.0"}, nil)
 mcp.AddTool(server, &mcp.Tool{Name: "greet", Description: "打招呼"}, greet)
-server.Run(ctx, &mcp.StdioTransport{})
+if err := server.Run(ctx, &mcp.StdioTransport{}); err != nil {
+    return err
+}
 ```
 
 **传输方式选型**
@@ -61,7 +63,7 @@ server.Run(ctx, &mcp.StdioTransport{})
 | 传输 | 场景 |
 |------|------|
 | Stdio | Cursor、Claude Desktop 本地子进程 |
-| Streamable HTTP | 远程多客户端、K8s 部署 |
+| Streamable HTTP | 远程多客户端；单一 MCP endpoint 使用 POST/GET，可选 SSE |
 | InMemory | 单测（`mcp.NewInMemoryTransports()`） |
 
 **Cursor 挂载示例（stdio）**
@@ -104,7 +106,7 @@ server.Run(ctx, &mcp.StdioTransport{})
 
 1. **和 Function Calling 区别？** → FC 在模型 API 内；MCP 是 **宿主↔服务** 标准协议，可跨进程/跨语言。
 2. **Tool 返回什么？** → 结构化 JSON（`AddTool` Out 类型）或 `TextContent`；错误用 `IsError` 或业务字段。
-3. **如何做鉴权？** → HTTP 传输加 OAuth/mTLS；stdio 依赖本机用户身份 + Tool 内 RBAC。
+3. **如何做鉴权？** → HTTP 传输按 MCP authorization 与部署环境采用 OAuth/mTLS，并校验 Origin 防 DNS rebinding；本地 HTTP 只绑定 loopback。stdio 从环境/宿主取得凭证，但 Tool 内仍按最终用户与资源做授权。
 4. **资源 Resources 与 Tool？** → Resource 只读暴露文件/URI；Tool 可执行副作用。
 
 ## 反模式与事故
@@ -113,6 +115,7 @@ server.Run(ctx, &mcp.StdioTransport{})
 - **一个 Tool 执行任意 SQL** → 注入与越权
 - **无超时** → Tool 内 HTTP 挂死拖垮 Agent
 - **返回巨型 JSON** → 撑爆 Agent context
+- Streamable HTTP 对任意 Origin 开放或本地监听 `0.0.0.0` 且无认证 → DNS rebinding/越权调用风险
 
 ## 代码示例
 

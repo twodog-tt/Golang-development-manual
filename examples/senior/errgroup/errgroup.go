@@ -8,16 +8,15 @@ import (
 )
 
 type Group struct {
-	wg     sync.WaitGroup
-	ctx    context.Context
-	cancel context.CancelFunc
+	wg      sync.WaitGroup
+	cancel  context.CancelFunc
 	errOnce sync.Once
-	err    error
+	err     error
 }
 
 func WithContext(parent context.Context) (*Group, context.Context) {
 	ctx, cancel := context.WithCancel(parent)
-	return &Group{ctx: ctx, cancel: cancel}, ctx
+	return &Group{cancel: cancel}, ctx
 }
 
 func (g *Group) Go(fn func() error) {
@@ -27,7 +26,9 @@ func (g *Group) Go(fn func() error) {
 		if err := fn(); err != nil {
 			g.errOnce.Do(func() {
 				g.err = err
-				g.cancel()
+				if g.cancel != nil {
+					g.cancel()
+				}
 			})
 		}
 	}()

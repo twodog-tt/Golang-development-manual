@@ -18,7 +18,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> Goroutine **初始栈约 2KB**，按需 **分段复制扩容**（连续栈，copy stack）；线程栈通常 **MB 级固定预留**。百万 goroutine 可行主要靠小栈 + 动态增长。生产关键词：**深递归/大栈局部变量 → 栈扩容成本与 OOM**。
+> Goroutine **初始栈通常约 2KB**，采用 **连续栈复制扩容**；早期“分段栈”早已被替换。OS 线程栈通常预留 MB 级虚拟地址空间，但不等于一开始全部成为 RSS。百万 goroutine 仍需按实际平均栈、对象和连接资源做容量估算。
 
 ## 3 分钟版（一面深度）
 
@@ -44,24 +44,24 @@ flowchart TB
 | 维度 | Goroutine | OS Thread |
 |------|-----------|-----------|
 | 初始大小 | ~2KB | 常见 1–8MB（pthread） |
-| 增长 | 运行时 copy grow | 固定或 guard page |
+| 增长 | 运行时分配更大连续栈并复制 | 平台线程栈通常有固定上限/虚拟预留与 guard page |
 | 数量级 | 10⁵–10⁶ 常见 | 通常 < 10⁴ |
 | 切换成本 | 用户态，保存少量寄存器 | 内核态切换 |
 
 **栈扫描与 GC**：栈上的指针参与根扫描；**逃逸到堆**的对象不在栈扩容问题里丢失，但指针需正确更新（连续栈拷贝时 runtime 处理）。
 
-**1.21+ 相关**：基于寄存器的调用约定减少栈流量，间接影响栈压力（实现细节，面试可提一句）。
+**寄存器 ABI**：Go 1.17 起在主要架构逐步启用基于寄存器的调用约定，减少部分参数的栈流量；这是实现优化，不改变 goroutine 栈可增长的语义。
 
 ## 生产场景
 
 - **深度递归**（JSON 嵌套、AST 遍历）：栈溢出 `stack overflow` 或频繁扩容导致 CPU 毛刺。
-- **大数组在栈上**：`var buf [1<<20]byte` 在函数内可能触发扩容或栈过大。
+- **大局部对象**：编译器可能把它放到堆，也可能增加栈压力；应以 escape analysis 和 benchmark 为准，不能只凭源码位置断言“必在栈上”。
 - **百万连接网关**：每连接一 goroutine，若每栈平均 8KB，仅栈就 ~8GB 虚拟内存——需监控 RSS。
 
 ## 排查与工具
 
-- `runtime/debug.SetMaxStack`（默认 1GB）限制单 G 栈
-- pprof → `stack` sample 看栈深度热点
+- `runtime/debug.SetMaxStack` 限制单 G 栈；默认在 64 位系统通常为 1GB、32 位系统更小，具体看版本
+- goroutine profile / panic 栈查看递归深度；CPU/alloc profile 判断热点与分配
 - panic `runtime: goroutine stack exceeds ...` → 改迭代/拆 goroutine
 
 ## 架构取舍
@@ -78,7 +78,7 @@ flowchart TB
 1. **分段栈为何被弃用？** → 热分割点、GC 复杂；连续栈拷贝更简单。
 2. **栈会缩吗？** → 会，GC 阶段评估，避免长期占用。
 3. **goroutine 和线程栈谁更安全？** → 线程栈溢出常 SIGSEGV；Go 有 `morestack` 检测，但仍有 `stack overflow`。
-4. **cgo 调用栈？** → 仍在 G 栈上，深 cgo 嵌套同样耗栈。
+4. **cgo 调用栈？** → 进入 C 时会切到 OS 线程的系统/C 栈；Go 调度器不能像普通 Go 代码一样抢占正在执行的 C 代码，但通常会释放 P 给其他 M。
 5. **闭包捕获变量在哪？** → 逃逸分析决定堆或栈。
 
 ## 反模式与事故
@@ -98,7 +98,7 @@ func walk(n int) {
     walk(n - 1)
 }
 
-// 正例：显式栈或 goroutine 分段
+// 正例：显式数据结构替代深递归
 func walkIter(root *Node) {
     stack := []*Node{root}
     for len(stack) > 0 {
@@ -114,5 +114,4 @@ func walkIter(root *Node) {
 ## 延伸阅读
 
 - [runtime/stack.go](https://go.dev/src/runtime/stack.go)
-- [Stack copying and goroutines（旧文仍有助于理解）](https://go.dev/blog/slices-intro)
 - [Draveness：Goroutine 与栈](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-goroutine/)

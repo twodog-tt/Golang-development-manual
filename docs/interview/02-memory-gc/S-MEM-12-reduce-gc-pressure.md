@@ -51,7 +51,7 @@ flowchart TB
 
 **sync.Pool 注意**
 
-- 对象可能被 GC 清空，不能当可靠缓存。
+- 任意对象都可能被 runtime 随时从 Pool 移除，不能把 Pool 当可靠缓存或资源池。
 - 归还前清理指针字段，避免泄漏。
 - Pool 内对象大小应接近，避免 size class 抖动。
 
@@ -89,9 +89,9 @@ flowchart TB
 ## 追问链
 
 1. **降分配和降 GOGC 哪个优先？** → 先降分配，调参不减少总拷贝字节。
-2. **Pool 为何会被 GC 清空？** → 每轮 GC 可能 drop pool 链，防内存囤积。
+2. **Pool 为何不能保证保留对象？** → API 明确允许 runtime 随时移除对象；当前实现还使用 victim 机制跨 GC 周期短暂保留部分对象，但这不是业务契约。
 3. **Builder 复用？** → `Reset()` 后复用底层 []byte。
-4. **泛型能减少 GC 吗？** → 减少 interface 装箱，视 monomorphization 结果。
+4. **泛型能减少 GC 吗？** → 有机会减少 interface 装箱；实际代码可能使用类型形状、dictionary 或专门化，以编译结果和 benchmark 为准。
 5. **如何设 SLO 验证？** → 同 QPS 下 P99 + GC pause + 吞吐三角。
 
 ## 反模式与事故
@@ -113,13 +113,26 @@ var bufPool = sync.Pool{
 func marshalPooled(v any, enc func([]byte, any) ([]byte, error)) ([]byte, error) {
     bp := bufPool.Get().(*[]byte)
     b := (*bp)[:0]
-    defer func() {
+    encoded, err := enc(b, v)
+    if err != nil {
         *bp = b[:0]
         bufPool.Put(bp)
-    }()
-    return enc(b, v)
+        return nil, err
+    }
+
+    // 返回值不能继续引用即将放回 Pool 的底层数组，否则其他请求会覆盖它。
+    out := append([]byte(nil), encoded...)
+
+    // 避免一次异常大响应把超大 buffer 永久带回池中。
+    if cap(encoded) <= 64<<10 {
+        *bp = encoded[:0]
+        bufPool.Put(bp)
+    }
+    return out, nil
 }
 ```
+
+这个签名要求返回 `[]byte` 的所有权交给调用方，因此必须复制。若追求真正的零额外拷贝，应改成“由调用方提供目标 buffer”或直接写入 `io.Writer`，并明确 buffer 的借用/归还生命周期。
 
 ## 延伸阅读
 

@@ -52,7 +52,8 @@ flowchart LR
 
 - 通过的 ADR 编号
 - 未决问题 owner
-- **Architecture Fitness Function**（如：P99 < 200ms，错误率 < 0.01%）
+- **Architecture Fitness Function**：把关键 NFR 变成可自动/周期验证的约束。
+  `P99 < 200ms`、错误率阈值等只能来自具体用户旅程与 SLO，不能当通用标准答案
 
 **常见反对意见与应对（面试情景题）**
 
@@ -79,7 +80,7 @@ flowchart LR
 
 | 重流程 | 无评审 |
 |--------|--------|
-| 慢但稳 | 快但反复 |
+| 可能降低变更速度且产生形式主义 | 决策快，但风险、依赖和责任容易不可追溯 |
 
 **轻量团队**：2 人 walkthrough + ADR 即可，不必大厂式 ARB。
 

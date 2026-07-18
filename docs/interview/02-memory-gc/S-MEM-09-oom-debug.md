@@ -18,7 +18,10 @@ sources:
 
 ## 30 秒版（开场）
 
-> **OOM** 常是 RSS（堆+栈+runtime+堆外）超 cgroup limit，而非单纯「GC 没回收」。**大对象**（≥32KB 等阈值）走 dedicated span，加剧堆碎片与 GC 标记成本。**堆外**：mmap、cgo、DirectByteBuffer 类库不计入 HeapAlloc。生产关键词：**GOMEMLIMIT、RSS vs HeapInuse、pprof+smem**。
+> **OOM** 常是 RSS（堆+栈+runtime+堆外）超过 cgroup limit，而非单纯“GC 没回收”。
+> 当前 runtime 把超过约 32 KiB 小对象上限的分配走大对象路径；精确边界属于实现细节。
+> 大对象可能抬高峰值与碎片，其 GC 扫描成本还取决于对象是否含指针。`mmap`、cgo/C
+> 分配等不体现在 `HeapAlloc`，也未必受 `GOMEMLIMIT` 完整约束。
 
 ## 3 分钟版（一面深度）
 
@@ -33,7 +36,7 @@ sources:
 | 类别 | 说明 |
 |------|------|
 | Heap | 小对象 span + 大对象 direct |
-| Stack | goroutine 栈可增长至 1GB（默认上限） |
+| Stack | goroutine 栈按需增长；64 位平台默认单栈上限约 1GB，属于实现配置 |
 | Off-heap | cgo C.malloc、部分驱动 |
 | OS 缓存 | 归还 span 未必立刻还 OS（Scavenger） |
 
@@ -48,7 +51,7 @@ flowchart TB
 
 **大对象**：超过 maxSmallSize 的对象单独分配，释放进 idle 列表；频繁分配/释放大 buffer 导致堆峰值高。
 
-**Scavenger**：`debug.FreeOSMemory()` 强制归还，平时按策略 lazy return。
+**Scavenger**：平时按策略把空闲物理页归还 OS；`debug.FreeOSMemory()` 会先强制 GC，再尽量 scavenging，频繁调用会明显干扰吞吐与延迟。
 
 ## 生产场景
 
@@ -79,10 +82,11 @@ flowchart TB
 ## 追问链
 
 1. **HeapAlloc 与 RSS 为何差很多？** → span 缓存、栈、堆外、libc。
-2. **大对象阈值大概？** → 32KB 量级（实现相关，口述「有大对象专门路径」即可）。
+2. **大对象阈值大概？** → 当前实现是超过 32 KiB 小对象上限的量级；这是 runtime
+   实现常量，不是 Go 语言/API 保证，口述“有大对象专门路径”更稳妥。
 3. **FreeOSMemory 生产能用吗？** → 仅诊断或特殊批处理，常调用损性能。
 4. **cgo 内存谁回收？** → 自己 C.free，Go GC 不管。
-5. **如何设 Pod memory？** → request≈常态 RSS，limit 留峰值，GOMEMLIMIT≈90% limit。
+5. **如何设 Pod memory？** → 用实测常态与峰值制定 request/limit；GOMEMLIMIT 要低于 limit，并给 cgo、mmap、内核缓冲和波动留足余量，没有通用固定百分比。
 
 ## 反模式与事故
 

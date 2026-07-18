@@ -17,13 +17,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> **南北向流量** 从公网进集群：传统 **Ingress**（nginx/ALB）或新 **Gateway API**（更细粒度路由）。Go 服务通常 ClusterIP + Ingress 暴露 HTTP/gRPC。生产关键词：**TLS 终止、超时与 body 限制、path 路由、WebSocket 升级、gRPC 需 backend protocol 注解**。
+> **南北向流量** 从公网进入集群：可用传统 **Ingress** 或 **Gateway API**。Go 服务通常通过 ClusterIP 接入网关。TLS、超时、body 限制、WebSocket 和 gRPC 的具体配置取决于 controller；Gateway API 可用 HTTPRoute/GRPCRoute 表达标准化路由，不能把某个 nginx annotation 当成 Kubernetes 通用能力。
 
 ## 3 分钟版（一面深度）
 
 1. **是什么**：Ingress Controller 把外部 HTTP(S) 路由到 Service；Gateway API 用 Gateway + HTTPRoute 替代注解魔法。
 2. **为什么**：面试常问 Ingress vs Service LoadBalancer、如何做灰度 path、WebSocket 怎么配。
-3. **怎么做**：Go API 用 Ingress path 前缀；长连接单独 host 或 annotation；超时大于 Go `WriteTimeout`；与 [S-SOL-04 BFF/网关](../11-solution-architecture/S-SOL-04-bff-gateway-mesh.md) 分层：Ingress 基础设施，业务限流在应用或 API 网关。
+3. **怎么做**：Go API 用 host/path 路由；长连接单独评估 idle timeout、每次写 deadline 与 drain；网关和应用超时按各自语义形成端到端 deadline，不能简单比较两个数字；业务鉴权/限流放 API 网关或应用层。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -97,8 +97,8 @@ spec:
 
 ## 生产场景
 
-- **WebSocket 行情推送**：需 `proxy-read-timeout` 很大、`Connection Upgrade`；或独立域名 + [S-NET-05](../06-network-governance/S-NET-05-websocket-gateway.md)
-- **gRPC**：部分 Ingress 不支持 HTTP/2 gRPC → 用 **gRPC Gateway**、**独立 LB** 或支持 grpc 的 mesh/gateway
+- **WebSocket 行情推送**：确认 controller 支持 Upgrade/extended connect，并把 idle timeout 与心跳、写 deadline 对齐；或独立域名 + [S-NET-05](../06-network-governance/S-NET-05-websocket-gateway.md)
+- **gRPC**：确认入口到 backend 的 HTTP/2/gRPC 支持；Gateway API 可用 GRPCRoute，传统 Ingress 常需要 controller-specific 配置
 - **大文件上传**：`client_max_body_size` / Go `MaxBytesReader` 对齐
 - **多环境**：staging/prod 不同 host；cert-manager 自动续期 TLS
 
@@ -125,13 +125,13 @@ spec:
 1. **Ingress 和 Service 区别？** → Service 集群内负载均衡；Ingress 七层路由 + 域名/TLS。
 2. **如何做金丝雀？** → Ingress weight 注解、Gateway API HTTPRoute 权重、或 Flagger（[S-ARCH-15](../03-system-design/S-ARCH-15-release-strategy.md)）。
 3. **TLS 在哪终止？** → 多在 Ingress；Pod 内 mTLS 另说（Mesh）。
-4. **Go 反向代理超时怎么配？** → Ingress 超时 ≥ Go `ReadHeaderTimeout`/`WriteTimeout` + 业务 P99。
+4. **Go 反向代理超时怎么配？** → 先区分连接、读 header、上游响应 header、响应空闲和请求总 deadline。外层 deadline 应给内层留清理余量；streaming/WebSocket 不能套普通请求的固定 `WriteTimeout`。
 
 ## 反模式与事故
 
 - **Ingress 超时 60s 但 Go 长轮询 120s** → 504
 - **WebSocket 走默认短 timeout** → 频繁断连
-- **path 路由重叠未排序** → 错误 backend
+- 路径规则重叠且未按规范/目标 controller 验证 → 升级 controller 后路由行为变化
 - **TLS Secret 过期未监控** → 全站 HTTPS 失败
 
 ## 代码示例
@@ -142,7 +142,7 @@ srv := &http.Server{
     Handler:           router,
     ReadHeaderTimeout: 5 * time.Second,
     ReadTimeout:       30 * time.Second,
-    WriteTimeout:      60 * time.Second, // 与 Ingress proxy-read-timeout 对齐
+    WriteTimeout:      60 * time.Second, // 普通 API 示例；流式接口需单独设计
     IdleTimeout:       120 * time.Second,
 }
 ```

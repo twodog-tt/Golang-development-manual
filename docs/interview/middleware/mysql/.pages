@@ -2,6 +2,8 @@ title: MySQL
 collapse_single_pages: false
 nav:
   - index.md
+  - "复杂 SQL：JOIN、CTE、窗口函数与执行计划": S-DB-06-advanced-sql.md
+  - "资金类表设计：DECIMAL、约束、锁与死锁": S-DB-07-financial-schema-locking.md
   - "MySQL 索引原理与最左前缀": S-DB-01-mysql-index.md
   - "事务隔离级别与 MVCC": S-DB-02-transaction-mvcc.md
   - "慢查询排查与 EXPLAIN": S-DB-03-slow-query.md

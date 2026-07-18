@@ -1,8 +1,9 @@
 title: 面试专题
 nav:
-  - 基础 · Go 语言与编码:
+  - 基础 · Go 语言与生产工程:
     - 01-runtime-concurrency
     - 02-memory-gc
+    - 16-go-production-engineering
     - 08-coding-senior
   - 进阶 · 网络与中间件:
     - 06-network-governance
@@ -12,8 +13,13 @@ nav:
     - 09-cloud-native
     - 11-solution-architecture
     - 15-microservices-exchange
-  - 专题 · Web3 与交易所:
+  - 专题 · Web3 核心基础设施:
     - 12-blockchain-web3
+    - 17-multichain-wallet
+    - 18-web3-payments-stablecoin
+    - 19-node-rpc-staking
+    - 20-protocol-consensus-security
+    - 21-security-engineering
     - 13-solidity-contracts
     - 14-dex-cex-engineering
   - 综合 · 领导力与 AI:

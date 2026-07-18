@@ -11,7 +11,8 @@ code_refs:
   - basis/sync/main.go
   - basis/goroutine/main.go
 sources:
-  - https://pkg.go.dev/sync
+  - https://pkg.go.dev/sync#WaitGroup.Go
+  - https://pkg.go.dev/sync#Once.Do
   - https://go.dev/doc/go1.25
 ---
 
@@ -19,13 +20,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> **WaitGroup** 等一组 goroutine 结束；**Once** 保证初始化单次；**Cond** 等条件成立（需配合锁）。生产关键词：**Add 先于 go、Wait 前勿 Add、Once 慢路径阻塞所有调用**。
+> **WaitGroup** 等一组 goroutine 结束；**Once** 保证函数至多执行一次；**Cond** 等待锁保护的条件成立。Go 1.25+ 新代码可优先用 `WaitGroup.Go`；兼容旧版本时要在启动 goroutine **之前** `Add`。`Once.Do` 中函数即使 panic，也会被视为已经执行过。
 
 ## 3 分钟版（一面深度）
 
 1. **是什么**：WG 计数器；Once `sync.Once`；Cond `sync.NewCond(Locker)`。
 2. **为什么**：批任务汇合；单例 init；避免忙等（相比 spin）。
-3. **怎么做**：WG `Add/Done/Wait`；Once `Do(func())`；Cond `Wait/Signal/Broadcast` 必须在循环检查谓词。
+3. **怎么做**：Go 1.25+ 用 WG `Go/Wait`，旧版本用 `Add/Done/Wait`；Once 用 `Do(func())`；Cond 的 `Wait` 必须放在谓词循环中。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -45,11 +46,16 @@ flowchart TB
 
 **WaitGroup 陷阱**
 
-- `Add` 在 `Wait` 之后由子 goroutine 调用 → race（1.25 仍危险，应主 goroutine 先 Add）。
+- 使用 `Add/Done` 时，让子 goroutine 自己 `Add(1)` 可能使 `Wait` 提前返回；应先 `Add` 再启动 goroutine。
+- 当计数器为 0 时，正数 `Add` 必须发生在对应 `Wait` 之前；上一轮 `Wait` 返回后才能开始下一轮复用。
+- Go 1.25 的 `WaitGroup.Go(f)` 会完成“计数 + 启动 + Done”；按文档约束，传入的 `f` 不应 panic。
 - `Done` 次数不匹配 → panic 或永久 Wait。
-- 复用 WG：确保上一轮 Wait 完成后再 Add（常见面试点）。
 
-**Once**：`Do` 内 panic 也算执行过与否视版本；**不要在 Do 内再调同一 Once 死锁**。
+**Once**
+
+- `Do(f)` 中 `f` 如果 panic，当前 `Once` 仍被视为已经执行过；后续 `Do` 不会重试 `f`。
+- 一个 `Do` 尚未返回时，其他调用会等待；不要在 `f` 内再次调用同一个 `Once.Do`，否则会死锁。
+- 初始化可能失败且需要重试时，不要直接用 `Once` 隐藏失败；应显式保存结果，或设计受控重试状态机。
 
 **Cond vs channel**
 
@@ -92,7 +98,7 @@ mu.Unlock()
 
 1. **WG 能 Add(0) 吗？** → 可以但不有意义。
 2. **Once 并发 Do？** → 一个执行其余阻塞等待完成。
-3. **Cond Wait 为何用 for 不用 if？** → 虚假唤醒、谓词多次变化。
+3. **Cond Wait 为何用 for 不用 if？** → Go 的 `Wait` 只会在 `Signal/Broadcast` 后返回，但重新拿到锁时条件可能已被其他 goroutine 改变或消费，所以仍要重新检查谓词。
 4. **Signal vs Broadcast？** → 单消费者 vs 全唤醒。
 5. **WG 与 channel done？** → channel 可传结果，WG 仅计数。
 
@@ -104,14 +110,30 @@ mu.Unlock()
 
 ## 代码示例
 
+Go 1.25+：
+
 ```go
 var wg sync.WaitGroup
 for _, task := range tasks {
+    task := task
+    wg.Go(func() {
+        run(task)
+    })
+}
+wg.Wait()
+```
+
+兼容 Go 1.24 及更早版本：
+
+```go
+var wg sync.WaitGroup
+for _, task := range tasks {
+    task := task
     wg.Add(1)
-    go func(t Task) {
+    go func() {
         defer wg.Done()
-        run(t)
-    }(task)
+        run(task)
+    }()
 }
 wg.Wait()
 ```
@@ -120,6 +142,7 @@ wg.Wait()
 
 ## 延伸阅读
 
-- [sync 包文档](https://pkg.go.dev/sync)
+- [WaitGroup.Go 文档](https://pkg.go.dev/sync#WaitGroup.Go)
+- [Once.Do 的 panic 语义](https://pkg.go.dev/sync#Once.Do)
 - [Go 1.25 WaitGroup 相关改进说明](https://go.dev/doc/go1.25)
 - [errgroup 模式](https://pkg.go.dev/golang.org/x/sync/errgroup)

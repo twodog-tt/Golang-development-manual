@@ -27,7 +27,7 @@ sources:
 | 定位 | 分布式日志 / 流平台 | 业务型 MQ |
 | 吞吐 | 极高 | 高（万级 TPS 足够多数业务） |
 | 顺序 | 分区内有序 | Queue 内有序 |
-| 延迟消息 | 需自建 / 时间轮 | 内置 delay level |
+| 延迟消息 | 无通用原生延时队列，通常应用层实现 | 4.x delay level；5.x 定时时间戳 |
 | 事务消息 | 幂等 + 事务 API | 半消息 + 回查 |
 | 消费模型 | Consumer Group + partition 绑定 | Consumer Group + Queue 负载均衡 |
 | 运维 | KRaft/ZK，分区再均衡 | NameServer + Broker 主从 |
@@ -44,7 +44,7 @@ sources:
 **选 RocketMQ**
 
 - 订单、支付、通知等业务 MQ
-- 需要 **事务消息、固定延迟关单**
+- 需要 **事务消息、定时/延迟投递**，并且团队能处理版本限制与回查
 - 国内部署文档、云厂商托管成熟
 
 **Go 服务注意**
@@ -73,7 +73,7 @@ quadrantChart
 
 1. **两者都是拉消费？** → Kafka poll；RocketMQ Push 实为长轮询拉。
 2. **谁更适合顺序？** → 都靠 key 绑定固定分区/Queue；Kafka 分区数决定并行度。
-3. **Exactly-once？** → 两端多为 at-least-once + 业务幂等；Kafka EOS 限流式场景。
+3. **Exactly-once？** → 两端业务消费通常仍按 at-least-once 设计；Kafka EOS 主要覆盖 Kafka 内 read-process-write，RocketMQ 事务消息解决的是本地事务与消息可见性的协调，都不自动包含任意外部副作用。
 4. **迁移成本？** → Topic 模型、客户端、运维工具全换；用 **双写 + 对账** 渐进。
 
 ## 反模式与事故

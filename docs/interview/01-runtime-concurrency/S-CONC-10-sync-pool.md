@@ -18,7 +18,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> **sync.Pool** 是 **按 P 缓存的临时对象池**，减轻分配压力；**GC 时会清空 Pool**（每轮 STW 关联清理），不保证 Get 能拿到。生产关键词：**Reset 复用对象、勿池化有状态连接、GC 后冷启动抖动**。
+> **sync.Pool** 是按 P 优化的临时对象缓存，`Get` 随时可能拿不到旧对象。GC 开始时当前 local 会转为 victim、上一轮 victim 被丢弃，因此对象可能跨一轮 GC 被复用，但绝不能把 Pool 当持久缓存或资源池。
 
 ## 3 分钟版（一面深度）
 
@@ -36,14 +36,14 @@ sequenceDiagram
   G->>Pool: Get()
   Pool-->>G: reused or New()
   G->>Pool: Put(reset obj)
-  GC->>Pool: 清空 victim/cache
+  GC->>Pool: current local → victim，旧 victim 丢弃
   Note over Pool: 下轮 Get 可能全走 New
 ```
 
 **GC 关系（1.13+ victim 机制简化理解）**
 
-- 两轮 GC 设计：当前池 + victim，减少每轮全丢；但 **仍不持久**。
-- Pool 中对象 **不参与 GC 标记延长**（在池里仍可能被清）。
+- victim 机制让部分对象有机会再存活一轮 GC，但 runtime 可以在任意时刻移除 Pool 中的对象。
+- 正确语义只依赖 `Get` 可能返回 nil/调用 `New`，不要依赖“对象至少保留几轮”。
 
 **适用对象**：`bytes.Buffer`、`[]byte`、解码临时结构。
 
@@ -53,7 +53,7 @@ sequenceDiagram
 
 - **JSON/Proto 序列化**：`buf := pool.Get().(*bytes.Buffer); buf.Reset()`
 - **事故**：Pool 存 `*Request` 未清字段，下一请求读到上一用户 PII。
-- **指标**：分配率下降、GC pause 缩短；GC 后首秒 alloc 飙升正常。
+- **指标**：关注 allocs/op、B/op、GC CPU 与 P99；Pool 可能降低分配和 GC 工作，但不保证 STW 一定缩短。
 
 ## 排查与工具
 
@@ -73,7 +73,7 @@ sequenceDiagram
 ## 追问链
 
 1. **Pool 线程安全吗？** → 是，但 Put/Get 的对象本身需无竞态。
-2. **为什么 GC 清 Pool？** → 防内存泄漏、防隐式全局缓存。
+2. **GC 如何处理 Pool？** → current local 转 victim，旧 victim 清除；所以缓存保留非确定。
 3. **New 何时调用？** → Get 时本地与 victim 皆空。
 4. **能统计池大小吗？** → 无公开 API。
 5. **和 free list 区别？** → Pool 与 GC 协作、非确定性保留。
@@ -81,7 +81,7 @@ sequenceDiagram
 ## 反模式与事故
 
 - 用 Pool **缓存业务实体** 当 LRU。
-- Put `[]byte` 仍被外部引用 → use-after-free 式 bug。
+- Put `[]byte` 后外部仍在读写 → 同一底层数组可能被其他请求复用，产生数据竞态或跨请求数据污染。
 - 压测只测稳态，忽略 **GC 后延迟尖刺**。
 
 ## 代码示例

@@ -1,6 +1,6 @@
 # 14 DEX / CEX 交易所工程
 
-16 题 | P1 扩展（**交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
+22 题 | P1 扩展（**交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
 
 > 面向 **CEX 撮合与资金系统（Go）** + **DEX 链上协议（Solidity）** 工程师，及 **交易所架构师** 全栈面试。
 
@@ -12,6 +12,12 @@
 | [S-EXCH-14](./S-EXCH-14-web3-exchange-fullstack-architecture.md) | **Web3 交易所全栈（链上+链下）** | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-15](./S-EXCH-15-settlement-ha-disaster-recovery.md) | **清结算、对账与高可用** | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-16](./S-EXCH-16-perpetual-matching-position.md) | **永续合约撮合与仓位引擎** | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-17](./S-EXCH-17-runnable-deterministic-matching-engine.md) | **Go 可运行确定性撮合引擎** | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-18](./S-EXCH-18-wal-snapshot-replay.md) | **撮合 WAL、快照与回放** | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-19](./S-EXCH-19-market-data-sequence-gap-recovery.md) | **行情序号与 Gap Recovery** | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-20](./S-EXCH-20-fix-session-sequence-recovery.md) | **FIX Session 与断线恢复** | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-21](./S-EXCH-21-self-trade-prevention-surveillance.md) | **STP 与监控合规边界** | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-22](./S-EXCH-22-call-auction-performance-validation.md) | **集合竞价与性能验证** | ⭐⭐⭐⭐⭐ |
 
 > 架构白板 + **永续撮合**（EXCH-16）与专题题（01/04）配合使用。
 
@@ -25,6 +31,17 @@
 | [S-EXCH-04](./S-EXCH-04-futures-margin-liquidation.md) | 合约：保证金、强平、资金费率 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-16](./S-EXCH-16-perpetual-matching-position.md) | **永续合约撮合与仓位引擎** | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-05](./S-EXCH-05-risk-reconciliation.md) | 风控、对账与合规审计 | ⭐⭐⭐⭐⭐ |
+
+## 可运行撮合与恢复
+
+| 题 ID | 目录 | 命令 |
+|-------|------|------|
+| S-EXCH-17 | `examples/senior/matchingengine/` | `go test -race ./examples/senior/matchingengine/...` |
+| S-EXCH-18 | `examples/senior/walreplay/` | `go test -race ./examples/senior/walreplay/...` |
+| S-EXCH-19 | `examples/senior/marketdatarecovery/` | `go test -race ./examples/senior/marketdatarecovery/...` |
+| S-EXCH-20 | `examples/senior/fixsession/` | `go test -race ./examples/senior/fixsession/...` |
+| S-EXCH-21 | `examples/senior/matchingengine/` | `go test -race ./examples/senior/matchingengine/...` |
+| S-EXCH-22 | `examples/senior/callauction/` | `go test ./examples/senior/callauction/...` |
 
 ## DEX（去中心化，合约 + 索引）
 
@@ -46,6 +63,8 @@
 |----|------|------|
 | [S-EXCH-10](./S-EXCH-10-kline-event-aggregation.md) | 链上事件驱动 K 线与行情聚合 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-11](./S-EXCH-11-websocket-market-hub.md) | WebSocket 行情 Hub 与连接治理 | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-19](./S-EXCH-19-market-data-sequence-gap-recovery.md) | 行情序号、快照桥接与 Gap Recovery | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-20](./S-EXCH-20-fix-session-sequence-recovery.md) | FIX Session 序号与断线恢复 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-12](./S-EXCH-12-token-launch-rebate.md) | Token 发行、分账与返佣提现 | ⭐⭐⭐⭐⭐ |
 
 ## 关联模块
@@ -60,9 +79,9 @@
 
 ## 推荐刷题顺序
 
-**架构师**：EXCH-13 → **EXCH-16** → EXCH-04 → EXCH-15 → 按需下钻 01/03/05
+**架构师**：EXCH-13 → **EXCH-17~22** → EXCH-16 → EXCH-04 → EXCH-15 → 按需下钻 01/03/05
 
-**合约后端**：**EXCH-16** → EXCH-04 → EXCH-01 → EXCH-03
+**交易系统后端**：**EXCH-17~22** → EXCH-16 → EXCH-04 → EXCH-01 → EXCH-03
 
 **Web3 后端**：EXCH-14 → 10/11/12 → BC-05 → SOLID-04/08
 

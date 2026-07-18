@@ -22,8 +22,8 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **同步路径**：全量（DB scan + bulk）+ 增量（binlog CDC）；幂等写 ES（同 doc id upsert）。
-2. **一致性**：延迟秒级；失败进 DLQ 重试；定期 **对账** MySQL count vs ES count。
-3. **运维**：黄/红集群处理；节点磁盘 >85% 只读；滚动重启；快照 snapshot 备份。
+2. **一致性**：延迟通常秒级但取决于 refresh、MQ lag 和 bulk；失败进 DLQ 重试。对账不能只比 count，还应按主键范围校验缺失、多余、版本和关键字段 checksum。
+3. **运维**：黄/红集群处理；关注 low/high/flood-stage 磁盘水位。默认 low/high 常见为 85%/90%，到 flood stage（常见 95%）才会给相关索引加只读保护，具体值以集群配置为准。
 
 ## 10 分钟版（同步架构）
 

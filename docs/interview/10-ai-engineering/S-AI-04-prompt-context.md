@@ -18,13 +18,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> **Prompt 工程**在后端侧体现为：**System 模板化、Few-shot 可配置、结构化输出约束**；**Context 管理**是控制 token 预算 — 摘要、滑动窗口、优先级裁剪。生产关键词：**tiktoken、JSON mode、prompt 版本化、A/B**。
+> **Prompt 工程**在后端侧体现为：指令模板化、few-shot 可配置、结构化输出和回归评估；**Context 管理**是控制 token 预算与不可信上下文边界。tokenizer、context window 和结构化输出能力都与具体模型/API 版本相关，不能把某个厂商参数背成通用标准。
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：System/User/Assistant 消息组成上下文；模型有 **context window** 上限（如 128K），输入+输出共享。
+1. **是什么**：System/User/Assistant 等内容组成模型上下文；模型有 context window 和最大输出限制，二者关系按具体 API 定义。
 2. **为什么**：后端要把 prompt 当 **配置/代码** 管理；超长对话会截断、变贵、变慢。
-3. **怎么做**：模板引擎（text/template）+ 变量注入；历史消息 **摘要压缩**；RAG 片段按相关性排序后截断；要求 `response_format: json_object` 便于解析。
+3. **怎么做**：模板引擎 + 安全变量边界；历史消息摘要压缩；RAG 片段按相关性、权限和预算选择；优先使用 provider 支持的 JSON Schema/Structured Outputs。普通 JSON mode 通常只约束“有效 JSON”，不等于符合业务 schema。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -49,7 +49,7 @@ flowchart TD
 |------|------|
 | 最近 N 轮 | 简单；远历史丢失 |
 | 滚动摘要 | 旧对话用小模型 summarize |
-| 优先级 | System > RAG > 最近用户 > 旧 assistant |
+| 优先级 | 保留系统/开发者约束与当前用户请求；RAG 是不可信数据，按相关性裁剪，不能当更高优先级指令 |
 | 硬截断 | 按 token 从低优先级删 |
 
 **结构化输出（Go 解析）**
@@ -61,12 +61,20 @@ type OrderIntent struct {
 }
 
 // prompt 中明确 JSON schema + 示例
-resp, _ := llm.Complete(ctx, ChatRequest{
+resp, err := llm.Complete(ctx, ChatRequest{
     Messages: msgs,
     ResponseFormat: &JSONSchema{Name: "order_intent", Schema: schema},
 })
+if err != nil {
+    return err
+}
 var intent OrderIntent
-json.Unmarshal([]byte(resp.Content), &intent)
+if err := json.Unmarshal([]byte(resp.Content), &intent); err != nil {
+    return fmt.Errorf("decode order intent: %w", err)
+}
+if err := validateIntent(intent); err != nil {
+    return err
+}
 ```
 
 ## 生产场景
@@ -93,10 +101,10 @@ json.Unmarshal([]byte(resp.Content), &intent)
 
 ## 追问链
 
-1. **System prompt 泄露怎么办？** → 用户消息里要求「忽略上文」是攻击向量；输出过滤 + 安全 system。
-2. **中英文 token 差异？** → 中文通常 1 字≈1～2 token；预算按最坏估。
+1. **System prompt 泄露怎么办？** → 不把 system prompt 当秘密存储或授权边界；其中不得放密钥。按它可能被部分推断/泄露设计，真正权限在代码层。
+2. **中英文 token 差异？** → tokenizer 和模型不同，不能用固定“字/token”换算；用目标模型 tokenizer 或 provider usage 实测，并预留输出预算。
 3. **怎么版本化？** → `prompt_id` + `version` 打日志，便于回放 bad case。
-4. **Temperature 怎么设？** → 事实问答 0～0.3；创意 0.7+；生产默认低温。
+4. **Temperature 怎么设？** → 不同模型支持范围和语义不同，有些推理模型不开放该参数。通过任务评估集调参，不背固定区间；低温也不能保证事实正确或完全可复现。
 
 ## 反模式与事故
 

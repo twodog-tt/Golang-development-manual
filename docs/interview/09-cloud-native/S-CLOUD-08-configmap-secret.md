@@ -21,7 +21,7 @@ sources:
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：K8s 原生配置分发；Deployment 变更 ConfigMap 不会自动重启 Pod（除非挂载 subPath 等特殊情况）。
+1. **是什么**：K8s 原生配置分发；修改 ConfigMap/Secret 不会自动触发 Deployment rollout。环境变量不会变；普通 projected volume 会最终更新；`subPath` 挂载不会收到更新。
 2. **为什么**：面试问「改配置要不要发版」；错用 Secret 泄漏、subPath 不更新是常见坑。
 3. **怎么做**：非敏感可热更（watch 文件）；敏感改 Secret + 滚动重启或 Reloader；Go 用 `viper`/自研 atomic.Value 热加载。
 
@@ -86,17 +86,32 @@ type Config struct {
 var cfg atomic.Value // stores Config
 
 func watchConfig(path string) {
-    w, _ := fsnotify.NewWatcher()
-    _ = w.Add(filepath.Dir(path))
+    w, err := fsnotify.NewWatcher()
+    if err != nil {
+        slog.Error("create config watcher", "err", err)
+        return
+    }
+    defer w.Close()
+    if err := w.Add(filepath.Dir(path)); err != nil {
+        slog.Error("watch config directory", "err", err)
+        return
+    }
     for {
         select {
-        case ev := <-w.Events:
-            if ev.Op&(fsnotify.Write|fsnotify.Create) != 0 {
+        case ev, ok := <-w.Events:
+            if !ok {
+                return
+            }
+            if ev.Op&(fsnotify.Write|fsnotify.Create|fsnotify.Rename) != 0 {
                 if c, err := loadConfig(path); err == nil {
+                    // loadConfig 内应完成全量校验，再一次性发布快照。
                     cfg.Store(c)
                 }
             }
-        case err := <-w.Errors:
+        case err, ok := <-w.Errors:
+            if !ok {
+                return
+            }
             slog.Error("config watch", "err", err)
         }
     }
@@ -135,7 +150,7 @@ func GetConfig() Config {
 ## 追问链
 
 1. **Secret Base64 安全吗？** → 否，仅编码；靠 RBAC、etcd 加密 at rest、External Secrets。
-2. **改 ConfigMap 后 Pod 何时感知？** → volume 默认 ~分钟级同步；可 inotify；env 必须重启。
+2. **改 ConfigMap 后 Pod 何时感知？** → volume 更新受 kubelet sync period、缓存策略等影响，不是即时 SLA；目录通常通过原子替换更新，watcher 应监听父目录并容忍 rename。env 必须重启。
 3. **subPath 为什么不更新？** → subPath 绑定创建时 inode；用目录挂载或重启。
 4. **Go 热更线程安全？** → `atomic.Value` / `RWMutex`；业务读配置走快照，避免半写。
 
@@ -152,13 +167,21 @@ func GetConfig() Config {
 // 启动：env 覆盖文件（12-Factor）
 func loadConfig(path string) (Config, error) {
     var c Config
-    if b, err := os.ReadFile(path); err == nil {
-        _ = yaml.Unmarshal(b, &c)
+    b, err := os.ReadFile(path)
+    if err != nil {
+        return Config{}, err
+    }
+    if err := yaml.Unmarshal(b, &c); err != nil {
+        return Config{}, err
     }
     if v := os.Getenv("RATE_LIMIT_RPS"); v != "" {
-        c.RateLimitRPS, _ = strconv.Atoi(v)
+        n, err := strconv.Atoi(v)
+        if err != nil {
+            return Config{}, fmt.Errorf("RATE_LIMIT_RPS: %w", err)
+        }
+        c.RateLimitRPS = n
     }
-    return c, nil
+    return c, validateConfig(c)
 }
 ```
 

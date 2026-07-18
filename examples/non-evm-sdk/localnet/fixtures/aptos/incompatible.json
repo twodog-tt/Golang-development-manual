@@ -1,0 +1,13 @@
+{
+  "fixture_kind": "negative-contract",
+  "node_version": "future-breaking",
+  "hash": "0xefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef",
+  "transaction": {
+    "type": "user_transaction",
+    "hash": "0xefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef",
+    "version": "130",
+    "success": "true",
+    "vm_status": "Executed successfully"
+  }
+}
+

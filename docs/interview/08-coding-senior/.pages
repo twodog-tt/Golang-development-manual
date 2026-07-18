@@ -2,8 +2,10 @@ title: 08 手写题
 collapse_single_pages: false
 nav:
   - index.md
-  - "并发安全 LRU": S-CODE-01-concurrent-lru.md
-  - "令牌桶限流器实现": S-CODE-02-token-bucket.md
-  - "优雅关闭 HTTP 服务": S-CODE-03-graceful-shutdown.md
+  - "Singleflight 缓存击穿抑制": S-CODE-06-singleflight-cache.md
+  - "有界批处理执行器：取消、顺序与背压": S-CODE-07-bounded-batch-executor.md
+  - "并发安全 LRU 缓存": S-CODE-01-concurrent-lru.md
+  - "令牌桶限流器": S-CODE-02-token-bucket.md
+  - "HTTP 服务优雅关闭": S-CODE-03-graceful-shutdown.md
   - "errgroup 语义实现": S-CODE-04-errgroup.md
   - "连接池实现要点": S-CODE-05-connection-pool.md

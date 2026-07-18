@@ -10,6 +10,7 @@ status: published
 code_refs: [examples/senior/erc20bind]
 sources:
   - https://geth.ethereum.org/docs/tools/abigen
+  - https://geth.ethereum.org/docs/developers/dapp-developer/native-bindings-v2
   - https://pkg.go.dev/github.com/ethereum/go-ethereum/accounts/abi/bind
   - https://pkg.go.dev/github.com/ethereum/go-ethereum/ethclient/simulated
 ---
@@ -25,6 +26,11 @@ sources:
 1. **是什么**：`abigen` 根据 ABI 生成类型安全的 `SimpleToken` Go 结构体，封装 `transfer`、`FilterTransfer` 等。
 2. **为什么**：手写 RLP/ABI 易错；面试说「我们 abigen + simulated 单测覆盖」体现工程化。
 3. **怎么做**：见本仓库 `examples/senior/erc20bind/`。
+
+> go-ethereum 同时存在 legacy binding 与新一代 v2 binding 路径，v2 生成命令使用
+> `abigen --v2`，生成 API 与本文仓库当前示例并不互换。项目必须同时固定
+> go-ethereum 依赖版本、`abigen` 二进制版本和生成模式；本文以下代码按仓库现有
+> legacy API 讲解，不能只升级生成器后沿用旧调用代码。
 
 ## 10 分钟版（流程 + 代码）
 
@@ -46,44 +52,89 @@ abigen --abi build/SimpleToken.abi --bin build/SimpleToken.bin \
   --pkg erc20bind --type SimpleToken --out ../simple_token.go
 ```
 
-> 使用 `--evm-version paris` 避免 `PUSH0` 与当前 geth simulated 不兼容。
+> 本仓库固定 `paris` 是为了生成结果可复现并兼容更广的执行环境，不是因为新版
+> go-ethereum 的 simulated backend 永远不支持 `PUSH0`。生产应按目标链已激活的
+> fork、节点版本和部署编译参数选择 `--evm-version`，不能盲目使用编译器默认值。
 
 **部署与转账（测试核心逻辑）**
 
 ```go
-auth, _ := bind.NewKeyedTransactorWithChainID(key, big.NewInt(1337))
+auth, err := bind.NewKeyedTransactorWithChainID(key, big.NewInt(1337))
+if err != nil {
+    return err
+}
 backend := simulated.NewBackend(types.GenesisAlloc{
     auth.From: {Balance: big.NewInt(1e18)},
 })
 defer backend.Close()
 
 client := backend.Client()
-_, _, token, err := erc20bind.DeploySimpleToken(auth, client, big.NewInt(1_000_000))
+_, deployTx, token, err := erc20bind.DeploySimpleToken(auth, client, big.NewInt(1_000_000))
+if err != nil {
+    return err
+}
 backend.Commit()
+deployReceipt, err := bind.WaitMined(ctx, client, deployTx)
+if err != nil {
+    return err
+}
+if deployReceipt.Status != types.ReceiptStatusSuccessful {
+    return fmt.Errorf("deployment reverted: tx=%s", deployTx.Hash())
+}
 
-_, err = token.Transfer(auth, recipient, big.NewInt(100))
+transferTx, err := token.Transfer(auth, recipient, big.NewInt(100))
+if err != nil {
+    return err
+}
 backend.Commit()
+transferReceipt, err := bind.WaitMined(ctx, client, transferTx)
+if err != nil {
+    return err
+}
+if transferReceipt.Status != types.ReceiptStatusSuccessful {
+    return fmt.Errorf("transfer reverted: tx=%s", transferTx.Hash())
+}
 
-bal, _ := token.BalanceOf(&bind.CallOpts{}, recipient)
+bal, err := token.BalanceOf(&bind.CallOpts{Context: ctx}, recipient)
+if err != nil {
+    return err
+}
 ```
 
 **监听事件**
 
 ```go
-iter, _ := token.FilterTransfer(&bind.FilterOpts{},
+iter, err := token.FilterTransfer(&bind.FilterOpts{Context: ctx},
     []common.Address{from}, []common.Address{to})
+if err != nil {
+    return err
+}
+defer iter.Close()
 for iter.Next() {
     ev := iter.Event
     _ = ev.Value
+}
+if err := iter.Error(); err != nil {
+    return err
 }
 ```
 
 **接真实 RPC**
 
 ```go
-client, _ := ethclient.Dial(os.Getenv("SEPOLIA_RPC"))
-token, _ := erc20bind.NewSimpleToken(tokenAddr, client)
-bal, _ := token.BalanceOf(&bind.CallOpts{Context: ctx}, userAddr)
+client, err := ethclient.DialContext(ctx, os.Getenv("SEPOLIA_RPC"))
+if err != nil {
+    return err
+}
+defer client.Close()
+token, err := erc20bind.NewSimpleToken(tokenAddr, client)
+if err != nil {
+    return err
+}
+bal, err := token.BalanceOf(&bind.CallOpts{Context: ctx}, userAddr)
+if err != nil {
+    return err
+}
 ```
 
 ## 生产场景
@@ -94,8 +145,8 @@ bal, _ := token.BalanceOf(&bind.CallOpts{Context: ctx}, userAddr)
 
 ## 排查与工具
 
-- `bind.WaitMined` 等待上链
-- `receipt.Status == 0` → revert，用 `eth_call` 预模拟
+- `bind.WaitMined` 只等待 receipt 出现，不会替你检查 `receipt.Status`，也不代表区块已经 safe/finalized；业务状态仍需显式执行成功检查和 finality 推进
+- `receipt.Status == 0` → 交易已包含但执行 revert。优先用节点 trace/Tenderly 等按原交易和区块内顺序回放；简单地在“同一块”做 `eth_call` 通常读到块后状态，并不等价于原交易执行前的精确上下文。发送前 call/estimate 也只能降低失败率
 - abigen 失败：检查 ABI JSON 是否合法数组
 
 ## 架构取舍
@@ -115,8 +166,9 @@ bal, _ := token.BalanceOf(&bind.CallOpts{Context: ctx}, userAddr)
 ## 反模式与事故
 
 - **手改 simple_token.go** → 下次 abigen 覆盖；改 .sol 再生成
-- **simulated 用默认 solc 0.8.20+ 无 paris** → PUSH0 报错
+- **编译 fork 高于目标链/测试后端已激活 fork** → 可能产生目标环境不支持的 opcode
 - **Deploy 不 Commit** → 后续 call 读空状态
+- **只信 ABI、不校验 chainId/address/code** → 可能把正确绑定调用到错误链、错误代理或错误实现
 
 ## 代码示例
 
@@ -131,4 +183,5 @@ go test ./examples/senior/erc20bind/...
 ## 延伸阅读
 
 - [abigen 文档](https://geth.ethereum.org/docs/tools/abigen)
+- [Native bindings v2](https://geth.ethereum.org/docs/developers/dapp-developer/native-bindings-v2)
 - [bind package](https://pkg.go.dev/github.com/ethereum/go-ethereum/accounts/abi/bind)

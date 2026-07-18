@@ -6,6 +6,8 @@ repo_name: twodog-tt/Golang-development-manual
 
 docs_dir: docs
 site_dir: site
+exclude_docs: |
+  README.md
 
 theme:
   name: material

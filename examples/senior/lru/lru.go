@@ -8,10 +8,10 @@ import (
 
 type entry struct {
 	key   string
-	value interface{}
+	value any
 }
 
-// Cache 基于 map + 双向链表，所有操作 O(1)。
+// Cache 基于 map + 双向链表，所有操作平均 O(1)。
 type Cache struct {
 	cap   int
 	mu    sync.Mutex
@@ -30,7 +30,7 @@ func New(capacity int) *Cache {
 	}
 }
 
-func (c *Cache) Get(key string) (interface{}, bool) {
+func (c *Cache) Get(key string) (any, bool) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
@@ -42,7 +42,7 @@ func (c *Cache) Get(key string) (interface{}, bool) {
 	return elem.Value.(*entry).value, true
 }
 
-func (c *Cache) Put(key string, value interface{}) {
+func (c *Cache) Put(key string, value any) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 

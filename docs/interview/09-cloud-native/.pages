@@ -10,3 +10,5 @@ nav:
   - "Ingress、Gateway API 与南北向流量": S-CLOUD-06-ingress-gateway.md
   - "K8s 故障排查：OOMKilled、CrashLoop 与 Evicted": S-CLOUD-07-k8s-troubleshooting.md
   - "ConfigMap、Secret 与 Go 配置热更新": S-CLOUD-08-configmap-secret.md
+  - "Terraform State、模块、Drift 与安全变更": S-CLOUD-09-terraform-state-drift-safe-change.md
+  - "Helm 与 GitOps：持续收敛、发布顺序和回滚": S-CLOUD-10-helm-gitops-rollout-rollback.md

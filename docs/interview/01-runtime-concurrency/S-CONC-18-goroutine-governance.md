@@ -24,7 +24,7 @@ sources:
 
 1. **是什么**：架构层对异步任务数量、生命周期、取消的统一约束。
 2. **为什么**：泄漏、调度开销、下游过载、排查困难。
-3. **怎么做**：lint 规则、包装 `SafeGo(ctx, fn)`、全局 sem、review checklist、压测验收 goroutine 曲线。
+3. **怎么做**：优先 errgroup/worker pool 等结构化生命周期；按下游或任务类型设置独立 semaphore/队列；review 所有 fire-and-forget 边界；压测验证 goroutine、等待队列与下游容量。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -41,7 +41,7 @@ flowchart TB
 | 层次 | 手段 |
 |------|------|
 | 代码 | errgroup、有界队列、ctx |
-| 框架 | HTTP maxConns、gRPC 流控 |
+| 框架 | 网关/Listener 连接限制、HTTP/2/gRPC 流控、下游连接池 |
 | 运维 | HPA、实例数、告警 |
 | 组织 | 「谁创建谁取消」规范 |
 
@@ -56,7 +56,7 @@ flowchart TB
 ## 生产场景
 
 - **微服务「go 一把梭」**：每请求 20 个 RPC 各 `go`，峰值 200k G。
-- **治理后**：sem(50) + 串行非关键路径，G 稳定在 5k。
+- **治理后**：按压测得到的 semaphore + 有界队列，goroutine 数随负载有界且拒绝/排队指标可见。
 - **On-call**：G 涨而 CPU 低 → 阻塞；G 与 CPU 齐涨 → 计算或泄漏。
 
 ## 排查与工具
@@ -76,7 +76,7 @@ flowchart TB
 
 ## 追问链
 
-1. **多少 G 算多？** → 看内存与趋势，非绝对值；10万+ 要警惕。
+1. **多少 G 算多？** → 没有统一阈值；看栈内存、阻塞原因、调度延迟、增长趋势和 SLO。数量大本身只是排查信号。
 2. **sem 与 buffered chan？** → sem 计数、chan 可传任务语义。
 3. **如何强制规范？** → wrapper + code review + CI grep。
 4. **与 rate limit 区别？** → rate 限 QPS，sem 限并发 in-flight。
@@ -99,11 +99,15 @@ func SafeGo(ctx context.Context, fn func(context.Context) error) error {
     }
     go func() {
         defer limit.Release(1)
-        _ = fn(ctx)
+        if err := fn(ctx); err != nil {
+            reportAsyncError(err)
+        }
     }()
     return nil
 }
 ```
+
+这个 wrapper 只适合明确允许 fire-and-forget 的边界；它不能让调用方等待完成，也不能替代 errgroup。全局一把 semaphore 还可能让无关任务互相阻塞，生产应按资源池拆分并定义 panic/error 策略。
 
 并发任务见 [`basis/goroutine/main.go`](https://github.com/twodog-tt/Golang-development-manual/blob/master/basis/goroutine/main.go)。
 

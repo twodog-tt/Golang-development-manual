@@ -19,13 +19,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> 连接池 **复用昂贵连接**（TCP、DB），控制 **最大空闲数**。本实现用 **buffered channel** 存空闲连接：`Get` 先 `select` 取 channel，空则 `factory()` 新建；`Put` 能塞回则复用，否则 `Close` 丢弃。关键词：**maxIdle、Close 关池、ctx 超时**。
+> 连接池既要 **复用昂贵连接**，也要用 **maxOpen** 限制对下游的总连接压力，并用 **maxIdle** 控制保留多少空闲连接。本实现用 idle channel + open-slot semaphore：`Get` 优先复用，未达上限才新建，否则等待归还或 context 取消；`Put` 池满则关闭并释放 slot。
 
 ## 3 分钟版（一面深度）
 
 1. **是什么**：维护一组已建立连接，borrow / return，避免每次 dial。
 2. **为什么**：DB/TCP 握手成本高；无上限会打爆下游（对比 [S-NET-02 HTTP 连接池](../06-network-governance/S-NET-02-http-connection-pool.md)）。
-3. **怎么做**：`ch := make(chan Conn, maxIdle)`；`Get` 非阻塞取或 factory；`Put` 非阻塞还或 close；`Close` 设 flag、close(ch)、排空关闭。
+3. **怎么做**：`idle := make(chan Conn, maxIdle)` 保存空闲连接，`slots := make(chan struct{}, maxOpen)` 统计已打开/正在打开的连接；`Get` 复用、创建或等待；`Put` 归还，坏连接走 `Discard`；`Close` 原子标记关闭并唤醒等待者，再排空 idle。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -33,7 +33,8 @@ sources:
 flowchart LR
   Client --> Get
   Get -->|channel 有| Reuse[复用 Conn]
-  Get -->|channel 空| New[factory 新建]
+  Get -->|无 idle 且未达 maxOpen| New[factory 新建]
+  Get -->|已达 maxOpen| Wait[等待归还 / ctx 取消]
   Reuse --> Use[业务使用]
   New --> Use
   Use --> Put
@@ -46,15 +47,14 @@ flowchart LR
 | | 本手写池 | sql.DB |
 |---|----------|--------|
 | 连接类型 | 泛型 Conn | 真实 DB 连接 |
-| 最大连接 | maxIdle（仅空闲） | MaxOpen/MaxIdle |
-| 健康检查 | 未实现 | 自动 ping/重建 |
+| 最大连接 | MaxOpen/MaxIdle | MaxOpen/MaxIdle |
+| 坏连接处理 | 调用方 `Discard`/可扩展 Validator | driver 通过 `ErrBadConn` 等机制淘汰；不会在每次 checkout 前自动 `Ping` |
 
 **生产扩展**
 
-- `Get` 阻塞等待 + `ctx` 超时（`select` on ch）
-- `MaxOpen` 限制总连接（atomic 计数 + factory 前检查）
-- 借出前 `Ping` 验证；无效则丢弃再 factory
+- 按连接类型增加 Validator；坏连接不要放回池
 - 空闲超时清理（后台 goroutine）
+- 连接最大生命周期、等待队列指标、创建失败退避
 
 ## 生产场景
 
@@ -77,10 +77,10 @@ flowchart LR
 
 ## 追问链
 
-1. **Get 为何 default 分支 factory？** → 无空闲立即新建；可改为阻塞等归还。
+1. **什么时候 factory？** → 无空闲且 `open < maxOpen`；达到上限后等待归还或 context 取消，不能继续无限创建。
 2. **Put 时 channel 满？** → 连接过多，Close 释放（本实现）。
 3. **Close 后 Get ？** → 返回 `ErrPoolClosed`。
-4. **连接泄漏？** → Get 后未 Put/Close；需 `defer Put` 或 RAII 包装。
+4. **连接泄漏？** → Get 后未 Put/Discard；可用受控 helper 确保归还，但检测到网络/协议错误时不能无条件 `defer Put`。
 
 ## 反模式与事故
 
@@ -94,18 +94,10 @@ flowchart LR
 
 ```go
 func (p *Pool) Get(ctx context.Context) (Conn, error) {
-	select {
-	case <-ctx.Done():
-		return nil, ctx.Err()
-	default:
-	}
-	// ... closed check ...
-	select {
-	case c := <-p.ch:
-		return c, nil
-	default:
-		return p.factory()
-	}
+    // 1. 优先从 idle 复用
+    // 2. 未达 maxOpen 时占一个 slot 并调用 factory
+    // 3. 否则等待 idle、pool close 或 ctx.Done
+    // 完整并发关闭语义见示例文件。
 }
 ```
 

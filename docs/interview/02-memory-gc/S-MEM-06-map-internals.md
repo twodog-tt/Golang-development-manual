@@ -12,23 +12,28 @@ sources:
   - https://go.dev/ref/spec#Map_types
   - https://pkg.go.dev/sync#Map
   - https://go.dev/blog/swisstable
+  - https://github.com/golang/go/blob/go1.26.0/src/sync/map.go
 ---
 
 # map 并发安全、扩容与 sync.Map 选型
 
 ## 30 秒版（开场）
 
-> **内置 map 非并发安全**，并发读写 panic；读多写少可用 **`sync.Map`** 或 **`RWMutex+map`**。底层 **hmap + bucket**，负载因子超阈值 **增量扩容**，迭代顺序随机。生产关键词：**fatal error: concurrent map、扩容 STW 短暂、Swiss Table（1.24+）**。
+> **内置 map 不保证并发安全**：无同步并发读写属于 data race，runtime 常会以
+> `fatal error: concurrent map...` 终止，但不能把“必然 panic”当同步机制。Go ≤1.23
+> 的内置 map 使用经典 `hmap/bucket`，Go 1.24 起改为 **Swiss Table 风格实现**；
+> `sync.Map` 又是另一种并发容器，并在 Go 1.26 从 read/dirty 双表切换为并发 hash-trie。
+> 这些实现变化都不改变各自 API 契约。
 
 ## 3 分钟版（一面深度）
 
-1. **是什么**：map 是哈希表，key 经 hasher 落 bucket，冲突用 overflow 链或内联槽位。
-2. **为什么**：Go 选择 map 专用 runtime 实现，非通用容器；并发需外层同步。
-3. **怎么做**：写多读少 `map+RWMutex`；读极多写极少 `sync.Map`；分片 map 降锁；预分配 `make(map[K]V, hint)` 减扩容。
+1. **是什么**：map 是 runtime 实现的哈希表；具体布局随 Go 版本变化，面试必须区分“语言语义”和“当前实现”。
+2. **为什么**：内置 map 选择 runtime 专用实现，非通用并发容器；并发读写需外层同步。
+3. **怎么做**：通用场景先用 `map+Mutex/RWMutex` 并基准测试；`sync.Map` 主要适合“键写一次读很多”或不同 goroutine 操作互不相交的键集合；配置读取可用不可变 map + `atomic.Value/Pointer`。
 
 ## 10 分钟版（原理 + 图示）
 
-**hmap 要点**
+**Go ≤1.23：经典 hmap（历史实现）**
 
 | 字段 | 含义 |
 |------|------|
@@ -36,23 +41,34 @@ sources:
 | B | buckets = 2^B |
 | buckets | 数组，每 bucket 8 个 key/elem 槽 |
 | oldbuckets | 增量扩容时旧表 |
-| hashGrow | 扩容标志 |
+| nevacuate | 下一批待迁移 bucket 的进度 |
 
 **扩容**：负载 > 6.5（约）触发 **double buckets**；等量扩容整理 overflow。扩容期间 **渐进迁移**，访问触发 evacuate。
+
+**Go 1.24+：Swiss Table 风格实现**
+
+- 使用 control bytes 与成组 slot 加速哈希片段匹配和空槽查找。
+- 大 map 可由目录管理多个 table，增长时拆分 table；不再应使用 `hmap.B/oldbuckets/8 槽 bucket` 解释当前实现。
+- `make(map[K]V, hint)` 仍只是容量提示；扩容/拆分是单个 map 操作推进的内部工作，**不是全局 STW**。
+- 面试先说语义，再按目标 Go 版本补充实现，避免把旧源码结构背成永久规范。
 
 ```mermaid
 flowchart TB
   Write[写 map] --> Lock{并发?}
-  Lock -->|无锁| Panic[runtime panic]
+  Lock -->|无同步| Race[data race；runtime 可能 fatal]
   Lock -->|Mutex| Safe[安全]
-  Lock -->|sync.Map| CAS[read+dirty 双 map]
+  Lock -->|sync.Map| CAS[按目标版本实现并发访问]
 ```
 
-**sync.Map 结构**
+**`sync.Map` 的版本边界（实现细节，不是 API 契约）**
 
-- `read`：`atomic.Value` 存只读 map，无锁读。
-- `dirty`：写时晋升，miss 过多则全量替换 read。
-- 适合：**键稳定、读>>写、键集合相对固定**。
+- Go 1.25 及更早的常见实现使用原子发布的 `read` 快照与加锁维护的 `dirty` map，
+  miss 达阈值后发生晋升。
+- Go 1.26 的标准库实现改为 `internal/sync.HashTrieMap` 并发 hash-trie；继续用
+  “read/dirty 晋升”解释 1.26 已经是过时答案。
+- 官方重点场景：**键写一次、读取很多次**，或多个 goroutine 操作**互不相交的键集合**。
+- 稳定契约还包括：观察到某次写效果的读与该写建立 `synchronizes-before`；`Range`
+  不承诺一致快照。选型应依据契约和 benchmark，不能依赖内部字段。
 
 ## 生产场景
 
@@ -74,8 +90,8 @@ flowchart TB
 
 | 方案 | 适用 | 不适用 |
 |------|------|--------|
-| map + RWMutex | 通用、写不少 | 读极端多且锁竞争 |
-| sync.Map | 读多写少、key 稳定 | 频繁 Delete/新 key |
+| map + Mutex/RWMutex | 通用、需要类型不变量或复合操作 | 极端锁竞争且无法分片 |
+| sync.Map | 写一次读很多；不同 goroutine 操作不相交 key | 需要跨 key 原子不变量；写热点集中 |
 | 分片 map | 高 QPS 计数/缓存 | key 少、实现复杂 |
 | 不可变快照 | 配置/字典 | 频繁增量更新 |
 
@@ -83,14 +99,17 @@ flowchart TB
 
 1. **map 能取地址吗？** → `&m[k]` 非法，因扩容可能搬迁。
 2. **key 必须 comparable？** → 是，slice/map/func 不可作 key。
-3. **迭代顺序？** → 随机，勿依赖。
+3. **迭代顺序？** → 语言规范未指定，同一个 map 的不同次迭代也可能不同，勿依赖。
 4. **nil map 读写？** → 读零值，写 panic。
-5. **1.24 Swiss Table？** → 新哈希表实现，关注性能与语义不变。
+5. **1.24 Swiss Table？** → control bytes + 分组探测，并用目录/table 拆分支持增长；旧 `hmap bucket` 细节不再适用于当前版本，语义保持不变。
+6. **Go 1.26 的 sync.Map 还是 read/dirty 吗？** → 否，1.26 已切换为并发
+   hash-trie；read/dirty 是旧实现细节，面试先讲 API 场景、内存模型保证与一致快照边界。
 
 ## 反模式与事故
 
-- 多个 goroutine 读，一个写「应该没事」→ 直接 panic。
-- sync.Map 当通用 map，写多导致 dirty 抖动性能差。
+- 多个 goroutine 读，一个写「应该没事」→ data race，可能 fatal，也可能产生不可预测结果。
+- 把旧版 `sync.Map` 的 dirty 晋升机制当成永久契约，或没做 benchmark 就断言某种读写比
+  一定更快。
 - 超大 map 不 hint，启动阶段多次扩容卡顿。
 
 ## 代码示例
@@ -124,4 +143,5 @@ func (s *ShardedMap) Get(key string) (int, bool) {
 
 - [sync.Map 文档](https://pkg.go.dev/sync#Map)
 - [Go 1.24 Swiss Tables](https://go.dev/blog/swisstable)
+- [Go 1.26 `sync.Map` source](https://github.com/golang/go/blob/go1.26.0/src/sync/map.go)
 - [map 实现剖析（Draveness）](https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-hashmap/)

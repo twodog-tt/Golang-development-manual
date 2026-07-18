@@ -1,6 +1,6 @@
 # 08 手写题（资深向）
 
-5 题 | 代码 + 正文 | [返回索引](../../interview-catalog.md)
+7 题 | 代码 + 正文 | [返回索引](../../interview-catalog.md)
 
 | ID | 题目 | 代码 | 频率 |
 |----|------|------|------|
@@ -9,6 +9,8 @@
 | [S-CODE-03](./S-CODE-03-graceful-shutdown.md) | HTTP 优雅关闭 | [graceful_shutdown/](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/senior/graceful_shutdown) | ⭐⭐⭐⭐ |
 | [S-CODE-04](./S-CODE-04-errgroup.md) | errgroup 语义 | [errgroup/](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/senior/errgroup) | ⭐⭐⭐⭐ |
 | [S-CODE-05](./S-CODE-05-connection-pool.md) | 连接池 | [connpool/](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/senior/connpool) | ⭐⭐⭐⭐ |
+| [S-CODE-06](./S-CODE-06-singleflight-cache.md) | Singleflight 缓存击穿抑制 | [singleflightcache/](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/senior/singleflightcache) | ⭐⭐⭐⭐⭐ |
+| [S-CODE-07](./S-CODE-07-bounded-batch-executor.md) | 有界批处理执行器 | [batchexec/](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/senior/batchexec) | ⭐⭐⭐⭐⭐ |
 
 ## 练习方式
 

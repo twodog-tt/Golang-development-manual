@@ -1,10 +1,11 @@
 # 中间件与数据库（按类型浏览）
 
-按 **MySQL / Redis / Kafka / RocketMQ / RabbitMQ / Elasticsearch** 分类，便于按 JD 或技术栈刷题。
+按 **MySQL / PostgreSQL / Redis / Kafka / RocketMQ / RabbitMQ / Elasticsearch** 分类，便于按 JD 或技术栈刷题。
 
 | 类型 | 题数 | 入口 |
 |------|------|------|
-| [MySQL + GORM](./mysql/index.md) | 5 | 索引、MVCC、慢查询、分库分表、GORM |
+| [MySQL + GORM](./mysql/index.md) | 7 | 索引、MVCC、复杂 SQL、资金表、锁与 GORM |
+| [PostgreSQL](./postgresql/index.md) | 3 | MVCC/VACUUM、SSI/锁、WAL/复制与 pgx |
 | [Redis](./redis/index.md) | 3 | 集群、分布式锁、热点 Key |
 | [Kafka](./kafka/index.md) | 4 | 架构、Producer、消费语义、交易总线 |
 | [RocketMQ](./rocketmq/index.md) | 4 | 架构、事务/顺序/延迟、选型、排障 |
@@ -14,4 +15,5 @@
 
 **关联系统设计**：缓存见 [03-system-design](../03-system-design/S-ARCH-06-cache-failure-modes.md)；MQ 通用语义见 [S-ARCH-10](../03-system-design/S-ARCH-10-mq-semantics.md)。
 
-学习路径仍可按模块 [04 分布式](../04-distributed-middleware/index.md) / [05 数据库](../05-database-storage/index.md) 顺序阅读（内容与本文目录一致）。
+岗位优先级以 [角色化矩阵](../_meta/role-priority-matrix.md) 为准；MySQL 与 PostgreSQL 应对照
+实现语义，不要把 undo/heap、隔离级别和清理机制混用。

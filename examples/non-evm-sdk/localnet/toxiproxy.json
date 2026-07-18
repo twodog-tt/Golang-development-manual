@@ -1,0 +1,27 @@
+[
+  {
+    "name": "solana-rpc",
+    "listen": "0.0.0.0:18899",
+    "upstream": "host.docker.internal:8899",
+    "enabled": true
+  },
+  {
+    "name": "cosmos-rpc",
+    "listen": "0.0.0.0:16657",
+    "upstream": "host.docker.internal:26657",
+    "enabled": true
+  },
+  {
+    "name": "aptos-rest",
+    "listen": "0.0.0.0:18080",
+    "upstream": "host.docker.internal:8080",
+    "enabled": true
+  },
+  {
+    "name": "sui-graphql",
+    "listen": "0.0.0.0:19125",
+    "upstream": "host.docker.internal:9125",
+    "enabled": true
+  }
+]
+

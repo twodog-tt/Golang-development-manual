@@ -17,13 +17,13 @@ sources:
 
 ## 30 秒版（开场）
 
-> **HPA** 根据 CPU、内存或 **自定义指标**（QPS、队列 lag、goroutine 数）自动改 Deployment 副本数。Go 服务注意：**CPU 被 cgroup throttle 时 HPA 失真**；高并发 I/O 型更适合 **Prometheus + prometheus-adapter** 按 QPS/latency 扩。生产关键词：**稳定窗口、扩缩容速率、min/maxReplicas、与 PDB 对齐**。
+> **HPA** 根据 CPU、内存或自定义/外部指标自动修改 workload 副本数。CPU `Utilization` 是 **实际 CPU usage / CPU request**，不是除以 limit；未设置 request 时该指标无法正常计算。I/O 型服务通常更适合按 RPS、inflight、队列 lag 等“增加副本后会下降”的指标扩容，延迟可作为保护信号但不宜单独盲目驱动。
 
 ## 3 分钟版（一面深度）
 
 1. **是什么**：HorizontalPodAutoscaler 周期性读 metrics-server 或 custom metrics API，计算目标副本数。
 2. **为什么**：大促/开盘流量波动；手动扩缩滞后；面试常问「为什么 CPU 不高却不扩容」。
-3. **怎么做**：默认 CPU 70% 仅作起点；Go 网关用 **RPS 或 P99**；设置 cooldown 防抖动；压测在 **limit 下** 验证（[S-CLOUD-01](./S-CLOUD-01-k8s-scheduling.md)）。
+3. **怎么做**：CPU target 只是起点；Go 网关结合 RPS/inflight 与 CPU，多指标时 HPA 取各建议副本数的最大值；用 `behavior` 的 stabilization window 与 scaling policies 防抖；在真实 requests/limits 下压测。
 
 ## 10 分钟版（原理 + 图示）
 
@@ -95,10 +95,10 @@ var reqTotal = prometheus.NewCounterVec(
 
 ## 生产场景
 
-- **Go I/O 密集**：CPU 30% 但连接数爆满 → 改按 **inflight 请求数** 或 **P99 延迟** 扩缩
+- **Go I/O 密集**：CPU 低但 inflight/连接队列已满 → 改按 **inflight、RPS 或队列长度**；P99 可告警或参与复合策略，但它噪声大且扩容生效慢
 - **Kafka consumer**：按 **consumer lag** 扩（见 [S-DIST-04](../middleware/kafka/S-DIST-04-kafka-semantics.md)）— 扩缩触发 rebalance，需 **scaleDown 慢**
 - **交易所开盘**：提前 **manual scale** + HPA max 预留；与 [S-ARCH-18](../03-system-design/S-ARCH-18-capacity-planning.md) 容量规划一致
-- **内存泄漏**：CPU HPA 无效 → 需 memory 指标或固定 maxReplicas + 告警
+- **内存泄漏**：HPA 不是修复手段；按内存扩容可能只是复制更多泄漏实例，应告警、限制 maxReplicas 并修代码
 
 ## 排查与工具
 
@@ -120,16 +120,16 @@ var reqTotal = prometheus.NewCounterVec(
 
 ## 追问链
 
-1. **HPA 和 VPA 区别？** → HPA 改副本数；VPA 改 request/limit；一般不同时开同 Deployment。
+1. **HPA 和 VPA 区别？** → HPA 改副本数；VPA 调整/推荐单 Pod 资源。两者可以组合，但不要让 VPA 改动 HPA 正在以利用率计算的同一资源而缺少协调，否则目标基线会漂移。
 2. **扩容后更卡？** → 冷启动、JVM/Go 预热、DB 连接池打满、缓存未热。
 3. **Go GOMAXPROCS 与 HPA？** → 单 Pod CPU limit 固定时 GOMAXPROCS 应匹配；多 Pod 线性扩展（[S-CONC-04](../01-runtime-concurrency/S-CONC-04-gomaxprocs.md)）。
-4. **自定义指标延迟？** → Prometheus scrape 15s + HPA 15s 周期 → 突发可能 overshoot，配合 KEDA 或预扩容。
+4. **自定义指标延迟？** → scrape、adapter、HPA sync、调度和应用启动都会叠加；默认/示例周期不是 SLA。尖峰场景可预扩容、保留余量或使用事件驱动 autoscaler。
 
 ## 反模式与事故
 
 - **minReplicas=1 核心服务** → 单点 + 扩容来不及
 - **scaleDown 无 stabilization** → 流量波动反复缩扩，缓存失效
-- **HPA 仅 CPU 且 limit 过低** → 永远 100% CPU 但实际 throttle
+- CPU request/limit 设置与 HPA target 不匹配 → 利用率基线失真，Pod 可能先被 limit throttle，或 HPA 过早/过晚扩容
 - **maxReplicas 超过 DB 连接上限** → 扩容即打挂数据库
 
 ## 代码示例

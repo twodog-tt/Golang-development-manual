@@ -23,7 +23,7 @@ sources:
 
 1. **是什么**：撮合引擎产出 `TradeMatched` 事件写 Kafka；下游 Consumer Group 并行消费：账务入账、K 线聚合、推送网关。
 2. **为什么**：解耦撮合与慢路径；可回放补账；比 Redis Pub/Sub **可持久、可重放**（见 [S-NET-05](../../06-network-governance/S-NET-05-websocket-gateway.md)）。
-3. **怎么做**：topic 按业务拆分（`trade.matched` / `order.updates`）；key=`symbol`；监控 lag；扩 consumer 不超过 partition 数；WS 网关独立 group 或 Redis 中转 fan-out。
+3. **怎么做**：topic 按业务拆分（`trade.matched` / `order.updates`）；key 由所需顺序域决定，行情常按 `symbol`，账务未必适合；监控 lag；扩 consumer 不超过 partition 数。WS 需要把事件送到持有订阅连接的所有节点，不能只让同一 consumer group 的某一个 Pod 收到后就结束。
 
 ## 10 分钟版（架构）
 
@@ -81,7 +81,7 @@ kafka-consumer-groups.sh --bootstrap-server kafka:9092 \
 
 ## 追问链
 
-1. **WS 直连 Kafka 还是经 Redis？** → 小集群 Kafka 直推；多 WS 节点用 Redis/Kafka 二次 fan-out 减连接压力。
+1. **WS 直连 Kafka 还是经 Redis？** → 同一 group 会把每条消息只交给一个 Pod；若各 Pod 都可能持有订阅者，可由一个/一组消费者发布到 Redis/NATS fan-out，或建立按订阅路由的分发层。让每个 Pod 使用独立 group 会放大 Kafka 消费与连接数。
 2. **成交顺序错了？** → 检查 key；消费端是否多 goroutine 乱序 commit。
 3. **和 [S-EXCH-01](../../14-dex-cex-engineering/S-EXCH-01-cex-matching-engine.md) 关系？** → 撮合产事件；本题讲 **事件下游**。
 4. **lag 能为 0 吗？** → 持续接近 0 是目标；burst 允许短暂堆积。
