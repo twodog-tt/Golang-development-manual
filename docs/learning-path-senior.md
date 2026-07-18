@@ -61,7 +61,7 @@
 |----|------|------|------|------|
 | W1 | Go 语言 + 生产工程 | 01 核心 10 题 + [16 全部](./interview/16-go-production-engineering/index.md) | `go test -race`、错误/接口重构 | 画 GMP；讲 error 与 panic 边界 |
 | W2 | 内存 + 手写 + Linux/SQL | 02 高频 + S-CODE-06/07 + S-NET-06/07 + S-DB-06/07 + S-PG-01~03 | 跑 5 个新示例、读 heap profile | 手写有界批处理；排查一次 TCP/SQL |
-| W3 | [系统设计](./interview/03-system-design/index.md) | 20 题 | 每题 15min 结构化输出 | 秒杀/幂等/缓存各 1 题口述 |
+| W3 | [系统设计](./interview/03-system-design/index.md) | 21 题 | 每题 15min 结构化输出 | 秒杀/幂等/缓存/实时数据各 1 题口述 |
 | W4 | 目标岗位主线 + 模拟 | 按角色矩阵只选一个增量 P0 | 证据标签为 test/harness 的题才运行；2 场模拟面 | 追问链不停顿 3 层 |
 
 ### 每日建议（工作日 1.5h）
@@ -78,7 +78,7 @@
 |----|------|
 | 1 | 01 并发 + 02 内存高频 |
 | 2 | [16 Go 生产工程](./interview/16-go-production-engineering/index.md) + [08 手写题](./interview/08-coding-senior/index.md) |
-| 3-4 | 03 系统设计 20 题 + 容量估算模板 |
+| 3-4 | 03 系统设计 21 题 + 容量估算模板 |
 | 5 | [网络](./interview/06-network-governance/index.md) + [MySQL](./interview/middleware/mysql/index.md) + [PostgreSQL](./interview/middleware/postgresql/index.md) |
 | 6 | Redis/Kafka/RocketMQ/ES + Terraform/Helm/GitOps |
 | 7 | 目标岗位专题：普通后端选 11/15；Web3 选 17/18 与四条 SDK 实战 |
@@ -88,7 +88,7 @@
 
 ## 架构师岗冲刺（6 周，在职）
 
-> 在 **P0 系统设计 20 题** 基础上，专攻 [11 解决方案架构](./interview/11-solution-architecture/index.md) 8 题 + 45min 白板。
+> 在 **P0 系统设计 21 题** 基础上，专攻 [11 解决方案架构](./interview/11-solution-architecture/index.md) 8 题 + 45min 白板。
 
 | 周 | 模块 | 阅读 | 练习 | 自测 |
 |----|------|------|------|------|

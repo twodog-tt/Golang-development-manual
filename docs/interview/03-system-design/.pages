@@ -22,3 +22,4 @@ nav:
   - "容量评估与压测方法论": S-ARCH-18-capacity-planning.md
   - "从单体到微服务的演进与回退": S-ARCH-19-monolith-to-microservices.md
   - "技术选型文档怎么写（Lead 面）": S-ARCH-20-tech-decision-doc.md
+  - "CDC / Flink / 实时风控": S-ARCH-21-realtime-risk-cdc-flink.md

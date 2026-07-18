@@ -283,6 +283,12 @@ p0:
       frequency: 4
       status: published
       file: 03-system-design/S-ARCH-20-tech-decision-doc.md
+    - id: S-ARCH-21
+      title: 实时风控数据平台：CDC、Flink、ES 与可重放链路
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 03-system-design/S-ARCH-21-realtime-risk-cdc-flink.md
 
   go_production_engineering:
     - id: S-GOENG-01
@@ -443,6 +449,12 @@ p0:
       resume_focus: true
       file: 17-multichain-wallet/S-WALLET-11-sui-go-capability-adapter.md
       code_refs: [examples/non-evm-sdk/sui]
+    - id: S-WALLET-12
+      title: TRON / TRC20 钱包：资源、权限与交易生命周期
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 17-multichain-wallet/S-WALLET-12-tron-trc20-resource-transaction.md
 
   web3_payments:
     - id: S-PAY-01
@@ -703,6 +715,18 @@ p1:
       frequency: 4
       status: published
       file: 10-ai-engineering/S-AI-08-multimodal-voice.md
+    - id: S-AI-09
+      title: Agent 工作流、Human-in-the-loop 与可靠发布控制面
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md
+    - id: S-AI-10
+      title: Persona、分层 Memory 与反馈学习治理
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md
   blockchain_web3:
     - id: S-BC-01
       title: 区块链基础与 EVM 账户模型

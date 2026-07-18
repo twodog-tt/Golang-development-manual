@@ -8,7 +8,7 @@
 # questions.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
 
 schema_version: 1
-updated_at: "2026-07-17"
+updated_at: "2026-07-18"
 default_priority: p2
 priority_precedence: [p0, p1, p2]
 
@@ -155,6 +155,7 @@ roles:
       - S-ES-01
       - S-ES-02
       - S-ES-03
+      - S-ARCH-21
       - S-CLOUD-02
       - S-CLOUD-05
       - S-CLOUD-06
@@ -178,6 +179,70 @@ roles:
       - S-BC-02
       - S-BC-05
 
+  ai_agent_platform:
+    label: AI Agent Platform / Infrastructure
+    objective: 用 Go 构建可恢复、可审计、可控成本的 Agent 平台，并用 Web3 与实时风控项目证明复杂外部副作用和数据链路经验。
+    p0:
+      - S-AI-01
+      - S-AI-03
+      - S-AI-04
+      - S-AI-05
+      - S-AI-06
+      - S-AI-07
+      - S-AI-09
+      - S-AI-10
+      - S-ARCH-08
+      - S-ARCH-09
+      - S-ARCH-15
+      - S-ARCH-21
+      - S-NET-04
+      - S-KAFKA-02
+      - S-RAB-01
+      - S-ES-03
+      - S-SEC-01
+      - S-SEC-04
+      - S-SOL-05
+      - S-WALLET-12
+    p1:
+      - S-AI-02
+      - S-AI-08
+      - S-SOL-01
+      - S-SOL-02
+      - S-SOL-03
+      - S-SOL-04
+      - S-SOL-06
+      - S-SOL-07
+      - S-SOL-08
+      - S-MSVC-01
+      - S-MSVC-02
+      - S-MSVC-03
+      - S-MSVC-04
+      - S-MSVC-05
+      - S-MSVC-06
+      - S-CLOUD-02
+      - S-CLOUD-03
+      - S-CLOUD-04
+      - S-CLOUD-07
+      - S-CLOUD-09
+      - S-CLOUD-10
+      - S-RMQ-01
+      - S-RMQ-02
+      - S-RMQ-03
+      - S-RMQ-04
+      - S-EXCH-02
+      - S-EXCH-03
+      - S-EXCH-05
+      - S-EXCH-10
+      - S-EXCH-11
+      - S-EXCH-15
+      - S-WALLET-01
+      - S-WALLET-06
+      - S-WALLET-07
+      - S-PAY-01
+      - S-PAY-03
+      - S-PAY-04
+      - S-BC-05
+
   wallet_custody:
     label: 多链钱包与托管
     objective: 保留链特有交易语义，并把签名、策略、恢复和资金生命周期讲成一个控制系统。
@@ -193,6 +258,7 @@ roles:
       - S-WALLET-09
       - S-WALLET-10
       - S-WALLET-11
+      - S-WALLET-12
       - S-BC-03
       - S-BC-05
       - S-BC-10
@@ -252,6 +318,7 @@ roles:
       - S-WALLET-06
       - S-WALLET-07
       - S-WALLET-11
+      - S-WALLET-12
       - S-EXCH-02
       - S-EXCH-03
       - S-EXCH-05
@@ -425,6 +492,7 @@ roles:
       - S-WALLET-09
       - S-WALLET-10
       - S-WALLET-11
+      - S-WALLET-12
       - S-BC-03
       - S-BC-05
       - S-BC-07
@@ -488,6 +556,7 @@ roles:
       - S-MSVC-02
       - S-MSVC-04
       - S-PG-01
+      - S-ARCH-21
     p1:
       - S-SOL-04
       - S-SOL-05
@@ -528,6 +597,8 @@ roles:
       - S-PROTO-02
       - S-PROTO-03
       - S-PROTO-04
+      - S-AI-09
+      - S-AI-10
 
 evidence:
   basis:
@@ -593,6 +664,7 @@ evidence:
     version_sensitive:
       - S-CONC-04
       - S-CONC-20
+      - S-ARCH-21
       - S-PG-01
       - S-PG-03
       - S-SEC-03

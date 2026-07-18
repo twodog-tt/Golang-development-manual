@@ -1,26 +1,26 @@
 # 题源与引用规范
 
-本手册面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 面试准备。正文均为自研表述；外部资料仅作题源与延伸阅读，**不整段搬运**。
+本手册面向 **5 年+ Go 后端 + AI Agent Platform + 区块链/Web3 架构师** 面试准备。正文均为自研表述；外部资料仅作题源与延伸阅读，**不整段搬运**。
 
 > 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) ·
 > [角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
 > 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
-## 手册覆盖范围（215 题）
+## 手册覆盖范围（219 题）
 
 | 模块 | 题数 | 说明 |
 |------|------|------|
 | 01 并发与运行时 | 20 | GMP、Channel、Context、pprof |
 | 02 内存与 GC | 15 | 三色标记、逃逸、sync.Pool |
 | 16 Go 生产工程 | 6 | 错误契约、接口、测试、工具链、供应链 |
-| 03 系统设计 | 20 | 秒杀、缓存、MQ、多活、SLO |
+| 03 系统设计 | 21 | 秒杀、缓存、MQ、多活、SLO、CDC/Flink 实时风控 |
 | 中间件与数据库 | 26 | MySQL、PostgreSQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
 | 06 网络与服务治理 | 7 | Linux/epoll/TCP、gRPC、Gin、JWT、WebSocket |
 | 08 手写题 | 7 | LRU、限流、连接池、Singleflight、有界批处理 |
-| 10 AI 工程与编程 | 8 | LLM、RAG、Agent、MCP |
+| 10 AI 工程与编程 | 10 | LLM、Agent 工作流/HITL、Persona/Memory、RAG、MCP |
 | 11 解决方案架构 | 8 | DDD、演进、评审、白板 |
 | 12 区块链与 Web3（Go） | 12 | RPC、索引、Rollup/DA/finality、跨链消息安全、4337、MPC |
-| 17 多链钱包与托管 | 11 | Bitcoin、Solana/Cosmos/Aptos/Sui Go 实战、归集 |
+| 17 多链钱包与托管 | 12 | Bitcoin、TRON/TRC20、Solana/Cosmos/Aptos/Sui Go 实战、归集 |
 | 18 Web3 支付与稳定币 | 6 | 状态机、稳定币、账本、机构托管、DvP、RWA/ISO 20022 |
 | 19 节点、RPC 与 Staking | 10 | EL/CL、RPC HA、canonical merge、trace、ClickHouse/lakehouse、在线 SDK |
 | 20 协议、共识与安全 | 4 | PoS/BFT、fork choice、PeerDAS、状态迁移 |
@@ -93,6 +93,8 @@
 | Model Context Protocol | https://modelcontextprotocol.io/ | MCP 协议与工具暴露 |
 | MCP Go SDK | https://github.com/modelcontextprotocol/go-sdk | Go 实现 MCP Server |
 | OpenTelemetry GenAI 语义约定 | https://opentelemetry.io/docs/specs/semconv/gen-ai/ | LLM 可观测性 |
+| OpenAI Agents SDK | https://openai.github.io/openai-agents-python/ | Agent loop、HITL、Sessions |
+| LangGraph 文档 | https://docs.langchain.com/oss/python/langgraph/overview | Persistence、Memory、Interrupts |
 
 ### 云原生、容器与可观测性
 

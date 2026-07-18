@@ -89,7 +89,7 @@
   -webkit-line-clamp: 2;
 }
 
-/* 215 篇均已发布时，逐条 published 图标没有区分价值。 */
+/* 全库正文均已发布时，逐条 published 图标没有区分价值。 */
 .md-nav--primary .md-status--published {
   display: none;
 }

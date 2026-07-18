@@ -10,3 +10,5 @@ nav:
   - "LLM 可观测性、成本与延迟优化": S-AI-06-llm-observability-cost.md
   - "Go MCP Server": S-AI-07-mcp-server-go.md
   - "多模态与语音接入": S-AI-08-multimodal-voice.md
+  - "Agent 工作流 / HITL / 发布": S-AI-09-agent-workflow-hitl-publishing.md
+  - "Persona / Memory / 反馈治理": S-AI-10-persona-memory-feedback-governance.md

@@ -161,5 +161,5 @@ flowchart LR
 
 ## 延伸阅读
 
-- 本手册 [03 系统设计](../03-system-design/index.md) 20 题作为组件知识库
+- 本手册 [03 系统设计](../03-system-design/index.md) 21 题作为组件知识库
 - [Google SRE - SLO](https://sre.google/sre-book/service-level-objectives/)

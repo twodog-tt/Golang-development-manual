@@ -1,6 +1,6 @@
 # Go 后端与区块链架构师面试手册
 
-面向 **5 年+ Go 后端 + 区块链/Web3 架构师** 的面试知识库（**215 篇正文**）。
+面向 **5 年+ Go 后端 + AI Agent Platform + 区块链/Web3 架构师** 的面试知识库（**219 篇正文**）。
 
 > **定位**：Go 运行时与系统设计 + 链上工程（Solidity）+ 链下工程（Go RPC/索引）+ 解决方案架构 + AI 工程。
 >
@@ -28,9 +28,10 @@
 | 主线 | 推荐顺序 |
 |------|----------|
 | Go 工程门槛 | [16 Go 生产工程](interview/16-go-production-engineering/index.md) → [08 手写题](interview/08-coding-senior/index.md) → [06 Linux/TCP](interview/06-network-governance/index.md) → [MySQL](interview/middleware/mysql/index.md) / [PostgreSQL](interview/middleware/postgresql/index.md) |
+| **简历首选：Agent Platform** | [10 AI 工程](interview/10-ai-engineering/index.md) → [Agent 工作流/HITL](interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) → [Persona/Memory](interview/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) → [实时风控数据](interview/03-system-design/S-ARCH-21-realtime-risk-cdc-flink.md) |
 | Web3 核心 | [17 多链钱包](interview/17-multichain-wallet/index.md) → [18 支付与稳定币](interview/18-web3-payments-stablecoin/index.md) → [19 节点/RPC](interview/19-node-rpc-staking/index.md) |
 
-先完成共享门槛，再从 Go 后端、钱包、支付、节点、交易所、Staff 六条轨道选择一个增量：
+先完成共享门槛，再从 Agent Platform、Go 后端、钱包、支付、节点、交易所、Staff 七条轨道选择一个增量：
 [查看角色化矩阵](interview/_meta/role-priority-matrix.md) ·
 [查看知识图谱](interview/_meta/p0-knowledge-graph.md)。
 

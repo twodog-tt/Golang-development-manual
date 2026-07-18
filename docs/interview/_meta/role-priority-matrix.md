@@ -1,8 +1,8 @@
 # 角色化优先级与证据标签
 
-> 当前共 **215 篇 published 正文**。角色优先级与证据标签的机器事实源为
+> 当前共 **219 篇 published 正文**。角色优先级与证据标签的机器事实源为
 > [role-evidence.yaml](./role-evidence.yaml)，一致性由
-> `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-17**。
+> `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-18**。
 
 ## 先选岗位，不再背统一 P0
 
@@ -17,12 +17,13 @@
 
 | 目标岗位 | P0 | P1 | P2 | P0 重点 |
 |----------|---:|---:|---:|---------|
-| 资深 Go 后端 | 62 | 71 | 82 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
-| 多链钱包与托管 | 65 | 90 | 60 | 多链交易、归集、MPC/HSM、签名控制、恢复 |
-| 支付与稳定币 | 65 | 97 | 53 | 支付状态机、账本、清结算、合规、机构资金 |
-| 节点/RPC/Indexer | 73 | 85 | 57 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
-| 交易所工程 | 68 | 102 | 45 | 撮合/WAL、行情/FIX、账本、风控、充提 |
-| Staff/后端架构师 | 74 | 86 | 55 | 系统设计、迁移、IaC/GitOps、安全、跨团队影响 |
+| 资深 Go 后端 | 62 | 72 | 85 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
+| **AI Agent Platform / Infrastructure** | **60** | **89** | **70** | Agent 工作流、HITL、Memory、Guardrail、成本、外部副作用 |
+| 多链钱包与托管 | 66 | 90 | 63 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
+| 支付与稳定币 | 66 | 97 | 56 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
+| 节点/RPC/Indexer | 73 | 85 | 61 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
+| 交易所工程 | 68 | 103 | 48 | 撮合/WAL、行情/FIX、账本、风控、充提 |
+| Staff/后端架构师 | 75 | 88 | 56 | 系统设计、实时数据、迁移、IaC/GitOps、安全、跨团队影响 |
 
 P0 数量不是“全部逐字背诵”。建议先掌握 shared P0 的 30 秒版与不变量，再只进入一个岗位的
 增量 P0；P1 用来应对 JD 特有追问，P2 只按面试反馈补洞。
@@ -40,7 +41,24 @@ P0 数量不是“全部逐字背诵”。建议先掌握 shared P0 的 30 秒�
 
 这 40 篇解决“资深工程师基本盘”。岗位增量解决“为什么要录用你做这一类系统”。
 
-## 六条岗位增量
+## 七条岗位增量
+
+### AI Agent Platform / Infrastructure（本简历首选）
+
+在 shared P0 之外，新增 20 篇简历定向 P0：
+
+| 能力域 | P0 题号 | 简历证据 |
+|--------|---------|----------|
+| 模型与工具入口 | `S-AI-01/03/07` | Go LLM 接入、Tool/Skill、MCP Server |
+| 工作流与人工控制 | `S-AI-09` | Review Queue、Execution Queue、Publishing Pipeline |
+| Persona/Memory | `S-AI-04/10` | Bot/Scene Context、反馈规则再注入 |
+| 安全与成本 | `S-AI-05/06`、`S-SEC-01/04` | Guardrail、注入隔离、token/cost、事件响应 |
+| 平台控制面 | `S-ARCH-08/09/15`、`S-NET-04` | 限额、熔断、版本兼容、OAuth2/凭据 |
+| 实时数据与消息 | `S-ARCH-21`、`S-KAFKA-02`、`S-RAB-01`、`S-ES-03` | CDC/Flink/ES、RabbitMQ 行情与异步任务 |
+| SaaS 与 Web3 证据 | `S-SOL-05`、`S-WALLET-12` | 多租户平台、EVM/TRON USDT 与 TRC20 |
+
+这条路径不要求把 LangGraph、AutoGen、CrewAI 的 API 逐个背成 P0。面试主张应是：
+**理解框架能力，但能用 Go 自建可审计状态机，并清楚框架 checkpoint 与业务幂等的边界**。
 
 ### 资深 Go 后端
 
@@ -54,7 +72,7 @@ P0 数量不是“全部逐字背诵”。建议先掌握 shared P0 的 30 秒�
 
 ### 多链钱包与托管
 
-优先升级 `S-WALLET-01~11`、`S-BC-03/05/10/12`、`S-SEC-01/02/04`、
+优先升级 `S-WALLET-01~12`、`S-BC-03/05/10/12`、`S-SEC-01/02/04`、
 `S-NODE-02/05/09` 和 `S-PAY-03~05`。回答必须保留各链 nonce/UTXO/object/sequence、
 提交、执行和 finality 差异。
 
@@ -97,7 +115,7 @@ signer 控制。性能结论必须附 workload、持久化边界、P99/P999 和�
 
 | 标签 | 当前篇数 | 能证明什么 | 不能证明什么 |
 |------|---------:|------------|--------------|
-| `explanation_only` | 157 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
+| `explanation_only` | 161 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
 | `illustrative_artifact` | 31 | 仓库有相关代码或配置 | 测试当前通过、外部系统兼容 |
 | `deterministic_test` | 20 | 有不依赖外部服务的测试/回放门禁 | localnet、硬件或生产行为 |
 | `integration_harness` | 7 | 有 localnet/testnet/HSM/MPC/故障 harness | 每个目标版本都已实跑 |
@@ -111,7 +129,7 @@ signer 控制。性能结论必须附 workload、持久化边界、P99/P999 和�
 | 标签 | 当前篇数 | 复核方式 |
 |------|---------:|----------|
 | `stable` | 142 | 目标数据库/语言版本面试前抽查 |
-| `version_sensitive` | 62 | 复核官方 release/spec/SDK 文档 |
+| `version_sensitive` | 66 | 复核官方 release/spec/SDK 文档 |
 | `vendor_or_regulatory_sensitive` | 11 | 结合目标厂商、司法辖区和法律/合规意见 |
 
 `vendor_or_regulatory_sensitive` 优先于普通版本敏感；它提醒你在面试里说明适用范围，而不是背一个
@@ -129,5 +147,4 @@ signer 控制。性能结论必须附 workload、持久化边界、P99/P999 和�
 .venv/bin/python scripts/verify_knowledge_metadata.py
 ```
 
-校验会检查 215 个 ID、正文、sources、30 秒版、追问链、角色引用和证据标签互斥关系。
-
+校验会检查 219 个 ID、正文、sources、30 秒版、追问链、角色引用和证据标签互斥关系。

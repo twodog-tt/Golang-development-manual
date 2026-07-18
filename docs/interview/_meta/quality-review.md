@@ -1,6 +1,6 @@
 # 面试知识库质量审查与岗位差距
 
-> 全库 **215 题**（以 [questions.yaml](questions.yaml) 为准）
+> 全库 **219 题**（以 [questions.yaml](questions.yaml) 为准）
 >
 > 本轮审查与补强日期：**2026-07-17**
 >
@@ -38,8 +38,12 @@
   Solana/Aptos/Sui 节点仍受本机设备/二进制条件约束，不能冒充已验收。
 - 第七阶段新增 **8 篇正文**：PostgreSQL 3 篇、Terraform/IaC 与 Helm/GitOps 2 篇、
   链数据 ClickHouse/lakehouse 1 篇、Staff 技术战略与跨团队迁移 2 篇。全库优先级改为
-  [六类岗位轨道](role-priority-matrix.md)，旧全局 tier 只保留兼容。
-- 证据标签已覆盖 215 篇：`explanation_only=157`、`illustrative_artifact=31`、
+  [七类岗位轨道](role-priority-matrix.md)，旧全局 tier 只保留兼容。
+- 第八阶段按候选人简历新增 **4 篇正文**：Agent 工作流/HITL 与可靠发布、Persona/Memory
+  与反馈治理、TRON/TRC20 钱包生命周期、CDC/Flink/ES 实时风控数据平台；新增
+  `AI Agent Platform / Infrastructure` 首选岗位轨道，并将简历定向 P0 收敛为
+  shared 40 篇 + 角色增量 20 篇。
+- 证据标签已覆盖 219 篇：`explanation_only=161`、`illustrative_artifact=31`、
   `deterministic_test=20`、`integration_harness=7`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
@@ -59,16 +63,16 @@
 | Go 并发与运行时 | 20 |
 | Go 内存与 GC | 15 |
 | Go 生产工程 | 6 |
-| 系统设计 | 20 |
+| 系统设计 | 21 |
 | 数据库与中间件 | 26 |
 | 网络治理 | 7 |
 | 工程领导力 | 5 |
 | 资深手写题 | 7 |
 | 云原生 | 10 |
-| AI 工程 | 8 |
+| AI 工程 | 10 |
 | 解决方案架构 | 8 |
 | 区块链 Web3 | 12 |
-| 多链钱包与托管 | 11 |
+| 多链钱包与托管 | 12 |
 | Web3 支付与稳定币 | 6 |
 | 节点、RPC 与 Staking | 10 |
 | 协议、共识与安全 | 4 |
@@ -76,7 +80,7 @@
 | Solidity | 8 |
 | DEX/CEX | 22 |
 | 交易所微服务 | 6 |
-| **合计** | **215** |
+| **合计** | **219** |
 
 原始 153 题基线中的中间件为 21 题；此前新增 2 篇 MySQL，本阶段再新增 3 篇 PostgreSQL，
 当前数据库与中间件共 26 题。
@@ -320,7 +324,7 @@
 
 1. **[Staff 案例结构已补]** spec-first、ADR、API/versioning、跨团队技术治理、mentor、
    on-call 与事故指挥；候选人仍需用本人真实项目替换 `S-LEAD-04/05` 占位符。
-2. AI-assisted engineering、MCP/agent workflow。当前已有 8 题，保持工程化深度即可，
+2. AI-assisted engineering、MCP/agent workflow。当前已有 10 题，保持工程化深度即可，
    不应挤占多链、节点和资金安全的准备时间。
 3. Go 1.26 安全与工具链：`crypto/hpke`、FIPS 相关能力、现代化 `go fix`；
    按目标岗位再扩展，不列为 Web3 后端通用 P0。

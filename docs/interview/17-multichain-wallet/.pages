@@ -13,3 +13,4 @@ nav:
   - "Cosmos DIRECT 签名": S-WALLET-09-cosmos-go-sdk-sign-mode-direct.md
   - "Aptos BCS 与执行跟踪": S-WALLET-10-aptos-go-sdk-bcs-transaction.md
   - "Sui Object 与能力适配": S-WALLET-11-sui-go-capability-adapter.md
+  - "TRON / TRC20 交易生命周期": S-WALLET-12-tron-trc20-resource-transaction.md

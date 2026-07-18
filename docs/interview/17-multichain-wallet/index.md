@@ -1,6 +1,6 @@
 # 17 多链钱包与托管
 
-11 题 | 钱包/托管岗位 P0 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+12 题 | 钱包/托管岗位 P0 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
 
 > 目标不是背更多链名，而是建立一套不会错误泛化的 **Chain Adapter、交易并发、归集、签名和恢复模型**。
 
@@ -17,6 +17,7 @@
 | [S-WALLET-09](./S-WALLET-09-cosmos-go-sdk-sign-mode-direct.md) | Cosmos SDK TxBuilder 与 DIRECT 签名 | ⭐⭐⭐⭐⭐ |
 | [S-WALLET-10](./S-WALLET-10-aptos-go-sdk-bcs-transaction.md) | Aptos Go SDK、BCS 与执行跟踪 | ⭐⭐⭐⭐⭐ |
 | [S-WALLET-11](./S-WALLET-11-sui-go-capability-adapter.md) | Sui Object、Address Balance 与能力适配 | ⭐⭐⭐⭐⭐ |
+| [S-WALLET-12](./S-WALLET-12-tron-trc20-resource-transaction.md) | TRON/TRC20 资源、权限与交易生命周期 | ⭐⭐⭐⭐⭐ |
 
 ## 可运行代码
 
@@ -33,5 +34,5 @@ contract test；testnet smoke 只有设置 endpoint 环境变量才运行，广�
 
 ## 推荐顺序
 
-能力矩阵 → Bitcoin → Solana/Cosmos/Sui/Aptos 原理 → 地址与归集 → MPC 故障恢复 →
-四条非 EVM Go 实战。
+能力矩阵 → Bitcoin → TRON/TRC20 → Solana/Cosmos/Sui/Aptos 原理 → 地址与归集 →
+MPC 故障恢复 → 四条非 EVM Go 实战。
