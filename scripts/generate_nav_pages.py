@@ -77,6 +77,12 @@ ROOT_PAGES = """nav:
   - 首页: index.md
   - 学习路线: learning-path-senior.md
   - 模拟面试: mock-interview.md
+
+  - 岗位与优先级:
+    - 角色优先级与证据: interview/_meta/role-priority-matrix
+    - P0 知识图谱: interview/_meta/p0-knowledge-graph
+    - P0 技术纠错审计: interview/_meta/technical-corrections-audit
+
   - interview
 
   - 参考资料:
@@ -84,12 +90,80 @@ ROOT_PAGES = """nav:
     - 面试题总索引: interview-catalog.md
     - 题源与引用: sources.md
     - 代码与题目映射: interview/_meta/mapping
+
+  - 维护工具:
     - 题目撰写模板: interview/_meta/template
-    - 角色优先级与证据: interview/_meta/role-priority-matrix
-    - P0 技术纠错审计: interview/_meta/technical-corrections-audit
     - 习题质量审查: interview/_meta/quality-review
-    - 知识图谱: interview/_meta/p0-knowledge-graph
 """
+
+# 仅影响侧栏展示；正文 H1、搜索索引与题单标题继续使用完整 title。
+# 优先覆盖题目数多、术语长、在窄侧栏中容易超过两行的模块。
+COMPACT_NAV_TITLES: dict[str, str] = {
+    # 12 区块链与 Web3
+    "S-BC-11": "Rollup Finality / DA / 强制退出",
+    "S-BC-12": "跨链桥认证 / 重放 / 限额",
+    # 14 DEX / CEX 交易所工程
+    "S-EXCH-01": "CEX 撮合与订单簿",
+    "S-EXCH-02": "充值 / 提现 / 钱包体系",
+    "S-EXCH-03": "账户与复式记账",
+    "S-EXCH-04": "保证金 / 强平 / 资金费率",
+    "S-EXCH-05": "风控 / AML / 对账",
+    "S-EXCH-06": "DEX AMM 与流动性池",
+    "S-EXCH-07": "DEX 聚合 / 滑点 / Gas",
+    "S-EXCH-08": "MEV / 抢跑 / 三明治",
+    "S-EXCH-09": "CeDeFi 混合架构",
+    "S-EXCH-10": "链上成交与 K 线聚合",
+    "S-EXCH-11": "WebSocket 行情 Hub",
+    "S-EXCH-12": "Token 发行 / 分账 / 返佣",
+    "S-EXCH-13": "CEX 端到端架构白板",
+    "S-EXCH-14": "Web3 交易所全栈架构",
+    "S-EXCH-15": "清结算 / 对账 / 高可用",
+    "S-EXCH-16": "永续撮合与仓位引擎",
+    "S-EXCH-17": "Go 确定性撮合引擎",
+    "S-EXCH-18": "撮合 WAL / 快照 / 回放",
+    "S-EXCH-19": "行情序号与 Gap Recovery",
+    "S-EXCH-20": "FIX 序号与断线恢复",
+    "S-EXCH-21": "STP 自成交防护与监控",
+    "S-EXCH-22": "集合竞价与性能验证",
+    # 17 多链钱包与托管
+    "S-WALLET-01": "Chain Adapter 能力矩阵",
+    "S-WALLET-02": "Bitcoin UTXO / PSBT / RBF",
+    "S-WALLET-03": "Solana 账户 / PDA / 生命周期",
+    "S-WALLET-04": "Cosmos / IBC / Sequence",
+    "S-WALLET-05": "Sui Object vs Aptos Resource",
+    "S-WALLET-06": "归集 / Nonce / UTXO 恢复",
+    "S-WALLET-07": "MPC DKG / Reshare / 恢复",
+    "S-WALLET-08": "Solana 离线签名与确认",
+    "S-WALLET-09": "Cosmos DIRECT 签名",
+    "S-WALLET-10": "Aptos BCS 与执行跟踪",
+    "S-WALLET-11": "Sui Object 与能力适配",
+    # 19 节点、RPC 与 Staking
+    "S-NODE-01": "Ethereum EL / CL 与同步",
+    "S-NODE-02": "RPC HA / Quorum / Hedging",
+    "S-NODE-03": "Validator / Slashing / 密钥",
+    "S-NODE-04": "链数据 Backfill / Trace / Schema",
+    "S-NODE-05": "Relayer Nonce / Fee / Finality",
+    "S-NODE-06": "节点升级 / 快照 / Pruning",
+    "S-NODE-07": "Backfill + Realtime 与 Reorg",
+    "S-NODE-08": "Trace / State Diff / Decoder",
+    "S-NODE-09": "非 EVM SDK 故障注入与兼容",
+    "S-NODE-10": "ClickHouse / Reorg / Lakehouse",
+    # 其他超长标题
+    "S-NET-06": "Linux FD / epoll / Go netpoll",
+    "S-GOENG-03": "Go 单测与 Test Double",
+    "S-GOENG-05": "Go Modules 与可复现构建",
+    "S-CLOUD-07": "K8s OOM / CrashLoop / Evicted",
+    "S-CLOUD-10": "Helm / GitOps / 回滚",
+    "S-AI-07": "Go MCP Server",
+    "S-AI-08": "多模态与语音接入",
+    "S-PAY-06": "机构托管 / RWA / ISO 20022",
+    "S-PROTO-01": "Ethereum PoS 与 Finality",
+    "S-PROTO-03": "Blob / DA / PeerDAS",
+    "S-SEC-04": "安全测试与事件响应",
+    "S-PG-01": "PostgreSQL MVCC / VACUUM",
+    "S-PG-03": "PostgreSQL WAL / 复制 / pgx",
+    "S-KAFKA-02": "Kafka Producer 可靠性",
+}
 
 
 def iter_questions(node, chain: list[str] | None = None):
@@ -112,8 +186,8 @@ def yaml_quote(s: str) -> str:
 
 
 def nav_label(item: dict) -> str:
-    """侧栏显示题目标题，不显示编号。"""
-    return item["title"]
+    """侧栏优先显示紧凑标题，正文和搜索仍保留完整题目标题。"""
+    return COMPACT_NAV_TITLES.get(item["id"], item["title"])
 
 
 def write_module_pages(rel_dir: str, items: list[dict]) -> None:
@@ -177,9 +251,18 @@ def write_root_pages() -> None:
 def main() -> None:
     data = yaml.safe_load(YAML_PATH.read_text(encoding="utf-8"))
     by_dir: dict[str, list[dict]] = defaultdict(list)
+    question_ids: set[str] = set()
 
     for item, _chain in iter_questions(data):
+        question_ids.add(item["id"])
         by_dir[str(Path(item["file"]).parent)].append(item)
+
+    unknown_overrides = sorted(set(COMPACT_NAV_TITLES) - question_ids)
+    if unknown_overrides:
+        raise SystemExit(
+            "Compact nav titles reference unknown IDs: "
+            + ", ".join(unknown_overrides)
+        )
 
     write_root_pages()
     write_interview_pages()

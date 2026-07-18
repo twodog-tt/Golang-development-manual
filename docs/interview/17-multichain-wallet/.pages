@@ -2,14 +2,14 @@ title: 17 多链钱包与托管
 collapse_single_pages: false
 nav:
   - index.md
-  - "多链钱包 Chain Adapter 与能力矩阵": S-WALLET-01-chain-adapter-capability-matrix.md
-  - "Bitcoin UTXO、Coin Selection、PSBT 与手续费替换": S-WALLET-02-bitcoin-utxo-psbt-fee-bump.md
-  - "Solana 账户模型、PDA 与交易生命周期": S-WALLET-03-solana-account-pda-transaction.md
-  - "Cosmos SDK、CometBFT、IBC 与账户 Sequence": S-WALLET-04-cosmos-cometbft-ibc-sequence.md
-  - "Sui Object 与 Aptos Resource 模型对比": S-WALLET-05-sui-aptos-state-model.md
-  - "充值地址、归集、Nonce/UTXO 预占与恢复": S-WALLET-06-deposit-sweep-reservation-recovery.md
-  - "MPC/TSS 的 DKG、Reshare 与故障恢复": S-WALLET-07-mpc-dkg-reshare-recovery.md
-  - "Solana Go SDK 实战：离线构建、签名与确认状态": S-WALLET-08-solana-go-sdk-transaction.md
-  - "Cosmos SDK Go 实战：TxBuilder、SIGN_MODE_DIRECT 与 Sequence": S-WALLET-09-cosmos-go-sdk-sign-mode-direct.md
-  - "Aptos Go SDK 实战：BCS 交易、域分离签名与执行跟踪": S-WALLET-10-aptos-go-sdk-bcs-transaction.md
-  - "Sui Go 集成实战：Object、Address Balance 与能力演进": S-WALLET-11-sui-go-capability-adapter.md
+  - "Chain Adapter 能力矩阵": S-WALLET-01-chain-adapter-capability-matrix.md
+  - "Bitcoin UTXO / PSBT / RBF": S-WALLET-02-bitcoin-utxo-psbt-fee-bump.md
+  - "Solana 账户 / PDA / 生命周期": S-WALLET-03-solana-account-pda-transaction.md
+  - "Cosmos / IBC / Sequence": S-WALLET-04-cosmos-cometbft-ibc-sequence.md
+  - "Sui Object vs Aptos Resource": S-WALLET-05-sui-aptos-state-model.md
+  - "归集 / Nonce / UTXO 恢复": S-WALLET-06-deposit-sweep-reservation-recovery.md
+  - "MPC DKG / Reshare / 恢复": S-WALLET-07-mpc-dkg-reshare-recovery.md
+  - "Solana 离线签名与确认": S-WALLET-08-solana-go-sdk-transaction.md
+  - "Cosmos DIRECT 签名": S-WALLET-09-cosmos-go-sdk-sign-mode-direct.md
+  - "Aptos BCS 与执行跟踪": S-WALLET-10-aptos-go-sdk-bcs-transaction.md
+  - "Sui Object 与能力适配": S-WALLET-11-sui-go-capability-adapter.md

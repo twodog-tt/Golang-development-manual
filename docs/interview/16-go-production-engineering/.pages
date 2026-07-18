@@ -4,7 +4,7 @@ nav:
   - index.md
   - "错误契约、Wrapping 与 Panic 边界": S-GOENG-01-errors-contract-panic-boundary.md
   - "包边界、接口设计与依赖注入": S-GOENG-02-package-interface-di.md
-  - "Go 单元测试：表驱动、子测试与 Test Double": S-GOENG-03-testing-table-fake.md
+  - "Go 单测与 Test Double": S-GOENG-03-testing-table-fake.md
   - "Fuzz、Benchmark、Race 与回归门禁": S-GOENG-04-fuzz-benchmark-race.md
-  - "Go Modules、Workspace、Toolchain 与可复现构建": S-GOENG-05-modules-toolchain-reproducible.md
+  - "Go Modules 与可复现构建": S-GOENG-05-modules-toolchain-reproducible.md
   - "静态分析、govulncheck 与依赖供应链": S-GOENG-06-static-analysis-supply-chain.md

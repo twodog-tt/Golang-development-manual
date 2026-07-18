@@ -5,4 +5,4 @@ nav:
   - "Web3 威胁建模、IAM 与信任边界": S-SEC-01-web3-threat-model-iam-trust-boundaries.md
   - "Key Ceremony、远程签名机 Fencing 与恢复": S-SEC-02-key-ceremony-signer-fencing-recovery.md
   - "SBOM、SLSA Provenance 与发布准入": S-SEC-03-sbom-provenance-release-admission.md
-  - "Fuzz、Property、Differential Test 与安全事件响应": S-SEC-04-security-testing-incident-response.md
+  - "安全测试与事件响应": S-SEC-04-security-testing-incident-response.md

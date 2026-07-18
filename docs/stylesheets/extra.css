@@ -59,10 +59,10 @@
   padding-left: 0.25rem;
 }
 
-/* 二级分组（如 MySQL、Redis） */
+/* 二级分组（如 MySQL、Redis）：避免为了密度继续缩小字号 */
 .md-nav--primary .md-nav__item--section .md-nav__item--section > .md-nav__link {
   font-weight: 500;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
 }
 
 /* 当前页高亮 */
@@ -70,7 +70,34 @@
   font-weight: 600;
 }
 
-/* 叶子节点字号略小，减少视觉噪音 */
+/*
+ * 叶子节点最多显示两行，紧凑标题写入 title 属性便于悬浮查看；
+ * 正文 H1 与搜索索引仍保留完整题目标题。
+ */
 .md-nav--primary .md-nav__item:not(.md-nav__item--section) > .md-nav__link {
-  font-size: 0.68rem;
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.md-nav--primary
+  .md-nav__item:not(.md-nav__item--section)
+  > .md-nav__link
+  > .md-ellipsis {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* 215 篇均已发布时，逐条 published 图标没有区分价值。 */
+.md-nav--primary .md-status--published {
+  display: none;
+}
+
+/* 自定义键盘语义后，为折叠标签提供稳定的可见焦点。 */
+.md-nav--primary label.md-nav__link[role="button"]:focus-visible,
+.md-header label.md-header__button[role="button"]:focus-visible {
+  border-radius: 0.15rem;
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
 }

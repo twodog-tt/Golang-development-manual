@@ -2,6 +2,6 @@ title: PostgreSQL
 collapse_single_pages: false
 nav:
   - index.md
-  - "PostgreSQL MVCC、VACUUM、可见性与索引设计": S-PG-01-mvcc-vacuum-indexes.md
+  - "PostgreSQL MVCC / VACUUM": S-PG-01-mvcc-vacuum-indexes.md
   - "PostgreSQL 隔离级别、锁与资金写入": S-PG-02-isolation-locking-ledger.md
-  - "PostgreSQL WAL、复制、故障切换与 pgx 连接治理": S-PG-03-wal-replication-pgx-ha.md
+  - "PostgreSQL WAL / 复制 / pgx": S-PG-03-wal-replication-pgx-ha.md

@@ -8,7 +8,7 @@ nav:
   - "滚动发布、探针与 PodDisruptionBudget": S-CLOUD-04-rolling-update-probes-pdb.md
   - "HPA 与 Go 服务自定义指标扩缩容": S-CLOUD-05-hpa-autoscaling.md
   - "Ingress、Gateway API 与南北向流量": S-CLOUD-06-ingress-gateway.md
-  - "K8s 故障排查：OOMKilled、CrashLoop 与 Evicted": S-CLOUD-07-k8s-troubleshooting.md
+  - "K8s OOM / CrashLoop / Evicted": S-CLOUD-07-k8s-troubleshooting.md
   - "ConfigMap、Secret 与 Go 配置热更新": S-CLOUD-08-configmap-secret.md
   - "Terraform State、模块、Drift 与安全变更": S-CLOUD-09-terraform-state-drift-safe-change.md
-  - "Helm 与 GitOps：持续收敛、发布顺序和回滚": S-CLOUD-10-helm-gitops-rollout-rollback.md
+  - "Helm / GitOps / 回滚": S-CLOUD-10-helm-gitops-rollout-rollback.md

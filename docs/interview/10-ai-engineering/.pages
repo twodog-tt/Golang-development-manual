@@ -8,5 +8,5 @@ nav:
   - "Prompt 工程与 Context 窗口管理": S-AI-04-prompt-context.md
   - "LLM 应用安全：注入、PII、护栏": S-AI-05-llm-security.md
   - "LLM 可观测性、成本与延迟优化": S-AI-06-llm-observability-cost.md
-  - "Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署": S-AI-07-mcp-server-go.md
-  - "多模态与语音接入：图像、音频在 Go 服务中的工程实践": S-AI-08-multimodal-voice.md
+  - "Go MCP Server": S-AI-07-mcp-server-go.md
+  - "多模态与语音接入": S-AI-08-multimodal-voice.md

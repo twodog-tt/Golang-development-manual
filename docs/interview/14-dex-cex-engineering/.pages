@@ -2,25 +2,25 @@ title: 14 DEX / CEX 交易所工程
 collapse_single_pages: false
 nav:
   - index.md
-  - "CEX 撮合引擎与订单簿架构": S-EXCH-01-cex-matching-engine.md
-  - "充值、提现与链上钱包体系": S-EXCH-02-deposit-withdraw-wallet.md
-  - "账户体系与资金账务（复式记账）": S-EXCH-03-account-ledger.md
-  - "合约交易：保证金、强平、资金费率": S-EXCH-04-futures-margin-liquidation.md
-  - "风控、反洗钱与对账体系": S-EXCH-05-risk-reconciliation.md
-  - "DEX AMM、流动性池与 LP 收益": S-EXCH-06-dex-amm-liquidity.md
-  - "DEX 聚合路由、滑点与 Gas 优化": S-EXCH-07-aggregator-slippage.md
-  - "MEV、抢跑与三明治攻击防护": S-EXCH-08-mev-sandwich.md
-  - "CEX 与 DEX 混合架构（CeDeFi）": S-EXCH-09-hybrid-cex-dex.md
-  - "链上成交事件驱动 K 线与行情聚合": S-EXCH-10-kline-event-aggregation.md
-  - "WebSocket 行情 Hub 与连接治理": S-EXCH-11-websocket-market-hub.md
-  - "Token 发行平台：毕业、分账与返佣提现": S-EXCH-12-token-launch-rebate.md
-  - "CEX 端到端交易系统架构（45 分钟白板）": S-EXCH-13-cex-end-to-end-architecture.md
-  - "Web3 交易所全栈架构（链上 DEX + 链下 Go）": S-EXCH-14-web3-exchange-fullstack-architecture.md
-  - "交易所清结算、对账与高可用架构": S-EXCH-15-settlement-ha-disaster-recovery.md
-  - "永续合约撮合与仓位引擎架构": S-EXCH-16-perpetual-matching-position.md
-  - "Go 可运行确定性撮合引擎：价格时间优先与订单语义": S-EXCH-17-runnable-deterministic-matching-engine.md
-  - "撮合 WAL、快照与确定性回放：崩溃一致性实战": S-EXCH-18-wal-snapshot-replay.md
-  - "行情序号、快照桥接与 Gap Recovery": S-EXCH-19-market-data-sequence-gap-recovery.md
-  - "FIX Session：序号、Resend、Gap Fill 与断线恢复": S-EXCH-20-fix-session-sequence-recovery.md
-  - "STP 自成交防护：撮合语义、账户边界与监控合规": S-EXCH-21-self-trade-prevention-surveillance.md
-  - "集合竞价与撮合性能验证：清算价、分配和 Benchmark": S-EXCH-22-call-auction-performance-validation.md
+  - "CEX 撮合与订单簿": S-EXCH-01-cex-matching-engine.md
+  - "充值 / 提现 / 钱包体系": S-EXCH-02-deposit-withdraw-wallet.md
+  - "账户与复式记账": S-EXCH-03-account-ledger.md
+  - "保证金 / 强平 / 资金费率": S-EXCH-04-futures-margin-liquidation.md
+  - "风控 / AML / 对账": S-EXCH-05-risk-reconciliation.md
+  - "DEX AMM 与流动性池": S-EXCH-06-dex-amm-liquidity.md
+  - "DEX 聚合 / 滑点 / Gas": S-EXCH-07-aggregator-slippage.md
+  - "MEV / 抢跑 / 三明治": S-EXCH-08-mev-sandwich.md
+  - "CeDeFi 混合架构": S-EXCH-09-hybrid-cex-dex.md
+  - "链上成交与 K 线聚合": S-EXCH-10-kline-event-aggregation.md
+  - "WebSocket 行情 Hub": S-EXCH-11-websocket-market-hub.md
+  - "Token 发行 / 分账 / 返佣": S-EXCH-12-token-launch-rebate.md
+  - "CEX 端到端架构白板": S-EXCH-13-cex-end-to-end-architecture.md
+  - "Web3 交易所全栈架构": S-EXCH-14-web3-exchange-fullstack-architecture.md
+  - "清结算 / 对账 / 高可用": S-EXCH-15-settlement-ha-disaster-recovery.md
+  - "永续撮合与仓位引擎": S-EXCH-16-perpetual-matching-position.md
+  - "Go 确定性撮合引擎": S-EXCH-17-runnable-deterministic-matching-engine.md
+  - "撮合 WAL / 快照 / 回放": S-EXCH-18-wal-snapshot-replay.md
+  - "行情序号与 Gap Recovery": S-EXCH-19-market-data-sequence-gap-recovery.md
+  - "FIX 序号与断线恢复": S-EXCH-20-fix-session-sequence-recovery.md
+  - "STP 自成交防护与监控": S-EXCH-21-self-trade-prevention-surveillance.md
+  - "集合竞价与性能验证": S-EXCH-22-call-auction-performance-validation.md

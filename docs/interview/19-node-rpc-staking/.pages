@@ -2,13 +2,13 @@ title: 19 节点、RPC 与 Staking
 collapse_single_pages: false
 nav:
   - index.md
-  - "Ethereum EL/CL、Full/Archive Node 与同步模式": S-NODE-01-ethereum-node-architecture-sync.md
-  - "RPC 高可用：多 Provider、Quorum、Hedging 与缓存": S-NODE-02-rpc-ha-quorum-hedging-cache.md
-  - "Validator、Staking、Slashing 与密钥生命周期": S-NODE-03-validator-staking-slashing-keys.md
-  - "链上数据平台：Backfill、实时流、Trace 与 Schema": S-NODE-04-chain-data-platform.md
-  - "Relayer 与交易管理器：Nonce、Fee、Replacement、Finality": S-NODE-05-relayer-transaction-manager.md
-  - "节点运维：升级、快照、Pruning、监控与 Runbook": S-NODE-06-node-operations-runbook.md
-  - "Canonical Backfill + Realtime Merge 与 Reorg 提交协议": S-NODE-07-canonical-backfill-realtime-merge.md
-  - "Trace、State Diff、版本化 Decoder 与链数据质量": S-NODE-08-trace-state-diff-versioned-decoder-quality.md
-  - "非 EVM 在线 SDK：提交、确认、故障注入与升级兼容": S-NODE-09-non-evm-online-sdk-fault-injection.md
-  - "链数据列存：ClickHouse 建模、Reorg 与 Lakehouse 分层": S-NODE-10-chain-data-clickhouse-lakehouse.md
+  - "Ethereum EL / CL 与同步": S-NODE-01-ethereum-node-architecture-sync.md
+  - "RPC HA / Quorum / Hedging": S-NODE-02-rpc-ha-quorum-hedging-cache.md
+  - "Validator / Slashing / 密钥": S-NODE-03-validator-staking-slashing-keys.md
+  - "链数据 Backfill / Trace / Schema": S-NODE-04-chain-data-platform.md
+  - "Relayer Nonce / Fee / Finality": S-NODE-05-relayer-transaction-manager.md
+  - "节点升级 / 快照 / Pruning": S-NODE-06-node-operations-runbook.md
+  - "Backfill + Realtime 与 Reorg": S-NODE-07-canonical-backfill-realtime-merge.md
+  - "Trace / State Diff / Decoder": S-NODE-08-trace-state-diff-versioned-decoder-quality.md
+  - "非 EVM SDK 故障注入与兼容": S-NODE-09-non-evm-online-sdk-fault-injection.md
+  - "ClickHouse / Reorg / Lakehouse": S-NODE-10-chain-data-clickhouse-lakehouse.md
