@@ -29,15 +29,18 @@ sources:
 ```mermaid
 flowchart TB
   Client[客户端] -->|Idempotency-Key| API[API 网关]
-  API --> Check{Redis 已处理?}
+  API --> Check{已完成结果缓存命中?}
   Check -->|是| Return[返回首次结果]
   Check -->|否| Svc[业务服务]
-  Svc --> TX[事务]
-  TX --> DB[(唯一索引)]
-  TX --> Redis2[SET key result EX 24h]
+  Svc --> TX[本地数据库事务]
+  TX --> DB[(业务表 + 幂等记录 + 唯一索引)]
+  DB -->|提交后回填/失效可重试| Cache[(Redis 热结果缓存)]
   MQ[MQ 消费者] --> Dedup[去重表 biz_id]
   Dedup --> Svc
 ```
+
+Redis 缓存不属于数据库本地事务。缓存写失败只影响加速路径，不能改变已经提交的业务事实；
+后续请求仍应回源持久幂等记录，并通过重试或失效机制修复缓存。
 
 **三层幂等策略**
 

@@ -9,7 +9,7 @@ tags: [observability, cost, latency, caching, llmops]
 status: published
 code_refs: []
 sources:
-  - https://opentelemetry.io/docs/specs/semconv/gen-ai/
+  - https://github.com/open-telemetry/semantic-conventions-genai
   - https://langfuse.com/docs
   - https://platform.openai.com/docs/guides/production-best-practices
 ---
@@ -65,7 +65,9 @@ span.SetAttributes(
 )
 ```
 
-GenAI semantic conventions 仍在演进，属性名和稳定性应锁定到项目采用的 semconv/instrumentation 版本；prompt、tool arguments/results 可能含敏感信息，默认不记录正文。
+GenAI semantic conventions 已迁移到 OpenTelemetry 的独立仓库，仍在持续演进；属性名和稳定性
+应锁定到项目采用的 semconv/instrumentation 版本。prompt、tool arguments/results 可能含敏感
+信息，默认不记录正文。
 
 **成本优化手段**
 
@@ -130,5 +132,5 @@ tokenCounter.Add(ctx, int64(tokens), metric.WithAttributes(
 
 ## 延伸阅读
 
-- [OTel GenAI SemConv](https://opentelemetry.io/docs/specs/semconv/gen-ai/)
+- [OpenTelemetry GenAI Semantic Conventions](https://github.com/open-telemetry/semantic-conventions-genai)
 - [OpenAI Production Best Practices](https://platform.openai.com/docs/guides/production-best-practices)
