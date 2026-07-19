@@ -304,7 +304,7 @@ P 的 `runq` 是 **长度 256 的环形数组**，用 `runqhead` / `runqtail` �
 4. **顺序打乱**：仅当 **`randomizeScheduler`** 为真时执行（当前实现中 **`randomizeScheduler = raceenabled`**，即 **`-race` 检测构建** 才会 Fisher-Yates 洗牌）；**普通生产构建通常不打乱**。
 
 ```mermaid
-flowchart TB
+flowchart LR
   subgraph Before[本地 runq 已满 256 个 G]
     direction LR
     H[runqhead] --> F1[G0 最老]
@@ -314,6 +314,18 @@ flowchart TB
     B1 --> B2[G128 ... 较新]
     B2 --> T[runqtail]
   end
+  Moved["前半 128 个 + 新 G"]
+  subgraph After[操作后]
+    LocalKeep["本地保留后半 128 个<br/>靠近 tail"]
+    GlobalBatch["全局队列收到 129 个 G"]
+  end
+  Before -->|runqputslow| Moved
+  Moved --> GlobalBatch
+  Before --> LocalKeep
+```
+
+```mermaid
+flowchart TB
   subgraph Action[runqputslow]
     A1["n = (t-h)/2 = 128"]
     A2["batch[0..127] = runq[h..h+127] 前半段"]
@@ -321,13 +333,10 @@ flowchart TB
     A4["batch[128] = 触发溢出的新 G"]
     A5["-race 时 Fisher-Yates 洗牌 batch"]
     A6["schedlink 串成链表 → globrunqputbatch"]
+    A1 --> A2 --> A3 --> A4 --> A5 --> A6
   end
-  subgraph After[操作后]
-    LocalKeep["本地保留后半 128 个 靠近 tail"]
-    GlobalBatch["全局队列收到 129 个 G 的 batch"]
-  end
-  Before --> Action
-  Action --> After
+  A3 --> LocalKeep["本地保留后半 128 个"]
+  A6 --> GlobalBatch["全局队列收到 129 个 G"]
 ```
 
 **源码伪逻辑**（对应 `runqputslow`）：

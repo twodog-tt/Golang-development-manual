@@ -35,6 +35,8 @@ sources:
 
 ### 库归属（交易所）
 
+#### 订单与账务：各自持有权威库
+
 ```mermaid
 flowchart TB
   subgraph order_db
@@ -45,6 +47,16 @@ flowchart TB
     Journal[journal_entries]
     Balance[balance_snapshot]
   end
+  OMS[order-svc] --> order_db
+  ME[matching-svc] -->|TradeEvent MQ| Ledger[ledger-svc]
+  Ledger --> ledger_db
+  ME -.->|不写| ledger_db
+```
+
+#### 钱包与索引：事件连接上下文
+
+```mermaid
+flowchart LR
   subgraph wallet_db
     Withdraw[withdrawals]
     ChainTx[chain_tx]
@@ -53,10 +65,8 @@ flowchart TB
     Cursor[block_cursor]
     Events[chain_events]
   end
-  ME[matching-svc] -->|TradeEvent MQ| Ledger[ledger-svc]
-  ME -.->|不写| ledger_db
   Wallet[wallet-svc] --> wallet_db
-  Wallet -->|DepositEvent| Ledger
+  Wallet -->|DepositEvent| Ledger[ledger-svc]
   Idx[indexer-svc] --> indexer_db
   Idx -->|SwapEvent| Kline[kline-svc]
 ```

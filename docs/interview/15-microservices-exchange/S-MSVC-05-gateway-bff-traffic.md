@@ -30,12 +30,13 @@ sources:
 
 ### 分层架构
 
+#### App / Web 聚合链路
+
 ```mermaid
 flowchart TB
   subgraph Clients
     App[Mobile App]
     Web[Web]
-    APIKey[Open API HMAC]
   end
   subgraph Edge[边缘]
     WAF[WAF / DDoS]
@@ -43,7 +44,6 @@ flowchart TB
   end
   subgraph BFFLayer[BFF 层 Go]
     AppBFF[app-bff]
-    OpenBFF[open-api-bff]
   end
   subgraph Services[领域服务]
     Order[order-svc]
@@ -53,12 +53,23 @@ flowchart TB
   end
   App --> WAF --> GW --> AppBFF
   Web --> WAF --> GW --> AppBFF
-  APIKey --> WAF --> GW --> OpenBFF
   AppBFF --> Order
   AppBFF --> Market
-  OpenBFF --> Order
   AppBFF --> Wallet
   AppBFF --> Idx
+```
+
+#### Open API 独立认证链路
+
+```mermaid
+flowchart LR
+  APIKey[Open API HMAC]
+  WAF[WAF / DDoS]
+  GW[API Gateway]
+  OpenBFF[open-api-bff]
+  Order[order-svc]
+
+  APIKey --> WAF --> GW --> OpenBFF --> Order
 ```
 
 ### 职责矩阵（交易所定制）

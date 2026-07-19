@@ -8,6 +8,8 @@
 >
 > 图中箭头表示学习与表达依赖，不表示线上系统只能按该拓扑部署。
 
+### 学习主干：Go 门槛 → Agent Platform
+
 ```mermaid
 flowchart LR
   subgraph A["主线 A：共享资深 Go 门槛（40 篇）"]
@@ -29,12 +31,26 @@ flowchart LR
     B6["版本 / OAuth2 / 多租户<br/>S-ARCH-15 · S-NET-04 · S-SOL-05"]
     B7["CDC / Flink / MQ / ES<br/>S-ARCH-21 · S-KAFKA-02 · S-RAB-01 · S-ES-03"]
     B1 --> B2
-    B1 --> B3
-    B3 --> B2
-    B4 --> B2
-    B2 --> B5
-    B5 --> B6
+    B1 --> B3 --> B2
+    B4 --> B2 --> B5 --> B6
     B7 --> B2
+  end
+
+  A5 --> B2
+  A6 --> B5
+  A4 --> B7
+```
+
+### 差异化证据 → 岗位出口
+
+```mermaid
+flowchart LR
+  subgraph Bridge["Agent 能力与生产证据的连接点"]
+    Workflow["Workflow / HITL"]
+    Guardrail["Guardrail / 安全"]
+    Data["CDC / Flink / MQ / ES"]
+    Platform["版本 / OAuth2 / 多租户"]
+    Architecture["SLO / 容量 / ADR"]
   end
 
   subgraph C["简历证据：Web3 / 交易 / 钱包"]
@@ -43,10 +59,8 @@ flowchart LR
     C3["Indexer / Reorg / 行情<br/>S-BC-05 · S-EXCH-10/11/19"]
     C4["订单 / 撮合 / WAL<br/>S-EXCH-01/17/18"]
     C5["账本 / 对账 / 风控<br/>S-EXCH-03/05/15"]
-    C1 --> C2
-    C2 --> C5
-    C3 --> C4
-    C4 --> C5
+    C1 --> C2 --> C5
+    C3 --> C4 --> C5
   end
 
   subgraph D["岗位深挖出口"]
@@ -55,16 +69,13 @@ flowchart LR
     D3["Staff / 后端架构师<br/>战略、迁移、组织影响"]
   end
 
-  A5 --> B2
-  A6 --> B5
-  A4 --> B7
-  B2 --> C1
-  B4 --> C2
-  B7 --> C3
-  B6 --> D1
+  Workflow --> C1
+  Guardrail --> C2
+  Data --> C3
+  Platform --> D1
   C5 --> D2
-  A6 --> D3
-  B7 --> D3
+  Architecture --> D3
+  Data --> D3
   C5 --> D3
 ```
 

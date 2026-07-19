@@ -33,6 +33,8 @@ sources:
 
 ### 限界上下文地图（CEX + DEX）
 
+#### CEX 上下文：交易事实扇出
+
 ```mermaid
 flowchart LR
   subgraph Trading[交易上下文]
@@ -48,6 +50,16 @@ flowchart LR
   subgraph Market[行情上下文]
     MD[Market Data]
   end
+  OMS -->|OHS 开放主机| ME
+  ME -->|发布语言 TradeEvent| Ledger
+  ME -->|发布语言| MD
+  Wallet -->|客户-供应商| Ledger
+```
+
+#### DEX 上下文：链事件与增长读模型
+
+```mermaid
+flowchart LR
   subgraph Chain[链上索引上下文]
     Idx[Indexer]
     Kline[K 线读模型]
@@ -56,10 +68,6 @@ flowchart LR
     Launch[Token 发行]
     Rebate[返佣]
   end
-  OMS -->|OHS 开放主机| ME
-  ME -->|发布语言 TradeEvent| Ledger
-  ME -->|发布语言| MD
-  Wallet -->|客户-供应商| Ledger
   Idx -->|发布语言 ChainEvent| Kline
   Idx -->|发布语言| Rebate
   Launch -->|ACL| Idx

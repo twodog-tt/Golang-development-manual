@@ -40,8 +40,10 @@ sources:
 
 ### 交易域在 CEX 中的位置
 
+#### 同步接单与可恢复撮合
+
 ```mermaid
-flowchart TB
+flowchart LR
   subgraph Ingress[接入 Go]
     API[交易 API / Open API]
     OMS[订单服务 OMS]
@@ -58,13 +60,20 @@ flowchart TB
     Match <--> OB
     OB --> Snap
   end
+  API --> OMS --> Risk --> Q
+```
+
+#### 成交事实异步扇出
+
+```mermaid
+flowchart LR
+  Match[撮合循环]
   subgraph Async[异步域]
     MQ[trade.matched / order.lifecycle]
     Ledger[账务过账]
     MD[行情聚合 Depth/Trade]
     WS[WebSocket Hub]
   end
-  API --> OMS --> Risk --> Q
   Match -->|TradeEvent| MQ
   MQ --> Ledger
   MQ --> MD --> WS

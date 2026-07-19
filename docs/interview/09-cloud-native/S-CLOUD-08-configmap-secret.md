@@ -30,7 +30,7 @@ sources:
 ```mermaid
 flowchart TB
   CM[ConfigMap / Secret] -->|env| Pod[Go Pod]
-  CM -->|volume mount| File[/etc/config/app.yaml]
+  CM -->|volume mount| File["/etc/config/app.yaml"]
   File -->|fsnotify| App[配置热更]
   Ext[External Secrets / Vault] --> Secret[K8s Secret]
   Secret --> Pod

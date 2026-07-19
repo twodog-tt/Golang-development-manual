@@ -101,3 +101,252 @@
   outline: 2px solid var(--md-accent-fg-color);
   outline-offset: 2px;
 }
+
+/* ── Mermaid 图表：正文预览、工具栏与全屏缩放查看器 ── */
+
+.diagram-viewer {
+  margin: 1.25rem 0;
+  overflow: hidden;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.45rem;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 0.15rem 0.55rem rgb(15 23 42 / 7%);
+}
+
+.diagram-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.45rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+}
+
+.diagram-toolbar__hint {
+  flex: 1;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.66rem;
+}
+
+.diagram-viewer--complex .diagram-toolbar__hint {
+  color: var(--md-accent-fg-color);
+  font-weight: 600;
+}
+
+.diagram-viewer--complex .diagram-toolbar__hint::before {
+  content: "复杂图 · ";
+}
+
+.diagram-button {
+  min-height: 1.65rem;
+  padding: 0.22rem 0.55rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.3rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font: inherit;
+  font-size: 0.64rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.diagram-button:hover:not(:disabled) {
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+
+.diagram-button:focus-visible,
+.diagram-stage:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+.diagram-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.diagram-stage {
+  position: relative;
+  overflow: auto;
+  padding: 0.8rem;
+  background: #fff;
+  cursor: zoom-in;
+  scrollbar-width: thin;
+}
+
+.diagram-stage > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.diagram-viewer--fallback .diagram-stage {
+  background: var(--md-code-bg-color);
+  cursor: text;
+}
+
+.diagram-viewer--fallback .diagram-stage pre.mermaid-source {
+  max-height: 28rem;
+  margin: 0;
+  overflow: auto;
+  white-space: pre;
+}
+
+.diagram-status {
+  padding: 0.35rem 0.55rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color--light);
+  font-size: 0.62rem;
+}
+
+.diagram-status[data-kind="warning"],
+.diagram-status[data-kind="error"] {
+  color: var(--md-typeset-color);
+  background: color-mix(in srgb, var(--md-code-bg-color) 82%, #f59e0b);
+}
+
+.diagram-dialog {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.diagram-dialog::backdrop {
+  background: rgb(2 6 23 / 72%);
+  backdrop-filter: blur(2px);
+}
+
+.diagram-dialog__shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+}
+
+.diagram-dialog__header {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3rem;
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+  box-shadow: 0 0.1rem 0.4rem rgb(15 23 42 / 10%);
+}
+
+.diagram-dialog__title {
+  flex: 1;
+  margin: 0;
+  overflow: hidden;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.diagram-dialog__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.diagram-dialog__scale {
+  min-width: 3.2rem;
+  color: var(--md-default-fg-color--light);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+.diagram-dialog__viewport {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgb(148 163 184 / 10%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(148 163 184 / 10%) 1px, transparent 1px),
+    #fff;
+  background-size: 1.2rem 1.2rem;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.diagram-dialog__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.diagram-dialog__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  height: max-content;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.diagram-dialog__canvas > svg {
+  display: block;
+}
+
+.diagram-dialog__canvas--source {
+  width: min(64rem, calc(100vw - 2rem));
+}
+
+.diagram-dialog__source {
+  max-height: calc(100dvh - 5rem);
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  border-radius: 0.4rem;
+  background: var(--md-code-bg-color);
+  color: var(--md-code-fg-color);
+  font-size: 0.68rem;
+  white-space: pre;
+  user-select: text;
+}
+
+@media screen and (max-width: 44.99em) {
+  .diagram-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .diagram-toolbar__hint {
+    flex-basis: 100%;
+  }
+
+  .diagram-button {
+    flex: 1;
+    min-height: 2rem;
+  }
+
+  .diagram-dialog__header {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .diagram-dialog__controls .diagram-button {
+    min-width: 2.4rem;
+  }
+
+  .diagram-dialog__title {
+    flex: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram-dialog__canvas {
+    will-change: auto;
+  }
+}

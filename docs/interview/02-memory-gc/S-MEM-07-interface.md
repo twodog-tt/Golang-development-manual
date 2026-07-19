@@ -41,7 +41,7 @@ itab  { inter *InterfaceType, _type *Type, hash uint32, fun [1]uintptr }
 ```mermaid
 flowchart LR
   Concrete[具体类型 T] -->|装箱| IF[iface/eface]
-  IF -->|方法调用| ITAB[itab.fun[i]]
+  IF -->|方法调用| ITAB["itab.fun[i]"]
   ITAB --> Fn[实际函数]
 ```
 

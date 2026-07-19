@@ -33,12 +33,13 @@ sources:
 
 ### G、M、P 关系总览
 
+#### 执行绑定：G 由持有 P 的 M 运行
+
 ```mermaid
-flowchart TB
+flowchart LR
   subgraph Goroutines[G — goroutine 任务]
     G1[G₁ runnable]
     G2[G₂ running]
-    G3[G₃ waiting]
   end
   subgraph Processors[P — 逻辑处理器 GOMAXPROCS]
     P0["P₀ runq[256] + mcache"]
@@ -47,19 +48,31 @@ flowchart TB
   subgraph Machines[M — OS 线程]
     M0[M₀ 绑定 P₀]
     M1[M₁ 绑定 P₁]
-    M2[M₂ 阻塞 syscall 无 P]
   end
-  GlobalQ[(全局 runq)]
-  Netpoll[netpoller 就绪队列]
 
   G1 --> P0
   G2 --> M0
+  P0 --> M0
+  P1 --> M1
+```
+
+#### 唤醒与补偿：netpoll、全局队列和 syscall
+
+```mermaid
+flowchart LR
+  G3[G₃ waiting]
+  Netpoll[netpoller 就绪队列]
+  GlobalQ[(全局 runq)]
+  subgraph Processors[P — 可接收 runnable G]
+    P0[P₀ 本地 runq]
+    P1[P₁ 本地 runq]
+  end
+  M2[M₂ 阻塞 syscall 无 P]
+
   G3 -.->|chan/net 就绪| Netpoll
   Netpoll --> GlobalQ
   GlobalQ --> P0
   GlobalQ --> P1
-  P0 --> M0
-  P1 --> M1
   P0 -.->|work steal| P1
   M2 -.->|exitsyscall 后| GlobalQ
 ```

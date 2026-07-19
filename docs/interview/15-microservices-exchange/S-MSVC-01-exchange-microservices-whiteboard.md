@@ -33,8 +33,10 @@ sources:
 
 ### 总览图
 
+#### CEX：同步交易热路径 + 异步事实流
+
 ```mermaid
-flowchart TB
+flowchart LR
   subgraph North[南北向]
     Client[App/Web/API Key]
     GW[API Gateway]
@@ -48,6 +50,32 @@ flowchart TB
     Market[market-svc]
     Risk[risk-svc]
   end
+  subgraph Infra[基础设施]
+    MQ[Kafka / RocketMQ]
+    Redis[(Redis)]
+    MySQL[(MySQL 分库)]
+    RPC[多链 RPC 池]
+  end
+  Client --> GW --> BFF
+  BFF --> OMS
+  BFF --> Market
+  BFF --> Wallet
+  OMS -->|gRPC 预检| Risk
+  OMS -->|预检通过| ME
+  ME -->|TradeEvent| MQ
+  MQ --> Ledger
+  MQ --> Market
+  Wallet --> RPC
+  Ledger --> MySQL
+  Wallet --> MySQL
+  Market --> Redis
+```
+
+#### DEX：链事件入口 + 异步读模型
+
+```mermaid
+flowchart LR
+  Client[App / Web] --> GW[API Gateway] --> BFF[BFF 聚合]
   subgraph DEX[DEX / Web3 微服务域]
     Idx[indexer-svc]
     Kline[kline-svc]
@@ -60,23 +88,17 @@ flowchart TB
     MySQL[(MySQL 分库)]
     RPC[多链 RPC 池]
   end
-  Client --> GW --> BFF
-  BFF --> OMS
-  BFF --> Market
   BFF --> Idx
-  OMS -->|gRPC 预检| Risk
-  OMS --> ME
-  ME -->|TradeEvent| MQ
-  MQ --> Ledger
-  MQ --> Market
-  Wallet --> RPC
+  BFF --> Launch
+  Idx --> RPC
   Idx --> MQ
   MQ --> Kline
   MQ --> Rebate
-  Ledger --> MySQL
-  Wallet --> MySQL
   Idx --> MySQL
-  Market --> Redis
+  Launch --> MySQL
+  Launch -->|发送交易| RPC
+  Rebate --> MySQL
+  Kline --> Redis
 ```
 
 ### 45 分钟时间盒

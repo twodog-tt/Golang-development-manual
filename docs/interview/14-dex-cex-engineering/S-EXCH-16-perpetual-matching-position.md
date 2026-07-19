@@ -49,8 +49,10 @@ sources:
 
 ### 端到端架构
 
+#### 下单、撮合与清算事实链
+
 ```mermaid
-flowchart TB
+flowchart LR
   subgraph Ingress[接入 Go]
     API[合约交易 API]
     Pre[下单预检]
@@ -66,24 +68,38 @@ flowchart TB
     Reserve[保证金 Reservation]
     Clear[Clearing / Position Engine]
     Ledger[复式账务]
-    Reserve --> Clear --> Ledger
+    Reserve -.->|冻结/保证金约束| Clear
+    Clear --> Ledger
   end
-  subgraph Async[派生与控制]
+  subgraph Event[可重放事实流]
     MQ[可重放 Fill 流]
-    MD[行情/标记价广播]
-    Risk[维持保证金扫描]
-    Liq[强平引擎]
   end
   API --> Pre
   Pre --> Reserve
   Pre -->|新单| Match
   Match -->|FillEvent matchSeq| MQ
   MQ --> Clear
-  MQ --> MD
-  Risk -->|强平/撤单| Pre
-  Liq -->|市价平仓单| Pre
-  Index[现货指数/标记价服务] --> Risk
+```
+
+#### 标记价、风险扫描与强平回路
+
+```mermaid
+flowchart LR
+  Index[现货指数/标记价服务]
+  MQ[可重放 Fill 流]
+  Clear[Clearing / Position Engine]
+  Risk[维持保证金扫描]
+  Liq[强平引擎]
+  Pre[下单预检]
+  MD[行情/标记价广播]
+
+  Index --> Risk
   Index --> MD
+  MQ --> Clear
+  MQ --> MD
+  Clear -->|仓位/权益投影| Risk
+  Risk -->|账户触发强平| Liq
+  Liq -->|市价平仓/撤单指令| Pre
 ```
 
 **设计要点**：

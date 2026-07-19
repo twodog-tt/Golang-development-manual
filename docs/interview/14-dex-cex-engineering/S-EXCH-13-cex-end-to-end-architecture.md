@@ -33,6 +33,8 @@ sources:
 
 ### 总览架构（三域 + 基础设施）
 
+#### 接入与交易热路径
+
 ```mermaid
 flowchart TB
   subgraph Client[客户端]
@@ -48,6 +50,18 @@ flowchart TB
     Risk[风控预检]
     Router[Symbol 路由]
     ME[撮合引擎 per symbol]
+  end
+  App --> GW --> Auth --> RL --> OMS
+  OMS --> Risk --> Router --> ME
+```
+
+#### 成交事实流与派生系统
+
+```mermaid
+flowchart LR
+  subgraph Trading[交易事实源]
+    OMS[订单服务 OMS]
+    ME[撮合引擎]
     WAL[撮合 WAL / Snapshot]
   end
   subgraph Fund[资金域 — 强审计]
@@ -57,18 +71,17 @@ flowchart TB
   end
   subgraph Market[行情域 — 高扇出]
     MD[Market Data 聚合]
-    WS[WebSocket Hub 集群]
+    WS[WebSocket Hub]
     Kline[K 线 Worker]
-    Depth[Depth 缓存 Redis]
+    Depth[Depth 缓存]
   end
-  subgraph Infra[基础设施]
+  subgraph Infra[存储与事件设施]
     MQ[Kafka / RocketMQ]
     DB[(MySQL 分库分表)]
     Cache[(Redis Cluster)]
     ES[(ES / ClickHouse 审计)]
   end
-  App --> GW --> Auth --> RL --> OMS
-  OMS --> Risk --> Router --> ME
+  OMS --> Cache
   ME --> WAL
   ME -->|TradeEvent / OrderUpdate| MQ
   MQ --> Ledger

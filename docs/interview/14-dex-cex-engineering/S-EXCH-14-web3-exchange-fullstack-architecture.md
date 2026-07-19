@@ -34,8 +34,10 @@ sources:
 
 ### 全栈分层
 
+#### 链上事件写入链路
+
 ```mermaid
-flowchart TB
+flowchart LR
   subgraph Chain[链上 EVM]
     Factory[Token Factory / Launchpad]
     Pool[AMM Pool / Router]
@@ -50,6 +52,24 @@ flowchart TB
     MQ[RabbitMQ / Kafka]
     Worker[事件 Worker 池]
   end
+  subgraph Store[链下事件与游标存储]
+    MySQL[(MySQL 业务库)]
+  end
+  Chain -->|Logs/Events| RPC --> Idx
+  Idx --> Reorg
+  Reorg -->|确认或回滚后的事件| MQ --> Worker
+  Worker --> MySQL
+  Factory -.->|TokenCreated| Idx
+  Pool -.->|Swap| Idx
+  Rebate -.->|Withdraw| Idx
+```
+
+#### 应用读模型与链上副作用
+
+```mermaid
+flowchart LR
+  Worker[事件 Worker 池]
+  RPC[多链 RPC 池]
   subgraph App[应用层 Go]
     API[Gin REST API]
     WS[WebSocket Hub]
@@ -58,16 +78,14 @@ flowchart TB
     RebateSvc[返佣 / 提现服务]
     Ledger[站内账务可选]
   end
-  subgraph Store[存储]
+  subgraph Store[读模型与业务存储]
     MySQL[(MySQL 业务库)]
     Redis[(Redis 缓存)]
     ES[(ES 搜索可选)]
   end
-  Chain -->|Logs/Events| RPC --> Idx
-  Idx --> Reorg
-  Idx --> MQ --> Worker
-  Worker --> MySQL
   Worker --> Kline
+  Worker --> Ledger
+  Worker --> ES
   Kline --> Redis
   API --> MySQL
   API --> Redis
@@ -75,9 +93,7 @@ flowchart TB
   Rank --> MySQL
   RebateSvc --> MySQL
   RebateSvc -->|提现 tx| RPC
-  Factory -.->|TokenCreated| Idx
-  Pool -.->|Swap| Idx
-  Rebate -.->|Withdraw| Idx
+  Ledger --> MySQL
 ```
 
 ### 核心事件与下游
