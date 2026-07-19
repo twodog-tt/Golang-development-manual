@@ -10,8 +10,9 @@
 !!! tip "从这里开始"
 
     [① 选择目标岗位](interview/_meta/role-priority-matrix.md) →
-    [② 查看简历定向 P0 图谱](interview/_meta/p0-knowledge-graph.md) →
-    [③ 开始模拟面试](mock-interview.md)
+    [② 完成 18 个高频锚点](high-frequency-roadmap.md) →
+    [③ 查看简历定向 P0 图谱](interview/_meta/p0-knowledge-graph.md) →
+    [④ 开始模拟面试](mock-interview.md)
 
     Web3 定向准备可直接进入 [交易所与钱包重点题单](resume-focus-web3.md)。
 
@@ -45,7 +46,8 @@
 | **4. 项目举证** | 用个人真实项目关联设计、代码、故障与取舍 | 明确本人职责、约束、指标和证据等级 |
 | **5. 模拟与回补** | 进行模拟面试，记录失分点 | 只回补暴露出的知识洞与错误表达 |
 
-辅助入口：[学习路线](learning-path-senior.md) ·
+辅助入口：[18 个高频锚点](high-frequency-roadmap.md) ·
+[学习路线](learning-path-senior.md) ·
 [P0 技术纠错审计](interview/_meta/technical-corrections-audit.md) ·
 [模拟面试](mock-interview.md)
 

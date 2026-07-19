@@ -1,6 +1,7 @@
 nav:
   - 首页: index.md
   - 学习路线: learning-path-senior.md
+  - 高频必背题单: high-frequency-roadmap.md
   - 模拟面试: mock-interview.md
 
   - 岗位与优先级:
@@ -19,4 +20,3 @@ nav:
   - 维护工具:
     - 题目撰写模板: interview/_meta/template
     - 习题质量审查: interview/_meta/quality-review
-
