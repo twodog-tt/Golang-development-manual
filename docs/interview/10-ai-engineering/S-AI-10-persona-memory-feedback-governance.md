@@ -18,21 +18,40 @@ sources:
 
 # Persona、分层 Memory 与反馈学习治理
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> Agent Memory 不是把所有历史对话塞回 prompt。我会区分 **Persona/策略配置、线程短期状态、
-> 长期事实与偏好、内容知识、反馈学习规则**，分别做 namespace、TTL、权限和版本控制。一次 run
-> 记录实际使用的 persona、memory snapshot、检索结果和 prompt 版本，才能复现。用户反馈先成为
-> candidate rule，经去重、证据聚合、风险检查和人工/策略批准后才启用；所谓 `66% confidence`
-> 只能是项目的业务门槛，不能表述成通用、校准过的模型置信度。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **短期 Memory**：thread/run 内消息、tool result、checkpoint；用于续跑，不等于永久知识。
-2. **长期 Memory**：跨线程的用户偏好、账户事实、经过批准的规则；按 tenant/bot/user/scene 隔离。
-3. **Persona**：目标、语气、语言、边界、合规和账号能力，是版本化配置，不应该由普通对话静默覆盖。
-4. **Context assembly**：按任务检索必要片段，进行权限过滤、排序、压缩和 token 预算分配，再构造 prompt。
-5. **Feedback learning**：记录证据 → 生成候选规则 → 验证/审批 → 灰度启用 → 监控效果 → 回滚或退役。
+!!! abstract "30 秒回答"
+
+    Agent Memory 不是把全部聊天历史塞进 prompt。我会分开版本化 Persona/Policy、线程短期状态、
+    长期事实与偏好、RAG 内容和反馈学习规则，并按 tenant/bot/user/scene 做 namespace、权限、
+    TTL 和来源治理。检索必须先做授权过滤再排序；一次 run 保存实际使用的版本和 memory snapshot。
+    用户反馈先成为 candidate，经证据聚合、审核和灰度后才可变成 active rule。
+
+**3 分钟展开**
+
+1. Thread/checkpoint 用于续跑；长期 memory 跨会话但会过期；账户余额和授权仍要实时查询权威系统。
+2. Persona 是目标、语气和边界的版本化配置，普通对话不能静默提升权限或覆盖合规策略。
+3. Context assembly 按权限、任务、freshness、来源、冲突和 token budget 选择片段；向量相似度只是候选信号。
+4. 反馈规则经历 candidate→approved→active→retired，保存阈值算法、证据和 policy version，
+   不能把模型自报 confidence 当校准概率。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | Memory、Context、RAG 不等价；授权过滤发生在检索前；高价值事实必须有权威来源和版本 |
+| 手画图 | `namespace + policy + thread + retrieval → context assembler → model → run snapshot`；反馈走独立规则状态机 |
+| 项目落点 | OctoAgentFlow 讲 Persona、thread state、memory namespace 和反馈规则；只陈述真实实现层级 |
+| 一个取舍 | 全量历史实现快但贵且污染；结构化 memory 可治理，却需要 schema、失效、删除和迁移机制 |
+
+**错误表达**
+
+- ❌ “向量库就是 Memory；top-k 相似就可以跨租户召回；66% confidence 是模型可信概率。”
+- ✅ “向量索引只是召回手段；权限、版本、来源和阈值定义必须由系统治理。”
+
+**自测追问**：用户说“以后都自动发布”能否写入 Persona？删除用户数据时缓存和向量索引怎么办？
 
 ## 10 分钟版（原理 + 图示）
 

@@ -17,15 +17,41 @@ sources:
 
 # Mutex、RWMutex 与 atomic 选型
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> **Mutex** 保护复合不变量；**RWMutex** 只在读占绝大多数且临界区短时可能获益。Go 的 RWMutex 在 writer 等待时会阻塞新的 reader，避免 writer 被持续新读者饿死，但会形成读延迟尖峰。`sync/atomic` 适合单变量状态，不能自动保护多字段不变量。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **是什么**：Mutex 二元锁；RWMutex 多读单写；atomic 包提供顺序一致的原子 Load/Store/Add/Swap/CAS 等操作，底层不都等同于 CAS。
-2. **为什么**：保护共享结构；读多场景减少竞争；热点计数避免锁。
-3. **怎么做**：Mutex/RWMutex 不可升级、不可重入；Go 1.19+ 可用 `atomic.Int64`、`atomic.Pointer[T]` 等类型；任何选型都要用 benchmark 和 mutex/block profile 验证。
+!!! abstract "30 秒回答"
+
+    我按“不变量的范围”选同步原语：复合状态优先用 `Mutex`；`RWMutex` 只在读远多于写且读
+    临界区很短时才可能更优；`sync/atomic` 适合单个计数、标志或不可变快照引用。Go 的 atomic
+    操作具有顺序一致语义，但多个原子变量并不会自动组成一个原子业务事务，最终仍要用基准和
+    mutex/block profile 验证选型。
+
+**3 分钟展开**
+
+1. `Mutex` 适合保护 map、slice 和多字段约束，重点是缩短临界区，不能在持锁时做 RPC。
+2. `RWMutex` 在 writer 等待时会阻止新的 reader；它缓解 writer 被持续新读者饿死，但长读仍
+   会造成 writer 和后续 reader 排队。
+3. atomic 的 Load/Store/Add/Swap/CAS 适合单变量状态；check-then-act 必须放进锁或正确的 CAS
+   循环。
+4. `atomic.Value` 适合发布不可变配置快照；首次 Store 后具体类型要一致，首次使用后不能复制。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 先定义被保护的不变量；锁内不做慢 IO；单变量原子性不等于多字段一致性 |
+| 手画图 | `readers ─RLock→ snapshot` 与 `writer ─Lock→ replace`，再画一条 `atomic.Pointer → immutable config` |
+| 项目落点 | 风控/Agent 规则用不可变快照原子发布；订单、余额或返佣等复合状态仍放数据库事务或锁内 |
+| 一个取舍 | atomic 减少热点锁竞争，但可读性和正确性证明更难；低竞争路径优先清晰的 Mutex |
+
+**错误表达**
+
+- ❌ “RWMutex 一定比 Mutex 快；用了 atomic 就是 lock-free，而且多字段天然一致。”
+- ✅ “是否更快取决于读写比例和临界区；atomic 只保证相应原子操作及其内存序语义。”
+
+**自测追问**：为什么不支持读锁升级写锁？`atomic.Value` 中的对象如果发布后继续被修改会怎样？
 
 ## 10 分钟版（原理 + 图示）
 

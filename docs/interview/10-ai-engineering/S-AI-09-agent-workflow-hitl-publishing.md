@@ -18,25 +18,40 @@ sources:
 
 # Agent 工作流、Human-in-the-loop 与可靠发布控制面
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> 生产 Agent 要把 **模型生成** 与 **外部副作用** 分开：模型可以提出 draft/action
-> proposal，但审批、权限、幂等、重试和发布必须由持久化状态机控制。Review Queue 保存待审批的
-> 不可变提案，Execution Queue 只接收已经批准且策略仍有效的执行任务；审批必须绑定 proposal
-> hash、policy/version 和 reviewer，内容被编辑后原审批失效。进程崩溃或发布超时后，从 checkpoint
-> 和外部事实恢复，不能让模型“从头想一遍”后盲目重发。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **决策面**：LLM 生成候选内容或 tool proposal；Guardrail 计算风险等级，决定自动放行、人工审批或拒绝。
-2. **控制面**：`draft → pending_review → approved → ready_to_execute → executing → succeeded/failed/unknown`，
-   每次转换都有 actor、版本、原因和审计记录。
-3. **执行面**：worker 原子 claim 任务，使用 lease/fencing 防并发执行；调用外部平台时带内部
-   idempotency key，并保存 request/response/provider object ID。
-4. **恢复面**：超时是 `unknown`，先按 provider ID、业务唯一键或内容指纹查询外部事实，再决定重试、
-   补偿或转人工。
+!!! abstract "30 秒回答"
 
-框架可以提供 pause/resume、checkpoint 和 tool approval，但 **业务授权与副作用幂等仍属于应用层**。
+    生产 Agent 必须把模型生成和外部副作用分开。模型生成不可变 proposal，审批绑定 proposal
+    hash、策略版本和 reviewer；批准后由持久化 execution job 执行。worker 用 lease 加 fencing
+    claim 任务，外部调用保存 intent key 和 receipt；网络超时进入 `UNKNOWN`，先查询 provider
+    事实再决定重试或人工恢复，不能让模型从头规划并盲目重发。
+
+**3 分钟展开**
+
+1. 决策面产生 draft/proposal 和风险等级；控制面维护 draft→review→approved→executing→终态。
+2. Review Queue 管“人批准了什么”，Execution Queue 管“机器执行什么”，两者不能共用一个布尔状态。
+3. 审批后执行前重新检查内容版本、权限、OAuth scope、配额和 cooldown；编辑内容使旧审批失效。
+4. checkpoint 解决流程恢复，不是外部事实源；HTTP 200/timeout 都要结合 provider object ID、
+   查询接口和 receipt 对账。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 审批对象不可静默变化；过期 worker 不能提交状态；UNKNOWN 必须 reconcile 后再重试 |
+| 手画图 | `proposal(hash) → review → execution job(lease+epoch) → provider → receipt/UNKNOWN → reconcile` |
+| 项目落点 | OctoAgentFlow 讲工作流和 HITL 的设计/原型边界；不要把 checkpoint 设计表述成生产 exactly-once |
+| 一个取舍 | 自建 Go 状态机语义清晰；通用工作流引擎恢复能力成熟，但引入新运行时和版本治理 |
+
+**错误表达**
+
+- ❌ “加一个 `approved=true` 就完成 HITL；发布超时直接重试即可。”
+- ✅ “审批必须绑定不可变 proposal；模糊成功先对账，只有证明安全时才自动重试。”
+
+**自测追问**：lease 已过期为什么还需要 fencing token？reviewer 编辑内容后如何处理旧审批？
 
 ## 10 分钟版（原理 + 图示）
 

@@ -14,15 +14,41 @@ sources:
 
 # 消息队列：至少一次、恰好一次、顺序性
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> 分布式 MQ **最常见的是至少一次（At-Least-Once）**。Kafka EOS 能覆盖 Kafka topic 之间的 read-process-write 事务，但不会自动把外部数据库、支付 API 等副作用纳入同一事务；业务上的“效果恰好一次”仍需本地事务、幂等键、outbox/inbox 与状态机。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **是什么**：At-Most-Once 可能丢；At-Least-Once 可能重复；Exactly-Once 语义复杂，多为「效果上的恰好一次」。
-2. **为什么**：网络、 rebalance、进程 crash 都会导致重复或丢失；顺序与吞吐矛盾。
-3. **怎么做**：默认 At-Least-Once + 业务幂等；Kafka 幂等 producer + 事务；顺序消息用相同 partition key；失败进 DLQ 人工/自动重试。
+!!! abstract "30 秒回答"
+
+    分布式 MQ 最常见的是至少一次：不丢的代价是故障恢复、重试和 rebalance 时可能重复。
+    Kafka 的幂等 producer 和事务能在明确的 Kafka read-process-write 边界提供 EOS，但不会把
+    外部数据库、支付 API 或链上交易自动纳入事务。业务上的 effect-once 仍依赖 inbox/outbox、
+    本地事务、业务幂等和状态机；顺序通常只保证在同一分区或同一业务 key 内。
+
+**3 分钟展开**
+
+1. At-most-once 先提交后处理，可能丢；at-least-once 先处理后提交，可能重复。
+2. Kafka producer 幂等消除 broker 重试导致的重复；事务可原子提交 Kafka 写入和消费 offset，
+   但外部副作用仍在边界外。
+3. 需要同一实体顺序时用稳定 partition key，并在事件中带 version/sequence；全局顺序意味着
+   单分区或集中排序，吞吐和可用性代价很高。
+4. 重试要分瞬时错误与 poison message，配置退避、上限、DLQ、告警和可审计回放。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 至少一次必然要求消费幂等；顺序范围必须明确；exactly-once 必须声明提交边界 |
+| 手画图 | `producer → partition(key) → consumer → local TX(inbox+business) → commit offset` |
+| 项目落点 | 链事件到 K 线/风控流水按 token、account 或 order 分区；消费者稳定 ID upsert 并检测 sequence gap |
+| 一个取舍 | 增加分区提高吞吐，却削弱跨 key 顺序并增加 rebalance、热点和运维复杂度 |
+
+**错误表达**
+
+- ❌ “Kafka 开启 EOS 后数据库不会重复写；同一个 topic 天然全局有序。”
+- ✅ “EOS 只覆盖参与 Kafka 事务的边界；Kafka 的核心顺序保证是分区内顺序。”
+
+**自测追问**：先处理还是先提交 offset？DLQ 为什么不能只是“把失败消息挪走”？
 
 ## 10 分钟版（原理 + 图示）
 

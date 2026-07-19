@@ -18,15 +18,41 @@ sources:
 
 # Goroutine 泄漏成因与 pprof 排查
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> **Goroutine 泄漏** = 本应结束的 goroutine 长期无法退出。常见根因是 channel 无对端、缺取消路径、锁/WaitGroup 永久等待、网络调用无 deadline 或后台 ticker 循环没有 stop 信号。Go 1.26 提供实验性 `goroutineleak` profile，但它只能检测一类可证明无法再唤醒的阻塞泄漏，不替代生命周期设计、常规 goroutine profile 与指标趋势。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **是什么**：本应在请求结束后退出的 G 仍阻塞或空转，进程级累积。
-2. **为什么**：资源上限（内存、调度）、FD、下游连接池耗尽。
-3. **怎么做**：生命周期绑定 ctx；避免无缓冲永久等；超时；压测后对比 `runtime.NumGoroutine()`。
+!!! abstract "30 秒回答"
+
+    Goroutine 泄漏是本应结束的 goroutine 因无对端 channel、缺少取消、永久锁等待、无 deadline
+    网络调用或后台循环而长期存活。判断不能只看某一时刻的 goroutine 数，而要结合流量归一化
+    趋势、两次 profile 的新增栈和业务生命周期。修复的核心是明确 owner、退出信号和等待协议，
+    不是依赖 GC 或 `recover`。
+
+**3 分钟展开**
+
+1. 先看 `go_goroutines` 是否在相似负载下持续上升且不回落，再按版本/接口/租户关联变化。
+2. 受保护地采集 goroutine profile，间隔一段压测或真实流量后对比，按 `chan send/receive`、
+   `select`、`Mutex.Lock`、网络调用等栈聚类。
+3. 回到创建点检查：谁启动、谁取消、谁 close、谁 wait、下游是否有 deadline。
+4. 修复后做重复启停/压测和泄漏测试；Go 1.26 实验性 leak profile 只能补充识别一类可证明永久
+   阻塞的 goroutine，不能替代普通 profile 和指标。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 每个 goroutine 都要有 owner；每条阻塞路径都要有退出条件；profile 必须结合趋势和业务语义 |
+| 手画图 | `start → work loop → ctx.Done/chan close → return → Wait`，把缺失的退出边画红叉 |
+| 项目落点 | WebSocket/indexer 每连接或每订阅 goroutine：断线 cancel、关闭资源并等待退出；只讲真实排障证据 |
+| 一个取舍 | 每连接 goroutine 简单清晰，但连接规模大时资源线性增长；事件循环/worker 池更省资源但实现更复杂 |
+
+**错误表达**
+
+- ❌ “goroutine 数多就是泄漏；pprof 开销很低，可以把调试端点直接暴露公网。”
+- ✅ “泄漏由生命周期定义；profile 采集要鉴权、限频，并结合基线和流量判断。”
+
+**自测追问**：正常的高并发阻塞与泄漏怎么区分？如何定位 goroutine 的创建点和无法退出的等待点？
 
 ## 10 分钟版（原理 + 图示）
 

@@ -107,7 +107,12 @@ def main() -> None:
         if not fm.get("sources"):
             errors.append(f"{qid} 缺少 sources，不能标记 source_anchored")
         text = path.read_text(encoding="utf-8")
-        if "## 30 秒版" not in text:
+        has_legacy_opening = "## 30 秒版" in text
+        has_oral_card_opening = (
+            "## 口述卡（高频必背）" in text
+            and '!!! abstract "30 秒回答"' in text
+        )
+        if not (has_legacy_opening or has_oral_card_opening):
             errors.append(f"{qid} 缺少 30 秒版")
         if "## 追问链" not in text:
             errors.append(f"{qid} 缺少追问链")

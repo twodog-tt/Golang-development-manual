@@ -16,16 +16,39 @@ sources:
 
 # TCP 建连、队列、TIME_WAIT 与故障排查
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> TCP 建连要同时看半连接/SYN 处理、已完成但尚未被应用 accept 的队列，以及应用自身处理速度；`listen(backlog)` 不是唯一容量参数。`TIME_WAIT` 通常出现在主动关闭方，用于处理最后 ACK 丢失和隔离旧报文，不应见到就粗暴消灭。线上超时要按 DNS、connect、TLS、请求写入、首字节、读响应拆阶段，并结合重传、队列、FD、端口和应用指标定位。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **三次握手**：SYN → SYN-ACK → ACK，建立双方初始序列号和能力。
-2. **服务端队列**：Linux 分别维护未完成握手状态与已建立等待 accept 的队列，实际行为受 backlog、sysctl、syncookies 和负载影响。
-3. **四次关闭**：双方方向独立关闭；主动关闭、先发 FIN 的一侧通常在发送最终 ACK 后进入 TIME_WAIT。
-4. **重传**：可靠性来自序列号、ACK、重传和拥塞控制，不等于低延迟。
+!!! abstract "30 秒回答"
+
+    TCP 故障不能只看一个 timeout。建连要结合 SYN 处理、已完成握手但尚未 accept 的队列、
+    `listen(backlog)`、内核参数和应用 accept/处理速度；连接成功也不代表 TLS 和应用响应正常。
+    `TIME_WAIT` 通常在主动关闭方，用于重发最终 ACK 和隔离旧报文，数量多不等于故障，应先看
+    连接复用、临时端口、NAT/conntrack 和实际错误率。
+
+**3 分钟展开**
+
+1. 三次握手交换并确认双方初始序列号；Linux 未完成握手和等待 accept 的连接受不同机制约束。
+2. 把延迟拆成 DNS、connect、TLS、写请求、TTFB 和读响应，分别设置 timeout 和指标。
+3. 重传保证可靠性但增加时延；结合 RTT、重传、队列溢出、FD、端口和应用 P99 交叉定位。
+4. 大量短连接优先连接池与 keep-alive；不要为了减少 TIME_WAIT 先改危险复用参数。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | connect 成功不等于请求成功；backlog 不是唯一容量；TIME_WAIT 可能出现在任一主动关闭方 |
+| 手画图 | `SYN → SYN-ACK → ACK → accept queue → handler → FIN/ACK → TIME_WAIT` |
+| 项目落点 | RPC/WebSocket 网关分别记录 connect、TLS、首包和业务 P99，结合 `ss`、内核统计和抓包定位 |
+| 一个取舍 | 长连接减少握手和端口压力，但引入连接保活、负载均衡、重连风暴和资源治理 |
+
+**错误表达**
+
+- ❌ “backlog 就是半连接队列；TIME_WAIT 永远在客户端，调小就能提升性能。”
+- ✅ “现代 Linux 的 listen backlog 主要约束等待 accept 队列；TIME_WAIT 由主动关闭角色决定。”
+
+**自测追问**：为什么两次握手不够？TCP keepalive 与 HTTP keep-alive 有什么区别？
 
 ## 10 分钟版（原理 + 图示）
 

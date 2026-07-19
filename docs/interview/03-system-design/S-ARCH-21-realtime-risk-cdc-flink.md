@@ -19,22 +19,43 @@ sources:
 
 # 实时风控数据平台：CDC、Flink、ES 与可重放链路
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> 实时风控链路要把 **数据库事实、变更日志、流计算状态、在线索引和决策服务** 分层：
-> MySQL/PostgreSQL CDC 进入可保留日志，Flink 按业务 key 做乱序处理、特征聚合和 checkpoint，
-> 再以幂等 upsert/事务 sink 写 Redis、ES 或画像库，Go 风控服务读取带版本和 freshness 的特征。
-> Flink `EXACTLY_ONCE` 首先保证算子状态恢复一致，不自动保证外部系统端到端只写一次；必须结合
-> source offset、稳定 event ID、sink 事务/幂等和可重放原始日志。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **采集**：CDC 读取 binlog/WAL，先完成一致性 snapshot，再无缝切换到增量；事件携带 source
-   position、table/PK、op、schema version 和 event time。
-2. **传输**：Kafka 等日志保存原始变更，按账户/设备/订单等业务 key 分区；保留期覆盖故障恢复和回放窗口。
-3. **计算**：Flink 管理 keyed state、event time/watermark、late event、checkpoint/savepoint 和 backpressure。
-4. **落地**：在线特征用幂等版本写或支持 checkpoint commit 的 sink；ES 负责检索/画像，不充当资金或订单事实源。
-5. **服务**：Go API 在低延迟路径读取特征，校验 schema/model/rule version 与 freshness，超时按风险策略降级。
+!!! abstract "30 秒回答"
+
+    实时风控链路要把 OLTP 事实、CDC 日志、Flink 状态、在线特征和 ES 检索投影分层。CDC 用
+    一致性 snapshot 与 source position 衔接增量；Flink 处理 keyed state、event time、watermark
+    和 checkpoint；sink 用稳定 event/document ID、版本或事务提交。Flink exactly-once 首先是
+    故障恢复后每条事件只影响托管状态一次，不自动保证 ES 或外部动作端到端只发生一次。
+
+**3 分钟展开**
+
+1. 事件契约携带稳定 event ID、source position、主键、op、schema version 和 event time；
+   `before/after` 完整性取决于数据库与 connector 配置。
+2. Kafka/raw lake 保留可重放事实；Flink 用 watermark 处理乱序和迟到，watermark 是进度估计，
+   不是“之后绝无迟到”。
+3. 端到端 effect-once 需要可重放 source、checkpointed offset、确定性状态和事务或幂等 sink；
+   ES bulk 还必须逐 item 检查结果。
+4. 升级先回放到 shadow feature/index，对数量、内容、延迟和决策结果做对账后切 alias；回放数据
+   不能再次触发封禁、通知、扣款等命令。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | OLTP/领域事件是事实，ES 是可重建投影；event ID 必须稳定；回放数据与外部命令隔离 |
+| 手画图 | `OLTP → CDC → Kafka/raw → Flink → Redis/ES → Go risk API`，旁边画 `replay → shadow → compare → switch` |
+| 项目落点 | 出行平台实时风控可讲真实数据契约、Go 服务、SLO 和排障边界；没写过 Flink 算子就不声称内核开发 |
+| 一个取舍 | CDC 适合通用数据投影；领域 outbox 更能表达业务意图，但需要业务代码改造和 relay 运维 |
+
+**错误表达**
+
+- ❌ “开启 Flink EXACTLY_ONCE 后 ES 永不重复；watermark 到了就不会再有迟到事件。”
+- ✅ “checkpoint 与 sink 语义必须分别说明；watermark 是可配置的事件时间进度估计。”
+
+**自测追问**：snapshot 与增量如何避免中间漏数？为什么回放只能重建数据状态，不能重放外部命令？
 
 ## 10 分钟版（原理 + 图示）
 

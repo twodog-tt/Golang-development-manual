@@ -19,15 +19,41 @@ sources:
 
 # GMP 模型与 1.14 以来抢占式调度
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> Go 调度器 = **G（goroutine 任务）+ M（OS 线程）+ P（逻辑处理器 / 本地 runq）** 的 M:N 模型：海量 G 复用一组 M，真正执行 Go 代码的并行上限由 **`GOMAXPROCS` = 活跃 P 数**决定。Go 1.14+ 引入异步抢占，改善无函数调用的 CPU 热循环长期占用 P；Unix 类系统常用信号实现，但这是平台相关的 runtime 细节。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **是什么**：GMP 是 Go runtime 的三层调度抽象。G 是用户态协程（~2KB 起栈，见 [S-CONC-03](./S-CONC-03-goroutine-stack.md)）；M 对应 OS 线程；P 是「工牌」——持有本地运行队列 `runq`（当前实现容量 256）、`mcache` 等资源，**无 P 的 M 不能执行 Go 用户代码**。
-2. **为什么**：线程切换走内核、栈 MB 级，无法承载百万连接；P 的本地队列 + work stealing 降低全局锁竞争，比单纯 G-M 模型更易扩展（详见 [S-CONC-02](./S-CONC-02-gmp-roles.md)）。
-3. **怎么做**：调度循环从 P 的 `runq` 取 G 执行；本地空则偷其他 P 或全局队列；阻塞 syscall 时 M 与 P 解绑、P 移交；网络 IO 走 netpoller 不占 P 忙等（[S-CONC-19](./S-CONC-19-netpoller.md)）；GC 与抢占 tick 触发重新调度。
+!!! abstract "30 秒回答"
+
+    Go 调度器是 G、M、P 组成的 M:N 模型：G 是 goroutine 任务，M 是 OS 线程，P 是执行
+    Go 代码所需的调度资源和并行槽位。活跃 P 数由 `GOMAXPROCS` 决定；本地队列、全局队列和
+    work stealing 分配 runnable G。阻塞系统调用时 M 可以与 P 解绑，Go 1.14 起的异步抢占则
+    改善了纯计算循环长期占用 P，但 Go 调度仍不是硬实时调度。
+
+**3 分钟展开**
+
+1. 先定义 G/M/P，强调“并发 goroutine 数”不等于“并行执行数”。
+2. 再讲调度路径：当前 P 本地 runq → 全局 runq → work stealing → netpoll/timer。
+3. G 因 channel、锁或网络等待会让出执行；同步 syscall/cgo 可能阻塞 M，runtime 会尽量把 P
+   交给其他 M。
+4. Go 1.14+ 可在异步安全点抢占长时间运行的 Go 代码；信号、runq 容量等属于版本和平台相关
+   的 runtime 实现，不是语言规范。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | M 执行普通 Go 代码需要 P；并行上限约为活跃 P 数；runnable 不等于 running |
+| 手画图 | `G → runq(P) → M+P 执行 → waiting/runnable`，旁边补 `syscall: M 阻塞、P handoff` |
+| 项目落点 | 用 Launchpad 类 DEX 的链上监听、API 或行情任务说明 IO 等待与 CPU 任务如何隔离；只引用实际 trace/指标 |
+| 一个取舍 | CPU 密集任务采用有界 worker 或进程隔离，换取稳定 P99，代价是排队和运维复杂度 |
+
+**错误表达**
+
+- ❌ “一个 P 就是一颗 CPU；Go 每 10ms 必然强制切换 goroutine。”
+- ✅ “P 是 runtime 的逻辑调度资源；抢占时机和实现随版本、平台变化，不提供硬实时或严格公平保证。”
+
+**自测追问**：`GOMAXPROCS=1` 是否还有并发？阻塞 syscall、网络 IO 和 cgo 分别怎样影响 M/P？
 
 ## 10 分钟版（原理 + 图示）
 

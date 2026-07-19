@@ -16,15 +16,39 @@ sources:
 
 # AI Agent 与 Function Calling
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> **Agent** 通常是模型、状态和工具执行器组成的受控循环；并不要求固定采用 ReAct。Function Calling / Tool Use 让模型提出结构化调用，但这些参数仍是 **不可信输入**，必须由 Go 服务做 schema、身份、权限和业务状态校验后才可执行。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **是什么**：模型不直接改数据库，而是声明要调用的函数及参数；宿主程序校验后执行并回传 `tool` 结果。
-2. **为什么**：弥补 LLM 不能访问实时数据、不能执行副作用；把 **确定性逻辑留在代码里**。
-3. **怎么做**：注册 tool schema → 模型提出 `tool_calls` → 宿主验证名称、参数、用户授权与幂等键 → 执行并返回经过裁剪的结果 → 继续循环；设置 max steps、总 deadline、token/成本预算和高风险审批。
+!!! abstract "30 秒回答"
+
+    Agent 是“模型 + 状态 + 受控工具执行器”的循环，不等于让模型直接操作系统。Function
+    Calling 只是让模型提出结构化 tool proposal，名称和参数仍是不可信输入；Go 宿主必须做
+    schema、身份、权限、业务状态、幂等和风险审批校验后才能执行。循环还要有 max steps、
+    总 deadline、token/成本预算和可审计 trace。
+
+**3 分钟展开**
+
+1. 注册最小、强类型的 tool schema，模型返回 tool call，宿主校验后执行，再把裁剪后的结果回传。
+2. schema 合法只代表结构合法，不代表当前用户有权退款、金额合理或资源状态允许。
+3. 写工具使用 intent key/状态机；高风险工具走 HITL；无依赖且无冲突的只读工具才能安全并行。
+4. 固定流程优先传统状态机或 DAG，只有步骤和工具选择确实需要非确定性决策时才引入 Agent。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 模型只能提议不能授权；工具参数始终不可信；副作用必须有幂等、预算和审计边界 |
+| 手画图 | `user → LLM proposal → policy/schema/authz → tool executor → result → LLM` |
+| 项目落点 | OctoAgentFlow 讲 tool registry、执行器、step budget 和 policy；按个人项目/原型证据表达 |
+| 一个取舍 | 单 Agent + 多工具易治理；多 Agent 可分工，但增加上下文漂移、延迟、成本和授权面 |
+
+**错误表达**
+
+- ❌ “模型输出符合 JSON Schema 就可以执行；用了 ReAct 才叫 Agent。”
+- ✅ “Schema 只是第一层校验；Agent 模式不要求固定推理提示，授权永远在确定性系统。”
+
+**自测追问**：并行 tool calls 的安全前提是什么？RAG 与 Agent、MCP 分别解决什么问题？
 
 ## 10 分钟版（原理 + 图示）
 

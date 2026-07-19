@@ -16,18 +16,40 @@ sources:
 
 # 错误契约、Wrapping 与 Panic 边界
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> Go 的 error 是 API 契约，不只是日志字符串。调用方需要分支处理的错误，应通过 sentinel、类型或稳定的分类码暴露，并用 `errors.Is/As` 判断；`fmt.Errorf("...: %w", err)` 保留 cause。`panic` 只用于无法继续的程序不变量或程序员错误，`recover` 只能放在 goroutine/request 等隔离边界，把故障转成失败响应并记录栈，不能把未知状态继续当成功执行。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **分类**：可重试、业务拒绝、调用方错误、依赖故障、内部 bug 的处理策略不同。
-2. **传播**：在边界增加有用上下文，但保留原始 cause；不要靠字符串匹配。
-3. **映射**：domain/service 层返回稳定错误语义，HTTP/gRPC/MQ adapter 再映射状态码、重试与 DLQ。
-4. **Panic 边界**：`recover` 只有在**同一 goroutine 的 deferred function 中直接调用**
-   才能截获正在展开的 panic；一个 goroutine 不能捕获另一个 goroutine 的 panic。每个独立
-   goroutine/request 边界都要自行决定 fail-fast 还是 recover 后结束当前工作单元。
+!!! abstract "30 秒回答"
+
+    Go 的 error 是 API 契约，不只是日志字符串。调用方需要分支处理的错误用稳定 sentinel、
+    自定义类型或领域码表达，包装时用 `%w` 保留 cause，再通过 `errors.Is/As` 判断。`panic`
+    只适合程序员错误或无法维持的不变量；`recover` 只能在同一 goroutine 的 defer 中生效，
+    应放在 request/worker 隔离边界，记录栈并让当前工作单元失败，不能恢复后返回成功。
+
+**3 分钟展开**
+
+1. 先按调用方动作分类：业务拒绝、参数错误、可重试依赖故障、取消/超时和内部 bug。
+2. repository/service 保留 cause 并增加 operation 上下文，transport adapter 再映射 HTTP/gRPC
+   状态、MQ retry 或 DLQ。
+3. 只有愿意把底层错误变成公开兼容契约时才 `%w` 暴露；否则转换成自己的领域错误。
+4. 日志由真正处理或丢弃错误的边界记录一次，使用低基数分类码做指标，敏感数据不进入 error。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 错误分类决定调用方动作；包装不能破坏 `Is/As`；panic 后当前工作单元不得假装成功 |
+| 手画图 | `repo cause → service classification → HTTP/gRPC/MQ mapping`；旁边画 `panic → boundary → fail closed` |
+| 项目落点 | 链 RPC/HSM/发布 API：区分临时不可用、策略拒绝和内部不一致，分别决定重试、拒绝与告警 |
+| 一个取舍 | 暴露底层 sentinel 方便调用方判断，却会把实现细节变成长期兼容承诺 |
+
+**错误表达**
+
+- ❌ “所有 error 都 `%w` 并每层打印；recover 后返回 nil，服务就不会崩。”
+- ✅ “只暴露稳定契约并在处理边界记录一次；recover 要结束当前工作单元并 fail closed。”
+
+**自测追问**：什么时候不用 `%w`？为什么一个 goroutine 不能 recover 另一个 goroutine 的 panic？
 
 ## 10 分钟版（原理 + 图示）
 

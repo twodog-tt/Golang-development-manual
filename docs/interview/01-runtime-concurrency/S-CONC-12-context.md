@@ -16,16 +16,39 @@ sources:
 
 # Context 树、取消传播与泄漏
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> **context** 在调用链传递取消、deadline 和请求域元数据；父取消向下传播，子取消不会反向取消父。`WithTimeout` 只有在下游实际监听 `Done` 或使用 `QueryContext/Do(req.WithContext)` 等 API 时才会停止工作。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **是什么**：从父 Context 派生出的调用树；接口提供 `Done/Err/Deadline/Value`，并可被
-   多个 goroutine 并发调用。不要把“派生后调用方不修改”误说成内部对象永远不可变。
-2. **为什么**：统一取消 HTTP/RPC/DB 子调用，避免孤儿 goroutine。
-3. **怎么做**：请求入口 `context.Background()` 或框架提供；派生 `WithCancel/WithTimeout/WithDeadline/WithValue`；下游 `select ctx.Done()`。
+!!! abstract "30 秒回答"
+
+    `context.Context` 用于在调用链中传递取消、deadline 和请求域元数据。父取消向子树传播，
+    子取消不会反向取消父；`CancelFunc` 只是发出取消并释放关联资源，不等待 goroutine 真正退出。
+    下游必须显式监听 `Done`，或使用 `QueryContext`、`NewRequestWithContext` 等支持 context 的
+    API，超时才会真正截断工作。
+
+**3 分钟展开**
+
+1. 从请求入口继承框架提供的 ctx，再逐层派生更短的 timeout/deadline，函数第一参数传递。
+2. `WithCancel/WithTimeout/WithDeadline` 返回的 cancel 应及时调用，避免 timer 和父子关系长期保留。
+3. `Value` 只放 request ID、trace 等请求域数据，key 使用私有类型；业务参数和 client 依赖显式传递。
+4. 真正需要脱离父请求的任务可用 `WithoutCancel`，但必须重新设置自己的 deadline、关闭和等待协议。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 取消只向下传播；取消是信号不是等待；超时必须被下游 API/代码消费 |
+| 手画图 | `request ctx → DB / RPC / chain RPC`，父节点 `cancel` 向下，子节点不反向 |
+| 项目落点 | API → 数据库 → 链 RPC 全程透传 ctx；对账/reconciler 使用服务级生命周期而不是请求 ctx |
+| 一个取舍 | 统一 deadline 能及时止损，但层层设置过短会造成无意义失败；要从端到端预算反推各阶段预算 |
+
+**错误表达**
+
+- ❌ “调用 `cancel()` 后所有子 goroutine 已经停止；把 client 放进 `ctx.Value` 比较方便。”
+- ✅ “cancel 只关闭取消信号；退出要由下游协作，并由 WaitGroup/errgroup 等机制等待。”
+
+**自测追问**：`Background`、`TODO`、`WithoutCancel` 的区别是什么？循环里为什么不应堆积大量 `defer cancel()`？
 
 ## 10 分钟版（原理 + 图示）
 

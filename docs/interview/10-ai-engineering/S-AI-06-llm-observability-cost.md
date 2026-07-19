@@ -16,15 +16,42 @@ sources:
 
 # LLM 可观测性、成本与延迟优化
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> LLM 服务要观测 **TTFT、总时延、tokens、成本、工具步数与质量指标**。缓存、模型路由、batch 和 streaming 都有适用边界；尤其 semantic cache 必须纳入 tenant、权限、prompt/model 版本与数据时效，不能只按向量相似度跨用户复用答案。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回高频必背题单](../../high-frequency-roadmap.md)
 
-1. **是什么**：在传统 RED 指标外，增加 token 级、生成级维度；LLMOps 平台（Langfuse/LangSmith）做 trace 与评估。
-2. **为什么**：按 token 计费，一次 Agent 十步可烧掉普通 API 百倍成本；P99 延迟直接影响留存。
-3. **怎么做**：每次调用记录 provider/model、operation、input/output/cache/reasoning tokens（以 provider 实际返回为准）、TTFT、总时延、重试、错误和估算成本；内容、tool 参数和结果默认不全量入 span。通过评估集决定路由与缓存，不凭启发式直接上线。
+!!! abstract "30 秒回答"
+
+    LLM 服务除了 RED 指标，还要观测 TTFT、总时延、输入/输出及 provider 返回的其他 token 用量、
+    重试、tool steps、任务质量和单位任务成本。一次 Agent run 要串起 RAG、模型和工具 span，
+    但 prompt、tool 参数和结果默认不全量记录。缓存和模型路由必须经过评估；semantic cache
+    还要把租户、权限、prompt/model 版本和数据时效放进隔离边界。
+
+**3 分钟展开**
+
+1. 区分模型调用与整个 run：单次 latency 低，不代表十步 Agent 的总时延和成本可接受。
+2. 记录 provider/model/version、TTFT、总时延、token、重试、错误、cache hit 和估算/账单成本，
+   质量用离线集、人工反馈和任务完成率共同评价。
+3. 优化顺序是先减少无效步骤和上下文，再考虑 prompt caching、semantic cache、模型路由、batch
+   和 streaming；每种手段都有质量、时效和安全边界。
+4. OpenTelemetry GenAI 约定仍在演进和迁移，项目要锁定 semconv/instrumentation 版本，不把高基数
+   prompt 正文当 span attribute。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 成本按完整任务统计；优化不能越过质量门槛；缓存 key 必须包含授权与版本边界 |
+| 手画图 | `request → RAG → LLM₁ → tool → LLM₂ → output`，每段标 latency/token/cost/quality |
+| 项目落点 | OctoAgentFlow 展示预算、step 上限和 trace 设计；无生产账单时只说测试数据和观测方案 |
+| 一个取舍 | 小模型/缓存降低成本和 TTFT，但可能损失质量、时效或隔离性，必须离线+灰度验证 |
+
+**错误表达**
+
+- ❌ “streaming 降低了模型总计算时间；语义相似的回答可以跨用户直接复用。”
+- ✅ “streaming 主要改善首屏体验；缓存必须满足租户、权限、版本和时效约束。”
+
+**自测追问**：TTFT、TPOT 和端到端时延分别说明什么？失败重试为什么会造成隐蔽成本放大？
 
 ## 10 分钟版（原理 + 图示）
 
