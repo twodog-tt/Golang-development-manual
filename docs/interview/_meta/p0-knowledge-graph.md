@@ -8,6 +8,58 @@
 >
 > 图中箭头表示学习与表达依赖，不表示线上系统只能按该拓扑部署。
 
+## 共享 P0 口述卡索引（40/40）
+
+以下链接直接进入各题正文开头的口述卡，正文后半部分保留 10 分钟原理、生产场景、排查与追问。
+
+- **并发与调度（9）**：
+  [S-CONC-01](../01-runtime-concurrency/S-CONC-01-gmp-overview.md#oral-card) ·
+  [S-CONC-05](../01-runtime-concurrency/S-CONC-05-channel.md#oral-card) ·
+  [S-CONC-06](../01-runtime-concurrency/S-CONC-06-channel-deadlock.md#oral-card) ·
+  [S-CONC-08](../01-runtime-concurrency/S-CONC-08-sync-primitives.md#oral-card) ·
+  [S-CONC-12](../01-runtime-concurrency/S-CONC-12-context.md#oral-card) ·
+  [S-CONC-13](../01-runtime-concurrency/S-CONC-13-goroutine-leak.md#oral-card) ·
+  [S-CONC-14](../01-runtime-concurrency/S-CONC-14-memory-model.md#oral-card) ·
+  [S-CONC-18](../01-runtime-concurrency/S-CONC-18-goroutine-governance.md#oral-card) ·
+  [S-CONC-19](../01-runtime-concurrency/S-CONC-19-netpoller.md#oral-card)
+- **内存与 GC（7）**：
+  [S-MEM-01](../02-memory-gc/S-MEM-01-tri-color-gc.md#oral-card) ·
+  [S-MEM-03](../02-memory-gc/S-MEM-03-gogc-tuning.md#oral-card) ·
+  [S-MEM-04](../02-memory-gc/S-MEM-04-escape-analysis.md#oral-card) ·
+  [S-MEM-05](../02-memory-gc/S-MEM-05-slice-internals.md#oral-card) ·
+  [S-MEM-06](../02-memory-gc/S-MEM-06-map-internals.md#oral-card) ·
+  [S-MEM-09](../02-memory-gc/S-MEM-09-oom-debug.md#oral-card) ·
+  [S-MEM-10](../02-memory-gc/S-MEM-10-pprof-heap.md#oral-card)
+- **Go 生产工程（6）**：
+  [S-GOENG-01](../16-go-production-engineering/S-GOENG-01-errors-contract-panic-boundary.md#oral-card) ·
+  [S-GOENG-02](../16-go-production-engineering/S-GOENG-02-package-interface-di.md#oral-card) ·
+  [S-GOENG-03](../16-go-production-engineering/S-GOENG-03-testing-table-fake.md#oral-card) ·
+  [S-GOENG-04](../16-go-production-engineering/S-GOENG-04-fuzz-benchmark-race.md#oral-card) ·
+  [S-GOENG-05](../16-go-production-engineering/S-GOENG-05-modules-toolchain-reproducible.md#oral-card) ·
+  [S-GOENG-06](../16-go-production-engineering/S-GOENG-06-static-analysis-supply-chain.md#oral-card)
+- **手写与并发组件（4）**：
+  [S-CODE-03](../08-coding-senior/S-CODE-03-graceful-shutdown.md#oral-card) ·
+  [S-CODE-04](../08-coding-senior/S-CODE-04-errgroup.md#oral-card) ·
+  [S-CODE-06](../08-coding-senior/S-CODE-06-singleflight-cache.md#oral-card) ·
+  [S-CODE-07](../08-coding-senior/S-CODE-07-bounded-batch-executor.md#oral-card)
+- **Linux 与网络（2）**：
+  [S-NET-06](../06-network-governance/S-NET-06-linux-fd-epoll-netpoll.md#oral-card) ·
+  [S-NET-07](../06-network-governance/S-NET-07-tcp-lifecycle-queues-timewait.md#oral-card)
+- **数据库与账本（4）**：
+  [S-DB-06](../middleware/mysql/S-DB-06-advanced-sql.md#oral-card) ·
+  [S-DB-07](../middleware/mysql/S-DB-07-financial-schema-locking.md#oral-card) ·
+  [S-PG-02](../middleware/postgresql/S-PG-02-isolation-locking-ledger.md#oral-card) ·
+  [S-PG-03](../middleware/postgresql/S-PG-03-wal-replication-pgx-ha.md#oral-card)
+- **架构方法论（8）**：
+  [S-ARCH-04](../03-system-design/S-ARCH-04-idempotency.md#oral-card) ·
+  [S-ARCH-05](../03-system-design/S-ARCH-05-consistency-tradeoff.md#oral-card) ·
+  [S-ARCH-10](../03-system-design/S-ARCH-10-mq-semantics.md#oral-card) ·
+  [S-ARCH-12](../03-system-design/S-ARCH-12-order-state-machine.md#oral-card) ·
+  [S-ARCH-16](../03-system-design/S-ARCH-16-observability.md#oral-card) ·
+  [S-ARCH-17](../03-system-design/S-ARCH-17-slo-error-budget.md#oral-card) ·
+  [S-ARCH-18](../03-system-design/S-ARCH-18-capacity-planning.md#oral-card) ·
+  [S-ARCH-20](../03-system-design/S-ARCH-20-tech-decision-doc.md#oral-card)
+
 ### 学习主干：Go 门槛 → Agent Platform
 
 ```mermaid
@@ -92,21 +144,34 @@ flowchart LR
 | 7 | 交易所状态机与量化指标 | 证明高吞吐、账本、行情和故障恢复深度 | “只报 3k/20k QPS，不说明 workload 和持久化边界” |
 | 8 | Staff 案例 | 架构师岗位需要跨团队决策、迁移和组织影响 | “把题库模板包装成自己做过的生产案例” |
 
-## 20 篇 Agent 定向增量
+## Agent 定向 P0 口述卡索引（20/20）
 
-```text
-AI 核心（8）:
-  S-AI-01/03/04/05/06/07/09/10
+以下链接直接进入正文口述卡；建议按组内顺序练习，每题先闭卷讲 30 秒，再展开 3 分钟。
 
-平台控制面（5）:
-  S-ARCH-08/09/15/21 · S-NET-04
-
-消息、检索与安全（5）:
-  S-KAFKA-02 · S-RAB-01 · S-ES-03 · S-SEC-01/04
-
-简历差异证据（2）:
-  S-SOL-05 · S-WALLET-12
-```
+- **AI 核心（8）**：
+  [S-AI-01](../10-ai-engineering/S-AI-01-llm-api-integration.md#oral-card) ·
+  [S-AI-03](../10-ai-engineering/S-AI-03-agent-tool-calling.md#oral-card) ·
+  [S-AI-04](../10-ai-engineering/S-AI-04-prompt-context.md#oral-card) ·
+  [S-AI-05](../10-ai-engineering/S-AI-05-llm-security.md#oral-card) ·
+  [S-AI-06](../10-ai-engineering/S-AI-06-llm-observability-cost.md#oral-card) ·
+  [S-AI-07](../10-ai-engineering/S-AI-07-mcp-server-go.md#oral-card) ·
+  [S-AI-09](../10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md#oral-card) ·
+  [S-AI-10](../10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md#oral-card)
+- **平台控制面（5）**：
+  [S-ARCH-08](../03-system-design/S-ARCH-08-rate-limiting.md#oral-card) ·
+  [S-ARCH-09](../03-system-design/S-ARCH-09-circuit-breaker.md#oral-card) ·
+  [S-ARCH-15](../03-system-design/S-ARCH-15-release-strategy.md#oral-card) ·
+  [S-ARCH-21](../03-system-design/S-ARCH-21-realtime-risk-cdc-flink.md#oral-card) ·
+  [S-NET-04](../06-network-governance/S-NET-04-jwt-auth.md#oral-card)
+- **消息、检索与安全（5）**：
+  [S-KAFKA-02](../middleware/kafka/S-KAFKA-02-producer-reliability.md#oral-card) ·
+  [S-RAB-01](../middleware/rabbitmq/S-RAB-01-exchange-async-pipeline.md#oral-card) ·
+  [S-ES-03](../middleware/elasticsearch/S-ES-03-sync-ops.md#oral-card) ·
+  [S-SEC-01](../21-security-engineering/S-SEC-01-web3-threat-model-iam-trust-boundaries.md#oral-card) ·
+  [S-SEC-04](../21-security-engineering/S-SEC-04-security-testing-incident-response.md#oral-card)
+- **简历差异证据（2）**：
+  [S-SOL-05](../11-solution-architecture/S-SOL-05-multi-tenant-saas.md#oral-card) ·
+  [S-WALLET-12](../17-multichain-wallet/S-WALLET-12-tron-trc20-resource-transaction.md#oral-card)
 
 RAG、多模态、通用 Agent 框架 API 放在 P1：它们值得会，但不是这份简历最先要证明的能力。
 

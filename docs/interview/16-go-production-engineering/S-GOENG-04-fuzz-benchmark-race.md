@@ -16,16 +16,36 @@ sources:
 
 # Fuzz、Benchmark、Race 与回归门禁
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> 单测验证已知案例，fuzz 用覆盖引导探索未知输入，race detector 只能发现实际执行路径上的数据竞态，benchmark 则必须在稳定环境下比较分布与 alloc，而不是迷信一次 ns/op。CI 应分层：快速单测每次提交，`-race`/fuzz seed/关键 benchmark 做门禁，长时间 fuzz 和全量压测进入 nightly；覆盖率只是发现未测试区域的信号。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    单测验证已知案例，fuzz 用覆盖引导探索未知输入，race detector 只能发现实际执行路径上的数据竞态，benchmark 则必须在稳定环境下比较分布与 alloc，而不是迷信一次 ns/op。CI 应分层：快速单测每次提交，`-race`/fuzz seed/关键 benchmark 做门禁，长时间 fuzz 和全量压测进入 nightly；覆盖率只是发现未测试区域的信号。
+
+**3 分钟展开**
 
 1. **Fuzz**：先放合法/非法 seed corpus，再写永远应成立的 invariant；发现的崩溃输入进入回归 corpus。
 2. **Race**：编译插桩 + happens-before 运行时分析；没报不等于无竞态。
 3. **Benchmark**：隔离初始化、报告分配、控制并发和数据规模；比较前后版本而非背绝对数。
 4. **门禁**：按风险和耗时分层，避免把 flaky benchmark 当硬阈值。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | fuzz、race、benchmark 和 coverage 回答不同问题；race 只发现执行路径；性能结论必须比较同环境分布 |
+| 手画图 | `commit → unit/vet → targeted race → fuzz corpus → benchmark compare`，长测放 nightly |
+| 项目落点 | 用实际交易解析、金额处理或并发状态机说明 invariant、回归 corpus 与基准门禁；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | PR 门禁反馈快但覆盖有限；长 fuzz/压测更深却成本高，需按风险分层 |
+
+**错误表达**
+
+- ❌ “`-race` 没报就是无竞态；覆盖率 90% 说明代码正确；一次 ns/op 就能证明优化。”
+- ✅ “这些工具都提供证据而不是证明；结论必须说明执行路径、样本、环境和统计波动。”
+
+**自测追问**：fuzz 应断言示例输出还是 invariant？benchmark 为什么要报告 alloc 并多次比较？
 
 ## 10 分钟版（原理 + 图示）
 

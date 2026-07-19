@@ -17,19 +17,39 @@ sources:
 
 # map 并发安全、扩容与 sync.Map 选型
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> **内置 map 不保证并发安全**：无同步并发读写属于 data race，runtime 常会以
-> `fatal error: concurrent map...` 终止，但不能把“必然 panic”当同步机制。Go ≤1.23
-> 的内置 map 使用经典 `hmap/bucket`，Go 1.24 起改为 **Swiss Table 风格实现**；
-> `sync.Map` 又是另一种并发容器，并在 Go 1.26 从 read/dirty 双表切换为并发 hash-trie。
-> 这些实现变化都不改变各自 API 契约。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    **内置 map 不保证并发安全**：无同步并发读写属于 data race，runtime 常会以
+    `fatal error: concurrent map...` 终止，但不能把“必然 panic”当同步机制。Go ≤1.23
+    的内置 map 使用经典 `hmap/bucket`，Go 1.24 起改为 **Swiss Table 风格实现**；
+    `sync.Map` 又是另一种并发容器，并在 Go 1.26 从 read/dirty 双表切换为并发 hash-trie。
+    这些实现变化都不改变各自 API 契约。
+
+**3 分钟展开**
 
 1. **是什么**：map 是 runtime 实现的哈希表；具体布局随 Go 版本变化，面试必须区分“语言语义”和“当前实现”。
 2. **为什么**：内置 map 选择 runtime 专用实现，非通用并发容器；并发读写需外层同步。
 3. **怎么做**：通用场景先用 `map+Mutex/RWMutex` 并基准测试；`sync.Map` 主要适合“键写一次读很多”或不同 goroutine 操作互不相交的键集合；配置读取可用不可变 map + `atomic.Value/Pointer`。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 内置 map 并发读写需要同步；runtime fatal 不是同步保证；布局与扩容实现随 Go 版本变化 |
+| 手画图 | `map access → ownership/lock? → builtin map`，旁分 `sync.Map` 与 `atomic immutable snapshot` |
+| 项目落点 | 用实际路由、资产元数据或配置表说明读多写少快照与普通 `map+Mutex` 的选择；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | `map+Mutex` 易维护复合不变量；`sync.Map` 针对特定访问模式，必须按目标版本 benchmark |
+
+**错误表达**
+
+- ❌ “并发 map 写一定 panic，所以捕获 panic 就安全；sync.Map 在所有场景都更快。”
+- ✅ “无同步访问是 data race，fatal 只是可能表现；容器选择由访问模式、类型安全和不变量决定。”
+
+**自测追问**：`sync.Map.Range` 是否是一致快照？为什么一个写一次读很多的 key 集合更符合它的设计目标？
 
 ## 10 分钟版（原理 + 图示）
 
@@ -73,7 +93,8 @@ flowchart TB
 ## 生产场景
 
 - **配置缓存**：启动后只读，偶尔热更新 → `atomic.Value` 存不可变 map 快照优于 sync.Map。
-- **会话表**：高并发读写 → 分片 `shardMap[256]` + 每片 Mutex。
+- **会话表**：若 profile 证明单锁竞争，可按稳定 hash 分片并给每片独立 Mutex；分片数不是
+  固定 256，必须按 key 分布、内存和目标版本 benchmark。
 - **可观测**：panic stack `concurrent map read and map write`；CPU profile 见 `mapassign`/`mapaccess`。
 
 ## 排查与工具
@@ -116,6 +137,7 @@ flowchart TB
 
 ```go
 type ShardedMap struct {
+    // 仅演示结构；生产分片数应由 workload benchmark 决定。
     shards [256]struct {
         mu sync.RWMutex
         m  map[string]int

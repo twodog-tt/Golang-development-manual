@@ -9,7 +9,7 @@ tags: [agent, function-calling, tools, mcp]
 status: published
 code_refs: []
 sources:
-  - https://platform.openai.com/docs/guides/function-calling
+  - https://developers.openai.com/api/docs/guides/function-calling
   - https://modelcontextprotocol.io/
   - https://www.anthropic.com/news/tool-use-anthropic
 ---
@@ -20,7 +20,7 @@ sources:
 
 ## 口述卡（高频必背）
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
 !!! abstract "30 秒回答"
 
@@ -31,7 +31,8 @@ sources:
 
 **3 分钟展开**
 
-1. 注册最小、强类型的 tool schema，模型返回 tool call，宿主校验后执行，再把裁剪后的结果回传。
+1. 注册最小、强类型的 tool schema，模型返回 tool call，宿主校验后执行，再按 API 要求把
+   `call_id`、必要的模型输出项和裁剪后的 tool result 回传，不能只拼一段自然语言结果。
 2. schema 合法只代表结构合法，不代表当前用户有权退款、金额合理或资源状态允许。
 3. 写工具使用 intent key/状态机；高风险工具走 HITL；无依赖且无冲突的只读工具才能安全并行。
 4. 固定流程优先传统状态机或 DAG，只有步骤和工具选择确实需要非确定性决策时才引入 Agent。
@@ -153,5 +154,5 @@ type Tool interface {
 
 ## 延伸阅读
 
-- [OpenAI Function Calling](https://platform.openai.com/docs/guides/function-calling)
+- [OpenAI Function Calling](https://developers.openai.com/api/docs/guides/function-calling)
 - [Model Context Protocol](https://modelcontextprotocol.io/)

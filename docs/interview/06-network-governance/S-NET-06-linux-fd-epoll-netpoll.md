@@ -16,16 +16,36 @@ sources:
 
 # Linux 进程、文件描述符、epoll 与 Go netpoll
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> 文件描述符是进程内的小整数，指向内核维护的打开文件描述/对象；socket、pipe、普通文件都可用 FD 表示。`epoll` 是 readiness 通知：告诉你某 FD 现在可能可读/可写，不代表一次 read/write 必然完成全部数据。Go runtime 用 netpoll 把可轮询网络 FD 的就绪事件转换为 goroutine 可运行状态，所以大量网络连接不需要一连接一 OS 线程，但普通文件 I/O、CGO 或不可轮询阻塞 syscall 仍可能占用线程。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    文件描述符是进程内的小整数，指向内核维护的打开文件描述/对象；socket、pipe、普通文件都可用 FD 表示。`epoll` 是 readiness 通知：告诉你某 FD 现在可能可读/可写，不代表一次 read/write 必然完成全部数据。Go runtime 用 netpoll 把可轮询网络 FD 的就绪事件转换为 goroutine 可运行状态，所以大量网络连接不需要一连接一 OS 线程，但普通文件 I/O、CGO 或不可轮询阻塞 syscall 仍可能占用线程。
+
+**3 分钟展开**
 
 1. **进程/线程**：进程拥有地址空间和 FD 表；线程共享它们，但有独立调度状态和栈。
 2. **FD**：`dup`/fork 后多个 FD 可指向共享的 open file description，因此文件偏移/状态可能共享。
 3. **epoll**：interest list + ready list；支持 level-triggered 和 edge-triggered。
 4. **Go netpoll**：goroutine 在网络 I/O 上 park，runtime poller 收到 readiness 后唤醒，不是“goroutine 自己调用 epoll”。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | FD 是进程句柄而非对象本身；epoll 报 readiness 不报业务完成；Go netpoll 只覆盖可轮询路径 |
+| 手画图 | `FD table → open file description/socket → epoll ready list → runtime netpoll → runnable G` |
+| 项目落点 | 用实际 WebSocket/节点连接说明 FD 上限、accept 速度、ephemeral port 与 goroutine 指标如何联查；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | ET 减少重复通知但要求非阻塞并读到 EAGAIN；Go net 包封装实现，业务一般不直接选择 |
+
+**错误表达**
+
+- ❌ “epoll 通知可读就能一次读完；Go 所有文件 I/O 都不占线程。”
+- ✅ “readiness 只表示现在可能前进；短读/EAGAIN、普通文件、cgo 与平台差异必须分别处理。”
+
+**自测追问**：`dup` 后两个 FD 为什么可能共享文件偏移？连接失败如何区分 FD、端口和 accept backlog？
 
 ## 10 分钟版（原理 + 图示）
 

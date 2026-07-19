@@ -17,15 +17,39 @@ sources:
 
 # Kafka Producer 可靠性：acks、幂等与分区键
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> Producer 可靠性靠 **`acks` + `retries` + 幂等 Producer**；与 [S-ARCH-04 幂等](../../03-system-design/S-ARCH-04-idempotency.md) 配合才能端到端不重复。**Partition Key** 决定消息进哪个 partition，影响 **顺序与热点**。生产关键词：**acks=all、enable.idempotence、max.in.flight、key 设计**。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../../_meta/p0-knowledge-graph.md)
 
-1. **是什么**：`acks=0/1/all` 控制 broker 确认深度；幂等 Producer（PID + sequence）防 **单分区重复**；Key hash 绑定 partition。
-2. **为什么**：网络抖动、broker 切换会导致重试重复；交易所 **orderId / symbol** 的 key 选错会破坏顺序或打爆单 partition。
-3. **怎么做**：生产常用 `acks=all` 并配置合适的 `min.insync.replicas`；选择能明确启用幂等/事务 producer 的客户端。Java/librdkafka 可在协议允许范围内使用多 in-flight；Sarama 的幂等配置通常要求 `Net.MaxOpenRequests=1`。`kafka-go` 高层 Writer 目前不暴露等价的 `enable.idempotence`/完整事务配置，核心事件仍要 outbox 与消费幂等。
+!!! abstract "30 秒回答"
+
+    Kafka Producer 可靠性分三层：`acks=all + min.insync.replicas` 控制 broker 接受条件，
+    幂等 producer 用 PID/epoch/sequence 去掉协议重试造成的重复，业务端仍用 outbox、
+    idempotency key 与消费去重保证端到端语义。Partition key 只保证同 partition 日志顺序，
+    选 key 要同时权衡业务顺序、并行度和热点，并明确所用 Go 客户端是否真的支持幂等与事务。
+
+**3 分钟展开**
+
+1. `acks=all` 不等于落到所有副本，也不等于 end-to-end exactly-once；ISR/minISR、选主和错误处理同样重要。
+2. 幂等 producer 识别协议层重试，不会把应用主动发送的两条相同订单消息认成一条。
+3. 发送超时/取消可能是结果未知；例如 `kafka-go` 同步写 context 取消后消息仍可能已写入，盲重试会重复。
+4. 默认值必须带客户端与版本；Java、librdkafka、Sarama、kafka-go 的开关和 in-flight 约束不能混讲。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | broker ack 不等于业务完成；幂等 producer 不替代业务幂等；顺序范围只到 partition |
+| 手画图 | `DB tx + outbox → producer → partition replicas → consumer inbox/unique key` |
+| 项目落点 | Agent 发布事件用 workflow/tenant key；交易/钱包事件用 intent/order key 并说明热点治理 |
+| 一个取舍 | 更强 ack/事务提高可靠性但增加延迟和客户端复杂度；是否需要由事件损失后果决定 |
+
+**错误表达**
+
+- ❌ “开 `acks=all` 和幂等后就是端到端 exactly-once；Kafka 所有 Go 客户端配置一样。”
+- ✅ “它们只覆盖 producer/broker 边界；数据库、消费与副作用仍需 outbox/inbox 和业务唯一键。”
+
+**自测追问**：同步发送返回 deadline exceeded 时，为何不能直接认定消息没写入并换 key 重发？
 
 ## 10 分钟版（原理 + 图示）
 
@@ -83,10 +107,10 @@ sequenceDiagram
 
 | 方案 | 适用 | 不适用 |
 |------|------|--------|
-| acks=all + 幂等 | 资金/订单 | 纯日志采集 |
+| acks=all + 幂等 | 不能容忍 producer 重试重复且要求较强 broker 接受条件 | 客户端不支持或业务证据表明成本不值得 |
 | acks=1 | 可容忍极少丢失的 metrics | 核心账务 |
 | 无 key 轮询 | 高并行埋点 | 顺序业务 |
-| 事务 Producer | Kafka Streams EOS | 简单 Go 微服务（过重） |
+| 事务 Producer | 原子写多个 partition，或把消费 offset 与输出记录纳入同一 Kafka 事务 | 还要原子提交外部 DB/HTTP 副作用 |
 
 ## 追问链
 
@@ -117,7 +141,8 @@ err := w.WriteMessages(ctx, kafka.Message{
     Value: payload,
 })
 if err != nil {
-    // 同步发送必须处理错误；重试仍需受 deadline 与业务幂等约束。
+    // 同步发送必须处理错误；ctx 超时/取消可能是 unknown outcome，
+    // 重试仍需受 deadline、稳定业务 key 与下游幂等约束。
     return err
 }
 // kafka-go 高层 Writer 无等价的 enable.idempotence 配置；

@@ -17,16 +17,36 @@ sources:
 
 # 有界批处理执行器：取消、顺序与背压
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> 批处理并发不能“每个 item 一个 goroutine”。应固定 worker 数，使用有界 job queue 形成背压，用派生 context 在首错或上游取消时停止继续投递，并持续 drain 已启动 worker 的结果，避免 goroutine 卡在发送。若 API 承诺按输入顺序返回，就给 job 编号并写回预分配结果切片，而不是依赖完成顺序。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    批处理并发不能“每个 item 一个 goroutine”。应固定 worker 数，使用有界 job queue 形成背压，用派生 context 在首错或上游取消时停止继续投递，并持续 drain 已启动 worker 的结果，避免 goroutine 卡在发送。若 API 承诺按输入顺序返回，就给 job 编号并写回预分配结果切片，而不是依赖完成顺序。
+
+**3 分钟展开**
 
 1. **并发上限**：worker 数限制正在执行的工作，queue 限制等待内存。
 2. **取消**：首错 `cancel(cause)`；producer、worker 和回调都必须观察 context。
 3. **收尾**：只有 producer 关闭 jobs，只有等待全部 worker 的 goroutine 关闭 results。
 4. **结果语义**：示例采用 fail-fast、无部分结果；资金批处理往往要返回逐项结果并另做业务补偿。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | active worker 与等待队列都要有界；channel 关闭权唯一；取消不能强杀不合作的任务 |
+| 手画图 | `producer → bounded jobs → N workers → results[index] → collector`，error 指向 cancel |
+| 项目落点 | 用实际多链 RPC、批量归集或对象迁移说明 provider 配额、nonce domain 和逐项结果；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | 保持输入顺序便于调用方但要保留结果槽；完成顺序流式返回延迟低却增加协议复杂度 |
+
+**错误表达**
+
+- ❌ “固定 worker 数就一定有背压；context cancel 可以立即停止任意 fn。”
+- ✅ “无界输入/queue 仍会爆内存；取消只对遵守契约的 producer、worker 和回调生效。”
+
+**自测追问**：谁关闭 jobs 和 results？资金批处理为什么通常不能只返回第一个错误？
 
 ## 10 分钟版（原理 + 图示）
 

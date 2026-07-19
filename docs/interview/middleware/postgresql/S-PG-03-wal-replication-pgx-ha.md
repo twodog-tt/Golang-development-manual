@@ -21,11 +21,17 @@ sources:
 
 # PostgreSQL WAL、复制、故障切换与 pgx 连接治理
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> WAL 的核心是不先把脏数据页当成提交证据，而是先把描述变更的日志持久化；但客户端收到 commit 成功究竟证明了“本机落盘、备机收到、备机落盘还是备机已回放”，取决于 `synchronous_commit` 和同步备配置。流复制默认异步，failover 仍要定义 RPO/RTO、leader fencing、timeline 与重接策略。Go 侧的 `pgxpool` 只是连接复用器，不会替你处理事务回滚、池容量、慢查询、主备陈旧读和 unknown commit。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    WAL 的核心是不先把脏数据页当成提交证据，而是先把描述变更的日志持久化；但客户端收到 commit 成功究竟证明了“本机落盘、备机收到、备机落盘还是备机已回放”，取决于 `synchronous_commit` 和同步备配置。流复制默认异步，failover 仍要定义 RPO/RTO、leader fencing、timeline 与重接策略。Go 侧的 `pgxpool` 只是连接复用器，不会替你处理事务回滚、池容量、慢查询、主备陈旧读和 unknown commit。
+
+**3 分钟展开**
 
 1. **WAL**：修改数据页前，相关 WAL 必须先到达规定的持久化边界；恢复时可 redo 已记录变更。
 2. **物理流复制**：standby 接收并回放 WAL；默认异步，primary 成功不代表 standby 已收到。
@@ -34,6 +40,20 @@ sources:
    处理连接池和陈旧 DNS，并验证数据损失窗口。
 5. **pgxpool**：池上限按数据库总连接预算分配；事务占用一条连接，必须 commit/rollback；
    初始化后应 `Ping` 验证可达性，并监控 acquire 等待。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | commit ACK 证据取决于 WAL/同步提交配置；流复制默认异步；failover 必须 fencing；连接池不提供 HA 语义 |
+| 手画图 | `client → primary WAL → standby receive/flush/replay`，旁接 archive+base backup 与 fencing |
+| 项目落点 | 用实际订单/账本数据库说明 RPO/RTO、主切换、连接重建和 unknown commit 对账；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | 同步提交降低 RPO 但增加 RTT/可用性耦合；异步延迟低却必须接受并量化数据损失窗口 |
+
+**错误表达**
+
+- ❌ “有 replica 就是零 RPO 且等于备份；pgxpool 会自动安全处理主备切换和未知提交。”
+- ✅ “复制、备份、PITR、failover 是不同能力；客户端必须重连、重试分类并查询权威事实。”
+
+**自测追问**：`remote_write`、`on`、`remote_apply` 分别等待到哪里？旧 primary 如何防止恢复后继续写？
 
 ## 10 分钟版（提交证据与 HA）
 

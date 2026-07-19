@@ -16,17 +16,37 @@ sources:
 
 # Go Modules、Workspace、Toolchain 与可复现构建
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> Go Modules 用 MVS 从依赖图中选择每个 module path 的版本；它不是传统 SAT 求“最新兼容版本”。`go` 行声明最低 Go 版本要求，`toolchain` 行可声明主模块开发时建议工具链；`go.work` 适合本地多模块联调，但 CI/发布必须明确是否启用。可复现构建依赖固定源码、模块图、工具链、构建参数和外部生成物，`go.sum` 负责校验下载内容，不是依赖锁文件的完整替代。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    Go Modules 用 MVS 从依赖图中选择每个 module path 的版本；它不是传统 SAT 求“最新兼容版本”。`go` 行声明最低 Go 版本要求，`toolchain` 行可声明主模块开发时建议工具链；`go.work` 适合本地多模块联调，但 CI/发布必须明确是否启用。可复现构建依赖固定源码、模块图、工具链、构建参数和外部生成物，`go.sum` 负责校验下载内容，不是依赖锁文件的完整替代。
+
+**3 分钟展开**
 
 1. **MVS**：每条 `require` 声明的是最低要求；对同一 module path，MVS 选择当前模块图中
    出现的最高版本。它不会为了寻找“最新兼容版本”而枚举仓库中的更新版本。
 2. **`go mod tidy`**：补齐构建/测试所需依赖并删除不再需要的条目，不等于“升级所有依赖”。
 3. **Workspace**：`go.work` 的 `use`/`replace` 可让多个本地 module 联调；发布前要防止只在 workspace 下成功。
 4. **Toolchain**：Go 1.21+ 会根据 `go`/`toolchain` 与 `GOTOOLCHAIN` 选择或下载合适工具链。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | MVS 选模块图中已要求的最高最低版本；go.sum 校验内容而非完整锁定环境；toolchain/workspace 必须显式 |
+| 手画图 | `source + go.mod/sum + toolchain + flags + generated assets → artifact + provenance` |
+| 项目落点 | 用实际多模块 Go 服务说明本地 `go.work`、CI 工具链和发布构建参数如何对齐；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | vendor 提高离线和审计确定性但增加同步成本；proxy+sumdb 更轻但依赖外部获取策略 |
+
+**错误表达**
+
+- ❌ “`go mod tidy` 会升级所有依赖；有 go.sum 就能保证任何机器产出完全相同二进制。”
+- ✅ “tidy 整理当前图；复现还依赖工具链、环境、flags、CGO、生成物和基础镜像等输入。”
+
+**自测追问**：MVS 为什么不会自动选择仓库最新版本？启用 `go.work` 后 CI 可能出现什么本地成功假象？
 
 ## 10 分钟版（原理 + 图示）
 

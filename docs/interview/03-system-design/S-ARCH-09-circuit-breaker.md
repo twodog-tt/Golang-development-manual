@@ -15,23 +15,46 @@ sources:
 
 # 熔断、降级、舱壁
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> **熔断**在下游故障时快速失败，避免占满 goroutine、连接池和并发配额；**降级**返回业务允许的兜底；**舱壁**隔离资源池防扩散。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
-1. **是什么**：熔断器三态 Closed → Open → Half-Open；降级牺牲非核心功能保核心；舱壁为不同依赖独立 goroutine/连接池配额。
-2. **为什么**：慢调用占满 worker，上游排队超时，级联雪崩（Metastable failure）。
-3. **怎么做**：Hystrix/gobreaker 按错误率熔断；超时 + 有限并发；降级缓存/默认值；核心与非核心线程池分离。
+!!! abstract "30 秒回答"
+
+    熔断器根据选定的技术失败信号在 Closed、Open、Half-Open 间切换，避免继续打已故障依赖；
+    舱壁限制每个依赖可占用的并发、连接和队列；降级则定义业务上可接受的替代结果。它们都不能
+    替代端到端 deadline。业务拒绝不应计入熔断失败，重试要受预算和幂等约束，Half-Open 探针也要限量。
+
+**3 分钟展开**
+
+1. 从 SLO 和依赖错误语义选择统计窗口、最小样本与 trip 条件；固定阈值只是示例，低流量还要避免样本噪声。
+2. 本地 breaker 通常是每实例状态，切流/扩容后视图会变化；探针加并发上限与 jitter，避免同时恢复形成洪峰。
+3. 降级必须保持业务正确：推荐可返回空列表，支付/签名只能明确返回 pending/unavailable，不能伪造成功或默认值。
+4. 指标同时看 breaker 状态、拒绝量、依赖真实错误、舱壁饱和与 fallback 成功率，并演练恢复路径。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 先有 deadline；只统计选定失败；fallback 不破坏业务正确性 |
+| 手画图 | `caller → deadline → bulkhead → breaker → dependency`，Open 分支到安全 fallback |
+| 项目落点 | Agent 外部 provider 可降级模型；钱包/支付类副作用只转 pending 或停用，绝不伪造成功 |
+| 一个取舍 | 本地 breaker 简单低延迟但状态分散；集中协调更一致却可能引入新的控制面依赖 |
+
+**错误表达**
+
+- ❌ “金融强一致场景不能熔断，任何错误都计入失败，熔断后返回默认成功。”
+- ✅ “核心依赖同样会故障；应快速暴露 unavailable/pending，并禁止不安全 fallback。”
+
+**自测追问**：429、业务余额不足、context canceled 和连接超时中，哪些应计入 breaker？
 
 ## 10 分钟版（原理 + 图示）
 
 ```mermaid
 stateDiagram-v2
   [*] --> Closed
-  Closed --> Open: 错误率>50% 或 连续失败N次
-  Open --> HalfOpen: 冷却 30s 后
+  Closed --> Open: 统计窗口达到 trip 条件
+  Open --> HalfOpen: 冷却窗口后
   HalfOpen --> Closed: 探测成功
   HalfOpen --> Open: 探测失败
 ```
@@ -47,18 +70,19 @@ flowchart TB
 
 **参数示例（不能脱离流量与 SLO 硬背）**
 
-| 参数 | 典型值 | 说明 |
+| 参数 | 示例 | 说明 |
 |------|--------|------|
-| 错误率阈值 | 50% / 10s 窗口 | 低于此易误熔断 |
-| 最小请求数 | 20 | 避免样本过少 |
-| Open 持续时间 | 30~60s | 给下游恢复时间 |
-| Half-Open 探测 | 1~3 个请求 | 渐进恢复 |
+| 错误率/连续失败 | 由依赖基线和 SLO 推导 | 只纳入应统计的技术失败 |
+| 最小请求数 | 防止小样本误判 | 低流量可结合连续失败和主动健康信号 |
+| Open 持续时间 | 结合恢复特征与退避 | 避免所有实例同时探测 |
+| Half-Open 探测 | 小流量且有并发上限 | 成功后渐进恢复 |
 | 超时 | 从端到端 deadline 倒推 | 给重试、排队和上游返回留预算，并控制误超时率 |
 
 **容量估算**
 
-- 服务 1000 goroutine worker，下游慢 10s → 100 QPS 即占满 → **必须超时 200ms + 熔断**。
-- 舱壁：推荐服务最多占 10% 连接，故障时不拖订单主路径。
+- 用 Little's Law 粗估 `并发 ≈ 到达率 × 服务时间`，再结合队列和连接池确认慢依赖的占用上限；
+  timeout 必须从端到端 SLO 与正常延迟分布倒推，不能固定背 `200ms`。
+- 舱壁配额按核心路径、容量与降级目标压测确定，不机械使用固定百分比。
 
 ## 生产场景
 
@@ -81,7 +105,7 @@ flowchart TB
 
 | 方案 | 适用 | 不适用 |
 |------|------|--------|
-| 熔断 | 可选依赖、可失败 | 金融强一致必成功 |
+| 熔断 | 依赖故障时快速失败 | 无明确失败分类或恢复策略 |
 | 降级 | 有缓存兜底 | 无兜底且用户敏感 |
 | 舱壁 | 多依赖共享进程 | 依赖已独立部署 |
 | 重试 | 瞬时故障 | 下游已过载（加重） |
@@ -121,12 +145,12 @@ var cb = gobreaker.NewCircuitBreaker(gobreaker.Settings{
 
 func CallRecommend(ctx context.Context) ([]Item, error) {
     v, err := cb.Execute(func() (any, error) {
-        ctx, cancel := context.WithTimeout(ctx, 200*time.Millisecond)
+        ctx, cancel := context.WithTimeout(ctx, recommendBudget) // 由端到端预算推导
         defer cancel()
         return fetchRecommend(ctx)
     })
     if err != nil {
-        return getCachedHotItems(), nil // 降级
+        return getCachedHotItems(), nil // 仅当产品明确允许陈旧推荐时
     }
     return v.([]Item), nil
 }

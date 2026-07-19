@@ -16,18 +16,42 @@ sources:
 
 # 大对象、堆外与 OOM 排查
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> **OOM** 常是 RSS（堆+栈+runtime+堆外）超过 cgroup limit，而非单纯“GC 没回收”。
-> 当前 runtime 把超过约 32 KiB 小对象上限的分配走大对象路径；精确边界属于实现细节。
-> 大对象可能抬高峰值与碎片，其 GC 扫描成本还取决于对象是否含指针。`mmap`、cgo/C
-> 分配等不体现在 `HeapAlloc`，也未必受 `GOMEMLIMIT` 完整约束。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
-1. **是什么**：Go 进程内存 = 堆 + goroutine 栈 + runtime 元数据 + 堆外分配。
-2. **为什么**：仅看 `HeapAlloc` 会漏栈暴涨、CGO、未 Trim 的 OS 内存；大对象影响 sweep/mark。
+!!! abstract "30 秒回答"
+
+    **OOM** 要从“进程或容器被计费内存达到限制”排查，而不能只归因于“GC 没回收”；
+    容器 OOM 的口径也不等同于某一个进程的 RSS。Go 堆、goroutine 栈、runtime 元数据、
+    cgo/`mmap`、页缓存与其他容器进程都可能贡献内存压力。
+    当前 runtime 把超过约 32 KiB 小对象上限的分配走大对象路径；精确边界属于实现细节。
+    大对象可能抬高峰值与碎片，其 GC 扫描成本还取决于对象是否含指针。`mmap`、cgo/C
+    分配等不体现在 `HeapAlloc`，也未必受 `GOMEMLIMIT` 完整约束。
+
+**3 分钟展开**
+
+1. **是什么**：先区分 Go runtime 指标、进程 RSS 与 cgroup 计费口径，再分解堆、goroutine
+   栈、runtime 元数据、cgo/`mmap` 和页缓存。
+2. **为什么**：仅看 `HeapAlloc` 会漏栈暴涨、cgo 和堆外内存；仅看 RSS 又不能定位所有权；
+   大对象对 GC 的影响还取决于存活时间、指针密度和分配速率。
 3. **怎么做**：设 `GOMEMLIMIT`、查 goroutine 栈、heap profile 大 slice、容器看 working set；限制单请求 body、流式处理。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 先区分 runtime、进程和 cgroup 口径；HeapAlloc 正常不能排除 OOM；GOMEMLIMIT 不覆盖全部内存来源 |
+| 手画图 | `cgroup charge → Go heap + stacks + runtime + cgo/mmap + cache/other process → OOM` |
+| 项目落点 | 用实际批量索引、文件解析或 RPC body 峰值说明如何从容器事件到 heap/goroutine/cgo 逐层定位；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | 流式处理和请求限额降低峰值但增加状态管理；整块加载实现简单却放大并发内存 |
+
+**错误表达**
+
+- ❌ “heap profile 正常就不是内存问题；调用 `debug.FreeOSMemory` 可以根治 OOM。”
+- ✅ “heap 只是一个组成；先对齐 cgroup/RSS/runtime 指标，再根据所有权和存活链定位根因。”
+
+**自测追问**：容器 OOMKilled 时为什么进程 heap 可能看起来不高？如何区分 goroutine 栈和 cgo 内存？
 
 ## 10 分钟版（原理 + 图示）
 
@@ -42,11 +66,14 @@ sources:
 
 ```mermaid
 flowchart TB
-  RSS[进程 RSS] --> Heap[Go Heap]
-  RSS --> Stack[Goroutine Stacks]
-  RSS --> Off[堆外 / cgo]
-  RSS --> Frag[碎片与缓存]
-  Limit[cgroup limit] -->|超过| OOM[OOMKilled]
+  Charge["cgroup 计费内存"] --> Proc["进程内存"]
+  Charge --> Cache["被计费页缓存"]
+  Charge --> Sidecar["同容器/同 cgroup 其他进程"]
+  Proc --> Heap["Go Heap"]
+  Proc --> Stack["Goroutine Stacks"]
+  Proc --> Off["cgo / mmap / runtime"]
+  Proc --> Frag["碎片与驻留页差异"]
+  Limit[cgroup limit] -->|计费总量超过| OOM[OOMKilled]
 ```
 
 **大对象**：超过 maxSmallSize 的对象单独分配，释放进 idle 列表；频繁分配/释放大 buffer 导致堆峰值高。

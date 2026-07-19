@@ -17,15 +17,35 @@ sources:
 
 # errgroup 语义实现
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> **errgroup** = **WaitGroup + 首个 error + Context 取消**。`WithContext` 派生可取消 ctx；任一 `Go(fn)` 返回 error → **`errOnce` 记录 + cancel**；`Wait` 等全部结束并返回该 error。面试关键词：**errOnce、cancel 传播、Wait 后再 cancel 一次无害**。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    **errgroup** = **WaitGroup + 首个 error + Context 取消**。`WithContext` 派生可取消 ctx；任一 `Go(fn)` 返回 error → **`errOnce` 记录 + cancel**；`Wait` 等全部结束并返回该 error。面试关键词：**errOnce、cancel 传播、Wait 后再 cancel 一次无害**。
+
+**3 分钟展开**
 
 1. **是什么**：`golang.org/x/sync/errgroup` 简化「多 goroutine 有一失败则全员停工」。
 2. **为什么**：并行调多个 RPC/查多个库，一个失败不应继续浪费资源（见 [S-CONC-17 Pipeline](../01-runtime-concurrency/S-CONC-17-pipeline.md)）。
 3. **怎么做**：`WaitGroup` 计数；`Go` 里 `defer Done()`；error 时 `errOnce.Do` 存 err 并 `cancel()`；子任务 `select ctx.Done()`。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 首个非 nil error 触发派生 ctx 取消；Wait 仍等待所有已启动任务；任务必须主动观察取消 |
+| 手画图 | `Go A/B/C → first error → cancel ctx → cooperative exits → Wait → first error` |
+| 项目落点 | 用实际并行 RPC、链节点查询或批量校验说明 fail-fast 与下游请求取消；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | fail-fast 节省资源但可能丢失完整错误集合；需要逐项结果时应换聚合语义 |
+
+**错误表达**
+
+- ❌ “errgroup 一出错就强制杀死其他 goroutine，并立刻从 Wait 返回；还能自动回滚副作用。”
+- ✅ “取消是协作信号，Wait 要等任务返回；事务补偿、panic 和部分结果都需业务层另行设计。”
+
+**自测追问**：函数忽略 ctx 永久阻塞时 errgroup 能做什么？SetLimit 限制的是 active 还是所有排队调用？
 
 ## 10 分钟版（原理 + 图示）
 

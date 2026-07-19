@@ -17,21 +17,39 @@ sources:
 
 # Web3 威胁建模、IAM 与信任边界
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> 威胁模型不是画一张 STRIDE 表，而是为一个确定版本列出资产、攻击者能力、信任边界、入口、滥用路径和必须保持的不变量。Web3 后端尤其要把“读到链数据、批准业务意图、构造交易、签名、广播、确认、账本入账”拆开：RPC、消息队列、CI 和运营后台都不是天然可信。IAM 应区分人、工作负载、签名者和 break-glass 身份，使用短期凭证、最小权限和双人高风险审批；HSM/MPC 保护密钥材料，但不替代交易策略和授权。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
-一套可评审的威胁模型至少回答：
+!!! abstract "30 秒回答"
 
-1. **保护什么**：私钥/份额、用户权益、账本、提现策略、链数据完整性、构建产物和审计证据。
-2. **谁能攻击**：外部调用者、恶意用户、被接管的 worker/provider、内部人员、供应链攻击者、控制部分 MPC participant 的对手。
-3. **穿过哪些边界**：Internet/API、服务到队列、业务域到 signer、云 IAM 到 HSM、链下到链上、CI 到生产。
-4. **失败后果是什么**：盗签、双付、错误入账、隐私泄露、拒绝服务、合规证据缺失，而不只是 CVSS 分数。
-5. **如何证明控制有效**：拒绝路径、审计关联、故障注入、恢复演练和 residual risk owner。
+    威胁模型不是列漏洞或画 STRIDE，而是对一个明确版本写清资产、攻击者能力、信任边界、
+    滥用路径、安全不变量、控制和剩余风险 owner。Web3 要把观察链数据、批准 intent、构建、
+    签名、广播、确认和账本拆开；RPC、队列、VPC、CI 与运营后台都不是天然可信。
+    HSM/MPC 能缩小密钥材料暴露面，但恶意 intent 若通过策略，密码设备仍可能忠实签名。
 
-STRIDE、攻击树和 abuse case 是发现问题的工具，不是风险已经关闭的证据。
+**3 分钟展开**
+
+1. 先写资金/授权/完整性不变量，再画 DFD 和跨边界身份；风险按影响、可利用性与检测/恢复能力排序。
+2. IAM 区分 human、workload、signer 与 break-glass；最小权限要细到 tenant/key/chain/action/amount/environment 和有效期。
+3. 审批必须绑定 canonical intent digest，包括 recipient、amount、chain、calldata、fee ceiling 和 policy version，防止“批 A 签 B”。
+4. 每个控制指定 owner、验证方法和 residual risk；架构、链、权限、依赖或事故变化后更新模型。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 网络位置不等于信任；HSM/MPC 不替代授权；审批必须绑定完整意图 |
+| 手画图 | `identity → intent → policy → signer → broadcast → observation → ledger`，逐箭头标信任边界 |
+| 项目落点 | Launchpad 类 DEX/钱包用 signer fence、policy digest、链证据和账本对账举例，只讲真实落地层级 |
+| 一个取舍 | 集中 policy 易治理但价值集中；分散执行降低单点，却增加策略漂移与证据一致性成本 |
+
+**错误表达**
+
+- ❌ “服务在 VPC 内且私钥在 HSM，所以请求可信、交易安全。”
+- ✅ “网络和 HSM 只是控制层；仍需 workload identity、完整 intent 授权、fencing 与审计对账。”
+
+**自测追问**：攻击者不拿到私钥，仍有哪些路径能让 signer 产生一笔恶意有效签名？
 
 ## 10 分钟版（原理 + 图示）
 

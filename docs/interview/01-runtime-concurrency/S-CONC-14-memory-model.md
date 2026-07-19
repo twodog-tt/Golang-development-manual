@@ -16,15 +16,35 @@ sources:
 
 # Go 内存模型与 happens-before
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> Go 内存模型定义：若事件 A happens-before B，则 A 的写对 B 可见。同步原语建立 hb 边；含数据竞态的程序是错误程序，结果不可靠，但 Go 不应简单表述成 C/C++ 式“编译器可以任意做任何事”。无竞态程序享有 DRF-SC 保证。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    Go 内存模型定义：若事件 A happens-before B，则 A 的写对 B 可见。同步原语建立 hb 边；含数据竞态的程序是错误程序，结果不可靠，但 Go 不应简单表述成 C/C++ 式“编译器可以任意做任何事”。无竞态程序享有 DRF-SC 保证。
+
+**3 分钟展开**
 
 1. **是什么**：规范 goroutine 间读写可见性与执行顺序保证。
 2. **为什么**：编译器/CPU 重排序；无 hb 则读到的可能是陈旧值。
 3. **怎么做**：用 channel 传递数据、mutex 保护、atomic 单变量、init 与 goroutine 启动有特殊规则。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | happens-before 不是墙上时间顺序；无数据竞态程序享有 DRF-SC；普通变量无同步就没有跨 G 可见性保证 |
+| 手画图 | `write → Unlock/send/atomic → Lock/recv/atomic → read`，无同步分支标成 race |
+| 项目落点 | 用实际配置热更新或状态快照说明如何用不可变对象加 `atomic.Pointer` 发布；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | Mutex 易维护复合不变量；atomic 适合单变量/不可变快照，但组合状态更难证明 |
+
+**错误表达**
+
+- ❌ “先 sleep 一下写入就可见；race detector 没报就说明没有竞态。”
+- ✅ “可见性来自内存模型定义的同步边；race detector 只覆盖本次执行到的路径。”
+
+**自测追问**：为什么 `done=true` 之后另一个 goroutine 不一定安全看到配套数据？atomic 能否自动保护两个字段的不变量？
 
 ## 10 分钟版（原理 + 图示）
 

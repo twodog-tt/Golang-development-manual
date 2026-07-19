@@ -11,19 +11,45 @@ code_refs: []
 sources:
   - https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/overview
   - https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html
+  - https://www.postgresql.org/docs/current/ddl-rowsecurity.html
 ---
 
 # 多租户 SaaS 隔离与权限架构
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> 多租户架构师要定 **隔离模型**（共享库共享表 / 共享库独立 schema / 独立库）+ **租户上下文贯穿全链路** + **RLS/中间件防越权**。生产关键词：**tenant_id、数据泄露 0 容忍、 noisy neighbor 配额**。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
-1. **是什么**：一套部署服务多个客户（tenant），逻辑或物理隔离数据与配置。
-2. **为什么**：B 端 SaaS、内部平台化面试高频；与 [S-AI-05 RAG ACL](../10-ai-engineering/S-AI-05-llm-security.md) 同属权限边界题。
-3. **怎么做**：从已认证身份与服务端映射解析 tenant，不能信任 body/query 自报；应用层 fail-closed scope + 数据库 RLS/复合键等纵深防御；需要更强隔离的租户可使用独立凭证、库、集群或部署。
+!!! abstract "30 秒回答"
+
+    多租户不是给表加 `tenant_id`，而是让可信租户身份贯穿 API、任务、数据库、缓存、MQ、
+    对象存储、搜索、向量检索、日志和备份。隔离强度按合规、噪声、故障域和成本选择共享表、
+    schema/库或独立部署；应用 fail-closed scope、复合键和 PostgreSQL RLS 形成纵深防御，
+    同时注意 owner/BYPASSRLS、连接池上下文和数据库之外的资源仍需各自授权。
+
+**3 分钟展开**
+
+1. tenant 来自已验证 identity 与服务端 membership，不接受 body/query 覆盖；跨租户运营走独立 break-glass 审批和审计。
+2. 共享表的主键/唯一键/外键和常用索引通常都带 `tenant_id`，防止业务约束和查询遗漏形成跨租户引用。
+3. PostgreSQL RLS 默认不约束 superuser、`BYPASSRLS`，table owner 通常也绕过；必要时 `FORCE ROW LEVEL SECURITY`，
+   应用角色不得拥有绕过能力，pooled connection 在事务内 `SET LOCAL` 并测试上下文清理。
+4. 每租户限 QPS、并发、存储、token/tool 成本；大租户可渐进迁移到 silo，控制面维护路由、配置和迁移状态。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | tenant 只能来自可信身份；缺 tenant 必须 fail closed；所有共享资源都要纳入隔离 |
+| 手画图 | `identity → tenant context → app scope + RLS → cache/MQ/search/storage` |
+| 项目落点 | OctoAgentFlow 讲 persona/memory/tool/credential namespace 和配额；只按真实实现程度表述 |
+| 一个取舍 | pool 模型成本低但爆破半径和 noisy neighbor 风险高；silo 隔离强但迁移与运维成本高 |
+
+**错误表达**
+
+- ❌ “有 RLS 就不会串租户；独立数据库一定完全隔离。”
+- ✅ “RLS 有绕过角色和连接上下文边界；独立库仍要检查凭证、备份、网络和运维控制面是否共享。”
+
+**自测追问**：使用 pgx 连接池时，tenant session variable 为什么可能泄漏到下一个请求，如何避免？
 
 ## 10 分钟版（原理 + 图示）
 
@@ -45,9 +71,9 @@ flowchart TB
 
 | 模型 | 成本 | 隔离 | 适用 |
 |------|------|------|------|
-| 共享表 + tenant_id | 低 | 逻辑 | SMB SaaS |
-| Schema / 库 per tenant | 中 | 较强 | 中大客户 |
-| 部署 per tenant | 高 | 最强 | 金融/政企 |
+| 共享表 + tenant_id | 低 | 逻辑隔离、共享故障域 | 大量相似租户且合规允许 |
+| Schema / 库 per tenant | 中 | 更强数据边界 | 需独立迁移/备份或 noisy-neighbor 治理 |
+| 部署 per tenant | 高 | 可分离计算、网络与运维边界 | 合规/性能/故障域要求值得承担成本 |
 
 **权限层次**
 
@@ -75,11 +101,18 @@ func TenantScope(db *gorm.DB, ctx context.Context) (*gorm.DB, error) {
 
 中间件：从已完成 iss/aud/签名校验的身份中解析 tenant，并再次验证用户对 tenant 的 membership；禁止客户端 body 覆盖。仅靠开发者记得调用 scope 容易漏，关键表还应使用 RLS、带 tenant_id 的唯一键/外键与跨租户测试。
 
+若 PostgreSQL policy 读取 `current_setting('app.tenant_id')`，应在显式事务中用 `SET LOCAL`
+绑定，并确保应用角色不是 table owner/superuser/`BYPASSRLS`；`FORCE ROW LEVEL SECURITY`
+只处理 table owner 的常见绕过，不能约束 superuser/`BYPASSRLS`。连接池上的 session-level
+`SET` 若未可靠 reset，可能把前一个请求的 tenant 带给后一个请求。
+
 ## 生产场景
 
 - **大客户要独立库**：绞杀迁移 tenant 数据；连接池按 tenant 路由（见连接池题）
 - **AI 知识库 SaaS**：向量检索必须 filter `tenant_id`（[S-AI-02 RAG](../10-ai-engineering/S-AI-02-rag-architecture.md)）
 - **配额 noisy neighbor**：单 tenant QPS/存储/cpu 限流
+- **异步与外围资源**：job payload、cache key、topic/consumer authorization、object prefix、search
+  alias/filter、日志查询和导出都必须携带并验证 tenant，不能只保护主数据库
 
 ## 排查与工具
 
@@ -116,3 +149,4 @@ Gin 中间件注入 tenant 后，`c.Request = c.Request.WithContext(WithTenant(.
 
 - [Azure Multitenant guidance](https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/overview)
 - [OWASP Multi Tenant Security](https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html)
+- [PostgreSQL Row Security Policies](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)

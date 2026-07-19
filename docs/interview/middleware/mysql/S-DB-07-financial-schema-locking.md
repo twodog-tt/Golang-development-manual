@@ -17,16 +17,36 @@ sources:
 
 # 资金类表设计：DECIMAL、约束、锁与死锁
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> 金额不能用 `FLOAT/DOUBLE` 做账。先定义资产精度和最大范围，再选整数最小单位、`DECIMAL(p,s)` 或原始大整数编码；MySQL `DECIMAL` 最大精度有限，不能直接假设可容纳所有 uint256。账本流水应不可变，并在同一账簿、资产/币种和计量单位内保持借贷平衡；幂等键和唯一约束负责防重复，余额只是投影。entry、余额投影和 outbox 等原子状态要在同一数据库事务中提交。并发更新要固定完整资源键的锁顺序、缩短事务，并安全重试 deadlock。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    金额不能用 `FLOAT/DOUBLE` 做账。先定义资产精度和最大范围，再选整数最小单位、`DECIMAL(p,s)` 或原始大整数编码；MySQL `DECIMAL` 最大精度有限，不能直接假设可容纳所有 uint256。账本流水应不可变，并在同一账簿、资产/币种和计量单位内保持借贷平衡；幂等键和唯一约束负责防重复，余额只是投影。entry、余额投影和 outbox 等原子状态要在同一数据库事务中提交。并发更新要固定完整资源键的锁顺序、缩短事务，并安全重试 deadlock。
+
+**3 分钟展开**
 
 1. **数值域**：法币通常固定小数位；链上 token decimals 与总量各异，必须按资产元数据验证。
 2. **账本模型**：transaction/header + 多条 immutable entries；平衡不变量必须限定在同一 tenant/book、资产/币种和计量单位内。跨资产兑换通常要为每个资产分别形成平衡分录，不能把 BTC 与 USDT 的名义数量直接相加后声称“总和为零”。
 3. **幂等与约束**：`UNIQUE(tenant_id, idempotency_key)`、外部引用唯一、状态 CHECK；跨行平衡仍需同事务应用逻辑。
 4. **并发**：按规范化资源键（例如 `tenant_id, book_id, account_id, asset_id`）排序加锁；发生 deadlock 回滚后，从事务最外层带退避重试，副作用必须幂等。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 金额域必须无损且有范围；流水在同账簿同资产内平衡且不可变；幂等、投影、outbox 同事务提交 |
+| 手画图 | `intent/idempotency → ledger tx → debit+credit entries → balance projection/outbox → reconcile` |
+| 项目落点 | 用实际支付、返佣、提现或钱包账务说明 raw amount、ledger amount 和对账边界；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | BIGINT/DECIMAL 便于 SQL 算术但范围有限；原始大整数保真却把校验和计算推到应用层 |
+
+**错误表达**
+
+- ❌ “MySQL `DECIMAL(65,0)` 能存任何 uint256；死锁后重试最后一条 SQL 即可。”
+- ✅ “uint256 最多 78 位；InnoDB deadlock 会回滚事务，应从幂等事务边界整体重试。”
+
+**自测追问**：跨资产兑换为什么不能直接把 BTC 与 USDT 数量相加求零？锁顺序应包含哪些资源键？
 
 ## 10 分钟版（原理 + 图示）
 

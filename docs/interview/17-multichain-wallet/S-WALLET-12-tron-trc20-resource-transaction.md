@@ -10,6 +10,7 @@ status: published
 resume_focus: true
 code_refs: []
 sources:
+  - https://developers.tron.network/docs/account
   - https://developers.tron.network/docs/resource-model
   - https://developers.tron.network/docs/tron-protocol-transaction
   - https://developers.tron.network/docs/multi-signature
@@ -19,26 +20,41 @@ sources:
 
 # TRON / TRC20 钱包：资源、权限与交易生命周期
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> TRON 的 TVM 和 Solidity 生态让它看起来像 EVM，但钱包不能只“换一个 RPC”。TRON 交易没有
-> Ethereum 式账户 nonce，而是绑定近期区块引用和 expiration；成本模型是 **Bandwidth +
-> Energy + 不足时燃烧 TRX**，TRC20 调用还要设置合适的 `fee_limit`。签名与权限要处理
-> owner/active permission、threshold 和 `permission_id`；充值不能只看 `Transfer` 日志，
-> 必须区分上链、执行成功和 solidified，再做幂等入账与重组/回滚处理。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
-1. **地址与编码**：TRON 使用 secp256k1；链上/HTTP 常见 Base58Check 与带网络前缀的十六进制地址，
-   转换时必须保留 network/type 语义，不能直接拿 Ethereum `0x...` 字符串混用。
-2. **交易**：构建 raw data 时冻结近期区块引用、expiration、contract call 和 fee limit，签名后不再修改；
-   广播超时按 txID 查询，不立即重建一笔。
-3. **资源**：所有交易消耗 Bandwidth，智能合约执行消耗 Energy；资源价格、动态 Energy 和网络参数会变，
-   估算后仍需留出 policy-controlled margin。
-4. **权限**：owner 权限可改权限结构，active 权限可限制 operation；多签阈值是 TRON 账户权限，
-   与通用 MPC/TSS 的离线签名协议不是同一层。
-5. **确认**：`/wallet/*` 可返回已上链但未 solidified 的数据，`/walletsolidity/*` 面向已确认数据；
-   业务还要配置自己的 credited/finalized 水位。
+!!! abstract "30 秒回答"
+
+    TRON 不能当作“换 RPC 的 EVM”。它没有 Ethereum 式账户 nonce，交易绑定近期区块引用和
+    expiration；费用是 Bandwidth、Energy 与不足时燃烧 TRX，合约调用还受 `fee_limit` 约束。
+    签名要建模 owner/active permission、operation、threshold 和 `permission_id`。
+    充值则校验目标合约、Transfer log、执行结果、canonical/solidified 状态和业务唯一键，
+    广播 timeout 先按原 txID 查证，不能立即重建。
+
+**3 分钟展开**
+
+1. 地址常用 `41` 开头 hex 或 Base58Check `T...`；这是 TRON 地址编码，不能仅凭地址区分 mainnet/testnet，
+   实际网络身份来自配置的节点/环境与交易上下文。
+2. 构建后冻结 raw bytes、txID、ref block、expiration、fee limit 和 intent lineage；签名后任何字段变化都会改变交易。
+3. 资源余额、Energy 单价/动态因子和合约状态会变；估算只是输入，`fee_limit` 是按网络/合约/业务策略设置的风险上限。
+4. full-node view、solidified view 和业务 credited/finalized 水位分开；查询到 tx 或 event 不等于执行成功和最终入账。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 无 Ethereum 式 nonce；广播成功不等于执行/最终；TRON 多签不等于 MPC |
+| 手画图 | `intent → resource check → build → policy/permission → sign → broadcast? → receipt → solidified → ledger` |
+| 项目落点 | 用真实 TRC20 USDT 充值/提现、资源治理、active permission 与补扫对账证据讲生产经验 |
+| 一个取舍 | 第三方 provider 接入快；自有节点/索引可控性高但升级、存储和一致性治理成本更高 |
+
+**错误表达**
+
+- ❌ “TRON 地址前缀能区分主网测试网；查到 Transfer 或广播成功就可以入账。”
+- ✅ “网络由节点/环境上下文确定；还要校验 receipt、canonical/solidified 与业务确认策略。”
+
+**自测追问**：广播超时且多个节点暂时 `not found` 时，何时才能创建带新 ref block 的 attempt？
 
 ## 10 分钟版（原理 + 图示）
 
@@ -66,7 +82,7 @@ stateDiagram-v2
 |------|------|--------------|
 | 防旧交易/有效期 | recent block reference + expiration | “TRON 也靠 account nonce 排序” |
 | 资源/费用 | Bandwidth、Energy、TRX burn、fee limit | “就是 gasPrice × gasLimit” |
-| 地址 | Base58Check/hex 表示与网络前缀 | “Ethereum 地址原样可用” |
+| 地址 | Base58Check/hex 与 TRON 地址前缀；网络由节点/环境上下文确定 | “地址本身能区分主网测试网” |
 | 权限 | owner/witness/active、operation、threshold、permission ID | “只有私钥对应地址一种权限” |
 | 确认查询 | full-node view 与 solidified view 有区别 | “接口查到就是最终入账” |
 | 合约执行 | inclusion 与 receipt/result 分离 | “广播成功就代表 TRC20 转账成功” |
@@ -190,6 +206,7 @@ solidified 状态；不要只盯 HTTP 状态码。
 ## 延伸阅读
 
 - [TRON Resource Model](https://developers.tron.network/docs/resource-model)
+- [TRON Account and Address Formats](https://developers.tron.network/docs/account)
 - [TRON Transaction Lifecycle](https://developers.tron.network/docs/tron-protocol-transaction)
 - [TRON Account Permission Management](https://developers.tron.network/docs/multi-signature)
 - [TRC20 Contract Interaction](https://developers.tron.network/docs/trc20-contract-interaction)

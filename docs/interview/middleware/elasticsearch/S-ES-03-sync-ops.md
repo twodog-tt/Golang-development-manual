@@ -10,20 +10,46 @@ status: published
 code_refs: []
 sources:
   - https://www.elastic.co/docs/solutions/search/ingest-for-search
+  - https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+  - https://www.elastic.co/guide/en/elasticsearch/reference/current/aliases.html
   - https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-cluster.html
 ---
 
 # Elasticsearch 数据同步与运维
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> ES 数据通常 **从 MySQL 同步**（Canal/Debezium → MQ → ES Consumer，或 Logstash/Flink）。原则：**MySQL 为源、ES 可重建**；同步延迟可接受则 **近实时搜索**。运维关注 **分片均衡、磁盘 watermark、集群颜色、版本升级**。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../../_meta/p0-knowledge-graph.md)
 
-1. **同步路径**：全量（DB scan + bulk）+ 增量（binlog CDC）；幂等写 ES（同 doc id upsert）。
-2. **一致性**：延迟通常秒级但取决于 refresh、MQ lag 和 bulk；失败进 DLQ 重试。对账不能只比 count，还应按主键范围校验缺失、多余、版本和关键字段 checksum。
-3. **运维**：黄/红集群处理；关注 low/high/flood-stage 磁盘水位。默认 low/high 常见为 85%/90%，到 flood stage（常见 95%）才会给相关索引加只读保护，具体值以集群配置为准。
+!!! abstract "30 秒回答"
+
+    Elasticsearch 应作为可重建的搜索投影，数据库或事件日志才是事实源。同步通常是
+    snapshot + CDC + MQ + bulk writer：先确定快照高水位，再无缝接增量；每条文档携带源版本/位置，
+    防止旧事件覆盖新状态。Bulk HTTP 200 仍可能有 item 失败，必须逐项分类重试，全部安全落地后
+    才提交消费位点；删除/tombstone、对账、重建和 alias 切换都要进入状态机。
+
+**3 分钟展开**
+
+1. `_id=业务主键` 只解决重复目标，不解决乱序；使用可比较的源版本、external versioning 或条件脚本阻止旧更新覆盖新文档。
+2. batch 按文档数、字节、内存与目标延迟联合调节并做背压；429/局部失败只重试失败 item，毒数据进入可审计停车区。
+3. 搜索可见性受 refresh 影响，写入成功不等于立即可搜；业务读己之写可回源或使用明确策略，不能承诺固定秒数。
+4. 新 mapping 用新索引回填、shadow 校验，再用一次 aliases API 操作切读写；原子切别名不代表 schema/query 一定兼容。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | ES 不是事实源；同 `_id` 不防乱序；Bulk 成功看每个 item |
+| 手画图 | `DB snapshot@W + CDC>W → MQ → version-aware bulk → ES alias` |
+| 项目落点 | 风控/Agent 检索讲可重建 projection、lag、DLQ、范围 checksum 和双索引升级 |
+| 一个取舍 | 更频繁 refresh 提高可见性但增加资源成本；更大 bulk 提升吞吐却增加内存和失败重放范围 |
+
+**错误表达**
+
+- ❌ “同 `_id` upsert 就能保证 CDC 幂等有序；Bulk 返回 200 就可以 commit offset。”
+- ✅ “重复与乱序是两件事；必须检查 item 结果并保存源版本/删除语义。”
+
+**自测追问**：全量扫描期间发生 UPDATE/DELETE，如何保证切到增量后既不漏也不被旧快照覆盖？
 
 ## 10 分钟版（同步架构）
 
@@ -43,9 +69,10 @@ flowchart LR
 
 **Go Consumer 要点**
 
-- Bulk 批量（500～5000 条/批）+ `refresh=false`
-- 文档 `_id` = 业务主键，天然 upsert
-- 消费失败不 commit offset； poison 进 DLQ
+- Bulk 按 docs、bytes、内存与等待时间自适应；吞吐/可见性策略按 workload 压测，不背固定条数。
+- 文档 `_id` 使用稳定业务主键，并携带源版本/位点；以 external versioning 或条件更新拒绝旧事件。
+- 逐项检查 Bulk `items[].status/error`；只重试可重试 item，确认批内状态安全后再提交 offset。
+- DELETE/tombstone 与 update 使用相同的版本顺序规则；poison item 进入带原始事件和错误原因的 DLQ。
 
 **与分库分表**（见 [S-DB-04](../mysql/S-DB-04-sharding.md)）
 
@@ -55,7 +82,8 @@ flowchart LR
 ## 生产场景
 
 - 商品库 MySQL，搜索走 ES；大促前 **全量 reindex** 预热
-- 索引别名 `products_v2` 切换零停机
+- 用一次 aliases API 操作切换读/写 alias；上线前验证 mapping、查询、排序、写兼容和回滚条件，
+  才能把它作为低停机迁移方案
 
 ## 排查与工具
 
@@ -73,7 +101,7 @@ flowchart LR
 
 ## 追问链
 
-1. **同步丢消息？** → MQ 持久化 + 至少一次 + ES 幂等 id。
+1. **同步丢消息？** → MQ 持久化/可重放 + 至少一次 + version-aware projection；offset、DLQ 和源数据对账共同闭环。
 2. **删除怎么同步？** → binlog DELETE 事件删 ES doc。
 3. **mapping 变更？** → 新 index + reindex + alias 切换。
 4. **集群红了？** → 未分配副本、磁盘满、版本不兼容；先扩盘/删旧索引。
@@ -81,7 +109,7 @@ flowchart LR
 ## 反模式与事故
 
 - **双写无对账** → 搜索有货 DB 无货
-- **bulk 无背压** → ES 拒绝写入 429
+- **bulk 无背压或只看 HTTP 状态** → ES 过载 429，或 item 局部失败被当成整批成功
 - **单 giant shard** → 无法恢复、迁移慢
 
 ## 延伸阅读

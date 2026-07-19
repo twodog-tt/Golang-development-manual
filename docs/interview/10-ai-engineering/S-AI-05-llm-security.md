@@ -20,7 +20,7 @@ sources:
 
 ## 口述卡（高频必背）
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
 !!! abstract "30 秒回答"
 

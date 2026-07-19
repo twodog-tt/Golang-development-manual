@@ -9,22 +9,47 @@ tags: [prompt-engineering, context-window, token]
 status: published
 code_refs: []
 sources:
-  - https://platform.openai.com/docs/guides/prompt-engineering
+  - https://developers.openai.com/api/docs/guides/prompting
+  - https://developers.openai.com/api/docs/guides/structured-outputs
   - https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering
   - https://github.com/dair-ai/Prompt-Engineering-Guide
 ---
 
 # Prompt 工程与 Context 窗口管理
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> **Prompt 工程**在后端侧体现为：指令模板化、few-shot 可配置、结构化输出和回归评估；**Context 管理**是控制 token 预算与不可信上下文边界。tokenizer、context window 和结构化输出能力都与具体模型/API 版本相关，不能把某个厂商参数背成通用标准。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
-1. **是什么**：System/User/Assistant 等内容组成模型上下文；模型有 context window 和最大输出限制，二者关系按具体 API 定义。
-2. **为什么**：后端要把 prompt 当 **配置/代码** 管理；超长对话会截断、变贵、变慢。
-3. **怎么做**：模板引擎 + 安全变量边界；历史消息摘要压缩；RAG 片段按相关性、权限和预算选择；优先使用 provider 支持的 JSON Schema/Structured Outputs。普通 JSON mode 通常只约束“有效 JSON”，不等于符合业务 schema。
+!!! abstract "30 秒回答"
+
+    Prompt 在生产系统里是有版本、有评估、有回滚的行为配置；Context 管理同时解决预算、
+    相关性和信任边界。系统约束、用户输入、历史、RAG 和工具结果分层组装，先做租户/资源授权，
+    再按目标模型 tokenizer 与输出预算裁剪。Structured Outputs 或 strict schema 约束结构，
+    但不证明事实正确、业务合法或用户有权执行。
+
+**3 分钟展开**
+
+1. 记录 `prompt_id/version`、模型/API 版本和评估集；变更先离线回归再灰度，不靠主观读几条回答。
+2. Context 预算优先保留高优先级约束与当前任务；RAG 和工具结果都是不可信数据，先授权、再裁剪、再明确引用边界。
+3. 摘要是有损压缩，应保留事实来源、版本和可回溯原文；不能把摘要中的猜测升级为长期记忆。
+4. Schema 输出仍需 JSON 解码、枚举/范围/状态和授权校验；真正副作用交给确定性 executor。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | Prompt 可版本化可回归；上下文先授权再预算；结构正确不等于语义或权限正确 |
+| 手画图 | `policy + history + authorized RAG + user → budgeter → model → validator` |
+| 项目落点 | OctoAgentFlow 讲 prompt registry、memory namespace、context budget 和发布回滚 |
+| 一个取舍 | 更长 context 保留信息但增加成本、延迟和攻击面；摘要节省 token 但可能丢事实 |
+
+**错误表达**
+
+- ❌ “JSON mode/strict schema 能保证业务答案正确；temperature=0 就完全可复现。”
+- ✅ “Schema 约束输出形状，业务语义和授权由代码校验；模型行为仍需基于版本和评估集验证。”
+
+**自测追问**：RAG 片段、历史摘要和 system 约束冲突时，如何排序并保留审计证据？
 
 ## 10 分钟版（原理 + 图示）
 
@@ -60,7 +85,7 @@ type OrderIntent struct {
     OrderID string `json:"order_id"`
 }
 
-// prompt 中明确 JSON schema + 示例
+// 优先使用 provider/API 支持的 schema 约束；仍需业务校验
 resp, err := llm.Complete(ctx, ChatRequest{
     Messages: msgs,
     ResponseFormat: &JSONSchema{Name: "order_intent", Schema: schema},
@@ -85,7 +110,7 @@ if err := validateIntent(intent); err != nil {
 
 ## 排查与工具
 
-- Token 计数：`tiktoken` 或 provider `usage` 回传
+- Token 计数：目标模型 tokenizer 的本地估算 + provider `usage` 回传；两者可能因隐藏/缓存等 token 口径不同
 - Prompt 回归：golden dataset + 自动评分（LLM-as-judge 慎用）
 - 配置：Git 管理 prompt 模板；敏感词过滤前置
 
@@ -123,5 +148,6 @@ const systemTmpl = `你是订单助手。仅回答订单相关问题。
 
 ## 延伸阅读
 
-- [OpenAI Prompt Engineering](https://platform.openai.com/docs/guides/prompt-engineering)
+- [OpenAI Prompting](https://developers.openai.com/api/docs/guides/prompting)
+- [OpenAI Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
 - [Anthropic Prompt Engineering](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering)

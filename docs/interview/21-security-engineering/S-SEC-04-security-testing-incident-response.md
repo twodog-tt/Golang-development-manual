@@ -21,22 +21,39 @@ sources:
 
 # Fuzz、Property、Differential Test 与安全事件响应
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> 安全测试要围绕不变量组合：fuzz 找输入空间中的崩溃和边界，property/invariant test 验证任意操作序列下资金与状态约束，differential test 比较独立实现但必须先定义允许差异，fault injection 验证超时、重放、分区和崩溃恢复。测试通过不等于没有漏洞，还要把检测、遏制、恢复和改进做成可演练 runbook。NIST SP 800-61r3 已于 2025 年取代 r2，并把 incident response 融入 CSF 2.0 六个职能；面试中不应只背旧版四阶段就结束。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
-| 方法 | 最适合发现 | Web3 示例 |
-|------|------------|-----------|
-| Fuzz | parser/decoder 边界、panic、整数/长度组合 | ABI/BCS/protobuf、WAL torn tail、RPC 响应 |
-| Property test | 大输入空间中的恒真性质 | 账本逐资产平衡、coin selection 不超支、request ID 不变义 |
-| Stateful invariant | 任意命令序列后的系统不变量 | 撮合守恒、桥 replay once、finalized history 不回滚 |
-| Differential | 两个实现/版本的语义漂移 | client trace、SDK 编码、旧/新 decoder、合约 reference model |
-| Fault injection | 分布式生命周期与恢复错误 | submit timeout、RPC 分歧、DB crash、旧 signer leader、reorg |
-| Tabletop/game day | 人、权限、通信和 runbook 缺口 | 私钥疑似泄露、桥异常、链停机、供应链投毒 |
+!!! abstract "30 秒回答"
 
-测试层次互补；提高单元覆盖率不能替代状态机、故障和恢复验证。
+    安全测试围绕不变量分层：fuzz 探索输入，property/stateful test 验证大量输入和操作序列，
+    differential test 比较实现前先定义合法差异与 oracle，fault injection 验证超时、分区、
+    崩溃和恢复。任何一层通过都不等于无漏洞；还要把检测、精确遏制、可信证据恢复和改进做成
+    可演练 runbook。当前 NIST SP 800-61r3 已把事件响应融入 CSF 2.0，而不是只背旧版四阶段。
+
+**3 分钟展开**
+
+1. 先从威胁模型提取资金守恒、request-to-intent 不变义、旧 leader 不可签、finalized 历史不可静默改写等 oracle。
+2. Differential 先 canonicalize 版本、fork height、字段和允许差异；两个实现一致也可能共享同一 bug。
+3. 故障矩阵覆盖“持久化后响应前断线”、unknown broadcast、WAL torn tail、reorg 和升级 decoder。
+4. 事故响应先定级和保全证据，再按 key/tenant/asset 精确停用、撤销身份、可信重建、shadow 放量和对账。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | 测试先定义 oracle；一致不等于正确；恢复以可信证据和对账完成为准 |
+| 手画图 | `threat model → tests → fault injection → signals → runbook → exercise → improve` |
+| 项目落点 | 用 signer fence、交易生命周期、WAL replay 或四链 adapter 的实际测试证据，不虚构生产演练 |
+| 一个取舍 | 越接近生产越真实也越危险；按 model/localnet/staging/shadow/受控 game day 逐级扩大 |
+
+**错误表达**
+
+- ❌ “fuzz 没崩就说明安全；两个 SDK 输出一致就是协议正确；事故先重启恢复流量。”
+- ✅ “测试只能增加证据；事故先控制授权与资金风险、保全证据，再从可信状态恢复。”
+
+**自测追问**：signer 已持久化签名但响应丢失时，故障注入应验证哪些状态和审计不变量？
 
 ## 10 分钟版（测试与响应闭环）
 

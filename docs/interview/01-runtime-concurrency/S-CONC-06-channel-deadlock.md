@@ -16,18 +16,38 @@ sources:
 
 # Channel 死锁场景与排查
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> Go runtime 能报告的是进程已无可继续运行路径的一类**全局死锁**，典型报错为
-> `fatal error: all goroutines are asleep - deadlock!`；**局部死锁**（部分 G 永久阻塞，
-> 但还有 G、timer、网络/cgo 等活动路径）不会自动报。`main` 返回会直接结束进程，不是死锁。
-> 生产关键词：**无缓冲握手顺序、忘记 close、循环等待、取消路径缺失**。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    Go runtime 能报告的是进程已无可继续运行路径的一类**全局死锁**，典型报错为
+    `fatal error: all goroutines are asleep - deadlock!`；**局部死锁**（部分 G 永久阻塞，
+    但还有 G、timer、网络/cgo 等活动路径）不会自动报。`main` 返回会直接结束进程，不是死锁。
+    生产关键词：**无缓冲握手顺序、忘记 close、循环等待、取消路径缺失**。
+
+**3 分钟展开**
 
 1. **是什么**：若干 G 在 channel 操作上互相等待，无进展。
 2. **为什么**：CSP 同步语义要求配对；缓冲满/空、无接收者、无发送者都会 park。
 3. **怎么做**：设计固定角色（生产者 close）、超时/ctx、buffer、多路 select；避免循环依赖等待链。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | channel 操作要有配对方或可用容量；runtime 只检测部分全局无进展状态；关闭权必须由协议指定 |
+| 手画图 | `G1 send A → 等 G2`、`G2 send B → 等 G1` 画成环，再补 `ctx.Done()` 退出边 |
+| 项目落点 | 用实际链事件流水线说明 producer、worker、collector 的关闭所有权和取消路径；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | buffer 可吸收短时错峰但不能修复循环依赖；越大越可能把错误推迟到生产高峰 |
+
+**错误表达**
+
+- ❌ “只要发生 channel 死锁，runtime 一定立即报错；加大 buffer 就能解决。”
+- ✅ “runtime 主要能发现进程级无进展；局部等待环可能只是 hang，必须靠协议、指标和 profile 排查。”
+
+**自测追问**：为什么系统仍有 timer 或其他 runnable goroutine 时，局部死锁可能不触发 fatal？多 producer 由谁 close？
 
 ## 10 分钟版（原理 + 图示）
 

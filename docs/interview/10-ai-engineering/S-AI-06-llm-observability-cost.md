@@ -11,7 +11,7 @@ code_refs: []
 sources:
   - https://github.com/open-telemetry/semantic-conventions-genai
   - https://langfuse.com/docs
-  - https://platform.openai.com/docs/guides/production-best-practices
+  - https://developers.openai.com/api/docs/guides/production-best-practices
 ---
 
 # LLM 可观测性、成本与延迟优化
@@ -20,7 +20,7 @@ sources:
 
 ## 口述卡（高频必背）
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
 !!! abstract "30 秒回答"
 
@@ -71,7 +71,7 @@ flowchart LR
 |------|------|
 | TTFT | 首 token 时间，体感关键 |
 | TPOT | 每 token 耗时 |
-| $/1K requests | 商业指标 |
+| 成本/成功任务 | 把多次模型、检索和工具调用汇总到完整任务；同时保留 provider 账单维度 |
 | Tool steps | Agent 深度 |
 | Cache hit rate | 优化效果 |
 
@@ -108,9 +108,9 @@ GenAI semantic conventions 已迁移到 OpenTelemetry 的独立仓库，仍在�
 
 ## 生产场景
 
-- **高峰客服**：缓存 FAQ；夜间批处理摘要用批 API
+- **高峰客服**：缓存满足权限与时效约束的 FAQ；非实时摘要可评估 provider 的异步/批处理能力
 - **Agent 账单爆炸**：某用户循环提问 → 按 user 限流 + max_steps
-- **多 region**：就近调推理节点降 RTT
+- **多 region**：在数据驻留、模型可用区、故障域和成本约束下选择路由；距离只是网络时延的一部分
 
 ## 排查与工具
 
@@ -140,7 +140,7 @@ GenAI semantic conventions 已迁移到 OpenTelemetry 的独立仓库，仍在�
 - **无 token 预算告警** → 单月账单惊呆财务
 - **生产开 debug 全量记 prompt** → 存储与合规双爆
 - 未经评估就让全部流量上最贵模型，或反过来强行路由小模型 → 成本或质量失控；路由层是否值得引入取决于流量和质量收益
-- **忽略失败重试成本** → 重试 doubling 费用
+- **忽略失败重试成本** → 多次尝试会放大 token、工具调用和链路成本，且超时请求是否计费取决于 provider
 
 ## 代码示例
 
@@ -160,4 +160,4 @@ tokenCounter.Add(ctx, int64(tokens), metric.WithAttributes(
 ## 延伸阅读
 
 - [OpenTelemetry GenAI Semantic Conventions](https://github.com/open-telemetry/semantic-conventions-genai)
-- [OpenAI Production Best Practices](https://platform.openai.com/docs/guides/production-best-practices)
+- [OpenAI Production Best Practices](https://developers.openai.com/api/docs/guides/production-best-practices)

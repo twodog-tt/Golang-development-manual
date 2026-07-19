@@ -16,15 +16,35 @@ sources:
 
 # pprof heap/allocs 实战解读
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> **heap** 看当前仍在使用的分配（inuse），**allocs** 看累计分配（含已释放）；排查泄漏偏向 heap，排查 GC 压力偏向 allocs。内存 profile 按分配字节概率采样，默认平均约每 512 KiB 采一个样本，不是机械地“每 512 KiB 必采一次”。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    **heap** 看当前仍在使用的分配（inuse），**allocs** 看累计分配（含已释放）；排查泄漏偏向 heap，排查 GC 压力偏向 allocs。内存 profile 按分配字节概率采样，默认平均约每 512 KiB 采一个样本，不是机械地“每 512 KiB 必采一次”。
+
+**3 分钟展开**
 
 1. **是什么**：`/debug/pprof/heap` 暴露内存 profile；`go tool pprof` 交互分析调用栈。
 2. **为什么**：定位谁占内存、谁分配多；比 `ReadMemStats` 多了栈归因。
 3. **怎么做**：`?gc=1` 强制 GC 后快照；`-sample_index=inuse_space`；对比两次 heap 差分；allocs 看 `alloc_objects`。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | heap 看仍存活/在用，allocs 看累计分配；profile 是概率采样估算；差分必须绑定可比 workload |
+| 手画图 | `workload → allocation samples → heap/allocs → top/cum/list → code fix → same-workload verify` |
+| 项目落点 | 用实际索引器或 API 的内存峰值说明两次快照、流量窗口和版本如何对齐；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | 降低采样间隔提高小热点可见性但增加开销；生产通常先用默认采样再做定向复现 |
+
+**错误表达**
+
+- ❌ “pprof 每 512 KiB 必采一个对象；`?gc=1` 后还在的都一定是泄漏。”
+- ✅ “采样间隔是平均概率；GC 后存活对象可能是合法缓存，必须结合增长趋势和引用所有权判断。”
+
+**自测追问**：`inuse_space` 与 `alloc_space` 分别回答什么问题？为什么 base diff 不能替代相同 workload？
 
 ## 10 分钟版（原理 + 图示）
 

@@ -19,11 +19,17 @@ sources:
 
 # PostgreSQL 隔离级别、锁与资金写入
 
-## 30 秒版（开场）
+<a id="oral-card"></a>
 
-> PostgreSQL 默认 `READ COMMITTED` 是**每条语句重新取快照**，不是整个事务固定快照；`REPEATABLE READ` 使用事务级快照，但仍不能把所有跨行不变量都自动变成可串行化；`SERIALIZABLE` 通过 SSI 检测危险依赖，必要时以 `40001` 中止事务，所以应用必须重试整个事务。资金写入还要靠唯一幂等键、原子条件更新、稳定锁顺序、不可变流水和对账；隔离级别不能替代业务约束。
+## 口述卡（高频必背）
 
-## 3 分钟版（一面深度）
+[返回 P0 知识图谱](../../_meta/p0-knowledge-graph.md)
+
+!!! abstract "30 秒回答"
+
+    PostgreSQL 默认 `READ COMMITTED` 是**每条语句重新取快照**，不是整个事务固定快照；`REPEATABLE READ` 使用事务级快照，但仍不能把所有跨行不变量都自动变成可串行化；`SERIALIZABLE` 通过 SSI 检测危险依赖，必要时以 `40001` 中止事务，所以应用必须重试整个事务。资金写入还要靠唯一幂等键、原子条件更新、稳定锁顺序、不可变流水和对账；隔离级别不能替代业务约束。
+
+**3 分钟展开**
 
 | 级别 | PostgreSQL 关键语义 | 应用责任 |
 |------|---------------------|----------|
@@ -35,6 +41,20 @@ sources:
 或实现细节回答。还要知道 Read Committed 下 `UPDATE`/`DELETE`/锁定读遇到并发更新时会等待，
 随后对新版本重新检查 `WHERE`；因此一条更新命令可能看到目标行的并发新版本，却看不到对方对
 其他行的改动。简单主键更新通常正需要这种语义，复杂跨行搜索条件则必须额外审查。
+
+| 记忆槽 | 内容 |
+|--------|------|
+| 三个不变量 | RC 是语句级快照；PG RR 是事务级快照但仍可能有序列化异常；Serializable 失败要重试整个事务 |
+| 手画图 | `tx snapshot → atomic DML/locks/constraints → commit | 40001/deadlock → whole-tx retry` |
+| 项目落点 | 用实际账户扣款或账本写入说明条件更新、唯一幂等键、稳定锁顺序和 reconcile；只引用本人实际参与部分和可解释指标 |
+| 一个取舍 | 原子 DML 在 RC 下简单高效；Serializable 更通用但有重试和谓词冲突成本 |
+
+**错误表达**
+
+- ❌ “Repeatable Read 会自动保护所有跨行不变量；收到 40001 只重试失败 SQL。”
+- ✅ “PG RR 仍允许 serialization anomaly；重试必须从事务开始重算读取和业务判断。”
+
+**自测追问**：为什么 `UPDATE ... WHERE balance >= amount` 比先查后改稳？Serializable 能否替代唯一约束？
 
 ## 10 分钟版（正确性设计）
 
