@@ -1,12 +1,12 @@
 # 题源与引用规范
 
-本手册面向 **5 年+ Go 后端 + AI Agent Platform + 区块链/Web3 架构师** 面试准备。正文均为自研表述；外部资料仅作题源与延伸阅读，**不整段搬运**。
+本手册面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构师** 面试准备。正文均为自研表述；外部资料仅作题源与延伸阅读，**不整段搬运**。
 
 > 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) ·
 > [角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
 > 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
-## 手册覆盖范围（223 题）
+## 手册覆盖范围（227 题）
 
 | 模块 | 题数 | 说明 |
 |------|------|------|
@@ -17,7 +17,7 @@
 | 中间件与数据库 | 26 | MySQL、PostgreSQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
 | 06 网络与服务治理 | 7 | Linux/epoll/TCP、gRPC、Gin、JWT、WebSocket |
 | 08 手写题 | 7 | LRU、限流、连接池、Singleflight、有界批处理 |
-| 10 AI 工程与编程 | 10 | LLM、Agent 工作流/HITL、Persona/Memory、RAG、MCP |
+| 10 AI 工程与编程 | 14 | 工作流/HITL、MCP/A2A、ERC-8004、x402/ERC-8183、开放平台/Launchpad |
 | 11 解决方案架构 | 8 | DDD、演进、评审、白板 |
 | 12 区块链与 Web3（Go） | 12 | RPC、索引、Rollup/DA/finality、跨链消息安全、4337、MPC |
 | 17 多链钱包与托管 | 12 | Bitcoin、TRON/TRC20、Solana/Cosmos/Aptos/Sui Go 实战、归集 |
@@ -92,9 +92,15 @@
 | OWASP LLM Top 10 | https://owasp.org/www-project-top-10-for-large-language-model-applications/ | LLM 安全 |
 | Model Context Protocol | https://modelcontextprotocol.io/ | MCP 协议与工具暴露 |
 | MCP Go SDK | https://github.com/modelcontextprotocol/go-sdk | Go 实现 MCP Server |
+| A2A Protocol | https://a2a-protocol.org/latest/ | Agent 发现、任务生命周期与跨框架互操作 |
+| ERC-8004 | https://eips.ethereum.org/EIPS/eip-8004 | Agent 身份、信誉和验证 Draft |
+| x402 Foundation | https://github.com/x402-foundation/x402 | HTTP 支付协商、scheme/network 与结算 |
+| ERC-8183 | https://eips.ethereum.org/EIPS/eip-8183 | Agent job escrow 与 Evaluator Draft |
 | OpenTelemetry GenAI 语义约定 | https://opentelemetry.io/docs/specs/semconv/gen-ai/ | LLM 可观测性 |
 | OpenAI Agents SDK | https://openai.github.io/openai-agents-python/ | Agent loop、HITL、Sessions |
 | LangGraph 文档 | https://docs.langchain.com/oss/python/langgraph/overview | Persistence、Memory、Interrupts |
+| ElizaOS 文档 | https://docs.elizaos.ai/plugins/architecture | Crypto Agent Runtime 与插件模型 |
+| Virtuals GAME | https://whitepaper.virtuals.io/builders-hub/game-framework | Agent 决策框架与生态路线 |
 
 ### 云原生、容器与可观测性
 

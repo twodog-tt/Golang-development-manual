@@ -1,11 +1,11 @@
 # Go · Agent · Web3 架构师面试手册
 
-面向 **5 年+ Go 后端、AI Agent Platform / Infrastructure 与 Web3 架构岗位** 的
-面试知识库，共 **223 篇正文**。
+面向 **5 年+ Go 后端、AI Agent Platform / Crypto Agent Ecosystem 与 Web3 架构岗位** 的
+面试知识库，共 **227 篇正文**。
 
-> **当前简历主线**：先证明资深 Go 与生产工程基本盘，再重点讲 Agent 工作流、HITL、
-> Persona/Memory、Guardrail 和外部副作用；交易所、钱包、实时风控与链上工程作为处理
-> 资金、高吞吐、可恢复数据链路的差异化证据。
+> **当前简历主线**：先证明资深 Go 与生产工程基本盘，再重点讲 Agent 工作流、MCP/A2A、
+> Persona/Memory、Agent 身份/Commerce、开放平台和 Web3 安全执行；交易所、钱包、实时风控
+> 与链上工程作为处理资金、高吞吐、可恢复数据链路的差异化证据。
 
 !!! tip "从这里开始"
 
@@ -23,7 +23,7 @@
 
 | 目标岗位 | P0 | 首要证明的能力 |
 |----------|---:|----------------|
-| **AI Agent Platform / Infrastructure（简历首选）** | **60** | 工作流、HITL、Memory、Guardrail、成本与外部副作用 |
+| **AI Agent Platform / Crypto Agent Ecosystem（简历首选）** | **64** | 工作流、MCP/A2A、身份/Commerce、开放平台与 Web3 安全执行 |
 | 资深 Go 后端 | 62 | Go/运行时、测试、网络、数据库、消息与生产工程 |
 | 多链钱包与托管 | 66 | 多链交易、归集、MPC/HSM、签名控制与恢复 |
 | 支付与稳定币 | 66 | 支付状态机、账本、清结算、合规与机构资金 |
@@ -76,7 +76,7 @@ Agent Platform 仍是简历主线；公开仓库中的
 | **Go 基础与生产工程** | [01 并发](interview/01-runtime-concurrency/index.md) → [02 内存](interview/02-memory-gc/index.md) → [16 Go 生产工程](interview/16-go-production-engineering/index.md) → [08 手写题](interview/08-coding-senior/index.md) | Go 深度、测试、性能与编码门槛 |
 | **网络与中间件** | [06 网络](interview/06-network-governance/index.md) → [中间件](interview/middleware/index.md) | Linux/TCP、API、gRPC、数据库、缓存与 MQ |
 | **系统与组织架构** | [03 系统设计](interview/03-system-design/index.md) → [09 云原生](interview/09-cloud-native/index.md) → [11 解决方案架构](interview/11-solution-architecture/index.md) → [15 微服务](interview/15-microservices-exchange/index.md) → [07 领导力](interview/07-engineering-leadership/index.md) | 架构白板、K8s、演进、迁移与 Staff 影响力 |
-| **AI Agent** | [10 AI 工程](interview/10-ai-engineering/index.md) → [工作流/HITL](interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) → [Persona/Memory](interview/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) | Agent 平台主线 |
+| **AI / Crypto Agent** | [10 AI 工程](interview/10-ai-engineering/index.md) → [工作流/HITL](interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) → [MCP/A2A](interview/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) → [Agent Commerce](interview/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) → [开放平台/Launchpad](interview/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) | Agent 生态主线 |
 | **Web3 基础设施** | [12 EVM](interview/12-blockchain-web3/index.md) → [17 多链钱包](interview/17-multichain-wallet/index.md) → [18 支付](interview/18-web3-payments-stablecoin/index.md) → [19 节点/RPC](interview/19-node-rpc-staking/index.md) → [20 协议/共识](interview/20-protocol-consensus-security/index.md) → [21 安全](interview/21-security-engineering/index.md) → [13 Solidity](interview/13-solidity-contracts/index.md) → [14 交易所](interview/14-dex-cex-engineering/index.md) | 多链、资金、节点、协议、安全、合约与交易 |
 
 左侧导航适合按专题查漏；正文与搜索保留完整题目标题。

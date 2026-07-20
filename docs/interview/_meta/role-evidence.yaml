@@ -180,8 +180,8 @@ roles:
       - S-BC-05
 
   ai_agent_platform:
-    label: AI Agent Platform / Infrastructure
-    objective: 用 Go 构建可恢复、可审计、可控成本的 Agent 平台，并用 Web3 与实时风控项目证明复杂外部副作用和数据链路经验。
+    label: AI Agent Platform / Crypto Agent Ecosystem
+    objective: 用 Go 构建可恢复、可审计、可控成本的 Agent 平台，并贯通 MCP/A2A、Agent 身份与商业协议、开放生态和 Web3 安全执行面。
     p0:
       - S-AI-01
       - S-AI-03
@@ -191,6 +191,10 @@ roles:
       - S-AI-07
       - S-AI-09
       - S-AI-10
+      - S-AI-11
+      - S-AI-12
+      - S-AI-13
+      - S-AI-14
       - S-ARCH-08
       - S-ARCH-09
       - S-ARCH-15
@@ -692,6 +696,8 @@ evidence:
       - S-CLOUD-09
       - S-CLOUD-10
       - S-EXCH-25
+      - S-AI-13
+      - S-AI-14
     labels:
       stable: 核心机制相对稳定，仍以目标版本行为为准。
       version_sensitive: 协议、运行时、SDK 或产品行为会随版本变化。

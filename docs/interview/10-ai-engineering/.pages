@@ -12,3 +12,7 @@ nav:
   - "多模态与语音接入": S-AI-08-multimodal-voice.md
   - "Agent 工作流 / HITL / 发布": S-AI-09-agent-workflow-hitl-publishing.md
   - "Persona / Memory / 反馈治理": S-AI-10-persona-memory-feedback-governance.md
+  - "MCP / A2A 跨框架互操作": S-AI-11-mcp-a2a-vendor-neutral-interoperability.md
+  - "ERC-8004 身份 / 信誉 / 验证": S-AI-12-erc8004-agent-identity-reputation-validation.md
+  - "x402 / ERC-8183 Commerce": S-AI-13-x402-erc8183-agent-commerce.md
+  - "Agent 开放平台 / Launchpad": S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md

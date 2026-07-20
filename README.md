@@ -1,6 +1,6 @@
 # Go 后端与区块链架构师面试手册
 
-面向 **5 年+ Go 后端 + AI Agent Platform + 区块链/Web3 架构师** 的面试知识库（**223 篇正文**）。
+面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构师** 的面试知识库（**227 篇正文**）。
 
 **在线阅读**：https://twodog-tt.github.io/Golang-development-manual/
 
@@ -33,7 +33,7 @@
 | **进阶 · 网络与中间件** | 06 Linux/TCP/网络 + MySQL/PostgreSQL/Redis/MQ/ES/分布式事务 | 33 |
 | **高阶 · 系统设计与架构** | 03 系统设计 → 09 云原生 → 11 解决方案架构 → **15 微服务（交易所）** | 45 |
 | **专题 · Web3 核心基础设施** | 12 EVM/Rollup/跨链 → 17 多链钱包 → 18 支付 → 19 节点/RPC → 20 协议/共识 → 21 安全工程 → 13 Solidity → 14 交易所/预测市场 | 82 |
-| **综合 · 领导力与 AI** | 07 工程领导力 → 10 AI 工程 | 15 |
+| **综合 · 领导力与 AI** | 07 工程领导力 → 10 AI 工程 | 19 |
 
 ## 模块入口
 
@@ -80,7 +80,7 @@
 | 模块 | 题数 | 入口 |
 |------|------|------|
 | [07 工程与领导力](./docs/interview/07-engineering-leadership/index.md) | 5 | 复盘、技术债、Staff 战略与跨团队迁移 |
-| [10 AI 工程与编程](./docs/interview/10-ai-engineering/index.md) | 10 | LLM、Agent 工作流/HITL、Persona/Memory、RAG、MCP |
+| [10 AI 工程与编程](./docs/interview/10-ai-engineering/index.md) | 14 | 工作流/HITL、MCP/A2A、Agent 身份/Commerce、开放平台/Launchpad |
 
 ### Web3 架构师速查
 
@@ -89,7 +89,7 @@
 | [16 Go 生产工程](./docs/interview/16-go-production-engineering/index.md) · [21 安全工程](./docs/interview/21-security-engineering/index.md) | [17 多链钱包](./docs/interview/17-multichain-wallet/index.md) · [18 支付](./docs/interview/18-web3-payments-stablecoin/index.md) | [19 节点/RPC](./docs/interview/19-node-rpc-staking/index.md) · [20 协议/共识](./docs/interview/20-protocol-consensus-security/index.md) | [13 Solidity](./docs/interview/13-solidity-contracts/index.md) · [14 DEX/CEX](./docs/interview/14-dex-cex-engineering/index.md) |
 
 <!-- QUESTION_TABLE_START -->
-## 面试题全表（223 题）
+## 面试题全表（227 题）
 
 > 序号按 **基础 → 进阶 → 高阶 → 专题 → 综合** 排列；题号即文档 ID（如 `S-CONC-01`）。点击题目可跳转至 Markdown 正文。
 
@@ -340,6 +340,10 @@
 | 221 | `S-AI-08` | [多模态与语音接入：图像、音频在 Go 服务中的工程实践](./docs/interview/10-ai-engineering/S-AI-08-multimodal-voice.md) |
 | 222 | `S-AI-09` | [Agent 工作流、Human-in-the-loop 与可靠发布控制面](./docs/interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) |
 | 223 | `S-AI-10` | [Persona、分层 Memory 与反馈学习治理](./docs/interview/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) |
+| 224 | `S-AI-11` | [MCP 与 A2A：Tool、Agent、任务生命周期与跨框架互操作](./docs/interview/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) |
+| 225 | `S-AI-12` | [ERC-8004：Agent 身份、信誉、验证与钱包绑定](./docs/interview/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md) |
+| 226 | `S-AI-13` | [x402、x402b 与 ERC-8183：Agent 支付、托管、争议和对账](./docs/interview/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) |
+| 227 | `S-AI-14` | [Crypto Agent SDK、开放平台、Marketplace 与 Launchpad 架构](./docs/interview/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) |
 
 <!-- QUESTION_TABLE_END -->
 ## 可运行代码
@@ -382,7 +386,7 @@ mkdocs serve   # http://127.0.0.1:8000
 | [scripts/generate_mock_interview_data.py](./scripts/generate_mock_interview_data.py) | 从 `questions.yaml` 生成 `docs/data/questions.json`（模拟面试页） |
 | [scripts/generate_nav_pages.py](./scripts/generate_nav_pages.py) | 生成 `interview/.pages` 与各模块 `.pages`（三级侧栏题目标题） |
 | [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `questions.yaml` 更新 README 面试题全表（序号 + 题号 + 题目） |
-| [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 223 篇正文、角色优先级与证据标签一致性 |
+| [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 227 篇正文、角色优先级与证据标签一致性 |
 
 ## 引用来源
 

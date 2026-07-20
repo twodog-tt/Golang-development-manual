@@ -727,6 +727,30 @@ p1:
       status: published
       resume_focus: true
       file: 10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md
+    - id: S-AI-11
+      title: MCP 与 A2A：Tool、Agent、任务生命周期与跨框架互操作
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md
+    - id: S-AI-12
+      title: ERC-8004：Agent 身份、信誉、验证与钱包绑定
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md
+    - id: S-AI-13
+      title: x402、x402b 与 ERC-8183：Agent 支付、托管、争议和对账
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md
+    - id: S-AI-14
+      title: Crypto Agent SDK、开放平台、Marketplace 与 Launchpad 架构
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md
   blockchain_web3:
     - id: S-BC-01
       title: 区块链基础与 EVM 账户模型

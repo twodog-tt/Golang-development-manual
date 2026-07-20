@@ -1,10 +1,11 @@
 # 面试知识库质量审查与岗位差距
 
-> 全库 **223 题**（以 [questions.yaml](questions.yaml) 为准）
+> 全库 **227 题**（以 [questions.yaml](questions.yaml) 为准）
 >
-> 本轮审查与补强日期：**2026-07-17**
+> 本轮审查与补强日期：**2026-07-20**
 >
-> 目标岗位：资深 Golang 开发、后端/解决方案架构师，重点行业为 Web3、交易所、钱包、链基础设施与支付
+> 目标岗位：资深 Golang 开发、后端/解决方案架构师，重点行业为 AI/Crypto Agent、
+> Web3、交易所、钱包、链基础设施与支付
 >
 > 2026-07-18 已启动角色 P0 深度纠错，首批 25 篇的逐项结果见
 > [P0 技术纠错审计](technical-corrections-audit.md)。
@@ -46,7 +47,11 @@
 - 第九阶段按预测市场技术负责人 JD 新增 **4 篇正文**：CTF/Outcome Token/市场生命周期、
   CLOB-first/EIP-712/链上结算、体育电竞数据源/乐观预言机/争议仲裁，以及安全不变量/
   测试矩阵/主网上线；四篇均为 `exchange_engineering` 与 `staff_architect` P0。
-- 证据标签已覆盖 223 篇：`explanation_only=165`、`illustrative_artifact=31`、
+- 第十阶段按 Crypto AI Agent 生态技术经理/架构师 JD 新增 **4 篇 P0 正文**：MCP/A2A
+  跨框架互操作、ERC-8004 身份/信誉/验证、x402/x402b/ERC-8183 Agent Commerce，以及
+  Agent SDK/开放平台/Marketplace/Launchpad；`AI Agent Platform` 轨道升级为
+  `AI Agent Platform / Crypto Agent Ecosystem`，增量 P0 从 20 篇扩展为 24 篇。
+- 证据标签已覆盖 227 篇：`explanation_only=169`、`illustrative_artifact=31`、
   `deterministic_test=20`、`integration_harness=7`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
@@ -72,7 +77,7 @@
 | 工程领导力 | 5 |
 | 资深手写题 | 7 |
 | 云原生 | 10 |
-| AI 工程 | 10 |
+| AI 工程 | 14 |
 | 解决方案架构 | 8 |
 | 区块链 Web3 | 12 |
 | 多链钱包与托管 | 12 |
@@ -83,7 +88,7 @@
 | Solidity | 8 |
 | DEX/CEX/预测市场 | 26 |
 | 交易所微服务 | 6 |
-| **合计** | **223** |
+| **合计** | **227** |
 
 原始 153 题基线中的中间件为 21 题；此前新增 2 篇 MySQL，本阶段再新增 3 篇 PostgreSQL，
 当前数据库与中间件共 26 题。
@@ -327,8 +332,8 @@
 
 1. **[Staff 案例结构已补]** spec-first、ADR、API/versioning、跨团队技术治理、mentor、
    on-call 与事故指挥；候选人仍需用本人真实项目替换 `S-LEAD-04/05` 占位符。
-2. AI-assisted engineering、MCP/agent workflow。当前已有 10 题，保持工程化深度即可，
-   不应挤占多链、节点和资金安全的准备时间。
+2. 对 Crypto Agent 生态岗位，`S-AI-11~14` 已进入角色 P0；对纯 Go/Web3 基础设施岗位，
+   它们仍按 JD 选择，不应挤占多链、节点和资金安全的准备时间。
 3. Go 1.26 安全与工具链：`crypto/hpke`、FIPS 相关能力、现代化 `go fix`；
    按目标岗位再扩展，不列为 Web3 后端通用 P0。
 

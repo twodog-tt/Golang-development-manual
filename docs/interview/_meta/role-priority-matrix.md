@@ -1,6 +1,6 @@
 # 角色化优先级与证据标签
 
-> 当前共 **223 篇 published 正文**。角色优先级与证据标签的机器事实源为
+> 当前共 **227 篇 published 正文**。角色优先级与证据标签的机器事实源为
 > [role-evidence.yaml](./role-evidence.yaml)，一致性由
 > `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-20**。
 
@@ -17,13 +17,13 @@
 
 | 目标岗位 | P0 | P1 | P2 | P0 重点 |
 |----------|---:|---:|---:|---------|
-| 资深 Go 后端 | 62 | 72 | 89 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
-| **AI Agent Platform / Infrastructure** | **60** | **89** | **74** | Agent 工作流、HITL、Memory、Guardrail、成本、外部副作用 |
-| 多链钱包与托管 | 66 | 90 | 67 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
-| 支付与稳定币 | 66 | 97 | 60 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
-| 节点/RPC/Indexer | 73 | 85 | 65 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
-| 交易所工程 | 72 | 103 | 48 | 撮合/WAL、预测市场 CTF/CLOB、预言机、账本与安全上线 |
-| Staff/后端架构师 | 79 | 88 | 56 | 系统设计、预测市场全栈、迁移、IaC/GitOps、安全、跨团队影响 |
+| 资深 Go 后端 | 62 | 72 | 93 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
+| **AI Agent Platform / Crypto Agent Ecosystem** | **64** | **89** | **74** | 工作流、MCP/A2A、Agent 身份/Commerce、开放平台、Web3 安全执行 |
+| 多链钱包与托管 | 66 | 90 | 71 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
+| 支付与稳定币 | 66 | 97 | 64 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
+| 节点/RPC/Indexer | 73 | 85 | 69 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
+| 交易所工程 | 72 | 103 | 52 | 撮合/WAL、预测市场 CTF/CLOB、预言机、账本与安全上线 |
+| Staff/后端架构师 | 79 | 88 | 60 | 系统设计、预测市场全栈、迁移、IaC/GitOps、安全、跨团队影响 |
 
 P0 数量不是“全部逐字背诵”。建议先掌握 shared P0 的 30 秒版与不变量，再只进入一个岗位的
 增量 P0；P1 用来应对 JD 特有追问，P2 只按面试反馈补洞。
@@ -43,16 +43,19 @@ P0 数量不是“全部逐字背诵”。建议先掌握 shared P0 的 30 秒�
 
 ## 七条岗位增量
 
-### AI Agent Platform / Infrastructure（本简历首选）
+### AI Agent Platform / Crypto Agent Ecosystem（本简历首选）
 
-在 shared P0 之外，新增 20 篇简历定向 P0：
+在 shared P0 之外，新增 24 篇简历定向 P0：
 
 | 能力域 | P0 题号 | 简历证据 |
 |--------|---------|----------|
 | 模型与工具入口 | `S-AI-01/03/07` | Go LLM 接入、Tool/Skill、MCP Server |
+| 协议互操作 | `S-AI-11` | MCP/A2A 边界、统一任务状态与 vendor-neutral conformance |
 | 工作流与人工控制 | `S-AI-09` | Review Queue、Execution Queue、Publishing Pipeline |
 | Persona/Memory | `S-AI-04/10` | Bot/Scene Context、反馈规则再注入 |
 | 安全与成本 | `S-AI-05/06`、`S-SEC-01/04` | Guardrail、注入隔离、token/cost、事件响应 |
+| Agent 身份与商业协议 | `S-AI-12/13` | ERC-8004、x402/x402b、ERC-8183、支付/托管/对账 |
+| 开放生态与 Launchpad | `S-AI-14` | SDK、发布治理、Marketplace、钱包执行和 Agent Launchpad |
 | 平台控制面 | `S-ARCH-08/09/15`、`S-NET-04` | 限额、熔断、版本兼容、OAuth2/凭据 |
 | 实时数据与消息 | `S-ARCH-21`、`S-KAFKA-02`、`S-RAB-01`、`S-ES-03` | CDC/Flink/ES、RabbitMQ 行情与异步任务 |
 | SaaS 与 Web3 证据 | `S-SOL-05`、`S-WALLET-12` | 多租户平台、EVM/TRON USDT 与 TRC20 |
@@ -119,7 +122,7 @@ P99/P999 和恢复语义。
 
 | 标签 | 当前篇数 | 能证明什么 | 不能证明什么 |
 |------|---------:|------------|--------------|
-| `explanation_only` | 165 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
+| `explanation_only` | 169 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
 | `illustrative_artifact` | 31 | 仓库有相关代码或配置 | 测试当前通过、外部系统兼容 |
 | `deterministic_test` | 20 | 有不依赖外部服务的测试/回放门禁 | localnet、硬件或生产行为 |
 | `integration_harness` | 7 | 有 localnet/testnet/HSM/MPC/故障 harness | 每个目标版本都已实跑 |
@@ -133,8 +136,8 @@ P99/P999 和恢复语义。
 | 标签 | 当前篇数 | 复核方式 |
 |------|---------:|----------|
 | `stable` | 142 | 目标数据库/语言版本面试前抽查 |
-| `version_sensitive` | 69 | 复核官方 release/spec/SDK 文档 |
-| `vendor_or_regulatory_sensitive` | 12 | 结合目标厂商、司法辖区和法律/合规意见 |
+| `version_sensitive` | 71 | 复核官方 release/spec/SDK 文档 |
+| `vendor_or_regulatory_sensitive` | 14 | 结合目标厂商、司法辖区和法律/合规意见 |
 
 `vendor_or_regulatory_sensitive` 优先于普通版本敏感；它提醒你在面试里说明适用范围，而不是背一个
 全球通用结论。
@@ -151,4 +154,4 @@ P99/P999 和恢复语义。
 .venv/bin/python scripts/verify_knowledge_metadata.py
 ```
 
-校验会检查 223 个 ID、正文、sources、30 秒版、追问链、角色引用和证据标签互斥关系。
+校验会检查 227 个 ID、正文、sources、30 秒版、追问链、角色引用和证据标签互斥关系。

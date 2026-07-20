@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "generated_at": "2026-07-20T05:45:00Z",
-  "count": 223,
+  "generated_at": "2026-07-20T07:59:46Z",
+  "count": 227,
   "roles": [
     {
       "key": "senior_go_backend",
@@ -10,8 +10,8 @@
     },
     {
       "key": "ai_agent_platform",
-      "label": "AI Agent Platform / Infrastructure",
-      "objective": "用 Go 构建可恢复、可审计、可控成本的 Agent 平台，并用 Web3 与实时风控项目证明复杂外部副作用和数据链路经验。"
+      "label": "AI Agent Platform / Crypto Agent Ecosystem",
+      "objective": "用 Go 构建可恢复、可审计、可控成本的 Agent 平台，并贯通 MCP/A2A、Agent 身份与商业协议、开放生态和 Web3 安全执行面。"
     },
     {
       "key": "wallet_custody",
@@ -287,6 +287,106 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
+        "reviewed_at": "2026-07-20"
+      }
+    },
+    {
+      "id": "S-AI-11",
+      "title": "MCP 与 A2A：Tool、Agent、任务生命周期与跨框架互操作",
+      "frequency": 5,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": true,
+      "url": "interview/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability/",
+      "prompt": "MCP 与 A2A：Tool、Agent、任务生命周期与跨框架互操作",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p0",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-07-20"
+      }
+    },
+    {
+      "id": "S-AI-12",
+      "title": "ERC-8004：Agent 身份、信誉、验证与钱包绑定",
+      "frequency": 5,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": true,
+      "url": "interview/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation/",
+      "prompt": "ERC-8004：Agent 身份、信誉、验证与钱包绑定",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p0",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-07-20"
+      }
+    },
+    {
+      "id": "S-AI-13",
+      "title": "x402、x402b 与 ERC-8183：Agent 支付、托管、争议和对账",
+      "frequency": 5,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": true,
+      "url": "interview/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce/",
+      "prompt": "x402、x402b 与 ERC-8183：Agent 支付、托管、争议和对账",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p0",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "vendor_or_regulatory_sensitive",
+        "reviewed_at": "2026-07-20"
+      }
+    },
+    {
+      "id": "S-AI-14",
+      "title": "Crypto Agent SDK、开放平台、Marketplace 与 Launchpad 架构",
+      "frequency": 5,
+      "module": "10 AI 工程",
+      "module_key": "ai_engineering",
+      "resume_focus": true,
+      "url": "interview/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad/",
+      "prompt": "Crypto Agent SDK、开放平台、Marketplace 与 Launchpad 架构",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p0",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "vendor_or_regulatory_sensitive",
         "reviewed_at": "2026-07-20"
       }
     },

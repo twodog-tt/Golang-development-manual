@@ -1,9 +1,10 @@
 # 10 AI 工程与编程
 
-10 题 | Agent Platform 岗位 P0 / Go 后端 P1 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+14 题 | Agent Platform / Crypto Agent 生态岗位 P0 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
 
-> 面向 **AI Agent Platform / Infrastructure 与 Go 后端** 的工程面试：既覆盖模型接入，也覆盖
-> 可恢复工作流、HITL、Memory 治理、外部副作用和多租户控制面，非算法研究员方向。
+> 面向 **AI Agent Platform / Crypto Agent Ecosystem 与 Go 后端** 的工程面试：既覆盖模型接入，
+> 也覆盖可恢复工作流、HITL、Memory、MCP/A2A、Agent 身份与商业协议、开放平台和 Web3
+> 安全执行面，非算法研究员方向。
 
 | ID | 题目 | 频率 |
 |----|------|------|
@@ -17,6 +18,10 @@
 | [S-AI-08](./S-AI-08-multimodal-voice.md) | 多模态与语音接入 | ⭐⭐⭐⭐ |
 | [S-AI-09](./S-AI-09-agent-workflow-hitl-publishing.md) | Agent 工作流、HITL 与可靠发布控制面 | ⭐⭐⭐⭐⭐ |
 | [S-AI-10](./S-AI-10-persona-memory-feedback-governance.md) | Persona、分层 Memory 与反馈学习治理 | ⭐⭐⭐⭐⭐ |
+| [S-AI-11](./S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) | MCP 与 A2A：跨框架互操作 | ⭐⭐⭐⭐⭐ |
+| [S-AI-12](./S-AI-12-erc8004-agent-identity-reputation-validation.md) | ERC-8004：Agent 身份、信誉与验证 | ⭐⭐⭐⭐⭐ |
+| [S-AI-13](./S-AI-13-x402-erc8183-agent-commerce.md) | x402/x402b/ERC-8183：Agent Commerce | ⭐⭐⭐⭐⭐ |
+| [S-AI-14](./S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) | Crypto Agent 开放平台与 Launchpad | ⭐⭐⭐⭐⭐ |
 
 ## 可运行代码
 
@@ -28,11 +33,13 @@
 
 ## 适用场景
 
-- JD 含 **AI Agent Platform / Agent Infrastructure / AI 应用 / Copilot / MCP**
+- JD 含 **AI Agent Platform / Crypto Agent / Agent Economy / MCP / A2A / Agent SDK**
 - 二面问「Agent 如何暂停恢复」「审批后如何防重复执行」「Memory 如何隔离与学习」
+- 架构面问「Agent 身份、支付、Marketplace/Launchpad、钱包执行如何分层」
 - 与 [S-ARCH-16](../03-system-design/S-ARCH-16-observability.md)、[S-CLOUD-03](../09-cloud-native/S-CLOUD-03-opentelemetry.md)、[S-ES 系列](../middleware/elasticsearch/index.md) 交叉复习
 
 ## 推荐刷题顺序
 
-API 接入 → Agent/Tool → 工作流与 HITL → Persona/Memory → Prompt/Context → 安全 →
-成本观测 → MCP → RAG → 多模态
+API 接入 → Agent/Tool → 工作流与 HITL → Persona/Memory → 安全与成本 → MCP →
+MCP/A2A 互操作 → ERC-8004 身份 → x402/ERC-8183 Commerce → 开放平台/Launchpad →
+RAG → 多模态
