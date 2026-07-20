@@ -1061,6 +1061,30 @@ p1:
       resume_focus: true
       file: 14-dex-cex-engineering/S-EXCH-22-call-auction-performance-validation.md
       code_refs: [examples/senior/callauction, examples/senior/matchingengine]
+    - id: S-EXCH-23
+      title: 预测市场 CTF、Outcome Token 与市场生命周期
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-23-prediction-market-ctf-lifecycle.md
+    - id: S-EXCH-24
+      title: CLOB-first 预测市场：EIP-712 订单与链上结算
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-24-prediction-market-clob-eip712-settlement.md
+    - id: S-EXCH-25
+      title: 预测市场预言机、事件数据源与争议仲裁
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-25-prediction-market-oracle-dispute-resolution.md
+    - id: S-EXCH-26
+      title: 预测市场安全不变量、测试矩阵与主网上线
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet.md
   microservices_exchange:
     - id: S-MSVC-01
       title: 交易所微服务全链路架构白板（CEX + DEX）

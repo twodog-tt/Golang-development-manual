@@ -25,6 +25,7 @@
 | PoS/BFT、fork choice、PeerDAS、协议升级与迁移 | [20 协议、共识与安全](interview/20-protocol-consensus-security/index.md) |
 | Threat model、signer fencing、SBOM/provenance、安全事件响应 | [21 Web3 安全工程](interview/21-security-engineering/index.md) |
 | 机构托管、DvP、RWA、ISO 20022 与 settlement evidence | [S-PAY-06](interview/18-web3-payments-stablecoin/S-PAY-06-institutional-custody-rwa-iso20022.md) |
+| 预测市场 CTF、CLOB/EIP-712、预言机争议与主网上线 | [S-EXCH-23~26](interview/14-dex-cex-engineering/index.md) |
 | Rollup/跨链安全、撮合/WAL、行情/FIX/STP/竞价与完整架构白板 | [12 Web3](interview/12-blockchain-web3/index.md) · [13 Solidity](interview/13-solidity-contracts/index.md) · [14 DEX/CEX](interview/14-dex-cex-engineering/index.md) |
 | 微服务拆分、gRPC 治理、Database per Service、网关 BFF、事件总线 | [15 微服务（交易所）](interview/15-microservices-exchange/index.md) |
 | 多链充提、reorg、MPC/TSS、热冷钱包、提现风控 | [17 多链钱包](interview/17-multichain-wallet/index.md)、[S-EXCH-02](interview/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md) |
@@ -108,6 +109,10 @@
 | ⭐ [S-EXCH-20](interview/14-dex-cex-engineering/S-EXCH-20-fix-session-sequence-recovery.md) | FIX Session | Resend、PossDup、Gap Fill |
 | ⭐ [S-EXCH-21](interview/14-dex-cex-engineering/S-EXCH-21-self-trade-prevention-surveillance.md) | STP 自成交防护 | scope、cancel policy、surveillance |
 | ⭐ [S-EXCH-22](interview/14-dex-cex-engineering/S-EXCH-22-call-auction-performance-validation.md) | 集合竞价与性能验证 | clearing price、分配、benchstat |
+| ⭐ [S-EXCH-23](interview/14-dex-cex-engineering/S-EXCH-23-prediction-market-ctf-lifecycle.md#oral-card) | 预测市场 CTF 与生命周期 | condition/position、split/merge/redeem、规则冻结 |
+| ⭐ [S-EXCH-24](interview/14-dex-cex-engineering/S-EXCH-24-prediction-market-clob-eip712-settlement.md#oral-card) | CLOB 与链上结算 | EIP-712、防重放、取消竞态、mint/merge |
+| ⭐ [S-EXCH-25](interview/14-dex-cex-engineering/S-EXCH-25-prediction-market-oracle-dispute-resolution.md#oral-card) | 预言机与争议仲裁 | 体育/电竞 feed、bond、liveness、source conflict |
+| ⭐ [S-EXCH-26](interview/14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet.md#oral-card) | 安全与主网上线 | 资金不变量、fuzz/invariant、审计、canary |
 
 ### 完整架构白板（架构师 / 终面）
 

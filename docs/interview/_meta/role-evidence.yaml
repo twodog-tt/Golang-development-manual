@@ -8,7 +8,7 @@
 # questions.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
 
 schema_version: 1
-updated_at: "2026-07-18"
+updated_at: "2026-07-20"
 default_priority: p2
 priority_precedence: [p0, p1, p2]
 
@@ -461,6 +461,10 @@ roles:
       - S-EXCH-20
       - S-EXCH-21
       - S-EXCH-22
+      - S-EXCH-23
+      - S-EXCH-24
+      - S-EXCH-25
+      - S-EXCH-26
       - S-MSVC-01
       - S-MSVC-03
       - S-MSVC-04
@@ -552,6 +556,10 @@ roles:
       - S-PAY-06
       - S-EXCH-13
       - S-EXCH-15
+      - S-EXCH-23
+      - S-EXCH-24
+      - S-EXCH-25
+      - S-EXCH-26
       - S-MSVC-01
       - S-MSVC-02
       - S-MSVC-04
@@ -668,6 +676,9 @@ evidence:
       - S-PG-01
       - S-PG-03
       - S-SEC-03
+      - S-EXCH-23
+      - S-EXCH-24
+      - S-EXCH-26
     vendor_or_regulatory_sensitive:
       - S-PAY-02
       - S-PAY-05
@@ -680,6 +691,7 @@ evidence:
       - S-SEC-04
       - S-CLOUD-09
       - S-CLOUD-10
+      - S-EXCH-25
     labels:
       stable: 核心机制相对稳定，仍以目标版本行为为准。
       version_sensitive: 协议、运行时、SDK 或产品行为会随版本变化。

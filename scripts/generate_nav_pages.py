@@ -125,6 +125,10 @@ COMPACT_NAV_TITLES: dict[str, str] = {
     "S-EXCH-20": "FIX 序号与断线恢复",
     "S-EXCH-21": "STP 自成交防护与监控",
     "S-EXCH-22": "集合竞价与性能验证",
+    "S-EXCH-23": "预测市场 CTF 与生命周期",
+    "S-EXCH-24": "预测市场 CLOB / EIP-712",
+    "S-EXCH-25": "预言机 / 数据源 / 争议",
+    "S-EXCH-26": "预测市场安全与上线",
     # 17 多链钱包与托管
     "S-WALLET-01": "Chain Adapter 能力矩阵",
     "S-WALLET-02": "Bitcoin UTXO / PSBT / RBF",
@@ -248,7 +252,7 @@ def write_middleware_pages() -> None:
 
 
 def write_root_pages() -> None:
-    DOCS_PAGES.write_text(ROOT_PAGES + "\n", encoding="utf-8")
+    DOCS_PAGES.write_text(ROOT_PAGES.rstrip() + "\n", encoding="utf-8")
     print(f"Wrote {DOCS_PAGES.relative_to(ROOT)}")
 
 

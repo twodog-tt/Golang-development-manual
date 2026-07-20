@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "generated_at": "2026-07-18T08:17:04Z",
-  "count": 219,
+  "generated_at": "2026-07-20T05:45:00Z",
+  "count": 223,
   "roles": [
     {
       "key": "senior_go_backend",
@@ -48,7 +48,7 @@
       "module_key": "ai_engineering",
       "resume_focus": false,
       "url": "interview/10-ai-engineering/S-AI-01-llm-api-integration/",
-      "prompt": "大模型调用本质是 **高延迟、不可靠的 HTTP/RPC**；Go 侧用 **Context 超时**、**SSE 流式**、**指数退避重试** 和 **连接池复用**。生产关键词：**OpenAI 兼容协议、首 token 延迟 TTFT、429 限流、断路器**。",
+      "prompt": "Go 接入大模型 API：流式、重试、超时",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p0",
@@ -62,7 +62,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -87,7 +87,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -98,7 +98,7 @@
       "module_key": "ai_engineering",
       "resume_focus": false,
       "url": "interview/10-ai-engineering/S-AI-03-agent-tool-calling/",
-      "prompt": "**Agent** 通常是模型、状态和工具执行器组成的受控循环；并不要求固定采用 ReAct。Function Calling / Tool Use 让模型提出结构化调用，但这些参数仍是 **不可信输入**，必须由 Go 服务做 schema、身份、权限和业务状态校验后才可执行。",
+      "prompt": "AI Agent 与 Function Calling",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p0",
@@ -112,7 +112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -123,7 +123,7 @@
       "module_key": "ai_engineering",
       "resume_focus": false,
       "url": "interview/10-ai-engineering/S-AI-04-prompt-context/",
-      "prompt": "**Prompt 工程**在后端侧体现为：指令模板化、few-shot 可配置、结构化输出和回归评估；**Context 管理**是控制 token 预算与不可信上下文边界。tokenizer、context window 和结构化输出能力都与具体模型/API 版本相关，不能把某个厂商参数背成通用标准。",
+      "prompt": "Prompt 工程与 Context 窗口管理",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p0",
@@ -137,7 +137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -148,7 +148,7 @@
       "module_key": "ai_engineering",
       "resume_focus": false,
       "url": "interview/10-ai-engineering/S-AI-05-llm-security/",
-      "prompt": "LLM 应用安全不只是内容过滤：核心是 **Prompt Injection、敏感信息泄露、不安全输出处理、过度代理权限和无界资源消耗**。模型输出与检索文档都应视为不可信数据，真正的授权、参数约束和副作用控制必须在代码层完成。",
+      "prompt": "LLM 应用安全：注入、PII、护栏",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p0",
@@ -162,7 +162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -173,7 +173,7 @@
       "module_key": "ai_engineering",
       "resume_focus": false,
       "url": "interview/10-ai-engineering/S-AI-06-llm-observability-cost/",
-      "prompt": "LLM 服务要观测 **TTFT、总时延、tokens、成本、工具步数与质量指标**。缓存、模型路由、batch 和 streaming 都有适用边界；尤其 semantic cache 必须纳入 tenant、权限、prompt/model 版本与数据时效，不能只按向量相似度跨用户复用答案。",
+      "prompt": "LLM 可观测性、成本与延迟优化",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p0",
@@ -187,7 +187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -198,7 +198,7 @@
       "module_key": "ai_engineering",
       "resume_focus": false,
       "url": "interview/10-ai-engineering/S-AI-07-mcp-server-go/",
-      "prompt": "**MCP（Model Context Protocol）** 基于 JSON-RPC 标准化工具、资源、提示等能力。Go 可用官方 `modelcontextprotocol/go-sdk`；stdio 适合本地子进程，Streamable HTTP 适合远程服务。远程部署还必须处理协议版本、认证授权、Origin 校验、会话与超时，不能只把 stdio server 换成 HTTP listener。",
+      "prompt": "Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p0",
@@ -212,7 +212,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -237,7 +237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -248,7 +248,7 @@
       "module_key": "ai_engineering",
       "resume_focus": true,
       "url": "interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing/",
-      "prompt": "生产 Agent 要把 **模型生成** 与 **外部副作用** 分开：模型可以提出 draft/action proposal，但审批、权限、幂等、重试和发布必须由持久化状态机控制。Review Queue 保存待审批的 不可变提案，Execution Queue 只接收已经批准且策略仍有效的执行任务；审批必须绑定 proposal hash、policy/version 和 reviewer，内容被编辑后原审批失效。进程崩溃或发布超时后，从 checkpoint 和外部事实恢复，不能让模型“从头想一遍”后盲目重发。",
+      "prompt": "Agent 工作流、Human-in-the-loop 与可靠发布控制面",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p0",
@@ -262,7 +262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -273,7 +273,7 @@
       "module_key": "ai_engineering",
       "resume_focus": true,
       "url": "interview/10-ai-engineering/S-AI-10-persona-memory-feedback-governance/",
-      "prompt": "Agent Memory 不是把所有历史对话塞回 prompt。我会区分 **Persona/策略配置、线程短期状态、 长期事实与偏好、内容知识、反馈学习规则**，分别做 namespace、TTL、权限和版本控制。一次 run 记录实际使用的 persona、memory snapshot、检索结果和 prompt 版本，才能复现。用户反馈先成为 candidate rule，经去重、证据聚合、风险检查和人工/策略批准后才启用；所谓 `66% confidence` 只能是项目的业务门槛，不能表述成通用、校准过的模型置信度。",
+      "prompt": "Persona、分层 Memory 与反馈学习治理",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p0",
@@ -287,7 +287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -312,7 +312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -337,7 +337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -362,7 +362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -373,7 +373,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-04-idempotency/",
-      "prompt": "幂等 = **同一业务操作执行多次，结果与执行一次相同**。在至少一次投递的网络里，必须在 **API 幂等键、MQ 去重、DB 唯一约束** 三层落地。生产关键词：**Idempotency-Key、状态机、唯一索引**。",
+      "prompt": "幂等设计：接口、消息、数据库层",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -387,7 +387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -398,7 +398,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-05-consistency-tradeoff/",
-      "prompt": "**强一致**用在对的钱/库存/权限；**最终一致**用在 Feed、计数、搜索索引。面试要讲清 **CAP 在分区时的选择** 和 **业务可接受的延迟窗口**。生产关键词：**Saga、Outbox、读己之写**。",
+      "prompt": "最终一致 vs 强一致：业务怎么选",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -412,7 +412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -437,7 +437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -462,7 +462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -473,7 +473,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-08-rate-limiting/",
-      "prompt": "**令牌桶**允许突发、**漏桶**平滑输出；生产网关常用 **令牌桶 + 分布式 Redis/Envoy** 按用户/IP/接口维度限流。生产关键词：**429、配额、Warm-up、分级限流**。",
+      "prompt": "限流：令牌桶、漏桶、分布式限流",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -487,7 +487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -498,7 +498,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-09-circuit-breaker/",
-      "prompt": "**熔断**在下游故障时快速失败，避免占满 goroutine、连接池和并发配额；**降级**返回业务允许的兜底；**舱壁**隔离资源池防扩散。",
+      "prompt": "熔断、降级、舱壁",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -512,7 +512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -523,7 +523,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-10-mq-semantics/",
-      "prompt": "分布式 MQ **最常见的是至少一次（At-Least-Once）**。Kafka EOS 能覆盖 Kafka topic 之间的 read-process-write 事务，但不会自动把外部数据库、支付 API 等副作用纳入同一事务；业务上的“效果恰好一次”仍需本地事务、幂等键、outbox/inbox 与状态机。",
+      "prompt": "消息队列：至少一次、恰好一次、顺序性",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -537,7 +537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -562,7 +562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -573,7 +573,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-12-order-state-machine/",
-      "prompt": "订单/支付用 **有限状态机（FSM）** 约束合法迁移，配合 **乐观锁 version + 幂等回调** 防并发乱序。生产关键词：**PENDING→PAID→SHIPPED、非法迁移拒绝、补偿关单**。",
+      "prompt": "支付/订单状态机设计",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -587,7 +587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -612,7 +612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -637,7 +637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -648,7 +648,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-15-release-strategy/",
-      "prompt": "**API 版本**保兼容（URL `/v2` 或 Header）；**灰度**用小流量验证新版本；**Feature Flag** 在运行时开关行为无需发版。生产关键词：**向后兼容、可回滚、Flag 生命周期**。",
+      "prompt": "API 版本、灰度发布与特性开关",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p0",
@@ -662,7 +662,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -673,7 +673,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-16-observability/",
-      "prompt": "可观测性三板斧：**Metrics 告警、Logs 细节、Traces 因果**；Go 生产标配 **OpenTelemetry + Prometheus + 结构化 JSON 日志**。生产关键词：**RED/USE 方法、trace_id 贯通、采样**。",
+      "prompt": "可观测性：日志、指标、链路",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -687,7 +687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -698,7 +698,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-17-slo-error-budget/",
-      "prompt": "**SLI** 是可测量指标（如成功率）；**SLO** 是目标（99.9%）；**错误预算** = 1 - SLO，预算耗尽则停功能保稳定。生产关键词：**多窗口 burn rate、用户感知、发布门禁**。",
+      "prompt": "SLO/SLI 与错误预算",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -712,7 +712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -723,7 +723,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-18-capacity-planning/",
-      "prompt": "容量规划 = **业务预测 × 单实例能力 × 冗余系数**；压测验证 **拐点 QPS、P99、资源饱和点**。生产关键词：**30% Headroom、阶梯加压、全链路、生产流量回放**。",
+      "prompt": "容量评估与压测方法论",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -737,7 +737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -762,7 +762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -773,7 +773,7 @@
       "module_key": "system_design",
       "resume_focus": false,
       "url": "interview/03-system-design/S-ARCH-20-tech-decision-doc/",
-      "prompt": "Lead 面考察 **结构化决策能力**：ADR/技术选型文档讲清 **背景、目标、备选方案、权衡、决策、后果、回滚**。生产关键词：**可逆性、数据驱动、利益相关方对齐**。",
+      "prompt": "技术选型文档怎么写（Lead 面）",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -787,7 +787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -798,7 +798,7 @@
       "module_key": "system_design",
       "resume_focus": true,
       "url": "interview/03-system-design/S-ARCH-21-realtime-risk-cdc-flink/",
-      "prompt": "实时风控链路要把 **数据库事实、变更日志、流计算状态、在线索引和决策服务** 分层： MySQL/PostgreSQL CDC 进入可保留日志，Flink 按业务 key 做乱序处理、特征聚合和 checkpoint， 再以幂等 upsert/事务 sink 写 Redis、ES 或画像库，Go 风控服务读取带版本和 freshness 的特征。 Flink `EXACTLY_ONCE` 首先保证算子状态恢复一致，不自动保证外部系统端到端只写一次；必须结合 source offset、稳定 event ID、sink 事务/幂等和可重放原始日志。",
+      "prompt": "实时风控数据平台：CDC、Flink、ES 与可重放链路",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p0",
@@ -812,7 +812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -837,7 +837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -862,7 +862,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -887,7 +887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -912,7 +912,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -937,7 +937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -962,7 +962,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -987,7 +987,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1012,7 +1012,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1037,7 +1037,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1062,7 +1062,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1087,7 +1087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1112,7 +1112,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1137,7 +1137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1162,7 +1162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1187,7 +1187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1212,7 +1212,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1237,7 +1237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1262,7 +1262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1287,7 +1287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1312,7 +1312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1337,7 +1337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1362,7 +1362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1387,7 +1387,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1412,7 +1412,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1423,7 +1423,7 @@
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-03-graceful-shutdown/",
-      "prompt": "**优雅关闭** = 收到 SIGTERM/SIGINT 后 **关闭 listener、关闭空闲连接，并等待活跃请求自然结束**。Go 标准做法：`signal.NotifyContext` → `Server.Shutdown(ctx)`（带超时）→ 必要时 `Server.Close()` 兜底。关键边界：`Shutdown` **不会自动取消活跃 handler 的 `Request.Context`，也不会等待 WebSocket 等 hijacked 连接**。",
+      "prompt": "HTTP 服务优雅关闭",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1437,7 +1437,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1448,7 +1448,7 @@
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-04-errgroup/",
-      "prompt": "**errgroup** = **WaitGroup + 首个 error + Context 取消**。`WithContext` 派生可取消 ctx；任一 `Go(fn)` 返回 error → **`errOnce` 记录 + cancel**；`Wait` 等全部结束并返回该 error。面试关键词：**errOnce、cancel 传播、Wait 后再 cancel 一次无害**。",
+      "prompt": "errgroup 语义实现",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1462,7 +1462,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1487,7 +1487,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1498,7 +1498,7 @@
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-06-singleflight-cache/",
-      "prompt": "Singleflight 只合并“同一进程、同一 key、同一时刻”的重复加载，不等于缓存，也不提供跨实例全局锁。实现时用 `map[key]*call` 保存进行中的调用，首个请求加载，后续请求等待同一个 `done`。等待者可因自己的 context 提前离开，但共享加载不应被首个 HTTP 请求的取消随意终止，否则一个客户端断开会让所有等待者失败。",
+      "prompt": "Singleflight 缓存击穿抑制",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1512,7 +1512,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1523,7 +1523,7 @@
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-07-bounded-batch-executor/",
-      "prompt": "批处理并发不能“每个 item 一个 goroutine”。应固定 worker 数，使用有界 job queue 形成背压，用派生 context 在首错或上游取消时停止继续投递，并持续 drain 已启动 worker 的结果，避免 goroutine 卡在发送。若 API 承诺按输入顺序返回，就给 job 编号并写回预分配结果切片，而不是依赖完成顺序。",
+      "prompt": "有界批处理执行器：取消、顺序与背压",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1537,7 +1537,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1548,7 +1548,7 @@
       "module_key": "concurrency",
       "resume_focus": false,
       "url": "interview/01-runtime-concurrency/S-CONC-01-gmp-overview/",
-      "prompt": "Go 调度器 = **G（goroutine 任务）+ M（OS 线程）+ P（逻辑处理器 / 本地 runq）** 的 M:N 模型：海量 G 复用一组 M，真正执行 Go 代码的并行上限由 **`GOMAXPROCS` = 活跃 P 数**决定。Go 1.14+ 引入异步抢占，改善无函数调用的 CPU 热循环长期占用 P；Unix 类系统常用信号实现，但这是平台相关的 runtime 细节。",
+      "prompt": "GMP 模型与 1.14 以来抢占式调度",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1562,7 +1562,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1587,7 +1587,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1612,7 +1612,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1637,7 +1637,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1648,7 +1648,7 @@
       "module_key": "concurrency",
       "resume_focus": false,
       "url": "interview/01-runtime-concurrency/S-CONC-05-channel/",
-      "prompt": "Channel 底层是 **`hchan`**：环形队列 + `sendq/recvq` 等待链表 + 锁；**无缓冲**发送要与接收配对，**有缓冲**允许最多 `cap` 个值排队。无缓冲 send 返回只表示值已被接收方接走，不表示接收方已经完成业务处理。",
+      "prompt": "Channel 内部实现与有缓冲/无缓冲选型",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1662,7 +1662,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1673,7 +1673,7 @@
       "module_key": "concurrency",
       "resume_focus": false,
       "url": "interview/01-runtime-concurrency/S-CONC-06-channel-deadlock/",
-      "prompt": "Go runtime 能报告的是进程已无可继续运行路径的一类**全局死锁**，典型报错为 `fatal error: all goroutines are asleep - deadlock!`；**局部死锁**（部分 G 永久阻塞， 但还有 G、timer、网络/cgo 等活动路径）不会自动报。`main` 返回会直接结束进程，不是死锁。 生产关键词：**无缓冲握手顺序、忘记 close、循环等待、取消路径缺失**。",
+      "prompt": "Channel 死锁场景与排查",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1687,7 +1687,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1712,7 +1712,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1723,7 +1723,7 @@
       "module_key": "concurrency",
       "resume_focus": false,
       "url": "interview/01-runtime-concurrency/S-CONC-08-sync-primitives/",
-      "prompt": "**Mutex** 保护复合不变量；**RWMutex** 只在读占绝大多数且临界区短时可能获益。Go 的 RWMutex 在 writer 等待时会阻塞新的 reader，避免 writer 被持续新读者饿死，但会形成读延迟尖峰。`sync/atomic` 适合单变量状态，不能自动保护多字段不变量。",
+      "prompt": "Mutex、RWMutex 与 atomic 选型",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1737,7 +1737,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1762,7 +1762,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1787,7 +1787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1812,7 +1812,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1823,7 +1823,7 @@
       "module_key": "concurrency",
       "resume_focus": false,
       "url": "interview/01-runtime-concurrency/S-CONC-12-context/",
-      "prompt": "**context** 在调用链传递取消、deadline 和请求域元数据；父取消向下传播，子取消不会反向取消父。`WithTimeout` 只有在下游实际监听 `Done` 或使用 `QueryContext/Do(req.WithContext)` 等 API 时才会停止工作。",
+      "prompt": "Context 树、取消传播与泄漏",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1837,7 +1837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1848,7 +1848,7 @@
       "module_key": "concurrency",
       "resume_focus": false,
       "url": "interview/01-runtime-concurrency/S-CONC-13-goroutine-leak/",
-      "prompt": "**Goroutine 泄漏** = 本应结束的 goroutine 长期无法退出。常见根因是 channel 无对端、缺取消路径、锁/WaitGroup 永久等待、网络调用无 deadline 或后台 ticker 循环没有 stop 信号。Go 1.26 提供实验性 `goroutineleak` profile，但它只能检测一类可证明无法再唤醒的阻塞泄漏，不替代生命周期设计、常规 goroutine profile 与指标趋势。",
+      "prompt": "Goroutine 泄漏成因与 pprof 排查",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1862,7 +1862,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1873,7 +1873,7 @@
       "module_key": "concurrency",
       "resume_focus": false,
       "url": "interview/01-runtime-concurrency/S-CONC-14-memory-model/",
-      "prompt": "Go 内存模型定义：若事件 A happens-before B，则 A 的写对 B 可见。同步原语建立 hb 边；含数据竞态的程序是错误程序，结果不可靠，但 Go 不应简单表述成 C/C++ 式“编译器可以任意做任何事”。无竞态程序享有 DRF-SC 保证。",
+      "prompt": "Go 内存模型与 happens-before",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1887,7 +1887,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1912,7 +1912,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1937,7 +1937,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1962,7 +1962,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1973,7 +1973,7 @@
       "module_key": "concurrency",
       "resume_focus": false,
       "url": "interview/01-runtime-concurrency/S-CONC-18-goroutine-governance/",
-      "prompt": "**Goroutine 轻量不等于无限**：需 **并发预算**（semaphore、worker 池、连接池对齐）、**可观测**（`go_goroutines`）、**编码规范**（禁止裸 go 无界）。生产关键词：**每请求 goroutine 上限、async 边界审计**。",
+      "prompt": "Goroutine 泛滥治理与并发预算",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -1987,7 +1987,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -1998,7 +1998,7 @@
       "module_key": "concurrency",
       "resume_focus": false,
       "url": "interview/01-runtime-concurrency/S-CONC-19-netpoller/",
-      "prompt": "**Netpoller** 用 epoll/kqueue/IOCP 等平台后端把可轮询 **网络 IO** 与调度器集成： socket 未就绪时 G 挂起并释放 P，就绪后变 runnable。**纯阻塞 syscall** 可能让执行它的 M 阻塞；runtime 通常会把 P 交给别的 M，但线程资源并没有被 netpoll 消除。生产关键词： **网络等待 G 不等于一连接一线程；磁盘、cgo 和 resolver 路径要单独限并发**。",
+      "prompt": "Netpoller 与阻塞 Syscall 行为",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -2012,7 +2012,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2037,7 +2037,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2048,7 +2048,7 @@
       "module_key": "mysql",
       "resume_focus": false,
       "url": "interview/middleware/mysql/S-DB-01-mysql-index/",
-      "prompt": "InnoDB 默认用 **B+Tree 聚簇索引**组织行；二级索引叶子保存索引列和聚簇索引键，只有查询未被二级索引覆盖时才需要 **回表**。**联合索引 `(a,b,c)` 遵循最左前缀**：通常能利用 `a`、`a,b`、`a,b,c` 定位，跳过 `a` 只按 `b/c` 查询往往不能使用普通前缀定位。生产关键词：**覆盖索引、索引下推 ICP、选择性、前缀索引**。",
+      "prompt": "MySQL 索引原理与最左前缀",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p1",
@@ -2062,7 +2062,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2087,7 +2087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2112,7 +2112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2137,7 +2137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2162,7 +2162,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2173,7 +2173,7 @@
       "module_key": "mysql",
       "resume_focus": false,
       "url": "interview/middleware/mysql/S-DB-06-advanced-sql/",
-      "prompt": "复杂 SQL 先保证集合语义正确，再谈“少写一层”。JOIN 要明确基数和去重，否则一对多叠加会把金额重复；CTE 是命名和组织查询的工具，不保证一定物化或更快；窗口函数在不压缩行数的前提下计算排名、累计值等。优化必须看 `EXPLAIN ANALYZE` 的实际 rows、loops、排序和临时表，不能只凭 SQL 长短。",
+      "prompt": "复杂 SQL：JOIN、CTE、窗口函数与执行计划",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -2187,7 +2187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2198,7 +2198,7 @@
       "module_key": "mysql",
       "resume_focus": false,
       "url": "interview/middleware/mysql/S-DB-07-financial-schema-locking/",
-      "prompt": "金额不能用 `FLOAT/DOUBLE` 做账。先定义资产精度和最大范围，再选整数最小单位、`DECIMAL(p,s)` 或原始大整数编码；MySQL `DECIMAL` 最大精度有限，不能直接假设可容纳所有 uint256。账本流水应不可变，并在同一账簿、资产/币种和计量单位内保持借贷平衡；幂等键和唯一约束负责防重复，余额只是投影。entry、余额投影和 outbox 等原子状态要在同一数据库事务中提交。并发更新要固定完整资源键的锁顺序、缩短事务，并安全重试 deadlock。",
+      "prompt": "资金类表设计：DECIMAL、约束、锁与死锁",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -2212,7 +2212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2237,7 +2237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2262,7 +2262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2287,7 +2287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2312,7 +2312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2337,7 +2337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2362,7 +2362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2387,7 +2387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2398,7 +2398,7 @@
       "module_key": "elasticsearch",
       "resume_focus": false,
       "url": "interview/middleware/elasticsearch/S-ES-03-sync-ops/",
-      "prompt": "ES 数据通常 **从 MySQL 同步**（Canal/Debezium → MQ → ES Consumer，或 Logstash/Flink）。原则：**MySQL 为源、ES 可重建**；同步延迟可接受则 **近实时搜索**。运维关注 **分片均衡、磁盘 watermark、集群颜色、版本升级**。",
+      "prompt": "Elasticsearch 数据同步与运维",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p0",
@@ -2412,7 +2412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2437,7 +2437,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2462,7 +2462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2487,7 +2487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2512,7 +2512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2537,7 +2537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2562,7 +2562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2587,7 +2587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2612,7 +2612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2637,7 +2637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2662,7 +2662,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2687,7 +2687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2712,7 +2712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2737,7 +2737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2762,7 +2762,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2787,7 +2787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2812,7 +2812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2837,7 +2837,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2862,7 +2862,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2887,7 +2887,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2912,7 +2912,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2937,7 +2937,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2962,7 +2962,107 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
+      }
+    },
+    {
+      "id": "S-EXCH-23",
+      "title": "预测市场 CTF、Outcome Token 与市场生命周期",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-23-prediction-market-ctf-lifecycle/",
+      "prompt": "预测市场 CTF、Outcome Token 与市场生命周期",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p0",
+        "staff_architect": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-07-20"
+      }
+    },
+    {
+      "id": "S-EXCH-24",
+      "title": "CLOB-first 预测市场：EIP-712 订单与链上结算",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-24-prediction-market-clob-eip712-settlement/",
+      "prompt": "CLOB-first 预测市场：EIP-712 订单与链上结算",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p0",
+        "staff_architect": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-07-20"
+      }
+    },
+    {
+      "id": "S-EXCH-25",
+      "title": "预测市场预言机、事件数据源与争议仲裁",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-25-prediction-market-oracle-dispute-resolution/",
+      "prompt": "预测市场预言机、事件数据源与争议仲裁",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p0",
+        "staff_architect": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "vendor_or_regulatory_sensitive",
+        "reviewed_at": "2026-07-20"
+      }
+    },
+    {
+      "id": "S-EXCH-26",
+      "title": "预测市场安全不变量、测试矩阵与主网上线",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet/",
+      "prompt": "预测市场安全不变量、测试矩阵与主网上线",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p0",
+        "staff_architect": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2973,7 +3073,7 @@
       "module_key": "go_production_engineering",
       "resume_focus": false,
       "url": "interview/16-go-production-engineering/S-GOENG-01-errors-contract-panic-boundary/",
-      "prompt": "Go 的 error 是 API 契约，不只是日志字符串。调用方需要分支处理的错误，应通过 sentinel、类型或稳定的分类码暴露，并用 `errors.Is/As` 判断；`fmt.Errorf(\"...: %w\", err)` 保留 cause。`panic` 只用于无法继续的程序不变量或程序员错误，`recover` 只能放在 goroutine/request 等隔离边界，把故障转成失败响应并记录栈，不能把未知状态继续当成功执行。",
+      "prompt": "错误契约、Wrapping 与 Panic 边界",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -2987,7 +3087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -2998,7 +3098,7 @@
       "module_key": "go_production_engineering",
       "resume_focus": false,
       "url": "interview/16-go-production-engineering/S-GOENG-02-package-interface-di/",
-      "prompt": "Go 包应该围绕高内聚能力而不是 MVC 层名拆分；依赖方向保持单向，循环依赖通常意味着边界错了。接口优先由使用方定义，并保持最小；实现方通常返回具体类型。依赖注入用显式构造函数完成，同时把配置校验、启动、关闭和健康检查纳入生命周期，而不是用全局变量或 service locator 隐藏依赖。",
+      "prompt": "包边界、接口设计与依赖注入",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3012,7 +3112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3023,7 +3123,7 @@
       "module_key": "go_production_engineering",
       "resume_focus": false,
       "url": "interview/16-go-production-engineering/S-GOENG-03-testing-table-fake/",
-      "prompt": "Go 单测的核心不是表驱动语法，而是把输入、依赖和可观察结果做成确定性契约。表驱动 + `t.Run` 适合覆盖同一行为的多组边界；fake 适合有状态协议，stub 返回固定值，mock 只在“交互本身就是契约”时使用。时间、随机数、ID 和外部 I/O 应通过小接口或函数注入，测试不能靠 sleep 和真实公网稳定性。",
+      "prompt": "Go 单元测试：表驱动、子测试与 Test Double",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3037,7 +3137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3048,7 +3148,7 @@
       "module_key": "go_production_engineering",
       "resume_focus": false,
       "url": "interview/16-go-production-engineering/S-GOENG-04-fuzz-benchmark-race/",
-      "prompt": "单测验证已知案例，fuzz 用覆盖引导探索未知输入，race detector 只能发现实际执行路径上的数据竞态，benchmark 则必须在稳定环境下比较分布与 alloc，而不是迷信一次 ns/op。CI 应分层：快速单测每次提交，`-race`/fuzz seed/关键 benchmark 做门禁，长时间 fuzz 和全量压测进入 nightly；覆盖率只是发现未测试区域的信号。",
+      "prompt": "Fuzz、Benchmark、Race 与回归门禁",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3062,7 +3162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3073,7 +3173,7 @@
       "module_key": "go_production_engineering",
       "resume_focus": false,
       "url": "interview/16-go-production-engineering/S-GOENG-05-modules-toolchain-reproducible/",
-      "prompt": "Go Modules 用 MVS 从依赖图中选择每个 module path 的版本；它不是传统 SAT 求“最新兼容版本”。`go` 行声明最低 Go 版本要求，`toolchain` 行可声明主模块开发时建议工具链；`go.work` 适合本地多模块联调，但 CI/发布必须明确是否启用。可复现构建依赖固定源码、模块图、工具链、构建参数和外部生成物，`go.sum` 负责校验下载内容，不是依赖锁文件的完整替代。",
+      "prompt": "Go Modules、Workspace、Toolchain 与可复现构建",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3087,7 +3187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3098,7 +3198,7 @@
       "module_key": "go_production_engineering",
       "resume_focus": false,
       "url": "interview/16-go-production-engineering/S-GOENG-06-static-analysis-supply-chain/",
-      "prompt": "Go 质量门禁应分层：`gofmt` 保持机械一致，`go vet` 找官方定义的一组可疑构造，Staticcheck 等补充更广规则，`govulncheck` 结合漏洞库和可达调用分析降低纯版本扫描噪音。任何工具都不是“安全证明”；还要控制依赖来源、升级节奏、许可证、生成器、构建 provenance、SBOM 和密钥权限。",
+      "prompt": "静态分析、govulncheck 与依赖供应链",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3112,7 +3212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3137,7 +3237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3148,7 +3248,7 @@
       "module_key": "kafka",
       "resume_focus": false,
       "url": "interview/middleware/kafka/S-KAFKA-02-producer-reliability/",
-      "prompt": "Producer 可靠性靠 **`acks` + `retries` + 幂等 Producer**；与 [S-ARCH-04 幂等](../../03-system-design/S-ARCH-04-idempotency.md) 配合才能端到端不重复。**Partition Key** 决定消息进哪个 partition，影响 **顺序与热点**。生产关键词：**acks=all、enable.idempotence、max.in.flight、key 设计**。",
+      "prompt": "Kafka Producer 可靠性：acks、幂等与分区键",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3162,7 +3262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3187,7 +3287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3212,7 +3312,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3237,7 +3337,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3262,7 +3362,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3287,7 +3387,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3312,7 +3412,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3323,7 +3423,7 @@
       "module_key": "memory_gc",
       "resume_focus": false,
       "url": "interview/02-memory-gc/S-MEM-01-tri-color-gc/",
-      "prompt": "Go GC 是**并发三色标记-清除**：白=未访问，灰=已扫描入口待展开，黑=已扫描完毕。**并发标记时 mutator 会改指针**，单靠三色不够，需要写屏障： - **插入写屏障（Dijkstra）**：写入新指针时 **shade(新值)**，防「黑→白」漏标； - **删除写屏障（Yuasa）**：覆盖旧指针时 **shade(旧值)**，防「删引用丢活对象」； - **混合写屏障（Go 1.8+）**：堆上 `*slot = ptr` 时总是 **shade(旧值)**；仅当当前 goroutine 的栈还未扫描（仍为灰色）时再 **shade(新值)**。栈扫描属于并发标记工作，扫描某个 goroutine 时只暂停该 goroutine，从而去掉 mark termination 的全栈重扫。 - **Go 1.26 的 Green Tea** 默认改变的是标记/扫描工作的组织方式与局部性，Go GC 仍属于 tracing mark-sweep；不要误答成“改成分代 GC”或“对象会被移动压缩”。 生产关键词：**mark assist、写屏障开销、wbBuf、GC 与 mutator 并发**。",
+      "prompt": "三色标记与混合写屏障",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3337,7 +3437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3362,7 +3462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3373,7 +3473,7 @@
       "module_key": "memory_gc",
       "resume_focus": false,
       "url": "interview/02-memory-gc/S-MEM-03-gogc-tuning/",
-      "prompt": "GC 主要由**堆增长目标**触发。忽略根扫描成本时可粗记为“上次存活堆 × (1 + GOGC/100)”；更准确的模型还把 goroutine 栈和全局指针等 GC roots 计入。**GOMEMLIMIT**（1.19+）是 runtime 管理内存的软限制，不是 RSS 硬上限。",
+      "prompt": "GC 触发条件与 GOGC 调优",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3387,7 +3487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3398,7 +3498,7 @@
       "module_key": "memory_gc",
       "resume_focus": false,
       "url": "interview/02-memory-gc/S-MEM-04-escape-analysis/",
-      "prompt": "**逃逸分析**决定对象能否放在栈上或被完全消除：若编译器无法证明引用不会超出安全生命周期，就可能**逃逸到堆**，增加 GC 压力。用 **`go build -gcflags=-m`** 看当前编译器的决策，不要把某种语法和“必然上堆”画等号。",
+      "prompt": "逃逸分析与 -gcflags=-m",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3412,7 +3512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3423,7 +3523,7 @@
       "module_key": "memory_gc",
       "resume_focus": false,
       "url": "interview/02-memory-gc/S-MEM-05-slice-internals/",
-      "prompt": "**slice 是三元组**（pointer, len, cap）描述底层数组的视图；扩容在当前 runtime 中小容量倾向翻倍，大容量从约 2 倍平滑过渡到约 1.25 倍，最终容量还受分配器规格影响。泄漏高发于 **subslice 持有大数组引用**和 **Pool 留住超大 buffer/指针槽**。",
+      "prompt": "slice 底层、扩容与内存泄漏场景",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3437,7 +3537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3448,7 +3548,7 @@
       "module_key": "memory_gc",
       "resume_focus": false,
       "url": "interview/02-memory-gc/S-MEM-06-map-internals/",
-      "prompt": "**内置 map 不保证并发安全**：无同步并发读写属于 data race，runtime 常会以 `fatal error: concurrent map...` 终止，但不能把“必然 panic”当同步机制。Go ≤1.23 的内置 map 使用经典 `hmap/bucket`，Go 1.24 起改为 **Swiss Table 风格实现**； `sync.Map` 又是另一种并发容器，并在 Go 1.26 从 read/dirty 双表切换为并发 hash-trie。 这些实现变化都不改变各自 API 契约。",
+      "prompt": "map 并发安全、扩容与 sync.Map 选型",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3462,7 +3562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3487,7 +3587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3512,7 +3612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3523,7 +3623,7 @@
       "module_key": "memory_gc",
       "resume_focus": false,
       "url": "interview/02-memory-gc/S-MEM-09-oom-debug/",
-      "prompt": "**OOM** 常是 RSS（堆+栈+runtime+堆外）超过 cgroup limit，而非单纯“GC 没回收”。 当前 runtime 把超过约 32 KiB 小对象上限的分配走大对象路径；精确边界属于实现细节。 大对象可能抬高峰值与碎片，其 GC 扫描成本还取决于对象是否含指针。`mmap`、cgo/C 分配等不体现在 `HeapAlloc`，也未必受 `GOMEMLIMIT` 完整约束。",
+      "prompt": "大对象、堆外与 OOM 排查",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3537,7 +3637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3548,7 +3648,7 @@
       "module_key": "memory_gc",
       "resume_focus": false,
       "url": "interview/02-memory-gc/S-MEM-10-pprof-heap/",
-      "prompt": "**heap** 看当前仍在使用的分配（inuse），**allocs** 看累计分配（含已释放）；排查泄漏偏向 heap，排查 GC 压力偏向 allocs。内存 profile 按分配字节概率采样，默认平均约每 512 KiB 采一个样本，不是机械地“每 512 KiB 必采一次”。",
+      "prompt": "pprof heap/allocs 实战解读",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3562,7 +3662,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3587,7 +3687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3612,7 +3712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3637,7 +3737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3662,7 +3762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3687,7 +3787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3712,7 +3812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3737,7 +3837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3762,7 +3862,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3787,7 +3887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3812,7 +3912,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3837,7 +3937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3862,7 +3962,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3887,7 +3987,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3912,7 +4012,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3923,7 +4023,7 @@
       "module_key": "network",
       "resume_focus": false,
       "url": "interview/06-network-governance/S-NET-04-jwt-auth/",
-      "prompt": "**JWT** 是签名声明（Header.Payload.Signature）；Header/Payload 只是 Base64URL 编码，**不是加密**。服务端可本地验签，但一旦还要查 token version、黑名单或权限实时状态，系统就不再完全无状态。生产关键词：**算法白名单、exp/nbf、aud/iss、kid 与密钥轮换、最小化 claims**。",
+      "prompt": "JWT 认证与安全边界",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p0",
@@ -3937,7 +4037,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3962,7 +4062,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3973,7 +4073,7 @@
       "module_key": "network",
       "resume_focus": false,
       "url": "interview/06-network-governance/S-NET-06-linux-fd-epoll-netpoll/",
-      "prompt": "文件描述符是进程内的小整数，指向内核维护的打开文件描述/对象；socket、pipe、普通文件都可用 FD 表示。`epoll` 是 readiness 通知：告诉你某 FD 现在可能可读/可写，不代表一次 read/write 必然完成全部数据。Go runtime 用 netpoll 把可轮询网络 FD 的就绪事件转换为 goroutine 可运行状态，所以大量网络连接不需要一连接一 OS 线程，但普通文件 I/O、CGO 或不可轮询阻塞 syscall 仍可能占用线程。",
+      "prompt": "Linux 进程、文件描述符、epoll 与 Go netpoll",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -3987,7 +4087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -3998,7 +4098,7 @@
       "module_key": "network",
       "resume_focus": false,
       "url": "interview/06-network-governance/S-NET-07-tcp-lifecycle-queues-timewait/",
-      "prompt": "TCP 建连要同时看半连接/SYN 处理、已完成但尚未被应用 accept 的队列，以及应用自身处理速度；`listen(backlog)` 不是唯一容量参数。`TIME_WAIT` 通常出现在主动关闭方，用于处理最后 ACK 丢失和隔离旧报文，不应见到就粗暴消灭。线上超时要按 DNS、connect、TLS、请求写入、首字节、读响应拆阶段，并结合重传、队列、FD、端口和应用指标定位。",
+      "prompt": "TCP 建连、队列、TIME_WAIT 与故障排查",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -4012,7 +4112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4037,7 +4137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4062,7 +4162,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4087,7 +4187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4112,7 +4212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4137,7 +4237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4162,7 +4262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4187,7 +4287,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4212,7 +4312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4237,7 +4337,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4262,7 +4362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4287,7 +4387,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4312,7 +4412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4337,7 +4437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4362,7 +4462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4387,7 +4487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4412,7 +4512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4437,7 +4537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4448,7 +4548,7 @@
       "module_key": "postgresql",
       "resume_focus": false,
       "url": "interview/middleware/postgresql/S-PG-02-isolation-locking-ledger/",
-      "prompt": "PostgreSQL 默认 `READ COMMITTED` 是**每条语句重新取快照**，不是整个事务固定快照；`REPEATABLE READ` 使用事务级快照，但仍不能把所有跨行不变量都自动变成可串行化；`SERIALIZABLE` 通过 SSI 检测危险依赖，必要时以 `40001` 中止事务，所以应用必须重试整个事务。资金写入还要靠唯一幂等键、原子条件更新、稳定锁顺序、不可变流水和对账；隔离级别不能替代业务约束。",
+      "prompt": "PostgreSQL 隔离级别、锁与资金写入",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -4462,7 +4562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4473,7 +4573,7 @@
       "module_key": "postgresql",
       "resume_focus": false,
       "url": "interview/middleware/postgresql/S-PG-03-wal-replication-pgx-ha/",
-      "prompt": "WAL 的核心是不先把脏数据页当成提交证据，而是先把描述变更的日志持久化；但客户端收到 commit 成功究竟证明了“本机落盘、备机收到、备机落盘还是备机已回放”，取决于 `synchronous_commit` 和同步备配置。流复制默认异步，failover 仍要定义 RPO/RTO、leader fencing、timeline 与重接策略。Go 侧的 `pgxpool` 只是连接复用器，不会替你处理事务回滚、池容量、慢查询、主备陈旧读和 unknown commit。",
+      "prompt": "PostgreSQL WAL、复制、故障切换与 pgx 连接治理",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p0",
@@ -4487,7 +4587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4512,7 +4612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4537,7 +4637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4562,7 +4662,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4587,7 +4687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4598,7 +4698,7 @@
       "module_key": "rabbitmq",
       "resume_focus": true,
       "url": "interview/middleware/rabbitmq/S-RAB-01-exchange-async-pipeline/",
-      "prompt": "链上 **RPC 扫块** 与 **业务写库** 必须解耦：监听进程只负责解析 logs → 发 **RabbitMQ** → 多消费者处理 K 线、持仓、返佣、排行榜。生产关键词：**Publisher Confirm、手动 ACK、DLX 死信、prefetch、队列隔离**。",
+      "prompt": "RabbitMQ 拆分链上监听与业务写入",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p0",
@@ -4612,7 +4712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4637,7 +4737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4662,7 +4762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4687,7 +4787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4712,7 +4812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4723,7 +4823,7 @@
       "module_key": "security_engineering",
       "resume_focus": true,
       "url": "interview/21-security-engineering/S-SEC-01-web3-threat-model-iam-trust-boundaries/",
-      "prompt": "威胁模型不是画一张 STRIDE 表，而是为一个确定版本列出资产、攻击者能力、信任边界、入口、滥用路径和必须保持的不变量。Web3 后端尤其要把“读到链数据、批准业务意图、构造交易、签名、广播、确认、账本入账”拆开：RPC、消息队列、CI 和运营后台都不是天然可信。IAM 应区分人、工作负载、签名者和 break-glass 身份，使用短期凭证、最小权限和双人高风险审批；HSM/MPC 保护密钥材料，但不替代交易策略和授权。",
+      "prompt": "Web3 威胁建模、IAM 与信任边界",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p0",
@@ -4737,7 +4837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4762,7 +4862,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4787,7 +4887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4798,7 +4898,7 @@
       "module_key": "security_engineering",
       "resume_focus": true,
       "url": "interview/21-security-engineering/S-SEC-04-security-testing-incident-response/",
-      "prompt": "安全测试要围绕不变量组合：fuzz 找输入空间中的崩溃和边界，property/invariant test 验证任意操作序列下资金与状态约束，differential test 比较独立实现但必须先定义允许差异，fault injection 验证超时、重放、分区和崩溃恢复。测试通过不等于没有漏洞，还要把检测、遏制、恢复和改进做成可演练 runbook。NIST SP 800-61r3 已于 2025 年取代 r2，并把 incident response 融入 CSF 2.0 六个职能；面试中不应只背旧版四阶段就结束。",
+      "prompt": "Fuzz、Property、Differential Test 与安全事件响应",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p0",
@@ -4812,7 +4912,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4837,7 +4937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4862,7 +4962,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4887,7 +4987,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4912,7 +5012,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4923,7 +5023,7 @@
       "module_key": "solution_architecture",
       "resume_focus": false,
       "url": "interview/11-solution-architecture/S-SOL-05-multi-tenant-saas/",
-      "prompt": "多租户架构师要定 **隔离模型**（共享库共享表 / 共享库独立 schema / 独立库）+ **租户上下文贯穿全链路** + **RLS/中间件防越权**。生产关键词：**tenant_id、数据泄露 0 容忍、 noisy neighbor 配额**。",
+      "prompt": "多租户 SaaS 隔离与权限架构",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p0",
@@ -4937,7 +5037,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4962,7 +5062,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -4987,7 +5087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5012,7 +5112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5037,7 +5137,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5062,7 +5162,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5087,7 +5187,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5112,7 +5212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5137,7 +5237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5162,7 +5262,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5187,7 +5287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5212,7 +5312,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5237,7 +5337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5262,7 +5362,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5287,7 +5387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5312,7 +5412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5337,7 +5437,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5362,7 +5462,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5387,7 +5487,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5412,7 +5512,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5437,7 +5537,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5462,7 +5562,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5487,7 +5587,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     },
     {
@@ -5498,7 +5598,7 @@
       "module_key": "multichain_wallet",
       "resume_focus": true,
       "url": "interview/17-multichain-wallet/S-WALLET-12-tron-trc20-resource-transaction/",
-      "prompt": "TRON 的 TVM 和 Solidity 生态让它看起来像 EVM，但钱包不能只“换一个 RPC”。TRON 交易没有 Ethereum 式账户 nonce，而是绑定近期区块引用和 expiration；成本模型是 **Bandwidth + Energy + 不足时燃烧 TRX**，TRC20 调用还要设置合适的 `fee_limit`。签名与权限要处理 owner/active permission、threshold 和 `permission_id`；充值不能只看 `Transfer` 日志， 必须区分上链、执行成功和 solidified，再做幂等入账与重组/回滚处理。",
+      "prompt": "TRON / TRC20 钱包：资源、权限与交易生命周期",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p0",
@@ -5512,7 +5612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-18"
+        "reviewed_at": "2026-07-20"
       }
     }
   ]

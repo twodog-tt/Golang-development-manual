@@ -1,6 +1,6 @@
 # Go 后端与区块链架构师面试手册
 
-面向 **5 年+ Go 后端 + AI Agent Platform + 区块链/Web3 架构师** 的面试知识库（**219 篇正文**）。
+面向 **5 年+ Go 后端 + AI Agent Platform + 区块链/Web3 架构师** 的面试知识库（**223 篇正文**）。
 
 **在线阅读**：https://twodog-tt.github.io/Golang-development-manual/
 
@@ -31,9 +31,9 @@
 |------|------|------|
 | **基础 · Go 语言与生产工程** | 01 并发 → 02 内存 → 16 Go 生产工程 → 08 手写题 | 48 |
 | **进阶 · 网络与中间件** | 06 Linux/TCP/网络 + MySQL/PostgreSQL/Redis/MQ/ES/分布式事务 | 33 |
-| **高阶 · 系统设计与架构** | 03 系统设计 → 09 云原生 → 11 解决方案架构 → **15 微服务（交易所）** | 44 |
-| **专题 · Web3 核心基础设施** | 12 EVM/Rollup/跨链 → 17 多链钱包 → 18 支付 → 19 节点/RPC → 20 协议/共识 → 21 安全工程 → 13 Solidity → 14 交易所 | 77 |
-| **综合 · 领导力与 AI** | 07 工程领导力 → 10 AI 工程 | 13 |
+| **高阶 · 系统设计与架构** | 03 系统设计 → 09 云原生 → 11 解决方案架构 → **15 微服务（交易所）** | 45 |
+| **专题 · Web3 核心基础设施** | 12 EVM/Rollup/跨链 → 17 多链钱包 → 18 支付 → 19 节点/RPC → 20 协议/共识 → 21 安全工程 → 13 Solidity → 14 交易所/预测市场 | 82 |
+| **综合 · 领导力与 AI** | 07 工程领导力 → 10 AI 工程 | 15 |
 
 ## 模块入口
 
@@ -73,7 +73,7 @@
 | [20 协议、共识与安全](./docs/interview/20-protocol-consensus-security/index.md) | 4 | PoS/BFT、fork choice、PeerDAS、状态迁移 |
 | [21 Web3 安全工程](./docs/interview/21-security-engineering/index.md) | 4 | 威胁模型、signer fencing、SBOM/provenance、事件响应 |
 | [13 Solidity 与合约工程](./docs/interview/13-solidity-contracts/index.md) | 8 | 安全、ERC、Proxy、DeFi |
-| [14 DEX / CEX 交易所工程](./docs/interview/14-dex-cex-engineering/index.md) | 22 | 撮合/WAL、行情恢复、FIX、STP、竞价与性能 |
+| [14 DEX / CEX 交易所工程](./docs/interview/14-dex-cex-engineering/index.md) | 26 | 撮合/WAL、预测市场 CTF/CLOB、预言机争议、安全上线 |
 
 ### 综合 · 领导力与 AI
 
@@ -89,7 +89,7 @@
 | [16 Go 生产工程](./docs/interview/16-go-production-engineering/index.md) · [21 安全工程](./docs/interview/21-security-engineering/index.md) | [17 多链钱包](./docs/interview/17-multichain-wallet/index.md) · [18 支付](./docs/interview/18-web3-payments-stablecoin/index.md) | [19 节点/RPC](./docs/interview/19-node-rpc-staking/index.md) · [20 协议/共识](./docs/interview/20-protocol-consensus-security/index.md) | [13 Solidity](./docs/interview/13-solidity-contracts/index.md) · [14 DEX/CEX](./docs/interview/14-dex-cex-engineering/index.md) |
 
 <!-- QUESTION_TABLE_START -->
-## 面试题全表（219 题）
+## 面试题全表（223 题）
 
 > 序号按 **基础 → 进阶 → 高阶 → 专题 → 综合** 排列；题号即文档 ID（如 `S-CONC-01`）。点击题目可跳转至 Markdown 正文。
 
@@ -316,26 +316,30 @@
 | 202 | `S-EXCH-20` | [FIX Session：序号、Resend、Gap Fill 与断线恢复](./docs/interview/14-dex-cex-engineering/S-EXCH-20-fix-session-sequence-recovery.md) |
 | 203 | `S-EXCH-21` | [STP 自成交防护：撮合语义、账户边界与监控合规](./docs/interview/14-dex-cex-engineering/S-EXCH-21-self-trade-prevention-surveillance.md) |
 | 204 | `S-EXCH-22` | [集合竞价与撮合性能验证：清算价、分配和 Benchmark](./docs/interview/14-dex-cex-engineering/S-EXCH-22-call-auction-performance-validation.md) |
+| 205 | `S-EXCH-23` | [预测市场 CTF、Outcome Token 与市场生命周期](./docs/interview/14-dex-cex-engineering/S-EXCH-23-prediction-market-ctf-lifecycle.md) |
+| 206 | `S-EXCH-24` | [CLOB-first 预测市场：EIP-712 订单与链上结算](./docs/interview/14-dex-cex-engineering/S-EXCH-24-prediction-market-clob-eip712-settlement.md) |
+| 207 | `S-EXCH-25` | [预测市场预言机、事件数据源与争议仲裁](./docs/interview/14-dex-cex-engineering/S-EXCH-25-prediction-market-oracle-dispute-resolution.md) |
+| 208 | `S-EXCH-26` | [预测市场安全不变量、测试矩阵与主网上线](./docs/interview/14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet.md) |
 
 ### 综合 · 领导力与 AI
 
 | 序号 | 题号 | 题目 |
 |------|------|------|
-| 205 | `S-LEAD-01` | [线上事故复盘结构](./docs/interview/07-engineering-leadership/S-LEAD-01-incident-postmortem.md) |
-| 206 | `S-LEAD-02` | [技术债识别与偿还策略](./docs/interview/07-engineering-leadership/S-LEAD-02-tech-debt.md) |
-| 207 | `S-LEAD-03` | [带团队与 Code Review 文化](./docs/interview/07-engineering-leadership/S-LEAD-03-code-review-culture.md) |
-| 208 | `S-LEAD-04` | [Staff 技术战略、无职权影响力与案例表达](./docs/interview/07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case.md) |
-| 209 | `S-LEAD-05` | [跨团队高风险迁移、灰度切换与回滚边界](./docs/interview/07-engineering-leadership/S-LEAD-05-cross-team-migration-case.md) |
-| 210 | `S-AI-01` | [Go 接入大模型 API：流式、重试、超时](./docs/interview/10-ai-engineering/S-AI-01-llm-api-integration.md) |
-| 211 | `S-AI-02` | [RAG 架构：分块、向量检索与 Go 落地](./docs/interview/10-ai-engineering/S-AI-02-rag-architecture.md) |
-| 212 | `S-AI-03` | [AI Agent 与 Function Calling](./docs/interview/10-ai-engineering/S-AI-03-agent-tool-calling.md) |
-| 213 | `S-AI-04` | [Prompt 工程与 Context 窗口管理](./docs/interview/10-ai-engineering/S-AI-04-prompt-context.md) |
-| 214 | `S-AI-05` | [LLM 应用安全：注入、PII、护栏](./docs/interview/10-ai-engineering/S-AI-05-llm-security.md) |
-| 215 | `S-AI-06` | [LLM 可观测性、成本与延迟优化](./docs/interview/10-ai-engineering/S-AI-06-llm-observability-cost.md) |
-| 216 | `S-AI-07` | [Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署](./docs/interview/10-ai-engineering/S-AI-07-mcp-server-go.md) |
-| 217 | `S-AI-08` | [多模态与语音接入：图像、音频在 Go 服务中的工程实践](./docs/interview/10-ai-engineering/S-AI-08-multimodal-voice.md) |
-| 218 | `S-AI-09` | [Agent 工作流、Human-in-the-loop 与可靠发布控制面](./docs/interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) |
-| 219 | `S-AI-10` | [Persona、分层 Memory 与反馈学习治理](./docs/interview/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) |
+| 209 | `S-LEAD-01` | [线上事故复盘结构](./docs/interview/07-engineering-leadership/S-LEAD-01-incident-postmortem.md) |
+| 210 | `S-LEAD-02` | [技术债识别与偿还策略](./docs/interview/07-engineering-leadership/S-LEAD-02-tech-debt.md) |
+| 211 | `S-LEAD-03` | [带团队与 Code Review 文化](./docs/interview/07-engineering-leadership/S-LEAD-03-code-review-culture.md) |
+| 212 | `S-LEAD-04` | [Staff 技术战略、无职权影响力与案例表达](./docs/interview/07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case.md) |
+| 213 | `S-LEAD-05` | [跨团队高风险迁移、灰度切换与回滚边界](./docs/interview/07-engineering-leadership/S-LEAD-05-cross-team-migration-case.md) |
+| 214 | `S-AI-01` | [Go 接入大模型 API：流式、重试、超时](./docs/interview/10-ai-engineering/S-AI-01-llm-api-integration.md) |
+| 215 | `S-AI-02` | [RAG 架构：分块、向量检索与 Go 落地](./docs/interview/10-ai-engineering/S-AI-02-rag-architecture.md) |
+| 216 | `S-AI-03` | [AI Agent 与 Function Calling](./docs/interview/10-ai-engineering/S-AI-03-agent-tool-calling.md) |
+| 217 | `S-AI-04` | [Prompt 工程与 Context 窗口管理](./docs/interview/10-ai-engineering/S-AI-04-prompt-context.md) |
+| 218 | `S-AI-05` | [LLM 应用安全：注入、PII、护栏](./docs/interview/10-ai-engineering/S-AI-05-llm-security.md) |
+| 219 | `S-AI-06` | [LLM 可观测性、成本与延迟优化](./docs/interview/10-ai-engineering/S-AI-06-llm-observability-cost.md) |
+| 220 | `S-AI-07` | [Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署](./docs/interview/10-ai-engineering/S-AI-07-mcp-server-go.md) |
+| 221 | `S-AI-08` | [多模态与语音接入：图像、音频在 Go 服务中的工程实践](./docs/interview/10-ai-engineering/S-AI-08-multimodal-voice.md) |
+| 222 | `S-AI-09` | [Agent 工作流、Human-in-the-loop 与可靠发布控制面](./docs/interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) |
+| 223 | `S-AI-10` | [Persona、分层 Memory 与反馈学习治理](./docs/interview/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) |
 
 <!-- QUESTION_TABLE_END -->
 ## 可运行代码
@@ -378,7 +382,7 @@ mkdocs serve   # http://127.0.0.1:8000
 | [scripts/generate_mock_interview_data.py](./scripts/generate_mock_interview_data.py) | 从 `questions.yaml` 生成 `docs/data/questions.json`（模拟面试页） |
 | [scripts/generate_nav_pages.py](./scripts/generate_nav_pages.py) | 生成 `interview/.pages` 与各模块 `.pages`（三级侧栏题目标题） |
 | [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `questions.yaml` 更新 README 面试题全表（序号 + 题号 + 题目） |
-| [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 219 篇正文、角色优先级与证据标签一致性 |
+| [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 223 篇正文、角色优先级与证据标签一致性 |
 
 ## 引用来源
 

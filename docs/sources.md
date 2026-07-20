@@ -6,7 +6,7 @@
 > [角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
 > 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
-## 手册覆盖范围（219 题）
+## 手册覆盖范围（223 题）
 
 | 模块 | 题数 | 说明 |
 |------|------|------|
@@ -26,7 +26,7 @@
 | 20 协议、共识与安全 | 4 | PoS/BFT、fork choice、PeerDAS、状态迁移 |
 | 21 Web3 安全工程 | 4 | 威胁模型、signer fencing、SBOM/provenance、事件响应 |
 | 13 Solidity 与合约 | 8 | 安全、ERC、Proxy、DeFi |
-| 14 DEX / CEX 交易所 | 22 | 撮合/WAL、行情恢复、FIX、STP、竞价与性能 |
+| 14 DEX / CEX / 预测市场 | 26 | 撮合/WAL、CTF/CLOB、EIP-712、预言机争议与安全上线 |
 | 15 微服务（交易所场景） | 6 | 服务拆分、gRPC、数据隔离、网关、事件总线 |
 | 07 工程与领导力 | 5 | 复盘、技术债、Code Review、Staff 战略与迁移 |
 | 09 云原生 | 10 | K8s、Docker、OTel、Terraform、Helm/GitOps |
@@ -189,6 +189,10 @@
 | Nasdaq Opening/Closing Cross | https://www.nasdaqtrader.com/content/ProductsServices/Trading/Crosses/openclose_faqs.pdf | 集合竞价清算价与不平衡 |
 | Binance 永续合约 FAQ | https://www.binance.com/en/support/faq/perpetual-futures-contracts | 资金费率、强平 |
 | 1inch 聚合协议 | https://docs.1inch.io/docs/aggregation-protocol/introduction | DEX 路由 |
+| Gnosis Conditional Tokens | https://gnosis-conditional-tokens.readthedocs.io/en/latest/developer-guide.html | CTF condition、position、split/merge/redeem |
+| EIP-712 | https://eips.ethereum.org/EIPS/eip-712 | 结构化签名与 replay protection 边界 |
+| Polymarket CTF Exchange V2 | https://github.com/Polymarket/ctf-exchange-v2 | CLOB 链上结算与版本差异 |
+| UMA Optimistic Oracle | https://docs.uma.xyz/protocol-overview/how-does-umas-oracle-work | 提案、bond、liveness、争议仲裁 |
 | FATF 建议 | https://www.fatf-gafi.org/en/topics/fatf-recommendations.html | AML/KYT 合规框架 |
 | 复式记账（百科） | https://en.wikipedia.org/wiki/Double-entry_bookkeeping | 交易所账务 |
 

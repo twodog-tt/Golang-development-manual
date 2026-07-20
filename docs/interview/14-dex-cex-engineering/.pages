@@ -24,3 +24,7 @@ nav:
   - "FIX 序号与断线恢复": S-EXCH-20-fix-session-sequence-recovery.md
   - "STP 自成交防护与监控": S-EXCH-21-self-trade-prevention-surveillance.md
   - "集合竞价与性能验证": S-EXCH-22-call-auction-performance-validation.md
+  - "预测市场 CTF 与生命周期": S-EXCH-23-prediction-market-ctf-lifecycle.md
+  - "预测市场 CLOB / EIP-712": S-EXCH-24-prediction-market-clob-eip712-settlement.md
+  - "预言机 / 数据源 / 争议": S-EXCH-25-prediction-market-oracle-dispute-resolution.md
+  - "预测市场安全与上线": S-EXCH-26-prediction-market-security-testing-mainnet.md

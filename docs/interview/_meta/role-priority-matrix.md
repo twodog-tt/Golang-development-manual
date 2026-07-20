@@ -1,8 +1,8 @@
 # 角色化优先级与证据标签
 
-> 当前共 **219 篇 published 正文**。角色优先级与证据标签的机器事实源为
+> 当前共 **223 篇 published 正文**。角色优先级与证据标签的机器事实源为
 > [role-evidence.yaml](./role-evidence.yaml)，一致性由
-> `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-18**。
+> `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-20**。
 
 ## 先选岗位，不再背统一 P0
 
@@ -17,13 +17,13 @@
 
 | 目标岗位 | P0 | P1 | P2 | P0 重点 |
 |----------|---:|---:|---:|---------|
-| 资深 Go 后端 | 62 | 72 | 85 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
-| **AI Agent Platform / Infrastructure** | **60** | **89** | **70** | Agent 工作流、HITL、Memory、Guardrail、成本、外部副作用 |
-| 多链钱包与托管 | 66 | 90 | 63 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
-| 支付与稳定币 | 66 | 97 | 56 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
-| 节点/RPC/Indexer | 73 | 85 | 61 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
-| 交易所工程 | 68 | 103 | 48 | 撮合/WAL、行情/FIX、账本、风控、充提 |
-| Staff/后端架构师 | 75 | 88 | 56 | 系统设计、实时数据、迁移、IaC/GitOps、安全、跨团队影响 |
+| 资深 Go 后端 | 62 | 72 | 89 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
+| **AI Agent Platform / Infrastructure** | **60** | **89** | **74** | Agent 工作流、HITL、Memory、Guardrail、成本、外部副作用 |
+| 多链钱包与托管 | 66 | 90 | 67 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
+| 支付与稳定币 | 66 | 97 | 60 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
+| 节点/RPC/Indexer | 73 | 85 | 65 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
+| 交易所工程 | 72 | 103 | 48 | 撮合/WAL、预测市场 CTF/CLOB、预言机、账本与安全上线 |
+| Staff/后端架构师 | 79 | 88 | 56 | 系统设计、预测市场全栈、迁移、IaC/GitOps、安全、跨团队影响 |
 
 P0 数量不是“全部逐字背诵”。建议先掌握 shared P0 的 30 秒版与不变量，再只进入一个岗位的
 增量 P0；P1 用来应对 JD 特有追问，P2 只按面试反馈补洞。
@@ -90,12 +90,16 @@ P0 数量不是“全部逐字背诵”。建议先掌握 shared P0 的 30 秒�
 
 ### 交易所工程
 
-优先升级 `S-EXCH-01~05/10/11/13/15~22`、交易所微服务、账本、充提、节点交易管理器与
-signer 控制。性能结论必须附 workload、持久化边界、P99/P999 和恢复语义。
+优先升级 `S-EXCH-01~05/10/11/13/15~26`、交易所微服务、账本、充提、节点交易管理器与
+signer 控制。预测市场岗位按 `S-EXCH-23 → 24 → 25 → 26` 形成 CTF/生命周期、
+CLOB/EIP-712/结算、数据源/争议、安全/上线闭环。性能结论必须附 workload、持久化边界、
+P99/P999 和恢复语义。
 
 ### Staff / 后端架构师
 
-优先升级领导力、解决方案架构、跨地域/迁移、IaC/GitOps、安全与数据平台。
+优先升级领导力、解决方案架构、跨地域/迁移、IaC/GitOps、安全与数据平台。若目标是
+预测市场技术负责人，再把 `S-EXCH-23~26` 作为 Staff P0，重点讲链上/链下边界、机制风险、
+里程碑和跨团队上线门禁。
 [S-LEAD-04](../07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case.md) 和
 [S-LEAD-05](../07-engineering-leadership/S-LEAD-05-cross-team-migration-case.md)
 使用占位符训练案例；没有真实数据就明确说目标/估算，不能把模板包装成个人经历。
@@ -115,7 +119,7 @@ signer 控制。性能结论必须附 workload、持久化边界、P99/P999 和�
 
 | 标签 | 当前篇数 | 能证明什么 | 不能证明什么 |
 |------|---------:|------------|--------------|
-| `explanation_only` | 161 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
+| `explanation_only` | 165 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
 | `illustrative_artifact` | 31 | 仓库有相关代码或配置 | 测试当前通过、外部系统兼容 |
 | `deterministic_test` | 20 | 有不依赖外部服务的测试/回放门禁 | localnet、硬件或生产行为 |
 | `integration_harness` | 7 | 有 localnet/testnet/HSM/MPC/故障 harness | 每个目标版本都已实跑 |
@@ -129,8 +133,8 @@ signer 控制。性能结论必须附 workload、持久化边界、P99/P999 和�
 | 标签 | 当前篇数 | 复核方式 |
 |------|---------:|----------|
 | `stable` | 142 | 目标数据库/语言版本面试前抽查 |
-| `version_sensitive` | 66 | 复核官方 release/spec/SDK 文档 |
-| `vendor_or_regulatory_sensitive` | 11 | 结合目标厂商、司法辖区和法律/合规意见 |
+| `version_sensitive` | 69 | 复核官方 release/spec/SDK 文档 |
+| `vendor_or_regulatory_sensitive` | 12 | 结合目标厂商、司法辖区和法律/合规意见 |
 
 `vendor_or_regulatory_sensitive` 优先于普通版本敏感；它提醒你在面试里说明适用范围，而不是背一个
 全球通用结论。
@@ -147,4 +151,4 @@ signer 控制。性能结论必须附 workload、持久化边界、P99/P999 和�
 .venv/bin/python scripts/verify_knowledge_metadata.py
 ```
 
-校验会检查 219 个 ID、正文、sources、30 秒版、追问链、角色引用和证据标签互斥关系。
+校验会检查 223 个 ID、正文、sources、30 秒版、追问链、角色引用和证据标签互斥关系。

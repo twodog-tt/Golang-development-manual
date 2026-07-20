@@ -1,6 +1,6 @@
 # 面试知识库质量审查与岗位差距
 
-> 全库 **219 题**（以 [questions.yaml](questions.yaml) 为准）
+> 全库 **223 题**（以 [questions.yaml](questions.yaml) 为准）
 >
 > 本轮审查与补强日期：**2026-07-17**
 >
@@ -43,7 +43,10 @@
   与反馈治理、TRON/TRC20 钱包生命周期、CDC/Flink/ES 实时风控数据平台；新增
   `AI Agent Platform / Infrastructure` 首选岗位轨道，并将简历定向 P0 收敛为
   shared 40 篇 + 角色增量 20 篇。
-- 证据标签已覆盖 219 篇：`explanation_only=161`、`illustrative_artifact=31`、
+- 第九阶段按预测市场技术负责人 JD 新增 **4 篇正文**：CTF/Outcome Token/市场生命周期、
+  CLOB-first/EIP-712/链上结算、体育电竞数据源/乐观预言机/争议仲裁，以及安全不变量/
+  测试矩阵/主网上线；四篇均为 `exchange_engineering` 与 `staff_architect` P0。
+- 证据标签已覆盖 223 篇：`explanation_only=165`、`illustrative_artifact=31`、
   `deterministic_test=20`、`integration_harness=7`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
@@ -78,9 +81,9 @@
 | 协议、共识与安全 | 4 |
 | Web3 安全工程 | 4 |
 | Solidity | 8 |
-| DEX/CEX | 22 |
+| DEX/CEX/预测市场 | 26 |
 | 交易所微服务 | 6 |
-| **合计** | **219** |
+| **合计** | **223** |
 
 原始 153 题基线中的中间件为 21 题；此前新增 2 篇 MySQL，本阶段再新增 3 篇 PostgreSQL，
 当前数据库与中间件共 26 题。
