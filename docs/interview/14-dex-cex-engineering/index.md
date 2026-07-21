@@ -1,6 +1,6 @@
 # 14 DEX / CEX 交易所工程
 
-26 题 | P0/P1 专题（**预测市场 / 交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
+27 题 | P0/P1 专题（**预测市场 / 交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
 
 > 面向 **CEX 撮合与资金系统（Go）** + **DEX/预测市场链上协议（Solidity）** 工程师，
 > 及 **交易所/预测市场技术负责人** 全栈面试。
@@ -61,6 +61,7 @@
 | ID | 题目 | 频率 |
 |----|------|------|
 | [S-EXCH-06](./S-EXCH-06-dex-amm-liquidity.md) | DEX AMM 与流动性池设计 | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-27](./S-EXCH-27-pancakeswap-v2-v3-differences.md#oral-card) | PancakeSwap V2/V3：池、LP 与后端集成差异 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-07](./S-EXCH-07-aggregator-slippage.md) | DEX 聚合路由与滑点保护 | ⭐⭐⭐⭐ |
 | [S-EXCH-08](./S-EXCH-08-mev-sandwich.md) | MEV、抢跑与链上交易防护 | ⭐⭐⭐⭐⭐ |
 
@@ -98,7 +99,7 @@
 
 **交易系统后端**：**EXCH-17~22** → EXCH-16 → EXCH-04 → EXCH-01 → EXCH-03
 
-**Web3 后端**：EXCH-14 → **23~26** → 10/11/12 → BC-05 → SOLID-04/08
+**Web3 后端**：EXCH-14 → **27** → **23~26** → 10/11/12 → BC-05 → SOLID-04/08
 
 ## 岗位自测
 

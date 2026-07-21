@@ -1,6 +1,6 @@
 # 面试题索引
 
-> 全库 **227 题**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本题单为速查表。
+> 全库 **228 题**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本题单为速查表。
 > **⭐ 岗位定向**：[角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
 > [Web3 交易所重点准备](resume-focus-web3.md)
 
@@ -31,7 +31,7 @@
 | 11 解决方案架构 | 8 | [11-solution-architecture/](interview/11-solution-architecture/index.md) |
 | 15 微服务（交易所场景） | 6 | [15-microservices-exchange/](interview/15-microservices-exchange/index.md) |
 
-## 专题 · Web3 核心基础设施（82 题）
+## 专题 · Web3 核心基础设施（83 题）
 
 | 模块 | 题数 | 入口 |
 |------|------|------|
@@ -42,7 +42,7 @@
 | 20 协议、共识与安全 | 4 | [20-protocol-consensus-security/](interview/20-protocol-consensus-security/index.md) |
 | 21 Web3 安全工程 | 4 | [21-security-engineering/](interview/21-security-engineering/index.md) |
 | 13 Solidity 与合约 | 8 | [13-solidity-contracts/](interview/13-solidity-contracts/index.md) |
-| 14 DEX / CEX / 预测市场 | 26 | [14-dex-cex-engineering/](interview/14-dex-cex-engineering/index.md) |
+| 14 DEX / CEX / 预测市场 | 27 | [14-dex-cex-engineering/](interview/14-dex-cex-engineering/index.md) |
 
 ## 综合 · 领导力与 AI（19 题）
 

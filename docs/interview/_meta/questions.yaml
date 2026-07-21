@@ -1109,6 +1109,12 @@ p1:
       status: published
       resume_focus: true
       file: 14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet.md
+    - id: S-EXCH-27
+      title: PancakeSwap V2 与 V3：AMM、流动性与后端集成差异
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-27-pancakeswap-v2-v3-differences.md
   microservices_exchange:
     - id: S-MSVC-01
       title: 交易所微服务全链路架构白板（CEX + DEX）

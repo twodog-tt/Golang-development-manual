@@ -1,8 +1,8 @@
 # 面试知识库质量审查与岗位差距
 
-> 全库 **227 题**（以 [questions.yaml](questions.yaml) 为准）
+> 全库 **228 题**（以 [questions.yaml](questions.yaml) 为准）
 >
-> 本轮审查与补强日期：**2026-07-20**
+> 本轮审查与补强日期：**2026-07-21**
 >
 > 目标岗位：资深 Golang 开发、后端/解决方案架构师，重点行业为 AI/Crypto Agent、
 > Web3、交易所、钱包、链基础设施与支付
@@ -51,7 +51,9 @@
   跨框架互操作、ERC-8004 身份/信誉/验证、x402/x402b/ERC-8183 Agent Commerce，以及
   Agent SDK/开放平台/Marketplace/Launchpad；`AI Agent Platform` 轨道升级为
   `AI Agent Platform / Crypto Agent Ecosystem`，增量 P0 从 20 篇扩展为 24 篇。
-- 证据标签已覆盖 227 篇：`explanation_only=169`、`illustrative_artifact=31`、
+- 第十一阶段按候选人 Launchpad 类 DEX 项目补充 **1 篇简历定向 P1 正文**：PancakeSwap
+  V2/V3 的池模型、集中流动性、fee tier、position NFT、报价、Indexer 和毕业迁池差异。
+- 证据标签已覆盖 228 篇：`explanation_only=170`、`illustrative_artifact=31`、
   `deterministic_test=20`、`integration_harness=7`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
@@ -86,9 +88,9 @@
 | 协议、共识与安全 | 4 |
 | Web3 安全工程 | 4 |
 | Solidity | 8 |
-| DEX/CEX/预测市场 | 26 |
+| DEX/CEX/预测市场 | 27 |
 | 交易所微服务 | 6 |
-| **合计** | **227** |
+| **合计** | **228** |
 
 原始 153 题基线中的中间件为 21 题；此前新增 2 篇 MySQL，本阶段再新增 3 篇 PostgreSQL，
 当前数据库与中间件共 26 题。

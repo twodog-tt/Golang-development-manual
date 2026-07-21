@@ -1,7 +1,7 @@
 # Go · Agent · Web3 架构师面试手册
 
 面向 **5 年+ Go 后端、AI Agent Platform / Crypto Agent Ecosystem 与 Web3 架构岗位** 的
-面试知识库，共 **227 篇正文**。
+面试知识库，共 **228 篇正文**。
 
 > **当前简历主线**：先证明资深 Go 与生产工程基本盘，再重点讲 Agent 工作流、MCP/A2A、
 > Persona/Memory、Agent 身份/Commerce、开放平台和 Web3 安全执行；交易所、钱包、实时风控

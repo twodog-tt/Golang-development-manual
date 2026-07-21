@@ -100,6 +100,7 @@
 | ⭐ [S-EXCH-03](interview/14-dex-cex-engineering/S-EXCH-03-account-ledger.md) | 账户与复式记账 | 账务、返佣 |
 | ⭐ [S-EXCH-05](interview/14-dex-cex-engineering/S-EXCH-05-risk-reconciliation.md) | 风控与对账 | 黑名单、审计 |
 | ⭐ [S-EXCH-06](interview/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity.md) | DEX AMM 与 LP | 恒定乘积、外盘迁移 |
+| ⭐ [S-EXCH-27](interview/14-dex-cex-engineering/S-EXCH-27-pancakeswap-v2-v3-differences.md#oral-card) | PancakeSwap V2/V3 | 集中流动性、fee tier、position NFT、迁池与索引差异 |
 | ⭐ [S-EXCH-10](interview/14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation.md) | 链上事件驱动 K 线 | K 线、排行榜 |
 | ⭐ [S-EXCH-11](interview/14-dex-cex-engineering/S-EXCH-11-websocket-market-hub.md) | WebSocket 行情 Hub | 实时推送 |
 | ⭐ [S-EXCH-12](interview/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate.md) | Token 发行与返佣提现 | 毕业、分账、提现 |

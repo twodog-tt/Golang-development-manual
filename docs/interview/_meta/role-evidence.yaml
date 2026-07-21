@@ -8,7 +8,7 @@
 # questions.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
 
 schema_version: 1
-updated_at: "2026-07-20"
+updated_at: "2026-07-21"
 default_priority: p2
 priority_precedence: [p0, p1, p2]
 
@@ -488,6 +488,7 @@ roles:
       - S-EXCH-09
       - S-EXCH-12
       - S-EXCH-14
+      - S-EXCH-27
       - S-MSVC-02
       - S-MSVC-05
       - S-PAY-01
@@ -683,6 +684,7 @@ evidence:
       - S-EXCH-23
       - S-EXCH-24
       - S-EXCH-26
+      - S-EXCH-27
     vendor_or_regulatory_sensitive:
       - S-PAY-02
       - S-PAY-05

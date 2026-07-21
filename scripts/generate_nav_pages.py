@@ -129,6 +129,7 @@ COMPACT_NAV_TITLES: dict[str, str] = {
     "S-EXCH-24": "预测市场 CLOB / EIP-712",
     "S-EXCH-25": "预言机 / 数据源 / 争议",
     "S-EXCH-26": "预测市场安全与上线",
+    "S-EXCH-27": "PancakeSwap V2 / V3",
     # 17 多链钱包与托管
     "S-WALLET-01": "Chain Adapter 能力矩阵",
     "S-WALLET-02": "Bitcoin UTXO / PSBT / RBF",

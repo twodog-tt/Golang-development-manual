@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "generated_at": "2026-07-20T07:59:46Z",
-  "count": 227,
+  "generated_at": "2026-07-21T10:35:08Z",
+  "count": 228,
   "roles": [
     {
       "key": "senior_go_backend",
@@ -62,7 +62,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -87,7 +87,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -112,7 +112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -137,7 +137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -162,7 +162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -187,7 +187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -212,7 +212,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -237,7 +237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -262,7 +262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -287,7 +287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -312,7 +312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -337,7 +337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -362,7 +362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -387,7 +387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -412,7 +412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -437,7 +437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -462,7 +462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -487,7 +487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -512,7 +512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -537,7 +537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -562,7 +562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -587,7 +587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -612,7 +612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -637,7 +637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -662,7 +662,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -687,7 +687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -712,7 +712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -737,7 +737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -762,7 +762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -787,7 +787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -812,7 +812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -837,7 +837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -862,7 +862,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -887,7 +887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -912,7 +912,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -937,7 +937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -962,7 +962,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -987,7 +987,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1012,7 +1012,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1037,7 +1037,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1062,7 +1062,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1087,7 +1087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1112,7 +1112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1137,7 +1137,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1162,7 +1162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1187,7 +1187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1212,7 +1212,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1237,7 +1237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1262,7 +1262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1287,7 +1287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1312,7 +1312,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1337,7 +1337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1362,7 +1362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1387,7 +1387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1412,7 +1412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1437,7 +1437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1462,7 +1462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1487,7 +1487,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1512,7 +1512,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1537,7 +1537,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1562,7 +1562,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1587,7 +1587,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1612,7 +1612,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1637,7 +1637,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1662,7 +1662,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1687,7 +1687,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1712,7 +1712,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1737,7 +1737,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1762,7 +1762,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1787,7 +1787,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1812,7 +1812,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1837,7 +1837,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1862,7 +1862,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1887,7 +1887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1912,7 +1912,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1937,7 +1937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1962,7 +1962,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -1987,7 +1987,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2012,7 +2012,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2037,7 +2037,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2062,7 +2062,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2087,7 +2087,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2112,7 +2112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2137,7 +2137,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2162,7 +2162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2187,7 +2187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2212,7 +2212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2237,7 +2237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2262,7 +2262,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2287,7 +2287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2312,7 +2312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2337,7 +2337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2362,7 +2362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2387,7 +2387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2412,7 +2412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2437,7 +2437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2462,7 +2462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2487,7 +2487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2512,7 +2512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2537,7 +2537,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2562,7 +2562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2587,7 +2587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2612,7 +2612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2637,7 +2637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2662,7 +2662,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2687,7 +2687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2712,7 +2712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2737,7 +2737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2762,7 +2762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2787,7 +2787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2812,7 +2812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2837,7 +2837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2862,7 +2862,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2887,7 +2887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2912,7 +2912,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2937,7 +2937,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2962,7 +2962,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -2987,7 +2987,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3012,7 +3012,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3037,7 +3037,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3062,7 +3062,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3087,7 +3087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3112,7 +3112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3137,7 +3137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3162,7 +3162,32 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
+      }
+    },
+    {
+      "id": "S-EXCH-27",
+      "title": "PancakeSwap V2 与 V3：AMM、流动性与后端集成差异",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-27-pancakeswap-v2-v3-differences/",
+      "prompt": "PancakeSwap V2 是全价格区间恒定乘积 AMM，一个 token pair 通常对应一个 Pair，LP 份额 是 ERC-20 LP token；V3 使用按 fee tier 划分的集中流动性池，LP 自选 tick 区间并持有 position NFT。V3 在活跃区间资本效率更高，但出区间不赚费且会变成单边资产，后端还要 索引 `sqrtPriceX96`、active liquidity、tick、fee growth 和 NFT position，不能继续只靠 `getReserves()`。因此 Launchpad 迁池要在资本效率与运维复杂度之间做选择。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p1",
+        "staff_architect": "p2"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3187,7 +3212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3212,7 +3237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3237,7 +3262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3262,7 +3287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3287,7 +3312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3312,7 +3337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3337,7 +3362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3362,7 +3387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3387,7 +3412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3412,7 +3437,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3437,7 +3462,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3462,7 +3487,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3487,7 +3512,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3512,7 +3537,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3537,7 +3562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3562,7 +3587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3587,7 +3612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3612,7 +3637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3637,7 +3662,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3662,7 +3687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3687,7 +3712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3712,7 +3737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3737,7 +3762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3762,7 +3787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3787,7 +3812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3812,7 +3837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3837,7 +3862,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3862,7 +3887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3887,7 +3912,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3912,7 +3937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3937,7 +3962,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3962,7 +3987,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -3987,7 +4012,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4012,7 +4037,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4037,7 +4062,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4062,7 +4087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4087,7 +4112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4112,7 +4137,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4137,7 +4162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4162,7 +4187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4187,7 +4212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4212,7 +4237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4237,7 +4262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4262,7 +4287,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4287,7 +4312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4312,7 +4337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4337,7 +4362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4362,7 +4387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4387,7 +4412,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4412,7 +4437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4437,7 +4462,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4462,7 +4487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4487,7 +4512,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4512,7 +4537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4537,7 +4562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4562,7 +4587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4587,7 +4612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4612,7 +4637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4637,7 +4662,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4662,7 +4687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4687,7 +4712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4712,7 +4737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4737,7 +4762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4762,7 +4787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4787,7 +4812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4812,7 +4837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4837,7 +4862,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4862,7 +4887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4887,7 +4912,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4912,7 +4937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4937,7 +4962,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4962,7 +4987,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -4987,7 +5012,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5012,7 +5037,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5037,7 +5062,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5062,7 +5087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5087,7 +5112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5112,7 +5137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5137,7 +5162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5162,7 +5187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5187,7 +5212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5212,7 +5237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5237,7 +5262,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5262,7 +5287,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5287,7 +5312,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5312,7 +5337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5337,7 +5362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5362,7 +5387,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5387,7 +5412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5412,7 +5437,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5437,7 +5462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5462,7 +5487,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5487,7 +5512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5512,7 +5537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5537,7 +5562,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5562,7 +5587,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5587,7 +5612,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5612,7 +5637,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5637,7 +5662,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5662,7 +5687,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5687,7 +5712,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     },
     {
@@ -5712,7 +5737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-20"
+        "reviewed_at": "2026-07-21"
       }
     }
   ]
