@@ -1,6 +1,6 @@
-# Go 后端与区块链架构师面试手册
+# Go · Agent · Web3 工程知识库
 
-面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构师** 的面试知识库（**228 篇正文**）。
+面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构** 的工程知识沉淀（**228 篇正文**），并配套可运行示例。
 
 **在线阅读**：https://twodog-tt.github.io/Golang-development-manual/
 
@@ -14,9 +14,9 @@
 | 步骤 | 链接 |
 |------|------|
 | 1. 学习路线（4 周 / 8 周 / 架构师 / Web3） | [docs/learning-path-senior.md](./docs/learning-path-senior.md) |
-| 2. **模拟面试**（随机抽题 + 熟练度） | [docs/mock-interview.md](./docs/mock-interview.md) |
-| 3. 面试题总索引 | [docs/interview-catalog.md](./docs/interview-catalog.md) |
-| 4. Web3 交易所重点题单 | [docs/resume-focus-web3.md](./docs/resume-focus-web3.md) |
+| 2. **专题自测**（随机抽题 + 熟练度） | [docs/mock-interview.md](./docs/mock-interview.md) |
+| 3. 专题总索引 | [docs/interview-catalog.md](./docs/interview-catalog.md) |
+| 4. Web3 交易所重点专题 | [docs/resume-focus-web3.md](./docs/resume-focus-web3.md) |
 | 5. 角色化优先级与证据标签 | [docs/interview/_meta/role-priority-matrix.md](./docs/interview/_meta/role-priority-matrix.md) |
 | 6. P0 技术纠错审计 | [docs/interview/_meta/technical-corrections-audit.md](./docs/interview/_meta/technical-corrections-audit.md) |
 | 7. 题单与元数据 | [docs/interview/_meta/questions.yaml](./docs/interview/_meta/questions.yaml) |
@@ -89,9 +89,9 @@
 | [16 Go 生产工程](./docs/interview/16-go-production-engineering/index.md) · [21 安全工程](./docs/interview/21-security-engineering/index.md) | [17 多链钱包](./docs/interview/17-multichain-wallet/index.md) · [18 支付](./docs/interview/18-web3-payments-stablecoin/index.md) | [19 节点/RPC](./docs/interview/19-node-rpc-staking/index.md) · [20 协议/共识](./docs/interview/20-protocol-consensus-security/index.md) | [13 Solidity](./docs/interview/13-solidity-contracts/index.md) · [14 DEX/CEX](./docs/interview/14-dex-cex-engineering/index.md) |
 
 <!-- QUESTION_TABLE_START -->
-## 面试题全表（228 题）
+## 专题全表（228 篇）
 
-> 序号按 **基础 → 进阶 → 高阶 → 专题 → 综合** 排列；题号即文档 ID（如 `S-CONC-01`）。点击题目可跳转至 Markdown 正文。
+> 序号按 **基础 → 进阶 → 高阶 → 专题 → 综合** 排列；题号即文档 ID（如 `S-CONC-01`）。点击标题可跳转至 Markdown 正文。
 
 ### 基础 · Go 语言与生产工程
 
@@ -371,7 +371,7 @@ cd basis/goroutine && go run .
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-docs.txt
 
-# 生成模拟面试数据、侧栏导航与 README 题表（新增题目后建议执行）
+# 生成专题自测数据、侧栏导航与 README 题表（新增题目后建议执行）
 python3 scripts/generate_mock_interview_data.py
 python3 scripts/generate_nav_pages.py
 python3 scripts/generate_readme_question_table.py
@@ -384,9 +384,9 @@ mkdocs serve   # http://127.0.0.1:8000
 
 | 脚本 | 作用 |
 |------|------|
-| [scripts/generate_mock_interview_data.py](./scripts/generate_mock_interview_data.py) | 从 `questions.yaml` 生成 `docs/data/questions.json`（模拟面试页） |
+| [scripts/generate_mock_interview_data.py](./scripts/generate_mock_interview_data.py) | 从 `questions.yaml` 生成 `docs/data/questions.json`（专题自测页） |
 | [scripts/generate_nav_pages.py](./scripts/generate_nav_pages.py) | 生成 `interview/.pages` 与各模块 `.pages`（三级侧栏题目标题） |
-| [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `questions.yaml` 更新 README 面试题全表（序号 + 题号 + 题目） |
+| [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `questions.yaml` 更新 README 专题全表（序号 + 题号 + 题目） |
 | [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 228 篇正文、角色优先级与证据标签一致性 |
 
 ## 引用来源

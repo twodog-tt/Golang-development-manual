@@ -1,11 +1,11 @@
-# Web3 交易所角色重点准备题单
+# Web3 交易所与钱包重点专题
 
 > 本页是 `exchange_engineering` 的场景化学习投影，不再定义一套全局 P0/P1/P2。
 > 正式优先级和每篇正文的证据边界以
 > [角色化优先级与证据标签](interview/_meta/role-priority-matrix.md) 为准。
 
-**图例**：⭐ **核心主线**（先形成闭环） · 🔶 **延展强化**（二面 / 架构追问） ·
-○ **基础回查**（按面试反馈补洞）
+**图例**：⭐ **核心主线**（先形成闭环） · 🔶 **延展强化**（架构深挖） ·
+○ **基础回查**（按反馈补洞）
 
 证据标签不在本页重复维护，避免两处数据漂移。口述时按
 `explanation_only → illustrative_artifact → deterministic_test → integration_harness`
@@ -16,7 +16,7 @@
 
 ## 按技术场景速查
 
-| 面试常问 | 对应题目 |
+| 常见场景 | 对应题目 |
 |----------|----------|
 | Go 工程、测试、Linux/TCP、SQL、手写题 | [16 Go 生产工程](interview/16-go-production-engineering/index.md) · [08 手写题](interview/08-coding-senior/index.md) · [06 网络](interview/06-network-governance/index.md) |
 | BTC/Solana/Cosmos/Sui/Aptos、多链充提、SDK 交易向量、MPC | [17 多链钱包与托管](interview/17-multichain-wallet/index.md) |

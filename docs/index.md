@@ -1,29 +1,29 @@
-# Go · Agent · Web3 架构师面试手册
+# Go · Agent · Web3 工程知识库
 
-面向 **5 年+ Go 后端、AI Agent Platform / Crypto Agent Ecosystem 与 Web3 架构岗位** 的
-面试知识库，共 **228 篇正文**。
+面向 **5 年+ Go 后端、AI Agent Platform / Crypto Agent Ecosystem 与 Web3 架构方向** 的
+工程知识沉淀，共 **228 篇正文**，并配套可运行示例。
 
-> **当前简历主线**：先证明资深 Go 与生产工程基本盘，再重点讲 Agent 工作流、MCP/A2A、
+> **知识主线**：先夯实资深 Go 与生产工程基本盘，再深入 Agent 工作流、MCP/A2A、
 > Persona/Memory、Agent 身份/Commerce、开放平台和 Web3 安全执行；交易所、钱包、实时风控
-> 与链上工程作为处理资金、高吞吐、可恢复数据链路的差异化证据。
+> 与链上工程作为处理资金、高吞吐、可恢复数据链路的差异化专题。
 
 !!! tip "从这里开始"
 
-    [① 选择目标岗位](interview/_meta/role-priority-matrix.md) →
+    [① 选择目标方向](interview/_meta/role-priority-matrix.md) →
     [② 完成 18 个高频锚点](high-frequency-roadmap.md) →
-    [③ 查看简历定向 P0 图谱](interview/_meta/p0-knowledge-graph.md) →
-    [④ 开始模拟面试](mock-interview.md)
+    [③ 查看岗位定向 P0 图谱](interview/_meta/p0-knowledge-graph.md) →
+    [④ 开始专题自测](mock-interview.md)
 
-    Web3 定向准备可直接进入 [交易所与钱包重点题单](resume-focus-web3.md)。
+    Web3 方向可直接进入 [交易所与钱包重点专题](resume-focus-web3.md)。
 
 > **图表操作**：正文中的架构图和时序图支持点击全屏、滚轮或双指缩放、拖拽、重置、
 > 新标签打开与复制 Mermaid 源码。
 
-## 1. 先选岗位，再决定 P0
+## 1. 先选方向，再决定 P0
 
-| 目标岗位 | P0 | 首要证明的能力 |
+| 目标方向 | P0 | 首要证明的能力 |
 |----------|---:|----------------|
-| **AI Agent Platform / Crypto Agent Ecosystem（简历首选）** | **64** | 工作流、MCP/A2A、身份/Commerce、开放平台与 Web3 安全执行 |
+| **AI Agent Platform / Crypto Agent Ecosystem（重点方向）** | **64** | 工作流、MCP/A2A、身份/Commerce、开放平台与 Web3 安全执行 |
 | 资深 Go 后端 | 62 | Go/运行时、测试、网络、数据库、消息与生产工程 |
 | 多链钱包与托管 | 66 | 多链交易、归集、MPC/HSM、签名控制与恢复 |
 | 支付与稳定币 | 66 | 支付状态机、账本、清结算、合规与机构资金 |
@@ -31,25 +31,25 @@
 | 节点、RPC 与 Indexer | 73 | 节点/共识、canonical 数据、列存与非 EVM 兼容 |
 | Staff / 后端架构师 | 79 | 系统演进、预测市场全栈、IaC/GitOps、安全与跨团队影响 |
 
-这里的 P0 已包含约 40 篇 Shared P0，不代表需要逐字背诵全部正文。先掌握 Shared P0 的
-30 秒版与关键不变量，再只进入一个岗位的增量 P0；P1 按目标 JD 补充，P2 只根据面试反馈回补。
+这里的 P0 已包含约 40 篇 Shared P0，不代表需要逐字通读全部正文。先掌握 Shared P0 的
+30 秒版与关键不变量，再只进入一个方向的增量 P0；P1 按目标场景补充，P2 按反馈回补。
 
-[查看七类岗位完整 P0/P1/P2 与证据标签](interview/_meta/role-priority-matrix.md)
+[查看七类方向完整 P0/P1/P2 与证据标签](interview/_meta/role-priority-matrix.md)
 
-## 2. 五步面试准备法
+## 2. 五步学习法
 
 | 步骤 | 动作 | 完成标准 |
 |------|------|----------|
-| **1. 选择岗位** | 在七类角色中确定一个主投出口 | 能用一句话说明“为什么是我” |
+| **1. 选择方向** | 在七类角色中确定一个主攻出口 | 能用一句话说明能力边界与差异化 |
 | **2. Shared P0** | Go 并发、生产工程、网络、数据库、幂等、MQ、可观测 | 每题能讲 30 秒结论、边界与反例 |
-| **3. 岗位增量** | 只补目标角色的 P0，再按 JD 选择 P1 | 不再按统一题单平均用力 |
+| **3. 方向增量** | 只补目标角色的 P0，再按场景选择 P1 | 不再按统一题单平均用力 |
 | **4. 项目举证** | 用个人真实项目关联设计、代码、故障与取舍 | 明确本人职责、约束、指标和证据等级 |
-| **5. 模拟与回补** | 进行模拟面试，记录失分点 | 只回补暴露出的知识洞与错误表达 |
+| **5. 自测与回补** | 进行专题自测，记录薄弱点 | 只回补暴露出的知识洞与错误表达 |
 
 辅助入口：[18 个高频锚点](high-frequency-roadmap.md) ·
 [学习路线](learning-path-senior.md) ·
 [P0 技术纠错审计](interview/_meta/technical-corrections-audit.md) ·
-[模拟面试](mock-interview.md)
+[专题自测](mock-interview.md)
 
 ## 3. 可验证项目证据
 
@@ -60,11 +60,11 @@
 | 四条非 EVM 链 Adapter | [多链钱包专题](interview/17-multichain-wallet/index.md) | [Solana/Cosmos/Aptos/Sui](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/non-evm-sdk) | `integration_harness`：覆盖 fixture、故障与兼容门禁；testnet/localnet 不等于生产 |
 | Launchpad 类 DEX 全链路 | [链上 DEX + 链下 Go](interview/14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture.md) | [EVM 合约绑定示例](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/erc20bind) | `illustrative_artifact`：用于讲 Indexer、Reorg、K 线与副作用边界，不声称仓库复现完整生产系统 |
 
-证据标签用于约束面试表达：有代码不等于生产验收，SoftHSM 不等于真实 HSM，
+证据标签用于约束对外表达：有代码不等于生产验收，SoftHSM 不等于真实 HSM，
 localnet/testnet 也不等于主网兼容。完整定义见
 [角色优先级与证据标签](interview/_meta/role-priority-matrix.md)。
 
-Agent Platform 仍是简历主线；公开仓库中的
+Agent Platform 仍是知识主线；公开仓库中的
 [工作流/HITL](interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) 与
 [Persona/Memory](interview/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md)
 目前属于结构化设计依据，不应表述成“仓库已经复现完整生产平台”。
@@ -95,7 +95,7 @@ Agent Platform 仍是简历主线；公开仓库中的
 
 ## 资料、索引与维护
 
-- [面试题总索引](interview-catalog.md)
+- [专题总索引](interview-catalog.md)
 - [题单 YAML](interview/_meta/questions.yaml)
 - [角色优先级与证据标签](interview/_meta/role-priority-matrix.md)
 - [代码映射](interview/_meta/mapping.md)

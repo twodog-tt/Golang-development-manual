@@ -1,4 +1,4 @@
-# 面试知识库质量审查与岗位差距
+# 知识库质量审查与岗位差距
 
 > 全库 **228 题**（以 [questions.yaml](questions.yaml) 为准）
 >
@@ -42,7 +42,7 @@
   [七类岗位轨道](role-priority-matrix.md)，旧全局 tier 只保留兼容。
 - 第八阶段按候选人简历新增 **4 篇正文**：Agent 工作流/HITL 与可靠发布、Persona/Memory
   与反馈治理、TRON/TRC20 钱包生命周期、CDC/Flink/ES 实时风控数据平台；新增
-  `AI Agent Platform / Infrastructure` 首选岗位轨道，并将简历定向 P0 收敛为
+  `AI Agent Platform / Infrastructure` 首选岗位轨道，并将方向定向 P0 收敛为
   shared 40 篇 + 角色增量 20 篇。
 - 第九阶段按预测市场技术负责人 JD 新增 **4 篇正文**：CTF/Outcome Token/市场生命周期、
   CLOB-first/EIP-712/链上结算、体育电竞数据源/乐观预言机/争议仲裁，以及安全不变量/
@@ -51,7 +51,7 @@
   跨框架互操作、ERC-8004 身份/信誉/验证、x402/x402b/ERC-8183 Agent Commerce，以及
   Agent SDK/开放平台/Marketplace/Launchpad；`AI Agent Platform` 轨道升级为
   `AI Agent Platform / Crypto Agent Ecosystem`，增量 P0 从 20 篇扩展为 24 篇。
-- 第十一阶段按候选人 Launchpad 类 DEX 项目补充 **1 篇简历定向 P1 正文**：PancakeSwap
+- 第十一阶段按候选人 Launchpad 类 DEX 项目补充 **1 篇方向定向 P1 正文**：PancakeSwap
   V2/V3 的池模型、集中流动性、fee tier、position NFT、报价、Indexer 和毕业迁池差异。
 - 证据标签已覆盖 228 篇：`explanation_only=170`、`illustrative_artifact=31`、
   `deterministic_test=20`、`integration_harness=7`、`external_acceptance=0`。

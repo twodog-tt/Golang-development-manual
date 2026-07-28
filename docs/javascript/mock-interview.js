@@ -231,7 +231,7 @@
     root.innerHTML = `
       <div class="mock-interview-app">
         <p class="mock-interview-intro">
-          随机抽题模拟面试开场。点 <strong>看看答案</strong> 跳转完整解析；点 <strong>下一题</strong> 表示已熟悉，降低再次出现概率（记录保存在本机浏览器）。
+          随机抽题做专题自测。点 <strong>看看答案</strong> 跳转完整解析；点 <strong>下一题</strong> 表示已熟悉，降低再次出现概率（记录保存在本机浏览器）。
         </p>
         <div id="mock-interview-stats-host">${renderStats()}</div>
         ${renderToolbar()}

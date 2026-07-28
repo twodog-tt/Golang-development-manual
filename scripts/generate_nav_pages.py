@@ -76,9 +76,9 @@ INTERVIEW_GROUPS: list[tuple[str, list[str]]] = [
 ROOT_PAGES = """nav:
   - 首页: index.md
   - 学习路线: learning-path-senior.md
-  - 模拟面试: mock-interview.md
+  - 专题自测: mock-interview.md
 
-  - 岗位与优先级:
+  - 方向与优先级:
     - 角色优先级与证据: interview/_meta/role-priority-matrix
     - P0 知识图谱: interview/_meta/p0-knowledge-graph
     - P0 技术纠错审计: interview/_meta/technical-corrections-audit
@@ -86,8 +86,8 @@ ROOT_PAGES = """nav:
   - interview
 
   - 参考资料:
-    - Web3 交易所重点准备: resume-focus-web3.md
-    - 面试题总索引: interview-catalog.md
+    - Web3 交易所重点专题: resume-focus-web3.md
+    - 专题总索引: interview-catalog.md
     - 题源与引用: sources.md
     - 代码与题目映射: interview/_meta/mapping
 
@@ -226,7 +226,7 @@ def write_module_pages(rel_dir: str, items: list[dict]) -> None:
 
 
 def write_interview_pages() -> None:
-    lines = ["title: 面试专题", "nav:"]
+    lines = ["title: 工程专题", "nav:"]
     for group_title, modules in INTERVIEW_GROUPS:
         lines.append(f"  - {group_title}:")
         for mod in modules:

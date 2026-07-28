@@ -1,12 +1,12 @@
 # 题源与引用规范
 
-本手册面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构师** 面试准备。正文均为自研表述；外部资料仅作题源与延伸阅读，**不整段搬运**。
+本知识库面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构** 方向的工程知识沉淀。正文均为自研表述；外部资料仅作题源与延伸阅读，**不整段搬运**。
 
 > 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) ·
 > [角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
 > 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
-## 手册覆盖范围（228 题）
+## 知识库覆盖范围（228 篇）
 
 | 模块 | 题数 | 说明 |
 |------|------|------|
@@ -46,7 +46,7 @@
 | Effective Go | https://go.dev/doc/effective_go | 语言惯例 |
 | pkg.go.dev | https://pkg.go.dev/ | 标准库与 x/sync 等 |
 
-### Go 后端面试题源（社区）
+### Go 后端社区题源
 
 | 来源 | 链接 | 用途 |
 |------|------|------|

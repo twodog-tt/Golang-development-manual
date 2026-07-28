@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""从 questions.yaml + 题目 Markdown 生成模拟面试用的 questions.json。"""
+"""从 questions.yaml + 题目 Markdown 生成专题自测用的 questions.json。"""
 
 from __future__ import annotations
 

@@ -1,8 +1,8 @@
-# 面试题索引
+# 专题索引
 
-> 全库 **228 题**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本题单为速查表。
-> **⭐ 岗位定向**：[角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
-> [Web3 交易所重点准备](resume-focus-web3.md)
+> 全库 **228 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
+> **⭐ 方向定向**：[角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
+> [Web3 交易所重点专题](resume-focus-web3.md)
 
 ## 基础 · Go 语言与生产工程（48 题）
 
@@ -54,7 +54,7 @@
 ## 角色化 P0
 
 1. **共享 Go/生产工程门槛**：[16 Go 生产工程](interview/16-go-production-engineering/index.md) → [08 手写题](interview/08-coding-senior/index.md) → [06 Linux/TCP](interview/06-network-governance/index.md) → [PostgreSQL](interview/middleware/postgresql/index.md) / [MySQL](interview/middleware/mysql/index.md)。
-2. **简历首选 Agent / Crypto Agent**：[10 AI 工程](interview/10-ai-engineering/index.md) → [工作流/HITL](interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) → [MCP/A2A](interview/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) → [Agent Commerce](interview/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) → [开放平台/Launchpad](interview/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md)。
+2. **重点方向 Agent / Crypto Agent**：[10 AI 工程](interview/10-ai-engineering/index.md) → [工作流/HITL](interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) → [MCP/A2A](interview/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) → [Agent Commerce](interview/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) → [开放平台/Launchpad](interview/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md)。
 3. **Web3 证据主线**：[17 多链钱包](interview/17-multichain-wallet/index.md) → [18 支付与稳定币](interview/18-web3-payments-stablecoin/index.md) → [19 节点/RPC](interview/19-node-rpc-staking/index.md)。
 
 完整题号：[角色优先级矩阵](interview/_meta/role-priority-matrix.md)；

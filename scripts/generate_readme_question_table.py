@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""从 questions.yaml 生成 README.md 中的面试题全表（序号 + 题号 + 题目）。"""
+"""从 questions.yaml 生成 README.md 中的专题全表（序号 + 题号 + 题目）。"""
 
 from __future__ import annotations
 
@@ -80,7 +80,7 @@ def build_table(by_key: dict[str, list[dict]]) -> str:
     total = sum(len(by_key[k]) for _, mods in MODULE_ORDER for _, k in mods)
 
     lines.append(MARKER_START)
-    lines.append(f"## 面试题全表（{total} 题）")
+    lines.append(f"## 专题全表（{total} 篇）")
     lines.append("")
     lines.append(
         "> 序号按 **基础 → 进阶 → 高阶 → 专题 → 综合** 排列；"
