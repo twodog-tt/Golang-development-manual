@@ -29,3 +29,4 @@ nav:
   - "预言机 / 数据源 / 争议": S-EXCH-25-prediction-market-oracle-dispute-resolution.md
   - "预测市场安全与上线": S-EXCH-26-prediction-market-security-testing-mainnet.md
   - "PancakeSwap V2 / V3": S-EXCH-27-pancakeswap-v2-v3-differences.md
+  - "CEX/DEX 多级代理：极差费率、计佣账本与后台隔离": S-EXCH-28-affiliate-tiered-rate-rebate.md

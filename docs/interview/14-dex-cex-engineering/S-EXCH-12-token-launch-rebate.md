@@ -85,4 +85,5 @@ stateDiagram-v2
 ## 延伸阅读
 
 - [S-EXCH-06 DEX AMM](./S-EXCH-06-dex-amm-liquidity.md)
+- [S-EXCH-28 多级代理极差分润](./S-EXCH-28-affiliate-tiered-rate-rebate.md)
 - [S-SOLID-04 可升级合约](../13-solidity-contracts/S-SOLID-04-upgradeable-proxy.md)

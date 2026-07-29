@@ -104,6 +104,7 @@
 | ⭐ [S-EXCH-10](interview/14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation.md) | 链上事件驱动 K 线 | K 线、排行榜 |
 | ⭐ [S-EXCH-11](interview/14-dex-cex-engineering/S-EXCH-11-websocket-market-hub.md) | WebSocket 行情 Hub | 实时推送 |
 | ⭐ [S-EXCH-12](interview/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate.md) | Token 发行与返佣提现 | 毕业、分账、提现 |
+| ⭐ [S-EXCH-28](interview/14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate.md#oral-card) | 多级代理极差分润 | 代理树、极差费率、计佣账本、后台隔离 |
 | ⭐ [S-EXCH-17](interview/14-dex-cex-engineering/S-EXCH-17-runnable-deterministic-matching-engine.md) | 可运行确定性撮合 | 价格时间优先、FOK、Post-only、STP、重放 |
 | ⭐ [S-EXCH-18](interview/14-dex-cex-engineering/S-EXCH-18-wal-snapshot-replay.md) | WAL、快照与回放 | durable-before-apply、torn tail、发布水位 |
 | ⭐ [S-EXCH-19](interview/14-dex-cex-engineering/S-EXCH-19-market-data-sequence-gap-recovery.md) | 行情 Gap Recovery | snapshot bridge、sequence、fail closed |

@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "generated_at": "2026-07-21T10:35:08Z",
-  "count": 228,
+  "generated_at": "2026-07-29T14:07:23Z",
+  "count": 229,
   "roles": [
     {
       "key": "senior_go_backend",
@@ -3187,6 +3187,31 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
+        "reviewed_at": "2026-07-21"
+      }
+    },
+    {
+      "id": "S-EXCH-28",
+      "title": "CEX/DEX 多级代理：极差费率、计佣账本与后台隔离",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate/",
+      "prompt": "多级代理极差分润 = 沿代理链向上，把每一级的 **有效费率差** 拆成多笔佣金分录。 计佣只消费已确认的成交/手续费事实，绑定 **费率模板版本** 与幂等键；结算进独立佣金账本， 再走提现风控。CEX 与 DEX 的差别主要在事实来源（撮合 ledger vs 链上事件 + reorg）， 不在“要不要做账本”。生产关键词：**代理树、极差、规则版本、冲正、subtree 隔离**。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p1",
+        "staff_architect": "p2"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "stable",
         "reviewed_at": "2026-07-21"
       }
     },

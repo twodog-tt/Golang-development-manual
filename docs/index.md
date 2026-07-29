@@ -1,7 +1,7 @@
 # Go · Agent · Web3 工程知识库
 
 面向 **5 年+ Go 后端、AI Agent Platform / Crypto Agent Ecosystem 与 Web3 架构方向** 的
-工程知识沉淀，共 **228 篇正文**，并配套可运行示例。
+工程知识沉淀，共 **229 篇正文**，并配套可运行示例。
 
 > **知识主线**：先夯实资深 Go 与生产工程基本盘，再深入 Agent 工作流、MCP/A2A、
 > Persona/Memory、Agent 身份/Commerce、开放平台和 Web3 安全执行；交易所、钱包、实时风控

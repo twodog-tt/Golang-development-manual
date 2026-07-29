@@ -489,6 +489,7 @@ roles:
       - S-EXCH-12
       - S-EXCH-14
       - S-EXCH-27
+      - S-EXCH-28
       - S-MSVC-02
       - S-MSVC-05
       - S-PAY-01

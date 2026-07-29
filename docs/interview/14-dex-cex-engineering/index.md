@@ -1,6 +1,6 @@
 # 14 DEX / CEX 交易所工程
 
-27 题 | P0/P1 专题（**预测市场 / 交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
+28 题 | P0/P1 专题（**预测市场 / 交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
 
 > 面向 **CEX 撮合与资金系统（Go）** + **DEX/预测市场链上协议（Solidity）** 工程师，
 > 及 **交易所/预测市场技术负责人** 全栈面试。
@@ -80,6 +80,7 @@
 | [S-EXCH-19](./S-EXCH-19-market-data-sequence-gap-recovery.md) | 行情序号、快照桥接与 Gap Recovery | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-20](./S-EXCH-20-fix-session-sequence-recovery.md) | FIX Session 序号与断线恢复 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-12](./S-EXCH-12-token-launch-rebate.md) | Token 发行、分账与返佣提现 | ⭐⭐⭐⭐⭐ |
+| [S-EXCH-28](./S-EXCH-28-affiliate-tiered-rate-rebate.md#oral-card) | **多级代理极差费率、计佣账本与后台隔离** | ⭐⭐⭐⭐⭐ |
 
 ## 关联模块
 

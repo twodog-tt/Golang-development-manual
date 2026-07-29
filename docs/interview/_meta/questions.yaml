@@ -1115,6 +1115,12 @@ p1:
       status: published
       resume_focus: true
       file: 14-dex-cex-engineering/S-EXCH-27-pancakeswap-v2-v3-differences.md
+    - id: S-EXCH-28
+      title: CEX/DEX 多级代理：极差费率、计佣账本与后台隔离
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate.md
   microservices_exchange:
     - id: S-MSVC-01
       title: 交易所微服务全链路架构白板（CEX + DEX）

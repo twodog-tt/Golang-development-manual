@@ -1,6 +1,6 @@
 # 专题索引
 
-> 全库 **228 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
+> 全库 **229 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
 > **⭐ 方向定向**：[角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
 > [Web3 交易所重点专题](web3-exchange-wallet-focus.md)
 
@@ -42,7 +42,7 @@
 | 20 协议、共识与安全 | 4 | [20-protocol-consensus-security/](interview/20-protocol-consensus-security/index.md) |
 | 21 Web3 安全工程 | 4 | [21-security-engineering/](interview/21-security-engineering/index.md) |
 | 13 Solidity 与合约 | 8 | [13-solidity-contracts/](interview/13-solidity-contracts/index.md) |
-| 14 DEX / CEX / 预测市场 | 27 | [14-dex-cex-engineering/](interview/14-dex-cex-engineering/index.md) |
+| 14 DEX / CEX / 预测市场 | 28 | [14-dex-cex-engineering/](interview/14-dex-cex-engineering/index.md) |
 
 ## 综合 · 领导力与 AI（19 题）
 
