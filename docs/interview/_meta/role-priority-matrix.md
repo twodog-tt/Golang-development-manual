@@ -4,10 +4,10 @@
 > [role-evidence.yaml](./role-evidence.yaml)，一致性由
 > `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-21**。
 
-## 先选岗位，不再背统一 P0
+## 先选方向，不再套统一 P0
 
 旧 [questions.yaml](./questions.yaml) 中的全局 P0/P1/P2 保留给导航和历史兼容，但不再代表
-所有岗位的统一学习顺序。有效优先级按以下规则计算：
+所有方向的统一学习顺序。有效优先级按以下规则计算：
 
 ```text
 岗位 P0 = shared.p0 ∪ role.p0
@@ -47,7 +47,7 @@ P0 数量不是“全部逐字通读”。建议先掌握 shared P0 的 30 秒�
 
 在 shared P0 之外，新增 24 篇方向定向 P0：
 
-| 能力域 | P0 题号 | 简历证据 |
+| 能力域 | P0 题号 | 项目证据 |
 |--------|---------|----------|
 | 模型与工具入口 | `S-AI-01/03/07` | Go LLM 接入、Tool/Skill、MCP Server |
 | 协议互操作 | `S-AI-11` | MCP/A2A 边界、统一任务状态与 vendor-neutral conformance |
@@ -60,7 +60,7 @@ P0 数量不是“全部逐字通读”。建议先掌握 shared P0 的 30 秒�
 | 实时数据与消息 | `S-ARCH-21`、`S-KAFKA-02`、`S-RAB-01`、`S-ES-03` | CDC/Flink/ES、RabbitMQ 行情与异步任务 |
 | SaaS 与 Web3 证据 | `S-SOL-05`、`S-WALLET-12` | 多租户平台、EVM/TRON USDT 与 TRC20 |
 
-这条路径不要求把 LangGraph、AutoGen、CrewAI 的 API 逐个背成 P0。面试主张应是：
+这条路径不要求把 LangGraph、AutoGen、CrewAI 的 API 逐个背成 P0。核心主张应是：
 **理解框架能力，但能用 Go 自建可审计状态机，并清楚框架 checkpoint 与业务幂等的边界**。
 
 ### 资深 Go 后端
@@ -96,7 +96,7 @@ P0 数量不是“全部逐字通读”。建议先掌握 shared P0 的 30 秒�
 优先升级 `S-EXCH-01~05/10/11/13/15~26`、交易所微服务、账本、充提、节点交易管理器与
 signer 控制。预测市场岗位按 `S-EXCH-23 → 24 → 25 → 26` 形成 CTF/生命周期、
 CLOB/EIP-712/结算、数据源/争议、安全/上线闭环。性能结论必须附 workload、持久化边界、
-P99/P999 和恢复语义；涉及 DEX/Launchpad 简历追问时再把 `S-EXCH-27` 作为 P1 补齐。
+P99/P999 和恢复语义；涉及 DEX/Launchpad 场景深挖时再把 `S-EXCH-27` 作为 P1 补齐。
 
 ### Staff / 后端架构师
 
@@ -135,11 +135,11 @@ P99/P999 和恢复语义；涉及 DEX/Launchpad 简历追问时再把 `S-EXCH-27
 
 | 标签 | 当前篇数 | 复核方式 |
 |------|---------:|----------|
-| `stable` | 142 | 目标数据库/语言版本面试前抽查 |
+| `stable` | 142 | 目标数据库/语言版本使用前抽查 |
 | `version_sensitive` | 72 | 复核官方 release/spec/SDK 文档 |
 | `vendor_or_regulatory_sensitive` | 14 | 结合目标厂商、司法辖区和法律/合规意见 |
 
-`vendor_or_regulatory_sensitive` 优先于普通版本敏感；它提醒你在面试里说明适用范围，而不是背一个
+`vendor_or_regulatory_sensitive` 优先于普通版本敏感；它提醒你对外说明适用范围，而不是套一个
 全球通用结论。
 
 ## 使用方式
@@ -147,7 +147,7 @@ P99/P999 和恢复语义；涉及 DEX/Launchpad 简历追问时再把 `S-EXCH-27
 1. 在 [role-evidence.yaml](./role-evidence.yaml) 选择一个 role。
 2. 先过 shared P0，再过该 role 的增量 P0。
 3. 每题先看可复现标签：`explanation_only` 就只声称“设计/理解”；有 test/harness 才说明覆盖范围。
-4. 遇到 version/vendor/regulatory 标签，面试前按目标 JD 再核官方资料。
+4. 遇到 version/vendor/regulatory 标签，按目标场景再核官方资料。
 5. 每周运行：
 
 ```bash

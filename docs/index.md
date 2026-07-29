@@ -12,9 +12,9 @@
     [① 选择目标方向](interview/_meta/role-priority-matrix.md) →
     [② 完成 18 个高频锚点](high-frequency-roadmap.md) →
     [③ 查看岗位定向 P0 图谱](interview/_meta/p0-knowledge-graph.md) →
-    [④ 开始专题自测](mock-interview.md)
+    [④ 开始专题自测](topic-quiz.md)
 
-    Web3 方向可直接进入 [交易所与钱包重点专题](resume-focus-web3.md)。
+    Web3 方向可直接进入 [交易所与钱包重点专题](web3-exchange-wallet-focus.md)。
 
 > **图表操作**：正文中的架构图和时序图支持点击全屏、滚轮或双指缩放、拖拽、重置、
 > 新标签打开与复制 Mermaid 源码。
@@ -49,7 +49,7 @@
 辅助入口：[18 个高频锚点](high-frequency-roadmap.md) ·
 [学习路线](learning-path-senior.md) ·
 [P0 技术纠错审计](interview/_meta/technical-corrections-audit.md) ·
-[专题自测](mock-interview.md)
+[专题自测](topic-quiz.md)
 
 ## 3. 可验证项目证据
 

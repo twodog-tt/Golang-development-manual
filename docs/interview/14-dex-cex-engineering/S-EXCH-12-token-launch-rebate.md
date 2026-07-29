@@ -14,7 +14,7 @@ sources:
 ---
 
 !!! tip "⭐ 重点准备"
-    Web3 交易所 / 钱包方向高频题，见 [重点准备题单](../../resume-focus-web3.md)。
+    Web3 交易所 / 钱包方向高频题，见 [重点专题](../../web3-exchange-wallet-focus.md)。
 
 # Token 发行平台：毕业、分账与返佣提现
 

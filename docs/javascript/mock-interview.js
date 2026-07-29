@@ -163,7 +163,7 @@
     const familiar = familiarCount(q.id);
     const w = weight(q).toFixed(2);
     const focusBadge = q.resume_focus
-      ? '<span class="mock-interview-badge mock-interview-badge-focus">岗位重点</span>'
+      ? '<span class="mock-interview-badge mock-interview-badge-focus">方向重点</span>'
       : "";
     return `
       <article class="mock-interview-card" aria-live="polite">

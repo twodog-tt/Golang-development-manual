@@ -1,6 +1,6 @@
 # 14 DEX / CEX 交易所工程
 
-27 题 | P0/P1 专题（**预测市场 / 交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
+27 题 | P0/P1 专题（**预测市场 / 交易所 / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
 
 > 面向 **CEX 撮合与资金系统（Go）** + **DEX/预测市场链上协议（Solidity）** 工程师，
 > 及 **交易所/预测市场技术负责人** 全栈面试。

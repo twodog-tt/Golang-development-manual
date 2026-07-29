@@ -7,16 +7,16 @@
 ![gopher](./gopher.png)
 
 > **定位**：Go 运行时与系统设计 + 链上工程（Solidity）+ 链下工程（Go RPC/索引）+ 解决方案架构 + 微服务治理 + AI 工程。  
-> **⭐ Web3 交易所 / 钱包方向**：[docs/resume-focus-web3.md](./docs/resume-focus-web3.md)
+> **⭐ Web3 交易所 / 钱包方向**：[docs/web3-exchange-wallet-focus.md](./docs/web3-exchange-wallet-focus.md)
 
 ## 快速开始
 
 | 步骤 | 链接 |
 |------|------|
 | 1. 学习路线（4 周 / 8 周 / 架构师 / Web3） | [docs/learning-path-senior.md](./docs/learning-path-senior.md) |
-| 2. **专题自测**（随机抽题 + 熟练度） | [docs/mock-interview.md](./docs/mock-interview.md) |
+| 2. **专题自测**（随机抽题 + 熟练度） | [docs/topic-quiz.md](./docs/topic-quiz.md) |
 | 3. 专题总索引 | [docs/interview-catalog.md](./docs/interview-catalog.md) |
-| 4. Web3 交易所重点专题 | [docs/resume-focus-web3.md](./docs/resume-focus-web3.md) |
+| 4. Web3 交易所重点专题 | [docs/web3-exchange-wallet-focus.md](./docs/web3-exchange-wallet-focus.md) |
 | 5. 角色化优先级与证据标签 | [docs/interview/_meta/role-priority-matrix.md](./docs/interview/_meta/role-priority-matrix.md) |
 | 6. P0 技术纠错审计 | [docs/interview/_meta/technical-corrections-audit.md](./docs/interview/_meta/technical-corrections-audit.md) |
 | 7. 题单与元数据 | [docs/interview/_meta/questions.yaml](./docs/interview/_meta/questions.yaml) |

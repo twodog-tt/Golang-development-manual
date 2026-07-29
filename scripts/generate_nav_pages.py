@@ -76,7 +76,7 @@ INTERVIEW_GROUPS: list[tuple[str, list[str]]] = [
 ROOT_PAGES = """nav:
   - 首页: index.md
   - 学习路线: learning-path-senior.md
-  - 专题自测: mock-interview.md
+  - 专题自测: topic-quiz.md
 
   - 方向与优先级:
     - 角色优先级与证据: interview/_meta/role-priority-matrix
@@ -86,7 +86,7 @@ ROOT_PAGES = """nav:
   - interview
 
   - 参考资料:
-    - Web3 交易所重点专题: resume-focus-web3.md
+    - Web3 交易所重点专题: web3-exchange-wallet-focus.md
     - 专题总索引: interview-catalog.md
     - 题源与引用: sources.md
     - 代码与题目映射: interview/_meta/mapping

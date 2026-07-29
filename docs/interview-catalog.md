@@ -2,7 +2,7 @@
 
 > 全库 **228 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
 > **⭐ 方向定向**：[角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
-> [Web3 交易所重点专题](resume-focus-web3.md)
+> [Web3 交易所重点专题](web3-exchange-wallet-focus.md)
 
 ## 基础 · Go 语言与生产工程（48 题）
 

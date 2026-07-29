@@ -1,6 +1,6 @@
 # 15 微服务（交易所场景）
 
-6 题 | **CEX / DEX 背景的微服务架构** | [返回索引](../../interview-catalog.md) · [重点准备题单](../../resume-focus-web3.md)
+6 题 | **CEX / DEX 背景的微服务架构** | [返回索引](../../interview-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
 
 > 以 **中心化交易（CEX）** 与 **链上交易（DEX/Web3）** 为业务背景，讲清微服务拆分、通信、数据、网关与事件边界。与 [14 DEX/CEX](../14-dex-cex-engineering/index.md) 业务专题互补：14 讲 **领域逻辑**，15 讲 **服务治理与架构落地**。
 

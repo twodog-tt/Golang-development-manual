@@ -199,7 +199,7 @@
 - ISO 20022 被修正为业务模型和消息标准，不是结算网络；区分 transport ACK、scheme status、
   settlement account movement、legal finality，以及 RWA token 与法定登记/受益权。
 
-## 面试中应避免的错误表达
+## 对外表述时应避免的错误表达
 
 | 不建议这样说 | 更准确的表达 |
 |--------------|--------------|

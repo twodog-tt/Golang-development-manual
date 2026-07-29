@@ -8,9 +8,9 @@
 >
 > 图中箭头表示学习与表达依赖，不表示线上系统只能按该拓扑部署。
 
-## 共享 P0 口述卡索引（40/40）
+## 共享 P0 要点速览索引（40/40）
 
-以下链接直接进入各题正文开头的口述卡，正文后半部分保留 10 分钟原理、生产场景、排查与追问。
+以下链接直接进入各题正文开头的要点速览，正文后半部分保留原理、生产场景、排查与深挖。
 
 - **并发与调度（9）**：
   [S-CONC-01](../01-runtime-concurrency/S-CONC-01-gmp-overview.md#oral-card) ·
@@ -108,7 +108,7 @@ flowchart LR
     Architecture["SLO / 容量 / ADR"]
   end
 
-  subgraph C["简历证据：Web3 / 交易 / 钱包"]
+  subgraph C["项目证据：Web3 / 交易 / 钱包"]
     C1["TRON / TRC20 生命周期<br/>S-WALLET-12"]
     C2["多链归集 / MPC / 恢复<br/>S-WALLET-01/06/07"]
     C3["Indexer / Reorg / 行情<br/>S-BC-05 · S-EXCH-10/11/19"]
@@ -118,8 +118,8 @@ flowchart LR
     C3 --> C4 --> C5
   end
 
-  subgraph D["岗位深挖出口"]
-    D1["Agent / Crypto Agent Platform<br/>主投"]
+  subgraph D["方向深挖出口"]
+    D1["Agent / Crypto Agent Platform<br/>主线"]
     D2["资深 Go / 交易所 / 钱包<br/>复用既有证据"]
     D3["Staff / 后端架构师<br/>战略、迁移、组织影响"]
   end
@@ -146,13 +146,13 @@ flowchart LR
 | 5 | 开放平台、SDK 与 Launchpad | 技术经理岗位需要开发者生态、发布治理和商业闭环 | “接了几个框架就等于建成开放平台” |
 | 6 | 外部副作用、OAuth2、成本与观测 | 发布、支付、tool call 都涉及模糊成功和权限边界 | “框架 checkpoint 自动保证 exactly-once” |
 | 7 | CDC/Flink/ES 实时风控 | 连接头部出行平台实时风控经验与 Agent 反馈/画像平台 | “Flink exactly-once 等于 ES 永不重复” |
-| 8 | TRON/TRC20 与多链钱包 | 简历明确有 TRON USDT、CEX 钱包和 MPC/TSS | “TRON 就是换 RPC 的 EVM” |
+| 8 | TRON/TRC20 与多链钱包 | 项目明确有 TRON USDT、CEX 钱包和 MPC/TSS | “TRON 就是换 RPC 的 EVM” |
 | 9 | 交易所状态机与量化指标 | 证明高吞吐、账本、行情和故障恢复深度 | “只报 3k/20k QPS，不说明 workload 和持久化边界” |
 | 10 | Staff 案例 | 架构师岗位需要跨团队决策、迁移和组织影响 | “把题库模板包装成自己做过的生产案例” |
 
-## Agent 定向 P0 口述卡索引（24/24）
+## Agent 定向 P0 要点速览索引（24/24）
 
-以下链接直接进入正文口述卡；建议按组内顺序练习，每题先闭卷讲 30 秒，再展开 3 分钟。
+以下链接直接进入正文要点速览；建议按组内顺序复习，每题先闭卷讲 30 秒，再展开 3 分钟。
 
 - **AI / Crypto Agent 核心（12）**：
   [S-AI-01](../10-ai-engineering/S-AI-01-llm-api-integration.md#oral-card) ·
@@ -179,13 +179,13 @@ flowchart LR
   [S-ES-03](../middleware/elasticsearch/S-ES-03-sync-ops.md#oral-card) ·
   [S-SEC-01](../21-security-engineering/S-SEC-01-web3-threat-model-iam-trust-boundaries.md#oral-card) ·
   [S-SEC-04](../21-security-engineering/S-SEC-04-security-testing-incident-response.md#oral-card)
-- **简历差异证据（2）**：
+- **差异化项目证据（2）**：
   [S-SOL-05](../11-solution-architecture/S-SOL-05-multi-tenant-saas.md#oral-card) ·
   [S-WALLET-12](../17-multichain-wallet/S-WALLET-12-tron-trc20-resource-transaction.md#oral-card)
 
 RAG、多模态和逐框架 API 细节放在 P1；P0 是框架无关的工作流、协议、权限、商业状态和平台治理。
 
-## 建议刷题节奏
+## 建议学习节奏
 
 1. **第一阶段：共享门槛**
    过完 shared P0 的 30 秒版，重点闭卷讲 Go 并发、错误边界、测试、SQL、网络、幂等、MQ、
@@ -200,13 +200,13 @@ RAG、多模态和逐框架 API 细节放在 P1；P0 是框架无关的工作流
    `S-ARCH-08/09/15/21`、`S-NET-04`、Kafka/RabbitMQ/ES，回答版本、OAuth2、配额、
    CDC、回放和降级。
 5. **第五阶段：差异化项目证据**
-   `S-WALLET-12` 串 TRON USDT；再从交易所/钱包路径选择 6～10 篇与你简历项目最接近的题，
-   准备 workload、指标口径、故障和取舍。
+   `S-WALLET-12` 串 TRON USDT；再从交易所/钱包路径选择 6～10 篇与你项目最接近的题，
+   整理 workload、指标口径、故障和取舍。
 6. **第六阶段：架构师出口**
    用 OctoAgentFlow 0→1、CEX 钱包恢复、实时风控链路各准备一个 STAR/ADR 案例，明确本人职责、
    团队边界、失败方案和量化结果。
 
-## 面试表达总原则
+## 对外表述总原则
 
 - 先说 **你实际负责的边界**，再说框架或组件；“熟悉 LangGraph”不能替代 Go 自建工作流的证据。
 - 区分 **模型 proposal、人工 approval、执行 job、外部 receipt**，四者不是一个状态。

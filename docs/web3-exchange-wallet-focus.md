@@ -7,7 +7,7 @@
 **图例**：⭐ **核心主线**（先形成闭环） · 🔶 **延展强化**（架构深挖） ·
 ○ **基础回查**（按反馈补洞）
 
-证据标签不在本页重复维护，避免两处数据漂移。口述时按
+证据标签不在本页重复维护，避免两处数据漂移。对外表述时按
 `explanation_only → illustrative_artifact → deterministic_test → integration_harness`
 说明仓库实际能证明到哪一层；当前没有 `external_acceptance`，不得把本地 harness
 表述成生产或真实厂商验收。
