@@ -104,3 +104,6 @@ function executeOperation(...) external returns (bool) {
 - [Uniswap V2 Concepts](https://docs.uniswap.org/contracts/v2/concepts/core-concepts/pools)
 - [Chainlink Data Feeds](https://docs.chain.link/data-feeds)
 - [14 DEX/CEX：AMM 与 LP](../14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity.md)
+- [S-EXCH-29 Staking / LM / Farm](../14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md)
+- [S-EXCH-30 Uniswap V2/V3](../14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md)
+- [S-EXCH-31 DEX Tech Lead 白板](../14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md)

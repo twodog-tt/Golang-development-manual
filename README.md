@@ -73,7 +73,7 @@
 | [20 协议、共识与安全](./docs/interview/20-protocol-consensus-security/index.md) | 4 | PoS/BFT、fork choice、PeerDAS、状态迁移 |
 | [21 Web3 安全工程](./docs/interview/21-security-engineering/index.md) | 4 | 威胁模型、signer fencing、SBOM/provenance、事件响应 |
 | [13 Solidity 与合约工程](./docs/interview/13-solidity-contracts/index.md) | 8 | 安全、ERC、Proxy、DeFi |
-| [14 DEX / CEX 交易所工程](./docs/interview/14-dex-cex-engineering/index.md) | 28 | AMM/PancakeSwap、撮合/WAL、多级极差返佣、预测市场 CTF/CLOB、预言机争议、安全上线 |
+| [14 DEX / CEX 交易所工程](./docs/interview/14-dex-cex-engineering/index.md) | 31 | AMM/Uniswap/Pancake、Staking/Farm、DEX TL 白板、撮合/WAL、预测市场 |
 
 ### 综合 · 领导力与 AI
 
@@ -89,7 +89,7 @@
 | [16 Go 生产工程](./docs/interview/16-go-production-engineering/index.md) · [21 安全工程](./docs/interview/21-security-engineering/index.md) | [17 多链钱包](./docs/interview/17-multichain-wallet/index.md) · [18 支付](./docs/interview/18-web3-payments-stablecoin/index.md) | [19 节点/RPC](./docs/interview/19-node-rpc-staking/index.md) · [20 协议/共识](./docs/interview/20-protocol-consensus-security/index.md) | [13 Solidity](./docs/interview/13-solidity-contracts/index.md) · [14 DEX/CEX](./docs/interview/14-dex-cex-engineering/index.md) |
 
 <!-- QUESTION_TABLE_START -->
-## 专题全表（229 篇）
+## 专题全表（232 篇）
 
 > 序号按 **基础 → 进阶 → 高阶 → 专题 → 综合** 排列；题号即文档 ID（如 `S-CONC-01`）。点击题目可跳转至 Markdown 正文。
 
@@ -322,30 +322,33 @@
 | 208 | `S-EXCH-26` | [预测市场安全不变量、测试矩阵与主网上线](./docs/interview/14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet.md) |
 | 209 | `S-EXCH-27` | [PancakeSwap V2 与 V3：AMM、流动性与后端集成差异](./docs/interview/14-dex-cex-engineering/S-EXCH-27-pancakeswap-v2-v3-differences.md) |
 | 210 | `S-EXCH-28` | [CEX/DEX 多级代理：极差费率、计佣账本与后台隔离](./docs/interview/14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate.md) |
+| 211 | `S-EXCH-29` | [DeFi Staking、流动性挖矿与 Yield Farming](./docs/interview/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md) |
+| 212 | `S-EXCH-30` | [Uniswap V2 与 V3 协议机制深挖](./docs/interview/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md) |
+| 213 | `S-EXCH-31` | [DEX Tech Lead 45 分钟架构白板](./docs/interview/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md) |
 
 ### 综合 · 领导力与 AI
 
 | 序号 | 题号 | 题目 |
 |------|------|------|
-| 211 | `S-LEAD-01` | [线上事故复盘结构](./docs/interview/07-engineering-leadership/S-LEAD-01-incident-postmortem.md) |
-| 212 | `S-LEAD-02` | [技术债识别与偿还策略](./docs/interview/07-engineering-leadership/S-LEAD-02-tech-debt.md) |
-| 213 | `S-LEAD-03` | [带团队与 Code Review 文化](./docs/interview/07-engineering-leadership/S-LEAD-03-code-review-culture.md) |
-| 214 | `S-LEAD-04` | [Staff 技术战略、无职权影响力与案例表达](./docs/interview/07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case.md) |
-| 215 | `S-LEAD-05` | [跨团队高风险迁移、灰度切换与回滚边界](./docs/interview/07-engineering-leadership/S-LEAD-05-cross-team-migration-case.md) |
-| 216 | `S-AI-01` | [Go 接入大模型 API：流式、重试、超时](./docs/interview/10-ai-engineering/S-AI-01-llm-api-integration.md) |
-| 217 | `S-AI-02` | [RAG 架构：分块、向量检索与 Go 落地](./docs/interview/10-ai-engineering/S-AI-02-rag-architecture.md) |
-| 218 | `S-AI-03` | [AI Agent 与 Function Calling](./docs/interview/10-ai-engineering/S-AI-03-agent-tool-calling.md) |
-| 219 | `S-AI-04` | [Prompt 工程与 Context 窗口管理](./docs/interview/10-ai-engineering/S-AI-04-prompt-context.md) |
-| 220 | `S-AI-05` | [LLM 应用安全：注入、PII、护栏](./docs/interview/10-ai-engineering/S-AI-05-llm-security.md) |
-| 221 | `S-AI-06` | [LLM 可观测性、成本与延迟优化](./docs/interview/10-ai-engineering/S-AI-06-llm-observability-cost.md) |
-| 222 | `S-AI-07` | [Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署](./docs/interview/10-ai-engineering/S-AI-07-mcp-server-go.md) |
-| 223 | `S-AI-08` | [多模态与语音接入：图像、音频在 Go 服务中的工程实践](./docs/interview/10-ai-engineering/S-AI-08-multimodal-voice.md) |
-| 224 | `S-AI-09` | [Agent 工作流、Human-in-the-loop 与可靠发布控制面](./docs/interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) |
-| 225 | `S-AI-10` | [Persona、分层 Memory 与反馈学习治理](./docs/interview/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) |
-| 226 | `S-AI-11` | [MCP 与 A2A：Tool、Agent、任务生命周期与跨框架互操作](./docs/interview/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) |
-| 227 | `S-AI-12` | [ERC-8004：Agent 身份、信誉、验证与钱包绑定](./docs/interview/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md) |
-| 228 | `S-AI-13` | [x402、x402b 与 ERC-8183：Agent 支付、托管、争议和对账](./docs/interview/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) |
-| 229 | `S-AI-14` | [Crypto Agent SDK、开放平台、Marketplace 与 Launchpad 架构](./docs/interview/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) |
+| 214 | `S-LEAD-01` | [线上事故复盘结构](./docs/interview/07-engineering-leadership/S-LEAD-01-incident-postmortem.md) |
+| 215 | `S-LEAD-02` | [技术债识别与偿还策略](./docs/interview/07-engineering-leadership/S-LEAD-02-tech-debt.md) |
+| 216 | `S-LEAD-03` | [带团队与 Code Review 文化](./docs/interview/07-engineering-leadership/S-LEAD-03-code-review-culture.md) |
+| 217 | `S-LEAD-04` | [Staff 技术战略、无职权影响力与案例表达](./docs/interview/07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case.md) |
+| 218 | `S-LEAD-05` | [跨团队高风险迁移、灰度切换与回滚边界](./docs/interview/07-engineering-leadership/S-LEAD-05-cross-team-migration-case.md) |
+| 219 | `S-AI-01` | [Go 接入大模型 API：流式、重试、超时](./docs/interview/10-ai-engineering/S-AI-01-llm-api-integration.md) |
+| 220 | `S-AI-02` | [RAG 架构：分块、向量检索与 Go 落地](./docs/interview/10-ai-engineering/S-AI-02-rag-architecture.md) |
+| 221 | `S-AI-03` | [AI Agent 与 Function Calling](./docs/interview/10-ai-engineering/S-AI-03-agent-tool-calling.md) |
+| 222 | `S-AI-04` | [Prompt 工程与 Context 窗口管理](./docs/interview/10-ai-engineering/S-AI-04-prompt-context.md) |
+| 223 | `S-AI-05` | [LLM 应用安全：注入、PII、护栏](./docs/interview/10-ai-engineering/S-AI-05-llm-security.md) |
+| 224 | `S-AI-06` | [LLM 可观测性、成本与延迟优化](./docs/interview/10-ai-engineering/S-AI-06-llm-observability-cost.md) |
+| 225 | `S-AI-07` | [Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署](./docs/interview/10-ai-engineering/S-AI-07-mcp-server-go.md) |
+| 226 | `S-AI-08` | [多模态与语音接入：图像、音频在 Go 服务中的工程实践](./docs/interview/10-ai-engineering/S-AI-08-multimodal-voice.md) |
+| 227 | `S-AI-09` | [Agent 工作流、Human-in-the-loop 与可靠发布控制面](./docs/interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) |
+| 228 | `S-AI-10` | [Persona、分层 Memory 与反馈学习治理](./docs/interview/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) |
+| 229 | `S-AI-11` | [MCP 与 A2A：Tool、Agent、任务生命周期与跨框架互操作](./docs/interview/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) |
+| 230 | `S-AI-12` | [ERC-8004：Agent 身份、信誉、验证与钱包绑定](./docs/interview/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md) |
+| 231 | `S-AI-13` | [x402、x402b 与 ERC-8183：Agent 支付、托管、争议和对账](./docs/interview/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) |
+| 232 | `S-AI-14` | [Crypto Agent SDK、开放平台、Marketplace 与 Launchpad 架构](./docs/interview/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) |
 
 <!-- QUESTION_TABLE_END -->
 ## 可运行代码

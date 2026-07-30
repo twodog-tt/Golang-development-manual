@@ -90,4 +90,6 @@ flowchart LR
 
 ## 延伸阅读
 
+- [S-EXCH-30 Uniswap V2/V3 协议深挖](./S-EXCH-30-uniswap-v2-v3-protocol.md)
+- [S-EXCH-29 Staking / LM / Farm](./S-EXCH-29-defi-staking-liquidity-mining-yield.md)
 - [S-SOLID-07 DeFi 模式](../13-solidity-contracts/S-SOLID-07-defi-patterns.md)

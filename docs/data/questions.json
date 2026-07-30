@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "generated_at": "2026-07-29T14:07:23Z",
-  "count": 229,
+  "generated_at": "2026-07-30T08:23:01Z",
+  "count": 232,
   "roles": [
     {
       "key": "senior_go_backend",
@@ -3206,6 +3206,81 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
+        "staff_architect": "p2"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "stable",
+        "reviewed_at": "2026-07-21"
+      }
+    },
+    {
+      "id": "S-EXCH-29",
+      "title": "DeFi Staking、流动性挖矿与 Yield Farming",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield/",
+      "prompt": "DEX Tech Lead 面试里，「Staking / 挖矿 / Farming」考的不是背名词，而是：**奖励怎么公平累计、谁有资格领取、排放怎么停、如何防刷**，以及链下 Indexer 如何投影 APR 而不误导用户。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "stable",
+        "reviewed_at": "2026-07-21"
+      }
+    },
+    {
+      "id": "S-EXCH-30",
+      "title": "Uniswap V2 与 V3 协议机制深挖",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol/",
+      "prompt": "面试官说「讲讲 Uniswap」时，不要只背 `x*y=k`。要分层讲清：**Factory → Pool/Pair → Router → LP 凭证 → 报价与结算**，并对比 V2/V3 的状态机与后端索引成本。Pancake 等分叉见 [S-EXCH-27](./S-EXCH-27-pancakeswap-v2-v3-differences.md)。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "stable",
+        "reviewed_at": "2026-07-21"
+      }
+    },
+    {
+      "id": "S-EXCH-31",
+      "title": "DEX Tech Lead 45 分钟架构白板",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": true,
+      "url": "interview/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard/",
+      "prompt": "我按 Tech Lead 视角拆一层：**链上协议负责正确性与资产托管边界，链下负责体验与可观测**。 先画资金与交易主路径，再讲 Indexer/reorg、多链配置版本、安全门禁和团队接口。 细节公式落在 [S-EXCH-30](./S-EXCH-30-uniswap-v2-v3-protocol.md)、激励落在 [S-EXCH-29](./S-EXCH-29-defi-staking-liquidity-mining-yield.md)。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
         "staff_architect": "p2"
       },
       "evidence": {

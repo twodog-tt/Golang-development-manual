@@ -26,7 +26,7 @@
 | 20 协议、共识与安全 | 4 | PoS/BFT、fork choice、PeerDAS、状态迁移 |
 | 21 Web3 安全工程 | 4 | 威胁模型、signer fencing、SBOM/provenance、事件响应 |
 | 13 Solidity 与合约 | 8 | 安全、ERC、Proxy、DeFi |
-| 14 DEX / CEX / 预测市场 | 28 | AMM/PancakeSwap、撮合/WAL、多级极差返佣、CTF/CLOB、预言机争议与安全上线 |
+| 14 DEX / CEX / 预测市场 | 31 | AMM/Uniswap/Pancake、Staking/Farm、DEX TL 白板、撮合/WAL、预测市场 |
 | 15 微服务（交易所场景） | 6 | 服务拆分、gRPC、数据隔离、网关、事件总线 |
 | 07 工程与领导力 | 5 | 复盘、技术债、Code Review、Staff 战略与迁移 |
 | 09 云原生 | 10 | K8s、Docker、OTel、Terraform、Helm/GitOps |

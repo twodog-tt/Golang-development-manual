@@ -73,3 +73,6 @@
 2. 按上表进入代码目录：`go run .` 或 `go test`。
 3. 资深面建议：**先口述再对照代码**，并补充自己的生产案例。
 | S-EXCH-28 | 多级代理极差分润 | [S-EXCH-28](../14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate.md) | — |
+| S-EXCH-29 | DeFi Staking / LM / Farm | [S-EXCH-29](../14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md) | — |
+| S-EXCH-30 | Uniswap V2/V3 协议 | [S-EXCH-30](../14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md) | — |
+| S-EXCH-31 | DEX Tech Lead 白板 | [S-EXCH-31](../14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md) | — |

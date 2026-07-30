@@ -100,7 +100,9 @@
 | ⭐ [S-EXCH-03](interview/14-dex-cex-engineering/S-EXCH-03-account-ledger.md) | 账户与复式记账 | 账务、返佣 |
 | ⭐ [S-EXCH-05](interview/14-dex-cex-engineering/S-EXCH-05-risk-reconciliation.md) | 风控与对账 | 黑名单、审计 |
 | ⭐ [S-EXCH-06](interview/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity.md) | DEX AMM 与 LP | 恒定乘积、外盘迁移 |
+| ⭐ [S-EXCH-30](interview/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md#oral-card) | Uniswap V2/V3 协议深挖 | Factory/Router、sqrtPrice、tick、假池校验 |
 | ⭐ [S-EXCH-27](interview/14-dex-cex-engineering/S-EXCH-27-pancakeswap-v2-v3-differences.md#oral-card) | PancakeSwap V2/V3 | 集中流动性、fee tier、position NFT、迁池与索引差异 |
+| ⭐ [S-EXCH-29](interview/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md#oral-card) | Staking / 挖矿 / Farming | rewardPerToken、排放、防刷、APR 口径 |
 | ⭐ [S-EXCH-10](interview/14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation.md) | 链上事件驱动 K 线 | K 线、排行榜 |
 | ⭐ [S-EXCH-11](interview/14-dex-cex-engineering/S-EXCH-11-websocket-market-hub.md) | WebSocket 行情 Hub | 实时推送 |
 | ⭐ [S-EXCH-12](interview/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate.md) | Token 发行与返佣提现 | 毕业、分账、提现 |
@@ -122,6 +124,7 @@
 |-------|------|------------|
 | ⭐ [S-EXCH-13](interview/14-dex-cex-engineering/S-EXCH-13-cex-end-to-end-architecture.md) | CEX 端到端交易系统 | 撮合·账务·充提·行情·45min 白板 |
 | ⭐ [S-EXCH-14](interview/14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture.md) | Web3 交易所全栈 | Indexer·K线·WS·返佣·链上链下边界 |
+| ⭐ [S-EXCH-31](interview/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md#oral-card) | DEX Tech Lead 45min 白板 | 协议权威·激励·多链门禁·带队与取舍 |
 | ⭐ [S-EXCH-15](interview/14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery.md) | 清结算与 HA | 三层对账·T+0·RPO/RTO·提现熔断 |
 | ⭐ [S-EXCH-16](interview/14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position.md) | 永续撮合与仓位引擎 | 单向/双向持仓·Reduce-Only·撮合与仓位顺序边界 |
 

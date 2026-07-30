@@ -1121,6 +1121,24 @@ p1:
       status: published
       resume_focus: true
       file: 14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate.md
+    - id: S-EXCH-29
+      title: DeFi Staking、流动性挖矿与 Yield Farming
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md
+    - id: S-EXCH-30
+      title: Uniswap V2 与 V3 协议机制深挖
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md
+    - id: S-EXCH-31
+      title: DEX Tech Lead 45 分钟架构白板
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md
   microservices_exchange:
     - id: S-MSVC-01
       title: 交易所微服务全链路架构白板（CEX + DEX）
