@@ -1,5 +1,5 @@
 // Package connpool 提供一个有 maxOpen/maxIdle 边界的简易连接池
-// （面试手写题 S-CODE-05）。
+// （编码练习 S-CODE-05）。
 package connpool
 
 import (

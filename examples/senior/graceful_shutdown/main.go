@@ -1,4 +1,4 @@
-// 优雅关闭 HTTP 服务（面试手写题 S-CODE-03）。
+// 优雅关闭 HTTP 服务（编码练习 S-CODE-03）。
 package main
 
 import (

@@ -1,6 +1,6 @@
 # 中间件与数据库（按类型浏览）
 
-按 **MySQL / PostgreSQL / Redis / Kafka / RocketMQ / RabbitMQ / Elasticsearch** 分类，便于按 JD 或技术栈刷题。
+按 **MySQL / PostgreSQL / Redis / Kafka / RocketMQ / RabbitMQ / Elasticsearch** 分类，便于按岗位场景或技术栈浏览。
 
 | 类型 | 题数 | 入口 |
 |------|------|------|

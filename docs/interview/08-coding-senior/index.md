@@ -1,8 +1,8 @@
-# 08 手写题（资深向）
+# 08 编码练习（资深向）
 
-7 题 | 代码 + 正文 | [返回索引](../../interview-catalog.md)
+7 篇 | 代码 + 正文 | [返回专题索引](../../interview-catalog.md)
 
-| ID | 题目 | 代码 | 频率 |
+| ID | 标题 | 代码 | 频率 |
 |----|------|------|------|
 | [S-CODE-01](./S-CODE-01-concurrent-lru.md) | 并发安全 LRU | [lru/](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/senior/lru) | ⭐⭐⭐⭐⭐ |
 | [S-CODE-02](./S-CODE-02-token-bucket.md) | 令牌桶限流 | [ratelimit/](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/senior/ratelimit) | ⭐⭐⭐⭐⭐ |

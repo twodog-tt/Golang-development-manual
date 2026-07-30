@@ -14,48 +14,48 @@
 | 步骤 | 链接 |
 |------|------|
 | 1. 学习路线（4 周 / 8 周 / 架构师 / Web3） | [docs/learning-path-senior.md](./docs/learning-path-senior.md) |
-| 2. **专题自测**（随机抽题 + 熟练度） | [docs/topic-quiz.md](./docs/topic-quiz.md) |
+| 2. **专题自测**（随机抽专题 + 熟练度） | [docs/topic-quiz.md](./docs/topic-quiz.md) |
 | 3. 专题总索引 | [docs/interview-catalog.md](./docs/interview-catalog.md) |
 | 4. Web3 交易所重点专题 | [docs/web3-exchange-wallet-focus.md](./docs/web3-exchange-wallet-focus.md) |
 | 5. 角色化优先级与证据标签 | [docs/interview/_meta/role-priority-matrix.md](./docs/interview/_meta/role-priority-matrix.md) |
 | 6. P0 技术纠错审计 | [docs/interview/_meta/technical-corrections-audit.md](./docs/interview/_meta/technical-corrections-audit.md) |
-| 7. 题单与元数据 | [docs/interview/_meta/questions.yaml](./docs/interview/_meta/questions.yaml) |
-| 8. 代码 ↔ 题目映射 | [docs/interview/_meta/mapping.md](./docs/interview/_meta/mapping.md) |
-| 9. 题源与引用规范 | [docs/sources.md](./docs/sources.md) |
+| 7. 专题元数据 | [docs/interview/_meta/questions.yaml](./docs/interview/_meta/questions.yaml) |
+| 8. 代码 ↔ 专题映射 | [docs/interview/_meta/mapping.md](./docs/interview/_meta/mapping.md) |
+| 9. 来源与引用规范 | [docs/sources.md](./docs/sources.md) |
 
 ## 导航结构（由易到难 · 三级菜单）
 
-站点左侧导航为 **分组 → 模块 → 题目标题** 三级结构：
+站点左侧导航为 **分组 → 模块 → 专题标题** 三级结构：
 
-| 层级 | 模块 | 题数 |
+| 层级 | 模块 | 篇数 |
 |------|------|------|
-| **基础 · Go 语言与生产工程** | 01 并发 → 02 内存 → 16 Go 生产工程 → 08 手写题 | 48 |
+| **基础 · Go 语言与生产工程** | 01 并发 → 02 内存 → 16 Go 生产工程 → 08 编码练习 | 48 |
 | **进阶 · 网络与中间件** | 06 Linux/TCP/网络 + MySQL/PostgreSQL/Redis/MQ/ES/分布式事务 | 33 |
 | **高阶 · 系统设计与架构** | 03 系统设计 → 09 云原生 → 11 解决方案架构 → **15 微服务（交易所）** | 45 |
-| **专题 · Web3 核心基础设施** | 12 EVM/Rollup/跨链 → 17 多链钱包 → 18 支付 → 19 节点/RPC → 20 协议/共识 → 21 安全工程 → 13 Solidity → 14 交易所/预测市场 | 84 |
+| **专题 · Web3 核心基础设施** | 12 EVM/Rollup/跨链 → 17 多链钱包 → 18 支付 → 19 节点/RPC → 20 协议/共识 → 21 安全工程 → 13 Solidity → 14 交易所/预测市场 | 87 |
 | **综合 · 领导力与 AI** | 07 工程领导力 → 10 AI 工程 | 19 |
 
 ## 模块入口
 
 ### 基础 · Go 语言与生产工程
 
-| 模块 | 题数 | 入口 |
+| 模块 | 篇数 | 入口 |
 |------|------|------|
 | [01 并发与运行时](./docs/interview/01-runtime-concurrency/index.md) | 20 | GMP、Channel、Context、泄漏 |
 | [02 内存与 GC](./docs/interview/02-memory-gc/index.md) | 15 | 三色标记、逃逸、pprof |
 | [16 Go 生产工程](./docs/interview/16-go-production-engineering/index.md) | 6 | 错误契约、接口、测试、工具链、供应链 |
-| [08 手写题](./docs/interview/08-coding-senior/index.md) | 7 | LRU、限流、连接池、Singleflight、批处理 |
+| [08 编码练习](./docs/interview/08-coding-senior/index.md) | 7 | LRU、限流、连接池、Singleflight、批处理 |
 
 ### 进阶 · 网络与中间件
 
-| 模块 | 题数 | 入口 |
+| 模块 | 篇数 | 入口 |
 |------|------|------|
 | [06 网络与服务治理](./docs/interview/06-network-governance/index.md) | 7 | Linux FD/epoll、TCP、gRPC、Gin、WebSocket |
 | [中间件与数据库](./docs/interview/middleware/index.md) | 26 | MySQL(7)、PostgreSQL(3)、Redis(3)、Kafka(4)、RocketMQ(4)、RabbitMQ(1)、ES(3)、分布式事务(1) |
 
 ### 高阶 · 系统设计与架构
 
-| 模块 | 题数 | 入口 |
+| 模块 | 篇数 | 入口 |
 |------|------|------|
 | [03 系统设计](./docs/interview/03-system-design/index.md) | 21 | 秒杀、幂等、缓存、MQ、多活、CDC/Flink 实时风控 |
 | [09 云原生](./docs/interview/09-cloud-native/index.md) | 10 | K8s、Terraform、Helm/GitOps、OTel |
@@ -64,7 +64,7 @@
 
 ### 专题 · Web3 核心基础设施
 
-| 模块 | 题数 | 入口 |
+| 模块 | 篇数 | 入口 |
 |------|------|------|
 | [12 区块链与 Web3（Go）](./docs/interview/12-blockchain-web3/index.md) | 12 | RPC、索引、Rollup、跨链安全、4337、MPC |
 | [17 多链钱包与托管](./docs/interview/17-multichain-wallet/index.md) | 12 | BTC、TRON/TRC20、Solana/Cosmos/Aptos/Sui Go 实战、归集、MPC |
@@ -77,7 +77,7 @@
 
 ### 综合 · 领导力与 AI
 
-| 模块 | 题数 | 入口 |
+| 模块 | 篇数 | 入口 |
 |------|------|------|
 | [07 工程与领导力](./docs/interview/07-engineering-leadership/index.md) | 5 | 复盘、技术债、Staff 战略与跨团队迁移 |
 | [10 AI 工程与编程](./docs/interview/10-ai-engineering/index.md) | 14 | 工作流/HITL、MCP/A2A、Agent 身份/Commerce、开放平台/Launchpad |
@@ -91,11 +91,11 @@
 <!-- QUESTION_TABLE_START -->
 ## 专题全表（232 篇）
 
-> 序号按 **基础 → 进阶 → 高阶 → 专题 → 综合** 排列；题号即文档 ID（如 `S-CONC-01`）。点击题目可跳转至 Markdown 正文。
+> 序号按 **基础 → 进阶 → 高阶 → 专题 → 综合** 排列；文档 ID（如 `S-CONC-01`）。点击标题可跳转至 Markdown 正文。
 
 ### 基础 · Go 语言与生产工程
 
-| 序号 | 题号 | 题目 |
+| 序号 | 文档 ID | 标题 |
 |------|------|------|
 | 1 | `S-CONC-01` | [GMP 模型与 1.14 以来抢占式调度](./docs/interview/01-runtime-concurrency/S-CONC-01-gmp-overview.md) |
 | 2 | `S-CONC-02` | [G、M、P 角色与 P 被移除时会发生什么](./docs/interview/01-runtime-concurrency/S-CONC-02-gmp-roles.md) |
@@ -130,7 +130,7 @@
 | 31 | `S-MEM-11` | [CPU profile vs execution trace 选型](./docs/interview/02-memory-gc/S-MEM-11-pprof-vs-trace.md) |
 | 32 | `S-MEM-12` | [减少 GC 压力的系统级手段](./docs/interview/02-memory-gc/S-MEM-12-reduce-gc-pressure.md) |
 | 33 | `S-MEM-13` | [延迟敏感服务的 GC 抖动治理](./docs/interview/02-memory-gc/S-MEM-13-gc-jitter.md) |
-| 34 | `S-MEM-14` | [new/make 在资深面试中的升维回答](./docs/interview/02-memory-gc/S-MEM-14-new-make.md) |
+| 34 | `S-MEM-14` | [new 与 make：分配语义、逃逸与选型](./docs/interview/02-memory-gc/S-MEM-14-new-make.md) |
 | 35 | `S-MEM-15` | [defer 链、开销与错误处理](./docs/interview/02-memory-gc/S-MEM-15-defer.md) |
 | 36 | `S-GOENG-01` | [错误契约、Wrapping 与 Panic 边界](./docs/interview/16-go-production-engineering/S-GOENG-01-errors-contract-panic-boundary.md) |
 | 37 | `S-GOENG-02` | [包边界、接口设计与依赖注入](./docs/interview/16-go-production-engineering/S-GOENG-02-package-interface-di.md) |
@@ -148,7 +148,7 @@
 
 ### 进阶 · 网络与中间件
 
-| 序号 | 题号 | 题目 |
+| 序号 | 文档 ID | 标题 |
 |------|------|------|
 | 49 | `S-NET-06` | [Linux 进程、文件描述符、epoll 与 Go netpoll](./docs/interview/06-network-governance/S-NET-06-linux-fd-epoll-netpoll.md) |
 | 50 | `S-NET-07` | [TCP 建连、队列、TIME_WAIT 与故障排查](./docs/interview/06-network-governance/S-NET-07-tcp-lifecycle-queues-timewait.md) |
@@ -186,7 +186,7 @@
 
 ### 高阶 · 系统设计与架构
 
-| 序号 | 题号 | 题目 |
+| 序号 | 文档 ID | 标题 |
 |------|------|------|
 | 82 | `S-ARCH-01` | [设计支撑 10 万 QPS 的读多写少 API](./docs/interview/03-system-design/S-ARCH-01-read-heavy-api.md) |
 | 83 | `S-ARCH-02` | [秒杀：库存、超卖、热点 Key](./docs/interview/03-system-design/S-ARCH-02-seckill.md) |
@@ -236,7 +236,7 @@
 
 ### 专题 · Web3 核心基础设施
 
-| 序号 | 题号 | 题目 |
+| 序号 | 文档 ID | 标题 |
 |------|------|------|
 | 127 | `S-BC-01` | [区块链基础与 EVM 账户模型](./docs/interview/12-blockchain-web3/S-BC-01-blockchain-evm-basics.md) |
 | 128 | `S-BC-02` | [Go 连接节点：JSON-RPC 与 ethclient](./docs/interview/12-blockchain-web3/S-BC-02-go-ethereum-rpc.md) |
@@ -328,7 +328,7 @@
 
 ### 综合 · 领导力与 AI
 
-| 序号 | 题号 | 题目 |
+| 序号 | 文档 ID | 标题 |
 |------|------|------|
 | 214 | `S-LEAD-01` | [线上事故复盘结构](./docs/interview/07-engineering-leadership/S-LEAD-01-incident-postmortem.md) |
 | 215 | `S-LEAD-02` | [技术债识别与偿还策略](./docs/interview/07-engineering-leadership/S-LEAD-02-tech-debt.md) |
@@ -376,7 +376,7 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-docs.txt
 
 # 生成专题自测数据、侧栏导航与 README 题表（新增题目后建议执行）
-python3 scripts/generate_mock_interview_data.py
+python3 scripts/generate_topic_quiz_data.py
 python3 scripts/generate_nav_pages.py
 python3 scripts/generate_readme_question_table.py
 python3 scripts/verify_knowledge_metadata.py
@@ -388,9 +388,9 @@ mkdocs serve   # http://127.0.0.1:8000
 
 | 脚本 | 作用 |
 |------|------|
-| [scripts/generate_mock_interview_data.py](./scripts/generate_mock_interview_data.py) | 从 `questions.yaml` 生成 `docs/data/questions.json`（专题自测页） |
+| [scripts/generate_topic_quiz_data.py](./scripts/generate_topic_quiz_data.py) | 从 `questions.yaml` 生成 `docs/data/questions.json`（专题自测页） |
 | [scripts/generate_nav_pages.py](./scripts/generate_nav_pages.py) | 生成 `interview/.pages` 与各模块 `.pages`（三级侧栏题目标题） |
-| [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `questions.yaml` 更新 README 专题全表（序号 + 题号 + 题目） |
+| [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `questions.yaml` 更新 README 专题全表（序号 + 文档 ID + 标题） |
 | [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 232 篇正文、角色优先级与证据标签一致性 |
 
 ## 引用来源

@@ -13,9 +13,9 @@ nav:
   - 参考资料:
     - Web3 交易所重点专题: web3-exchange-wallet-focus.md
     - 专题总索引: interview-catalog.md
-    - 题源与引用: sources.md
-    - 代码与题目映射: interview/_meta/mapping
+    - 来源与引用: sources.md
+    - 代码与专题映射: interview/_meta/mapping
 
   - 维护工具:
-    - 题目撰写模板: interview/_meta/template
-    - 习题质量审查: interview/_meta/quality-review
+    - 专题撰写模板: interview/_meta/template
+    - 内容质量审查: interview/_meta/quality-review

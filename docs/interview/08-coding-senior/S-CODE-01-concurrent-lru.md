@@ -24,7 +24,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：容量固定，满时淘汰最久未访问的 key。
-2. **为什么**：本地缓存、DB 查询缓存、热点数据 — 面试高频手写题（LeetCode 146）。
+2. **为什么**：本地缓存、DB 查询缓存、热点数据 — 高频编码练习（LeetCode 146）。
 3. **怎么做**：`map[key]*list.Element` 定位节点；链表头=最新、尾=最旧；Get 命中则 `MoveToFront`；Put 新 key 则 `PushFront`，超 cap 删 `Back` 并从 map 移除。
 
 ## 10 分钟版（白板步骤）

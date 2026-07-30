@@ -1,10 +1,10 @@
 # 12 区块链与 Web3
 
-12 题 | P1 扩展（Web3 / 链上后端 JD） | [返回索引](../../interview-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
+12 篇 | P1 扩展（Web3 / 链上后端 JD） | [返回专题索引](../../interview-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
 
 > 面向 **Go 后端** 做链上数据索引、钱包、DApp 中台、交易所/ NFT 业务；偏 **工程落地**，非密码学研究员方向。
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-BC-01](./S-BC-01-blockchain-evm-basics.md) | 区块链基础与 EVM 账户模型 | ⭐⭐⭐⭐⭐ |
 | [S-BC-02](./S-BC-02-go-ethereum-rpc.md) | Go 连接节点：JSON-RPC 与 ethclient | ⭐⭐⭐⭐⭐ |
@@ -33,7 +33,7 @@
 - 二面问「L2 和 L1 索引区别」「4337 UserOp」「怎么用 abigen」
 - 与 [S-SOL-03 事件驱动](../11-solution-architecture/S-SOL-03-event-driven-cqrs.md)、[S-ARCH-04 幂等](../03-system-design/S-ARCH-04-idempotency.md) 交叉
 
-## 推荐刷题顺序
+## 推荐阅读顺序
 
 EVM → RPC → 签名 → ABI 理论 → **abigen 实战** → 索引器 → L2 概览 →
 **Rollup 安全边界** → **跨链消息安全** → 4337 → DeFi 架构

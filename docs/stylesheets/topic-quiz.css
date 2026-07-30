@@ -1,16 +1,16 @@
 /* 专题自测模块 */
 
-.mock-interview-page {
+.topic-quiz-page {
   margin-top: 0.5rem;
 }
 
-.mock-interview-intro {
+.topic-quiz-intro {
   color: var(--md-default-fg-color--light);
   margin-bottom: 1.25rem;
   max-width: 52rem;
 }
 
-.mock-interview-stats {
+.topic-quiz-stats {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem 1.5rem;
@@ -19,12 +19,12 @@
   color: var(--md-default-fg-color--light);
 }
 
-.mock-interview-stats strong {
+.topic-quiz-stats strong {
   color: var(--md-primary-fg-color);
   font-weight: 600;
 }
 
-.mock-interview-toolbar {
+.topic-quiz-toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -32,7 +32,7 @@
   margin-bottom: 1.25rem;
 }
 
-.mock-interview-filter {
+.topic-quiz-filter {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -40,7 +40,7 @@
   color: var(--md-default-fg-color--light);
 }
 
-.mock-interview-filter select {
+.topic-quiz-filter select {
   min-width: 12rem;
   padding: 0.45rem 0.6rem;
   border-radius: 0.25rem;
@@ -50,7 +50,7 @@
   font: inherit;
 }
 
-.mock-interview-card {
+.topic-quiz-card {
   max-width: 52rem;
   padding: 1.5rem 1.75rem;
   border-radius: 0.5rem;
@@ -59,7 +59,7 @@
   box-shadow: 0 0.15rem 0.6rem rgba(0, 0, 0, 0.06);
 }
 
-.mock-interview-card-header {
+.topic-quiz-card-header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -67,14 +67,14 @@
   margin-bottom: 0.75rem;
 }
 
-.mock-interview-id {
+.topic-quiz-id {
   font-family: var(--md-code-font, monospace);
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--md-primary-fg-color);
 }
 
-.mock-interview-module {
+.topic-quiz-module {
   font-size: 0.75rem;
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
@@ -82,29 +82,29 @@
   color: var(--md-default-fg-color--light);
 }
 
-.mock-interview-badge {
+.topic-quiz-badge {
   font-size: 0.72rem;
   padding: 0.12rem 0.45rem;
   border-radius: 999px;
 }
 
-.mock-interview-badge-focus {
+.topic-quiz-badge-focus {
   background: rgba(255, 171, 0, 0.18);
   color: #e65100;
 }
 
-[data-md-color-scheme="slate"] .mock-interview-badge-focus {
+[data-md-color-scheme="slate"] .topic-quiz-badge-focus {
   color: #ffb74d;
 }
 
-.mock-interview-title {
+.topic-quiz-title {
   margin: 0 0 1rem;
   font-size: 1.35rem;
   line-height: 1.35;
   font-weight: 600;
 }
 
-.mock-interview-prompt {
+.topic-quiz-prompt {
   margin: 0 0 1rem;
   padding: 1rem 1.1rem;
   border-left: 4px solid var(--md-primary-fg-color);
@@ -115,29 +115,29 @@
   color: var(--md-default-fg-color);
 }
 
-.mock-interview-meta {
+.topic-quiz-meta {
   margin: 0 0 1.25rem;
   font-size: 0.78rem;
   color: var(--md-default-fg-color--light);
 }
 
-.mock-interview-actions {
+.topic-quiz-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
-.mock-interview-actions .md-button {
+.topic-quiz-actions .md-button {
   margin: 0;
   cursor: pointer;
   text-decoration: none;
 }
 
-.mock-interview-btn-secondary {
+.topic-quiz-btn-secondary {
   opacity: 0.9;
 }
 
-.mock-interview-empty,
-.mock-interview-loading {
+.topic-quiz-empty,
+.topic-quiz-loading {
   color: var(--md-default-fg-color--light);
 }

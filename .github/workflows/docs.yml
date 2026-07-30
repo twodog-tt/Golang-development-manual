@@ -29,8 +29,8 @@ jobs:
       - name: Install MkDocs
         run: pip install -r requirements-docs.txt
 
-      - name: Generate mock interview data
-        run: python scripts/generate_mock_interview_data.py
+      - name: Generate topic-quiz data
+        run: python scripts/generate_topic_quiz_data.py
 
       - name: Build site
         run: mkdocs build

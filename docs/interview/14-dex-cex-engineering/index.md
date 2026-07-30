@@ -1,13 +1,13 @@
 # 14 DEX / CEX 交易所工程
 
-31 题 | P0/P1 专题（**预测市场 / 交易所 / DEX Tech Lead / 做市 / 合约后端 / 架构师** JD） | [返回索引](../../interview-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
+31 篇 | P0/P1 专题（**预测市场 / 交易所 / DEX Tech Lead / 做市 / 合约后端 / 架构师** JD） | [返回专题索引](../../interview-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
 
 > 面向 **CEX 撮合与资金系统（Go）** + **DEX/预测市场链上协议（Solidity）** 工程师，
-> 及 **交易所/预测市场技术负责人** 全栈面试。
+> 及 **交易所/预测市场技术负责人** 全栈能力叙事。
 
 ## 完整架构白板（架构师必练）
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-EXCH-13](./S-EXCH-13-cex-end-to-end-architecture.md) | **CEX 端到端交易系统架构（45min）** | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-14](./S-EXCH-14-web3-exchange-fullstack-architecture.md) | **Web3 交易所全栈（链上+链下）** | ⭐⭐⭐⭐⭐ |
@@ -25,7 +25,7 @@
 
 ## 预测市场（CLOB-first + 链上结算）
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-EXCH-23](./S-EXCH-23-prediction-market-ctf-lifecycle.md#oral-card) | **CTF、Outcome Token 与市场生命周期** | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-24](./S-EXCH-24-prediction-market-clob-eip712-settlement.md#oral-card) | **CLOB、EIP-712 订单与链上结算** | ⭐⭐⭐⭐⭐ |
@@ -37,7 +37,7 @@
 
 ## CEX（中心化，Go 后端为主）
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-EXCH-01](./S-EXCH-01-cex-matching-engine.md) | CEX 撮合引擎与订单簿架构 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-02](./S-EXCH-02-deposit-withdraw-wallet.md) | 充值、提现与链上钱包体系 | ⭐⭐⭐⭐⭐ |
@@ -59,7 +59,7 @@
 
 ## DEX（去中心化，合约 + 索引）
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-EXCH-06](./S-EXCH-06-dex-amm-liquidity.md) | DEX AMM 与流动性池设计 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-30](./S-EXCH-30-uniswap-v2-v3-protocol.md#oral-card) | **Uniswap V2/V3 协议机制深挖** | ⭐⭐⭐⭐⭐ |
@@ -71,13 +71,13 @@
 
 ## 混合架构
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-EXCH-09](./S-EXCH-09-hybrid-cex-dex.md) | CEX/DEX 混合与流动性整合 | ⭐⭐⭐⭐ |
 
 ## 行情与链上数据专题
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-EXCH-10](./S-EXCH-10-kline-event-aggregation.md) | 链上事件驱动 K 线与行情聚合 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-11](./S-EXCH-11-websocket-market-hub.md) | WebSocket 行情 Hub 与连接治理 | ⭐⭐⭐⭐⭐ |
@@ -96,7 +96,7 @@
 | [S-ARCH-08 限流](../03-system-design/S-ARCH-08-rate-limiting.md) | 交易 API 防刷 |
 | [S-SOL-08 白板模板](../11-solution-architecture/S-SOL-08-evolution-whiteboard.md) | 45min 答题结构 |
 
-## 推荐刷题顺序
+## 推荐阅读顺序
 
 **预测市场技术负责人**：**EXCH-23 → 24 → 25 → 26** → EXCH-17/18/19 → EXCH-15 → SEC-01/04 → SOLID-01/04/08
 

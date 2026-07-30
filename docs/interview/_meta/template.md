@@ -1,6 +1,6 @@
 ---
 id: S-MODULE-NNN
-title: 题目标题
+title: 专题标题
 module: runtime-concurrency | memory-gc | system-design | distributed | database | postgresql | network | leadership | coding | cloud-native | ai-engineering | solution-architecture | blockchain-web3 | solidity-contracts | dex-cex-engineering | go-production-engineering | multichain-wallet | web3-payments-stablecoin | node-rpc-staking | protocol-consensus-security | security-engineering
 level: senior
 frequency: 5
@@ -12,9 +12,9 @@ code_refs: []
 sources: []
 ---
 
-# 题目标题
+# 专题标题
 
-> 新增题目后还要更新
+> 新增专题后还要更新
 > [questions.yaml](./questions.yaml) 与
 > [role-evidence.yaml](./role-evidence.yaml)。岗位 P0/P1/P2 和证据标签以中央元数据为准，
 > 不在每篇正文重复维护；没有真实测试、localnet、硬件或生产验收时，不得写成“已验证”。
@@ -23,7 +23,7 @@ sources: []
 
 > 一句话结论 + 一个生产关键词。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：定义与边界
 2. **为什么**：设计动机
@@ -49,7 +49,7 @@ sources: []
 - 方案 A vs B 的适用条件
 - 何时**不**使用该方案
 
-## 追问链
+## 深挖问答
 
 1. 第一层追问 → 简答要点
 2. 第二层追问 → 简答要点

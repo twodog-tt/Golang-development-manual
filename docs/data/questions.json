@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-07-30T08:23:01Z",
+  "generated_at": "2026-07-30T12:10:24Z",
   "count": 232,
   "roles": [
     {
@@ -1469,7 +1469,7 @@
       "id": "S-CODE-01",
       "title": "并发安全 LRU 缓存",
       "frequency": 5,
-      "module": "08 手写题",
+      "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-01-concurrent-lru/",
@@ -1494,7 +1494,7 @@
       "id": "S-CODE-02",
       "title": "令牌桶限流器",
       "frequency": 5,
-      "module": "08 手写题",
+      "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-02-token-bucket/",
@@ -1519,7 +1519,7 @@
       "id": "S-CODE-03",
       "title": "HTTP 服务优雅关闭",
       "frequency": 4,
-      "module": "08 手写题",
+      "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-03-graceful-shutdown/",
@@ -1544,7 +1544,7 @@
       "id": "S-CODE-04",
       "title": "errgroup 语义实现",
       "frequency": 4,
-      "module": "08 手写题",
+      "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-04-errgroup/",
@@ -1569,7 +1569,7 @@
       "id": "S-CODE-05",
       "title": "连接池实现要点",
       "frequency": 4,
-      "module": "08 手写题",
+      "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-05-connection-pool/",
@@ -1594,7 +1594,7 @@
       "id": "S-CODE-06",
       "title": "Singleflight 缓存击穿抑制",
       "frequency": 5,
-      "module": "08 手写题",
+      "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-06-singleflight-cache/",
@@ -1619,7 +1619,7 @@
       "id": "S-CODE-07",
       "title": "有界批处理执行器：取消、顺序与背压",
       "frequency": 5,
-      "module": "08 手写题",
+      "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-07-bounded-batch-executor/",
@@ -3230,7 +3230,7 @@
         "wallet_custody": "p2",
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
-        "exchange_engineering": "p2",
+        "exchange_engineering": "p0",
         "staff_architect": "p2"
       },
       "evidence": {
@@ -3255,13 +3255,13 @@
         "wallet_custody": "p2",
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
-        "exchange_engineering": "p2",
+        "exchange_engineering": "p0",
         "staff_architect": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
-        "volatility": "stable",
+        "volatility": "version_sensitive",
         "reviewed_at": "2026-07-21"
       }
     },
@@ -3280,8 +3280,8 @@
         "wallet_custody": "p2",
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
-        "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "exchange_engineering": "p0",
+        "staff_architect": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3967,7 +3967,7 @@
     },
     {
       "id": "S-MEM-14",
-      "title": "new/make 在资深面试中的升维回答",
+      "title": "new 与 make：分配语义、逃逸与选型",
       "frequency": 3,
       "module": "02 内存与 GC",
       "module_key": "memory_gc",

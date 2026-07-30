@@ -2,7 +2,7 @@
 
 4 题（专题） | [返回中间件索引](../index.md)
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-KAFKA-01](./S-KAFKA-01-architecture-storage.md) | 架构与存储：Topic、Partition、ISR | ⭐⭐⭐⭐⭐ |
 | [S-KAFKA-02](./S-KAFKA-02-producer-reliability.md) | Producer 可靠性：acks、幂等、分区键 | ⭐⭐⭐⭐⭐ |

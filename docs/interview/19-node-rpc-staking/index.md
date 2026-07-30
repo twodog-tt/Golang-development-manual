@@ -1,10 +1,10 @@
 # 19 节点、RPC 与 Staking
 
-10 题 | 节点/Indexer 岗 P0 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+10 篇 | 节点/Indexer 岗 P0 | [返回专题索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
 
 > 面向节点平台、RPC 网关、Indexer、Relayer、Validator 与链上数据架构岗位，重点是 **状态机、数据正确性和运维边界**。
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-NODE-01](./S-NODE-01-ethereum-node-architecture-sync.md) | Ethereum EL/CL、Full/Archive Node 与同步模式 | ⭐⭐⭐⭐⭐ |
 | [S-NODE-02](./S-NODE-02-rpc-ha-quorum-hedging-cache.md) | RPC 高可用：多 Provider、Quorum、Hedging 与缓存 | ⭐⭐⭐⭐⭐ |

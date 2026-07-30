@@ -1,4 +1,4 @@
-// Package ratelimit 令牌桶限流器（面试手写题 S-CODE-02）。
+// Package ratelimit 令牌桶限流器（编码练习 S-CODE-02）。
 package ratelimit
 
 import (

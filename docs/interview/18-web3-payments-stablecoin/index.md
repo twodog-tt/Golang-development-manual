@@ -1,10 +1,10 @@
 # 18 Web3 支付与稳定币
 
-6 题 | 支付/稳定币岗位 P0 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+6 篇 | 支付/稳定币岗位 P0 | [返回专题索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
 
 > 把“链上转账”提升为可运营的支付系统：状态机、稳定币风险、Treasury、双分录、清结算、对账与合规控制。
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-PAY-01](./S-PAY-01-payment-state-idempotency-reversal.md) | Web3 支付状态机、幂等、Webhook 与冲正 | ⭐⭐⭐⭐⭐ |
 | [S-PAY-02](./S-PAY-02-stablecoin-issuer-crosschain-risk.md) | 稳定币发行人控制、跨链转移与结算风险 | ⭐⭐⭐⭐⭐ |

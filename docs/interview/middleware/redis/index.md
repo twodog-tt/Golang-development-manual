@@ -1,8 +1,8 @@
 # Redis
 
-3 题 | [返回中间件索引](../index.md)
+3 篇 | [返回中间件索引](../index.md)
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-DIST-01](./S-DIST-01-redis-cluster.md) | 集群模式与选型 | ⭐⭐⭐⭐⭐ |
 | [S-DIST-02](./S-DIST-02-distributed-lock.md) | 分布式锁 | ⭐⭐⭐⭐⭐ |

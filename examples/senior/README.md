@@ -1,10 +1,10 @@
-# Senior 面试手写题示例
+# Senior 编码练习示例
 
 对应 `docs/interview/08-coding-senior/` 与 `docs/interview/10-ai-engineering/`。
 
-## 手写题（S-CODE）
+## 编码练习（S-CODE）
 
-| 题 ID | 目录 | 说明 | 测试 |
+| 文档 ID | 目录 | 说明 | 测试 |
 |-------|------|------|------|
 | S-CODE-01 | [lru/](lru/) | 并发安全 LRU | `go test ./lru/...` |
 | S-CODE-02 | [ratelimit/](ratelimit/) | 令牌桶限流 | `go test ./ratelimit/...` |
@@ -16,7 +16,7 @@
 
 ## AI 工程（S-AI）
 
-| 题 ID | 目录 | 说明 | 测试 |
+| 文档 ID | 目录 | 说明 | 测试 |
 |-------|------|------|------|
 | S-AI-01 | [llmclient/](llmclient/) | 流式 LLM Client Mock | `go test ./llmclient/...` |
 | S-AI-02 | [rag/](rag/) | 简易 RAG（分块 + 检索） | `go test ./rag/...` |
@@ -29,7 +29,7 @@
 
 ## 交易所与跨链安全
 
-| 题 ID | 目录 | 说明 | 测试 |
+| 文档 ID | 目录 | 说明 | 测试 |
 |-------|------|------|------|
 | S-EXCH-17 | [matchingengine/](matchingengine/) | 确定性价格时间优先撮合、FOK/Post-only/STP | `go test -race ./matchingengine/...` |
 | S-EXCH-18 | [walreplay/](walreplay/) | Framed WAL、快照与崩溃回放 | `go test -race ./walreplay/...` |
@@ -41,7 +41,7 @@
 
 ## 安全、链数据与非 EVM 在线可靠性
 
-| 题 ID | 目录 | 说明 | 测试 |
+| 文档 ID | 目录 | 说明 | 测试 |
 |-------|------|------|------|
 | S-SEC-02 | [signerfencing/](signerfencing/) | signer-side epoch、owner、policy/intent 与幂等 fencing | `go test -race ./signerfencing/...` |
 | S-NODE-07 | [chainmerge/](chainmerge/) | hash lineage、overlap、reorg 与 finalized guard | `go test -race ./chainmerge/...` |

@@ -22,7 +22,7 @@
     [S-EXCH-30 Uniswap V2/V3](interview/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md) →
     [S-EXCH-29 Staking/Farm](interview/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md)
 
-!!! note "若用于面试备考"
+!!! note "能力自检快链（可选）"
 
     [① 选方向与 P0](interview/_meta/role-priority-matrix.md) →
     [② 18 个高频锚点](high-frequency-roadmap.md) →
@@ -54,10 +54,10 @@ P0 含 Shared P0 与方向增量，**不要求通读全部正文**。先掌握 S
 | 步骤 | 动作 | 完成标准 |
 |------|------|----------|
 | **1. 定场景** | 选 Go / Web3·DEX / Agent 之一作主入口 | 能说清要解决的工程问题 |
-| **2. 读不变量** | 先看 30 秒版 / 口述卡与反模式 | 能讲结论、边界与常见错答 |
+| **2. 读不变量** | 先看 30 秒版 / 要点卡与反模式 | 能讲结论、边界与常见误区 |
 | **3. 跟证据** | 对照 `code_refs`、测试或 harness | 分清 explanation / test / harness 等级 |
-| **4. 串链路** | 用白板题把模块收成端到端叙事 | 能画出权威数据源与失败模式 |
-| **5. 回补缺口** | 自测或项目复盘后只补暴露的洞 | 避免平均刷完全库 |
+| **4. 串链路** | 用白板练习把模块收成端到端叙事 | 能画出权威数据源与失败模式 |
+| **5. 回补缺口** | 自测或项目复盘后只补暴露的洞 | 避免平均通读全库 |
 
 辅助：[学习路线](learning-path-senior.md) ·
 [18 个高频锚点](high-frequency-roadmap.md) ·
@@ -85,17 +85,17 @@ localnet/testnet ≠ 主网兼容。完整定义见
 
 | 层级 | 模块 | 适用内容 |
 |------|------|----------|
-| **Go 基础与生产工程** | [01 并发](interview/01-runtime-concurrency/index.md) → [02 内存](interview/02-memory-gc/index.md) → [16 Go 生产工程](interview/16-go-production-engineering/index.md) → [08 手写题](interview/08-coding-senior/index.md) | Go 深度、测试、性能与编码门槛 |
+| **Go 基础与生产工程** | [01 并发](interview/01-runtime-concurrency/index.md) → [02 内存](interview/02-memory-gc/index.md) → [16 Go 生产工程](interview/16-go-production-engineering/index.md) → [08 编码练习](interview/08-coding-senior/index.md) | Go 深度、测试、性能与编码门槛 |
 | **网络与中间件** | [06 网络](interview/06-network-governance/index.md) → [中间件](interview/middleware/index.md) | Linux/TCP、API、gRPC、数据库、缓存与 MQ |
 | **系统与组织架构** | [03 系统设计](interview/03-system-design/index.md) → [09 云原生](interview/09-cloud-native/index.md) → [11 解决方案架构](interview/11-solution-architecture/index.md) → [15 微服务](interview/15-microservices-exchange/index.md) → [07 领导力](interview/07-engineering-leadership/index.md) | 架构白板、K8s、演进、迁移与 Staff 影响力 |
 | **AI / Crypto Agent** | [10 AI 工程](interview/10-ai-engineering/index.md) → [工作流/HITL](interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) → [MCP/A2A](interview/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) → [Agent Commerce](interview/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) → [开放平台/Launchpad](interview/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) | Agent 生态 |
 | **Web3 基础设施** | [12 EVM](interview/12-blockchain-web3/index.md) → [17 多链钱包](interview/17-multichain-wallet/index.md) → [18 支付](interview/18-web3-payments-stablecoin/index.md) → [19 节点/RPC](interview/19-node-rpc-staking/index.md) → [20 协议/共识](interview/20-protocol-consensus-security/index.md) → [21 安全](interview/21-security-engineering/index.md) → [13 Solidity](interview/13-solidity-contracts/index.md) → [14 交易所](interview/14-dex-cex-engineering/index.md) | 多链、资金、节点、协议、安全、合约与交易 |
 
-左侧导航适合按专题查漏；正文与搜索保留完整题目标题。
+左侧导航适合按专题查漏；正文与搜索保留完整标题。
 
 ## 5. 中间件速查
 
-| 类型 | 题数 | 重点 |
+| 类型 | 篇数 | 重点 |
 |------|-----:|------|
 | [MySQL + GORM](interview/middleware/mysql/index.md) | 7 | 索引、MVCC、复杂 SQL、资金表与锁 |
 | [PostgreSQL](interview/middleware/postgresql/index.md) | 3 | VACUUM/索引、SSI/锁、WAL/HA/pgx |
@@ -108,7 +108,7 @@ localnet/testnet ≠ 主网兼容。完整定义见
 ## 资料、索引与维护
 
 - [专题总索引](interview-catalog.md)
-- [题单 YAML](interview/_meta/questions.yaml)
+- [专题元数据 YAML](interview/_meta/questions.yaml)
 - [角色优先级与证据标签](interview/_meta/role-priority-matrix.md)
 - [代码映射](interview/_meta/mapping.md)
 - [引用来源](sources.md)

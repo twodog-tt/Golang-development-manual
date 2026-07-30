@@ -1,10 +1,10 @@
 # 17 多链钱包与托管
 
-12 题 | 钱包/托管岗位 P0 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+12 篇 | 钱包/托管岗位 P0 | [返回专题索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
 
 > 目标不是背更多链名，而是建立一套不会错误泛化的 **Chain Adapter、交易并发、归集、签名和恢复模型**。
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-WALLET-01](./S-WALLET-01-chain-adapter-capability-matrix.md) | 多链钱包 Chain Adapter 与能力矩阵 | ⭐⭐⭐⭐⭐ |
 | [S-WALLET-02](./S-WALLET-02-bitcoin-utxo-psbt-fee-bump.md) | Bitcoin UTXO、Coin Selection、PSBT 与手续费替换 | ⭐⭐⭐⭐⭐ |

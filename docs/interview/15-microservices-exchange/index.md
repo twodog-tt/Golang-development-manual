@@ -1,12 +1,12 @@
 # 15 微服务（交易所场景）
 
-6 题 | **CEX / DEX 背景的微服务架构** | [返回索引](../../interview-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
+6 篇 | **CEX / DEX 背景的微服务架构** | [返回专题索引](../../interview-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
 
 > 以 **中心化交易（CEX）** 与 **链上交易（DEX/Web3）** 为业务背景，讲清微服务拆分、通信、数据、网关与事件边界。与 [14 DEX/CEX](../14-dex-cex-engineering/index.md) 业务专题互补：14 讲 **领域逻辑**，15 讲 **服务治理与架构落地**。
 
 ## 模块地图
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-MSVC-01](./S-MSVC-01-exchange-microservices-whiteboard.md) | **交易所微服务全链路白板（CEX+DEX）** | ⭐⭐⭐⭐⭐ |
 | [S-MSVC-02](./S-MSVC-02-domain-decomposition.md) | 交易域服务拆分与限界上下文 | ⭐⭐⭐⭐⭐ |
@@ -25,7 +25,7 @@
 | [11 解决方案架构](../11-solution-architecture/index.md) | DDD、绞杀者、Mesh 通用架构师题 |
 | [03 系统设计](../03-system-design/index.md) | 限流、熔断、MQ 语义、幂等 |
 
-## 推荐刷题顺序
+## 推荐阅读顺序
 
 **CEX 微服务岗**：MSVC-01 → MSVC-02 → MSVC-03 → MSVC-04 → 下钻 [EXCH-13](../14-dex-cex-engineering/S-EXCH-13-cex-end-to-end-architecture.md)
 

@@ -1,8 +1,8 @@
 # 03 系统设计
 
-21 题 | P0 | [返回索引](../../interview-catalog.md)
+21 篇 | P0 | [返回专题索引](../../interview-catalog.md)
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-ARCH-01](./S-ARCH-01-read-heavy-api.md) | 10 万 QPS 读 API | ⭐⭐⭐⭐⭐ |
 | [S-ARCH-02](./S-ARCH-02-seckill.md) | 秒杀 | ⭐⭐⭐⭐⭐ |

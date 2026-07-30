@@ -1,8 +1,8 @@
 # Elasticsearch
 
-3 题 | [返回中间件索引](../index.md)
+3 篇 | [返回中间件索引](../index.md)
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-ES-01](./S-ES-01-inverted-index.md) | 倒排索引原理 | ⭐⭐⭐⭐ |
 | [S-ES-02](./S-ES-02-mapping-query-agg.md) | Mapping 与查询聚合 | ⭐⭐⭐⭐ |

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""从 questions.yaml 生成 README.md 中的专题全表（序号 + 题号 + 题目）。"""
+"""从 questions.yaml 生成 README.md 中的专题全表（序号 + 文档 ID + 标题）。"""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ MODULE_ORDER: list[tuple[str, list[tuple[str, str]]]] = [
         ("01 并发与运行时", "concurrency"),
         ("02 内存与 GC", "memory_gc"),
         ("16 Go 生产工程", "go_production_engineering"),
-        ("08 手写题", "coding"),
+        ("08 编码练习", "coding"),
     ]),
     ("进阶 · 网络与中间件", [
         ("06 网络与服务治理", "network"),
@@ -84,7 +84,7 @@ def build_table(by_key: dict[str, list[dict]]) -> str:
     lines.append("")
     lines.append(
         "> 序号按 **基础 → 进阶 → 高阶 → 专题 → 综合** 排列；"
-        "题号即文档 ID（如 `S-CONC-01`）。点击题目可跳转至 Markdown 正文。"
+        "文档 ID（如 `S-CONC-01`）。点击标题可跳转至 Markdown 正文。"
     )
     lines.append("")
 
@@ -92,7 +92,7 @@ def build_table(by_key: dict[str, list[dict]]) -> str:
     for group_name, modules in MODULE_ORDER:
         lines.append(f"### {group_name}")
         lines.append("")
-        lines.append("| 序号 | 题号 | 题目 |")
+        lines.append("| 序号 | 文档 ID | 标题 |")
         lines.append("|------|------|------|")
         for _mod_label, key in modules:
             for item in by_key.get(key, []):
@@ -130,7 +130,7 @@ def main() -> None:
     table_block = build_table(by_key)
     patch_readme(table_block)
     total = table_block.count("| `S-")
-    print(f"Updated {README_PATH.relative_to(ROOT)} ({total} questions)")
+    print(f"Updated {README_PATH.relative_to(ROOT)} ({total} topics)")
 
 
 if __name__ == "__main__":

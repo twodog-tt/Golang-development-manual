@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "gdm-mock-interview-v1";
+  const STORAGE_KEY = "gdm-topic-quiz-v1";
   const FAMILIAR_DECAY = 0.55;
   const MIN_WEIGHT = 0.08;
 
@@ -18,7 +18,7 @@
     { value: "elasticsearch", label: "Elasticsearch" },
     { value: "distributed", label: "分布式事务" },
     { value: "network", label: "网络" },
-    { value: "coding", label: "手写题" },
+    { value: "coding", label: "编码练习" },
     { value: "cloud_native", label: "云原生" },
     { value: "ai_engineering", label: "AI 工程" },
     { value: "solution_architecture", label: "解决方案架构" },
@@ -33,7 +33,7 @@
   let currentId = null;
   let moduleFilter = "";
 
-  const root = document.getElementById("mock-interview-root");
+  const root = document.getElementById("topic-quiz-root");
   if (!root) return;
 
   function loadState() {
@@ -126,10 +126,10 @@
     const familiarTotal = Object.keys(state.familiar).length;
     const sessions = state.sessions;
     return `
-      <div class="mock-interview-stats">
-        <span>题库 <strong>${catalog.length}</strong> 题</span>
-        <span>已标记熟悉 <strong>${familiarTotal}</strong> 题</span>
-        <span>本轮已练 <strong>${sessions}</strong> 题</span>
+      <div class="topic-quiz-stats">
+        <span>专题库 <strong>${catalog.length}</strong> 篇</span>
+        <span>已标记熟悉 <strong>${familiarTotal}</strong> 篇</span>
+        <span>本轮已练 <strong>${sessions}</strong> 篇</span>
       </div>
     `;
   }
@@ -140,12 +140,12 @@
         `<option value="${f.value}" ${f.value === moduleFilter ? "selected" : ""}>${f.label}</option>`
     ).join("");
     return `
-      <div class="mock-interview-toolbar">
-        <label class="mock-interview-filter">
+      <div class="topic-quiz-toolbar">
+        <label class="topic-quiz-filter">
           <span>模块筛选</span>
-          <select id="mock-module-filter">${options}</select>
+          <select id="topic-quiz-module-filter">${options}</select>
         </label>
-        <button type="button" class="md-button mock-interview-btn-secondary" id="mock-reset-btn">
+        <button type="button" class="md-button topic-quiz-btn-secondary" id="topic-quiz-reset-btn">
           重置熟练度
         </button>
       </div>
@@ -155,34 +155,34 @@
   function renderCard(q) {
     if (!q) {
       return `
-        <div class="mock-interview-card mock-interview-empty">
-          <p>当前筛选下没有可用题目，请切换模块或重置熟练度。</p>
+        <div class="topic-quiz-card topic-quiz-empty">
+          <p>当前筛选下没有可用专题，请切换模块或重置熟练度。</p>
         </div>
       `;
     }
     const familiar = familiarCount(q.id);
     const w = weight(q).toFixed(2);
     const focusBadge = q.resume_focus
-      ? '<span class="mock-interview-badge mock-interview-badge-focus">方向重点</span>'
+      ? '<span class="topic-quiz-badge topic-quiz-badge-focus">方向重点</span>'
       : "";
     return `
-      <article class="mock-interview-card" aria-live="polite">
-        <header class="mock-interview-card-header">
-          <span class="mock-interview-id">${q.id}</span>
-          <span class="mock-interview-module">${q.module}</span>
+      <article class="topic-quiz-card" aria-live="polite">
+        <header class="topic-quiz-card-header">
+          <span class="topic-quiz-id">${q.id}</span>
+          <span class="topic-quiz-module">${q.module}</span>
           ${focusBadge}
         </header>
-        <h2 class="mock-interview-title">${escapeHtml(q.title)}</h2>
-        <blockquote class="mock-interview-prompt">${escapeHtml(q.prompt)}</blockquote>
-        <p class="mock-interview-meta">
-          出现权重 ${w} · 已点「下一题」${familiar} 次（越多越不容易再抽到）
+        <h2 class="topic-quiz-title">${escapeHtml(q.title)}</h2>
+        <blockquote class="topic-quiz-prompt">${escapeHtml(q.prompt)}</blockquote>
+        <p class="topic-quiz-meta">
+          出现权重 ${w} · 已点「下一篇」${familiar} 次（越多越不容易再抽到）
         </p>
-        <div class="mock-interview-actions">
-          <a class="md-button md-button--primary mock-interview-btn-answer" href="${answerUrl(q.url)}">
+        <div class="topic-quiz-actions">
+          <a class="md-button md-button--primary topic-quiz-btn-answer" href="${answerUrl(q.url)}">
             看看答案
           </a>
-          <button type="button" class="md-button mock-interview-btn-next" id="mock-next-btn">
-            下一题
+          <button type="button" class="md-button topic-quiz-btn-next" id="topic-quiz-next-btn">
+            下一篇
           </button>
         </div>
       </article>
@@ -198,7 +198,7 @@
   }
 
   function bindEvents() {
-    const nextBtn = document.getElementById("mock-next-btn");
+    const nextBtn = document.getElementById("topic-quiz-next-btn");
     if (nextBtn) {
       nextBtn.addEventListener("click", () => {
         if (currentId) markFamiliar(currentId);
@@ -207,21 +207,21 @@
         showQuestion(pickRandom(currentId));
       });
     }
-    const filter = document.getElementById("mock-module-filter");
+    const filter = document.getElementById("topic-quiz-module-filter");
     if (filter) {
       filter.addEventListener("change", (e) => {
         moduleFilter = e.target.value;
         showQuestion(pickRandom(null));
       });
     }
-    const resetBtn = document.getElementById("mock-reset-btn");
+    const resetBtn = document.getElementById("topic-quiz-reset-btn");
     if (resetBtn) resetBtn.addEventListener("click", resetProgress);
   }
 
   function showQuestion(q) {
     currentId = q ? q.id : null;
-    const cardHost = document.getElementById("mock-interview-card-host");
-    const statsHost = document.getElementById("mock-interview-stats-host");
+    const cardHost = document.getElementById("topic-quiz-card-host");
+    const statsHost = document.getElementById("topic-quiz-stats-host");
     if (cardHost) cardHost.innerHTML = renderCard(q);
     if (statsHost) statsHost.innerHTML = renderStats();
     bindEvents();
@@ -229,20 +229,20 @@
 
   function render() {
     root.innerHTML = `
-      <div class="mock-interview-app">
-        <p class="mock-interview-intro">
-          随机抽题做专题自测。点 <strong>看看答案</strong> 跳转完整解析；点 <strong>下一题</strong> 表示已熟悉，降低再次出现概率（记录保存在本机浏览器）。
+      <div class="topic-quiz-app">
+        <p class="topic-quiz-intro">
+          随机抽专题做专题自测。点 <strong>看看答案</strong> 跳转完整解析；点 <strong>下一篇</strong> 表示已熟悉，降低再次出现概率（记录保存在本机浏览器）。
         </p>
-        <div id="mock-interview-stats-host">${renderStats()}</div>
+        <div id="topic-quiz-stats-host">${renderStats()}</div>
         ${renderToolbar()}
-        <div id="mock-interview-card-host">${renderCard(null)}</div>
+        <div id="topic-quiz-card-host">${renderCard(null)}</div>
       </div>
     `;
     bindEvents();
   }
 
   async function init() {
-    root.innerHTML = '<p class="mock-interview-loading">正在加载题库…</p>';
+    root.innerHTML = '<p class="topic-quiz-loading">正在加载专题库…</p>';
     try {
       const res = await fetch(dataUrl());
       if (!res.ok) throw new Error(res.statusText);
@@ -252,9 +252,9 @@
       showQuestion(pickRandom(null));
     } catch (err) {
       root.innerHTML = `
-        <div class="mock-interview-card mock-interview-empty">
-          <p>题库加载失败：${escapeHtml(err.message)}</p>
-          <p>请确认已运行 <code>python scripts/generate_mock_interview_data.py</code> 后重新构建站点。</p>
+        <div class="topic-quiz-card topic-quiz-empty">
+          <p>专题库加载失败：${escapeHtml(err.message)}</p>
+          <p>请确认已运行 <code>python scripts/generate_topic_quiz_data.py</code> 后重新构建站点。</p>
         </div>
       `;
     }

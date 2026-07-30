@@ -1,14 +1,14 @@
-# 题源与引用规范
+# 来源与引用规范
 
-本知识库面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构** 方向的工程知识沉淀。正文均为自研表述；外部资料仅作题源与延伸阅读，**不整段搬运**。
+本知识库面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构** 方向的工程知识沉淀。正文均为自研表述；外部资料仅作选题启发与延伸阅读，**不整段搬运**。
 
-> 题单元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) ·
+> 专题元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) ·
 > [角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
 > 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
 ## 知识库覆盖范围（232 篇）
 
-| 模块 | 题数 | 说明 |
+| 模块 | 篇数 | 说明 |
 |------|------|------|
 | 01 并发与运行时 | 20 | GMP、Channel、Context、pprof |
 | 02 内存与 GC | 15 | 三色标记、逃逸、sync.Pool |
@@ -16,7 +16,7 @@
 | 03 系统设计 | 21 | 秒杀、缓存、MQ、多活、SLO、CDC/Flink 实时风控 |
 | 中间件与数据库 | 26 | MySQL、PostgreSQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
 | 06 网络与服务治理 | 7 | Linux/epoll/TCP、gRPC、Gin、JWT、WebSocket |
-| 08 手写题 | 7 | LRU、限流、连接池、Singleflight、有界批处理 |
+| 08 编码练习 | 7 | LRU、限流、连接池、Singleflight、有界批处理 |
 | 10 AI 工程与编程 | 14 | 工作流/HITL、MCP/A2A、ERC-8004、x402/ERC-8183、开放平台/Launchpad |
 | 11 解决方案架构 | 8 | DDD、演进、评审、白板 |
 | 12 区块链与 Web3（Go） | 12 | RPC、索引、Rollup/DA/finality、跨链消息安全、4337、MPC |
@@ -46,7 +46,7 @@
 | Effective Go | https://go.dev/doc/effective_go | 语言惯例 |
 | pkg.go.dev | https://pkg.go.dev/ | 标准库与 x/sync 等 |
 
-### Go 后端社区题源
+### Go 后端社区选题启发
 
 | 来源 | 链接 | 用途 |
 |------|------|------|
@@ -55,7 +55,7 @@
 | 大厂 Go 后端 35 道深度解析 | https://developer.cloud.tencent.com/article/2647941 | 追问风格、大厂侧重点 |
 | 2024 最全 Go 面经汇总 | https://juejin.cn/post/7434352545870184485 | 真实公司题目 |
 | Top 20 Go Interview Questions (uByte) | https://www.ubyte.dev/blog/go-interview-questions | 代码示例结构 |
-| Top 50 Go Interview Questions 2026 | https://papersadda.com/article/go-interview-questions-2026/ | 并发与手写题 |
+| Top 50 Go Interview Questions 2026 | https://papersadda.com/article/go-interview-questions-2026/ | 并发与编码练习 |
 
 ### 系统设计、架构与工程实践
 

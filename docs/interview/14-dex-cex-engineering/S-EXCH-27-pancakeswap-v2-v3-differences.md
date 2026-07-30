@@ -63,7 +63,7 @@ sources:
 
 **自测追问**：如果 Launchpad Token 毕业到 V3 后价格迅速越过 LP 区间，用户还能否正常卖出？系统如何恢复有效双边流动性？
 
-## 30 秒版（模拟面试摘要）
+## 30 秒版（开场）
 
 > PancakeSwap V2 是全价格区间恒定乘积 AMM，一个 token pair 通常对应一个 Pair，LP 份额
 > 是 ERC-20 LP token；V3 使用按 fee tier 划分的集中流动性池，LP 自选 tick 区间并持有

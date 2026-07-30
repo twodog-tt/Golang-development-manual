@@ -1,10 +1,10 @@
 # PostgreSQL
 
-3 题 | Go 后端、支付与 Staff/架构岗位 P0～P1 | [返回中间件索引](../index.md)
+3 篇 | Go 后端、支付与 Staff/架构岗位 P0～P1 | [返回中间件索引](../index.md)
 
 > 重点不是把 MySQL 术语换成 PostgreSQL，而是讲清 **tuple version、VACUUM、SSI、WAL 提交证据、复制滞后和 pgx 连接生命周期**。
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-PG-01](./S-PG-01-mvcc-vacuum-indexes.md) | MVCC、VACUUM、可见性与索引设计 | ⭐⭐⭐⭐⭐ |
 | [S-PG-02](./S-PG-02-isolation-locking-ledger.md) | 隔离级别、锁与资金写入 | ⭐⭐⭐⭐⭐ |

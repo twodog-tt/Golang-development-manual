@@ -1,4 +1,4 @@
-# Go 后端面试题单（5 年+）
+# 专题元数据清单（Go · Agent · Web3 工程知识库）
 # status: published | draft | skeleton
 # frequency: 1-5（5 为最高频）
 
@@ -172,7 +172,7 @@ p0:
       status: published
       file: 02-memory-gc/S-MEM-13-gc-jitter.md
     - id: S-MEM-14
-      title: new/make 在资深面试中的升维回答
+      title: new 与 make：分配语义、逃逸与选型
       frequency: 3
       status: published
       file: 02-memory-gc/S-MEM-14-new-make.md

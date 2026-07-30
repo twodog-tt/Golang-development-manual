@@ -64,14 +64,14 @@
 |----|------|------|------|------|
 | W1 | Go 语言 + 生产工程 | 01 核心 10 题 + [16 全部](./interview/16-go-production-engineering/index.md) | `go test -race`、错误/接口重构 | 画 GMP；讲 error 与 panic 边界 |
 | W2 | 内存 + 手写 + Linux/SQL | 02 高频 + S-CODE-06/07 + S-NET-06/07 + S-DB-06/07 + S-PG-01~03 | 跑 5 个新示例、读 heap profile | 手写有界批处理；排查一次 TCP/SQL |
-| W3 | [系统设计](./interview/03-system-design/index.md) | 21 题 | 每题 15min 结构化输出 | 秒杀/幂等/缓存/实时数据各 1 题口述 |
-| W4 | 目标岗位主线 + 模拟 | 按角色矩阵只选一个增量 P0 | 证据标签为 test/harness 的题才运行；2 场模拟面 | 追问链不停顿 3 层 |
+| W3 | [系统设计](./interview/03-system-design/index.md) | 21 篇 | 每篇 15min 结构化输出 | 秒杀/幂等/缓存/实时数据各 1 篇讲解 |
+| W4 | 目标岗位主线 + 综合演练 | 按角色矩阵只选一个增量 P0 | 证据标签为 test/harness 的篇才运行；2 场综合演练 | 深挖问答不停顿 3 层 |
 
 ### 每日建议（工作日 1.5h）
 
 - 40min：精读 2 篇 P0 文档（含追问链）
 - 30min：跑/改 1 段关联代码
-- 20min：口述「30 秒版 + 1 个生产例子」
+- 20min：讲解「30 秒版 + 1 个生产例子」
 
 ---
 
@@ -80,7 +80,7 @@
 | 周 | 内容 |
 |----|------|
 | 1 | 01 并发 + 02 内存高频 |
-| 2 | [16 Go 生产工程](./interview/16-go-production-engineering/index.md) + [08 手写题](./interview/08-coding-senior/index.md) |
+| 2 | [16 Go 生产工程](./interview/16-go-production-engineering/index.md) + [08 编码练习](./interview/08-coding-senior/index.md) |
 | 3-4 | 03 系统设计 21 题 + 容量估算模板 |
 | 5 | [网络](./interview/06-network-governance/index.md) + [MySQL](./interview/middleware/mysql/index.md) + [PostgreSQL](./interview/middleware/postgresql/index.md) |
 | 6 | Redis/Kafka/RocketMQ/ES + Terraform/Helm/GitOps |
@@ -95,9 +95,9 @@
 
 | 周 | 模块 | 阅读 | 练习 | 自测 |
 |----|------|------|------|------|
-| W1 | P0 复习 | 03 系统设计 10 题 + 01/02 各 5 题 | 容量估算 3 题 | 15min 秒杀/幂等口述 |
+| W1 | P0 复习 | 03 系统设计 10 篇 + 01/02 各 5 篇 | 容量估算 3 篇 | 15min 秒杀/幂等讲解 |
 | W2 | [解决方案架构](./interview/11-solution-architecture/index.md) | S-SOL-01～04 | 画上下文图 + 迁移阶段图 | 讲 1 个真实拆分/迁移故事 |
-| W3 | 解决方案架构 + 中间件 | S-SOL-05～08 + middleware | 多租户 + Outbox 方案口述 | 45min 白板模拟 ×1 |
+| W3 | 解决方案架构 + 中间件 | S-SOL-05～08 + middleware | 多租户 + Outbox 方案讲解 | 45min 白板演练 ×1 |
 | W4 | 领导力 + 云原生 | S-LEAD-01~05 + S-CLOUD-04/07/09/10 | ADR + 迁移门禁各 1 篇 | 架构评审角色扮演 |
 | W5 | AI + 网络（可选） | 10 + 06 各 4 题 | MCP/RAG 架构串联 | 企业知识库综合题 |
 | W6 | 模拟 | 03 + 11 抽题 | 45min 白板 ×2 + 追问 | 录像复盘 |
@@ -138,11 +138,11 @@
 ## 模块优先级（菜单由易到难）
 
 ```
-基础：01 并发 → 02 内存 → 16 Go 生产工程 → 08 手写题
+基础：01 并发 → 02 内存 → 16 Go 生产工程 → 08 编码练习
 进阶：06 网络 → middleware（MySQL↔PostgreSQL→Redis→MQ→ES）→ 03 系统设计 → 09 云原生
 高阶：11 解决方案架构 → 15 微服务（交易所）
 专题：12 EVM → 17 多链钱包 → 18 支付 → 19 节点/RPC → 20 协议/共识 → 21 安全工程 → 13 Solidity → 14 DEX/CEX
-综合：07 工程领导力 · 10 AI 工程（JD 相关时提前）
+综合：07 工程领导力 · 10 AI 工程（岗位场景相关时提前）
 ```
 
 **岗位速查**
@@ -154,7 +154,7 @@
 - **Web3 架构师**：17 → 18 → 19 → 20 → 21 + 03/11 + 12/13
 - **CEX 交易系统**：14（重点 EXCH-17~22）+ 15 + 17 充提 + 18 账本/对账
 - **DEX Tech Lead**：14（**EXCH-31 → 30 → 29** → 06/27 → 07/08）+ 13（SOLID-02/04/06/07）+ 12（BC-05/07/08）+ LEAD-01/03/04
-- **AI / Crypto Agent**：10（AI-09~14）+ 16 + 21；按 JD 再补 12/14
+- **AI / Crypto Agent**：10（AI-09~14）+ 16 + 21；按岗位场景再补 12/14
 
 ---
 
@@ -173,7 +173,7 @@
 
 ## 交易所工程师冲刺（4 周）
 
-分两条轨，按 JD 二选一（可并行 Shared Go）。
+分两条轨，按岗位场景二选一（可并行 Shared Go）。
 
 ### A. CEX 交易系统
 
@@ -191,7 +191,7 @@
 | W1 | **S-EXCH-31 → 30 → 29** + EXCH-06/27 | 45min DEX 白板；讲 V2/V3 与 rewardPerToken |
 | W2 | EXCH-07/08 + SOLID-02/04/06/07 | 聚合/MEV、重入、升级、Foundry 审计清单 |
 | W3 | BC-05/07/08/11/12 + EXCH-10/11 | Indexer/reorg、L2/桥、AA、行情同步 |
-| W4 | EXCH-14 + LEAD-01/03/04 + 模拟 | 全栈叙事 + CR/事故/带队；英文口述要点 |
+| W4 | EXCH-14 + LEAD-01/03/04 + 综合演练 | 全栈叙事 + CR/事故/带队；英文讲解要点 |
 
 ---
 
@@ -202,6 +202,6 @@
 | W1 | [10 AI 工程](./interview/10-ai-engineering/index.md) S-AI-01~04 + 09 | API/RAG/Agent 工具调用 + 工作流/HITL |
 | W2 | S-AI-10~12 | Persona/Memory、MCP/A2A、ERC-8004 身份 |
 | W3 | S-AI-13~14 + 21 安全 | Agent Commerce、开放平台/Launchpad、威胁模型 |
-| W4 | 16 Go 生产工程 + 模拟 | 与 Go 工程门禁串联；1 场综合口述 |
+| W4 | 16 Go 生产工程 + 综合演练 | 与 Go 工程门禁串联；1 场综合讲解 |
 
-题单索引：[interview/_meta/questions.yaml](./interview/_meta/questions.yaml)
+专题索引：[interview/_meta/questions.yaml](./interview/_meta/questions.yaml)

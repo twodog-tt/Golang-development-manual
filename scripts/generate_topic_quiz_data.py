@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""从 questions.yaml + 题目 Markdown 生成专题自测用的 questions.json。"""
+"""从 questions.yaml + 专题 Markdown 生成专题自测用的 questions.json。"""
 
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ MODULE_LABELS: dict[str, str] = {
     "microservices_exchange": "15 微服务（交易所）",
     "leadership": "07 工程与领导力",
     "cloud_native": "09 云原生",
-    "coding": "08 手写题",
+    "coding": "08 编码练习",
     "solution_architecture": "11 解决方案架构",
     "go_production_engineering": "16 Go 生产工程",
     "multichain_wallet": "17 多链钱包与托管",

@@ -1,8 +1,8 @@
 # MySQL 与 GORM
 
-7 题 | [返回中间件索引](../index.md)
+7 篇 | [返回中间件索引](../index.md)
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-DB-01](./S-DB-01-mysql-index.md) | 索引与最左前缀 | ⭐⭐⭐⭐⭐ |
 | [S-DB-02](./S-DB-02-transaction-mvcc.md) | 事务隔离与 MVCC | ⭐⭐⭐⭐⭐ |

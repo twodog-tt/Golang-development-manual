@@ -1,4 +1,4 @@
-// Package errgroup 简化版 errgroup（面试手写题 S-CODE-04）。
+// Package errgroup 简化版 errgroup（编码练习 S-CODE-04）。
 // 语义：任一 goroutine 返回 error 则取消 context，Wait 返回首个 error。
 package errgroup
 

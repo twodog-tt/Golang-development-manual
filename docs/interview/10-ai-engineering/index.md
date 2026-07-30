@@ -1,12 +1,12 @@
 # 10 AI 工程与编程
 
-14 题 | Agent Platform / Crypto Agent 生态岗位 P0 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+14 篇 | Agent Platform / Crypto Agent 生态岗位 P0 | [返回专题索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
 
-> 面向 **AI Agent Platform / Crypto Agent Ecosystem 与 Go 后端** 的工程面试：既覆盖模型接入，
+> 面向 **AI Agent Platform / Crypto Agent Ecosystem 与 Go 后端** 的工程专题：既覆盖模型接入，
 > 也覆盖可恢复工作流、HITL、Memory、MCP/A2A、Agent 身份与商业协议、开放平台和 Web3
 > 安全执行面，非算法研究员方向。
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-AI-01](./S-AI-01-llm-api-integration.md) | Go 接入大模型 API：流式、重试、超时 | ⭐⭐⭐⭐⭐ |
 | [S-AI-02](./S-AI-02-rag-architecture.md) | RAG 架构：分块、向量检索与 Go 落地 | ⭐⭐⭐⭐⭐ |
@@ -38,7 +38,7 @@
 - 架构面问「Agent 身份、支付、Marketplace/Launchpad、钱包执行如何分层」
 - 与 [S-ARCH-16](../03-system-design/S-ARCH-16-observability.md)、[S-CLOUD-03](../09-cloud-native/S-CLOUD-03-opentelemetry.md)、[S-ES 系列](../middleware/elasticsearch/index.md) 交叉复习
 
-## 推荐刷题顺序
+## 推荐阅读顺序
 
 API 接入 → Agent/Tool → 工作流与 HITL → Persona/Memory → 安全与成本 → MCP →
 MCP/A2A 互操作 → ERC-8004 身份 → x402/ERC-8183 Commerce → 开放平台/Launchpad →

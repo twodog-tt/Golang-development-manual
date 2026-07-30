@@ -1,4 +1,4 @@
-// Package lru 提供并发安全的 LRU 缓存（面试手写题 S-CODE-01）。
+// Package lru 提供并发安全的 LRU 缓存（编码练习 S-CODE-01）。
 package lru
 
 import (

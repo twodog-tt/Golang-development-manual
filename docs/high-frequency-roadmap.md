@@ -1,17 +1,17 @@
 # 高频核心锚点：18 个必掌握主题
 
-这不是 232 篇正文的缩略目录，而是第一轮必须形成口述能力的 **18 个高频锚点**。
+这不是 232 篇正文的缩略目录，而是第一轮必须形成讲解能力的 **18 个高频锚点**。
 顺序按知识依赖排列：**Go 运行时与并发 → 生产后端与系统设计 → Agent Platform**。
 
-> 其中 17 题的题库频率为最高级 `5`。`S-AI-06` 的频率为 `4`，但它直接对应知识主线中的
-> 成本、延迟、可观测和容量问题，因此按方向相关性进入核心题单。
+> 其中 17 篇的优先级频率为最高级 `5`。`S-AI-06` 的频率为 `4`，但它直接对应知识主线中的
+> 成本、延迟、可观测和容量问题，因此按方向相关性进入核心主题清单。
 
-每张要点速览都放在对应正文开头。下表中的“要点速览”会直接跳到该题的 30 秒结论、3 分钟提纲、
+每张要点速览都放在对应正文开头。下表中的“要点速览”会直接跳到该篇的 30 秒结论、3 分钟提纲、
 记忆槽、错误表达和自测追问，不再维护独立的速览长页面。
 
 ## 使用规则
 
-这 18 题已经在各自正文开头配套要点速览，不必先通读整篇正文：
+这 18 篇已经在各自正文开头配套要点速览，不必先通读整篇正文：
 
 1. **一句话结论**：30 秒内说明它是什么、解决什么问题。
 2. **三个不变量**：讲清正确性边界，而不是堆 API 名称。
@@ -28,7 +28,7 @@
 目标：先建立资深 Go 岗位的语言基本盘。顺序不要打乱，后面的泄漏和 GC 排查依赖前面的
 调度、同步与取消语义。
 
-| 顺序 | 题号 | 题目名称 | 必须讲清 |
+| 顺序 | 文档 ID | 标题 | 必须讲清 |
 |-----:|------|----------|----------|
 | 1 | [`S-CONC-01`](interview/01-runtime-concurrency/S-CONC-01-gmp-overview.md) | [GMP 模型与 1.14 以来抢占式调度](interview/01-runtime-concurrency/S-CONC-01-gmp-overview.md) · [要点速览](interview/01-runtime-concurrency/S-CONC-01-gmp-overview.md#oral-card) | G/M/P 分工、本地/全局队列、抢占与 syscall |
 | 2 | [`S-CONC-05`](interview/01-runtime-concurrency/S-CONC-05-channel.md) | [Channel 内部实现与有缓冲/无缓冲选型](interview/01-runtime-concurrency/S-CONC-05-channel.md) · [要点速览](interview/01-runtime-concurrency/S-CONC-05-channel.md#oral-card) | hchan、发送/接收等待队列、关闭语义与背压 |
@@ -45,7 +45,7 @@
 目标：把语言能力连接到真实服务。学习主线是：
 **错误边界 → TCP 请求链路 → 数据库 → 幂等 → 消息事实 → 业务状态机**。
 
-| 顺序 | 题号 | 题目名称 | 必须讲清 |
+| 顺序 | 文档 ID | 标题 | 必须讲清 |
 |-----:|------|----------|----------|
 | 7 | [`S-GOENG-01`](interview/16-go-production-engineering/S-GOENG-01-errors-contract-panic-boundary.md) | [错误契约、Wrapping 与 Panic 边界](interview/16-go-production-engineering/S-GOENG-01-errors-contract-panic-boundary.md) · [要点速览](interview/16-go-production-engineering/S-GOENG-01-errors-contract-panic-boundary.md#oral-card) | errors.Is/As、稳定错误码、日志所有权与 recover 边界 |
 | 8 | [`S-NET-07`](interview/06-network-governance/S-NET-07-tcp-lifecycle-queues-timewait.md) | [TCP 建连、队列、TIME_WAIT 与故障排查](interview/06-network-governance/S-NET-07-tcp-lifecycle-queues-timewait.md) · [要点速览](interview/06-network-governance/S-NET-07-tcp-lifecycle-queues-timewait.md#oral-card) | 三次握手、listen/accept 队列、重传、TIME_WAIT |
@@ -61,7 +61,7 @@
 目标：从“调用一次模型”升级到“可审计、可恢复、可控成本的 Agent 平台”。学习主线是：
 **工具调用 → 工作流/HITL → Persona/Memory → 安全 → 成本 → 实时反馈数据**。
 
-| 顺序 | 题号 | 题目名称 | 必须讲清 |
+| 顺序 | 文档 ID | 标题 | 必须讲清 |
 |-----:|------|----------|----------|
 | 13 | [`S-AI-03`](interview/10-ai-engineering/S-AI-03-agent-tool-calling.md) | [AI Agent 与 Function Calling](interview/10-ai-engineering/S-AI-03-agent-tool-calling.md) · [要点速览](interview/10-ai-engineering/S-AI-03-agent-tool-calling.md#oral-card) | 模型建议与系统授权边界、schema 校验、工具副作用 |
 | 14 | [`S-AI-09`](interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) | [Agent 工作流、Human-in-the-loop 与可靠发布控制面](interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) · [要点速览](interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md#oral-card) | checkpoint 与业务幂等、Review Queue、发布模糊成功 |
@@ -88,7 +88,7 @@
 
 ## 完成后再进入方向增量
 
-只有当这 18 题可以闭卷口述，才继续进入：
+只有当这 18 篇可以闭卷讲清结论与边界，才继续进入：
 
 - [七类方向 P0/P1/P2 与证据标签](interview/_meta/role-priority-matrix.md)
 - [岗位定向 P0 知识图谱](interview/_meta/p0-knowledge-graph.md)

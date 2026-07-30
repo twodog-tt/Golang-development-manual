@@ -1,6 +1,6 @@
 # 20 协议、共识与安全
 
-4 题 | P1 深挖（**链基础设施 / 节点 / Protocol Engineer / 架构师** JD） | [返回索引](../../interview-catalog.md)
+4 篇 | P1 深挖（**链基础设施 / 节点 / Protocol Engineer / 架构师** JD） | [返回专题索引](../../interview-catalog.md)
 
 > 本模块用于把“会调用节点 RPC”提升到“能解释节点为何接受这条链、何时最终、
 > 数据为何可用、升级为何不会分叉”。重点不是背术语，而是说清 **安全假设、状态机、
@@ -8,7 +8,7 @@
 
 ## 题目
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-PROTO-01](./S-PROTO-01-ethereum-pos-fork-choice-finality.md) | Ethereum PoS、Fork Choice、Finality 与弱主观性 | ⭐⭐⭐⭐⭐ |
 | [S-PROTO-02](./S-PROTO-02-bft-cometbft-round-lock-safety-liveness.md) | BFT / CometBFT：轮次、锁、安全性与活性 | ⭐⭐⭐⭐⭐ |

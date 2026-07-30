@@ -16,9 +16,9 @@
 
 ## 按技术场景速查
 
-| 常见场景 | 对应题目 |
+| 常见场景 | 对应专题 |
 |----------|----------|
-| Go 工程、测试、Linux/TCP、SQL、手写题 | [16 Go 生产工程](interview/16-go-production-engineering/index.md) · [08 手写题](interview/08-coding-senior/index.md) · [06 网络](interview/06-network-governance/index.md) |
+| Go 工程、测试、Linux/TCP、SQL、编码练习 | [16 Go 生产工程](interview/16-go-production-engineering/index.md) · [08 编码练习](interview/08-coding-senior/index.md) · [06 网络](interview/06-network-governance/index.md) |
 | BTC/Solana/Cosmos/Sui/Aptos、多链充提、SDK 交易向量、MPC | [17 多链钱包与托管](interview/17-multichain-wallet/index.md) |
 | 稳定币支付、Treasury、双分录、清结算、合规 | [18 Web3 支付与稳定币](interview/18-web3-payments-stablecoin/index.md) |
 | EL/CL、RPC HA、Indexer、Relayer、Validator | [19 节点、RPC 与 Staking](interview/19-node-rpc-staking/index.md) |
@@ -39,7 +39,7 @@
 
 ## 核心主线（交易所角色）
 
-优先按 **Go 工程门槛 → 多链钱包 → 支付/账本 → 节点/RPC → 交易所与合约** 口述，每题准备 **1 个生产案例**。
+优先按 **Go 工程门槛 → 多链钱包 → 支付/账本 → 节点/RPC → 交易所与合约** 讲解，每篇准备 **1 个生产案例**。
 
 ### Go 生产工程与基础门槛
 
@@ -240,11 +240,11 @@
 | D4 | 支付、账本、机构托管与 RWA | S-PAY-01～06 |
 | D5 | 节点、链数据与非 EVM 在线可靠性 | S-NODE-01/02/04～10 |
 | D6 | 安全/协议或交易深挖（按岗位选） | S-SEC-01～04 + S-PROTO-01～04 + S-BC-11/12，或 S-EXCH-17～22 |
-| D7 | 架构与 Staff 模拟面 | S-CLOUD-09/10 + S-LEAD-04/05；完成交易平台 45min 白板 |
+| D7 | 架构与 Staff 综合演练 | S-CLOUD-09/10 + S-LEAD-04/05；完成交易平台 45min 白板 |
 
 ---
 
-## 口述模板（每题 3 分钟）
+## 讲解提纲（每篇 3 分钟）
 
 1. **业务背景**：你在项目中负责哪块、解决什么问题  
 2. **架构决策**：为什么 WebSocket 优先、为什么 MQ 拆链路、为什么 N 确认  

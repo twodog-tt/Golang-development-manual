@@ -1,8 +1,8 @@
 # 01 并发与运行时
 
-20 题 | P0 | [返回索引](../../interview-catalog.md)
+20 篇 | P0 | [返回专题索引](../../interview-catalog.md)
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-CONC-01](./S-CONC-01-gmp-overview.md) | GMP 模型全貌与抢占式调度 | ⭐⭐⭐⭐⭐ |
 | [S-CONC-02](./S-CONC-02-gmp-roles.md) | G、M、P 职责与去掉 P 的后果 | ⭐⭐⭐⭐⭐ |

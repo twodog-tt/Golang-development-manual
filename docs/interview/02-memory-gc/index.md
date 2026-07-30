@@ -1,8 +1,8 @@
 # 02 内存与 GC
 
-15 题 | P0 | [返回索引](../../interview-catalog.md)
+15 篇 | P0 | [返回专题索引](../../interview-catalog.md)
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-MEM-01](./S-MEM-01-tri-color-gc.md) | 三色标记与写屏障 | ⭐⭐⭐⭐⭐ |
 | [S-MEM-02](./S-MEM-02-stw-evolution.md) | STW 与 GC 演进 | ⭐⭐⭐⭐⭐ |

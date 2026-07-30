@@ -1,8 +1,8 @@
 # 06 网络与服务治理
 
-7 题 | P0 基础 + P1 服务治理 | [返回索引](../../interview-catalog.md)
+7 篇 | P0 基础 + P1 服务治理 | [返回专题索引](../../interview-catalog.md)
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-NET-01](./S-NET-01-grpc-vs-rest.md) | gRPC vs HTTP/REST 选型 | ⭐⭐⭐⭐ |
 | [S-NET-02](./S-NET-02-http-connection-pool.md) | HTTP 连接池与 Keep-Alive | ⭐⭐⭐⭐ |

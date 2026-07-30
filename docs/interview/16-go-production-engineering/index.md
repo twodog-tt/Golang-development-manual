@@ -1,10 +1,10 @@
 # 16 Go 生产工程
 
-6 题 | 各岗位共享 P0 门槛 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+6 篇 | 各岗位共享 P0 门槛 | [返回专题索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
 
 > 这一模块不重复 GMP/GC，而是补齐资深 Go 岗更容易暴露短板的 **错误契约、包设计、测试、构建与供应链**。
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-GOENG-01](./S-GOENG-01-errors-contract-panic-boundary.md) | 错误契约、Wrapping 与 Panic 边界 | ⭐⭐⭐⭐⭐ |
 | [S-GOENG-02](./S-GOENG-02-package-interface-di.md) | 包边界、接口设计与依赖注入 | ⭐⭐⭐⭐⭐ |

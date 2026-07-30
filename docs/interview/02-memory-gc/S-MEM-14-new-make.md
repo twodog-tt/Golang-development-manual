@@ -1,6 +1,6 @@
 ---
 id: S-MEM-14
-title: new/make 在资深面试中的升维回答
+title: new 与 make：分配语义、逃逸与选型
 module: memory-gc
 level: senior
 frequency: 3
@@ -15,7 +15,7 @@ sources:
   - https://pkg.go.dev/builtin
 ---
 
-# new/make 在资深面试中的升维回答
+# new 与 make：分配语义、逃逸与选型
 
 ## 30 秒版（开场）
 

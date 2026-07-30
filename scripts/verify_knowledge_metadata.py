@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""校验题单、角色化优先级、证据标签与正文的最小一致性。"""
+"""校验专题元数据、角色化优先级、证据标签与正文的最小一致性。"""
 
 from __future__ import annotations
 

@@ -15,5 +15,5 @@ nav:
   - "CPU profile vs execution trace 选型": S-MEM-11-pprof-vs-trace.md
   - "减少 GC 压力的系统级手段": S-MEM-12-reduce-gc-pressure.md
   - "延迟敏感服务的 GC 抖动治理": S-MEM-13-gc-jitter.md
-  - "new/make 在资深面试中的升维回答": S-MEM-14-new-make.md
+  - "new 与 make：分配语义、逃逸与选型": S-MEM-14-new-make.md
   - "defer 链、开销与错误处理": S-MEM-15-defer.md

@@ -1,6 +1,6 @@
-# 面试题 ↔ 可运行代码映射
+# 专题 ↔ 可运行代码映射
 
-| 题 ID | 文档 | 代码路径 | 说明 |
+| 文档 ID | 文档 | 代码路径 | 说明 |
 |-------|------|----------|------|
 | S-CONC-05, S-CONC-06 | Channel | `basis/channel/main.go` | 无缓冲/有缓冲 channel |
 | S-CONC-08, S-CONC-11 | Mutex / WaitGroup | `basis/sync/main.go` | Mutex vs atomic |
@@ -65,13 +65,13 @@
 | S-EXCH-21 | STP 自成交防护 | [S-EXCH-21](../14-dex-cex-engineering/S-EXCH-21-self-trade-prevention-surveillance.md) | `examples/senior/matchingengine/` |
 | S-EXCH-22 | 集合竞价与 Benchmark | [S-EXCH-22](../14-dex-cex-engineering/S-EXCH-22-call-auction-performance-validation.md) | `examples/senior/callauction/`, `examples/senior/matchingengine/` |
 | S-MSVC-01～06 | 微服务（交易所场景） | — | [15-microservices-exchange/](../15-microservices-exchange/index.md) |
-| — | 算法面 | `algorithm/lc_*` | LeetCode 参考实现 |
+| — | 算法练习 | `algorithm/lc_*` | LeetCode 参考实现 |
 
 ## 使用方式
 
 1. 阅读 `docs/interview/` 下对应 Markdown。
 2. 按上表进入代码目录：`go run .` 或 `go test`。
-3. 资深面建议：**先口述再对照代码**，并补充自己的生产案例。
+3. 建议：**先讲清不变量再对照代码**，并补充自己的生产案例。
 | S-EXCH-28 | 多级代理极差分润 | [S-EXCH-28](../14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate.md) | — |
 | S-EXCH-29 | DeFi Staking / LM / Farm | [S-EXCH-29](../14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md) | — |
 | S-EXCH-30 | Uniswap V2/V3 协议 | [S-EXCH-30](../14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md) | — |

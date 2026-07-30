@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""从 questions.yaml 生成 interview/.pages 与各模块 .pages，启用题目级（三级）导航。"""
+"""从 questions.yaml 生成 interview/.pages 与各模块 .pages，启用专题级（三级）导航。"""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ DIR_TITLES: dict[str, str] = {
     "03-system-design": "03 系统设计",
     "06-network-governance": "06 网络与服务治理",
     "07-engineering-leadership": "07 工程与领导力",
-    "08-coding-senior": "08 手写题",
+    "08-coding-senior": "08 编码练习",
     "09-cloud-native": "09 云原生",
     "10-ai-engineering": "10 AI 工程与编程",
     "11-solution-architecture": "11 解决方案架构",
@@ -88,16 +88,16 @@ ROOT_PAGES = """nav:
   - 参考资料:
     - Web3 交易所重点专题: web3-exchange-wallet-focus.md
     - 专题总索引: interview-catalog.md
-    - 题源与引用: sources.md
-    - 代码与题目映射: interview/_meta/mapping
+    - 来源与引用: sources.md
+    - 代码与专题映射: interview/_meta/mapping
 
   - 维护工具:
-    - 题目撰写模板: interview/_meta/template
-    - 习题质量审查: interview/_meta/quality-review
+    - 专题撰写模板: interview/_meta/template
+    - 内容质量审查: interview/_meta/quality-review
 """
 
-# 仅影响侧栏展示；正文 H1、搜索索引与题单标题继续使用完整 title。
-# 优先覆盖题目数多、术语长、在窄侧栏中容易超过两行的模块。
+# 仅影响侧栏展示；正文 H1、搜索索引与专题标题继续使用完整 title。
+# 优先覆盖篇数多、术语长、在窄侧栏中容易超过两行的模块。
 COMPACT_NAV_TITLES: dict[str, str] = {
     # 12 区块链与 Web3
     "S-BC-11": "Rollup Finality / DA / 强制退出",
@@ -199,7 +199,7 @@ def yaml_quote(s: str) -> str:
 
 
 def nav_label(item: dict) -> str:
-    """侧栏优先显示紧凑标题，正文和搜索仍保留完整题目标题。"""
+    """侧栏优先显示紧凑标题，正文和搜索仍保留完整专题标题。"""
     return COMPACT_NAV_TITLES.get(item["id"], item["title"])
 
 

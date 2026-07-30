@@ -1,8 +1,8 @@
 # 09 云原生（扩展）
 
-10 题 | 按岗位为 P0～P2 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+10 篇 | 按岗位为 P0～P2 | [返回专题索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-CLOUD-01](./S-CLOUD-01-k8s-scheduling.md) | K8s 调度与 Go 资源 limit | ⭐⭐⭐⭐ |
 | [S-CLOUD-02](./S-CLOUD-02-docker-multistage.md) | Docker 多阶段构建 | ⭐⭐⭐⭐ |
@@ -21,7 +21,7 @@
 - 二面问 **部署、镜像、可观测性、排障** 落地细节
 - 与 [S-CONC-04 GOMAXPROCS](../01-runtime-concurrency/S-CONC-04-gomaxprocs.md)、[S-CODE-03 优雅关闭](../08-coding-senior/S-CODE-03-graceful-shutdown.md)、[S-ARCH-15 发布策略](../03-system-design/S-ARCH-15-release-strategy.md) 交叉复习
 
-## 推荐刷题顺序
+## 推荐阅读顺序
 
 镜像构建(02) → 调度与 limit(01) → 探针与滚动(04) → Terraform(09) →
 Helm/GitOps(10) → Ingress(06) → HPA(05) → 配置(08) → 排障(07) → OTel(03)

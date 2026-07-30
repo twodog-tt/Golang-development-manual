@@ -1,6 +1,6 @@
 # 知识库质量审查与岗位差距
 
-> 全库 **232 题**（以 [questions.yaml](questions.yaml) 为准）
+> 全库 **232 篇**（以 [questions.yaml](questions.yaml) 为准）
 >
 > 本轮审查与补强日期：**2026-07-21**
 >
@@ -19,7 +19,7 @@
   [16 Go 生产工程](../16-go-production-engineering/index.md)、
   [17 多链钱包](../17-multichain-wallet/index.md)、
   [18 Web3 支付](../18-web3-payments-stablecoin/index.md)、
-  [19 节点/RPC/Staking](../19-node-rpc-staking/index.md)，并增强手写题、Linux/TCP 与 MySQL。
+  [19 节点/RPC/Staking](../19-node-rpc-staking/index.md)，并增强编码练习、Linux/TCP 与 MySQL。
 - 本阶段再新增 **8 篇正文**：可运行确定性撮合与 WAL 回放、Rollup/跨链安全，以及
   Solana、Cosmos、Aptos、Sui 四条非 EVM Go 实战；其中 4 篇为 P0、4 篇为 P1。
 - 第三阶段新增 **8 篇 P1 正文**：Ethereum PoS/fork choice、CometBFT、
@@ -61,7 +61,7 @@
   `deterministic_test=20`、`integration_harness=7`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
-- 当前题库的优势是 **Go 核心、分布式系统、中间件、EVM/Solidity、CEX/DEX 架构广度**。
+- 当前知识库的优势是 **Go 核心、分布式系统、中间件、EVM/Solidity、CEX/DEX 架构广度**。
 - 原先“过度偏 EVM 与交易所概念架构”的主要缺口，以及 PoS/BFT、PeerDAS、
   行情/FIX/STP/竞价、安全工程、机构金融与链数据质量的第一轮深度已补齐。当前剩余短板转为：
   **厂商硬件上的 HSM/HA 实机证据、MPC coordinator 高可用与 share 防回滚、三条大型非 EVM
@@ -81,7 +81,7 @@
 | 数据库与中间件 | 26 |
 | 网络治理 | 7 |
 | 工程领导力 | 5 |
-| 资深手写题 | 7 |
+| 资深编码练习 | 7 |
 | 云原生 | 10 |
 | AI 工程 | 14 |
 | 解决方案架构 | 8 |

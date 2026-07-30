@@ -5,4 +5,4 @@ hide:
 
 # 专题自测
 
-<div id="mock-interview-root" class="mock-interview-page"></div>
+<div id="topic-quiz-root" class="topic-quiz-page"></div>

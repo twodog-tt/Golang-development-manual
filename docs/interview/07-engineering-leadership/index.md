@@ -1,8 +1,8 @@
 # 07 工程与领导力
 
-5 题 | Staff/架构岗位 P0 | [返回索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+5 篇 | Staff/架构岗位 P0 | [返回专题索引](../../interview-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
 
-| ID | 题目 | 频率 |
+| ID | 标题 | 频率 |
 |----|------|------|
 | [S-LEAD-01](./S-LEAD-01-incident-postmortem.md) | 线上事故复盘结构 | ⭐⭐⭐⭐⭐ |
 | [S-LEAD-02](./S-LEAD-02-tech-debt.md) | 技术债识别与偿还 | ⭐⭐⭐⭐ |
