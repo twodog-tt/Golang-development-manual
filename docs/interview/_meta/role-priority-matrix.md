@@ -2,7 +2,7 @@
 
 > 当前共 **232 篇 published 正文**。角色优先级与证据标签的机器事实源为
 > [role-evidence.yaml](./role-evidence.yaml)，一致性由
-> `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-29**。
+> `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-30**。
 
 ## 先选方向，不再套统一 P0
 
@@ -17,13 +17,13 @@
 
 | 目标岗位 | P0 | P1 | P2 | P0 重点 |
 |----------|---:|---:|---:|---------|
-| 资深 Go 后端 | 62 | 72 | 95 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
-| **AI Agent Platform / Crypto Agent Ecosystem** | **64** | **89** | **76** | 工作流、MCP/A2A、Agent 身份/Commerce、开放平台、Web3 安全执行 |
-| 多链钱包与托管 | 66 | 90 | 73 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
-| 支付与稳定币 | 66 | 97 | 66 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
-| 节点/RPC/Indexer | 73 | 85 | 71 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
-| 交易所工程 | 72 | 105 | 52 | 撮合/WAL、预测市场 CTF/CLOB、预言机、账本与安全上线 |
-| Staff/后端架构师 | 79 | 88 | 62 | 系统设计、预测市场全栈、迁移、IaC/GitOps、安全、跨团队影响 |
+| 资深 Go 后端 | 62 | 72 | 98 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
+| **AI Agent Platform / Crypto Agent Ecosystem** | **64** | **89** | **79** | 工作流、MCP/A2A、Agent 身份/Commerce、开放平台、Web3 安全执行 |
+| 多链钱包与托管 | 66 | 90 | 76 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
+| 支付与稳定币 | 66 | 97 | 69 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
+| 节点/RPC/Indexer | 73 | 85 | 74 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
+| 交易所工程 | **75** | **105** | **52** | 撮合/WAL、DEX 协议、预测市场 CTF/CLOB、账本与安全上线 |
+| Staff/后端架构师 | **80** | **88** | **64** | 系统设计、DEX/预测市场白板、迁移、IaC/GitOps、安全、跨团队影响 |
 
 P0 数量不是“全部逐字通读”。建议先掌握 shared P0 的 30 秒版与不变量，再只进入一个岗位的
 增量 P0；P1 用来应对 JD 特有深挖，P2 只按反馈补洞。
@@ -93,16 +93,22 @@ P0 数量不是“全部逐字通读”。建议先掌握 shared P0 的 30 秒�
 
 ### 交易所工程
 
-优先升级 `S-EXCH-01~05/10/11/13/15~26`、交易所微服务、账本、充提、节点交易管理器与
-signer 控制。预测市场岗位按 `S-EXCH-23 → 24 → 25 → 26` 形成 CTF/生命周期、
-CLOB/EIP-712/结算、数据源/争议、安全/上线闭环。性能结论必须附 workload、持久化边界、
-P99/P999 和恢复语义；涉及 DEX/Launchpad 场景深挖时再把 `S-EXCH-27` 作为 P1 补齐。
+优先升级 `S-EXCH-01~05/10/11/13/15~26`、**`S-EXCH-29/30/31`**、交易所微服务、账本、充提、
+节点交易管理器与 signer 控制。两条岗位主线：
+
+- **CEX / 撮合**：`S-EXCH-01~05/17~22` + 微服务/账本；性能结论必须附 workload、持久化边界、
+  P99/P999 和恢复语义。
+- **DEX Tech Lead**：`S-EXCH-31 → 30 → 29`（45min 白板 → Uniswap V2/V3 → Staking/LM/Yield），
+  再按反馈补 `S-EXCH-06/27`（P1）与合约/链上安全。
+- **预测市场**：`S-EXCH-23 → 24 → 25 → 26` 形成 CTF/生命周期、CLOB/EIP-712/结算、
+  数据源/争议、安全/上线闭环。
 
 ### Staff / 后端架构师
 
 优先升级领导力、解决方案架构、跨地域/迁移、IaC/GitOps、安全与数据平台。若目标是
-预测市场技术负责人，再把 `S-EXCH-23~26` 作为 Staff P0，重点讲链上/链下边界、机制风险、
-里程碑和跨团队上线门禁。
+**DEX Tech Lead**，把 `S-EXCH-31` 作为 Staff P0 白板入口，再按需补交易所增量中的
+`S-EXCH-30/29`；若目标是预测市场技术负责人，再把 `S-EXCH-23~26` 作为 Staff P0，
+重点讲链上/链下边界、机制风险、里程碑和跨团队上线门禁。
 [S-LEAD-04](../07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case.md) 和
 [S-LEAD-05](../07-engineering-leadership/S-LEAD-05-cross-team-migration-case.md)
 使用占位符训练案例；没有真实数据就明确说目标/估算，不能把模板包装成个人经历。
@@ -122,7 +128,7 @@ P99/P999 和恢复语义；涉及 DEX/Launchpad 场景深挖时再把 `S-EXCH-27
 
 | 标签 | 当前篇数 | 能证明什么 | 不能证明什么 |
 |------|---------:|------------|--------------|
-| `explanation_only` | 170 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
+| `explanation_only` | 174 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
 | `illustrative_artifact` | 31 | 仓库有相关代码或配置 | 测试当前通过、外部系统兼容 |
 | `deterministic_test` | 20 | 有不依赖外部服务的测试/回放门禁 | localnet、硬件或生产行为 |
 | `integration_harness` | 7 | 有 localnet/testnet/HSM/MPC/故障 harness | 每个目标版本都已实跑 |
@@ -135,8 +141,8 @@ P99/P999 和恢复语义；涉及 DEX/Launchpad 场景深挖时再把 `S-EXCH-27
 
 | 标签 | 当前篇数 | 复核方式 |
 |------|---------:|----------|
-| `stable` | 142 | 目标数据库/语言版本使用前抽查 |
-| `version_sensitive` | 72 | 复核官方 release/spec/SDK 文档 |
+| `stable` | 145 | 目标数据库/语言版本使用前抽查 |
+| `version_sensitive` | 73 | 复核官方 release/spec/SDK 文档 |
 | `vendor_or_regulatory_sensitive` | 14 | 结合目标厂商、司法辖区和法律/合规意见 |
 
 `vendor_or_regulatory_sensitive` 优先于普通版本敏感；它提醒你对外说明适用范围，而不是套一个
@@ -154,4 +160,4 @@ P99/P999 和恢复语义；涉及 DEX/Launchpad 场景深挖时再把 `S-EXCH-27
 .venv/bin/python scripts/verify_knowledge_metadata.py
 ```
 
-校验会检查 228 个 ID、正文、sources、30 秒版、追问链、角色引用和证据标签互斥关系。
+校验会检查 232 个 ID、正文、sources、30 秒版、追问链、角色引用和证据标签互斥关系。
