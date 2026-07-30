@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-07-30T12:27:03Z",
+  "generated_at": "2026-07-30T12:32:46Z",
   "count": 232,
   "roles": [
     {
@@ -47,7 +47,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": false,
-      "url": "interview/10-ai-engineering/S-AI-01-llm-api-integration/",
+      "url": "topics/10-ai-engineering/S-AI-01-llm-api-integration/",
       "prompt": "Go 接入大模型 API：流式、重试、超时",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -72,7 +72,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": false,
-      "url": "interview/10-ai-engineering/S-AI-02-rag-architecture/",
+      "url": "topics/10-ai-engineering/S-AI-02-rag-architecture/",
       "prompt": "**RAG（检索增强生成）** = 用户问题 → 检索相关资料 → 把受控上下文交给模型生成。检索可组合 dense embedding、BM25、metadata filter 和 rerank。RAG 能提高可追溯性与时效性，但不自动保证答案正确，也不能替代权限控制。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -97,7 +97,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": false,
-      "url": "interview/10-ai-engineering/S-AI-03-agent-tool-calling/",
+      "url": "topics/10-ai-engineering/S-AI-03-agent-tool-calling/",
       "prompt": "AI Agent 与 Function Calling",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -122,7 +122,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": false,
-      "url": "interview/10-ai-engineering/S-AI-04-prompt-context/",
+      "url": "topics/10-ai-engineering/S-AI-04-prompt-context/",
       "prompt": "Prompt 工程与 Context 窗口管理",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -147,7 +147,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": false,
-      "url": "interview/10-ai-engineering/S-AI-05-llm-security/",
+      "url": "topics/10-ai-engineering/S-AI-05-llm-security/",
       "prompt": "LLM 应用安全：注入、PII、护栏",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -172,7 +172,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": false,
-      "url": "interview/10-ai-engineering/S-AI-06-llm-observability-cost/",
+      "url": "topics/10-ai-engineering/S-AI-06-llm-observability-cost/",
       "prompt": "LLM 可观测性、成本与延迟优化",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -197,7 +197,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": false,
-      "url": "interview/10-ai-engineering/S-AI-07-mcp-server-go/",
+      "url": "topics/10-ai-engineering/S-AI-07-mcp-server-go/",
       "prompt": "Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -222,7 +222,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": false,
-      "url": "interview/10-ai-engineering/S-AI-08-multimodal-voice/",
+      "url": "topics/10-ai-engineering/S-AI-08-multimodal-voice/",
       "prompt": "多模态 = 同一对话里传 **文本 + 图片 + 音频**；Go 后端负责 **上传校验、转码、流式转发、计费**。语音链路常见 **ASR（Whisper）→ LLM → TTS**。生产关键词：**multipart 限大小、base64 vs 对象存储 URL、实时语音 WebSocket**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -247,7 +247,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": true,
-      "url": "interview/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing/",
+      "url": "topics/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing/",
       "prompt": "Agent 工作流、Human-in-the-loop 与可靠发布控制面",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -272,7 +272,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": true,
-      "url": "interview/10-ai-engineering/S-AI-10-persona-memory-feedback-governance/",
+      "url": "topics/10-ai-engineering/S-AI-10-persona-memory-feedback-governance/",
       "prompt": "Persona、分层 Memory 与反馈学习治理",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -297,7 +297,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": true,
-      "url": "interview/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability/",
+      "url": "topics/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability/",
       "prompt": "MCP 与 A2A：Tool、Agent、任务生命周期与跨框架互操作",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -322,7 +322,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": true,
-      "url": "interview/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation/",
+      "url": "topics/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation/",
       "prompt": "ERC-8004：Agent 身份、信誉、验证与钱包绑定",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -347,7 +347,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": true,
-      "url": "interview/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce/",
+      "url": "topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce/",
       "prompt": "x402、x402b 与 ERC-8183：Agent 支付、托管、争议和对账",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -372,7 +372,7 @@
       "module": "10 AI 工程",
       "module_key": "ai_engineering",
       "resume_focus": true,
-      "url": "interview/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad/",
+      "url": "topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad/",
       "prompt": "Crypto Agent SDK、开放平台、Marketplace 与 Launchpad 架构",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -397,7 +397,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-01-read-heavy-api/",
+      "url": "topics/03-system-design/S-ARCH-01-read-heavy-api/",
       "prompt": "10 万 QPS 读多写少 API 的核心是 **CDN/边缘缓存 + 有界多级缓存 + 水平扩展 + 可控回源**。命中率、P99 和单 Pod QPS 都应是压测结果，不是通用常数；设计重点是即使缓存部分失效，也不会把 DB 直接打穿。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -422,7 +422,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-02-seckill/",
+      "url": "topics/03-system-design/S-ARCH-02-seckill/",
       "prompt": "秒杀本质是 **有限库存 + 瞬时超高并发**，核心用 **预减库存（Redis Lua）+ 异步下单 + 热点隔离** 防超卖与打穿。生产关键词：**库存扣减原子性、排队削峰、热点 Key 分片**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -447,7 +447,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-03-distributed-id/",
+      "url": "topics/03-system-design/S-ARCH-03-distributed-id/",
       "prompt": "分布式 ID 要在 **全局唯一、趋势递增、高性能、可运维** 之间取舍：订单用 **雪花/号段**（索引友好），日志追踪用 **UUID v7**。生产关键词：**时钟回拨、WorkerId 分配、号段双 Buffer**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -472,7 +472,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-04-idempotency/",
+      "url": "topics/03-system-design/S-ARCH-04-idempotency/",
       "prompt": "幂等设计：接口、消息、数据库层",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -497,7 +497,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-05-consistency-tradeoff/",
+      "url": "topics/03-system-design/S-ARCH-05-consistency-tradeoff/",
       "prompt": "最终一致 vs 强一致：业务怎么选",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -522,7 +522,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-06-cache-failure-modes/",
+      "url": "topics/03-system-design/S-ARCH-06-cache-failure-modes/",
       "prompt": "**穿透**查不存在的数据、**击穿**热点 Key 过期、**雪崩**大量 Key 同时失效——三板斧分别是 **布隆过滤器/空值缓存、互斥锁/singleflight、随机 TTL/多级缓存**。生产关键词：**回源率、热点隔离、熔断降级**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -547,7 +547,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-07-multi-level-cache/",
+      "url": "topics/03-system-design/S-ARCH-07-multi-level-cache/",
       "prompt": "多级缓存通常是请求进入应用前的 **CDN/边缘缓存**，加上应用内 **L1 本地缓存**、共享 **L2 Redis**，最后回源权威 DB。TTL、失效消息和版本号只能把不一致窗口变得可控，不会自动提供强一致。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -572,7 +572,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-08-rate-limiting/",
+      "url": "topics/03-system-design/S-ARCH-08-rate-limiting/",
       "prompt": "限流：令牌桶、漏桶、分布式限流",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -597,7 +597,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-09-circuit-breaker/",
+      "url": "topics/03-system-design/S-ARCH-09-circuit-breaker/",
       "prompt": "熔断、降级、舱壁",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -622,7 +622,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-10-mq-semantics/",
+      "url": "topics/03-system-design/S-ARCH-10-mq-semantics/",
       "prompt": "消息队列：至少一次、恰好一次、顺序性",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -647,7 +647,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-11-delayed-jobs/",
+      "url": "topics/03-system-design/S-ARCH-11-delayed-jobs/",
       "prompt": "延迟任务 = **不早于 T 时刻触发一次或多次尝试**（订单超时关单）；定时任务 = **周期执行**（对账）。常见实现有 **Redis ZSET 轮询、支持定时投递的 MQ、DB 扫描、durable workflow**。分布式调度通常只能承诺至少一次尝试，业务 handler 必须幂等。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -672,7 +672,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-12-order-state-machine/",
+      "url": "topics/03-system-design/S-ARCH-12-order-state-machine/",
       "prompt": "支付/订单状态机设计",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -697,7 +697,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-13-multi-active-dr/",
+      "url": "topics/03-system-design/S-ARCH-13-multi-active-dr/",
       "prompt": "**RPO** = 可丢多少数据（Recovery Point Objective）；**RTO** = 恢复要多久。多活是双城同时接流量；冷备 RTO 长、成本低。生产关键词：**同城双活、异地多活、单元化、数据复制 lag**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -722,7 +722,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-14-microservice-boundary/",
+      "url": "topics/03-system-design/S-ARCH-14-microservice-boundary/",
       "prompt": "拆分边界按 **业务域（Bounded Context）+ 变更频率 + 团队 Conway 定律**，不是按表或按层。过早拆分带来 **分布式事务、链路延迟、运维爆炸**。生产关键词：**高内聚低耦合、数据所有权、API 契约**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -747,7 +747,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-15-release-strategy/",
+      "url": "topics/03-system-design/S-ARCH-15-release-strategy/",
       "prompt": "API 版本、灰度发布与特性开关",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -772,7 +772,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-16-observability/",
+      "url": "topics/03-system-design/S-ARCH-16-observability/",
       "prompt": "可观测性：日志、指标、链路",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -797,7 +797,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-17-slo-error-budget/",
+      "url": "topics/03-system-design/S-ARCH-17-slo-error-budget/",
       "prompt": "SLO/SLI 与错误预算",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -822,7 +822,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-18-capacity-planning/",
+      "url": "topics/03-system-design/S-ARCH-18-capacity-planning/",
       "prompt": "容量评估与压测方法论",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -847,7 +847,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-19-monolith-to-microservices/",
+      "url": "topics/03-system-design/S-ARCH-19-monolith-to-microservices/",
       "prompt": "演进用 **绞杀者模式（Strangler Fig）**：新能力新服务，老模块逐步迁移；保留 **回退路径** 与 **数据双写对账**。生产关键词：**模块化单体先行、不是为拆而拆、可逆决策**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -872,7 +872,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": false,
-      "url": "interview/03-system-design/S-ARCH-20-tech-decision-doc/",
+      "url": "topics/03-system-design/S-ARCH-20-tech-decision-doc/",
       "prompt": "技术选型文档怎么写（Lead 面）",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -897,7 +897,7 @@
       "module": "03 系统设计",
       "module_key": "system_design",
       "resume_focus": true,
-      "url": "interview/03-system-design/S-ARCH-21-realtime-risk-cdc-flink/",
+      "url": "topics/03-system-design/S-ARCH-21-realtime-risk-cdc-flink/",
       "prompt": "实时风控数据平台：CDC、Flink、ES 与可重放链路",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -922,7 +922,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": false,
-      "url": "interview/12-blockchain-web3/S-BC-01-blockchain-evm-basics/",
+      "url": "topics/12-blockchain-web3/S-BC-01-blockchain-evm-basics/",
       "prompt": "以太坊执行层可视为状态机。传统上区分 **EOA**（由私钥原生授权交易）与 **合约账户**；但 EIP-7702 已允许 EOA 在账户状态中设置持久的代码委托，因此“EOA 永远没有代码、合约账户永远不能主动发起动作”的二分法要加版本语境。Go 后端重点是 nonce、typed transaction、fee、safe/finalized 与 chain ID。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -947,7 +947,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": false,
-      "url": "interview/12-blockchain-web3/S-BC-02-go-ethereum-rpc/",
+      "url": "topics/12-blockchain-web3/S-BC-02-go-ethereum-rpc/",
       "prompt": "链上数据通过 **JSON-RPC 2.0** 访问（HTTP/WebSocket/IPC）。Go 生产用 **go-ethereum/ethclient** 封装；自研网关可用最小 HTTP 客户端。生产关键词：**WS 订阅、限流、多节点 failover、context 超时**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -972,7 +972,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": false,
-      "url": "interview/12-blockchain-web3/S-BC-03-tx-signing-key-mgmt/",
+      "url": "topics/12-blockchain-web3/S-BC-03-tx-signing-key-mgmt/",
       "prompt": "以太坊交易通常由 secp256k1 ECDSA 授权后广播。生产热钱包要把策略、交易构造、签名和广播分层；HSM/KMS/MPC 只是密钥控制的一部分，还必须限制 chain、to、value、method、额度和 nonce，并保存幂等的已签名结果。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -997,7 +997,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": false,
-      "url": "interview/12-blockchain-web3/S-BC-04-contract-abi-events/",
+      "url": "topics/12-blockchain-web3/S-BC-04-contract-abi-events/",
       "prompt": "调合约 = **ABI 编码 calldata** + 发 tx 或 `eth_call`；监听业务常用 **Event Logs**（`Transfer` 等）。日志是可重组的执行输出，不是脱离区块上下文的状态证明。Go 用 **abigen** 生成绑定。生产关键词：**topics 索引、receipt status、合约地址白名单、finality**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -1022,7 +1022,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": false,
-      "url": "interview/12-blockchain-web3/S-BC-05-indexer-reorg/",
+      "url": "topics/12-blockchain-web3/S-BC-05-indexer-reorg/",
       "prompt": "**索引器** = 持续同步链上 canonical 数据到 DB，供 API 查询。必须校验相邻块 `parentHash`，遇到 **reorg** 时回退到共同祖先并重放。Ethereum PoS 应优先区分 `latest`、`safe`、`finalized`；“固定 N 个确认”只是部分链或 RPC 不支持 finality tag 时的风险策略。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1047,7 +1047,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": false,
-      "url": "interview/12-blockchain-web3/S-BC-06-defi-backend-patterns/",
+      "url": "topics/12-blockchain-web3/S-BC-06-defi-backend-patterns/",
       "prompt": "Web3 后端 = **链上结算 + 链下体验**：索引器、报价 API、元数据、风控。DeFi 重 **Oracle/滑点/MEV**；NFT 重 **元数据/IPFS/版税**。Go 常做 **聚合 API、任务队列、对账**。生产关键词：**链上链下一致性、价格延迟、合规 KYT**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -1072,7 +1072,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": false,
-      "url": "interview/12-blockchain-web3/S-BC-07-l2-cross-chain-bridge/",
+      "url": "topics/12-blockchain-web3/S-BC-07-l2-cross-chain-bridge/",
       "prompt": "Rollup 在 L2 执行并把数据/承诺提交到 L1；Optimistic 依赖挑战/fault proof 机制， ZK rollup 提交有效性证明。不同系统的数据可用性、升级密钥、sequencer、证明和退出 流程差异很大。**交易 finalized 不自动等于提现已经可领取**。桥是额外协议与信任面， 后端不能只用固定确认块数抽象所有链。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -1097,7 +1097,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": false,
-      "url": "interview/12-blockchain-web3/S-BC-08-erc4337-account-abstraction/",
+      "url": "topics/12-blockchain-web3/S-BC-08-erc4337-account-abstraction/",
       "prompt": "**ERC-4337** 在不改共识的前提下实现 **智能合约账户**：用户提交 **UserOperation**，**Bundler** 打包为交易调用某个版本的 **EntryPoint**，**Paymaster** 可按策略代付 Gas。Go 后端关键词：**按 EntryPoint 版本构造 UserOp、Bundler RPC、会话密钥、Gas 赞助策略**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -1122,7 +1122,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": false,
-      "url": "interview/12-blockchain-web3/S-BC-09-abigen-contract-bindings/",
+      "url": "topics/12-blockchain-web3/S-BC-09-abigen-contract-bindings/",
       "prompt": "生产路径：**Solidity → solc 出 ABI/BIN → abigen 生成 Go → Deploy/Call/FilterLogs**。单测用 **simulated.Backend** 不上测试网。与 [S-BC-04 ABI 理论](./S-BC-04-contract-abi-events.md) 配套，本题是 **可运行闭环**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -1147,7 +1147,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": true,
-      "url": "interview/12-blockchain-web3/S-BC-10-mpc-tss-custody/",
+      "url": "topics/12-blockchain-web3/S-BC-10-mpc-tss-custody/",
       "prompt": "CEX 热钱包不能依赖 **单点私钥**：用 **MPC/TSS（门限签名）** 让多个 key share 协作签名，正常流程不重构完整私钥。Go 后端负责 **冻结交易意图、 提现状态机、调用签名服务、广播与确认**。生产关键词：**门限 m-of-n、 DKG/resharing、KMS/HSM、策略审批、审计留痕**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -1172,7 +1172,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": true,
-      "url": "interview/12-blockchain-web3/S-BC-11-rollup-finality-da-proof-security/",
+      "url": "topics/12-blockchain-web3/S-BC-11-rollup-finality-da-proof-security/",
       "prompt": "Rollup 不能只分“Optimistic 或 ZK”。我会逐层确认 **排序/执行、数据可用性、L1 发布、状态承诺、证明、升级权限和退出路径**。`unsafe/safe/finalized` 是协议定义的不同水位， L2 交易 finalized 也不自动等于提现已经可领取。外部 DA、中心化 sequencer、proof 延迟、升级委员会和逃生舱都会改变真实安全边界，所以后端必须按具体网络做状态机， 不能统一成固定 N 个 L2 块。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -1197,7 +1197,7 @@
       "module": "12 区块链与 Web3",
       "module_key": "blockchain_web3",
       "resume_focus": true,
-      "url": "interview/12-blockchain-web3/S-BC-12-cross-chain-message-bridge-security/",
+      "url": "topics/12-blockchain-web3/S-BC-12-cross-chain-message-bridge-security/",
       "prompt": "跨链桥不是“监听源链 tx hash 后在目标链 mint”。必须验证 **准确的源事件或状态证明**， 并把 source/destination domain、emitter、destination app、nonce、asset、recipient、 amount、payload hash 和版本绑定进消息。若验证、replay consume 与业务执行都在同一个 目标链事务中，应依赖其原子回滚；若跨越链下协调器和外部交易，则要先持久化 reservation， 在结果未知时保留 pending，而不是删除 replay 记录。Relayer 只影响传递可用性，不应获得 伪造消息的权限；源链完成、证明可用、目标执行成功是三个独立状态。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -1222,7 +1222,7 @@
       "module": "09 云原生",
       "module_key": "cloud_native",
       "resume_focus": false,
-      "url": "interview/09-cloud-native/S-CLOUD-01-k8s-scheduling/",
+      "url": "topics/09-cloud-native/S-CLOUD-01-k8s-scheduling/",
       "prompt": "K8s **Scheduler 主要按 resource requests**、亲和性、污点容忍等选择 Node；CPU/memory limits 主要由 kubelet/container runtime 通过 cgroup 执行。Go 服务应验证 **GOMAXPROCS 与有效 CPU 配额**，避免严重不匹配造成 throttling 与尾延迟。Go 1.25+ 在 Linux 容器中默认感知 cgroup CPU limit。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1247,7 +1247,7 @@
       "module": "09 云原生",
       "module_key": "cloud_native",
       "resume_focus": false,
-      "url": "interview/09-cloud-native/S-CLOUD-02-docker-multistage/",
+      "url": "topics/09-cloud-native/S-CLOUD-02-docker-multistage/",
       "prompt": "Go 很适合 **multi-stage**：builder 阶段编译，runtime 只保留二进制和必需运行时文件。`distroless/scratch` 可缩小攻击面，但 `CGO_ENABLED=0`、剥离符号和极简镜像都应根据依赖、调试与合规需求选择，而不是机械套用。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1272,7 +1272,7 @@
       "module": "09 云原生",
       "module_key": "cloud_native",
       "resume_focus": false,
-      "url": "interview/09-cloud-native/S-CLOUD-03-opentelemetry/",
+      "url": "topics/09-cloud-native/S-CLOUD-03-opentelemetry/",
       "prompt": "**OpenTelemetry（OTel）** 统一 Traces、Metrics、Logs 的采集与导出；Go 用 `otel` SDK + **OTLP** 推到 Collector/Jaeger/Prometheus。生产关键词：**W3C traceparent 传播、采样率、高基数 label 控制、与 slog 关联 trace_id**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1297,7 +1297,7 @@
       "module": "09 云原生",
       "module_key": "cloud_native",
       "resume_focus": false,
-      "url": "interview/09-cloud-native/S-CLOUD-04-rolling-update-probes-pdb/",
+      "url": "topics/09-cloud-native/S-CLOUD-04-rolling-update-probes-pdb/",
       "prompt": "K8s **Deployment 滚动发布** 用 `maxSurge` / `maxUnavailable` 控制替换速度；**readiness** 控制是否进入 Service 流量，**liveness** 失败会触发重启。**PDB 只约束通过 Eviction API 的部分自愿中断（如 drain），不约束 Deployment 自身滚动更新，也不能阻止非自愿故障。**",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1322,7 +1322,7 @@
       "module": "09 云原生",
       "module_key": "cloud_native",
       "resume_focus": false,
-      "url": "interview/09-cloud-native/S-CLOUD-05-hpa-autoscaling/",
+      "url": "topics/09-cloud-native/S-CLOUD-05-hpa-autoscaling/",
       "prompt": "**HPA** 根据 CPU、内存或自定义/外部指标自动修改 workload 副本数。CPU `Utilization` 是 **实际 CPU usage / CPU request**，不是除以 limit；未设置 request 时该指标无法正常计算。I/O 型服务通常更适合按 RPS、inflight、队列 lag 等“增加副本后会下降”的指标扩容，延迟可作为保护信号但不宜单独盲目驱动。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1347,7 +1347,7 @@
       "module": "09 云原生",
       "module_key": "cloud_native",
       "resume_focus": false,
-      "url": "interview/09-cloud-native/S-CLOUD-06-ingress-gateway/",
+      "url": "topics/09-cloud-native/S-CLOUD-06-ingress-gateway/",
       "prompt": "**南北向流量** 从公网进入集群：可用传统 **Ingress** 或 **Gateway API**。Go 服务通常通过 ClusterIP 接入网关。TLS、超时、body 限制、WebSocket 和 gRPC 的具体配置取决于 controller；Gateway API 可用 HTTPRoute/GRPCRoute 表达标准化路由，不能把某个 nginx annotation 当成 Kubernetes 通用能力。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1372,7 +1372,7 @@
       "module": "09 云原生",
       "module_key": "cloud_native",
       "resume_focus": false,
-      "url": "interview/09-cloud-native/S-CLOUD-07-k8s-troubleshooting/",
+      "url": "topics/09-cloud-native/S-CLOUD-07-k8s-troubleshooting/",
       "prompt": "Pod 异常三件套：**OOMKilled**（内存超 limit）、**CrashLoopBackOff**（进程反复退出）、**Evicted**（节点磁盘/内存压力驱逐）。Go 服务排查路径：`kubectl describe pod` → Events → 日志 → **pprof heap/goroutine**（[S-MEM-10](../02-memory-gc/S-MEM-10-pprof-heap.md)）。生产关键词：**Last State、Exit Code 137、previous logs、ephemeral debug container**。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1397,7 +1397,7 @@
       "module": "09 云原生",
       "module_key": "cloud_native",
       "resume_focus": false,
-      "url": "interview/09-cloud-native/S-CLOUD-08-configmap-secret/",
+      "url": "topics/09-cloud-native/S-CLOUD-08-configmap-secret/",
       "prompt": "**ConfigMap** 存非敏感配置，**Secret** 存密钥（Base64 非加密）；挂载为 **环境变量** 或 **Volume 文件**。Go 服务推荐：**启动读 env + 可选文件 watch 热更**；Secret **不进镜像**（[S-CLOUD-02](./S-CLOUD-02-docker-multistage.md)）。生产关键词：**12-Factor、Reloader、immutable Secret、敏感配置轮换**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1422,7 +1422,7 @@
       "module": "09 云原生",
       "module_key": "cloud_native",
       "resume_focus": false,
-      "url": "interview/09-cloud-native/S-CLOUD-09-terraform-state-drift-safe-change/",
+      "url": "topics/09-cloud-native/S-CLOUD-09-terraform-state-drift-safe-change/",
       "prompt": "Terraform state 是“配置地址 ↔ 远端真实对象”的绑定和最近属性快照，不是可随手编辑的缓存；它可能含敏感值，团队使用应放在支持访问控制、加密、版本恢复和适当 locking 的远端后端。`plan` 只是基于当时配置、state、refresh 与 provider 行为计算出的变更提案，不是永不过期的事实。生产变更要固定 provider/module、审查同一份 saved plan、限制权限和 blast radius，并用 `moved`、`import`、`removed` 等声明式迁移记录代替直接改 state。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1447,7 +1447,7 @@
       "module": "09 云原生",
       "module_key": "cloud_native",
       "resume_focus": false,
-      "url": "interview/09-cloud-native/S-CLOUD-10-helm-gitops-rollout-rollback/",
+      "url": "topics/09-cloud-native/S-CLOUD-10-helm-gitops-rollout-rollback/",
       "prompt": "Helm 主要解决 Kubernetes manifest 的打包、模板与 release 记录；GitOps controller 持续比较 Git 中的期望状态和集群 live state，并主动收敛。Git commit 只是部署意图，不代表资源已健康；回滚也不是一句 `helm rollback`，因为 CRD、数据库迁移、消息格式和外部副作用未必可逆。生产方案要把 immutable artifact、Git 审批、sync wave/hook、健康门禁、prune/self-heal 权限、secret 管理和 expand/contract 数据迁移放在同一条状态机里。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1472,7 +1472,7 @@
       "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
-      "url": "interview/08-coding-senior/S-CODE-01-concurrent-lru/",
+      "url": "topics/08-coding-senior/S-CODE-01-concurrent-lru/",
       "prompt": "LRU = **最近最少使用**淘汰。经典实现：**哈希表 + 双向链表**，Get/Put 的期望/平均复杂度为 **O(1)**。Go 用 `map` + `container/list`，并发版加 **`sync.Mutex`** 包住“查 map + 改链表”的完整临界区。讲解关键词：**MoveToFront、超容量删 Back、更新已存在 key**。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1497,7 +1497,7 @@
       "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
-      "url": "interview/08-coding-senior/S-CODE-02-token-bucket/",
+      "url": "topics/08-coding-senior/S-CODE-02-token-bucket/",
       "prompt": "**令牌桶**：以速率 **rate** 补充令牌，上限 **burst**；请求消耗 1 令牌，无令牌则拒绝或等待。它限制长期平均速率，同时允许短时 burst，**不保证输出流量平滑**；严格整形更接近漏桶。Go 手写：每次 `Allow` 先按 elapsed 补令牌再扣减。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1522,7 +1522,7 @@
       "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
-      "url": "interview/08-coding-senior/S-CODE-03-graceful-shutdown/",
+      "url": "topics/08-coding-senior/S-CODE-03-graceful-shutdown/",
       "prompt": "HTTP 服务优雅关闭",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1547,7 +1547,7 @@
       "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
-      "url": "interview/08-coding-senior/S-CODE-04-errgroup/",
+      "url": "topics/08-coding-senior/S-CODE-04-errgroup/",
       "prompt": "errgroup 语义实现",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1572,7 +1572,7 @@
       "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
-      "url": "interview/08-coding-senior/S-CODE-05-connection-pool/",
+      "url": "topics/08-coding-senior/S-CODE-05-connection-pool/",
       "prompt": "连接池既要 **复用昂贵连接**，也要用 **maxOpen** 限制对下游的总连接压力，并用 **maxIdle** 控制保留多少空闲连接。本实现用 idle channel + open-slot semaphore：`Get` 优先复用，未达上限才新建，否则等待归还或 context 取消；`Put` 池满则关闭并释放 slot。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1597,7 +1597,7 @@
       "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
-      "url": "interview/08-coding-senior/S-CODE-06-singleflight-cache/",
+      "url": "topics/08-coding-senior/S-CODE-06-singleflight-cache/",
       "prompt": "Singleflight 缓存击穿抑制",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1622,7 +1622,7 @@
       "module": "08 编码练习",
       "module_key": "coding",
       "resume_focus": false,
-      "url": "interview/08-coding-senior/S-CODE-07-bounded-batch-executor/",
+      "url": "topics/08-coding-senior/S-CODE-07-bounded-batch-executor/",
       "prompt": "有界批处理执行器：取消、顺序与背压",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1647,7 +1647,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-01-gmp-overview/",
+      "url": "topics/01-runtime-concurrency/S-CONC-01-gmp-overview/",
       "prompt": "GMP 模型与 1.14 以来抢占式调度",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1672,7 +1672,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-02-gmp-roles/",
+      "url": "topics/01-runtime-concurrency/S-CONC-02-gmp-roles/",
       "prompt": "**G 干活，M 跑腿，P 发工牌**：G 是 goroutine 任务；M 是 OS 线程；P 是逻辑执行槽位，活跃数量等于 `GOMAXPROCS`，持有本地 runq 与 mcache。已知会阻塞的 syscall 路径可主动 handoff P；普通 syscall 先把 P 标成 syscall 状态，持续阻塞时再由 sysmon 尝试 retake。STW 是停止 P 上的 mutator 工作，不是把所有 P “移除”。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1697,7 +1697,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-03-goroutine-stack/",
+      "url": "topics/01-runtime-concurrency/S-CONC-03-goroutine-stack/",
       "prompt": "Goroutine **初始栈通常约 2KB**，采用 **连续栈复制扩容**；早期“分段栈”早已被替换。OS 线程栈通常预留 MB 级虚拟地址空间，但不等于一开始全部成为 RSS。百万 goroutine 仍需按实际平均栈、对象和连接资源做容量估算。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1722,7 +1722,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-04-gomaxprocs/",
+      "url": "topics/01-runtime-concurrency/S-CONC-04-gomaxprocs/",
       "prompt": "**GOMAXPROCS** 决定活跃 P 数，也就是同时执行 Go 代码的并行上限。Go 1.24 及更早 语言版本默认通常取 `runtime.NumCPU()`；使用 Go 1.25+ 工具链且模块语言版本为 `go 1.25` 或更高时，Linux 默认还会考虑 CPU affinity 与 cgroup CPU limit，并可随 限制变化自动更新。它不读取 Kubernetes CPU request。不要只看编译器版本，还要看 `go.mod` 与 `GODEBUG`。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1747,7 +1747,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-05-channel/",
+      "url": "topics/01-runtime-concurrency/S-CONC-05-channel/",
       "prompt": "Channel 内部实现与有缓冲/无缓冲选型",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1772,7 +1772,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-06-channel-deadlock/",
+      "url": "topics/01-runtime-concurrency/S-CONC-06-channel-deadlock/",
       "prompt": "Channel 死锁场景与排查",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1797,7 +1797,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-07-select/",
+      "url": "topics/01-runtime-concurrency/S-CONC-07-select/",
       "prompt": "**select** 在多个 channel 操作上择一执行；多路就绪时 **伪随机公平**（`fastrand` 打乱顺序）。**default** 使 select 非阻塞，易 **忙等 CPU** 或 **丢事件**。生产关键词：**超时分支、nil case 禁用、单 select 多 case 持锁范围**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1822,7 +1822,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-08-sync-primitives/",
+      "url": "topics/01-runtime-concurrency/S-CONC-08-sync-primitives/",
       "prompt": "Mutex、RWMutex 与 atomic 选型",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1847,7 +1847,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-09-sync-map/",
+      "url": "topics/01-runtime-concurrency/S-CONC-09-sync-map/",
       "prompt": "`sync.Map` 主要优化两类负载：key 只写一次后读很多次，或不同 goroutine 访问彼此不相交的 key 集合。它不是“所有读多写少都更快”，也不提供一致快照；与 `map+Mutex/RWMutex` 必须按真实负载 benchmark。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1872,7 +1872,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-10-sync-pool/",
+      "url": "topics/01-runtime-concurrency/S-CONC-10-sync-pool/",
       "prompt": "**sync.Pool** 是按 P 优化的临时对象缓存，`Get` 随时可能拿不到旧对象。GC 开始时当前 local 会转为 victim、上一轮 victim 被丢弃，因此对象可能跨一轮 GC 被复用，但绝不能把 Pool 当持久缓存或资源池。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1897,7 +1897,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-11-waitgroup-once-cond/",
+      "url": "topics/01-runtime-concurrency/S-CONC-11-waitgroup-once-cond/",
       "prompt": "**WaitGroup** 等一组 goroutine 结束；**Once** 保证函数至多执行一次；**Cond** 等待锁保护的条件成立。Go 1.25+ 新代码可优先用 `WaitGroup.Go`；兼容旧版本时要在启动 goroutine **之前** `Add`。`Once.Do` 中函数即使 panic，也会被视为已经执行过。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -1922,7 +1922,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-12-context/",
+      "url": "topics/01-runtime-concurrency/S-CONC-12-context/",
       "prompt": "Context 树、取消传播与泄漏",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1947,7 +1947,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-13-goroutine-leak/",
+      "url": "topics/01-runtime-concurrency/S-CONC-13-goroutine-leak/",
       "prompt": "Goroutine 泄漏成因与 pprof 排查",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1972,7 +1972,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-14-memory-model/",
+      "url": "topics/01-runtime-concurrency/S-CONC-14-memory-model/",
       "prompt": "Go 内存模型与 happens-before",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -1997,7 +1997,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-15-race-detector/",
+      "url": "topics/01-runtime-concurrency/S-CONC-15-race-detector/",
       "prompt": "**Race Detector** 通过编译插桩与运行时 happens-before 分析发现实际执行到的数据竞态。开销与工作负载、平台有关，可能达到数倍甚至更高，因此通常用于测试、预发压测或少量 canary，而不是把固定倍率背成保证。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2022,7 +2022,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-16-worker-pool/",
+      "url": "topics/01-runtime-concurrency/S-CONC-16-worker-pool/",
       "prompt": "**Worker Pool** 用 **固定数量 goroutine** 消费任务队列，实现 **并发上限与背压**。Go 可用 **buffered channel + N worker** 或 **`semaphore.Weighted`**。生产关键词：**队列长度、拒绝策略、优雅关停**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -2047,7 +2047,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-17-pipeline/",
+      "url": "topics/01-runtime-concurrency/S-CONC-17-pipeline/",
       "prompt": "**Pipeline** 用 stage + channel 串联处理；fan-out 让多个 worker 竞争消费，fan-in 把多个结果流合并。`errgroup` 适合管理一组 goroutine 的生命周期和首错取消，但它本身不是结果 fan-in channel。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -2072,7 +2072,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-18-goroutine-governance/",
+      "url": "topics/01-runtime-concurrency/S-CONC-18-goroutine-governance/",
       "prompt": "Goroutine 泛滥治理与并发预算",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2097,7 +2097,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-19-netpoller/",
+      "url": "topics/01-runtime-concurrency/S-CONC-19-netpoller/",
       "prompt": "Netpoller 与阻塞 Syscall 行为",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2122,7 +2122,7 @@
       "module": "01 并发与运行时",
       "module_key": "concurrency",
       "resume_focus": false,
-      "url": "interview/01-runtime-concurrency/S-CONC-20-go122-generics/",
+      "url": "topics/01-runtime-concurrency/S-CONC-20-go122-generics/",
       "prompt": "Go 1.22 的 loop variable 新语义按 **package 的 Go language version** 生效：模块 `go` 行为 1.22+ 时，每轮循环变量独立。仅升级编译器、不修改旧模块的 `go` 版本，不会自动改变旧 package 语义。泛型能提高并发容器类型安全，但不消除数据竞态；Go 1.26 允许泛型类型在自身类型参数列表中自引用，增强的是约束表达能力，同样不提供并发安全。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2147,7 +2147,7 @@
       "module": "MySQL",
       "module_key": "mysql",
       "resume_focus": false,
-      "url": "interview/middleware/mysql/S-DB-01-mysql-index/",
+      "url": "topics/middleware/mysql/S-DB-01-mysql-index/",
       "prompt": "MySQL 索引原理与最左前缀",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2172,7 +2172,7 @@
       "module": "MySQL",
       "module_key": "mysql",
       "resume_focus": false,
-      "url": "interview/middleware/mysql/S-DB-02-transaction-mvcc/",
+      "url": "topics/middleware/mysql/S-DB-02-transaction-mvcc/",
       "prompt": "InnoDB 默认 **REPEATABLE READ + MVCC**。普通一致性读复用快照，不会因为别的事务新插入而出现新的结果行；锁定读/DML 读取当前可用版本并加锁，范围条件通常用 **next-key lock（记录+间隙）** 阻止并发插入。不要把两种读法都笼统解释成“RR 靠间隙锁防幻读”。生产关键词：**长事务、undo 链、间隙锁死锁**。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2197,7 +2197,7 @@
       "module": "MySQL",
       "module_key": "mysql",
       "resume_focus": false,
-      "url": "interview/middleware/mysql/S-DB-03-slow-query/",
+      "url": "topics/middleware/mysql/S-DB-03-slow-query/",
       "prompt": "慢 SQL 治理链路：**slow log 发现 → EXPLAIN 看计划 → 索引/改写 SQL → 验证 rows 与 latency**。重点字段：`type`（访问方式）、`key`（实际索引）、`rows`（估算扫描行）、`Extra`（Using filesort/temporary）。生产关键词：**回表、深分页、隐式转换、统计信息过期**。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2222,7 +2222,7 @@
       "module": "MySQL",
       "module_key": "mysql",
       "resume_focus": false,
-      "url": "interview/middleware/mysql/S-DB-04-sharding/",
+      "url": "topics/middleware/mysql/S-DB-04-sharding/",
       "prompt": "单库瓶颈时 **垂直拆库**（按业务）或 **水平分片**（按 shard key 取模/范围）。核心：**选对 shard key**（高基数、查询必带）、避免跨片事务与 join。生产关键词：**扩容 rebalance、全局 ID、跨库分页、双写迁移**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -2247,7 +2247,7 @@
       "module": "MySQL",
       "module_key": "mysql",
       "resume_focus": false,
-      "url": "interview/middleware/mysql/S-DB-05-gorm-pitfalls/",
+      "url": "topics/middleware/mysql/S-DB-05-gorm-pitfalls/",
       "prompt": "**N+1**：查 N 条主记录后对每条再查关联，SQL 爆炸。GORM 用 **`Preload`/`Joins`** 预加载；`Find` 嵌套 struct 不会自动加载。**事务陷阱**：`Transaction` 回调和 Hook 中都要沿用 GORM 传入的 `tx`；Hook 的 `tx` 与当前写操作处于同一事务，真正会逃逸的是改用捕获的全局 `DB`。生产关键词：**Session、Clauses、连接池、软删 Scope**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -2272,7 +2272,7 @@
       "module": "MySQL",
       "module_key": "mysql",
       "resume_focus": false,
-      "url": "interview/middleware/mysql/S-DB-06-advanced-sql/",
+      "url": "topics/middleware/mysql/S-DB-06-advanced-sql/",
       "prompt": "复杂 SQL：JOIN、CTE、窗口函数与执行计划",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2297,7 +2297,7 @@
       "module": "MySQL",
       "module_key": "mysql",
       "resume_focus": false,
-      "url": "interview/middleware/mysql/S-DB-07-financial-schema-locking/",
+      "url": "topics/middleware/mysql/S-DB-07-financial-schema-locking/",
       "prompt": "资金类表设计：DECIMAL、约束、锁与死锁",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2322,7 +2322,7 @@
       "module": "Redis",
       "module_key": "redis",
       "resume_focus": false,
-      "url": "interview/middleware/redis/S-DIST-01-redis-cluster/",
+      "url": "topics/middleware/redis/S-DIST-01-redis-cluster/",
       "prompt": "Redis 部署分 **单机、主从、Sentinel、Cluster** 四档：读多写少用主从+Sentinel 保 HA；数据量/吞吐超单机用 **Cluster 16384 slot 分片**。Go 侧用 `go-redis`，Cluster 客户端需感知 MOVED/ASK 重定向。生产关键词：**slot 迁移、脑裂、连接池、Pipeline 跨 slot 限制**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -2347,7 +2347,7 @@
       "module": "Redis",
       "module_key": "redis",
       "resume_focus": false,
-      "url": "interview/middleware/redis/S-DIST-02-distributed-lock/",
+      "url": "topics/middleware/redis/S-DIST-02-distributed-lock/",
       "prompt": "分布式锁解决 **多进程/多机协调**，但“拿到锁”不等于旧持有者绝不会继续写。Redis `SET key NX PX` 适合可容忍极端重复执行的效率型锁；正确性关键场景还需数据库约束、幂等或 **fencing token**。Redlock 的时钟/暂停假设存在公开争议。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2372,7 +2372,7 @@
       "module": "Redis",
       "module_key": "redis",
       "resume_focus": false,
-      "url": "interview/middleware/redis/S-DIST-03-hot-key/",
+      "url": "topics/middleware/redis/S-DIST-03-hot-key/",
       "prompt": "**热点 Key** 是 QPS 远超平均的单个或少量 key，打满单 Redis 节点/单 CPU。治理：**发现（monitor/hotkeys 采样）→ 拆分（logical shard）→ 本地缓存 + 单飞（singleflight）→ 限流降级**。生产关键词：**大促 SKU、明星用户、配置中心全局 key**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -2397,7 +2397,7 @@
       "module": "Kafka",
       "module_key": "kafka",
       "resume_focus": false,
-      "url": "interview/middleware/kafka/S-DIST-04-kafka-semantics/",
+      "url": "topics/middleware/kafka/S-DIST-04-kafka-semantics/",
       "prompt": "Kafka 消费分 **at-most-once / at-least-once / Kafka 边界内 exactly-once**；Consumer Group 通过 Rebalance 分配 partition。Eager rebalance 会全量 revoke，cooperative 协议只迁移必要分区，但受影响分区仍会出现消费停顿和重复窗口。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -2422,7 +2422,7 @@
       "module": "分布式事务",
       "module_key": "distributed",
       "resume_focus": false,
-      "url": "interview/middleware/distributed/S-DIST-05-distributed-transaction/",
+      "url": "topics/middleware/distributed/S-DIST-05-distributed-transaction/",
       "prompt": "跨服务/跨库不能直接共享一个本地 ACID 事务；可选分布式数据库/XA，也可用 **Saga（本地事务 + 补偿）** 或 **TCC（Try-Confirm-Cancel 资源预留）**。2PC/XA 的协调和故障恢复成本较高，但是否适用取决于参与者、吞吐和运维能力，不能一概说“不能用”。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -2447,7 +2447,7 @@
       "module": "Elasticsearch",
       "module_key": "elasticsearch",
       "resume_focus": false,
-      "url": "interview/middleware/elasticsearch/S-ES-01-inverted-index/",
+      "url": "topics/middleware/elasticsearch/S-ES-01-inverted-index/",
       "prompt": "ES 基于 **Lucene**，核心是 **倒排索引**：词项 → 文档 ID 列表，支持全文检索。数据按 **Index → Type(7.x 前) / 无 type → Document → Field** 组织；分片 **Primary + Replica** 水平扩展。讲解关键词：**分片路由、近实时 NRT、segment merge**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -2472,7 +2472,7 @@
       "module": "Elasticsearch",
       "module_key": "elasticsearch",
       "resume_focus": false,
-      "url": "interview/middleware/elasticsearch/S-ES-02-mapping-query-agg/",
+      "url": "topics/middleware/elasticsearch/S-ES-02-mapping-query-agg/",
       "prompt": "**Mapping** 定义字段类型：`text`（分词全文）vs `keyword`（精确、聚合）；**Query DSL** 组合 `bool`（must/should/filter）；**Aggregation** 做指标与桶统计。生产关键词：**filter 不评分、nested、高基数 cardinality 慎用**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -2497,7 +2497,7 @@
       "module": "Elasticsearch",
       "module_key": "elasticsearch",
       "resume_focus": false,
-      "url": "interview/middleware/elasticsearch/S-ES-03-sync-ops/",
+      "url": "topics/middleware/elasticsearch/S-ES-03-sync-ops/",
       "prompt": "Elasticsearch 数据同步与运维",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -2522,7 +2522,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-01-cex-matching-engine/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-01-cex-matching-engine/",
       "prompt": "CEX 现货核心通常是 **内存订单簿 + 每个订单簿一个确定性单写者**： 常见规则为价格优先、时间优先，也可能采用 pro-rata 等市场规则。一个进程可承载 多个 symbol，但同一本簿不能被多个写者并发修改。生产关键词： **clientOrderId 幂等、输入全序、可恢复日志、事件序号、账务与行情异步派生**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2547,7 +2547,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": false,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet/",
       "prompt": "CEX 充提 = **canonical 链上索引 + 内部账务入账 + 提现审批/签名/广播状态机**。 架构师要讲清链的最终性模型、memo/tag、reorg 冲正、nonce/UTXO 预留和 “广播结果未知”状态。与 [S-BC-05 索引器](../12-blockchain-web3/S-BC-05-indexer-reorg.md) 同源，但增加托管、风控与审计边界。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2572,7 +2572,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": false,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-03-account-ledger/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-03-account-ledger/",
       "prompt": "交易所资金 **不能** 只改 `users.balance` 一行：每笔业务要生成一个不可变的过账批次和两条或多条分录。若采用“余额增减量”模型，必须保证 **每个资产分别守恒**；不要把会计借/贷方向与代码里的正负号混为一谈。生产关键词：**唯一业务键、单库 ACID、不可变流水、冲正、对账不平零容忍**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2597,7 +2597,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": false,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-04-futures-margin-liquidation/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-04-futures-margin-liquidation/",
       "prompt": "**永续合约** = 杠杆仓位 + **标记价格** 算盈亏 + **资金费率** 多空平衡 + **强平** 防穿仓。Go 后端：**标记价服务、风险引擎、强平队列、保险基金**。讲解关键词：**逐仓/全仓、维持保证金、ADL 自动减仓**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2622,7 +2622,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": false,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-05-risk-reconciliation/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-05-risk-reconciliation/",
       "prompt": "交易所风控 = **交易前（限额/频率/自成交）+ 交易后（异常盈利/对敲）+ 资金（充提 KYT/AML）+ 对账（链上 vs 内部账本）**。架构师要讲 **规则引擎可配置、实时+离线、审计留痕**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2647,7 +2647,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": false,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity/",
       "prompt": "**AMM 类 DEX** 让用户与流动性池交易；经典 V2 池可用 `x·y=k` 描述， 稳定币池和集中流动性使用不同曲线。V2 常用可替代 LP token 表示份额，V3 集中流动性仓位通常是带区间的非同质化 position。DEX 也可以采用订单簿， 所以不要把“DEX”与“AMM”画等号。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2672,7 +2672,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": false,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-07-aggregator-slippage/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-07-aggregator-slippage/",
       "prompt": "**聚合器**在多个池和路径间搜索，目标不是名义报价最大，而是 **扣除 Gas 后的可执行最优结果**，并可能把输入拆到多条路径。AMM 的边权随交易量和池状态变化，不能直接把它当固定权重图跑普通 Dijkstra。用户侧必须有 `amountOutMin`/`amountInMax`、截止条件和交易模拟。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2697,7 +2697,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": false,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-08-mev-sandwich/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-08-mev-sandwich/",
       "prompt": "**MEV** 是通过包含、排除或重排交易获得的额外价值。搜索者发现机会，builder/validator/sequencer 等排序参与者决定能否落块。三明治是：攻击者前跑改变价格 → 用户按容忍滑点成交 → 攻击者后跑获利。防护重点是 **严格滑点、私有订单流、批量拍卖/RFQ 与协议级设计**；简单分批或 TWAP 也可能持续泄露意图。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2722,7 +2722,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": false,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-09-hybrid-cex-dex/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-09-hybrid-cex-dex/",
       "prompt": "“CeDeFi/混合交易所”不是严格技术标准，讲解时先明确产品的 **托管、订单排序、 签名和结算信任模型**。同一 App 可以同时提供 CEX 账户与自托管钱包/DEX，但必须 分清 **平台负债账本、平台受控链上资产、用户自托管资产**，避免重复计入余额或对账。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2747,7 +2747,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation/",
       "prompt": "DEX 无中心化撮合日志，**K 线来自 canonical Swap/Trade 事件**。窗口由块时间戳归属，但同一窗口内的 open/close 应按链上顺序 `(block_number, transaction_index, log_index)` 决定，不能按 MQ 到达顺序。生产关键词：**精度归一、唯一事件、事务聚合、reorg 重算**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2772,7 +2772,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-11-websocket-market-hub/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-11-websocket-market-hub/",
       "prompt": "**行情 Hub** 管理订阅关系并把 K 线、成交和盘口更新推给客户端。Go 常用每连接 一个 read pump + 一个唯一 write pump，订阅 registry 则分片或串行管理。 生产关键词：**序号协议、有界发送队列、慢消费者策略、快照恢复、跨 Pod fan-out**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2797,7 +2797,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate/",
       "prompt": "在某些 bonding-curve Launchpad 中，“毕业”表示达到协议阈值后迁移或创建外部 流动性池；这不是所有发币平台的通用标准。Go 后端应把 canonical 链上状态、 产品规则版本、返佣账本和提现状态机分开，事件只是索引输入，不能忽略 reorg。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2822,7 +2822,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-13-cex-end-to-end-architecture/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-13-cex-end-to-end-architecture/",
       "prompt": "CEX 后端 = **三域解耦**：**交易域**（下单→风控→撮合→WAL→成交事件）、**资金域**（复式账务 + 充提钱包 + 对账）、**行情域**（成交流 fan-out → depth/trade/kline → WS Hub）。Go 常做 **API Gateway、OMS 编排、账务持久化、行情 Hub**；撮合内核可 Go 单写者或 Rust/C++ 独立进程。生产关键词：**symbol 单写者、成交事件驱动账务、clientOrderId 幂等、WAL 可恢复、充提不进撮合热路径**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2847,7 +2847,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture/",
       "prompt": "Web3 交易产品通常由链上合约与链下索引/API/行情组成；是否存在链下账务取决于 是否托管资产或提供内部余额。权威源是 canonical 区块、receipt、log 和合约状态， Indexer 只是可重建投影。关键词：**block lineage、事件 identity、reorg 重算、 ABI/部署版本、链上链下信任边界**；UUPS 只是可选升级方案，不是默认答案。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2872,7 +2872,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery/",
       "prompt": "交易所首先保证资金正确性，再在明确的不变量内优化性能。架构师需讲清： 实时 posting、持续 + 周期对账、受控链上资产与客户负债、单写者/fencing，以及 经过演练的 RPO/RTO。多副本或“多活”本身不等于不会双写。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2897,7 +2897,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position/",
       "prompt": "永续订单簿可以沿用价格/时间优先，但 fill 还要驱动仓位、保证金、已实现盈亏和 清算。关键不是强行“撮合 + 仓位同线程”，而是定义两个权威顺序域： **order book 按 market 全序，账户/风险按 account 或 margin unit 串行并可恢复**。 隔离保证金、单市场系统可共置状态机；跨多个 symbol 的全仓账户不能由任一 symbol 线程单独掌握完整风险。标记价通常不决定普通订单的成交价，但用于风险、 未实现盈亏和强平触发（[S-EXCH-04](./S-EXCH-04-futures-margin-liquidation.md)）。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2922,7 +2922,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-17-runnable-deterministic-matching-engine/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-17-runnable-deterministic-matching-engine/",
       "prompt": "我会先把撮合实现成 **单写者、外部单调序号、定点整数、确定性事件** 的状态机。 买盘价高优先、卖盘价低优先，同价 FIFO；成交采用簿上 maker 价格。GTC 可挂簿， IOC 取消剩余，FOK 必须在产生任何外部成交前证明全量可成交，Post-only 会吃单则拒绝。 STP 在成交前按受信任账户 scope 执行 cancel-maker/taker/both。相同命令序列从空状态 重放，订单簿、成交 ID 和事件 ID 必须完全相同。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2947,7 +2947,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-18-wal-snapshot-replay/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-18-wal-snapshot-replay/",
       "prompt": "撮合恢复先要选定唯一事实：记录 **已排序命令**，或记录 **确定性结果事件**，不能两套都声称权威。 本例采用命令日志：结构校验与分配序号后，先追加带长度、版本和校验和的 WAL，并达到声明的 fsync/复制策略，再应用确定性状态机，最后发布事件与响应。重启时读取校验快照，跳过快照水位， 连续重放 WAL 后缀；只允许显式修复不完整尾记录，完整记录校验和错误必须停机调查。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2972,7 +2972,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-19-market-data-sequence-gap-recovery/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-19-market-data-sequence-gap-recovery/",
       "prompt": "本地订单簿不能“先拉快照再订阅”，否则两者之间会漏更新。正确流程通常是先订阅并 缓冲 delta，再拉带 sequence 的 snapshot，丢弃完全早于快照的事件，并要求第一个 有效事件覆盖 `snapshotSeq+1`，之后每个范围连续。发现 gap、feed epoch 变化或 checksum 不一致时，本地视图已经不可证明正确，应停止对外发布并重新走 snapshot bridge； 不能跳过缺口继续算 BBO。不同交易所的 `sequence/U/u/pu` 语义不同，必须由 venue adapter 映射，不能照搬一套比较公式。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -2997,7 +2997,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-20-fix-session-sequence-recovery/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-20-fix-session-sequence-recovery/",
       "prompt": "FIX session 的可靠性核心是跨 TCP 连接持久化的 `NextNumIn/NextNumOut`，不是 “连上 socket 就从 1 开始”。收到 `MsgSeqNum > NextNumIn` 时先缓存高序号消息并发 `ResendRequest`，缺口补齐前不能乱序交给业务。响应恢复时，可重放的 application message 保留原 `MsgSeqNum`，设置 `PossDupFlag=Y` 和 `OrigSendingTime`；不重放的 session message 用 `SequenceReset-GapFill` 跳过。应用重新发一笔未确认订单是新的 application resend，通常使用新 session sequence，必须与 session retransmission 区分并做业务幂等。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3022,7 +3022,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-21-self-trade-prevention-surveillance/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-21-self-trade-prevention-surveillance/",
       "prompt": "STP 必须在撮合全序内、产生 trade 之前比较受信任的 self-match scope，例如 account、 firm 或配置的 SMP group。触发后按 venue 规则 cancel maker、cancel taker、cancel both， 或 decrement-and-cancel；策略通常取 aggressor/taker 指令，但不是行业统一规则。STP 只阻止指定 scope 的两张订单直接成交，不等于已经解决 wash trading：关联账户协同、 制造虚假深度、撤单操纵仍需独立 surveillance。所有 STP 动作必须产生确定性事件， 但绝不能生成成交、手续费或账本过账。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3047,7 +3047,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-22-call-auction-performance-validation/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-22-call-auction-performance-validation/",
       "prompt": "集合竞价先在 collection 阶段积累订单，再在一个确定性时点统一 uncross，所有成交使用 同一 clearing price。一个常见价格优先级是：最大成交量、最小不平衡、最接近参考价， 但候选价格、market/limit 订单、price collar 和最终 tie-break 都是 venue-specific， 不能只说“取成交量最大价格”就认为结果唯一。性能验证也不能只跑空簿 QPS：先用规则 向量证明竞价/连续撮合正确，再固定订单簿深度、交叉率、订单类型和持久化边界，报告 p50/p99/p999、allocs、GC 和端到端延迟，并用多次 benchmark + benchstat 比较。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3072,7 +3072,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-23-prediction-market-ctf-lifecycle/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-23-prediction-market-ctf-lifecycle/",
       "prompt": "预测市场 CTF、Outcome Token 与市场生命周期",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3097,7 +3097,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-24-prediction-market-clob-eip712-settlement/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-24-prediction-market-clob-eip712-settlement/",
       "prompt": "CLOB-first 预测市场：EIP-712 订单与链上结算",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3122,7 +3122,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-25-prediction-market-oracle-dispute-resolution/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-25-prediction-market-oracle-dispute-resolution/",
       "prompt": "预测市场预言机、事件数据源与争议仲裁",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3147,7 +3147,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet/",
       "prompt": "预测市场安全不变量、测试矩阵与主网上线",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3172,7 +3172,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-27-pancakeswap-v2-v3-differences/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-27-pancakeswap-v2-v3-differences/",
       "prompt": "PancakeSwap V2 是全价格区间恒定乘积 AMM，一个 token pair 通常对应一个 Pair，LP 份额 是 ERC-20 LP token；V3 使用按 fee tier 划分的集中流动性池，LP 自选 tick 区间并持有 position NFT。V3 在活跃区间资本效率更高，但出区间不赚费且会变成单边资产，后端还要 索引 `sqrtPriceX96`、active liquidity、tick、fee growth 和 NFT position，不能继续只靠 `getReserves()`。因此 Launchpad 迁池要在资本效率与运维复杂度之间做选择。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3197,7 +3197,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate/",
       "prompt": "多级代理极差分润 = 沿代理链向上，把每一级的 **有效费率差** 拆成多笔佣金分录。 计佣只消费已确认的成交/手续费事实，绑定 **费率模板版本** 与幂等键；结算进独立佣金账本， 再走提现风控。CEX 与 DEX 的差别主要在事实来源（撮合 ledger vs 链上事件 + reorg）， 不在“要不要做账本”。生产关键词：**代理树、极差、规则版本、冲正、subtree 隔离**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3222,7 +3222,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield/",
       "prompt": "DEX Tech Lead 场景里，「Staking / 挖矿 / Farming」考的不是背名词，而是：**奖励怎么公平累计、谁有资格领取、排放怎么停、如何防刷**，以及链下 Indexer 如何投影 APR 而不误导用户。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3247,7 +3247,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol/",
       "prompt": "有人问「讲讲 Uniswap」时，不要只背 `x*y=k`。要分层讲清：**Factory → Pool/Pair → Router → LP 凭证 → 报价与结算**，并对比 V2/V3 的状态机与后端索引成本。Pancake 等分叉见 [S-EXCH-27](./S-EXCH-27-pancakeswap-v2-v3-differences.md)。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3272,7 +3272,7 @@
       "module": "14 DEX / CEX",
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
-      "url": "interview/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard/",
+      "url": "topics/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard/",
       "prompt": "我按 Tech Lead 视角拆一层：**链上协议负责正确性与资产托管边界，链下负责体验与可观测**。 先画资金与交易主路径，再讲 Indexer/reorg、多链配置版本、安全门禁和团队接口。 细节公式落在 [S-EXCH-30](./S-EXCH-30-uniswap-v2-v3-protocol.md)、激励落在 [S-EXCH-29](./S-EXCH-29-defi-staking-liquidity-mining-yield.md)。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -3297,7 +3297,7 @@
       "module": "16 Go 生产工程",
       "module_key": "go_production_engineering",
       "resume_focus": false,
-      "url": "interview/16-go-production-engineering/S-GOENG-01-errors-contract-panic-boundary/",
+      "url": "topics/16-go-production-engineering/S-GOENG-01-errors-contract-panic-boundary/",
       "prompt": "错误契约、Wrapping 与 Panic 边界",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3322,7 +3322,7 @@
       "module": "16 Go 生产工程",
       "module_key": "go_production_engineering",
       "resume_focus": false,
-      "url": "interview/16-go-production-engineering/S-GOENG-02-package-interface-di/",
+      "url": "topics/16-go-production-engineering/S-GOENG-02-package-interface-di/",
       "prompt": "包边界、接口设计与依赖注入",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3347,7 +3347,7 @@
       "module": "16 Go 生产工程",
       "module_key": "go_production_engineering",
       "resume_focus": false,
-      "url": "interview/16-go-production-engineering/S-GOENG-03-testing-table-fake/",
+      "url": "topics/16-go-production-engineering/S-GOENG-03-testing-table-fake/",
       "prompt": "Go 单元测试：表驱动、子测试与 Test Double",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3372,7 +3372,7 @@
       "module": "16 Go 生产工程",
       "module_key": "go_production_engineering",
       "resume_focus": false,
-      "url": "interview/16-go-production-engineering/S-GOENG-04-fuzz-benchmark-race/",
+      "url": "topics/16-go-production-engineering/S-GOENG-04-fuzz-benchmark-race/",
       "prompt": "Fuzz、Benchmark、Race 与回归门禁",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3397,7 +3397,7 @@
       "module": "16 Go 生产工程",
       "module_key": "go_production_engineering",
       "resume_focus": false,
-      "url": "interview/16-go-production-engineering/S-GOENG-05-modules-toolchain-reproducible/",
+      "url": "topics/16-go-production-engineering/S-GOENG-05-modules-toolchain-reproducible/",
       "prompt": "Go Modules、Workspace、Toolchain 与可复现构建",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3422,7 +3422,7 @@
       "module": "16 Go 生产工程",
       "module_key": "go_production_engineering",
       "resume_focus": false,
-      "url": "interview/16-go-production-engineering/S-GOENG-06-static-analysis-supply-chain/",
+      "url": "topics/16-go-production-engineering/S-GOENG-06-static-analysis-supply-chain/",
       "prompt": "静态分析、govulncheck 与依赖供应链",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3447,7 +3447,7 @@
       "module": "Kafka",
       "module_key": "kafka",
       "resume_focus": false,
-      "url": "interview/middleware/kafka/S-KAFKA-01-architecture-storage/",
+      "url": "topics/middleware/kafka/S-KAFKA-01-architecture-storage/",
       "prompt": "Kafka 是 **分布式 commit log**：Topic 按 **Partition** 水平切分，每条消息追加到分区末尾；**Leader + ISR 副本** 保证可用与一致性。消费并行度 = partition 数；**分区内有序、跨分区无序**。生产关键词：**ISR、HW/LEO、replication.factor、min.insync.replicas**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3472,7 +3472,7 @@
       "module": "Kafka",
       "module_key": "kafka",
       "resume_focus": false,
-      "url": "interview/middleware/kafka/S-KAFKA-02-producer-reliability/",
+      "url": "topics/middleware/kafka/S-KAFKA-02-producer-reliability/",
       "prompt": "Kafka Producer 可靠性：acks、幂等与分区键",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3497,7 +3497,7 @@
       "module": "Kafka",
       "module_key": "kafka",
       "resume_focus": false,
-      "url": "interview/middleware/kafka/S-KAFKA-03-trade-event-bus/",
+      "url": "topics/middleware/kafka/S-KAFKA-03-trade-event-bus/",
       "prompt": "交易所常见 **撮合 → Kafka 成交 topic → 多下游**（账务、风控、行情、WebSocket）。Kafka 做 **持久化事件总线**，Consumer Group 各自 lag 独立。生产关键词：**symbol 分区、consumer lag、HPA 扩缩 rebalance、WS 网关 fan-out**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3522,7 +3522,7 @@
       "module": "07 工程与领导力",
       "module_key": "leadership",
       "resume_focus": false,
-      "url": "interview/07-engineering-leadership/S-LEAD-01-incident-postmortem/",
+      "url": "topics/07-engineering-leadership/S-LEAD-01-incident-postmortem/",
       "prompt": "复盘目标不是追责，而是 **还原时间线 → 找根因 → 可执行改进项**。资深回答用 **5W1H + 时间线 + 行动项（含 Owner/DDL）**；强调 **Blameless** 与 **错误预算/SLI 关联**。Lead 面考察：能否推动跨团队落地。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3547,7 +3547,7 @@
       "module": "07 工程与领导力",
       "module_key": "leadership",
       "resume_focus": false,
-      "url": "interview/07-engineering-leadership/S-LEAD-02-tech-debt/",
+      "url": "topics/07-engineering-leadership/S-LEAD-02-tech-debt/",
       "prompt": "技术债是 **为短期速度牺牲的长期维护成本**。资深回答要会 **分类（故意/无意）、量化影响（变更 lead time、故障率）、偿还策略（绞杀者、增量重构、预算 20%）**；Lead 面看能否在业务压力下 **谈妥优先级**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3572,7 +3572,7 @@
       "module": "07 工程与领导力",
       "module_key": "leadership",
       "resume_focus": false,
-      "url": "interview/07-engineering-leadership/S-LEAD-03-code-review-culture/",
+      "url": "topics/07-engineering-leadership/S-LEAD-03-code-review-culture/",
       "prompt": "Tech Lead 的核心是 **提效他人**：清晰标准、有效 CR、成长路径。资深回答强调 **CR 看设计/可维护性/测试，不只格式**；Go 团队应有 **uber-go/guide 或团队 style guide**；5 年+ 需举例 **你如何通过 CR/结对提升 junior 质量**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3597,7 +3597,7 @@
       "module": "07 工程与领导力",
       "module_key": "leadership",
       "resume_focus": false,
-      "url": "interview/07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case/",
+      "url": "topics/07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case/",
       "prompt": "Senior 的强项通常是把一个复杂系统做成；Staff 还要在没有直接汇报关系时，让多个团队围绕同一组不变量、接口和迁移顺序交付。技术战略不是技术清单，而是“基于证据的诊断 → 明确原则/非目标 → 目标能力 → 分阶段投资与退出旧路径 → 用业务和工程指标验证”。案例要说清我亲自改变了什么机制、如何处理反对意见、哪些结果有证据，以及哪些数字只是目标而非事实。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3622,7 +3622,7 @@
       "module": "07 工程与领导力",
       "module_key": "leadership",
       "resume_focus": false,
-      "url": "interview/07-engineering-leadership/S-LEAD-05-cross-team-migration-case/",
+      "url": "topics/07-engineering-leadership/S-LEAD-05-cross-team-migration-case/",
       "prompt": "高风险迁移先定义 source of truth、不变量和回滚边界，再谈双写或切流。我通常采用 expand → 可重放复制/回填 → shadow compare → 按 cohort 切读 → 切写/冻结旧入口 → contract/decommission。双写如果没有同一事务或 outbox/CDC，只会制造两个真相；应用版本回滚也不能逆转已写入的新 schema、事件或链上副作用。Staff 面要讲清技术门禁、跨团队 owner、风险登记、停止条件和可量化结果，而不是“大家配合完成迁移”。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3647,7 +3647,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-01-tri-color-gc/",
+      "url": "topics/02-memory-gc/S-MEM-01-tri-color-gc/",
       "prompt": "三色标记与混合写屏障",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3672,7 +3672,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-02-stw-evolution/",
+      "url": "topics/02-memory-gc/S-MEM-02-stw-evolution/",
       "prompt": "**STW（Stop The World）** 是 runtime 暂停所有用户 goroutine 以切换 GC 全局阶段的窗口；Go 自 1.5 起以**并发标记**为主，STW 已大幅缩短，但**从未归零**。goroutine 栈主要在并发标记期逐个暂停并扫描，不等于“STW 一次扫完所有栈”。生产关键词：**sweep termination、mark termination、P99 毛刺**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3697,7 +3697,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-03-gogc-tuning/",
+      "url": "topics/02-memory-gc/S-MEM-03-gogc-tuning/",
       "prompt": "GC 触发条件与 GOGC 调优",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3722,7 +3722,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-04-escape-analysis/",
+      "url": "topics/02-memory-gc/S-MEM-04-escape-analysis/",
       "prompt": "逃逸分析与 -gcflags=-m",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3747,7 +3747,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-05-slice-internals/",
+      "url": "topics/02-memory-gc/S-MEM-05-slice-internals/",
       "prompt": "slice 底层、扩容与内存泄漏场景",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3772,7 +3772,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-06-map-internals/",
+      "url": "topics/02-memory-gc/S-MEM-06-map-internals/",
       "prompt": "map 并发安全、扩容与 sync.Map 选型",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3797,7 +3797,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-07-interface/",
+      "url": "topics/02-memory-gc/S-MEM-07-interface/",
       "prompt": "空接口 **`interface{}`/`any` 是 eface**（type, data）；带方法的接口是 **iface**（itab, data）。**类型断言**需查 itab 或 type 相等，失败走 slow path；**频繁 dynamic dispatch** 阻碍内联。生产关键词：**少 interface 热点、type switch、具体类型 API**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3822,7 +3822,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-08-unsafe-alignment/",
+      "url": "topics/02-memory-gc/S-MEM-08-unsafe-alignment/",
       "prompt": "Go 按类型 **alignment** 布局 struct，字段顺序会影响 padding；在 32 位架构上直接对未对齐的裸 `int64/uint64` 使用 64 位 atomic 还可能失败。优先使用会自动保证对齐的 `atomic.Int64/Uint64`。`unsafe` 可绕过类型系统，但必须遵守指针存活、对象边界与对齐规则。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3847,7 +3847,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-09-oom-debug/",
+      "url": "topics/02-memory-gc/S-MEM-09-oom-debug/",
       "prompt": "大对象、堆外与 OOM 排查",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3872,7 +3872,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-10-pprof-heap/",
+      "url": "topics/02-memory-gc/S-MEM-10-pprof-heap/",
       "prompt": "pprof heap/allocs 实战解读",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3897,7 +3897,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-11-pprof-vs-trace/",
+      "url": "topics/02-memory-gc/S-MEM-11-pprof-vs-trace/",
       "prompt": "**CPU profile** 回答「**哪段代码耗 CPU**」，采样统计、可长期开；**execution trace** 回答「**时间线上发生了什么**」——调度、GC STW、网络阻塞、锁等待。生产关键词：**profile 找热点、trace 找毛刺与等待**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3922,7 +3922,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-12-reduce-gc-pressure/",
+      "url": "topics/02-memory-gc/S-MEM-12-reduce-gc-pressure/",
       "prompt": "降 GC 压力本质是 **降堆分配速率与存活对象**；系统级手段包括 **对象池、预分配、值语义、零拷贝、批处理、协议选型（Protobuf vs JSON）**。调 GOGC 是最后旋钮，不是第一选择。生产关键词：**alloc_rate、B/op、存活集大小**。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -3947,7 +3947,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-13-gc-jitter/",
+      "url": "topics/02-memory-gc/S-MEM-13-gc-jitter/",
       "prompt": "**GC 抖动** 指 P99/P999 延迟被 STW、mark assist、sweep 争抢打断；治理需 **降存活集、平滑分配、GOMEMLIMIT、版本升级**，而非简单堆内存「越大越好」。生产关键词：**pause 分位、assist 毛刺、与 CPU throttle 叠加**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3972,7 +3972,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-14-new-make/",
+      "url": "topics/02-memory-gc/S-MEM-14-new-make/",
       "prompt": "传统 **`new(T)`** 为 T 提供零值存储并返回 `*T`；Go 1.26 又允许 **`new(expr)`**，返回指向该表达式值副本的指针。两者最终在栈、堆还是被优化掉仍由编译器决定。**`make`** 仅用于 **slice、map、channel**，初始化其可用内部状态并返回 **T 本身（非指针）**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -3997,7 +3997,7 @@
       "module": "02 内存与 GC",
       "module_key": "memory_gc",
       "resume_focus": false,
-      "url": "interview/02-memory-gc/S-MEM-15-defer/",
+      "url": "topics/02-memory-gc/S-MEM-15-defer/",
       "prompt": "**defer** 注册调用，在函数返回或 panic 展开时按 LIFO 执行。编译器/runtime 可能采用 **open-coded defer**、栈上 `_defer` 或堆上 `_defer`，不能统一描述成“一个堆链表”。Go 1.14 起多数常见 defer 已接近普通调用成本，但循环中 defer 仍会累积到外层函数退出。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4022,7 +4022,7 @@
       "module": "15 微服务（交易所）",
       "module_key": "microservices_exchange",
       "resume_focus": true,
-      "url": "interview/15-microservices-exchange/S-MSVC-01-exchange-microservices-whiteboard/",
+      "url": "topics/15-microservices-exchange/S-MSVC-01-exchange-microservices-whiteboard/",
       "prompt": "交易所服务按业务能力与一致性/故障边界划分：订单与风险接纳可能同步，成交、 链上事件和行情适合可重放的异步扇出。账务必须保持权威 reservation/复式分录， 不能为了“微服务化”把资金强一致边界随意拆散。CEX 托管域与 DEX 自托管/索引域 可以共享身份入口，但应隔离密钥、负债账本与信任模型。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4047,7 +4047,7 @@
       "module": "15 微服务（交易所）",
       "module_key": "microservices_exchange",
       "resume_focus": true,
-      "url": "interview/15-microservices-exchange/S-MSVC-02-domain-decomposition/",
+      "url": "topics/15-microservices-exchange/S-MSVC-02-domain-decomposition/",
       "prompt": "交易所先按业务语言、规则和一致性边界识别限界上下文，再决定进程和数据库部署。 bounded context、微服务和数据库不是必然 1:1。聚合通常定义单事务一致性边界； 跨聚合/上下文通过 API、事件和对账协作，避免无意的跨库写事务。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4072,7 +4072,7 @@
       "module": "15 微服务（交易所）",
       "module_key": "microservices_exchange",
       "resume_focus": true,
-      "url": "interview/15-microservices-exchange/S-MSVC-03-discovery-grpc-governance/",
+      "url": "topics/15-microservices-exchange/S-MSVC-03-discovery-grpc-governance/",
       "prompt": "交易所内网大量 **gRPC 短链路**（BFF→order、order→risk、wallet→ledger 查询）。服务发现常见：**K8s DNS + Headless Service**、**Consul/etcd**、或 **Mesh（xDS）**。Go 侧必配：**超时、重试（仅幂等）、keepalive、客户端 LB、OTel trace 透传**。关键词：**不用裸 IP、metadata 传 trace_id/user_id**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4097,7 +4097,7 @@
       "module": "15 微服务（交易所）",
       "module_key": "microservices_exchange",
       "resume_focus": true,
-      "url": "interview/15-microservices-exchange/S-MSVC-04-database-per-service/",
+      "url": "topics/15-microservices-exchange/S-MSVC-04-database-per-service/",
       "prompt": "Database per Service 的核心是 **数据写入所有权**，不要求每个服务必须独占一台 数据库。跨 owner 的流程用本地事务、Outbox/日志发布、幂等、Saga 和持续对账； 资金 reservation 的强一致边界必须先定义，不能把所有问题都笼统归为“最终一致”。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4122,7 +4122,7 @@
       "module": "15 微服务（交易所）",
       "module_key": "microservices_exchange",
       "resume_focus": true,
-      "url": "interview/15-microservices-exchange/S-MSVC-05-gateway-bff-traffic/",
+      "url": "topics/15-microservices-exchange/S-MSVC-05-gateway-bff-traffic/",
       "prompt": "**API 网关** 挡南北向（鉴权、WAF、全局限流）；**BFF** 按 App/Web/OpenAPI 渠道 **聚合** order+market+wallet 接口；**交易流量治理** 在网关+BFF+服务三层：**按用户/IP/symbol 限流、熔断、灰度、超时**。忌网关里跑账务逻辑。关键词：**渠道隔离、无状态网关、敏感接口单独桶**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4147,7 +4147,7 @@
       "module": "15 微服务（交易所）",
       "module_key": "microservices_exchange",
       "resume_focus": true,
-      "url": "interview/15-microservices-exchange/S-MSVC-06-event-bus-async-boundary/",
+      "url": "topics/15-microservices-exchange/S-MSVC-06-event-bus-async-boundary/",
       "prompt": "交易所 **成交、链上日志、充提状态** 适合走 **Kafka/RocketMQ** 扇出；**下单风控、余额冻结** 走同步 gRPC。Topic 按 **领域事件** 划分：`trade.matched`、`deposit.confirmed`、`chain.swap`、`withdraw.status`。关键词：**分区键保序、消费幂等、Outbox、DLQ 补账**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4172,7 +4172,7 @@
       "module": "06 网络与服务治理",
       "module_key": "network",
       "resume_focus": false,
-      "url": "interview/06-network-governance/S-NET-01-grpc-vs-rest/",
+      "url": "topics/06-network-governance/S-NET-01-grpc-vs-rest/",
       "prompt": "**gRPC** 通常使用 HTTP/2 + Protobuf，强类型、支持双向流与多路复用，适合 **内部微服务**。**REST/JSON** 人类可读、浏览器友好、生态广，适合 **对外 API/BFF**。Go 可用 `google.golang.org/grpc`；需要同时服务浏览器和多种 RPC 协议时可考虑 **Connect**。生产关键词：**超时、重试幂等、负载均衡、TLS/mTLS**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4197,7 +4197,7 @@
       "module": "06 网络与服务治理",
       "module_key": "network",
       "resume_focus": false,
-      "url": "interview/06-network-governance/S-NET-02-http-connection-pool/",
+      "url": "topics/06-network-governance/S-NET-02-http-connection-pool/",
       "prompt": "Go `http.Transport` 默认会缓存连接；对 HTTP/1.x，`DefaultMaxIdleConnsPerHost` 为 2，固定高并发下游可能需要调大。**Keep-Alive** 复用 TCP/TLS 握手。生产应复用 `Client/Transport`，并按容量设置 `MaxIdleConnsPerHost`、`MaxConnsPerHost`、`IdleConnTimeout` 和各阶段超时。关键词：**TIME_WAIT、FD 耗尽、HTTP/2 多路复用**。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -4222,7 +4222,7 @@
       "module": "06 网络与服务治理",
       "module_key": "network",
       "resume_focus": false,
-      "url": "interview/06-network-governance/S-NET-03-gin-middleware/",
+      "url": "topics/06-network-governance/S-NET-03-gin-middleware/",
       "prompt": "Gin 请求走 **Engine → Router → Middleware 链 → Handler**；中间件通过 **`c.Next()`** 驱动后续执行，可在前后插入逻辑。`c.Abort()` 跳过剩余 handler。生产关键词：**Recovery、Auth、TraceID、Timeout、Request-scoped 值**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4247,7 +4247,7 @@
       "module": "06 网络与服务治理",
       "module_key": "network",
       "resume_focus": false,
-      "url": "interview/06-network-governance/S-NET-04-jwt-auth/",
+      "url": "topics/06-network-governance/S-NET-04-jwt-auth/",
       "prompt": "JWT 认证与安全边界",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4272,7 +4272,7 @@
       "module": "06 网络与服务治理",
       "module_key": "network",
       "resume_focus": false,
-      "url": "interview/06-network-governance/S-NET-05-websocket-gateway/",
+      "url": "topics/06-network-governance/S-NET-05-websocket-gateway/",
       "prompt": "**WebSocket** 在单连接上提供全双工通信，适合 **实时推送、IM、行情**。网关职责：**连接管理、鉴权、心跳、广播/房间、与 MQ 桥接**。Go 常用 **gorilla/websocket** 或 **github.com/coder/websocket**（原 nhooyr 项目现由 Coder 维护）。生产关键词：**连接上限、水平扩展、跨节点路由、背压、优雅下线**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4297,7 +4297,7 @@
       "module": "06 网络与服务治理",
       "module_key": "network",
       "resume_focus": false,
-      "url": "interview/06-network-governance/S-NET-06-linux-fd-epoll-netpoll/",
+      "url": "topics/06-network-governance/S-NET-06-linux-fd-epoll-netpoll/",
       "prompt": "Linux 进程、文件描述符、epoll 与 Go netpoll",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -4322,7 +4322,7 @@
       "module": "06 网络与服务治理",
       "module_key": "network",
       "resume_focus": false,
-      "url": "interview/06-network-governance/S-NET-07-tcp-lifecycle-queues-timewait/",
+      "url": "topics/06-network-governance/S-NET-07-tcp-lifecycle-queues-timewait/",
       "prompt": "TCP 建连、队列、TIME_WAIT 与故障排查",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -4347,7 +4347,7 @@
       "module": "19 节点、RPC 与 Staking",
       "module_key": "node_rpc_staking",
       "resume_focus": true,
-      "url": "interview/19-node-rpc-staking/S-NODE-01-ethereum-node-architecture-sync/",
+      "url": "topics/19-node-rpc-staking/S-NODE-01-ethereum-node-architecture-sync/",
       "prompt": "现代 Ethereum 节点需要 execution client 和 consensus client：EL 执行 EVM、维护交易与状态并提供多数 JSON-RPC，CL 跟踪 PoS 共识和 finalized head；validator 是连接 CL 的可选职责组件。Full node 验证链并维护当前/近期状态，archive node 额外保留每个历史区块对应的状态，主要服务历史 `eth_call`、余额/存储查询和分析。Sync mode、pruning、历史保留与磁盘规模是 client-specific，不能背一个永久固定数字。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4372,7 +4372,7 @@
       "module": "19 节点、RPC 与 Staking",
       "module_key": "node_rpc_staking",
       "resume_focus": true,
-      "url": "interview/19-node-rpc-staking/S-NODE-02-rpc-ha-quorum-hedging-cache/",
+      "url": "topics/19-node-rpc-staking/S-NODE-02-rpc-ha-quorum-hedging-cache/",
       "prompt": "多 RPC 轮询不等于高可用。先按 method capability、archive/trace、head/finality 和配额给 endpoint 分池；健康检查要验证 chain ID、head hash/lag 和代表性方法。确定性只读可 retry/hedge，第一条成功不一定正确；高价值读可按同一 block hash 做 quorum，但 quorum 只是分歧检测，不会创造链上共识或 finality。广播只重复发送同一 raw tx，不能 hedge 两次 “构造+签名”。缓存必须 finality-aware：按 block hash 且达到声明安全水位的结果可长缓存， `latest` 和 pending 只能短缓存或不缓存。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4397,7 +4397,7 @@
       "module": "19 节点、RPC 与 Staking",
       "module_key": "node_rpc_staking",
       "resume_focus": true,
-      "url": "interview/19-node-rpc-staking/S-NODE-03-validator-staking-slashing-keys/",
+      "url": "topics/19-node-rpc-staking/S-NODE-03-validator-staking-slashing-keys/",
       "prompt": "Ethereum validator 通过 validator signing key 执行 attest、proposal 等职责，withdrawal credentials 控制提款路径，两者不是同一密钥。普通离线会损失奖励/产生 penalty，但 slashing 针对可证明的冲突行为，如双 proposal、双投票或 surround vote。最大工程风险是同一 validator key 在两套活跃实例同时签名；HA 不能做普通 active-active，迁移前必须安全停旧实例并导入 slashing protection history。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4422,7 +4422,7 @@
       "module": "19 节点、RPC 与 Staking",
       "module_key": "node_rpc_staking",
       "resume_focus": true,
-      "url": "interview/19-node-rpc-staking/S-NODE-04-chain-data-platform/",
+      "url": "topics/19-node-rpc-staking/S-NODE-04-chain-data-platform/",
       "prompt": "链上数据平台应把 raw canonical evidence、decoded facts 和业务 projections 分层。Backfill 与 realtime 必须重叠一段并用 block hash/tx/log identity 去重，cursor 不能只存高度；reorg 时标记 orphan、回退 projection 并重放。Receipt/log 是协议化数据，trace/state diff 往往是 client-specific 调试输出，需要独立重资源管线和 schema version。ABI/合约升级后要可重解码，不能只保留扁平业务表。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4447,7 +4447,7 @@
       "module": "19 节点、RPC 与 Staking",
       "module_key": "node_rpc_staking",
       "resume_focus": true,
-      "url": "interview/19-node-rpc-staking/S-NODE-05-relayer-transaction-manager/",
+      "url": "topics/19-node-rpc-staking/S-NODE-05-relayer-transaction-manager/",
       "prompt": "Transaction manager 把业务 intent 转成可恢复的链上状态机：持久化 intent → 预占 nonce/资源 → build/simulate → 策略签名 → 保存 raw tx → 广播 → receipt → safe/finalized。Nonce 是同一 sender 的冲突域，分配不能只靠每次读 RPC；fee bump 必须建立同 nonce replacement lineage。RPC timeout、mempool missing 和 dropped 都不是最终失败，只有结合旧 raw tx、链上 nonce、receipt 和 replacement 状态才能决定下一步。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4472,7 +4472,7 @@
       "module": "19 节点、RPC 与 Staking",
       "module_key": "node_rpc_staking",
       "resume_focus": true,
-      "url": "interview/19-node-rpc-staking/S-NODE-06-node-operations-runbook/",
+      "url": "topics/19-node-rpc-staking/S-NODE-06-node-operations-runbook/",
       "prompt": "节点 SRE 的目标是“跟随正确 canonical/finalized chain 并按方法 SLO 提供数据”，不是进程存活。升级要跟踪协议 fork、EL/CL/client 兼容和数据库迁移，先在非关键/影子节点 canary；快照只缩短恢复时间，必须验证来源、network/genesis、head/finality 和数据库一致性。Pruning、archive/history 是 client-specific 容量策略。Validator key 不能普通 active-active，RPC 节点则应多实例、多 client、独立数据目录。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4497,7 +4497,7 @@
       "module": "19 节点、RPC 与 Staking",
       "module_key": "node_rpc_staking",
       "resume_focus": true,
-      "url": "interview/19-node-rpc-staking/S-NODE-07-canonical-backfill-realtime-merge/",
+      "url": "topics/19-node-rpc-staking/S-NODE-07-canonical-backfill-realtime-merge/",
       "prompt": "Backfill 和 realtime 不能按 block number 最后写入者覆盖，而要把不可变 observation 与可变 canonical assignment 分离。每个块按 `chain_id + block_hash` 保留 parent lineage 和 source；候选 head 必须先由链特有 fork-choice/canonical 证据选出，再证明能沿 parent hash 连续走到当前 canonical 祖先。父链连续只是必要条件，不会自动证明它是主链。reorg 先按高度 倒序发布 orphan，再按高度正序 apply 新分支；双通道在重叠区要证明双方观察到同一组 canonical hashes，最大高度相等不代表没有洞。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4522,7 +4522,7 @@
       "module": "19 节点、RPC 与 Staking",
       "module_key": "node_rpc_staking",
       "resume_focus": true,
-      "url": "interview/19-node-rpc-staking/S-NODE-08-trace-state-diff-versioned-decoder-quality/",
+      "url": "topics/19-node-rpc-staking/S-NODE-08-trace-state-diff-versioned-decoder-quality/",
       "prompt": "Receipt/log 是协议化执行结果的一部分，但 `debug_trace*`、call trace 和 state diff 的 API、字段及性能通常是 client/tracer/provider-specific。Geth tracing 通过重执行交易收集信息，因此依赖相应历史状态并可能很重；不能把某 provider 的 trace JSON 当成跨客户端共识数据。数据平台应保存 raw response、chain/block/tx identity、client/tracer/config/version 和 decode version，再归一化为可重建 facts；质量门禁同时做 hash lineage、数量/root、跨源抽样、decoder shadow 和 projection balance proof。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4547,7 +4547,7 @@
       "module": "19 节点、RPC 与 Staking",
       "module_key": "node_rpc_staking",
       "resume_focus": true,
-      "url": "interview/19-node-rpc-staking/S-NODE-09-non-evm-online-sdk-fault-injection/",
+      "url": "topics/19-node-rpc-staking/S-NODE-09-non-evm-online-sdk-fault-injection/",
       "prompt": "非 EVM 在线集成必须保留每条链自己的提交、执行、最终性和资源失效语义。Solana `sendTransaction` 成功只表示 RPC 接受，仍要查 status/commitment 与 blockhash expiry；Cosmos `sync` 只等 CheckTx，不能当成已进块执行；Aptos 要区分 pending 与 committed 的 `success/vm_status`；Sui 以 transaction effects 判断执行，checkpoint 是可选的索引/证据边界而不是所有业务的协议最终性前提。所有链在广播超时或暂时 `not found` 时都先进入 UNKNOWN，查询或重播同一 signed bytes；成功与失败使用对称的最终性门槛，只有证明过期并重读 sequence/blockhash/object 等资源后才能重建。若“已证明过期”后又出现入链证据，应冻结调查重复副作用风险。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4572,7 +4572,7 @@
       "module": "19 节点、RPC 与 Staking",
       "module_key": "node_rpc_staking",
       "resume_focus": true,
-      "url": "interview/19-node-rpc-staking/S-NODE-10-chain-data-clickhouse-lakehouse/",
+      "url": "topics/19-node-rpc-staking/S-NODE-10-chain-data-clickhouse-lakehouse/",
       "prompt": "链数据平台不能按 `block_number` 覆盖，因为 reorg 后同一高度可出现不同 hash。我的分层是：对象存储/lakehouse 保留可重放 raw evidence，canonical control plane 按 parent lineage 提交主链映射，ClickHouse 承担高吞吐分析和热查询。MergeTree 的 `ORDER BY` 决定数据排序与稀疏主索引，主键不保证唯一；`ReplacingMergeTree` 只在后台 merge 时做最终去重，查询正确性不能赌 merge 已发生。容量要用真实压缩率、parts/merge headroom、复制倍数、扫描字节和回填峰值测量，不能只报“每天多少行”。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4597,7 +4597,7 @@
       "module": "18 Web3 支付与稳定币",
       "module_key": "web3_payments",
       "resume_focus": true,
-      "url": "interview/18-web3-payments-stablecoin/S-PAY-01-payment-state-idempotency-reversal/",
+      "url": "topics/18-web3-payments-stablecoin/S-PAY-01-payment-state-idempotency-reversal/",
       "prompt": "支付 intent、链上 transaction 和账本 settlement 是三个不同对象。状态至少区分 awaiting、observed、confirmed/finalized、settled、failed/reversed；链上看到 tx hash 不等于支付完成。创建 API 用商户作用域幂等键，链事件用 chain+tx/log 等唯一键，Webhook 按 event ID 至少一次投递并允许乱序。区块重组或业务退款不能删除原记录，要用状态转换和不可变冲正流水表达。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4622,7 +4622,7 @@
       "module": "18 Web3 支付与稳定币",
       "module_key": "web3_payments",
       "resume_focus": true,
-      "url": "interview/18-web3-payments-stablecoin/S-PAY-02-stablecoin-issuer-crosschain-risk/",
+      "url": "topics/18-web3-payments-stablecoin/S-PAY-02-stablecoin-issuer-crosschain-risk/",
       "prompt": "“稳定币”不是一种统一技术资产。要区分发行人原生 token、bridge wrapped token、合约版本和 chain；同 symbol 不代表同一赎回权或风险。中心化发行稳定币的合约可能具有 mint/burn、pause、denylist/freeze、upgrade 等控制，具体以官方合约和条款为准。跨链也要区分锁定铸造桥与 burn-and-mint 协议；例如 CCTP 通过源链 burn、attestation、目标链 mint 转移原生 USDC，但仍有 finality、attestation、合约、运营和目的链风险。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4647,7 +4647,7 @@
       "module": "18 Web3 支付与稳定币",
       "module_key": "web3_payments",
       "resume_focus": true,
-      "url": "interview/18-web3-payments-stablecoin/S-PAY-03-treasury-liquidity-rebalancing/",
+      "url": "topics/18-web3-payments-stablecoin/S-PAY-03-treasury-liquidity-rebalancing/",
       "prompt": "Treasury 的目标不是让每条链余额最多，而是在安全敞口、提现/支付 SLA、手续费和资本占用之间维持目标库存。每个 chain+asset+custody domain 都是独立 liquidity bucket，available、reserved、pending inbound/outbound 和用户负债必须分开。再平衡是带时间、费用、限额和风险的路径规划：优先净额化与批处理，再选择链上转移、issuer burn/mint、交易所或做市渠道，并全程走审批、状态机和对账。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4672,7 +4672,7 @@
       "module": "18 Web3 支付与稳定币",
       "module_key": "web3_payments",
       "resume_focus": true,
-      "url": "interview/18-web3-payments-stablecoin/S-PAY-04-ledger-clearing-settlement-reconciliation/",
+      "url": "topics/18-web3-payments-stablecoin/S-PAY-04-ledger-clearing-settlement-reconciliation/",
       "prompt": "清算是计算各方应收应付，结算是实际转移最终价值；链上确认、内部账本入账和商户出款不是同一个时点。支付账本应双分录、不可变、按资产平衡，available/pending/reserved 分账户表达；错误用 reversal 抵消。对账至少比较内部账本、链/托管事实和支付/银行/provider statement，差异进入 break queue，有 owner、证据、SLA 和调整流水，不能直接改余额“抹平”。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4697,7 +4697,7 @@
       "module": "18 Web3 支付与稳定币",
       "module_key": "web3_payments",
       "resume_focus": true,
-      "url": "interview/18-web3-payments-stablecoin/S-PAY-05-compliance-travel-rule-sanctions/",
+      "url": "topics/18-web3-payments-stablecoin/S-PAY-05-compliance-travel-rule-sanctions/",
       "prompt": "合规系统不是“接一个 KYC API”。KYC/KYB 建立客户、企业和受益所有人身份；制裁筛查判断客户、对手方、地址和地理风险；交易监控发现行为模式；Travel Rule 在适用的虚拟资产转移中交换并保留 originator/beneficiary 信息。工程上要把政策做成版本化 decision service，交易前同步 hold/deny，交易后异步监控与 case management，并保存名单版本、输入证据、决策、人工覆盖和审计链。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4722,7 +4722,7 @@
       "module": "18 Web3 支付与稳定币",
       "module_key": "web3_payments",
       "resume_focus": true,
-      "url": "interview/18-web3-payments-stablecoin/S-PAY-06-institutional-custody-rwa-iso20022/",
+      "url": "topics/18-web3-payments-stablecoin/S-PAY-06-institutional-custody-rwa-iso20022/",
       "prompt": "机构金融系统要分开 instruction/message、内部 book of record、custodian/chain movement、clearing obligation、settlement asset 和 legal finality。ISO 20022 是金融业务模型与消息标准，不是资金网络；XML 校验、网络 ACK 或状态消息都不能单独证明钱已最终结算。RWA token 也不天然等于法律所有权，要把发行实体/登记簿、投资者资格、托管、申赎、公司行动、现金腿、链上转移限制和持续对账组成完整生命周期。设计时用不可变 instruction、双分录、DvP/PvP、状态证据和 exception case 管理，不能用一个 `SUCCESS` 覆盖全部阶段。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4747,7 +4747,7 @@
       "module": "PostgreSQL",
       "module_key": "postgresql",
       "resume_focus": false,
-      "url": "interview/middleware/postgresql/S-PG-01-mvcc-vacuum-indexes/",
+      "url": "topics/middleware/postgresql/S-PG-01-mvcc-vacuum-indexes/",
       "prompt": "PostgreSQL 的 `UPDATE` 通常写出新 tuple version，旧版本等到不再被任何快照需要后，才由 `VACUUM` 标记为可复用；普通 `VACUUM` 通常不把文件空间归还操作系统，`VACUUM FULL` 会重写表并持有强锁。索引保存的是指向 heap tuple 的位置，index-only scan 还依赖 visibility map；因此“建了覆盖索引就一定不回表”是错的。排查慢表要把长事务、dead tuple、autovacuum、索引顺序、heap fetch 和查询工作负载放在一起看。",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -4772,7 +4772,7 @@
       "module": "PostgreSQL",
       "module_key": "postgresql",
       "resume_focus": false,
-      "url": "interview/middleware/postgresql/S-PG-02-isolation-locking-ledger/",
+      "url": "topics/middleware/postgresql/S-PG-02-isolation-locking-ledger/",
       "prompt": "PostgreSQL 隔离级别、锁与资金写入",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -4797,7 +4797,7 @@
       "module": "PostgreSQL",
       "module_key": "postgresql",
       "resume_focus": false,
-      "url": "interview/middleware/postgresql/S-PG-03-wal-replication-pgx-ha/",
+      "url": "topics/middleware/postgresql/S-PG-03-wal-replication-pgx-ha/",
       "prompt": "PostgreSQL WAL、复制、故障切换与 pgx 连接治理",
       "role_priorities": {
         "senior_go_backend": "p0",
@@ -4822,7 +4822,7 @@
       "module": "20 协议、共识与安全",
       "module_key": "protocol_consensus_security",
       "resume_focus": true,
-      "url": "interview/20-protocol-consensus-security/S-PROTO-01-ethereum-pos-fork-choice-finality/",
+      "url": "topics/20-protocol-consensus-security/S-PROTO-01-ethereum-pos-fork-choice-finality/",
       "prompt": "Ethereum PoS 不是“票最多的块立即最终”。Fork choice 从 justified checkpoint 出发，在与 finalized checkpoint 一致的可行分支上执行 LMD-GHOST，按验证者最新 消息和有效余额选择 head，并包含 proposer boost 等协议规则。Casper FFG 负责 checkpoint 的 justification/finalization：健康网络通常很快最终，但不是固定经过 两个 epoch 就无条件最终。长期离线或新同步节点还需要近期 weak-subjectivity checkpoint，避免仅凭旧验证者密钥构造的长程历史。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4847,7 +4847,7 @@
       "module": "20 协议、共识与安全",
       "module_key": "protocol_consensus_security",
       "resume_focus": true,
-      "url": "interview/20-protocol-consensus-security/S-PROTO-02-bft-cometbft-round-lock-safety-liveness/",
+      "url": "topics/20-protocol-consensus-security/S-PROTO-02-bft-cometbft-round-lock-safety-liveness/",
       "prompt": "CometBFT 在每个高度运行一个或多个 round，每轮经历 Propose、Prevote、 Precommit；看到某个块在同一高度与轮次获得超过三分之二 voting power 的 precommit 才进入 commit。本地验证者在 Precommit 步骤观察到同轮某块的 `+2/3 prevote`（PoLC）后才锁定/重锁并 precommit；更高轮的合法 PoLC 可支持安全 换锁，不能说成“网络一出现 prevote 就让所有人同时锁定”。假设 Byzantine voting power 小于三分之一并最终 进入同步期，可以同时讨论安全性和活性；三分之一及以上即使不双签，也能通过不投票 阻止链前进。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4872,7 +4872,7 @@
       "module": "20 协议、共识与安全",
       "module_key": "protocol_consensus_security",
       "resume_focus": true,
-      "url": "interview/20-protocol-consensus-security/S-PROTO-03-blob-da-peerdas-security/",
+      "url": "topics/20-protocol-consensus-security/S-PROTO-03-blob-da-peerdas-security/",
       "prompt": "EIP-4844 的 blob 是给 Rollup 发布数据的独立数据空间：EVM 不能读取 blob 内容， 只能访问 versioned hash，并可通过 KZG point-evaluation 验证承诺开口。Blob 数据由 共识层传播且允许在协议保留窗口后被裁剪，不是永久归档。到 2026 年，PeerDAS 已随 Fusaka 于 2025-12-03 上线：节点托管确定的 data columns，并从 peers 采样，而不再 要求每个节点下载所有 blob。KZG 证明内容与承诺一致，采样在网络与纠删码假设下提供 概率性可用性判断；二者都不能替 Rollup 自动完成长期归档。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4897,7 +4897,7 @@
       "module": "20 协议、共识与安全",
       "module_key": "protocol_consensus_security",
       "resume_focus": true,
-      "url": "interview/20-protocol-consensus-security/S-PROTO-04-protocol-upgrade-state-migration/",
+      "url": "topics/20-protocol-consensus-security/S-PROTO-04-protocol-upgrade-state-migration/",
       "prompt": "链升级要拆成四层：协议规则在指定 block/slot/epoch 激活、节点二进制提前部署、 共识状态做确定性迁移、本地数据库 schema 做 client-specific 迁移。所有共识节点 必须对同一 pre-state 得到同一 post-state，因此迁移不能依赖 wall clock、网络调用、 map 非确定顺序或节点本地配置。旧规则产生的新块一旦被新协议接受并最终化，普通 “回滚旧二进制”通常会停链或分叉；恢复应是激活前中止、修复后二次升级，或经治理 协调的新协议事件，而不是随意恢复某台机器快照。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -4922,7 +4922,7 @@
       "module": "RabbitMQ",
       "module_key": "rabbitmq",
       "resume_focus": true,
-      "url": "interview/middleware/rabbitmq/S-RAB-01-exchange-async-pipeline/",
+      "url": "topics/middleware/rabbitmq/S-RAB-01-exchange-async-pipeline/",
       "prompt": "RabbitMQ 拆分链上监听与业务写入",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4947,7 +4947,7 @@
       "module": "RocketMQ",
       "module_key": "rocketmq",
       "resume_focus": false,
-      "url": "interview/middleware/rocketmq/S-RMQ-01-architecture/",
+      "url": "topics/middleware/rocketmq/S-RMQ-01-architecture/",
       "prompt": "RocketMQ 是 **NameServer（路由）+ Broker（存储）+ Producer/Consumer** 的分布式消息中间件。消息按 Topic 分类，Queue 是并行与顺序域。事务、延迟和 FIFO 是其重要能力，但具体 API 与限制要区分 4.x/5.x；Go 客户端也要核对与目标 broker 的兼容矩阵。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4972,7 +4972,7 @@
       "module": "RocketMQ",
       "module_key": "rocketmq",
       "resume_focus": false,
-      "url": "interview/middleware/rocketmq/S-RMQ-02-order-transaction-delay/",
+      "url": "topics/middleware/rocketmq/S-RMQ-02-order-transaction-delay/",
       "prompt": "**顺序消息**：同一消息组/Queue 内维持 FIFO；**事务消息**：半消息 → 本地事务 → commit/rollback/回查，缩小“写库成功但消息未发”的窗口，最终仍依赖本地事务状态、回查和消费幂等；**延迟消息**要区分 4.x 固定级别与 5.x 定时时间戳及其范围限制。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -4997,7 +4997,7 @@
       "module": "RocketMQ",
       "module_key": "rocketmq",
       "resume_focus": false,
-      "url": "interview/middleware/rocketmq/S-RMQ-03-vs-kafka/",
+      "url": "topics/middleware/rocketmq/S-RMQ-03-vs-kafka/",
       "prompt": "**Kafka** 强项：**超高吞吐、日志流、生态（Flink/Connect）**；分区有序、副本 ISR。**RocketMQ** 强项：**事务消息、延迟级别、Tag 过滤、国内运维经验**。Go 后端选 MQ 看 **语义需求** 而非单纯 QPS。讲解要点：**场景 + 一致性 + 运维 + 团队熟悉度**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -5022,7 +5022,7 @@
       "module": "RocketMQ",
       "module_key": "rocketmq",
       "resume_focus": false,
-      "url": "interview/middleware/rocketmq/S-RMQ-04-ops-troubleshooting/",
+      "url": "topics/middleware/rocketmq/S-RMQ-04-ops-troubleshooting/",
       "prompt": "RocketMQ 线上问题集中在 **消费堆积、重复消费、消息进死信、Broker 磁盘满**。排查路径：**Console 看 diff（堆积量）→ 消费 TPS vs 生产 TPS → 慢消费/失败重试 → DLQ**。生产关键词：**maxReconsumeTimes、%DLQ% 主题、CommitLog 磁盘、resetOffset 慎用**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -5047,7 +5047,7 @@
       "module": "21 Web3 安全工程",
       "module_key": "security_engineering",
       "resume_focus": true,
-      "url": "interview/21-security-engineering/S-SEC-01-web3-threat-model-iam-trust-boundaries/",
+      "url": "topics/21-security-engineering/S-SEC-01-web3-threat-model-iam-trust-boundaries/",
       "prompt": "Web3 威胁建模、IAM 与信任边界",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -5072,7 +5072,7 @@
       "module": "21 Web3 安全工程",
       "module_key": "security_engineering",
       "resume_focus": true,
-      "url": "interview/21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery/",
+      "url": "topics/21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery/",
       "prompt": "签名 HA 最危险的不是“新节点起不来”，而是新旧 owner 同时可签。控制面租约只能选 leader，必须由 signer 数据面持久化并强制执行单调 epoch/fencing token；授权还要绑定 key、owner、有效期、policy digest、准确 intent digest 和 request ID。签名结果释放前要原子持久化最高 epoch 与幂等记录。Key ceremony 则覆盖生成、备份/份额、激活、轮换、停用、恢复和销毁的参与者与证据；MPC/HSM 改变密钥信任边界，但不会自动提供业务策略、抗重放或 slashing protection。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5097,7 +5097,7 @@
       "module": "21 Web3 安全工程",
       "module_key": "security_engineering",
       "resume_focus": true,
-      "url": "interview/21-security-engineering/S-SEC-03-sbom-provenance-release-admission/",
+      "url": "topics/21-security-engineering/S-SEC-03-sbom-provenance-release-admission/",
       "prompt": "SBOM 回答“产物里有什么”，provenance 回答“由哪个 builder、哪些输入和步骤构建”，签名证明某身份认可了某 digest；三者都不自动证明软件无漏洞或业务上允许部署。生产发布应以不可变 digest 为主键，把 source revision、依赖锁定、测试、SBOM、构建 provenance、签名和环境准入串成验证链。按 SLSA v1.2 Build Track，L1 是存在 provenance，L2 是托管构建平台生成并签名，L3 还要求 hardened build；不要继续背旧版单一 SLSA 1–4。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -5122,7 +5122,7 @@
       "module": "21 Web3 安全工程",
       "module_key": "security_engineering",
       "resume_focus": true,
-      "url": "interview/21-security-engineering/S-SEC-04-security-testing-incident-response/",
+      "url": "topics/21-security-engineering/S-SEC-04-security-testing-incident-response/",
       "prompt": "Fuzz、Property、Differential Test 与安全事件响应",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -5147,7 +5147,7 @@
       "module": "11 解决方案架构",
       "module_key": "solution_architecture",
       "resume_focus": false,
-      "url": "interview/11-solution-architecture/S-SOL-01-bounded-context-ddd/",
+      "url": "topics/11-solution-architecture/S-SOL-01-bounded-context-ddd/",
       "prompt": "架构师先识别 **限界上下文（Bounded Context）**，再讨论部署边界：它首先限定某套领域模型和统一语言在哪个边界内成立。数据所有权、团队和服务拆分通常应与之对齐，但不是 DDD 规定的一上下文一库/一团队/一服务。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -5172,7 +5172,7 @@
       "module": "11 解决方案架构",
       "module_key": "solution_architecture",
       "resume_focus": false,
-      "url": "interview/11-solution-architecture/S-SOL-02-strangler-fig-migration/",
+      "url": "topics/11-solution-architecture/S-SOL-02-strangler-fig-migration/",
       "prompt": "**绞杀者（Strangler Fig）**：逐路由、逐能力替换旧系统。关键不是“同时写两套库”，而是每阶段明确 **唯一 source of truth**、同步方向、数据回放/对账和回滚条件，避免把迁移做成永久双主。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -5197,7 +5197,7 @@
       "module": "11 解决方案架构",
       "module_key": "solution_architecture",
       "resume_focus": false,
-      "url": "interview/11-solution-architecture/S-SOL-03-event-driven-cqrs/",
+      "url": "topics/11-solution-architecture/S-SOL-03-event-driven-cqrs/",
       "prompt": "**事件驱动**与 **CQRS** 是可独立采用的模式：CQRS 只要求命令模型与查询模型分离，不必然等于 Event Sourcing；事件驱动也不必然所有数据都最终一致。采用异步投影时，要讲清 outbox 的原子边界、至少一次投递、读模型新鲜度与读己之写。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -5222,7 +5222,7 @@
       "module": "11 解决方案架构",
       "module_key": "solution_architecture",
       "resume_focus": false,
-      "url": "interview/11-solution-architecture/S-SOL-04-bff-gateway-mesh/",
+      "url": "topics/11-solution-architecture/S-SOL-04-bff-gateway-mesh/",
       "prompt": "**BFF** 为前端/渠道聚合领域 API；**API 网关** 管南北向（鉴权、限流、路由）；**Service Mesh** 管东西向（mTLS、重试、可观测）。架构讲解忌 **三层叠同样逻辑**。生产关键词：**渠道隔离、网关无状态、Mesh 不跑业务逻辑**。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5247,7 +5247,7 @@
       "module": "11 解决方案架构",
       "module_key": "solution_architecture",
       "resume_focus": false,
-      "url": "interview/11-solution-architecture/S-SOL-05-multi-tenant-saas/",
+      "url": "topics/11-solution-architecture/S-SOL-05-multi-tenant-saas/",
       "prompt": "多租户 SaaS 隔离与权限架构",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5272,7 +5272,7 @@
       "module": "11 解决方案架构",
       "module_key": "solution_architecture",
       "resume_focus": false,
-      "url": "interview/11-solution-architecture/S-SOL-06-architecture-review/",
+      "url": "topics/11-solution-architecture/S-SOL-06-architecture-review/",
       "prompt": "架构师不只是画架构图，还要 **主持评审**：输入清晰、备选对比、风险显式、决策可追溯。产出 = **架构说明 + ADR + 非功能验收标准**。常考察：**如何处理反对意见、如何说「不」**。与 [S-ARCH-20 ADR](../03-system-design/S-ARCH-20-tech-decision-doc.md) 互补：20 讲文档怎么写，本题讲 **评审怎么开**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -5297,7 +5297,7 @@
       "module": "11 解决方案架构",
       "module_key": "solution_architecture",
       "resume_focus": false,
-      "url": "interview/11-solution-architecture/S-SOL-07-security-audit-architecture/",
+      "url": "topics/11-solution-architecture/S-SOL-07-security-audit-architecture/",
       "prompt": "架构师定义零信任与最小权限边界，并让审计日志 **追加写、访问受控、可检测篡改且满足留存策略**。mTLS 认证工作负载身份，但不自动授予业务权限；JWT、密钥、PII、供应链与恢复流程都要有独立控制。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5322,7 +5322,7 @@
       "module": "11 解决方案架构",
       "module_key": "solution_architecture",
       "resume_focus": false,
-      "url": "interview/11-solution-architecture/S-SOL-08-evolution-whiteboard/",
+      "url": "topics/11-solution-architecture/S-SOL-08-evolution-whiteboard/",
       "prompt": "架构白板常给 **开放式业务题**（设计 IM / 外卖 / 企业知识平台），45 分钟考察 **澄清 → 估算 → MVP → 扩展 → 非功能 → 演进**。本模板整合 [03 系统设计](../03-system-design/index.md) 单题能力，形成 **完整叙事**；不是新知识点，而是 **白板交付结构**。",
       "role_priorities": {
         "senior_go_backend": "p1",
@@ -5347,7 +5347,7 @@
       "module": "13 Solidity 与合约",
       "module_key": "solidity_contracts",
       "resume_focus": false,
-      "url": "interview/13-solidity-contracts/S-SOLID-01-language-storage/",
+      "url": "topics/13-solidity-contracts/S-SOLID-01-language-storage/",
       "prompt": "Solidity 运行在 **EVM** 上：数据分 **storage**（持久、贵）、**memory**（临时）、**calldata**（只读入参）。架构师要懂 **storage 槽位、打包、继承线性化**，否则升级合约会 **存储冲突**。与 [S-BC-01 EVM 账户](../12-blockchain-web3/S-BC-01-blockchain-evm-basics.md) 衔接。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5372,7 +5372,7 @@
       "module": "13 Solidity 与合约",
       "module_key": "solidity_contracts",
       "resume_focus": false,
-      "url": "interview/13-solidity-contracts/S-SOLID-02-security-reentrancy/",
+      "url": "topics/13-solidity-contracts/S-SOLID-02-security-reentrancy/",
       "prompt": "智能合约由链上共识执行，错误通常不可由后端热修复，且常直接控制资产。安全回答不能只背“重入”：应覆盖 **访问控制、业务逻辑、预言机、精度、外部调用、签名重放和升级面**。CEI 与 `ReentrancyGuard` 是重入防线，但 Go 层风控不能替代链上硬约束。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5397,7 +5397,7 @@
       "module": "13 Solidity 与合约",
       "module_key": "solidity_contracts",
       "resume_focus": false,
-      "url": "interview/13-solidity-contracts/S-SOLID-03-erc-standards/",
+      "url": "topics/13-solidity-contracts/S-SOLID-03-erc-standards/",
       "prompt": "**ERC-20** 同质化代币；**ERC-721** 在单个合约内标识唯一 token id；**ERC-1155** 在同一合约管理多种可同质化或非同质化 token 类型并支持批量操作。架构师选型 + Review **approve/transferFrom、回调、元数据**。Go 索引靠 **Transfer/TransferSingle 事件**（[S-BC-04](../12-blockchain-web3/S-BC-04-contract-abi-events.md)）。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5422,7 +5422,7 @@
       "module": "13 Solidity 与合约",
       "module_key": "solidity_contracts",
       "resume_focus": false,
-      "url": "interview/13-solidity-contracts/S-SOLID-04-upgradeable-proxy/",
+      "url": "topics/13-solidity-contracts/S-SOLID-04-upgradeable-proxy/",
       "prompt": "**代理模式**：用户调用稳定的 Proxy 地址，Proxy 用 `delegatecall` 执行 Implementation 代码，状态保存在 Proxy。架构师必讲 **EIP-1967、原子初始化、`_disableInitializers()`、升级鉴权和存储布局兼容**。现代 OpenZeppelin 还应了解 ERC-7201 namespaced storage。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5447,7 +5447,7 @@
       "module": "13 Solidity 与合约",
       "module_key": "solidity_contracts",
       "resume_focus": false,
-      "url": "interview/13-solidity-contracts/S-SOLID-05-gas-optimization/",
+      "url": "topics/13-solidity-contracts/S-SOLID-05-gas-optimization/",
       "prompt": "Gas 是 EVM 执行和交易数据的计费单位。架构师在 **可读性、安全性与成本** 间权衡：按访问模式设计 storage、减少无谓拷贝、合理使用 `immutable`、批量操作。 事件只能替代“仅供链下查询”的数据，不能替代合约未来需要读取的状态。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5472,7 +5472,7 @@
       "module": "13 Solidity 与合约",
       "module_key": "solidity_contracts",
       "resume_focus": false,
-      "url": "interview/13-solidity-contracts/S-SOLID-06-testing-audit/",
+      "url": "topics/13-solidity-contracts/S-SOLID-06-testing-audit/",
       "prompt": "**Foundry**（forge）支持 **单元测试、fuzz、fork、invariant**。交付前要组合 静态分析、属性测试、权限/升级演练、部署参数复核与人工审计。任何工具、覆盖率或 审计报告都只能降低风险，不能证明合约“绝对安全”。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5497,7 +5497,7 @@
       "module": "13 Solidity 与合约",
       "module_key": "solidity_contracts",
       "resume_focus": false,
-      "url": "interview/13-solidity-contracts/S-SOLID-07-defi-patterns/",
+      "url": "topics/13-solidity-contracts/S-SOLID-07-defi-patterns/",
       "prompt": "DeFi 架构师要懂 **AMM 恒定乘积、Oracle 喂价、闪电贷单 tx 原子性**。Solidity 层定 **价格与清算规则**；Go 层做 **聚合展示与风控**，不能替代链上数学（[S-SOLID-08](./S-SOLID-08-contract-go-boundary.md)）。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5522,7 +5522,7 @@
       "module": "13 Solidity 与合约",
       "module_key": "solidity_contracts",
       "resume_focus": false,
-      "url": "interview/13-solidity-contracts/S-SOLID-08-contract-go-boundary/",
+      "url": "topics/13-solidity-contracts/S-SOLID-08-contract-go-boundary/",
       "prompt": "**区块链架构师**划分：**链上 = 资产规则与不变量**；**Go = 编排、索引、UX、风控、密钥流程**。忌「链下算完链上只存结果无校验」。本题串联 [13 Solidity](./index.md) 与 [12 Web3 Go](../12-blockchain-web3/index.md)。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5547,7 +5547,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-01-chain-adapter-capability-matrix/",
+      "url": "topics/17-multichain-wallet/S-WALLET-01-chain-adapter-capability-matrix/",
       "prompt": "多链钱包不能抽象成一个“address + nonce + gas”的万能接口。正确做法是先建立能力矩阵：状态模型、签名方案、交易 freshness/replay、手续费、token 表示、finality、replacement、memo/tag、模拟与索引能力；再用小能力接口组合 adapter。公共领域模型只保留真正共性，链特有字段必须可扩展且可审计，不能为追求统一而丢失 UTXO、blockhash、object reference 等语义。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5572,7 +5572,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-02-bitcoin-utxo-psbt-fee-bump/",
+      "url": "topics/17-multichain-wallet/S-WALLET-02-bitcoin-utxo-psbt-fee-bump/",
       "prompt": "Bitcoin 交易消费一个或多个完整 UTXO，并创建新的 outputs；多余价值通常进入 change，手续费等于 inputs 总额减 outputs 总额，工程上按交易 vbytes × feerate 估算。Coin selection 同时权衡手续费、找零、dust、隐私和 UTXO 碎片。PSBT 是多参与方交换未完成交易及签名元数据的容器，不是链上交易格式。未确认交易加速要区分 replacement relay policy（RBF）和后代付费（CPFP），规则受节点版本与策略影响。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5597,7 +5597,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-03-solana-account-pda-transaction/",
+      "url": "topics/17-multichain-wallet/S-WALLET-03-solana-account-pda-transaction/",
       "prompt": "Solana 的 account 是程序读写状态的容器，包含 lamports、data、owner 等；owner 是可修改该 data、扣减 lamports 的 program，不等于业务资产所有者，其他 program 仍可向 writable account 增加 lamports。交易 message 显式列出账户与读写权限，并带 recent blockhash 作为 freshness；若业务要在它过期后继续，须先核对旧交易历史和业务状态，再用新 blockhash 重建、重签。PDA 是 program + seeds 推导出的无私钥地址，程序通过 runtime 授权“签名”。确认必须区分 processed、confirmed、finalized，不能把 RPC 返回 signature 当作支付完成。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5622,7 +5622,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-04-cosmos-cometbft-ibc-sequence/",
+      "url": "topics/17-multichain-wallet/S-WALLET-04-cosmos-cometbft-ibc-sequence/",
       "prompt": "Cosmos SDK 是构建应用链的模块化状态机框架，CometBFT 负责共识与区块生产；不同 Cosmos 链启用的 modules、消息和参数并不相同。普通交易签名会绑定 chain ID、account number、sequence、fee/gas 和 messages，sequence 防重放并约束同一 signer 的并发。IBC 通过链上 light client、connection、channel、packet sequence、timeout 和 acknowledgement 传递已验证消息，relayer 只是搬运 proofs/packets，不是可信托管方。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5647,7 +5647,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-05-sui-aptos-state-model/",
+      "url": "topics/17-multichain-wallet/S-WALLET-05-sui-aptos-state-model/",
       "prompt": "Sui 和 Aptos 都使用 Move，但状态与交易模型不能合并。Sui 仍以带 ID、version、 digest 和 ownership 的 object 为核心；同时 2026 年协议升级为支持资产引入 Address Balances，资金路径不能再绝对化为只有 Coin Object。Aptos 以 account address 下的 resources/modules 为核心，传统交易用 sender sequence 防重放与排序，也在演进 orderless 等能力。二者的 Move 方言、标准库、token、签名和 API 都应是独立 adapter。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5672,7 +5672,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-06-deposit-sweep-reservation-recovery/",
+      "url": "topics/17-multichain-wallet/S-WALLET-06-deposit-sweep-reservation-recovery/",
       "prompt": "钱包系统的关键不是“生成地址并转账”，而是让地址分配、链上 observation、最终性、 账本入账、归集、签名和广播都有可恢复状态机。EVM/Cosmos 预占 sender nonce/sequence， Bitcoin 预占 outpoints；Sui 的 object 路径预占 refs，Address Balance 路径预占 sender/asset 额度；Solana 还要管理 writable accounts 与 blockhash。网络超时不代表失败： 必须先按已冻结 payload、raw tx 和链状态查询，再决定重播、替换或释放资源。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5697,7 +5697,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-07-mpc-dkg-reshare-recovery/",
+      "url": "topics/17-multichain-wallet/S-WALLET-07-mpc-dkg-reshare-recovery/",
       "prompt": "MPC/TSS 的价值是多个参与方用 key shares 协作产生链可验证签名，正常协议不需要把完整私钥集中到一处；但它不自动解决授权、恶意内部人、备份和可用性。生产要讲清 DKG、share version、threshold/quorum、签名 round、session binding、nonce/preprocessing 安全、reshare 与 key rotation 的区别，以及参与方丢失、网络分区、协议中断后的恢复。任何降级到单私钥都是架构失败。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5722,7 +5722,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-08-solana-go-sdk-transaction/",
+      "url": "topics/17-multichain-wallet/S-WALLET-08-solana-go-sdk-transaction/",
       "prompt": "Solana 交易签名的是由 account keys、recent blockhash 和 instructions 编译出的 message。 Go 生态常用 `gagliardetto/solana-go`，但官方文档把它列为社区 SDK，不能说成官方维护。 `sendTransaction` 成功只代表 RPC 接受提交，不保证被确认或执行成功；后端要按 signature 查询 processed/confirmed/finalized 与执行错误。recent blockhash 过期后必须用新 blockhash **重建并重签**，不能修改已签名 bytes；但创建新 attempt 前还要排除旧交易已执行，不能把 单次 status cache miss 当作失败证明。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5747,7 +5747,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-09-cosmos-go-sdk-sign-mode-direct/",
+      "url": "topics/17-multichain-wallet/S-WALLET-09-cosmos-go-sdk-sign-mode-direct/",
       "prompt": "Cosmos SDK 交易不是“把 Msg JSON 用 secp256k1 签一下”。`SIGN_MODE_DIRECT` 的 SignDoc 绑定序列化后的 body bytes、auth info bytes、chain ID 和 account number；auth info 又包含 signer info/sequence、fee 和 gas。构建时先设置空签名以生成正确 signer info， 获取 sign bytes 后签名，再写回 SignatureV2 并编码 TxRaw。广播 `sync` 的 CheckTx 成功 不代表交易已提交到区块或应用执行成功；“DeliverTx”是旧 ABCI 常见术语，ABCI++ 版本通常 在 `FinalizeBlock` 中产生每笔交易的执行结果，客户端应统一检查 committed tx result。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5772,7 +5772,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-10-aptos-go-sdk-bcs-transaction/",
+      "url": "topics/17-multichain-wallet/S-WALLET-10-aptos-go-sdk-bcs-transaction/",
       "prompt": "Aptos 的 RawTransaction 明确绑定 sender、sequence、payload、gas、expiration 和 chain ID， Entry Function 参数要按 BCS 类型序列化；签名使用 Aptos 定义的域分离消息，不能自己对 JSON 随便 hash。示例因项目使用 Go 1.24 固定官方 SDK v1.13；官方仓库建议新项目评估 v2， 但版本结论必须绑定具体 tag/commit：截至 2026-07-18，v2 的 `main` 分支 `go.mod` 声明 Go 1.25 与 toolchain 1.25.10，这不能反推所有已发布 v2 tag 或未来 `@latest` 都是同一要求。 本示例是 Go 1.24 的兼容选择，不应说成最新。提交成功后仍要查询 committed transaction 的 `success` 与 VM status。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5797,7 +5797,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-11-sui-go-capability-adapter/",
+      "url": "topics/17-multichain-wallet/S-WALLET-11-sui-go-capability-adapter/",
       "prompt": "Sui 不能再绝对表述为“所有 Coin 和 Gas 都必须选 Coin Object”。2026 年协议升级引入 Address Balances，与 `Coin<T>` object 路径并存，并支持 address-balance/hybrid gas； 部分稳定币还有由 Address Balances 驱动的 gasless transfer。Go 侧没有可以无条件当作官方稳定交易 SDK 的统一结论， 所以生产做法是版本固定的 adapter + capability probe：对象路径预占 `(ID, version, digest)`，地址余额路径按 sender/asset 做持久化额度预占；这是一种应用协调键， 不是 Sui nonce，在原子防超额的前提下可允许并发 intent。最终以 transaction effects 为事实，而不是 RPC 接受提交。",
       "role_priorities": {
         "senior_go_backend": "p2",
@@ -5822,7 +5822,7 @@
       "module": "17 多链钱包与托管",
       "module_key": "multichain_wallet",
       "resume_focus": true,
-      "url": "interview/17-multichain-wallet/S-WALLET-12-tron-trc20-resource-transaction/",
+      "url": "topics/17-multichain-wallet/S-WALLET-12-tron-trc20-resource-transaction/",
       "prompt": "TRON / TRC20 钱包：资源、权限与交易生命周期",
       "role_priorities": {
         "senior_go_backend": "p2",

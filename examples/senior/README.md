@@ -1,6 +1,6 @@
 # Senior 编码练习示例
 
-对应 `docs/interview/08-coding-senior/` 与 `docs/interview/10-ai-engineering/`。
+对应 `docs/topics/08-coding-senior/` 与 `docs/topics/10-ai-engineering/`。
 
 ## 编码练习（S-CODE）
 

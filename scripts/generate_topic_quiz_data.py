@@ -11,9 +11,9 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-YAML_PATH = ROOT / "docs/interview/_meta/questions.yaml"
-ROLE_EVIDENCE_PATH = ROOT / "docs/interview/_meta/role-evidence.yaml"
-INTERVIEW_DIR = ROOT / "docs/interview"
+YAML_PATH = ROOT / "docs/topics/_meta/questions.yaml"
+ROLE_EVIDENCE_PATH = ROOT / "docs/topics/_meta/role-evidence.yaml"
+TOPICS_DIR = ROOT / "docs/topics"
 OUT_PATH = ROOT / "docs/data/questions.json"
 
 MODULE_LABELS: dict[str, str] = {
@@ -163,7 +163,7 @@ def evidence_for(qid: str, frontmatter: dict, config: dict) -> dict[str, str]:
 
 def mkdocs_url(file_rel: str) -> str:
     path = file_rel.removesuffix(".md")
-    return f"interview/{path}/"
+    return f"topics/{path}/"
 
 
 def main() -> None:
@@ -178,7 +178,7 @@ def main() -> None:
         if item.get("status") != "published":
             continue
         file_rel = item["file"]
-        md_path = INTERVIEW_DIR / file_rel
+        md_path = TOPICS_DIR / file_rel
         prompt = extract_prompt(md_path) if md_path.is_file() else ""
         article_frontmatter = extract_frontmatter(md_path) if md_path.is_file() else {}
         questions.append(

@@ -2,9 +2,9 @@
 
 本知识库面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构** 方向的工程知识沉淀。正文均为自研表述；外部资料仅作选题启发与延伸阅读，**不整段搬运**。
 
-> 专题元数据：[interview/_meta/questions.yaml](interview/_meta/questions.yaml) ·
-> [角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
-> 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
+> 专题元数据：[topics/_meta/questions.yaml](topics/_meta/questions.yaml) ·
+> [角色优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
+> 代码映射：[topics/_meta/mapping.md](topics/_meta/mapping.md)
 
 ## 知识库覆盖范围（232 篇）
 
@@ -204,7 +204,7 @@
 
 ## 引用规则
 
-1. 每题 YAML `sources` 字段至少 1 个外链或官方文档；详见 [题目撰写模板](interview/_meta/template.md)。
+1. 每篇 YAML `sources` 字段至少 1 个外链或官方文档；详见 [专题撰写模板](topics/_meta/template.md)。
 2. 博客、面经类内容只链出，正文用自己的话归纳，**不整段搬运**。
 3. 标注 `go_version` / Solidity 版本，避免泛型、loop 变量、PUSH0 等说法过时。
 4. **系统设计 / 架构题**：注明假设（QPS、一致性、地域），便于读者复现推演。

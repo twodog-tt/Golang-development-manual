@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""从 questions.yaml 生成 interview/.pages 与各模块 .pages，启用专题级（三级）导航。"""
+"""从 questions.yaml 生成 topics/.pages 与各模块 .pages，启用专题级（三级）导航。"""
 
 from __future__ import annotations
 
@@ -9,8 +9,8 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-YAML_PATH = ROOT / "docs/interview/_meta/questions.yaml"
-INTERVIEW_DIR = ROOT / "docs/interview"
+YAML_PATH = ROOT / "docs/topics/_meta/questions.yaml"
+TOPICS_DIR = ROOT / "docs/topics"
 DOCS_PAGES = ROOT / "docs/.pages"
 
 TIER_KEYS = {"p0", "p1", "p2"}
@@ -46,8 +46,8 @@ DIR_TITLES: dict[str, str] = {
     "middleware/distributed": "分布式事务",
 }
 
-# interview/.pages 二级分组（使用目录 basename，供 awesome-pages 匹配 Section）
-INTERVIEW_GROUPS: list[tuple[str, list[str]]] = [
+# topics/.pages 二级分组（使用目录 basename，供 awesome-pages 匹配 Section）
+TOPICS_GROUPS: list[tuple[str, list[str]]] = [
     (
         "基础 · Go 语言与生产工程",
         ["01-runtime-concurrency", "02-memory-gc", "16-go-production-engineering", "08-coding-senior"],
@@ -79,21 +79,21 @@ ROOT_PAGES = """nav:
   - 专题自测: topic-quiz.md
 
   - 方向与优先级:
-    - 角色优先级与证据: interview/_meta/role-priority-matrix
-    - P0 知识图谱: interview/_meta/p0-knowledge-graph
-    - P0 技术纠错审计: interview/_meta/technical-corrections-audit
+    - 角色优先级与证据: topics/_meta/role-priority-matrix
+    - P0 知识图谱: topics/_meta/p0-knowledge-graph
+    - P0 技术纠错审计: topics/_meta/technical-corrections-audit
 
-  - interview
+  - topics
 
   - 参考资料:
     - Web3 交易所重点专题: web3-exchange-wallet-focus.md
-    - 专题总索引: interview-catalog.md
+    - 专题总索引: topic-catalog.md
     - 来源与引用: sources.md
-    - 代码与专题映射: interview/_meta/mapping
+    - 代码与专题映射: topics/_meta/mapping
 
   - 维护工具:
-    - 专题撰写模板: interview/_meta/template
-    - 内容质量审查: interview/_meta/quality-review
+    - 专题撰写模板: topics/_meta/template
+    - 内容质量审查: topics/_meta/quality-review
 """
 
 # 仅影响侧栏展示；正文 H1、搜索索引与专题标题继续使用完整 title。
@@ -204,7 +204,7 @@ def nav_label(item: dict) -> str:
 
 
 def write_module_pages(rel_dir: str, items: list[dict]) -> None:
-    pages_dir = INTERVIEW_DIR / rel_dir
+    pages_dir = TOPICS_DIR / rel_dir
     pages_dir.mkdir(parents=True, exist_ok=True)
     title = DIR_TITLES.get(rel_dir, rel_dir.split("/")[-1])
 
@@ -225,14 +225,14 @@ def write_module_pages(rel_dir: str, items: list[dict]) -> None:
     print(f"Wrote {out.relative_to(ROOT)} ({len(items)} questions)")
 
 
-def write_interview_pages() -> None:
+def write_topics_pages() -> None:
     lines = ["title: 工程专题", "nav:"]
-    for group_title, modules in INTERVIEW_GROUPS:
+    for group_title, modules in TOPICS_GROUPS:
         lines.append(f"  - {group_title}:")
         for mod in modules:
             lines.append(f"    - {mod}")
 
-    out = INTERVIEW_DIR / ".pages"
+    out = TOPICS_DIR / ".pages"
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"Wrote {out.relative_to(ROOT)}")
 
@@ -251,7 +251,7 @@ def write_middleware_pages() -> None:
         "  - elasticsearch",
         "  - distributed",
     ]
-    out = INTERVIEW_DIR / "middleware/.pages"
+    out = TOPICS_DIR / "middleware/.pages"
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"Wrote {out.relative_to(ROOT)}")
 
@@ -278,7 +278,7 @@ def main() -> None:
         )
 
     write_root_pages()
-    write_interview_pages()
+    write_topics_pages()
     write_middleware_pages()
     for rel_dir in sorted(by_dir):
         write_module_pages(rel_dir, by_dir[rel_dir])

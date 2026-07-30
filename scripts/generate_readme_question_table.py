@@ -9,7 +9,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-YAML_PATH = ROOT / "docs/interview/_meta/questions.yaml"
+YAML_PATH = ROOT / "docs/topics/_meta/questions.yaml"
 README_PATH = ROOT / "README.md"
 
 TIER_KEYS = {"p0", "p1", "p2"}
@@ -99,7 +99,7 @@ def build_table(by_key: dict[str, list[dict]]) -> str:
                 seq += 1
                 qid = item["id"]
                 title = escape_table_cell(item["title"])
-                link = f"./docs/interview/{item['file']}"
+                link = f"./docs/topics/{item['file']}"
                 lines.append(f"| {seq} | `{qid}` | [{title}]({link}) |")
         lines.append("")
 

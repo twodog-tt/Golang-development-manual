@@ -4,18 +4,18 @@ nav:
   - 专题自测: topic-quiz.md
 
   - 方向与优先级:
-    - 角色优先级与证据: interview/_meta/role-priority-matrix
-    - P0 知识图谱: interview/_meta/p0-knowledge-graph
-    - P0 技术纠错审计: interview/_meta/technical-corrections-audit
+    - 角色优先级与证据: topics/_meta/role-priority-matrix
+    - P0 知识图谱: topics/_meta/p0-knowledge-graph
+    - P0 技术纠错审计: topics/_meta/technical-corrections-audit
 
-  - interview
+  - topics
 
   - 参考资料:
     - Web3 交易所重点专题: web3-exchange-wallet-focus.md
-    - 专题总索引: interview-catalog.md
+    - 专题总索引: topic-catalog.md
     - 来源与引用: sources.md
-    - 代码与专题映射: interview/_meta/mapping
+    - 代码与专题映射: topics/_meta/mapping
 
   - 维护工具:
-    - 专题撰写模板: interview/_meta/template
-    - 内容质量审查: interview/_meta/quality-review
+    - 专题撰写模板: topics/_meta/template
+    - 内容质量审查: topics/_meta/quality-review

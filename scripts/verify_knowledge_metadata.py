@@ -10,9 +10,9 @@ from typing import Any, Iterable
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-QUESTIONS_PATH = ROOT / "docs/interview/_meta/questions.yaml"
-ROLE_EVIDENCE_PATH = ROOT / "docs/interview/_meta/role-evidence.yaml"
-INTERVIEW_DIR = ROOT / "docs/interview"
+QUESTIONS_PATH = ROOT / "docs/topics/_meta/questions.yaml"
+ROLE_EVIDENCE_PATH = ROOT / "docs/topics/_meta/role-evidence.yaml"
+TOPICS_DIR = ROOT / "docs/topics"
 TIER_KEYS = {"p0", "p1", "p2"}
 
 
@@ -90,7 +90,7 @@ def main() -> None:
         if not file_value:
             errors.append(f"{qid} 缺少 file")
             continue
-        path = INTERVIEW_DIR / file_value
+        path = TOPICS_DIR / file_value
         if not path.is_file():
             errors.append(f"{qid} 正文不存在: {path.relative_to(ROOT)}")
             continue

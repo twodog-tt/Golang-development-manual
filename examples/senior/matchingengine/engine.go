@@ -1,7 +1,7 @@
 // Package matchingengine implements a deterministic, single-writer limit order book.
 //
 // It intentionally uses simple sorted slices instead of a production tree/skip-list:
-// the interview focus is ordering, exact arithmetic, replay, and invariants.
+// the learning focus is ordering, exact arithmetic, replay, and invariants.
 package matchingengine
 
 import (
