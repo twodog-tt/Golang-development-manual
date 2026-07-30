@@ -81,7 +81,7 @@ flowchart LR
 | GraphQL BFF | 聚合多源 | 简单 CRUD |
 | 消息异步 | 解耦峰值 | 同步查询 |
 
-## 追问链
+## 深挖问答
 
 1. **HTTP/2 好处？** → 多路复用、头部压缩、单连接并发 stream。
 2. **gRPC 负载均衡？** → 客户端 resolver + LB policy，或 L7 proxy/mesh。直接连 ClusterIP 时，长寿命 HTTP/2 连接可能长期落在少数后端。

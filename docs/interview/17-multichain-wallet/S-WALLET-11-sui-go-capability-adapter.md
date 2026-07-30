@@ -62,7 +62,7 @@ flowchart TB
   Sign --> Effects["query transaction effects"]
 ```
 
-### 需要修正的旧面试表达
+### 需要修正的旧表述
 
 旧说法“每次 Sui 转账都必须 coin selection/merge/split，并额外选择 gas object”只适用于
 Coin Object 路径。当前正确说法是：
@@ -126,7 +126,7 @@ Coin Object 路径冲突边界清晰但可能碎片化；Address Balance 简化�
 额度协调；Hybrid 提供迁移弹性却增加恢复复杂度。选择应由资产能力和吞吐模型决定，
 不能把任一模式描述成全面替代另一模式。
 
-## 追问链
+## 深挖问答
 
 1. **Sui 是否不再有 Coin Object？** → 仍有；Address Balances 是并存能力，不是删除 object 模型。
 2. **Address Balance 是否等于 EVM nonce？** → 不是；`sender+asset` reservation 是钱包应用的额度协调键，不是链上递增序号，协议仍按 Sui 交易语义执行。

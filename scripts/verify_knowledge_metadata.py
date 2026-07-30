@@ -109,13 +109,16 @@ def main() -> None:
         text = path.read_text(encoding="utf-8")
         has_legacy_opening = "## 30 秒版" in text
         has_oral_card_opening = (
-            "## 口述卡（高频必背）" in text
+            (
+                "## 要点卡" in text
+                or "## 口述卡（高频必背）" in text
+            )
             and '!!! abstract "30 秒回答"' in text
         )
         if not (has_legacy_opening or has_oral_card_opening):
             errors.append(f"{qid} 缺少 30 秒版")
-        if "## 追问链" not in text:
-            errors.append(f"{qid} 缺少追问链")
+        if "## 深挖问答" not in text and "## 追问链" not in text:
+            errors.append(f"{qid} 缺少深挖问答")
 
     shared_p0 = list(metadata["shared"].get("p0", []))
     shared_p1 = list(metadata["shared"].get("p1", []))

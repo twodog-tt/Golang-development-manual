@@ -71,11 +71,11 @@ flowchart LR
 
 | 方案 | 适用 |
 |------|------|
-| channel 池 | 面试、简单 TCP 复用 |
+| channel 池 | 编码练习、简单 TCP 复用 |
 | sync.Pool | 复用 **对象** 非连接；连接有状态慎用 |
 | 每请求 dial | 仅低 QPS |
 
-## 追问链
+## 深挖问答
 
 1. **什么时候 factory？** → 无空闲且 `open < maxOpen`；达到上限后等待归还或 context 取消，不能继续无限创建。
 2. **Put 时 channel 满？** → 连接过多，Close 释放（本实现）。

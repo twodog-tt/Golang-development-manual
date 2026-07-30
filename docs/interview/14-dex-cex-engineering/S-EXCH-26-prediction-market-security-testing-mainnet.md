@@ -21,7 +21,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回模块索引](./index.md)
 
@@ -258,7 +258,7 @@ detect → scope → precise pause → protect keys/funds
 storage 和订单兼容风险。合理答案不是绝对选择，而是结合合约职责、TVL、退出能力、timelock、
 审计和迁移路径说明残余风险。operator-only 也不是“安全结论”，只是一个必须公开的信任模型。
 
-## 追问链
+## 深挖问答
 
 1. **安全审计通过是否可主网？** → 还需修复复验、部署一致性、密钥/权限、运行监控、灰度和事故演练。
 2. **最重要的预测市场不变量是什么？** → 资金/position 守恒、订单授权不扩大、唯一合法 resolution、canonical 结算与账本一致。

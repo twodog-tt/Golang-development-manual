@@ -24,7 +24,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：`abigen` 根据 ABI 生成类型安全的 `SimpleToken` Go 结构体，封装 `transfer`、`FilterTransfer` 等。
-2. **为什么**：手写 RLP/ABI 易错；面试说「我们 abigen + simulated 单测覆盖」体现工程化。
+2. **为什么**：手写 RLP/ABI 易错；能说「我们 abigen + simulated 单测覆盖」体现工程化。
 3. **怎么做**：见本仓库 `examples/senior/erc20bind/`。
 
 > go-ethereum 同时存在 legacy binding 与新一代 v2 binding 路径，v2 生成命令使用
@@ -156,7 +156,7 @@ if err != nil {
 | 类型安全 | 灵活 |
 | 合约变更需 regen | 适合一次性脚本 |
 
-## 追问链
+## 深挖问答
 
 1. **如何测主网 fork？** → anvil/hardhat fork + go ethclient 指本地。
 2. **MetaData.Bin 用途？** → `DeploySimpleToken` 链上创建合约。

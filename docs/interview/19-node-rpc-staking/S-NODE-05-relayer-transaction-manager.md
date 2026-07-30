@@ -77,7 +77,7 @@ Replacement acceptance 是节点 mempool policy，不是 EIP-1559 本身保证�
 
 每账户单 worker 最容易保证 nonce；高吞吐可多账户分片或 durable allocator，但一个 sender 的状态仍需一致控制。不要让每个业务微服务直接持 key 并自行发交易。
 
-## 追问链
+## 深挖问答
 
 1. **pending tx 查不到就是 dropped？** → 不一定；provider mempool 局部、节点重启或传播差异都可能导致查不到。
 2. **广播超时怎么办？** → 查询 tx hash/nonce，并可重播同 raw tx。

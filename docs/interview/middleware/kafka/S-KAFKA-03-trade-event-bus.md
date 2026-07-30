@@ -79,7 +79,7 @@ kafka-consumer-groups.sh --bootstrap-server kafka:9092 \
 | rebalance rate | 扩缩过于频繁 |
 | 端到端延迟 | produce → 消费完成 |
 
-## 追问链
+## 深挖问答
 
 1. **WS 直连 Kafka 还是经 Redis？** → 同一 group 会把每条消息只交给一个 Pod；若各 Pod 都可能持有订阅者，可由一个/一组消费者发布到 Redis/NATS fan-out，或建立按订阅路由的分发层。让每个 Pod 使用独立 group 会放大 Kafka 消费与连接数。
 2. **成交顺序错了？** → 检查 key；消费端是否多 goroutine 乱序 commit。

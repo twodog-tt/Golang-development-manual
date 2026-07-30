@@ -19,9 +19,9 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回高频核心锚点](../../high-frequency-roadmap.md)
 
 !!! abstract "30 秒回答"
 
@@ -110,7 +110,7 @@ poll/lock order，并按 channel 的排序键加锁以避免内部锁顺序死�
 
 **不宜用 channel**：跨进程、需持久化、复杂路由规则。
 
-## 追问链
+## 深挖问答
 
 1. **关闭后 recv？** → 零值 + `ok=false`；send panic。
 2. **nil channel？** → send/recv 永久阻塞（用于 select 禁用分支）。

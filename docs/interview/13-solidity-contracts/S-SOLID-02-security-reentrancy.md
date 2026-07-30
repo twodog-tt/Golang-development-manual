@@ -54,7 +54,7 @@ function withdraw(uint256 amount) external nonReentrant {
 
 **OWASP Smart Contract Top 10（2026）**
 
-| 类别 | 面试时应讲的防线 |
+| 类别 | 讲解时应讲的防线 |
 |------|------------------|
 | SC01 访问控制 | 每条管理路径都鉴权；RBAC、两步权限转移、Multisig + Timelock |
 | SC02 业务逻辑 | 状态机与经济不变量；异常路径、边界状态和组合调用测试 |
@@ -67,7 +67,7 @@ function withdraw(uint256 amount) external nonReentrant {
 | SC09 溢出/下溢 | Solidity 0.8+ 默认检查，但仍审计 `unchecked`、窄类型转换和 assembly |
 | SC10 代理/升级 | 初始化、升级鉴权、存储布局校验、Timelock 与可审计升级流程 |
 
-SWC Registry 自身已明确说明：内容自 2020 年后未充分更新，可能不完整且含错误或关键遗漏。因此可以在面试里说 “SWC-107 重入”，但不应把 SWC 当作当前完整安全基线，也不应笼统回答“Solidity 0.8+ 全部用 SafeMath”。
+SWC Registry 自身已明确说明：内容自 2020 年后未充分更新，可能不完整且含错误或关键遗漏。因此可以在场景里，说 “SWC-107 重入”，但不应把 SWC 当作当前完整安全基线，也不应笼统回答“Solidity 0.8+ 全部用 SafeMath”。
 
 **权限模型**
 
@@ -89,7 +89,7 @@ SWC Registry 自身已明确说明：内容自 2020 年后未充分更新，可�
 - Echidna 模糊测试属性
 - 主网 fork 测试（Foundry）
 
-## 追问链
+## 深挖问答
 
 1. **read-only reentrancy？** → 跨合约视图在 callback 中读 stale 价格。
 2. **tx.origin 为何禁用？** → 钓鱼中间合约。

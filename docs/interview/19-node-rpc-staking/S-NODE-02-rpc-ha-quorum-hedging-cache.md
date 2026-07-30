@@ -88,7 +88,7 @@ Hedge 能削尾延迟，也会增加请求量并可能同时触发 provider 限�
 
 多 provider 提高可用性，但若都依赖同一上游或同一 client bug，会相关失败。自建节点、不同 client/region/provider 的多样性更有价值；quorum 也增加延迟和费用，应按资金风险分级使用。
 
-## 追问链
+## 深挖问答
 
 1. **第一条成功为何可能错？** → endpoint 可能落后、在不同 fork、返回缓存或方法语义不同。
 2. **写请求能 hedge 吗？** → 只能安全重复同一 raw tx；不能并发生成不同 nonce/payload。

@@ -85,7 +85,7 @@ ENTRYPOINT ["/app"]
 
 **何时不用 multi-stage**：本地 dev 用 `docker compose` 挂载卷热更即可，prod 才 distroless。
 
-## 追问链
+## 深挖问答
 
 1. **scratch 和 distroless 区别？** → scratch 是空文件系统，证书、时区、用户信息都要自行复制；distroless 按具体变体提供一组最小运行时文件，不能假设所有变体内容相同。
 2. **如何传 build 版本号？** → `-ldflags "-X main.version=$GIT_SHA"`。

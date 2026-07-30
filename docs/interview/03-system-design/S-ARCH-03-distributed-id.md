@@ -90,7 +90,7 @@ flowchart LR
 | UUID v7 | 跨系统、无中心 | 需要纯数字短 ID |
 | DB 自增 | 单库、低 QPS | 分库分表 |
 
-## 追问链
+## 深挖问答
 
 1. **雪花 WorkerId 怎么分配？** → ZK 临时节点、K8s StatefulSet 序号、或配置中心手动段。
 2. **时钟回拨怎么处理？** → 等待追平、备用 WorkerId、或切换号段模式。

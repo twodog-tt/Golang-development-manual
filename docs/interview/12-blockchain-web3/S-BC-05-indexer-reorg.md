@@ -131,7 +131,7 @@ for {
 | safe 后确认 | 中 | 适合多数正常风险业务 |
 | finalized 后确认 | 最高 | 适合高价值、不可逆结算 |
 
-## 追问链
+## 深挖问答
 
 1. **重组回滚多深？** → 不猜固定深度；一直回退到共同祖先。穿过 safe/finalized 或超过风控上限时升级告警。
 2. **eth_getLogs 范围限制？** → 按 provider 限额分片、重试并校验连续性。历史日志依赖节点保留对应区块体/receipt 与 provider 的历史窗口，不等同于“必须有 archive state”；启用 history pruning 的节点也可能已经删除旧 receipt。

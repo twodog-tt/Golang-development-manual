@@ -78,7 +78,7 @@ sequenceDiagram
 - **清算 bot 竞争**：gas 竞价；协议设计清算折扣
 - **CEX 对比**：订单簿内部撮合没有公开 mempool，但需要可审计的撮合优先级、时钟、权限隔离和公平接入
 
-## 追问链
+## 深挖问答
 
 1. **Flashbots Protect 与 bundle 区别？** → Protect 面向用户私有提交；bundle 面向搜索者/keeper 的有序原子交易集合。两者都可能绕开公开 mempool，但接口与目标不同。
 2. **EIP-1559 费用给谁？** → base fee 销毁；priority fee 计入执行层 `feeRecipient/coinbase`。在 builder 市场里，builder 再通过独立 bid 向 proposer 支付，不能把两笔经济关系混成一句“tip 给 builder”。

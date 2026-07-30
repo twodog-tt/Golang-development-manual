@@ -76,7 +76,7 @@ sequence，再决定重播或重建。
 Cosmos SDK 从 v0.53.0 起还支持由目标链显式启用的 unordered transaction：它必须把
 sequence 留为零，并用唯一 timeout timestamp 等机制防重放，额外 gas 与 ante-handler
 规则也可由链配置。这不表示所有 Cosmos 链都已启用；本文 v0.53.7 示例构建的是传统
-sequence 交易。面试时应先说“按 chain/app capability 选择”，不能把 sequence manager
+sequence 交易。讲解时应先说“按 chain/app capability 选择”，不能把 sequence manager
 永久泛化到 unordered 路径。
 
 ### 广播模式
@@ -112,7 +112,7 @@ codespace 分类。
 却需要自己保证 interface registry 和 sign mode 正确。无论选择哪种，都应放在独立 adapter/
 module 中，避免把链 SDK 依赖扩散到核心账务。
 
-## 追问链
+## 深挖问答
 
 1. **为什么先设置空签名？** → 让 builder 生成带 signer info/sequence 的 AuthInfo，再计算正确 sign bytes。
 2. **sequence 在哪里签进去？** → AuthInfo 的 signer info；SignerData 同时参与签名流程。

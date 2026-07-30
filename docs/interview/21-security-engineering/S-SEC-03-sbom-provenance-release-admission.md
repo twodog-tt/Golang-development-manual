@@ -57,7 +57,7 @@ flowchart LR
 ### 当前版本事实
 
 - SLSA v1.2 将 Build 和 Source 分 track；Build L1/L2/L3 的含义如上。
-- SPDX 是 ISO/IEC 5962:2021 的开放标准。**截至本次审计基准 2026-07-18，SPDX 官方规格页列出的 current version 是 3.0，仓库发布页的稳定补丁为 3.0.1；3.1-RC1 仍标为 pre-release，不应口述为已最终发布。** 组织应明确自己接受的稳定 schema/version，而不是仅写“3.x”。
+- SPDX 是 ISO/IEC 5962:2021 的开放标准。**截至本次审计基准 2026-07-18，SPDX 官方规格页列出的 current version 是 3.0，仓库发布页的稳定补丁为 3.0.1；3.1-RC1 仍标为 pre-release，不应表述为已最终发布。** 组织应明确自己接受的稳定 schema/version，而不是仅写“3.x”。
 - SBOM schema 版本、生成器版本和 artifact digest 都应入证据；“最新格式”不是兼容策略。
 
 ### Go 供应链边界
@@ -101,7 +101,7 @@ flowchart LR
 
 完全可复现构建价值很高，但部分 CGO/平台产物实现成本大；至少保证输入可枚举、builder 可认证、产物按 digest 不可变、可独立重建比较。供应链门禁要在风险和恢复速度之间设计分级，而不是所有 CVE 一刀切阻塞。
 
-## 追问链
+## 深挖问答
 
 1. **SBOM 和 provenance 区别？** → 前者是组成清单，后者是构建来源与过程证据。
 2. **签了镜像是否安全？** → 只证明签名身份认可 digest；还要验证身份授权、builder、source 和策略。

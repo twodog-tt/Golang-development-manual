@@ -16,9 +16,9 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回高频核心锚点](../../high-frequency-roadmap.md)
 
 !!! abstract "30 秒回答"
 
@@ -114,7 +114,7 @@ stateDiagram-v2
 | Temporal/Saga | 长流程、补偿 | 简单订单 |
 | Event Sourcing | 完整审计 | 团队成熟度要求高 |
 
-## 追问链
+## 深挖问答
 
 1. **支付成功和用户取消同时到？** → DB 条件更新谁先谁赢；失败方补偿（退款/释库存）。
 2. **状态存在 Redis 还是 DB？** → SoT 在 DB；Redis 可缓存展示。

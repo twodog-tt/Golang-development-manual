@@ -23,7 +23,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../../_meta/p0-knowledge-graph.md)
 
@@ -69,7 +69,7 @@ sources:
 | `on` | 还等同步 standby flush 到持久存储 | standby 可能尚未 replay，读仍看不到 |
 | `remote_apply` | 还等同步 standby replay | 延迟更高，且仍要考虑同步备数量与失效策略 |
 
-表格是面试用简化；真实保证还取决于 `fsync`、存储、`synchronous_standby_names`、同步备数量、
+表格是讲解用简化；真实保证还取决于 `fsync`、存储、`synchronous_standby_names`、同步备数量、
 故障模式和运维是否真的阻止双主。如果 `synchronous_standby_names` 为空，
 `remote_apply`、`remote_write`、`local` 在远端等待方面都不会凭空增加保证，非 `off`
 模式只等待本地 WAL flush；不要把参数名直接翻译成“绝对零丢失”。
@@ -179,7 +179,7 @@ return tx.Commit(ctx)
   prepared statement、临时对象等有语义影响。
 - **逻辑迁移**：便于渐进切换；必须有 schema 兼容、lag、水位、校验和回滚计划。
 
-## 追问链
+## 深挖问答
 
 1. **WAL 落盘是否表示数据页也已落盘？**  
    不需要；恢复可用 WAL redo 数据页，这是 write-ahead 的意义。

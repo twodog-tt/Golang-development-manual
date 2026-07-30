@@ -89,7 +89,7 @@ flowchart TB
 | MySQL + ES 双写 | 复杂交易仍走 MySQL |
 | 仅 keyword 字段 | 不需中文分词时简化 |
 
-## 追问链
+## 深挖问答
 
 1. **text 和 keyword 能否改？** → 一般需 reindex + 新 mapping。
 2. **中文分词？** → IK 等插件；索引与搜索 analyzer 可不同。

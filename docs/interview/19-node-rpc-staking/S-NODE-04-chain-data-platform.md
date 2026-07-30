@@ -76,7 +76,7 @@ Ethereum JSON-RPC 标准方法与 `debug_trace*`/其他 trace API 的可用性�
 
 OLTP 数据库适合状态与低延迟查询，列式/对象存储适合大规模历史分析，搜索引擎适合检索；不要让一个存储同时承担 raw archive、账本事实和全文查询。
 
-## 追问链
+## 深挖问答
 
 1. **为什么 raw 数据不能删？** → decoder/schema 会升级，业务 projection 需要可重建和审计。
 2. **cursor 只存 block number 行吗？** → 不行，reorg 无法识别 canonical lineage。

@@ -85,7 +85,7 @@ flowchart LR
 | Swap | — | pool, amountIn/Out, sender, tx_hash |
 | Reorg | — | `removed=true` 冲正 |
 
-### Kafka vs RocketMQ（交易所口述）
+### Kafka vs RocketMQ（交易所讲解）
 
 | 维度 | Kafka | RocketMQ |
 |------|-------|----------|
@@ -101,7 +101,7 @@ flowchart LR
   应使用 event id/sequence/version，而不是假设“多写无害”
 - **消息过大**：深度快照走对象存储，MQ 只传引用
 
-## 追问链
+## 深挖问答
 
 1. **为何不用 RPC 广播成交？** → N 个订阅者耦合；MQ 可重放审计。
 2. **Exactly-once？** → 端到端难；交易所 **至少一次 + 幂等** 务实。

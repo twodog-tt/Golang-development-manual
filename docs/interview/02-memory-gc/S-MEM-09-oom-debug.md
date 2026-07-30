@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -106,11 +106,11 @@ flowchart TB
 | 进程级隔离 | 重任务 worker | 单体省 ops |
 | GOMEMLIMIT | 容器标准 | 替代不了逻辑泄漏修复 |
 
-## 追问链
+## 深挖问答
 
 1. **HeapAlloc 与 RSS 为何差很多？** → span 缓存、栈、堆外、libc。
 2. **大对象阈值大概？** → 当前实现是超过 32 KiB 小对象上限的量级；这是 runtime
-   实现常量，不是 Go 语言/API 保证，口述“有大对象专门路径”更稳妥。
+   实现常量，不是 Go 语言/API 保证，讲解“有大对象专门路径”更稳妥。
 3. **FreeOSMemory 生产能用吗？** → 仅诊断或特殊批处理，常调用损性能。
 4. **cgo 内存谁回收？** → 自己 C.free，Go GC 不管。
 5. **如何设 Pod memory？** → 用实测常态与峰值制定 request/limit；GOMEMLIMIT 要低于 limit，并给 cgo、mmap、内核缓冲和波动留足余量，没有通用固定百分比。

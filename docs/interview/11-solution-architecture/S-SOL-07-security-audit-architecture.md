@@ -87,7 +87,7 @@ flowchart TB
 
 **合规行业**：独立安全架构师评审；后端架构师配合落地。
 
-## 追问链
+## 深挖问答
 
 1. **服务间还要鉴权吗？** → 要；mTLS/service identity 先认证调用方，再由服务或 policy engine 做 operation/resource authorization。
 2. **审计日志谁删？** → 运维无删权限；break-glass 双审批。

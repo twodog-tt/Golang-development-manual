@@ -49,7 +49,7 @@ flowchart TD
   Panic -->|否| Exit[函数退出]
 ```
 
-**开销（面试表述）**
+**开销（表述要点）**
 
 - Go 1.14 起，编译器可对满足条件的场景使用 **open-coded defer**；其他场景可能使用栈上或堆上的 `_defer` 记录。
 - 极热微函数：百万次 defer 可测到 ns 级差异，通常不是首要瓶颈。
@@ -85,13 +85,13 @@ flowchart TD
 | 显式 close | 热循环 | 多 return 易漏 |
 | errgroup + context | 并发生命周期 | 单函数资源 |
 
-## 追问链
+## 深挖问答
 
 1. **defer 参数何时求值？** → 注册时，除闭包读外部变量在执行时。
 2. **defer 修改返回值？** → 仅 named return 可被 defer 内赋值影响。
 3. **recover 能跨 goroutine 吗？** → 不能，只在同一 G 的 defer 栈。
 4. **defer 与 os.Exit？** → Exit 跳过 defer。
-5. **1.14+ defer 性能？** → open defer 减开销，实现细节口述「持续优化」即可。
+5. **1.14+ defer 性能？** → open defer 减开销，实现细节讲解「持续优化」即可。
 
 ## 反模式与事故
 

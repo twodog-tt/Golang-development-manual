@@ -74,7 +74,7 @@ flowchart LR
 
 自建节点提高可验证性、隐私和方法控制，但带来升级、磁盘和 on-call；第三方 provider 上手快但有配额、方法差异和共同故障域。生产通常采用自建 + 多 provider 的分层。
 
-## 追问链
+## 深挖问答
 
 1. **EL 和 CL 谁提供交易执行？** → EL；CL 决定 PoS 共识/forkchoice/finality。
 2. **CL 不带 validator 能运行吗？** → 可以跟踪共识；validator 是参与提议/证明的可选组件。

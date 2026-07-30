@@ -45,7 +45,7 @@ sequenceDiagram
   T-->>U: Transfer 事件
 ```
 
-**ERC-20 面试要点**
+**ERC-20 要点**
 
 ```solidity
 function transfer(address to, uint256 amount) external returns (bool);
@@ -91,7 +91,7 @@ event Transfer(address indexed from, address indexed to, uint256 value);
 |------------|---------|
 | 灵活 | 审计省心 |
 
-## 追问链
+## 深挖问答
 
 1. **721 vs 1155 何时选？** → 唯一 vs 可堆叠同类资产。
 2. **ERC-4626？** → 收益型 vault token，DeFi 标准化。

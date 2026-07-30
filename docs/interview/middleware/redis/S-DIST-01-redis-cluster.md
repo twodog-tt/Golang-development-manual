@@ -84,7 +84,7 @@ flowchart TB
 | 托管 Redis（云） | 快速上线、免运维 | 成本敏感、定制协议 |
 | 本地缓存 + Redis | 极热读 | 一致性要求高 |
 
-## 追问链
+## 深挖问答
 
 1. **Cluster 如何算 slot？** → `CRC16(key) mod 16384`；Hash Tag 只对 `{}` 内部分哈希。
 2. **MOVED 和 ASK 区别？** → MOVED 永久迁移完成；ASK 临时重定向，迁移窗口内。

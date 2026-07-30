@@ -22,7 +22,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：HorizontalPodAutoscaler 周期性读 metrics-server 或 custom metrics API，计算目标副本数。
-2. **为什么**：大促/开盘流量波动；手动扩缩滞后；面试常问「为什么 CPU 不高却不扩容」。
+2. **为什么**：大促/开盘流量波动；手动扩缩滞后；常见深挖「为什么 CPU 不高却不扩容」。
 3. **怎么做**：CPU target 只是起点；Go 网关结合 RPS/inflight 与 CPU，多指标时 HPA 取各建议副本数的最大值；用 `behavior` 的 stabilization window 与 scaling policies 防抖；在真实 requests/limits 下压测。
 
 ## 10 分钟版（原理 + 图示）
@@ -118,7 +118,7 @@ var reqTotal = prometheus.NewCounterVec(
 
 **何时不用 HPA**：副本强一致单主、有状态不适合水平扩、流量极平稳且成本敏感。
 
-## 追问链
+## 深挖问答
 
 1. **HPA 和 VPA 区别？** → HPA 改副本数；VPA 调整/推荐单 Pod 资源。两者可以组合，但不要让 VPA 改动 HPA 正在以利用率计算的同一资源而缺少协调，否则目标基线会漂移。
 2. **扩容后更卡？** → 冷启动、JVM/Go 预热、DB 连接池打满、缓存未热。

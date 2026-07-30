@@ -82,7 +82,7 @@ stateDiagram-v2
 - **提现拥堵**：动态提 Gas fee；队列 + 用户可选快/慢
 - **地址黑名单**：KYT 拦截（[S-EXCH-05](./S-EXCH-05-risk-reconciliation.md)）
 
-## 追问链
+## 深挖问答
 
 1. **memo 币怎么充？** → 用户必须填 memo；索引按 (address, memo) 映射 userId。
 2. **热钱包被盗？** → MPC/HSM/多签（按链能力）、最小热余额、分层额度、

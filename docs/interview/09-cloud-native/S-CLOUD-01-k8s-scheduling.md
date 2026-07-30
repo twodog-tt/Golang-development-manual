@@ -87,7 +87,7 @@ import _ "go.uber.org/automaxprocs" // 或监控 GOMAXPROCS 与 cgroup
 
 **何时不用 K8s**：极简边缘、强实时单机、团队无 SRE 能力 → 评估 VM/裸机。
 
-## 追问链
+## 深挖问答
 
 1. **request 和 limit 怎么定？** → request 影响调度和 CPU HPA 利用率基线；limit 约束运行时资源。使用历史分布、压测、SLO 和节点超卖策略共同决定，不背固定倍数。
 2. **liveness 和 readiness 区别？** → liveness 失败重启；readiness 失败摘流量。

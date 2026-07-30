@@ -108,7 +108,7 @@ ClickHouse 官方把 partition 首先定位为数据管理能力：TTL、整分�
 查询真正高频的前缀应反映在 `ORDER BY`。过细 partition 会产生更多独立 parts，而 parts 只在
 同一 partition 内 merge。
 
-面试中应先问：
+讲解时应先问：
 
 1. 主要查询是按链+高度、地址+时间、交易 hash，还是全链聚合？
 2. 数据保留和回填以月、天还是高度区间管理？
@@ -215,7 +215,7 @@ recovery_time         = bytes_to_restore / measured_effective_throughput + repla
 | lakehouse | snapshot/manifest 数、小文件、orphan、compaction lag、restore rehearsal |
 | cost | hot/cold bytes、replica factor、扫描 TB、egress、backfill compute |
 
-## 追问链
+## 深挖问答
 
 1. **ClickHouse primary key 会拒绝重复吗？**  
    不会。它是稀疏索引/排序语义，不是 OLTP unique constraint。

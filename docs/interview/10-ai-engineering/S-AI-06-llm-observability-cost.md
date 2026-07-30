@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -128,7 +128,7 @@ GenAI semantic conventions 已迁移到 OpenTelemetry 的独立仓库，仍在�
 
 **何时不做语义缓存**：强实时、个性化、合规要求每次重新生成。
 
-## 追问链
+## 深挖问答
 
 1. **和 S-ARCH-16 可观测性关系？** → LLM 是慢依赖，span 要单独标 `gen_ai.*`；SLO 用 TTFT+P95 总时长。
 2. **缓存错了怎么办？** → TTL + 版本号；关键业务不走缓存或人工审核。

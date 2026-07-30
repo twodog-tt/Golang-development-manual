@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -66,7 +66,7 @@ flowchart LR
 | LT | 条件仍成立时可重复通知 | 较易使用 |
 | ET | 状态边沿变化时通知 | 非阻塞 FD，循环读/写到 `EAGAIN` |
 
-Go `net` 包封装了这些细节；面试不应说“Go 所有 I/O 都是 epoll”。不同操作系统使用不同后端，普通磁盘文件通常不具备 socket 那样的 readiness 语义，阻塞文件调用可能由额外线程承载。
+Go `net` 包封装了这些细节；讲解时不应说“Go 所有 I/O 都是 epoll”。不同操作系统使用不同后端，普通磁盘文件通常不具备 socket 那样的 readiness 语义，阻塞文件调用可能由额外线程承载。
 
 **三个不同上限**
 
@@ -99,7 +99,7 @@ Go 侧结合 goroutine profile、threadcreate profile、execution trace 和 runt
 
 提高 FD limit 只能解除上限，不能修复连接泄漏、没有 read/write deadline、accept 不及时或下游长期不读。先确定连接生命周期和容量模型，再调内核与进程参数。
 
-## 追问链
+## 深挖问答
 
 1. **readable 是否保证读到业务完整包？** → 否；TCP 是字节流，read 还可能短读，应用层必须 framing。
 2. **writable 是否表示对端收到？** → 否；通常只表示本地发送缓冲有空间。

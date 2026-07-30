@@ -99,7 +99,7 @@ func ApplySwap(e SwapEvent) error {
 - **排行榜**：24h volume 物化视图或 Redis ZSET
 - **市场异动**：窗口内涨跌幅超阈值推 [S-EXCH-11](./S-EXCH-11-websocket-market-hub.md)
 
-## 追问链
+## 深挖问答
 
 1. **1m K 线边界？** → `[t, t+60s)` 左闭右开，用 canonical block timestamp 归窗；open/close 再按 block/tx/log 顺序。
 2. **历史回补？** → 从 cursor 重扫；与实时流合并要防双计（幂等键）。

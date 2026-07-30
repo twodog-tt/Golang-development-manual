@@ -85,7 +85,7 @@ PSBT 可携带每个 input 所需的 UTXO、脚本、派生路径、部分签名
 | exact/branch search | 可能无 change | 计算与 fallback 复杂 |
 | batch payment | 摊薄固定开销 | 延迟和隐私关联 |
 
-## 追问链
+## 深挖问答
 
 1. **手续费字段在哪？** → 没有单独 fee output；inputs 总额减 outputs 总额。
 2. **UTXO 锁住多久？** → reservation 有 lease/fencing，但签名或广播不确定后不能仅凭超时释放，要查链/mempool。

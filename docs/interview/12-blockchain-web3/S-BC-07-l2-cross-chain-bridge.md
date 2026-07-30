@@ -50,7 +50,7 @@ flowchart TB
 | Optimistic | Arbitrum, OP Mainnet | 挑战期/欺诈证明 | 标准 L2→L1 退出受具体协议挑战期约束 |
 | ZK | zkSync, Starknet | 有效性证明 | 受 proof 生成、batch 提交、L1 finality 与桥流程约束 |
 
-**跨链桥信任模型（面试必分层）**
+**跨链桥信任模型（必分层）**
 
 | 类型 | 信任假设 |
 |------|----------|
@@ -84,7 +84,7 @@ flowchart TB
 
 **何时仍走 L1**：大额结算、合约升级、治理。
 
-## 追问链
+## 深挖问答
 
 1. **L2 Gas 谁付？** → 通常包含 L2 execution fee 与 L1 data/proof 相关费用，支付资产和公式按链而异；4337 Paymaster 可在支持的链上赞助。
 2. **序列器宕机？** → 部分 rollup 提供经 L1 的强制 inclusion/escape hatch，但延迟、可用性和操作流程各异；后端应暂停依赖即时排序的写操作并展示状态。

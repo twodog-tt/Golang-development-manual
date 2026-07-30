@@ -118,7 +118,7 @@ go test -race ./examples/senior/chainmerge/...
 
 单 writer canonicalizer 最容易证明顺序；吞吐可按 chain/network 分片，而不能让同一 chain 的多个 writer 无 CAS 抢高度。大型 projection 可异步消费 outbox，但 canonical commit 与事件发布必须原子关联。
 
-## 追问链
+## 深挖问答
 
 1. **为什么 block number 不能当主键？** → 同高度可因 reorg 有多个 hash；number 是位置，不是不可变身份。
 2. **parent 缺了能先处理后补吗？** → evidence 可先缓冲，canonical/projection 不能越洞提交。

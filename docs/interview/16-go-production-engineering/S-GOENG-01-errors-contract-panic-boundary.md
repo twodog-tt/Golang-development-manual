@@ -18,9 +18,9 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回高频核心锚点](../../high-frequency-roadmap.md)
 
 !!! abstract "30 秒回答"
 
@@ -121,7 +121,7 @@ func bad() error {
 
 公开库若 wrap 了某个底层 sentinel，调用方可能依赖它，之后更换底层实现就受兼容性约束。只有希望把底层错误纳入 API 契约时才 `%w`；否则可保留内部日志并返回自己的领域错误。
 
-## 追问链
+## 深挖问答
 
 1. **什么时候不用 `%w`？** → 不希望暴露底层实现为公共契约时。
 2. **`errors.Is` 和 `==`？** → `Is` 可沿 unwrap/join 树判断；`==` 只比较当前值。

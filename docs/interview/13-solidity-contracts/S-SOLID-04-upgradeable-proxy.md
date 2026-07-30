@@ -49,7 +49,7 @@ flowchart LR
 - `implementation`：`0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc`
 - `admin`：透明代理用
 
-**存储布局（面试必考）**
+**存储布局（必掌握）**
 
 - **传统线性布局**：不能改变已有变量的类型/顺序、在已有变量前插入、删除后复用槽，也要谨慎改变继承顺序和父合约变量
 - 新变量通常追加到末尾；父合约需扩展时可消耗预留的 `__gap`，但要按 Solidity slot packing 精确减少，不能机械地永远写 `uint256[50]`
@@ -72,7 +72,7 @@ function _authorizeUpgrade(address) internal override onlyOwner {
 
 以上按当前 OpenZeppelin Contracts 5.x：`UUPSUpgradeable` 标记为 stateless，不提供
 `__UUPSUpgradeable_init()`，公开升级入口是 `upgradeToAndCall`；ProxyAdmin 5.x 对
-Transparent Proxy 使用 `upgradeAndCall`。旧版本曾有不同生成 API，面试和代码都应
+Transparent Proxy 使用 `upgradeAndCall`。旧版本曾有不同生成 API，讲解和代码都应
 先声明并固定依赖版本，不能把 `upgradeTo`/initializer 名称跨版本混用。
 
 Proxy 应在部署交易中通过 constructor `_data` 原子执行 `initialize`，不能先部署一个未初始化 Proxy 再等待下一笔交易，否则可能被抢先初始化。Implementation 自身则用 constructor 中的 `_disableInitializers()` 锁死。
@@ -92,7 +92,7 @@ Proxy 应在部署交易中通过 constructor `_data` 原子执行 `initialize`�
 | 可升级 | 可修复和迭代 | 引入升级密钥、治理、存储兼容与流程风险 |
 | 可升级后永久冻结 | 前期可修复，成熟后降低信任 | 冻结时点和迁移方案需提前设计 |
 
-## 追问链
+## 深挖问答
 
 1. **constructor 为何不能初始化业务状态？** → constructor 在 Implementation 部署上下文执行，不会写 Proxy storage；常量可以，immutable 会固化在 implementation code 并被所有 Proxy 共享，需非常谨慎。
 2. **selector clash？** → Transparent pattern 通过 admin/fallback 规则缓解；不要随意给 Proxy 本体新增外部函数，否则仍可能冲突。

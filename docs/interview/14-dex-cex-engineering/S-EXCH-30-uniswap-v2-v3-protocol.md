@@ -21,7 +21,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回模块索引](./index.md)
 
@@ -50,7 +50,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> 面试官说「讲讲 Uniswap」时，不要只背 `x*y=k`。要分层讲清：**Factory → Pool/Pair → Router → LP 凭证 → 报价与结算**，并对比 V2/V3 的状态机与后端索引成本。Pancake 等分叉见 [S-EXCH-27](./S-EXCH-27-pancakeswap-v2-v3-differences.md)。
+> 有人问「讲讲 Uniswap」时，不要只背 `x*y=k`。要分层讲清：**Factory → Pool/Pair → Router → LP 凭证 → 报价与结算**，并对比 V2/V3 的状态机与后端索引成本。Pancake 等分叉见 [S-EXCH-27](./S-EXCH-27-pancakeswap-v2-v3-differences.md)。
 
 ## 3 分钟版（一面深度）
 
@@ -224,7 +224,7 @@ flowchart TD
 | 自建 DEX 分叉 | 先抄对 Factory/Router 权限与费用开关，再谈创新 |
 | 链下报价 API | 明确「模拟成功 ≠ 上链成交」；给 blockNumber 与时效 |
 
-## 追问链
+## 深挖问答
 
 1. **V2 的 k 在有手续费时怎么变？** → 输入扣费后实际注入减少，k 通常随交易缓慢增长（费用留池）。
 2. **为何 V3 用 sqrtPrice？** → 便于在集中流动性公式里用定点数高效计算。

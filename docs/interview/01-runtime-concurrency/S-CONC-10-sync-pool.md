@@ -70,7 +70,7 @@ sequenceDiagram
 | 连接池（sql.DB） | 长生命周期资源 |
 | arena（实验） | 批量分配一次性释放 |
 
-## 追问链
+## 深挖问答
 
 1. **Pool 线程安全吗？** → 是，但 Put/Get 的对象本身需无竞态。
 2. **GC 如何处理 Pool？** → current local 转 victim，旧 victim 清除；所以缓存保留非确定。

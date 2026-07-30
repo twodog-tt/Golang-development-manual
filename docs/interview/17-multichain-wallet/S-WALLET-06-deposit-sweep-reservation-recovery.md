@@ -98,7 +98,7 @@ Sui 的 `sender + asset` 在这里是钱包内部防超额预占的协调键，�
 
 单 writer per conflict domain 最容易证明正确；高吞吐时可做分片 owner/lease，但必须保证同一 nonce domain、UTXO 或 object 不被多 writer 同时控制。不要为了“无锁高并发”牺牲资金确定性。
 
-## 追问链
+## 深挖问答
 
 1. **广播超时能否释放 nonce/UTXO？** → 不能；先查交易和冲突资源是否已被消费。
 2. **归集是否越频繁越好？** → 否；要权衡热钱包暴露、手续费、碎片和提现流动性。

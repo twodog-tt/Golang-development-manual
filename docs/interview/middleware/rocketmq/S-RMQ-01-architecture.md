@@ -22,7 +22,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：阿里开源 MQ，支持普通/FIFO/事务/延迟消息；NameServer 提供路由发现，Broker 可采用主从、Controller/DLedger 等不同高可用部署，版本与模式要说清。
-2. **为什么**：国内业务、电商、支付场景常见；面试 JD 写 RocketMQ 时需讲清 **与 Kafka 差异**。
+2. **为什么**：国内业务、电商、支付场景常见；岗位 JD 写 RocketMQ 时需讲清 **与 Kafka 差异**。
 3. **怎么做**：Producer 发 `Topic:Tag`；Broker 写 CommitLog + ConsumeQueue 索引；Push/Pull 消费；Consumer Group 内 **集群消费**（一条消息只被一个实例消费）或 **广播消费**。
 
 ## 10 分钟版（原理 + 图示）
@@ -67,7 +67,7 @@ flowchart LR
 | Kafka | 超高吞吐日志流、大数据管道 |
 | Redis Stream | 轻量、小规模 |
 
-## 追问链
+## 深挖问答
 
 1. **NameServer 挂了？** → 短时用本地缓存路由；新 Broker 无法注册；已有连接可继续一段时间。
 2. **Tag 和 Key 区别？** → Tag 订阅过滤；Key 业务索引、消息查询。

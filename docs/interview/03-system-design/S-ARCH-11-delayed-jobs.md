@@ -81,7 +81,7 @@ flowchart TB
 | XXL-JOB/Temporal | 复杂编排、可视化 | 简单超时关单 |
 | time.AfterFunc | 单进程 demo | 生产分布式 |
 
-## 追问链
+## 深挖问答
 
 1. **Redis ZSET 扫描会阻塞吗？** → 分批 ZRANGEBYSCORE + LIMIT；避免 ZRANGE 全量。
 2. **任务执行失败？** → 重入队列 + 退避 + DLQ + 告警。

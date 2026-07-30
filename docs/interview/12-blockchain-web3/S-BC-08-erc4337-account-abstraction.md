@@ -107,7 +107,7 @@ Paymaster 若使用自己的签名，也必须在其验证逻辑中绑定全部�
 
 **何时不用 4337**：EOA 已满足产品需求，或目标链缺少兼容的 EntryPoint、Bundler 和监控生态；不要只因为“链支持 EVM”就假设 4337 可直接投产。
 
-## 追问链
+## 深挖问答
 
 1. **Paymaster 如何防滥用？** → 在对应 EntryPoint 版本的数据结构中绑定用户、目标调用、额度、有效期、chainId、nonce/唯一请求，并在链上验证；同时做预算、速率、信誉和 `postOp` 风险控制。
 2. **和 [S-BC-03 签名](./S-BC-03-tx-signing-key-mgmt.md)？** → UserOpHash 会绑定 chainId 与 EntryPoint，账户签名格式又由实现定义；仍要防 session key 泄漏、跨链/跨账户重放。

@@ -21,7 +21,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回模块索引](./index.md)
 
@@ -204,7 +204,7 @@ MATCH_PLANNED
 - GTD 的 `expiration` 仍可出现在 API wire body，但不属于 V2 EIP-712 signed struct。
 - domain version、verifying contract、collateral adapter 和 SDK 也随迁移变化。
 
-所以面试应先讲**通用不变量**，再说“某协议某版本如何取舍”。不要拿旧 SDK 字段拼成
+所以应先讲清**通用不变量**，再说“某协议某版本如何取舍”。不要拿旧 SDK 字段拼成
 “当前 Polymarket order struct”，也不要把 V2 的 operator trust model 当成行业标准。
 
 ## 生产场景
@@ -231,7 +231,7 @@ receipt/block hash、canonical status 和 ledger projection。日志可记录 di
 链上强约束 + 可退出/可撤单 + 完整审计，再根据产品目标评估去中心化 sequencer，而不是
 一开始宣称“链上结算所以系统完全去中心化”。
 
-## 追问链
+## 深挖问答
 
 1. **EIP-712 自带防重放吗？** → 不带；它定义 typed data hashing/signing，应用要维护 domain 和 order state。
 2. **FOK 应由合约强制吗？** → 看承诺边界；若只属于 CLOB 执行策略可链下保证，若用户要求无条件保护就要签名并链上验证。

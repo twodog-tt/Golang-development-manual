@@ -22,7 +22,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：kubelet/cgroups 杀容器或驱逐 Pod；CrashLoop 是退避重启循环。
-2. **为什么**：5 年+ 后端必须会线上排障；面试常给「Pod 一直 Restart 你怎么查」。
+2. **为什么**：5 年+ 后端必须会线上排障；常见深挖：「Pod 一直 Restart 你怎么查」。
 3. **怎么做**：按 Events 分类；OOM 调 limit 或修泄漏；Crash 看 exit code 与 `--previous` 日志；Evicted 查节点与 QoS。
 
 ## 10 分钟版（排查流程）
@@ -109,7 +109,7 @@ go tool pprof -top heap.prof
 | VPA recommendation | 可辅助修正 requests；是否自动改 requests/limits 由 update policy/resource policy 决定 |
 | 集中日志 | Loki/ELK 查 previous 实例 |
 
-## 追问链
+## 深挖问答
 
 1. **137 一定是 OOM 吗？** → 也可能是 grace 超时 SIGKILL；看 `reason: OOMKilled`。
 2. **如何抓 Crash 前瞬间？** → `--previous`、preStop hook 打日志、Sentry/panic hook。

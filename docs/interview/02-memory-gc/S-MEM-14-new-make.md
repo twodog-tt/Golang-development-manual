@@ -53,7 +53,7 @@ flowchart LR
 - Go 1.26 的 `new(expr)` 类似先求值 `v := expr` 再取 `&v` 的结果语义，适合 JSON/Protobuf 中用指针表达“可选标量”；不要误说成 `new(T, value)`。
 - `[]int{}` vs `make([]int, 0)`：两者都是非 nil 空 slice；`var s []int` 是 nil slice。以 `encoding/json` 默认行为为例，前者编码为 `[]`，nil slice 编码为 `null`。
 
-**逃逸**：`new` 结果若未逃逸，可能被优化到栈；面试提一句即可。
+**逃逸**：`new` 结果若未逃逸，可能被优化到栈；提一句即可。
 
 **常见 follow-up**
 
@@ -82,7 +82,7 @@ flowchart LR
 | `make(..., cap)` | 已知规模 | 未知小量 |
 | `var m map` 延迟 make | 可选 map | 确定会用应直接 make |
 
-## 追问链
+## 深挖问答
 
 1. **new 返回指针为何不是 nil？** → 指向已分配零值。
 2. **make slice len 与 cap？** → len 可索引范围，cap 可扩上限。

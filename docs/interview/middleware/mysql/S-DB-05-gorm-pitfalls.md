@@ -76,7 +76,7 @@ flowchart LR
 | 禁用钩子 | 性能敏感 | 依赖计数一致性 |
 | sqlx | 轻量可控 | 快速迭代 |
 
-## 追问链
+## 深挖问答
 
 1. **Preload 和 Joins 区别？** → Preload 用额外 SQL 装配关联；Join Preload 适合 one-to-one。has-many 若手写 JOIN，会产生父行重复，需明确 Scan/聚合方式，不能只加 `Distinct` 就假定关联自动装好。
 2. **钩子事务？** → 回调参数 `tx` 与创建操作同一事务。

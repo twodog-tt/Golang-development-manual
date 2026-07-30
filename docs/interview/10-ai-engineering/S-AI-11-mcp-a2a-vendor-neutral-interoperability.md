@@ -20,7 +20,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -118,7 +118,7 @@ A2A 把远端 Agent 视为黑盒：客户端不需要知道其 prompt、memory �
 
 任务状态必须被当作远端事实投影，而不是本地 worker 状态。客户端收到超时、流中断或 push
 丢失时，应通过稳定 task id 查询；本地 `CANCEL_REQUESTED` 也不等于远端已经
-`CANCELED`。A2A 规范和 SDK 仍会演进，面试时应先讲状态不变量，再按目标版本说明字段。
+`CANCELED`。A2A 规范和 SDK 仍会演进，讲解时应先讲状态不变量，再按目标版本说明字段。
 
 ### 三类 ID 必须分开
 
@@ -228,7 +228,7 @@ Stream(remote_handle, cursor) -> Event
 推荐公共入口统一协议和策略，运行时内部允许框架原生能力；高风险副作用必须经过独立执行面，
 不能因为调用来自“可信 Agent”就绕过策略。
 
-## 追问链
+## 深挖问答
 
 1. **MCP 和 A2A 是否竞争？** → 主要边界分别是 Agent-to-Tool 与 Agent-to-Agent，可组合使用。
 2. **Agent Card 能否作为登录凭证？** → 不能；它是发现元数据，认证和端点控制需另行验证。

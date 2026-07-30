@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -62,7 +62,7 @@ flowchart TD
   Tools --> AuthZ[权限校验 + 审计]
 ```
 
-**OWASP LLM 高频项（面试常问）**
+**OWASP LLM 高频项（常见深挖）**
 
 | 风险 | 后端对策 |
 |------|----------|
@@ -118,7 +118,7 @@ func (e *ToolExecutor) Run(ctx context.Context, user User, tool string, args map
 
 **何时不能单靠模型自律**：金融、医疗、删库类操作 — **代码层硬拦截**。
 
-## 追问链
+## 深挖问答
 
 1. **和 XSS 类比？** → 类似「混淆指令」；但输出可能是自然语言社工而非脚本。
 2. **RAG 如何防投毒？** → 文档来源可信、签名、ingest 审批流。

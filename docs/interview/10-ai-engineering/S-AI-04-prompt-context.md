@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -124,7 +124,7 @@ if err := validateIntent(intent); err != nil {
 
 **何时少做 Prompt 花活**：有明确 API 契约时用 **Function Calling** 替代自然语言解析。
 
-## 追问链
+## 深挖问答
 
 1. **System prompt 泄露怎么办？** → 不把 system prompt 当秘密存储或授权边界；其中不得放密钥。按它可能被部分推断/泄露设计，真正权限在代码层。
 2. **中英文 token 差异？** → tokenizer 和模型不同，不能用固定“字/token”换算；用目标模型 tokenizer 或 provider usage 实测，并预留输出预算。

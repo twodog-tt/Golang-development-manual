@@ -19,13 +19,13 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
 !!! abstract "30 秒回答"
 
-    **errgroup** = **WaitGroup + 首个 error + Context 取消**。`WithContext` 派生可取消 ctx；任一 `Go(fn)` 返回 error → **`errOnce` 记录 + cancel**；`Wait` 等全部结束并返回该 error。面试关键词：**errOnce、cancel 传播、Wait 后再 cancel 一次无害**。
+    **errgroup** = **WaitGroup + 首个 error + Context 取消**。`WithContext` 派生可取消 ctx；任一 `Go(fn)` 返回 error → **`errOnce` 记录 + cancel**；`Wait` 等全部结束并返回该 error。讲解关键词：**errOnce、cancel 传播、Wait 后再 cancel 一次无害**。
 
 **3 分钟展开**
 
@@ -99,11 +99,11 @@ type Group struct {
 
 | 方案 | 适用 |
 |------|------|
-| 手写 errgroup | 面试 |
+| 手写 errgroup | 编码练习 / 中等负载 |
 | x/sync/errgroup | 生产 |
 | channel 收 err | 需收集 **所有** 错误时 |
 
-## 追问链
+## 深挖问答
 
 1. **为何 errOnce？** → 多 goroutine 同时失败，只保留首个有意义。
 2. **子任务如何感知取消？** → `fn` 内 `select <-ctx.Done()` 或传 ctx 给 HTTP/DB。

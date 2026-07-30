@@ -20,9 +20,9 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回高频核心锚点](../../high-frequency-roadmap.md)
 
 !!! abstract "30 秒回答"
 
@@ -136,7 +136,7 @@ runtime 借助 GC 可达性判断：若 goroutine 阻塞在某个并发原语上
 | 连接超时 | TCP/HTTP idle |
 | Go 1.26 `goroutineleak` profile | 补充发现可证明永久阻塞的泄漏；当前需实验开关 |
 
-## 追问链
+## 深挖问答
 
 1. **泄漏与高并发正常阻塞？** → 看是否随时间单调增且不回落。
 2. **main 退出 G 呢？** → 进程结束全杀；泄漏指长跑服务。

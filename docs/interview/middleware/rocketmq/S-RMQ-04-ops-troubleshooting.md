@@ -93,7 +93,7 @@ flowchart TB
 | resetOffset | 补数、测试 | **生产误操作重复/丢消费** |
 | 跳过失败消息 | 非关键链路 | 数据不一致 |
 
-## 追问链
+## 深挖问答
 
 1. **和 Kafka lag 区别？** → 概念类似 diff/lag；RocketMQ 还有 Retry/DLQ 独立 Topic（见 [S-DIST-04](../kafka/S-DIST-04-kafka-semantics.md)）。
 2. **重复消费怎么防？** → 业务幂等键；Rebalance 也会重复（[S-ARCH-04](../../03-system-design/S-ARCH-04-idempotency.md)）。

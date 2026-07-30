@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -91,7 +91,7 @@ netpoll、cgo callback、`c-shared/c-archive` 等特殊路径。它不是 channe
 - **超时必备**：优先使用 `context`；也可用 `time.After`/`NewTimer`。Go 1.23+ 可回收不再被引用的未触发 timer，旧语言版本或高频循环仍应注意 timer 分配，并在需要复用/停止时用 `NewTimer`。
 - **不宜**：用无缓冲 chan 做「函数返回值」替代 —— 用 future 模式也要防无人读。
 
-## 追问链
+## 深挖问答
 
 1. **两个 G 互相无缓冲 send？** → 两者会形成局部死锁；只有整个 Go 程序也没有其他
    可运行或可唤醒路径时，runtime 才会报全局 deadlock。

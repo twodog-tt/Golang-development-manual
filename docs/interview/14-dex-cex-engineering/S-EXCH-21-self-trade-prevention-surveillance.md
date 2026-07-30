@@ -70,7 +70,7 @@ flowchart LR
 | Decrement & Cancel | 按可自成交量减少/撤销 | 同步减少/撤销 | venue-specific |
 
 Coinbase Exchange 文档列出了 `dc/co/cn/cb`，并说明 taker 指令优先；其他交易场所可能使用
-不同命名、默认值和 scope。面试时应说“以场所规则为准”，不要把某个 API 的四个 flag
+不同命名、默认值和 scope。讲解时应说“以场所规则为准”，不要把某个 API 的四个 flag
 称为 FIX 或所有交易所的统一标准。
 
 ### 示例实现的明确策略
@@ -130,7 +130,7 @@ STP 只能识别配置范围内的直接 self match。Wash trading/market manipu
 scope 提高灵活性但增加合规和误成交风险。应由产品、法务、风控共同定义，并支持按市场/
 机构配置，不能让客户端单方面缩小范围。
 
-## 追问链
+## 深挖问答
 
 1. **STP 为什么要在撮合内？** → 异步检查时 trade 已成为外部事实，不能安全“删掉成交”。
 2. **策略听 maker 还是 taker？** → 示例和一些 venue 取 taker；最终必须按本场所规则。

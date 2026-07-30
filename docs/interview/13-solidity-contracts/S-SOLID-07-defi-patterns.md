@@ -23,7 +23,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：Uniswap 类 x*y=k；Chainlink aggregator；Aave flashLoan callback。
-2. **为什么**：面试常问「如何设计链上 swap / 如何避免 oracle 操纵」。
+2. **为什么**：常见深挖「如何设计链上 swap / 如何避免 oracle 操纵」。
 3. **怎么做**：根据资产流动性、延迟容忍和威胁模型选择 Oracle；绑定准确的网络、
    feed 地址、base/quote 与 decimals，按该 feed 的 heartbeat/deviation 和业务风险检查
    `answer`、`updatedAt`、范围与异常偏离；适用 L2 还检查 sequencer uptime 和恢复
@@ -85,7 +85,7 @@ function executeOperation(...) external returns (bool) {
 - 价格：关键操作避免直接使用单池 spot；按风险组合经过验证的 feed、TWAP、
   deviation/circuit breaker 与 fallback，而不是机械地“二选一”
 
-## 追问链
+## 深挖问答
 
 1. **MEV 与 DeFi？** → sandwich 攻击；架构上 private RPC/滑点保护。
 2. **ERC-4626 vault？** → 标准化收益凭证。

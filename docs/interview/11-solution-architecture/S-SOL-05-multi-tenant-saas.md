@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -128,7 +128,7 @@ func TenantScope(db *gorm.DB, ctx context.Context) (*gorm.DB, error) {
 
 **演进路径**：可从共享表演进到部分租户 silo 的混合模式；比例由合规、噪声、成本与迁移能力决定。
 
-## 追问链
+## 深挖问答
 
 1. **子域名 tenant 解析？** → `acme.app.com` → tenant=acme；通配证书 + 网关路由。
 2. **跨 tenant 运营后台？** → 超级管理员 break-glass + 全审计。

@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -127,7 +127,7 @@ if err := server.Run(ctx, &mcp.StdioTransport{}); err != nil {
 
 **何时不用 MCP**：固定 UI 工作流、强表单校验场景 — 直接 API 更简单。
 
-## 追问链
+## 深挖问答
 
 1. **和 Function Calling 区别？** → FC 在模型 API 内；MCP 是 **宿主↔服务** 标准协议，可跨进程/跨语言。
 2. **Tool 返回什么？** → 结构化 JSON（`AddTool` Out 类型）或 `TextContent`；错误用 `IsError` 或业务字段。

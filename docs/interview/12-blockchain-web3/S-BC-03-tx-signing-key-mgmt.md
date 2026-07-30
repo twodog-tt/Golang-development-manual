@@ -98,7 +98,7 @@ err = client.SendTransaction(ctx, signed)
 | 简单 | 对账清晰 |
 | 单点风险 | 地址管理复杂 |
 
-## 追问链
+## 深挖问答
 
 1. **EIP-1559 tx 怎么签？** → `DynamicFeeTx` + tip cap / fee cap。
 2. **为何 nonce 要集中治理？** → 同一账户的 nonce 唯一且按序生效；不一定所有业务都串行执行，但分配、持久化、替换和故障恢复必须由一个一致的管理面协调。

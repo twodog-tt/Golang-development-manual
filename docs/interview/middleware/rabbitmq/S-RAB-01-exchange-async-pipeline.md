@@ -21,7 +21,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../../_meta/p0-knowledge-graph.md)
 
@@ -95,7 +95,7 @@ for d := range deliveries {
 - **与 Kafka 选型**：不要只背吞吐高低；比较路由/投递、保留与重放、顺序范围、消费模型、
   运维经验和实测 workload（[S-RMQ-03](../rocketmq/S-RMQ-03-vs-kafka.md)）
 
-## 追问链
+## 深挖问答
 
 1. **消息丢失？** → Publisher Confirm + durable/quorum queue + persistent message + 消费手动 ACK；仍要处理连接恢复和 confirm 未知结果导致的重复发布。
 2. **顺序性？** → 单 queue + Single Active Consumer 可保持主要交付顺序，但 redelivery、优先级和失败重试会影响观察到的顺序；业务仍应带 sequence。

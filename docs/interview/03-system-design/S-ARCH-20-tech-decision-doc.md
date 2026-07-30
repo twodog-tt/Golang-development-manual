@@ -17,7 +17,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -28,7 +28,7 @@ sources:
 **3 分钟展开**
 
 1. **是什么**：Architecture Decision Record（ADR）或 RFC，记录「为什么选 A 不选 B」。
-2. **为什么**：避免「老板喜欢」；新人/审计可理解历史；面试展示 senior/lead 思维。
+2. **为什么**：避免「老板喜欢」；新人/审计可理解历史；展示 senior/lead 思维。
 3. **怎么做**：模板固定；只比较真正可行的备选，不为凑数量制造稻草人；量化 workload、成本、
    人天和可靠性目标；明确 owner、review 日期、验证计划与回滚触发条件；Rejected 方案也记录理由。
 
@@ -58,7 +58,7 @@ flowchart TB
   Conseq --> Rollback[回滚与触发条件]
 ```
 
-**ADR 推荐结构（Lead 面试口述版）**
+**ADR 推荐结构（Lead 讲解版）**
 
 | 章节 | 内容 |
 |------|------|
@@ -114,7 +114,7 @@ flowchart TB
 | 口头决策 | 紧急 hotfix | 持久技术债 |
 | 投票民主 | — | 应用专家+数据 |
 
-## 追问链
+## 深挖问答
 
 1. **两个方案差不多怎么选？** → 看 **可逆性**（Two-Way Door 先试）；看 **3 年后运维成本**。
 2. **决策被推翻怎么办？** → ADR Status 改 Superseded，链到新 ADR，不删历史。

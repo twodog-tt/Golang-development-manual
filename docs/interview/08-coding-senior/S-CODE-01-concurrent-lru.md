@@ -19,7 +19,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> LRU = **最近最少使用**淘汰。经典实现：**哈希表 + 双向链表**，Get/Put 的期望/平均复杂度为 **O(1)**。Go 用 `map` + `container/list`，并发版加 **`sync.Mutex`** 包住“查 map + 改链表”的完整临界区。面试关键词：**MoveToFront、超容量删 Back、更新已存在 key**。
+> LRU = **最近最少使用**淘汰。经典实现：**哈希表 + 双向链表**，Get/Put 的期望/平均复杂度为 **O(1)**。Go 用 `map` + `container/list`，并发版加 **`sync.Mutex`** 包住“查 map + 改链表”的完整临界区。讲解关键词：**MoveToFront、超容量删 Back、更新已存在 key**。
 
 ## 3 分钟版（一面深度）
 
@@ -40,7 +40,7 @@ flowchart LR
   end
 ```
 
-**手写顺序（建议口述）**
+**手写顺序（建议讲解）**
 
 1. 定义 `entry{key, value}` — 删尾时需要 key 从 map 移除
 2. `Cache{cap, mu, items map, order *list.List}`
@@ -70,11 +70,11 @@ flowchart LR
 
 | 方案 | 适用 |
 |------|------|
-| Mutex + 单 LRU | 面试 / 中等 QPS |
+| Mutex + 单 LRU | 编码练习 / 中等 QPS |
 | 分片 LRU | 高并发读写在同一进程 |
 | Redis LRU | 多实例共享 |
 
-## 追问链
+## 深挖问答
 
 1. **为何链表 + map？** → map O(1) 找节点，list O(1) 移动/删除，数组做不到。
 2. **Get 要 MoveToFront 吗？** → 要，否则「刚读过的」会被误淘汰。

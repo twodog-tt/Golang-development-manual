@@ -73,7 +73,7 @@ flowchart TB
 | 标准库 mux | 零依赖 | 需自研生态 |
 | Chi/Fiber | 同类模型 | 团队已标准化 Gin |
 
-## 追问链
+## 深挖问答
 
 1. **`gin.Default()` 和 `gin.New()`？** → Default = New + Logger + Recovery。
 2. **中间件如何传值？** → `c.Set`；类型断言需 ok 模式。

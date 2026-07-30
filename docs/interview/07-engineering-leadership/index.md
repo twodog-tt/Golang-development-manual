@@ -10,7 +10,7 @@
 | [S-LEAD-04](./S-LEAD-04-staff-strategy-influence-case.md) | Staff 技术战略与无职权影响力 | ⭐⭐⭐⭐⭐ |
 | [S-LEAD-05](./S-LEAD-05-cross-team-migration-case.md) | 跨团队高风险迁移与回滚边界 | ⭐⭐⭐⭐⭐ |
 
-## 面试提示
+## 讲解提示
 
 - 用 **STAR + 技术门禁** 准备 2～3 个真实案例（P0 事故、跨团队迁移、技术战略）
 - 少讲空话，多讲 **可量化结果**（MTTR、复发率、PR cycle time）

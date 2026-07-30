@@ -78,7 +78,7 @@ sequenceDiagram
 
 统一 Cosmos adapter 可复用 protobuf、签名和基础查询，但每条链的 module/capability 配置必须独立；过度假设“Cosmos SDK 链都一样”会在升级和 IBC 路径上出事故。
 
-## 追问链
+## 深挖问答
 
 1. **CometBFT 和 Cosmos SDK 谁负责什么？** → 前者共识/区块，后者应用状态机与 modules。
 2. **Relayer 能伪造 IBC packet 吗？** → 正常协议下目标链验证 proof/light client；relayer 可延迟或不转发，但不能仅凭自述伪造有效状态。

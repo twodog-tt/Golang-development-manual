@@ -185,7 +185,7 @@ API P95/P99: [真实值]
 | break-glass 与停止权 | 当 guardrail 触发时任何值班方可暂停 |
 | deprecation deadline | 给旧路径 owner、迁移支持和升级机制 |
 
-## 追问链
+## 深挖问答
 
 1. **双写为什么危险？**  
    两个系统没有共同提交边界，会出现部分成功和 unknown；必须有单一 authority、outbox/CDC、

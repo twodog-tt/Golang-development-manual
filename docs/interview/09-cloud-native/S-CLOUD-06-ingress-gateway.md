@@ -22,7 +22,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：Ingress Controller 把外部 HTTP(S) 路由到 Service；Gateway API 用 Gateway + HTTPRoute 替代注解魔法。
-2. **为什么**：面试常问 Ingress vs Service LoadBalancer、如何做灰度 path、WebSocket 怎么配。
+2. **为什么**：常见深挖 Ingress vs Service LoadBalancer、如何做灰度 path、WebSocket 怎么配。
 3. **怎么做**：Go API 用 host/path 路由；长连接单独评估 idle timeout、每次写 deadline 与 drain；网关和应用超时按各自语义形成端到端 deadline，不能简单比较两个数字；业务鉴权/限流放 API 网关或应用层。
 
 ## 10 分钟版（原理 + 图示）
@@ -120,7 +120,7 @@ spec:
 
 **何时不用 Ingress**：纯内网 gRPC 东西向 → Service + Mesh（[S-SOL-04](../11-solution-architecture/S-SOL-04-bff-gateway-mesh.md)）。
 
-## 追问链
+## 深挖问答
 
 1. **Ingress 和 Service 区别？** → Service 集群内负载均衡；Ingress 七层路由 + 域名/TLS。
 2. **如何做金丝雀？** → Ingress weight 注解、Gateway API HTTPRoute 权重、或 Flagger（[S-ARCH-15](../03-system-design/S-ARCH-15-release-strategy.md)）。

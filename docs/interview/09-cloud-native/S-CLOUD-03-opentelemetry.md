@@ -91,7 +91,7 @@ func initTracer(ctx context.Context, endpoint string) (*sdktrace.TracerProvider,
 
 **何时不全量 OTel**：边缘 IoT、极低延迟路径可只 metrics + 结构化日志。
 
-## 追问链
+## 深挖问答
 
 1. **Trace 和 Log 怎么关联？** → context 中 trace_id 写入 slog 字段；同一 request 共享。
 2. **采样策略？** → 头采样便宜但看不到最终错误；尾采样可按错误/延迟决策但需要缓冲完整 trace。所谓“错误全留”是策略目标，不是无成本保证。

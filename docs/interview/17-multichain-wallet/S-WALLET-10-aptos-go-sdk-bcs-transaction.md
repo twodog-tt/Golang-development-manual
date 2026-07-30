@@ -121,7 +121,7 @@ VM abort、out of gas、sequence too old/new 都必须保留原始错误和 ledg
 隔离在独立 module 能控制依赖。手写序列化看似轻量，除非有完整官方向量与审计，否则
 不值得承担签名错误风险。
 
-## 追问链
+## 深挖问答
 
 1. **为什么不能签 JSON？** → 链验证的是协议定义、带域分离的 RawTransaction signing message。
 2. **expiration 用本机时间可以吗？** → 应参考可信 ledger time 并设置策略余量。

@@ -80,7 +80,7 @@ flowchart LR
 
 本地 key 简单低延迟但主机风险集中；remote signer/HSM 隔离更强，却增加网络和可用性依赖。无论哪种，anti-slashing 状态不能成为无备份单点，也不能在分区时双主。
 
-## 追问链
+## 深挖问答
 
 1. **离线会被 slash 吗？** → 一般是 penalty/漏奖励；slashing 是特定可证明冲突行为。
 2. **为什么 validator 不能 active-active？** → 两实例可能对不同 fork/区块签冲突消息。

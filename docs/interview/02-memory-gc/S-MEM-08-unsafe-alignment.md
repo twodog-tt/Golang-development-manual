@@ -91,7 +91,7 @@ flowchart TD
 | cgo | 必须用 C 库 | 可纯 Go 实现 |
 | 代码生成 marshaler | 复杂 struct | 小消息 |
 
-## 追问链
+## 深挖问答
 
 1. **uintptr 与 Pointer 区别？** → uintptr 是整数，不参与 GC 扫描。
 2. **string 转 []byte 零拷贝？** → 可用 unsafe 构造只读视图，但绝不能通过它修改 string；后果可能是崩溃或内存破坏，且需保证原 string 存活。

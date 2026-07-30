@@ -21,7 +21,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../../_meta/p0-knowledge-graph.md)
 
@@ -164,7 +164,7 @@ if SQLSTATE == 40001 or approved deadlock retry:
 - **单写者/账户分片**：高热点资金系统可在数据库外先按账户串行化，数据库约束仍作最后防线。
 - **不可变账本 + 派生余额**：审计和重建能力更强；代价是写路径、对账与修复流程更复杂。
 
-## 追问链
+## 深挖问答
 
 1. **Repeatable Read 是否等于 Serializable？**  
    不等于。PostgreSQL Repeatable Read 提供稳定快照，但仍可能出现无法对应串行执行的依赖；

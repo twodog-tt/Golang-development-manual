@@ -40,7 +40,7 @@ flowchart TD
   Wake --> Done
 ```
 
-**公平性**：长期运行各 case 概率近似均等，但 **不保证严格公平**；高负载下仍可能饥饿（极少见，面试知道即可）。
+**公平性**：长期运行各 case 概率近似均等，但 **不保证严格公平**；高负载下仍可能饥饿（极少见，了解即可）。
 
 **nil channel**：对应 case 永不就绪，常用于动态关闭某分支。
 
@@ -70,7 +70,7 @@ flowchart TD
 
 **不宜**：用 `for { select { default: } }` 替代 condition variable 做精确等待。
 
-## 追问链
+## 深挖问答
 
 1. **多个 case 同时就绪？** → 随机选一个执行，其余本轮不执行。
 2. **select 与 priority？** → 语言无优先级，需多层 select 或独立 goroutine。

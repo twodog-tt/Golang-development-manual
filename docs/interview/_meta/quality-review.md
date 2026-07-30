@@ -109,7 +109,7 @@
   `GOMAXPROCS` 与 `WaitGroup.Go`、Go 1.26 Green Tea GC、
   `goroutineleak` profile、`new(expr)` 和泛型自引用约束。
 - 并发原语：修正“无缓冲 channel 代表业务已处理”“`sync.Map.Range`
-  不能修改 map”“`sync.Pool` 每次 GC 立即全清空”等错误口述。
+  不能修改 map”“`sync.Pool` 每次 GC 立即全清空”等错误表述。
 - 内存模型：避免把 Go data race 简化成 C/C++ 式“任意未定义行为”；明确
   DRF-SC、happens-before 与 race detector 只能发现已执行路径。
 - GC：区分 tracing/mark-sweep 正确性模型与 Green Tea 的 page/span

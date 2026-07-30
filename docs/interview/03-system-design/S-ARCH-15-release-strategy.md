@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -116,7 +116,7 @@ flowchart LR
 | Flag 降级 | 紧急关功能 | 数据 schema 变更 |
 | 蓝绿 | 快速切换 | 双倍资源成本 |
 
-## 追问链
+## 深挖问答
 
 1. **破坏性变更怎么发？** → 新版本 endpoint；旧版只增不删字段；deprecation 周期。
 2. **灰度失败自动回滚条件？** → 预先定义相对/绝对 guardrail，覆盖 5xx、延迟、饱和、

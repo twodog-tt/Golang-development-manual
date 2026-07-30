@@ -47,7 +47,7 @@ flowchart LR
   Merge --> Learn[团队知识沉淀]
 ```
 
-**Go 团队 CR Checklist（可口述）**
+**Go 团队 CR Checklist（可讲解）**
 
 - [ ] 错误是否 wrap 并保留链？`fmt.Errorf("...: %w", err)`
 - [ ] 并发：context 传递、泄漏、锁范围
@@ -78,7 +78,7 @@ flowchart LR
 
 **何时放宽 CR**：紧急 hotfix 可走 break-glass，**事后补 CR 与测试**。
 
-## 追问链
+## 深挖问答
 
 1. **CR 意见冲突？** → 先对齐 guide；无条文则 ADR 或 TL 决策并记录。
 2. **Senior 不接受 CR？** → 1:1 谈团队标准；用 revert/故障案例说明成本。

@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -129,7 +129,7 @@ chunk 与 `[DONE]` 是另一套 surface。若不用 SDK，自写 SSE decoder 还
 
 **何时不用流式**：短回答、批处理、仅需结构化 JSON 且要完整校验。
 
-## 追问链
+## 深挖问答
 
 1. **用户断开连接还要不要继续调模型？** → 监听 `ctx.Done()`，取消上游请求省成本。
 2. **429 怎么处理？** → 读 `Retry-After`；在总 deadline 内退避加 jitter；限制本地并发/队列并按配额治理，不能用轮换 key 绕过服务条款。

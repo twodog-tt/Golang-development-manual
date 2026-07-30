@@ -122,7 +122,7 @@ PDB 影响 `kubectl drain` 等调用 Eviction API 的操作。直接删除 Pod/D
 
 **何时不用 Deployment**：有状态单主 → StatefulSet；一次性任务 → Job。
 
-## 追问链
+## 深挖问答
 
 1. **readiness 和 liveness 能查同一个 DB 吗？** → 不推荐；DB 抖动会 liveness 杀全体 Pod。
 2. **preStop sleep 5s 干什么？** → 可给 EndpointSlice/LB 状态传播留缓冲，但只是经验性补偿。`preStop` 在 TERM 前执行，且其耗时计入同一个 termination grace period；极简镜像没有 shell 时不要用 `exec /bin/sh sleep`。

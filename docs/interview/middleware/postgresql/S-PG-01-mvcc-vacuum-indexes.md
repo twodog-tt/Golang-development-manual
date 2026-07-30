@@ -92,7 +92,7 @@ WHERE status = 'pending';
 
 - 多列 B-tree 最稳定的高收益形态仍是：前导列承接高频等值条件，随后放范围/排序列。
 - 不要把规则背成“没用最左列就绝对不能用”。PostgreSQL 18 为多列 B-tree 引入了
-  skip scan，是否获益由数据分布、统计信息和成本估算决定；面试目标若是 17 或更早版本，
+  skip scan，是否获益由数据分布、统计信息和成本估算决定；目标版本若是 17 或更早版本，
   不能把这一能力当成既有事实。
 - `INCLUDE` 列是 payload，不参与搜索键语义；它可能提高 index-only scan 机会，也会放大
   索引、写放大和缓存压力。
@@ -128,7 +128,7 @@ invalid index；它也不能放在普通事务块里。生产变更应检查 `pg
   出现在主要过滤条件中，并控制分区数量。
 - **重整空间**：先证明空间是否真的需要归还 OS；不要把 `VACUUM FULL` 当日常保养命令。
 
-## 追问链
+## 深挖问答
 
 1. **为什么 PostgreSQL 需要 VACUUM，而 InnoDB 的表述不同？**  
    两者 MVCC 物理组织和清理机制不同。回答 PostgreSQL 的 heap tuple、visibility 与 vacuum，

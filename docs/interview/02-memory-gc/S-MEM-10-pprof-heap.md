@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -103,7 +103,7 @@ go tool pprof -base heap1.prof heap2.prof   # 差分
 | 压测时抓 profile | 可复现 | 仅生产偶发 |
 | 降 MemProfileRate | 精确定位 | 生产长期开 |
 
-## 追问链
+## 深挖问答
 
 1. **heap 与 allocs endpoint 区别？** → 同一 profile 源，默认视图 index 不同。
 2. **为何 `?gc=1`？** → 去掉待回收垃圾，inuse 更接近真实存活。

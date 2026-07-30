@@ -75,7 +75,7 @@ flowchart LR
 
 **不宜**：CPU 任务池大小 >> 核数且无队列上限。
 
-## 追问链
+## 深挖问答
 
 1. **worker 阻塞会怎样？** → 吞吐降，队列堆积。
 2. **如何传递 error？** → results chan 带 error、或 errgroup。

@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -117,7 +117,7 @@ flowchart LR
 | 同步写日志 | 开发 | 生产热路径 |
 | 仅 Metrics | 资源监控 | 请求级根因 |
 
-## 追问链
+## 深挖问答
 
 1. **Metrics 和 Logs 区别？** → Metrics 便宜聚合告警；Logs 贵但含上下文。
 2. **trace_id 怎么传递？** → W3C `traceparent` Header；gRPC metadata；`context.Context`。

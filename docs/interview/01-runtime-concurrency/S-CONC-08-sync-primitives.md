@@ -19,9 +19,9 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回高频核心锚点](../../high-frequency-roadmap.md)
 
 !!! abstract "30 秒回答"
 
@@ -102,7 +102,7 @@ flowchart TB
 
 **不宜 atomic**：链表插入、check-then-act 多步无 CAS 循环。
 
-## 追问链
+## 深挖问答
 
 1. **Mutex 可重入吗？** → 不可，二次 Lock 死锁。
 2. **RWMutex 会让 writer 永久饿死吗？** → Go 实现会在 writer 等待时阻塞新 reader，使 writer 最终有机会获得锁；代价是后续 reader 也排队，长读临界区仍会让 writer 等很久。

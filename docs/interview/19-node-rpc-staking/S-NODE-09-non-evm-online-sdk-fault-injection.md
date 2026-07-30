@@ -80,7 +80,7 @@ stateDiagram-v2
 `PENDING`，非零是预执行准入 `REJECTED`，两者都不是 committed execution 的成功或失败；
 入块后仍要按 tx hash 查询 committed result。还要做链能力发现：Cosmos SDK v0.53 起支持由
 具体链选择启用 unordered transactions；启用时 sequence 规则和 timeout timestamp 与传统
-有序账户不同，不能继续口述“所有 Cosmos 交易永远 sequence++”。
+有序账户不同，不能继续讲解“所有 Cosmos 交易永远 sequence++”。
 
 执行失败后是否消耗 sequence、fee 以及在哪个 AnteHandler 阶段失败，需按目标链/版本验证并重读账户；不要从错误文本硬编码推断。
 
@@ -167,7 +167,7 @@ latency/timeout/reset 与故障后恢复。Solana、Aptos、Sui 已完成版本 
 
 一个统一 tracker 能减少重复状态机错误，但 chain adapter 必须拥有证据解释权。若把所有状态归一成 pending/success/failed 而不保存原始 evidence，会让升级、争议和资金对账无法恢复。
 
-## 追问链
+## 深挖问答
 
 1. **提交返回 hash 是否成功？** → 只说明请求/交易被某层接受；按链查询执行结果和业务 finality。
 2. **查不到交易能重签吗？** → 不能据此；先查/重播同一 bytes，只有证明原 attempt 不会执行且资源已刷新才重建。

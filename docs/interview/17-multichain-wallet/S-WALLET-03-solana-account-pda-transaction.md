@@ -80,7 +80,7 @@ PDA 由 program ID、seeds 和 bump 推导，落在 Ed25519 曲线之外，因�
 
 Versioned transaction + ALT 可压缩账户地址、支持更复杂交易，但增加 lookup table 生命周期和解析复杂度。简单交易不必强行使用；adapter 必须能解析 legacy 与支持的版本。
 
-## 追问链
+## 深挖问答
 
 1. **PDA 有私钥吗？** → 没有；runtime 根据 program+seeds 授权程序签名。
 2. **recent blockhash 是 nonce 吗？** → 都参与 freshness，但不是 EVM 账户递增 nonce；并发与过期语义不同。

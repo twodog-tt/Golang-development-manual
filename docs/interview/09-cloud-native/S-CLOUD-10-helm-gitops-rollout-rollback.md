@@ -173,7 +173,7 @@ Argo CD 自动同步会在 desired/live 差异时触发收敛；自动 prune 和
   migration controller/job。
 - **回退 Git commit**恢复期望状态可审计；对不可逆数据变化应优先兼容性 forward-fix。
 
-## 追问链
+## 深挖问答
 
 1. **Git 已 merge 是否代表已部署？**  
    不代表。还要有 controller observed revision、sync/health 和业务 SLI 证据。

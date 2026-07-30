@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -94,7 +94,7 @@ flowchart TB
 | 消息队列卸峰 | 突发流量 |
 | 禁止 goroutine | 不可能，需管理 |
 
-## 追问链
+## 深挖问答
 
 1. **多少 G 算多？** → 没有统一阈值；看栈内存、阻塞原因、调度延迟、增长趋势和 SLO。数量大本身只是排查信号。
 2. **sem 与 buffered chan？** → sem 计数、chan 可传任务语义。

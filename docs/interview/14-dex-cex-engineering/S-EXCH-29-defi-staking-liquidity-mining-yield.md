@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回模块索引](./index.md)
 
@@ -47,7 +47,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> DEX Tech Lead 面试里，「Staking / 挖矿 / Farming」考的不是背名词，而是：**奖励怎么公平累计、谁有资格领取、排放怎么停、如何防刷**，以及链下 Indexer 如何投影 APR 而不误导用户。
+> DEX Tech Lead 场景里，「Staking / 挖矿 / Farming」考的不是背名词，而是：**奖励怎么公平累计、谁有资格领取、排放怎么停、如何防刷**，以及链下 Indexer 如何投影 APR 而不误导用户。
 
 ## 3 分钟版（一面深度）
 
@@ -80,9 +80,9 @@ flowchart TB
 | Liquidity Mining | LP Token / V3 NFT | 排放 + swap fee | 无常损失、假池、刷量 |
 | Yield Farming | Vault share | 多策略收益 | 策略合约风险、复杂敞口 |
 
-> 注意：知识库 [S-NODE-03](../19-node-rpc-staking/S-NODE-03-validator-staking-slashing-keys.md) 讲的是 **PoS 验证者 Staking / Slashing**，本篇讲 **DeFi 应用层激励**，面试要先澄清语境。
+> 注意：知识库 [S-NODE-03](../19-node-rpc-staking/S-NODE-03-validator-staking-slashing-keys.md) 讲的是 **PoS 验证者 Staking / Slashing**，本篇讲 **DeFi 应用层激励**，要先澄清语境。
 
-### 奖励会计（面试必画）
+### 奖励会计（必画）
 
 目标：O(1) 更新，不遍历所有 staker。
 
@@ -212,7 +212,7 @@ APR 是 **瞬时估计**，不是承诺收益；产品文案与合规口径要�
 | Gauge + veToken | 长期治理与深度激励 | 冷启动过重 |
 | 纯链下积分 | 快速实验 | 用户不信任、难抗篡改 |
 
-## 追问链
+## 深挖问答
 
 1. **Staking 和 Liquidity Mining 区别？** → 质押物不同：单币 vs LP；风险敞口不同。
 2. **为何用 rewardPerToken？** → 避免每块遍历用户，O(1) 结算。

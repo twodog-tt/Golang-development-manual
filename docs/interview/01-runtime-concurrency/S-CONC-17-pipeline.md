@@ -71,7 +71,7 @@ flowchart LR
 | Kafka/Flink | 大规模、持久化、重放 |
 | 单 goroutine 顺序 | 低 QPS、简单逻辑 |
 
-## 追问链
+## 深挖问答
 
 1. **fan-out 同一 in channel？** → 多 reader 竞争，每条消息仅一 worker 处理。
 2. **如何保证顺序？** → 默认不保证；需序号重排 stage。

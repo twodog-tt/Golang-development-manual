@@ -91,7 +91,7 @@ cat /sys/fs/cgroup/cpu.max  # cgroup v2
 - **显式配置** vs **automaxprocs**：金融/核心链路倾向启动日志打印最终 GOMAXPROCS。
 - **不宜**：为「提高并发」盲目翻倍 GOMAXPROCS；IO 服务瓶颈常在网络而非 P 数。
 
-## 追问链
+## 深挖问答
 
 1. **改 GOMAXPROCS 会重启 G 吗？** → 不会杀进程，但调度与 P 池重建，瞬时抖动。
 2. **和 worker 池大小关系？** → 独立；worker 是应用层并发，GOMAXPROCS 是 runtime 并行度。

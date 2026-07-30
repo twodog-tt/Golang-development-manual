@@ -32,7 +32,7 @@ sources:
 ## 10 分钟版（优化清单）
 
 同一笔交易中，首次访问某个账户或 storage key 与后续 warm access 的成本不同；
-`SSTORE` 成本还取决于原值、当前值、新值和退款规则。面试时应讲相对关系与
+`SSTORE` 成本还取决于原值、当前值、新值和退款规则。讲解时应讲相对关系与
 目标 fork，避免死记一组会随 EIP 变化的固定数字。
 
 | 技巧 | 说明 |
@@ -65,7 +65,7 @@ sources:
 - NFT 批量 mint：ERC-1155 + merkle allowlist
 - 存储迁移：链下 Merkle root 上链验证
 
-## 追问链
+## 深挖问答
 
 1. **SLOAD vs MLOAD 成本？** → storage 贵 orders of magnitude。
 2. **cold vs warm access？** → EIP-2929 首次访问更贵。

@@ -135,7 +135,7 @@ sequenceDiagram
   reversal/recompute 指令；不是所有 RPC/历史回补都会直接给出 `removed=true`
 - **对账不平**：暂停提现（[S-EXCH-15](../14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery.md)）
 
-## 追问链
+## 深挖问答
 
 1. **能否共享一个 MySQL 实例多 schema？** → 可以，但 **逻辑上** 仍 per-service；避免跨 schema 事务。
 2. **强一致下单扣款？** → 若 ledger 是余额权威源，就在接受订单前幂等 reserve；

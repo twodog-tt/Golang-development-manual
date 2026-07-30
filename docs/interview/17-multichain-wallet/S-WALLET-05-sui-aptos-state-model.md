@@ -59,7 +59,7 @@ flowchart TB
 
 交易通常需要 `(object ID, version, digest)` 的认证引用。若另一笔交易先修改同一 mutable object，旧引用会失效，需要重新读取和构建。钱包不能只保存 object ID。
 
-Owned objects 的所有者控制使用；shared objects 需要全局共识排序，吞吐/延迟特征不同。面试不能简单说“Sui 所有交易都绕过共识”。
+Owned objects 的所有者控制使用；shared objects 需要全局共识排序，吞吐/延迟特征不同。不能简单说“Sui 所有交易都绕过共识”。
 
 对启用了 Address Balances 的资产，资金与 gas 可以走地址余额或与 Coin Objects 组合的
 hybrid 路径；当前部分稳定币转账还支持由 Address Balances 驱动、范围明确的 gasless 能力。这没有删除 object 模型，
@@ -98,7 +98,7 @@ resource/type 变化。错误码必须保留链原文并映射为稳定领域分
 
 构建“Move adapter”只适合共享少量 BCS/领域工具；如果它隐藏 Sui/Aptos 状态差异，会让 nonce/object reservation 和恢复逻辑变得错误。宁可重复少量 glue code，也不要制造错误抽象。
 
-## 追问链
+## 深挖问答
 
 1. **Sui object ID 足够重放交易吗？** → 不够；mutable input 还需要正确 version/digest。
 2. **Sui 为什么能并行？** → 互不冲突的输入/owned objects 可独立处理；shared objects 仍需排序。

@@ -63,7 +63,7 @@ flowchart LR
 | Rollup / archive | 可重建 L2 的 batch 数据和长期历史 | Ethereum 会替每个 Rollup 永久归档 |
 
 EIP-4844 原始参数曾对应较低 blob target/max；这些值会随网络升级和
-Blob-Parameter-Only fork 改变。面试时不要把 EIP 初始常量当作 2026 主网永久参数。
+Blob-Parameter-Only fork 改变。讲解时不要把 EIP 初始常量当作 2026 主网永久参数。
 
 ### PeerDAS 已不是“未来路线图”
 
@@ -113,7 +113,7 @@ PeerDAS 的安全性依赖随机/多样化采样、peer 可达性、custody 分�
 DA 吞吐提高可降低 L2 成本，但增加 P2P、纠删码和采样实现复杂度。Rollup 自建长期归档
 提高可审计性与恢复能力，但不能把归档服务的可用性反向宣称为 Ethereum 共识保证。
 
-## 追问链
+## 深挖问答
 
 1. **EVM 能读 blob 吗？** → 不能读取 blob 内容；能访问 versioned hash，并使用相关预编译验证开口。
 2. **KZG proof 是否等于 DA proof？** → 它证明数据片段与 commitment 一致，DA 还需要获取与采样机制。

@@ -18,9 +18,9 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回高频核心锚点](../../high-frequency-roadmap.md)
 
 !!! abstract "30 秒回答"
 
@@ -97,7 +97,7 @@ flowchart TB
 | 业务参数放 ctx.Value | 避免，用显式参数 |
 | errgroup + ctx | 并行子任务首错取消 |
 
-## 追问链
+## 深挖问答
 
 1. **Background vs TODO？** → 语义区别，均不取消；TODO 表未完成迁移。
 2. **Done 关闭后能读 Err 吗？** → `context.Canceled` 或 `DeadlineExceeded`。

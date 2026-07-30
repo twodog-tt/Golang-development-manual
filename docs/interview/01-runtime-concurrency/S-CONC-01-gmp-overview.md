@@ -21,9 +21,9 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回高频核心锚点](../../high-frequency-roadmap.md)
 
 !!! abstract "30 秒回答"
 
@@ -103,7 +103,7 @@ flowchart LR
   M2 -.->|exitsyscall 后| GlobalQ
 ```
 
-**面试一句话**：**G 是任务，M 是载体，P 是并行槽位**；同一时刻最多约 `GOMAXPROCS` 个 G 处于 `_Grunning`。
+**一句话结论**：**G 是任务，M 是载体，P 是并行槽位**；同一时刻最多约 `GOMAXPROCS` 个 G 处于 `_Grunning`。
 
 ### 三实体职责（必背表）
 
@@ -261,7 +261,7 @@ flowchart TB
 
 **安全点（safe-point）**：GC 与抢占需要能安全扫描栈、切换 G 的代码位置；Go 1.14 的异步抢占显著缩小了纯计算循环的抢占盲区，但 Go 调度仍不是硬实时调度。
 
-**不能完全抢占的情况（面试加分）**
+**不能完全抢占的情况（加分项）**
 
 - runtime 的 `nosplit`/关键临界区
 - 正在执行的 **C/外部代码**；该 M 不受 Go 调度器直接抢占，但调用通常会释放 P 供其他 M 使用
@@ -368,7 +368,7 @@ runtime.GOMAXPROCS(8)              // 设置 P 数量上限
 | `automaxprocs` | 容器部署 | 裸机通常默认即可 |
 | 进程外隔离 CPU 密集 | 避免拖垮 API 延迟 | 运维成本更高 |
 
-## 追问链
+## 深挖问答
 
 1. **G 和线程区别？** → G 栈 ~2KB 起、用户态切换；M 是 OS 线程，MB 栈、内核切换贵。
 2. **为什么需要 P，不是只有 G-M？** → 本地 runq + mcache 降锁；明确并行度上限（[S-CONC-02](./S-CONC-02-gmp-roles.md)）。

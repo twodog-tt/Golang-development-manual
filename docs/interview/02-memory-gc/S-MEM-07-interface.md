@@ -81,7 +81,7 @@ flowchart LR
 | 类型注册表 + ID | RPC 多类型 | 少量固定类型 |
 | 代码生成 | 序列化热点 | 小项目维护成本 |
 
-## 追问链
+## 深挖问答
 
 1. **eface 与 iface 区别？** → 有无 itab/方法集。
 2. **为何 nil 指针赋 interface 不是 nil？** → data 与 type 二元组，type 已设置。

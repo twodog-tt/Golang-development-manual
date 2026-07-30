@@ -76,7 +76,7 @@ flowchart LR
 | 悲观锁 FOR UPDATE | 强一致扣减 | 长临界区 |
 | 分库分表 | 锁粒度缩小 | 跨库无 MVCC |
 
-## 追问链
+## 深挖问答
 
 1. **快照读和当前读？** → 普通 SELECT vs 锁定读/DML。
 2. **RR 如何避免幻读？** → 快照读 MVCC；当前读 next-key lock。

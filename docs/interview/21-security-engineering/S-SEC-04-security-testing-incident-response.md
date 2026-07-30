@@ -23,7 +23,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -131,7 +131,7 @@ NIST SP 800-61r3 强调 incident response 是整体风险管理的一部分。We
 
 故障注入生产流量的真实性最高但风险也高。可按 deterministic model → localnet/staging → shadow → 小范围生产 game day 逐级推进，每级声明未覆盖的假设。主网资产操作应有硬额度和人工止损边界。
 
-## 追问链
+## 深挖问答
 
 1. **Fuzz 与 property test 区别？** → fuzz 是输入生成/探索机制；property 定义跨大量输入必须成立的语义，可组合使用。
 2. **两个 client 输出一致就正确吗？** → 不一定，可能共享 bug；需要 spec/golden model 和独立实现。

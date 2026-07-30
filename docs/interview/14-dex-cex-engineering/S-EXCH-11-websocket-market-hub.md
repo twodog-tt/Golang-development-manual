@@ -73,7 +73,7 @@ flowchart TB
   topic 订阅数放 metrics，避免 health payload 高基数和昂贵聚合
 - **运营推送**：Token 毕业/暂停交易状态变更
 
-## 追问链
+## 深挖问答
 
 1. **与 [S-NET-05](../06-network-governance/S-NET-05-websocket-gateway.md) 差异？** → NET-05 通用网关；本题 **行情 topic 与交易数据模型**。
 2. **单机 10w 连接？** → 连接数本身不是容量结论；还要压测 TLS、消息频率、

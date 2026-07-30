@@ -77,7 +77,7 @@ flowchart TB
 | singleflight | 热点 miss | 已命中路径 |
 | 永不过期 + 异步更新 | 超级热点 | 数据实时性要求高 |
 
-## 追问链
+## 深挖问答
 
 1. **布隆能删元素吗？** → 标准不能；用 Counting Bloom 或定期重建。
 2. **singleflight 和 Mutex 区别？** → singleflight 合并同 Key 并发请求，只回源一次。

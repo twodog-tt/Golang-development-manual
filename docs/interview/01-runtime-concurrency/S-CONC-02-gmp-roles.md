@@ -67,7 +67,7 @@ flowchart TB
   GlobalQ --> P1
 ```
 
-**面试一句话**：G 是任务，M 是载体，P 是工牌——**同一时刻最多约 GOMAXPROCS 个 G 处于 `_Grunning`**；M 可以很多，但无 P 的 M 跑不了 Go 用户代码。
+**一句话结论**：G 是任务，M 是载体，P 是工牌——**同一时刻最多约 GOMAXPROCS 个 G 处于 `_Grunning`**；M 可以很多，但无 P 的 M 跑不了 Go 用户代码。
 
 ### 三实体职责与核心字段
 
@@ -361,7 +361,7 @@ func runqputslow(pp *p, gp *g, h, t uint32) bool {
 }
 ```
 
-| 步骤 | 行为 | 面试易错点 |
+| 步骤 | 行为 | 易错点 |
 |------|------|------------|
 | 取哪一半 | **`runq[(h+i)]`，i=0..127** — **head 侧前半** | ❌ 常见误答「推 tail 后半段」 |
 | 本地剩什么 | **head 推进 128**，tail 不动 → **tail 侧后半留本地** | 与「推后半」说法相反 |
@@ -440,7 +440,7 @@ flowchart TB
 | mcentral | mcache 不足时补 span | 按 size class 分锁 |
 | mheap | 大对象 / mcentral 不足 | 全局锁 |
 
-**面试加分**：大量阻塞 syscall 会让 M 数量膨胀，但只要 P 能及时 handoff，Go 代码并行上限仍由 `GOMAXPROCS` 决定。不能回答成“无 P 的 M 会继续执行用户代码，只是分配退化到全局锁”。
+**加分项**：大量阻塞 syscall 会让 M 数量膨胀，但只要 P 能及时 handoff，Go 代码并行上限仍由 `GOMAXPROCS` 决定。不能回答成“无 P 的 M 会继续执行用户代码，只是分配退化到全局锁”。
 
 ### G 状态与 P 的关系
 
@@ -498,7 +498,7 @@ stateDiagram-v2
 | `automaxprocs` | 旧工具链或明确希望库在启动时固定设置 P 数 | Go 1.25+ 已启用 runtime 容器感知且希望保留动态更新时；库会显式设置 `GOMAXPROCS` |
 | 调大 GOMAXPROCS | CPU 密集、核数明确 | 已超过 cgroup quota |
 
-## 追问链
+## 深挖问答
 
 1. **G、M、P 一句话各是什么？** → G 任务，M 线程，P 并行槽位 + 本地 runq/mcache。
 2. **为什么需要 P，不是 G-M 两层？** → 降全局锁、明确并行上限、mcache 无锁分配。

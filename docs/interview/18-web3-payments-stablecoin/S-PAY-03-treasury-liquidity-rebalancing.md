@@ -82,7 +82,7 @@ Dashboard 至少展示 physical balance、ledger liability、available/reserved�
 
 库存越分散，局部 SLA 越好但资本和攻击面越大；越集中越安全/高效，但跨链补充慢。架构师应给出按流量与风险分层的动态区间，而不是固定“热钱包留 10%”。
 
-## 追问链
+## 深挖问答
 
 1. **链上余额为什么不等于可用？** → 有预占、未决交易、gas、冻结和安全 buffer。
 2. **如何设 min？** → 峰值流量 × 补充 lead time + 风险余量，并做压力测试。

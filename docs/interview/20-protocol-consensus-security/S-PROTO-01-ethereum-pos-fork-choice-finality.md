@@ -65,7 +65,7 @@ flowchart LR
 | EL `safe/finalized` | CL 通过 Engine API 传给 EL 的共识水位 | 语义来自共识层，不是 EL 自己数区块 |
 
 Fork-choice 规格只考虑与已知 finalized checkpoint 不冲突的分支，并从 justified
-checkpoint 执行 LMD-GHOST。面试时说“最长链”过于粗糙；块高相同也不是简单比较块数。
+checkpoint 执行 LMD-GHOST。讲解时说“最长链”过于粗糙；块高相同也不是简单比较块数。
 
 ### FFG 阈值的准确表达
 
@@ -118,7 +118,7 @@ genesis 比较两条看似都合法的历史，可能无法客观排除长程攻
 节点 checkpoint 来源越集中，运维越简单但信任集中度越高；生产应维护来源清单、签名/
 哈希证据和交叉验证。
 
-## 追问链
+## 深挖问答
 
 1. **LMD-GHOST 的 LMD 是什么？** → 每个验证者只按最新有效消息计权，避免历史票重复累计。
 2. **Head 为什么能在 finalized 不变时重组？** → fork choice 在 finalized 之后仍持续选择最优分支。

@@ -16,9 +16,9 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回高频核心锚点](../../high-frequency-roadmap.md)
 
 !!! abstract "30 秒回答"
 
@@ -106,7 +106,7 @@ flowchart LR
 | 单分区顺序 | 强顺序单实体 | 高吞吐全局顺序 |
 | 内存队列 | 单进程 | 持久化、跨服务 |
 
-## 追问链
+## 深挖问答
 
 1. **先 commit 还是先处理？** → 先处理再 commit（至少一次）；先 commit 可能丢（至多一次）。
 2. **如何保证全局顺序？** → 单分区，吞吐受限；或业务层按 version 丢弃乱序。

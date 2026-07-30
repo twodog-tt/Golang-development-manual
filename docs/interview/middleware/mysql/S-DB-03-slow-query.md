@@ -81,7 +81,7 @@ flowchart TB
 | ES/ClickHouse | 复杂检索聚合 | 简单 PK 查 |
 | 缓存 | 读重复高 | 一致性敏感 |
 
-## 追问链
+## 深挖问答
 
 1. **type=index 和 ALL？** → index 扫整棵二级索引树；ALL 全表，通常更差。
 2. **Using filesort 一定慢？** → 不一定；它表示不能按目标索引顺序直接返回，需要额外排序，可能完全在内存完成。看实际行数、`EXPLAIN ANALYZE`、`Sort_merge_passes` 和临时空间；`max_length_for_sort_data` 在 MySQL 8.0.20 起已废弃且不再生效。

@@ -96,7 +96,7 @@ logs, err := client.FilterLogs(ctx, query)
 | 简单 | 实时 |
 | 块范围分片 | 需重连 |
 
-## 追问链
+## 深挖问答
 
 1. **indexed 限制？** → 非 anonymous event 最多 3 个 indexed 参数（另有 `topics[0]` 签名）；anonymous 最多 4 个。动态类型 indexed 后 topic 存的是哈希，无法从 topic 还原原值。
 2. **proxy 合约？** → EIP-1967/UUPS/Transparent 可按对应 slot/接口识别，Beacon、Diamond、clone 等模式不同，不能对所有代理只读一个 implementation slot。

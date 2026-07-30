@@ -80,7 +80,7 @@ flowchart TB
 | 短连接 | 极低频 | 性能敏感 |
 | 专用 proxy | 统一 mTLS/限流 | 简单两服务 |
 
-## 追问链
+## 深挖问答
 
 1. **为什么要读完并关闭 Body？** → HTTP/1.x Transport 只有在响应体读到 EOF 后，才通常能把连接放回复用池；无论是否读完都必须 `Close`。请求取消用 context，不再推荐 `CancelRequest`。
 2. **Client.Timeout 包含什么？** → 从 Dial 到读完 body 的总时间。

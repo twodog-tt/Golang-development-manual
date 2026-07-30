@@ -105,7 +105,7 @@ req.Header.Set("Authorization", "Bearer "+apiKey)
 
 **何时不用端到端多模态**：仅需 OCR — 专用 OCR 更便宜更准。
 
-## 追问链
+## 深挖问答
 
 1. **图片 base64 还是 URL？** → 由 provider 请求大小、隐私和网络路径决定；URL 使用 HTTPS、短 TTL、最小对象权限，并防止把内部任意 URL 暴露给 provider。
 2. **实时语音和批处理 ASR？** → 实时用 WebSocket/专用 Realtime API；离线批处理用文件 API 更便宜。

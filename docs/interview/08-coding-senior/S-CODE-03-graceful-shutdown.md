@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -98,7 +98,7 @@ sequenceDiagram
 | errgroup 等多路服务 | 每个 Server 依次 Shutdown |
 | 仅 Close | 开发环境快速退出 |
 
-## 追问链
+## 深挖问答
 
 1. **Shutdown 和 Close 区别？** → Shutdown 等待活跃 HTTP 连接回到 idle；Close 立即关闭当前活跃网络连接，但两者都不会自动处理 hijacked 连接。
 2. **ListenAndServe 返回什么？** → Shutdown 后 `ErrServerClosed`，需 `errors.Is` 忽略。

@@ -21,7 +21,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回模块索引](./index.md)
 
@@ -142,7 +142,7 @@ stateDiagram-v2
 - **Dispute**：提交到协议指定的仲裁/backstop，例如 UMA DVM；不同 oracle 机制并不相同。
 - **Callback/adapter**：只接受预期 oracle、预期 assertion/condition，且要幂等、防重入和可恢复。
 
-官方示例里的 bond、默认 liveness 和结算耗时都是**协议版本/配置/示例相关值**。面试不要背成
+官方示例里的 bond、默认 liveness 和结算耗时都是**协议版本/配置/示例相关值**。不要背成
 “预测市场固定两小时结算”；应说参数依据市场价值、事实复杂度、监控覆盖和用户体验确定。
 
 ### 多源不是简单多数投票
@@ -218,7 +218,7 @@ arbitration result、adapter callback 和 CTF payout。每一步都保留 block 
 低可验证事件，应提高 bond/liveness、缩小市场限额，甚至不开放，而不是用技术名词掩盖
 不可裁决性。
 
-## 追问链
+## 深挖问答
 
 1. **比分 provider 能直接结算吗？** → 不应；它提供 evidence/candidate，最终 payout 由冻结规则和 oracle 流程授权。
 2. **两家数据源一致就够吗？** → 不够证明独立与正确；要看 source lineage、规则优先级和争议路径。

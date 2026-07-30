@@ -98,7 +98,7 @@ type FinalityTracker interface {
 
 统一层越厚，业务越简单，但越容易丢链语义。建议“薄公共内核 + 明确 capability + 链特有 extension”，而不是把所有链伪装成 EVM。
 
-## 追问链
+## 深挖问答
 
 1. **为什么不用统一 `SendTransaction(to, amount)`？** → 无法表达 UTXO 选择、token account、memo、object input、合约 calldata 和 fee policy。
 2. **链特有字段会污染领域层吗？** → 业务 intent 保持稳定；unsigned envelope 和审计证据允许版本化 extension。

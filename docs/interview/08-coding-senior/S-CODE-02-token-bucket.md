@@ -65,11 +65,11 @@ tokens = min(burst, tokens + (now - lastRefill).Seconds() * rate)
 
 | 方案 | 适用 |
 |------|------|
-| 手写 Mutex 桶 | 面试 |
+| 手写 Mutex 桶 | 编码练习 / 中等负载 |
 | x/time/rate | 生产默认 |
 | 滑动窗口 | 更严的「固定窗口 QPS」统计 |
 
-## 追问链
+## 深挖问答
 
 1. **Wait 怎么实现？** → 在锁内计算缺少令牌所需时间，锁外用 `time.Timer` 等待，并同时监听 `ctx.Done()`；唤醒后重新计算，避免 busy loop。
 2. **AllowN(n) 呢？** → 补令牌后若 `tokens >= n` 扣 n。

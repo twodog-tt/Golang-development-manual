@@ -73,7 +73,7 @@ flowchart LR
 | order 提交 | 200ms | 否（靠 clientOrderId 幂等） |
 | wallet 冻结 | 300ms | 谨慎（查状态再重试） |
 
-### K8s Headless 示例（口述）
+### K8s Headless 示例（讲解）
 
 - `matching-svc` Headless：`dns:///matching-svc.trading.svc.cluster.local`
 - Go `grpc.NewClient` + `round_robin` 负载到各撮合 Pod（每 Pod 负责 symbol 子集时改 **自定义 resolver/自定义 LB policy**）
@@ -84,7 +84,7 @@ flowchart LR
 - **跨 AZ**：优先同 AZ 调用；ledger 写走主 AZ
 - **DEX wallet→RPC**：非 gRPC，走 HTTP provider 池 + 熔断
 
-## 追问链
+## 深挖问答
 
 1. **gRPC 和 REST 怎么选？** → 见 [S-NET-01](../06-network-governance/S-NET-01-grpc-vs-rest.md)；内网 gRPC，公网 REST。
 2. **服务发现挂了怎么办？** → 客户端缓存 endpoints + 指数退避；K8s 本地 watch。

@@ -84,7 +84,7 @@ sequenceDiagram
 | 单 partition 单 consumer | 严格顺序 | 吞吐不足 |
 | 死信队列 DLQ |  poison message | 无运维回放 |
 
-## 追问链
+## 深挖问答
 
 1. **partition 数怎么定？** → 目标并行度 ≥ consumer 数；过多增加文件句柄与 rebalance 成本。
 2. **重复消费怎么防？** → 业务唯一键；去重/inbox 记录与业务变更同数据库事务。单独 Redis SETNX 存在崩溃窗口，不能自动保护 DB 或外部副作用。

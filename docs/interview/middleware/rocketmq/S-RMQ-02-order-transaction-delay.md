@@ -81,7 +81,7 @@ flowchart LR
 | 本地消息表 / Outbox | 任意 MQ、DB 同事务写 outbox |
 | Saga/TCC | 跨多服务长事务 |
 
-## 追问链
+## 深挖问答
 
 1. **顺序消息消费失败？** → 重试阻塞同 Queue；需 skip 策略或 DLQ + 人工。
 2. **事务回查做什么？** → 查本地事务表/订单状态，返回 COMMIT/ROLLBACK/UNKNOWN。

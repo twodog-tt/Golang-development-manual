@@ -28,7 +28,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：永续合约的订单执行、账户 clearing/仓位更新，以及保证金和清算规则。
-2. **为什么**：只讲现货撮合（[S-EXCH-01](./S-EXCH-01-cex-matching-engine.md)）不够；合约面试必问 **开平仓、只减仓、双向持仓、撮合与仓位一致性**。
+2. **为什么**：只讲现货撮合（[S-EXCH-01](./S-EXCH-01-cex-matching-engine.md)）不够；合约常见深挖 **开平仓、只减仓、双向持仓、撮合与仓位一致性**。
 3. **怎么做**：下单前在账户风险单元中原子 reserve；撮合引擎只按订单规则产生
    带 `matchSeq` 的 fills。Clearing/position 状态机按可恢复顺序应用 maker/taker
    两侧、费用与 reservation 变化，并发布 PositionUpdate/Journal
@@ -322,7 +322,7 @@ Metrics：`perp_match_latency`、`position_apply_errors`、`liquidation_queue_de
 | 全仓保证金 | 资金利用率高 | 风险传染；预检需读全账户 |
 | 逐仓保证金 | 风险隔离 | 预检仅看单仓位；实现略简单 |
 
-## 追问链
+## 深挖问答
 
 1. **永续和交割合约撮合有区别吗？** → 撮合环相同；交割有 **结算/交割日** 仓位下线，永续无到期 + 有 **资金费率**。
 2. **市价单按什么价格成交？** → **对手盘订单簿**；保护价（市价单 max/min price）防极端滑点。

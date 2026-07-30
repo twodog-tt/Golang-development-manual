@@ -88,7 +88,7 @@ sequenceDiagram
 | 超大堆换少 GC | 吞吐批处理 | 延迟敏感 |
 | 非 Go 处理极热路径 | 极端 | 过早 |
 
-## 追问链
+## 深挖问答
 
 1. **assist 如何体现在 trace？** → mutator 时间片执行 `gcAssistAlloc`。
 2. **GOMEMLIMIT 如何影响抖动？** → 合理值可约束 runtime 内存并降低撞 cgroup limit 的风险；设得过低会 GC thrashing，反而放大抖动。

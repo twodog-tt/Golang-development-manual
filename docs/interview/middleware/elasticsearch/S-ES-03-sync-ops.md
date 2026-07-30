@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../../_meta/p0-knowledge-graph.md)
 
@@ -99,7 +99,7 @@ flowchart LR
 | 跨集群复制 CCR | 异地灾备 |
 | 冷热架构 ILM | 日志历史降冷节点 |
 
-## 追问链
+## 深挖问答
 
 1. **同步丢消息？** → MQ 持久化/可重放 + 至少一次 + version-aware projection；offset、DLQ 和源数据对账共同闭环。
 2. **删除怎么同步？** → binlog DELETE 事件删 ES doc。

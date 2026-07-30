@@ -26,7 +26,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：面向 Meme/Launchpad、链上 Swap、返佣提现类产品的 **端到端技术架构**，不是单讲 AMM 公式。
-2. **为什么**：Web3 交易所 JD 常要求「链上+链下都做过」；需证明能 **从合约事件讲到用户看到的 K 线**。
+2. **为什么**：Web3 交易所岗位常要求「链上+链下都做过」；需证明能 **从合约事件讲到用户看到的 K 线**。
 3. **怎么做**：先将 canonical 原始日志和区块 lineage 幂等持久化，再发布标准化业务
    事件构建 K 线/排行榜；合约地址、code hash、ABI 与生效区块必须版本化。
 
@@ -128,7 +128,7 @@ flowchart LR
 | 若采用 Proxy：升级入口与链上权限 | ABI/地址/code hash 版本管理、多链配置与升级监控 |
 
 “规则在链上”不自动等于不可变：可升级代理、admin、pause 和 oracle 都会改变信任
-假设，面试时应把权限主体和 timelock/multisig 一并画出。
+假设，讲解时应把权限主体和 timelock/multisig 一并画出。
 
 详见 [S-SOLID-08](../13-solidity-contracts/S-SOLID-08-contract-go-boundary.md)
 
@@ -182,7 +182,7 @@ sequenceDiagram
 | 链上返佣 vs 链下记账 | 透明 | Gas、灵活性低 |
 | 单链 MVP | 快 | 多链需抽象 `chain_id` |
 
-## 追问链
+## 深挖问答
 
 1. **K 线以链上 Swap 为准还是以池子 Sync？** → Swap 定 OHLC 成交；Sync 辅助深度。
 2. **用户地址如何绑定 App 账号？** → SIWE/typed-data challenge 绑定 domain、chain、

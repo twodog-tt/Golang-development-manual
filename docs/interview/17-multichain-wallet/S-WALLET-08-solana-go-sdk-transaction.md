@@ -116,9 +116,9 @@ HTTP 200。
 
 跳过 preflight 可降低提交延迟，却减少早期错误反馈；多 RPC 广播提升可用性，但会增加
 状态不一致噪声。无论选择哪种，业务真相都应由 signature 的链上执行状态、commitment 与
-相关账户/程序状态变化决定；`effects` 是 Sui 常用术语，不应机械套到 Solana 面试表达中。
+相关账户/程序状态变化决定；`effects` 是 Sui 常用术语，不应机械套到 Solana 表达中。
 
-## 追问链
+## 深挖问答
 
 1. **signature 是业务幂等键吗？** → 它标识一份已签 message；业务还需要 intent/attempt lineage。
 2. **RPC 返回 signature 是否成功？** → 只表示接收提交，必须继续查 execution 与 commitment。

@@ -72,7 +72,7 @@ Circle 文档描述 CCTP 为源链 burn、目标链 mint 的 native USDC 跨链�
 
 原生 issuer-supported token 通常减少 wrapped bridge 风险，但增加发行人控制与赎回依赖；去中心化/超额抵押稳定币又有抵押、预言机和清算风险。没有“绝对安全稳定币”，只能明确风险预算。
 
-## 追问链
+## 深挖问答
 
 1. **USDC 都一样吗？** → 不；必须核对 chain 和官方 contract/mint，bridged 表示可能不同。
 2. **burn 后目标链 mint 失败怎么办？** → 状态机持续追踪 message/attestation，可重试 destination receive；不能在内部凭空记成已完成。

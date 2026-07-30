@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -99,7 +99,7 @@ sequenceDiagram
 | DNS | 缓存、异步 resolver |
 | cgo 阻塞库 | 隔离进程 |
 
-## 追问链
+## 深挖问答
 
 1. **netpoller 与 select？** → 不同层；net 在 poll 层，select 是 chan。
 2. **边缘触发会不会丢事件？** → Linux runtime 必须把非阻塞 FD 消耗到 `EAGAIN` 并正确

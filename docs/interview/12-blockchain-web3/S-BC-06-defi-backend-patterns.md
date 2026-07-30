@@ -67,7 +67,7 @@ flowchart TB
 
 **跨链桥（简述）**
 
-- 信任模型：官方桥 / 轻客户端 / 多签 — 面试说明 **额外信任假设**
+- 信任模型：官方桥 / 轻客户端 / 多签 — 说明 **额外信任假设**
 - 后端记录 bridge tx 状态机，非即时 finality
 
 ## 生产场景
@@ -91,7 +91,7 @@ flowchart TB
 
 与 [S-SOL-07 安全](../11-solution-architecture/S-SOL-07-security-audit-architecture.md)、[S-SOL-05 多租户](../11-solution-architecture/S-SOL-05-multi-tenant-saas.md) 在 SaaS 钱包场景交叉。
 
-## 追问链
+## 深挖问答
 
 1. **MEV 是什么？** → 排序提取价值；后端可提示 slippage、私有 RPC。
 2. **NFT 元数据中心化？** → IPFS 仍可能 gateway 挂；hash 上链锚定。

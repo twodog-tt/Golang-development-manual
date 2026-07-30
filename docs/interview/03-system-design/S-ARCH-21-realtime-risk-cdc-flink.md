@@ -21,7 +21,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -191,7 +191,7 @@ flowchart LR
 数据库行变更适合构建数据投影；需要表达“订单已支付”“账户被封禁”等领域语义时，优先由业务事务写
 outbox/domain event，而不是让下游从字段变化猜业务意图。
 
-## 追问链
+## 深挖问答
 
 1. **Flink exactly-once 是否代表 ES 只写一次？** → 不代表；要看 sink 是否事务提交或用稳定 ID/版本幂等。
 2. **watermark 到了为什么还有迟到数据？** → watermark 是进度估计；分区空闲、网络延迟和回放都会产生 late event。

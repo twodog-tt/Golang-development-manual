@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -33,7 +33,7 @@ sources:
 
 **3 分钟展开**
 
-1. **是什么**：map 是 runtime 实现的哈希表；具体布局随 Go 版本变化，面试必须区分“语言语义”和“当前实现”。
+1. **是什么**：map 是 runtime 实现的哈希表；具体布局随 Go 版本变化，必须区分“语言语义”和“当前实现”。
 2. **为什么**：内置 map 选择 runtime 专用实现，非通用并发容器；并发读写需外层同步。
 3. **怎么做**：通用场景先用 `map+Mutex/RWMutex` 并基准测试；`sync.Map` 主要适合“键写一次读很多”或不同 goroutine 操作互不相交的键集合；配置读取可用不可变 map + `atomic.Value/Pointer`。
 
@@ -70,7 +70,7 @@ sources:
 - 使用 control bytes 与成组 slot 加速哈希片段匹配和空槽查找。
 - 大 map 可由目录管理多个 table，增长时拆分 table；不再应使用 `hmap.B/oldbuckets/8 槽 bucket` 解释当前实现。
 - `make(map[K]V, hint)` 仍只是容量提示；扩容/拆分是单个 map 操作推进的内部工作，**不是全局 STW**。
-- 面试先说语义，再按目标 Go 版本补充实现，避免把旧源码结构背成永久规范。
+- 先说语义，再按目标 Go 版本补充实现，避免把旧源码结构背成永久规范。
 
 ```mermaid
 flowchart TB
@@ -116,7 +116,7 @@ flowchart TB
 | 分片 map | 高 QPS 计数/缓存 | key 少、实现复杂 |
 | 不可变快照 | 配置/字典 | 频繁增量更新 |
 
-## 追问链
+## 深挖问答
 
 1. **map 能取地址吗？** → `&m[k]` 非法，因扩容可能搬迁。
 2. **key 必须 comparable？** → 是，slice/map/func 不可作 key。
@@ -124,7 +124,7 @@ flowchart TB
 4. **nil map 读写？** → 读零值，写 panic。
 5. **1.24 Swiss Table？** → control bytes + 分组探测，并用目录/table 拆分支持增长；旧 `hmap bucket` 细节不再适用于当前版本，语义保持不变。
 6. **Go 1.26 的 sync.Map 还是 read/dirty 吗？** → 否，1.26 已切换为并发
-   hash-trie；read/dirty 是旧实现细节，面试先讲 API 场景、内存模型保证与一致快照边界。
+   hash-trie；read/dirty 是旧实现细节，先讲 API 场景、内存模型保证与一致快照边界。
 
 ## 反模式与事故
 

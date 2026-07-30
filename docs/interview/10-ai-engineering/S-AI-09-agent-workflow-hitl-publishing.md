@@ -20,7 +20,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -133,7 +133,7 @@ flowchart LR
 - scope 最小化，按 tenant/account 隔离，记录授权主体与过期时间；
 - refresh 也要 singleflight/分布式互斥，避免多 worker 同时轮换导致 token 失效；
 - `401` 不等于无限 refresh；区分过期、撤销、scope 不足和账号风控；
-- OAuth2 安全实践会演进，面试时不要背死 provider 的固定有效期或限额。
+- OAuth2 安全实践会演进，讲解时不要背死 provider 的固定有效期或限额。
 
 ## 生产场景
 
@@ -170,7 +170,7 @@ flowchart LR
 固定发布流程优先确定性状态机；LLM 只负责候选生成、分类或非确定性决策，不要让模型拥有整个
 workflow 的最终状态写权限。
 
-## 追问链
+## 深挖问答
 
 1. **人工审批后 worker 为什么还要重新校验？** → 审批到执行之间凭据、策略、配额和内容版本可能变化。
 2. **HTTP 200 是否代表发布成功？** → 只代表接口层响应；还要解析业务状态并保存 provider object ID，必要时查询最终事实。

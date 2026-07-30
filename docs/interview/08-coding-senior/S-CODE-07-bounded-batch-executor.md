@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -98,7 +98,7 @@ go test -race ./examples/senior/batchexec/...
 | 保序返回 | API 调用方按输入对齐 |
 | 完成顺序流式返回 | 降首条延迟，不要求保序 |
 
-## 追问链
+## 深挖问答
 
 1. **queue 越大越好吗？** → 否；只会增加排队延迟和内存，不能提升下游吞吐。
 2. **为什么首错后还 drain？** → 已启动 worker 可能正在发送，不 drain 会泄漏。

@@ -78,7 +78,7 @@ Webhook 消费方不应假设 `observed` 一定早于 `settled` 到达。payload
 
 状态机可以放代码或 workflow engine；无论哪种，转换表、幂等、timeout、补偿和审计都必须显式。workflow engine 不会自动解决资金语义。
 
-## 追问链
+## 深挖问答
 
 1. **tx confirmed 就能通知成功吗？** → 要看链 finality、金额风险和账本是否已 posted。
 2. **同 idempotency key 参数变了？** → 返回冲突，不能复用旧结果掩盖调用错误。

@@ -119,7 +119,7 @@ Heartbeat/TestRequest 证明连接在一定程度上可交互；消息完整性�
 正确处理嵌套 gap。双方应在 ROE 中固定算法、缓存窗口、session reset 和 aged order
 是否重放，不能运行时各自猜测。
 
-## 追问链
+## 深挖问答
 
 1. **TCP 已保证有序，为何还要 MsgSeqNum？** → TCP 重连不恢复上一连接未确认边界，应用还需要跨连接缺口检测。
 2. **重传为何不能用新序号？** → session retransmission 要填原缺口；新的序号属于 application resend。

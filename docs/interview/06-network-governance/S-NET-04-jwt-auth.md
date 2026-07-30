@@ -20,7 +20,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -109,7 +109,7 @@ sequenceDiagram
 | mTLS 服务间 | 零信任内网 | 移动端 |
 | API Key | 机器对机器 | 用户登录 |
 
-## 追问链
+## 深挖问答
 
 1. **JWT 和 Session 区别？** → JWT 客户端持票自证；Session 服务端存状态。
 2. **如何吊销？** → 短 TTL、黑名单、refresh rotation、ver claim。

@@ -22,7 +22,7 @@ sources:
 ## 3 分钟版（一面深度）
 
 1. **是什么**：K8s 原生配置分发；修改 ConfigMap/Secret 不会自动触发 Deployment rollout。环境变量不会变；普通 projected volume 会最终更新；`subPath` 挂载不会收到更新。
-2. **为什么**：面试问「改配置要不要发版」；错用 Secret 泄漏、subPath 不更新是常见坑。
+2. **为什么**：常问「改配置要不要发版」；错用 Secret 泄漏、subPath 不更新是常见坑。
 3. **怎么做**：非敏感可热更（watch 文件）；敏感改 Secret + 滚动重启或 Reloader；Go 用 `viper`/自研 atomic.Value 热加载。
 
 ## 10 分钟版（原理 + 图示）
@@ -147,7 +147,7 @@ func GetConfig() Config {
 
 **何时不用热更**：涉及结构变更、连接池重建 → 滚动发布更安全。
 
-## 追问链
+## 深挖问答
 
 1. **Secret Base64 安全吗？** → 否，仅编码；靠 RBAC、etcd 加密 at rest、External Secrets。
 2. **改 ConfigMap 后 Pod 何时感知？** → volume 更新受 kubelet sync period、缓存策略等影响，不是即时 SLA；目录通常通过原子替换更新，watcher 应监听父目录并容忍 rename。env 必须重启。

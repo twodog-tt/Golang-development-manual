@@ -20,7 +20,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -289,7 +289,7 @@ commerce_intent
 
 选择依据是 value at risk、工作可逆性、交付验证能力、链成本与争议模型，不是哪个协议更新。
 
-## 追问链
+## 深挖问答
 
 1. **x402 的 `/verify` 是否完成付款？** → 否；它验证 payload，实际资金移动由 settle 流程处理。
 2. **Facilitator 超时能否换一个重试？** → 先查原 payload/链上事实；多个 Facilitator 可能造成重复提交或状态分叉。

@@ -94,7 +94,7 @@ func (s *RAGService) Answer(ctx context.Context, q string, userID string) (strin
 
 **何时不用 RAG**：强实时数据（用 API 查库）；极小知识集（直接塞进 system prompt）。
 
-## 追问链
+## 深挖问答
 
 1. **Embedding 模型换了怎么办？** → 全量 re-embed；双写过渡期。
 2. **怎么降低无依据回答？** → 检索质量评估、无足够证据时拒答、引用可核验片段、结构化事实校验；一句“仅根据上下文”不是安全保证。

@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回模块索引](./index.md)
 
@@ -183,7 +183,7 @@ resolve、index set、collateral/adapter 地址、持仓余额、approval、父 
 oracle 集成。自研简化 outcome token 的心智更低，却要重新证明 collateral、mint/burn、
 payout、组合与升级不变量。无论选择哪种，都应先限制产品范围，再逐步开放组合能力。
 
-## 追问链
+## 深挖问答
 
 1. **CTF 是什么？** → Conditional Token Framework，把条件、outcome collection 和抵押物组合成可拆分、合并、兑付的 position。
 2. **YES + NO 永远等于 1 吗？** → 只在同一完备二元 condition、同一 collateral 和忽略费用/取整的完整 set 语境成立；盘口价格之和不保证恰好为 1。

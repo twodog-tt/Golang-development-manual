@@ -79,7 +79,7 @@ flowchart TB
 | 第三方（Pusher/Ably） | 快速上线 | 成本/定制 |
 | gRPC stream 内网 | 非浏览器 | 公网 |
 
-## 追问链
+## 深挖问答
 
 1. **握手过程？** → Upgrade 101，Sec-WebSocket-Accept 校验。
 2. **如何鉴权？** → 原生客户端可用 `Authorization`；浏览器 WebSocket API 不能自定义该 header，常用受保护 Cookie、受限 subprotocol 或连接后首帧认证。Query token 容易进入 access log、监控和 URL 记录，应尽量避免或使用一次性短 token。

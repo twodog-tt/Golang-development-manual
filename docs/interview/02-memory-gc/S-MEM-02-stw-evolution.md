@@ -84,7 +84,7 @@ sequenceDiagram
 | 升级 Go 版本获 GC 改进 | 长期维护服务 | 无回归测试的一次升级 |
 | 换语言/进程隔离 GC 敏感路径 | 极端延迟 | 小团队过早优化 |
 
-## 追问链
+## 深挖问答
 
 1. **STW 时 goroutine 状态？** → runtime 将 goroutine 带到可停止点，暂停 mutator 并协调各 P 完成阶段切换。
 2. **并发标记时 mutator 能分配吗？** → 能，触发 assist 并受写屏障保护。
@@ -94,7 +94,7 @@ sequenceDiagram
 
 ## 反模式与事故
 
-- 用「Go 无 STW」回答面试——会被追问 sweep term 打脸。
+- 用「Go 无 STW」作答——会被追问 sweep term 打脸。
 - 仅看 `GOGC=100` 默认值，不随容器 memory limit 设 `GOMEMLIMIT`。
 - 压测只看 QPS 不看 GC pause 分位，上线后 P99 暴雷。
 

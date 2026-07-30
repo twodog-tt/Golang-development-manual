@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-07-30T12:10:24Z",
+  "generated_at": "2026-07-30T12:27:03Z",
   "count": 232,
   "roles": [
     {
@@ -1473,7 +1473,7 @@
       "module_key": "coding",
       "resume_focus": false,
       "url": "interview/08-coding-senior/S-CODE-01-concurrent-lru/",
-      "prompt": "LRU = **最近最少使用**淘汰。经典实现：**哈希表 + 双向链表**，Get/Put 的期望/平均复杂度为 **O(1)**。Go 用 `map` + `container/list`，并发版加 **`sync.Mutex`** 包住“查 map + 改链表”的完整临界区。面试关键词：**MoveToFront、超容量删 Back、更新已存在 key**。",
+      "prompt": "LRU = **最近最少使用**淘汰。经典实现：**哈希表 + 双向链表**，Get/Put 的期望/平均复杂度为 **O(1)**。Go 用 `map` + `container/list`，并发版加 **`sync.Mutex`** 包住“查 map + 改链表”的完整临界区。讲解关键词：**MoveToFront、超容量删 Back、更新已存在 key**。",
       "role_priorities": {
         "senior_go_backend": "p0",
         "ai_agent_platform": "p1",
@@ -2448,7 +2448,7 @@
       "module_key": "elasticsearch",
       "resume_focus": false,
       "url": "interview/middleware/elasticsearch/S-ES-01-inverted-index/",
-      "prompt": "ES 基于 **Lucene**，核心是 **倒排索引**：词项 → 文档 ID 列表，支持全文检索。数据按 **Index → Type(7.x 前) / 无 type → Document → Field** 组织；分片 **Primary + Replica** 水平扩展。面试关键词：**分片路由、近实时 NRT、segment merge**。",
+      "prompt": "ES 基于 **Lucene**，核心是 **倒排索引**：词项 → 文档 ID 列表，支持全文检索。数据按 **Index → Type(7.x 前) / 无 type → Document → Field** 组织；分片 **Primary + Replica** 水平扩展。讲解关键词：**分片路由、近实时 NRT、segment merge**。",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p2",
@@ -2598,7 +2598,7 @@
       "module_key": "dex_cex_engineering",
       "resume_focus": false,
       "url": "interview/14-dex-cex-engineering/S-EXCH-04-futures-margin-liquidation/",
-      "prompt": "**永续合约** = 杠杆仓位 + **标记价格** 算盈亏 + **资金费率** 多空平衡 + **强平** 防穿仓。Go 后端：**标记价服务、风险引擎、强平队列、保险基金**。面试关键词：**逐仓/全仓、维持保证金、ADL 自动减仓**。",
+      "prompt": "**永续合约** = 杠杆仓位 + **标记价格** 算盈亏 + **资金费率** 多空平衡 + **强平** 防穿仓。Go 后端：**标记价服务、风险引擎、强平队列、保险基金**。讲解关键词：**逐仓/全仓、维持保证金、ADL 自动减仓**。",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p2",
@@ -2723,7 +2723,7 @@
       "module_key": "dex_cex_engineering",
       "resume_focus": false,
       "url": "interview/14-dex-cex-engineering/S-EXCH-09-hybrid-cex-dex/",
-      "prompt": "“CeDeFi/混合交易所”不是严格技术标准，面试时先明确产品的 **托管、订单排序、 签名和结算信任模型**。同一 App 可以同时提供 CEX 账户与自托管钱包/DEX，但必须 分清 **平台负债账本、平台受控链上资产、用户自托管资产**，避免重复计入余额或对账。",
+      "prompt": "“CeDeFi/混合交易所”不是严格技术标准，讲解时先明确产品的 **托管、订单排序、 签名和结算信任模型**。同一 App 可以同时提供 CEX 账户与自托管钱包/DEX，但必须 分清 **平台负债账本、平台受控链上资产、用户自托管资产**，避免重复计入余额或对账。",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p2",
@@ -3223,7 +3223,7 @@
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
       "url": "interview/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield/",
-      "prompt": "DEX Tech Lead 面试里，「Staking / 挖矿 / Farming」考的不是背名词，而是：**奖励怎么公平累计、谁有资格领取、排放怎么停、如何防刷**，以及链下 Indexer 如何投影 APR 而不误导用户。",
+      "prompt": "DEX Tech Lead 场景里，「Staking / 挖矿 / Farming」考的不是背名词，而是：**奖励怎么公平累计、谁有资格领取、排放怎么停、如何防刷**，以及链下 Indexer 如何投影 APR 而不误导用户。",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p2",
@@ -3248,7 +3248,7 @@
       "module_key": "dex_cex_engineering",
       "resume_focus": true,
       "url": "interview/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol/",
-      "prompt": "面试官说「讲讲 Uniswap」时，不要只背 `x*y=k`。要分层讲清：**Factory → Pool/Pair → Router → LP 凭证 → 报价与结算**，并对比 V2/V3 的状态机与后端索引成本。Pancake 等分叉见 [S-EXCH-27](./S-EXCH-27-pancakeswap-v2-v3-differences.md)。",
+      "prompt": "有人问「讲讲 Uniswap」时，不要只背 `x*y=k`。要分层讲清：**Factory → Pool/Pair → Router → LP 凭证 → 报价与结算**，并对比 V2/V3 的状态机与后端索引成本。Pancake 等分叉见 [S-EXCH-27](./S-EXCH-27-pancakeswap-v2-v3-differences.md)。",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p2",
@@ -3598,7 +3598,7 @@
       "module_key": "leadership",
       "resume_focus": false,
       "url": "interview/07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case/",
-      "prompt": "Senior 的强项通常是把一个复杂系统做成；Staff 还要在没有直接汇报关系时，让多个团队围绕同一组不变量、接口和迁移顺序交付。技术战略不是技术清单，而是“基于证据的诊断 → 明确原则/非目标 → 目标能力 → 分阶段投资与退出旧路径 → 用业务和工程指标验证”。面试案例要说清我亲自改变了什么机制、如何处理反对意见、哪些结果有证据，以及哪些数字只是目标而非事实。",
+      "prompt": "Senior 的强项通常是把一个复杂系统做成；Staff 还要在没有直接汇报关系时，让多个团队围绕同一组不变量、接口和迁移顺序交付。技术战略不是技术清单，而是“基于证据的诊断 → 明确原则/非目标 → 目标能力 → 分阶段投资与退出旧路径 → 用业务和工程指标验证”。案例要说清我亲自改变了什么机制、如何处理反对意见、哪些结果有证据，以及哪些数字只是目标而非事实。",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p2",
@@ -4998,7 +4998,7 @@
       "module_key": "rocketmq",
       "resume_focus": false,
       "url": "interview/middleware/rocketmq/S-RMQ-03-vs-kafka/",
-      "prompt": "**Kafka** 强项：**超高吞吐、日志流、生态（Flink/Connect）**；分区有序、副本 ISR。**RocketMQ** 强项：**事务消息、延迟级别、Tag 过滤、国内运维经验**。Go 后端选 MQ 看 **语义需求** 而非单纯 QPS。面试答：**场景 + 一致性 + 运维 + 团队熟悉度**。",
+      "prompt": "**Kafka** 强项：**超高吞吐、日志流、生态（Flink/Connect）**；分区有序、副本 ISR。**RocketMQ** 强项：**事务消息、延迟级别、Tag 过滤、国内运维经验**。Go 后端选 MQ 看 **语义需求** 而非单纯 QPS。讲解要点：**场景 + 一致性 + 运维 + 团队熟悉度**。",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p1",
@@ -5223,7 +5223,7 @@
       "module_key": "solution_architecture",
       "resume_focus": false,
       "url": "interview/11-solution-architecture/S-SOL-04-bff-gateway-mesh/",
-      "prompt": "**BFF** 为前端/渠道聚合领域 API；**API 网关** 管南北向（鉴权、限流、路由）；**Service Mesh** 管东西向（mTLS、重试、可观测）。架构师面试忌 **三层叠同样逻辑**。生产关键词：**渠道隔离、网关无状态、Mesh 不跑业务逻辑**。",
+      "prompt": "**BFF** 为前端/渠道聚合领域 API；**API 网关** 管南北向（鉴权、限流、路由）；**Service Mesh** 管东西向（mTLS、重试、可观测）。架构讲解忌 **三层叠同样逻辑**。生产关键词：**渠道隔离、网关无状态、Mesh 不跑业务逻辑**。",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p1",
@@ -5273,7 +5273,7 @@
       "module_key": "solution_architecture",
       "resume_focus": false,
       "url": "interview/11-solution-architecture/S-SOL-06-architecture-review/",
-      "prompt": "架构师不只是画架构图，还要 **主持评审**：输入清晰、备选对比、风险显式、决策可追溯。产出 = **架构说明 + ADR + 非功能验收标准**。面试考察：**如何处理反对意见、如何说「不」**。与 [S-ARCH-20 ADR](../03-system-design/S-ARCH-20-tech-decision-doc.md) 互补：20 讲文档怎么写，本题讲 **评审怎么开**。",
+      "prompt": "架构师不只是画架构图，还要 **主持评审**：输入清晰、备选对比、风险显式、决策可追溯。产出 = **架构说明 + ADR + 非功能验收标准**。常考察：**如何处理反对意见、如何说「不」**。与 [S-ARCH-20 ADR](../03-system-design/S-ARCH-20-tech-decision-doc.md) 互补：20 讲文档怎么写，本题讲 **评审怎么开**。",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p1",
@@ -5323,7 +5323,7 @@
       "module_key": "solution_architecture",
       "resume_focus": false,
       "url": "interview/11-solution-architecture/S-SOL-08-evolution-whiteboard/",
-      "prompt": "架构师终面常给 **开放式业务题**（设计 IM / 外卖 / 企业知识平台），45 分钟考察 **澄清 → 估算 → MVP → 扩展 → 非功能 → 演进**。本模板整合 [03 系统设计](../03-system-design/index.md) 单题能力，形成 **完整叙事**；不是新知识点，而是 **面试交付结构**。",
+      "prompt": "架构白板常给 **开放式业务题**（设计 IM / 外卖 / 企业知识平台），45 分钟考察 **澄清 → 估算 → MVP → 扩展 → 非功能 → 演进**。本模板整合 [03 系统设计](../03-system-design/index.md) 单题能力，形成 **完整叙事**；不是新知识点，而是 **白板交付结构**。",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p1",

@@ -147,7 +147,7 @@ fsync、network、downstream 分层，不要只看总 QPS。
 连续价格数组缓存友好但占空间并受价格范围约束。应以真实分布 benchmark 和 profile 决策，
 同时保持规则层与存储结构解耦。
 
-## 追问链
+## 深挖问答
 
 1. **最大成交量是否一定唯一价格？** → 不一定，还需 imbalance、reference 和最终 tie-break。
 2. **集合竞价是否按订单到达就成交？** → collection 阶段通常不连续撮合，统一在 uncross 时处理。

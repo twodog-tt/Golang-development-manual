@@ -48,7 +48,7 @@ flowchart LR
 
 **协议不能混讲**
 
-ECDSA、Schnorr/EdDSA 的 threshold 协议轮次、预处理和证明不同。FROST 是 threshold Schnorr 的标准化方案示例，不能拿它直接解释所有 EVM secp256k1 ECDSA 实现。面试中应说“按链签名算法选择经过审计的协议/实现”，而不是自己拼密码学。
+ECDSA、Schnorr/EdDSA 的 threshold 协议轮次、预处理和证明不同。FROST 是 threshold Schnorr 的标准化方案示例，不能拿它直接解释所有 EVM secp256k1 ECDSA 实现。讲解时应说“按链签名算法选择经过审计的协议/实现”，而不是自己拼密码学。
 
 **签名会话不变量**
 
@@ -99,7 +99,7 @@ ledger、复制 share 却漏掉 ledger，或回滚虚机快照，都可能重新
 
 这个项目证明“份额没有集中到 coordinator，进程与认证边界可执行”，不证明协议库已经
 完成生产审计，也未实现 reshare、跨地域可靠广播、恶意 coordinator 容错、share
-HSM-sealing 或业务 intent/policy 验证。面试中不能把“进程拆开”直接说成“生产 MPC”。
+HSM-sealing 或业务 intent/policy 验证。讲解时不能把“进程拆开”直接说成“生产 MPC”。
 
 ## 排查与工具
 
@@ -111,7 +111,7 @@ HSM-sealing 或业务 intent/policy 验证。面试中不能把“进程拆开�
 更强。参与方全在同一云账号/同一管理员控制域，即使机器分开也不是真正隔离。安全模型要覆盖
 身份、网络、运维、供应商、备份和 policy engine，而不只写 `2-of-3`。
 
-## 追问链
+## 深挖问答
 
 1. **MPC 是否永远不出现完整私钥？** → DKG 正常协议可避免集中重构；既有 key 导入、备份/恢复方案必须单独审计，不能绝对化。
 2. **MPC 和链上 multisig？** → MPC 通常产出普通签名；链上 multisig 的策略由合约/协议公开执行。

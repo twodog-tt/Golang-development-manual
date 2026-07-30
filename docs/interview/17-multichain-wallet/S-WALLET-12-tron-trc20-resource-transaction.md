@@ -22,7 +22,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -78,7 +78,7 @@ stateDiagram-v2
 
 ### 与 Ethereum 钱包的关键差异
 
-| 维度 | TRON | 面试中不要说 |
+| 维度 | TRON | 讲解时不要说 |
 |------|------|--------------|
 | 防旧交易/有效期 | recent block reference + expiration | “TRON 也靠 account nonce 排序” |
 | 资源/费用 | Bandwidth、Energy、TRX burn、fee limit | “就是 gasPrice × gasLimit” |
@@ -185,7 +185,7 @@ solidified 状态；不要只盯 HTTP 状态码。
 
 资金路径应让自有状态机和链上证据成为事实源；provider 是传输/查询通道，不是内部账本。
 
-## 追问链
+## 深挖问答
 
 1. **TRON 有 nonce 吗？** → 没有 Ethereum 式账户 nonce；交易使用近期区块引用和 expiration 防旧/过期，业务并发仍需自己做 intent/reservation。
 2. **为什么 Energy 估算后还会失败？** → 资源余额、动态 Energy、合约状态或网络参数可能变化，且 fee limit 是上限。

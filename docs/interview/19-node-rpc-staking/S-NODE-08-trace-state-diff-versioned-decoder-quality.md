@@ -121,7 +121,7 @@ Proxy upgrade、Move package upgrade、Solana program schema、Cosmos protobuf/i
 
 全量 trace 成本高且 client 耦合强，可按高价值地址、风险规则、失败交易或异步分析分层；但一旦产品承诺“完整 internal transfer”，就要量化 coverage，不能把缺失静默解释为空集合。
 
-## 追问链
+## 深挖问答
 
 1. **Trace 是链上共识数据吗？** → 执行结果受协议约束，但 trace API/表示常是 client-specific 的重执行观测。
 2. **Trace 超时是否表示没有 internal call？** → 不是；必须记录失败类型并重试/换具备历史状态的节点。

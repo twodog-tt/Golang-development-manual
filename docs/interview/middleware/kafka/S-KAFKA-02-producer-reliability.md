@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../../_meta/p0-knowledge-graph.md)
 
@@ -77,7 +77,7 @@ sequenceDiagram
 - 普通幂等 producer 的会话重建边界与 transactional ID 不同，不能替代业务 idempotency key
 - 与 **事务 Producer** 区别：事务可原子写多 partition（流处理场景）
 
-**默认值必须带客户端与版本**：以 Kafka 4.1 的 Java producer 为例，在没有冲突配置时 `acks=all`、`enable.idempotence=true`，`max.in.flight.requests.per.connection=5`，`linger.ms=5`；这些不是 Kafka 协议强制的“所有客户端默认值”。Sarama、kafka-go、librdkafka 的默认值和可用开关不同，面试时应说出客户端与版本，并对关键配置显式设置和启动校验。
+**默认值必须带客户端与版本**：以 Kafka 4.1 的 Java producer 为例，在没有冲突配置时 `acks=all`、`enable.idempotence=true`，`max.in.flight.requests.per.connection=5`，`linger.ms=5`；这些不是 Kafka 协议强制的“所有客户端默认值”。Sarama、kafka-go、librdkafka 的默认值和可用开关不同，讲解时应说出客户端与版本，并对关键配置显式设置和启动校验。
 
 **Partition Key 策略**
 
@@ -112,7 +112,7 @@ sequenceDiagram
 | 无 key 轮询 | 高并行埋点 | 顺序业务 |
 | 事务 Producer | 原子写多个 partition，或把消费 offset 与输出记录纳入同一 Kafka 事务 | 还要原子提交外部 DB/HTTP 副作用 |
 
-## 追问链
+## 深挖问答
 
 1. **幂等 Producer 和 DB 唯一键？** → Producer 幂等主要去掉同一 producer 会话内协议重试造成的重复记录，不会识别两次独立业务调用是同一笔订单；消费重投和业务重复仍要靠 idempotency key、DB 唯一约束/inbox 等处理。
 2. **max.in.flight 与顺序？** → 未开幂等时，失败重试与多个 in-flight 可能乱序；开启幂等后上限和约束依客户端而异，不能把 Java 的 “≤5” 直接套到 Sarama。

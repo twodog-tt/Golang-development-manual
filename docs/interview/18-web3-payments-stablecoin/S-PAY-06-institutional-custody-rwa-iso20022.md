@@ -138,7 +138,7 @@ token burn 不等于赎回资金已到账；subscription cash 到账也不等于
 
 同步 DvP 可降低 principal risk，却可能增加流动性需求和跨系统耦合；净额结算提高资金效率，却积累结算敞口。选择取决于产品、rail、资产、交易对手和法规，系统必须显式度量 unsettled exposure、cutoff 和 fail aging。
 
-## 追问链
+## 深挖问答
 
 1. **ISO 20022 是支付网络吗？** → 不是，是业务建模与消息标准；消息可运行在不同网络/市场基础设施上。
 2. **收到 pacs 状态就算结算吗？** → 看 usage guideline 与状态语义，并结合 settlement account/statement、rail finality 和对账证据。

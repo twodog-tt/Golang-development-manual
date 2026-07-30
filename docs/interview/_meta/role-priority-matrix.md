@@ -160,4 +160,4 @@ P0 数量不是“全部逐字通读”。建议先掌握 shared P0 的 30 秒�
 .venv/bin/python scripts/verify_knowledge_metadata.py
 ```
 
-校验会检查 232 个 ID、正文、sources、30 秒版、追问链、角色引用和证据标签互斥关系。
+校验会检查 232 个 ID、正文、sources、30 秒版、深挖问答、角色引用和证据标签互斥关系。

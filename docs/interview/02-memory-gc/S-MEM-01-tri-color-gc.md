@@ -23,9 +23,9 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回高频核心锚点](../../high-frequency-roadmap.md)
 
 !!! abstract "30 秒回答"
 
@@ -131,7 +131,7 @@ flowchart LR
 | 伪代码 | `shade(new); *slot = new` |
 | 单独使用时 | 必须配套相应的根/栈扫描协议；不能只看一条 store 规则判断整个 GC 是否正确 |
 
-**典型漏标场景（面试白板）**
+**典型漏标场景（白板）**
 
 1. GC 已将对象 **A 标黑**（A 的所有字段已扫描）。
 2. mutator 执行 `A.next = W`（W 是白对象）。
@@ -327,7 +327,7 @@ sequenceDiagram
 | 降分配 + `sync.Pool` | 短命对象 | 长生命周期误用 Pool |
 | `GOGC=off` + 手动 GC | 批处理窗口 | 在线 API |
 
-## 追问链
+## 深挖问答
 
 1. **三色各代表什么？** → 白未访问、灰待扫描、黑已扫完；结束仍白则清除。
 2. **插入写屏障解决什么？** → 黑对象新写入指向白对象时 `shade(新)`，防漏标。

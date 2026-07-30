@@ -82,7 +82,7 @@ function testFuzz_Deposit(uint96 amount) public {
 - fork 测试固定 block number，并记录 RPC/链状态假设；“今天 fork 通过”不保证未来
   外部协议版本仍兼容
 
-## 追问链
+## 深挖问答
 
 1. **Hardhat vs Foundry？** → Foundry 快、Solidity 测；Hardhat TS 生态。
 2. **invariant 测试？** → handler 随机调函数，assert 全局性质（如总供应守恒）。

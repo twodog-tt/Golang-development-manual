@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -107,7 +107,7 @@ flowchart LR
 | `bytes.Buffer` / ring buffer | 流式 IO | 随机访问 |
 | sync.Pool | 复用 []byte | 存指针 slice 未清零 |
 
-## 追问链
+## 深挖问答
 
 1. **append 是否修改原 slice？** → len/cap 够则原地，否则新数组，原 slice 不变。
 2. **`s[:0]` 与 `s=nil`？** → 前者 cap 仍在，底层数组仍可达。

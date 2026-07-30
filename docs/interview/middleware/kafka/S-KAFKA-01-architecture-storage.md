@@ -80,7 +80,7 @@ flowchart TB
 | RF=3, minISR=2 | 生产默认 | 测试环境可降 |
 | Log compaction | changelog、KV 状态 | 纯事件流全量保留 |
 
-## 追问链
+## 深挖问答
 
 1. **Leader 挂了？** → Controller 从 ISR 选新 Leader；非 ISR 副本不能自动当选（`unclean.leader.election=false` 防丢数据）。
 2. **HW 和 LEO 区别？** → LEO 是副本自身末尾；HW 是已 commit、对消费者可见的位置。

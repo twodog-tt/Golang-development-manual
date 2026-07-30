@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -108,7 +108,7 @@ flowchart LR
 | 降低 GOGC | 需要压低堆峰值、CPU 有余量 | 已 GC bound；把它当成必然降低延迟 |
 | sync.Pool / 降分配 | 根因优化 | 不替代 limit 配置 |
 
-## 追问链
+## 深挖问答
 
 1. **GOGC=100 具体含义？** → 若忽略 roots 和 pacer 浮动，上次 GC 后存活 100MB，可粗略理解为接近 200MB 目标；实际值并非固定翻倍点。
 2. **GOMEMLIMIT 与 cgroup limit？** → 应低于 Pod limit，给 cgo、mmap、内核页与监控误差留 headroom；它不是 RSS 硬上限。

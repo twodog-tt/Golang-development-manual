@@ -19,7 +19,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -95,7 +95,7 @@ value, shared, err := cache.Get(ctx, key, loader)
 | stale-while-revalidate | 降低用户等待 | 允许短时旧数据 |
 | 分布式锁 | 跨实例只重建一次 | 锁租约、fencing、可用性复杂 |
 
-## 追问链
+## 深挖问答
 
 1. **为什么要二次查缓存？** → leader 排队前后缓存状态可能已变化。
 2. **第一个请求取消怎么办？** → 不应默认取消共享 loader；请求只放弃等待。

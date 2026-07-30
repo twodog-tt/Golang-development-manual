@@ -18,9 +18,9 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
-[返回高频必背题单](../../high-frequency-roadmap.md)
+[返回高频核心锚点](../../high-frequency-roadmap.md)
 
 !!! abstract "30 秒回答"
 
@@ -114,7 +114,7 @@ Go 客户端拆分 `Dialer.Timeout`、TLS handshake timeout、response header ti
 | reset | 对端关闭、进程重启、LB/NAT idle | 只怪网络 |
 | retransmission 高 | 丢包、拥塞、MTU、链路 | 单纯加 goroutine |
 
-## 追问链
+## 深挖问答
 
 1. **backlog 是半连接队列长度吗？** → 在现代 Linux 上 `listen` backlog 主要约束已完成等待 accept 队列；SYN 队列另受内核参数影响。
 2. **TIME_WAIT 多就是故障吗？** → 不一定；要看端口耗尽、内存、连接复用和错误率。

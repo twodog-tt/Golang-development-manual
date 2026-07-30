@@ -83,7 +83,7 @@ flowchart TD
 | block/mutex profile | 锁竞争 | 默认未开启 |
 | 分布式 tracing（OTel） | 跨服务 | 替代不了 runtime trace |
 
-## 追问链
+## 深挖问答
 
 1. **profile 采样 100Hz 含义？** → 每 10ms 一次，短函数可能被低估。
 2. **trace 影响生产？** → 短 capture 可接受，需限流与权限。

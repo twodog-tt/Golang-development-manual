@@ -18,7 +18,7 @@ sources:
 
 <a id="oral-card"></a>
 
-## 口述卡（高频必背）
+## 要点卡
 
 [返回 P0 知识图谱](../_meta/p0-knowledge-graph.md)
 
@@ -84,7 +84,7 @@ flowchart LR
 - **消息传递**（chan）优先于 **共享内存**（锁）—— Effective Go 精神，但高性能热点仍用锁/atomic。
 - **不可变数据** 跨 goroutine：构造完成后仍需安全发布，例如在 `go` 语句之前完成写入、通过 channel 发送、锁或 atomic pointer 发布；“发布后只读”不能替代发布时的 hb。
 
-## 追问链
+## 深挖问答
 
 1. **chan 发送指针 hb 吗？** → send hb recv，指针指向内容对接收者可见（若之后无别的写）。
 2. **两个 RLock 之间有 hb 吗？** → 没有一般性的 RLock→RLock 规则。RWMutex 的保证通过 writer 的 Unlock/Lock 以及 RUnlock→后续 Lock 建立；共享数据仍必须遵守完整加锁协议。
