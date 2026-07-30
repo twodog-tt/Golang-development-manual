@@ -1,7 +1,8 @@
 # 5 年+ Go / Agent / Web3 工程学习路线
 
 > 目标读者：**Go 后端** / **Tech Lead** / **区块链+后端架构师**  
-> 假设：已有 3 年以上生产经验，需补齐 **Go 生产工程 + 系统设计 + 多链钱包/支付/节点基础设施**
+> 假设：已有 3 年以上生产经验，需补齐 **Go 生产工程 + 系统设计 + 多链钱包/支付/节点 / DEX / Agent**  
+> 用法：先定主线 **Go · Web3/DEX · AI Agent** 之一，再选下方冲刺表；完整查阅见 [首页](./index.md) 与 [专题总索引](./interview-catalog.md)。
 
 ## 角色化 P0：共享门槛 + 一个岗位增量
 
@@ -10,11 +11,12 @@
 | 轨道 | 有效 P0 | 增量重点 |
 |------|--------:|----------|
 | 资深 Go 后端 | 62 | PostgreSQL/MySQL、消息、网络、IaC/GitOps |
-| 多链钱包与托管 | 65 | 多链交易、归集、MPC/HSM、恢复 |
-| 支付与稳定币 | 65 | 支付状态机、账本、清结算、合规 |
+| AI Agent Platform / Crypto Agent Ecosystem | 64 | 工作流/HITL、MCP/A2A、身份/Commerce、开放平台 |
+| 多链钱包与托管 | 66 | 多链交易、归集、MPC/HSM、恢复 |
+| 支付与稳定币 | 66 | 支付状态机、账本、清结算、合规 |
 | 节点/RPC/Indexer | 73 | 共识、canonical 数据、ClickHouse/lakehouse |
-| 交易所工程 | 68 | 撮合/WAL、行情/FIX、账本与风控 |
-| Staff/后端架构师 | 74 | 技术战略、跨团队迁移、发布与风险治理 |
+| 交易所工程 | **75** | 撮合/WAL、DEX 协议、预测市场、账本与风控 |
+| Staff/后端架构师 | **80** | 技术战略、跨团队迁移、发布与风险治理 |
 
 完整题号、P1/P2 与证据标签见
 [角色化优先级矩阵](./interview/_meta/role-priority-matrix.md)；依赖关系见
@@ -52,6 +54,7 @@
 - [ ] 能解释 signer-side fencing、SBOM 与 provenance 的差别，并跑安全故障注入
 - [ ] 能运行撮合/WAL、行情恢复、FIX 与集合竞价，解释 sequence、STP 和性能边界
 - [ ] 能用真实指标讲一个 Staff 技术战略或跨团队迁移案例，不套用虚构数据
+- [ ] （DEX Tech Lead）能讲 Uniswap V2/V3 差异、rewardPerToken 激励会计，并完成 45min DEX 白板（[S-EXCH-31](./interview/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md)）
 
 ---
 
@@ -81,7 +84,7 @@
 | 3-4 | 03 系统设计 21 题 + 容量估算模板 |
 | 5 | [网络](./interview/06-network-governance/index.md) + [MySQL](./interview/middleware/mysql/index.md) + [PostgreSQL](./interview/middleware/postgresql/index.md) |
 | 6 | Redis/Kafka/RocketMQ/ES + Terraform/Helm/GitOps |
-| 7 | 目标岗位专题：普通后端选 11/15；Web3 选 17/18 与四条 SDK 实战 |
+| 7 | 目标岗位专题：普通后端选 11/15；Web3 选 17/18 与四条 SDK 实战；DEX TL 选 14（31/30/29）；Agent 选 10 |
 | 8 | Web3 节点/RPC + 安全工程 + 协议/共识 + Rollup/跨链，或 AI/领导力 + 2 场完整模拟 |
 
 ---
@@ -149,7 +152,9 @@
 - **Web3 钱包/支付**：16 → 17 → 18 → 21 + 12 索引/签名
 - **节点/RPC/Indexer**：06 → 19（含 NODE-10）→ 20 → 21 + 12 索引 + 09 云原生
 - **Web3 架构师**：17 → 18 → 19 → 20 → 21 + 03/11 + 12/13
-- **交易所工程师**：14（重点 17~22）+ 15 + 17 充提 + 18 账本/对账
+- **CEX 交易系统**：14（重点 EXCH-17~22）+ 15 + 17 充提 + 18 账本/对账
+- **DEX Tech Lead**：14（**EXCH-31 → 30 → 29** → 06/27 → 07/08）+ 13（SOLID-02/04/06/07）+ 12（BC-05/07/08）+ LEAD-01/03/04
+- **AI / Crypto Agent**：10（AI-09~14）+ 16 + 21；按 JD 再补 12/14
 
 ---
 
@@ -168,11 +173,35 @@
 
 ## 交易所工程师冲刺（4 周）
 
+分两条轨，按 JD 二选一（可并行 Shared Go）。
+
+### A. CEX 交易系统
+
 | 周 | 模块 | 自测 |
 |----|------|------|
 | W1 | [14 DEX/CEX](./interview/14-dex-cex-engineering/index.md) S-EXCH-01/17~22 | 跑撮合、WAL、行情、FIX、竞价；解释 sequence、STP 与 benchmark 边界 |
 | W2 | [15 微服务](./interview/15-microservices-exchange/index.md) + [18 账本/清结算](./interview/18-web3-payments-stablecoin/index.md) | 交易事实、账本事实、结算边界 |
 | W3 | [17 多链钱包](./interview/17-multichain-wallet/index.md) + [19 Relayer/RPC](./interview/19-node-rpc-staking/index.md) | 充提、nonce/UTXO、广播恢复 |
-| W4 | 14 DEX/永续 + 12 Rollup/跨链 + 13 合约 | CEX/CeDeFi 45min 白板 |
+| W4 | 14 永续（16/04）+ 12 Rollup/跨链 + 13 合约 | CEX/CeDeFi 45min 白板（EXCH-13/14/15） |
+
+### B. DEX Tech Lead
+
+| 周 | 模块 | 自测 |
+|----|------|------|
+| W1 | **S-EXCH-31 → 30 → 29** + EXCH-06/27 | 45min DEX 白板；讲 V2/V3 与 rewardPerToken |
+| W2 | EXCH-07/08 + SOLID-02/04/06/07 | 聚合/MEV、重入、升级、Foundry 审计清单 |
+| W3 | BC-05/07/08/11/12 + EXCH-10/11 | Indexer/reorg、L2/桥、AA、行情同步 |
+| W4 | EXCH-14 + LEAD-01/03/04 + 模拟 | 全栈叙事 + CR/事故/带队；英文口述要点 |
+
+---
+
+## AI / Crypto Agent 冲刺（4 周，可选）
+
+| 周 | 模块 | 自测 |
+|----|------|------|
+| W1 | [10 AI 工程](./interview/10-ai-engineering/index.md) S-AI-01~04 + 09 | API/RAG/Agent 工具调用 + 工作流/HITL |
+| W2 | S-AI-10~12 | Persona/Memory、MCP/A2A、ERC-8004 身份 |
+| W3 | S-AI-13~14 + 21 安全 | Agent Commerce、开放平台/Launchpad、威胁模型 |
+| W4 | 16 Go 生产工程 + 模拟 | 与 Go 工程门禁串联；1 场综合口述 |
 
 题单索引：[interview/_meta/questions.yaml](./interview/_meta/questions.yaml)
