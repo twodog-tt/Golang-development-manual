@@ -10,8 +10,10 @@ status: published
 code_refs: []
 sources:
   - https://ethereum.org/en/developers/docs/
+  - https://ethereum.org/en/developers/docs/evm/
   - https://ethereum.org/en/developers/docs/accounts/
   - https://ethereum.org/en/developers/docs/gas/
+  - https://ethereum.org/en/developers/docs/smart-contracts/
   - https://eips.ethereum.org/EIPS/eip-7702
   - https://pkg.go.dev/github.com/ethereum/go-ethereum/core/types
 ---
@@ -20,15 +22,61 @@ sources:
 
 ## 30 秒版（开场）
 
-> 以太坊执行层可视为状态机。传统上区分 **EOA**（由私钥原生授权交易）与 **合约账户**；但 EIP-7702 已允许 EOA 在账户状态中设置持久的代码委托，因此“EOA 永远没有代码、合约账户永远不能主动发起动作”的二分法要加版本语境。Go 后端重点是 nonce、typed transaction、fee、safe/finalized 与 chain ID。
+> **EVM（Ethereum Virtual Machine）** 是以太坊执行层的确定性虚拟机：给定同一前置世界状态与同一批交易，任何合规客户端算出来的状态转移结果必须一致。
+> 它不是“另一条链”，而是 **怎么执行交易、改账户状态** 的规则引擎；共识（PoS）负责谁出块、哪条链有效，EVM 负责块内交易如何改变状态。
+> 账户上传统区分 **EOA** 与 **合约账户**；EIP-7702 允许 EOA 设置持久代码委托，二分法要加版本语境。Go 后端重点是 nonce、typed transaction、fee、safe/finalized 与 chain ID。
 
 ## 3 分钟版（精讲深度）
 
-1. **是什么**：去中心化账本 + 可编程层（EVM）；区块打包交易，共识（PoS）保证安全。
-2. **为什么**：Web3 后端必须懂账户/Gas，否则无法估算费用、排查失败交易、设计索引。
-3. **怎么做**：读链用 RPC；写链构造 signed tx；业务层区分 **链上确认数** 与 **链下订单状态**。
+1. **EVM 是什么**：栈式、基于 gas 计量的字节码虚拟机。Solidity/Vyper 等先编译成 **EVM bytecode**，部署后存在合约账户的 code 字段；交易触发时，EVM 按 opcode 逐步执行，读写 **stack / memory / storage**，并更新世界状态。
+2. **它解决什么**：在不可信环境里让所有节点对「这笔交易执行后状态变成什么样」达成可验证一致——没有统一的中心服务器来“跑业务逻辑”。
+3. **后端怎么用**：读链用 RPC（`eth_call` / receipt / logs）；写链构造并广播 signed tx；业务层必须把 **EVM 执行结果**（status、logs、state root 含义）与 **链下订单/账本状态** 拆开建模。
 
 ## 10 分钟版（原理 + 图示）
+
+### EVM 究竟是什么
+
+用一句话：**EVM = 以太坊的状态转移函数实现规范**。
+
+```text
+新世界状态 = EVM(旧世界状态, 区块内交易与执行上下文)
+```
+
+| 它是 | 它不是 |
+|------|--------|
+| 确定性字节码 VM（同输入同输出） | 共识协议本身（那是 PoS / fork choice） |
+| 交易与合约逻辑的执行环境 | “钱包 App”或 RPC 网关 |
+| 以 **gas** 为计量单位的资源会计器 | 无限算力的通用服务器 |
+| 多条 EVM 兼容链可共享的执行模型 | 以太坊专属硬件或单一二进制 |
+
+**执行时看到的三块工作区（讲解必分清）**
+
+| 区域 | 生命周期 | 典型用途 | 后端直觉 |
+|------|----------|----------|----------|
+| **Stack** | 单次调用内 | opcode 运算操作数 | 不持久；溢出/深度限制会导致 revert |
+| **Memory** | 单次调用内 | 临时字节数组、ABI 编解码缓冲 | 按字扩展计 gas；调用结束即丢 |
+| **Storage** | 合约账户持久 | 状态变量、映射 | 写入昂贵；reorg/finality 前仍可能被推翻的是“整块共识”，不是单次 opcode 语义 |
+
+**一次交易在 EVM 里大致发生什么**
+
+```mermaid
+flowchart TB
+  Tx[Signed Tx] --> Check["校验签名 / nonce / 余额够付 gas"]
+  Check --> Ctx["构造执行上下文<br/>caller, value, calldata, gas"]
+  Ctx --> Run["按 bytecode 解释执行 opcode"]
+  Run --> Effects["改 storage / 转 ETH / 写 logs / 创建合约"]
+  Effects --> Receipt["生成 receipt：status, gasUsed, logs"]
+  Receipt --> StateRoot["参与计算新 state root"]
+```
+
+要点：
+
+- **输入**：前置状态 + 交易（及区块级上下文，如 `block.number`、`baseFee`）。
+- **输出**：后置状态 + receipt（成功/失败、耗气、事件日志）；失败交易仍可能消耗 gas（已执行部分计费，防 DoS）。
+- **确定性**：禁止依赖节点本地时间噪声、随机外设等；链上“随机性”必须来自协议定义的来源，否则各节点状态会分叉。
+- **与共识的分工**：PoS 决定 **哪条链、哪个块** 被接受；EVM 决定 **块被接受后状态怎么变**。Go 索引器两者都要关心：先跟对 canonical head / finality，再解释 receipt 与 logs。
+
+**和“智能合约”的关系**：合约源码不是链上直接执行物；链上存的是 bytecode。`eth_call` 是只读模拟执行（通常不改持久状态）；真正改状态的是被打包进块的交易。
 
 ```mermaid
 flowchart LR
@@ -87,10 +135,12 @@ flowchart LR
 
 ## 深挖问答
 
-1. **UTXO vs Account？** → BTC UTXO；ETH 账户余额模型，便于智能合约。
-2. **为什么 tx 失败仍耗 Gas？** → 已执行部分计费，防 DoS。
-3. **chainId 作用？** → 进入交易签名域，降低跨链重放；应用层 EIP-712/授权消息仍要包含 domain、nonce、deadline 等自己的重放保护。
-4. **和分布式系统一致性？** → 客户端先看到可能 reorg 的 tentative head，再按共识
+1. **EVM 和“以太坊节点”是一回事吗？** → 不是。节点还包含共识、网络、存储、RPC；EVM 只是执行层里负责状态转移的那一块。go-ethereum 的 `core/vm` 是实现，规范以 Yellow Paper / execution specs 为准。
+2. **为什么说 EVM 必须确定性？** → 每个验证者独立重放同一批交易；若结果可因本地环境分叉，就无法就 state root 达成共识。
+3. **UTXO vs Account？** → BTC UTXO；ETH 账户余额模型，便于智能合约。
+4. **为什么 tx 失败仍耗 Gas？** → 已执行部分计费，防 DoS。
+5. **chainId 作用？** → 进入交易签名域，降低跨链重放；应用层 EIP-712/授权消息仍要包含 domain、nonce、deadline 等自己的重放保护。
+6. **和分布式系统一致性？** → 客户端先看到可能 reorg 的 tentative head，再按共识
    获得 safe/finalized 保证；不要把所有链简单归类成一个“最终一致”数据库。
    跨链桥还引入额外协议与信任假设。
 
@@ -110,5 +160,7 @@ go-ethereum 版本后做兼容测试。
 
 ## 延伸阅读
 
+- [Ethereum Virtual Machine (EVM)](https://ethereum.org/en/developers/docs/evm/)
 - [Ethereum Accounts](https://ethereum.org/en/developers/docs/accounts/)
 - [Gas and Fees](https://ethereum.org/en/developers/docs/gas/)
+- [Smart Contracts](https://ethereum.org/en/developers/docs/smart-contracts/)
