@@ -1,6 +1,6 @@
 # 知识图谱：岗位定向 P0 与方向深挖
 
-> 当前共 **229 篇**。实际 P0/P1/P2 以
+> 当前共 **232 篇**。实际 P0/P1/P2 以
 > [七类岗位优先级](./role-priority-matrix.md) 为准。本知识库的首选方向是
 > **AI Agent Platform / Crypto Agent Ecosystem**：先完成 40 篇共享 Go/生产工程门槛，
 > 再补 24 篇 Agent 定向 P0；CEX/DEX、钱包和实时风控不是另一套平行体系，而是证明你能处理

@@ -1,6 +1,6 @@
 # 角色化优先级与证据标签
 
-> 当前共 **229 篇 published 正文**。角色优先级与证据标签的机器事实源为
+> 当前共 **232 篇 published 正文**。角色优先级与证据标签的机器事实源为
 > [role-evidence.yaml](./role-evidence.yaml)，一致性由
 > `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-29**。
 

@@ -469,6 +469,9 @@ roles:
       - S-EXCH-24
       - S-EXCH-25
       - S-EXCH-26
+      - S-EXCH-29
+      - S-EXCH-30
+      - S-EXCH-31
       - S-MSVC-01
       - S-MSVC-03
       - S-MSVC-04
@@ -566,6 +569,7 @@ roles:
       - S-EXCH-24
       - S-EXCH-25
       - S-EXCH-26
+      - S-EXCH-31
       - S-MSVC-01
       - S-MSVC-02
       - S-MSVC-04
@@ -686,6 +690,7 @@ evidence:
       - S-EXCH-24
       - S-EXCH-26
       - S-EXCH-27
+      - S-EXCH-30
     vendor_or_regulatory_sensitive:
       - S-PAY-02
       - S-PAY-05

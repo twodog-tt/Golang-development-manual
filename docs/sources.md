@@ -6,7 +6,7 @@
 > [角色优先级与证据标签](interview/_meta/role-priority-matrix.md) ·
 > 代码映射：[interview/_meta/mapping.md](interview/_meta/mapping.md)
 
-## 知识库覆盖范围（229 篇）
+## 知识库覆盖范围（232 篇）
 
 | 模块 | 题数 | 说明 |
 |------|------|------|
