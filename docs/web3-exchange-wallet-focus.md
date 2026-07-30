@@ -89,6 +89,7 @@
 | ⭐ [S-BC-10](topics/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) | MPC/TSS 与 CEX 托管签名 | 门限签名、提现链路 |
 | ⭐ [S-BC-04](topics/12-blockchain-web3/S-BC-04-contract-abi-events.md) | ABI 与事件监听 | Swap/TokenCreated 等 |
 | ⭐ [S-BC-02](topics/12-blockchain-web3/S-BC-02-go-ethereum-rpc.md) | JSON-RPC 与 ethclient | 多链 RPC Client |
+| ⭐ [S-BC-13](topics/12-blockchain-web3/S-BC-13-gas-fee-multichain.md) | Gas / Fee 与多链费用 | EIP-1559、L2 L1 data fee、estimateGas |
 | ⭐ [S-BC-03](topics/12-blockchain-web3/S-BC-03-tx-signing-key-mgmt.md) | 交易签名与密钥管理 | KMS/HSM |
 | ⭐ [S-BC-09](topics/12-blockchain-web3/S-BC-09-abigen-contract-bindings.md) | abigen 合约调用 | 合约集成 |
 

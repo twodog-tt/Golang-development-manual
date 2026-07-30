@@ -108,6 +108,7 @@ flowchart LR
 - `baseFee` 销毁 + `priorityFee` 给验证者
 - `SSTORE` 状态转换、首次 cold account/storage access 与后续 warm access 的计价不同；不要只背一个固定 opcode 数字。大数据通常链下存储并在链上提交必要承诺
 - EIP-7702 的授权处理与后续目标调用是两个阶段；即使交易执行阶段 revert，已处理的代码委托也不会因此自动回滚。签名 UI 与后端策略必须把授权本身当作持久权限变更审查
+- **计费公式、L2 L1 data fee、多链费用差异与 `estimateGas` 陷阱** 见 [S-BC-13](./S-BC-13-gas-fee-multichain.md)
 
 **Finality**
 

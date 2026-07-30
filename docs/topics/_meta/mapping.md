@@ -34,7 +34,7 @@
 | S-AI-02 | 简易 RAG | [S-AI-02](../10-ai-engineering/S-AI-02-rag-architecture.md) | `examples/senior/rag/` |
 | S-AI-07 | MCP Server | [S-AI-07](../10-ai-engineering/S-AI-07-mcp-server-go.md) | `examples/senior/mcp/` |
 | S-SOL-01～08 | 解决方案架构 | — | [11-solution-architecture/](../11-solution-architecture/index.md) |
-| S-BC-01～12 | 区块链 Web3 | — | [12-blockchain-web3/](../12-blockchain-web3/index.md) |
+| S-BC-01～13 | 区块链 Web3 | — | [12-blockchain-web3/](../12-blockchain-web3/index.md) |
 | S-BC-02 | JSON-RPC 客户端 | [S-BC-02](../12-blockchain-web3/S-BC-02-go-ethereum-rpc.md) | `examples/senior/ethrpc/` |
 | S-BC-09 | abigen ERC20 实战 | [S-BC-09](../12-blockchain-web3/S-BC-09-abigen-contract-bindings.md) | `examples/senior/erc20bind/` |
 | S-BC-12 | 跨链应用层 Guard | [S-BC-12](../12-blockchain-web3/S-BC-12-cross-chain-message-bridge-security.md) | `examples/senior/bridgeguard/` |

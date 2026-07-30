@@ -818,6 +818,11 @@ p1:
       resume_focus: true
       file: 12-blockchain-web3/S-BC-12-cross-chain-message-bridge-security.md
       code_refs: [examples/senior/bridgeguard]
+    - id: S-BC-13
+      title: Gas / Fee 计费与多链费用差异
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-13-gas-fee-multichain.md
 
   protocol_consensus_security:
     - id: S-PROTO-01

@@ -8,7 +8,7 @@
 # topics.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
 
 schema_version: 1
-updated_at: "2026-07-21"
+updated_at: "2026-07-31"
 default_priority: p2
 priority_precedence: [p0, p1, p2]
 
@@ -246,6 +246,7 @@ roles:
       - S-PAY-03
       - S-PAY-04
       - S-BC-05
+      - S-BC-13
 
   wallet_custody:
     label: 多链钱包与托管
@@ -285,6 +286,7 @@ roles:
       - S-BC-08
       - S-BC-09
       - S-BC-11
+      - S-BC-13
       - S-PAY-01
       - S-PAY-02
       - S-PAY-06
@@ -356,6 +358,7 @@ roles:
       - S-BC-08
       - S-BC-09
       - S-BC-11
+      - S-BC-13
       - S-NODE-01
       - S-NODE-03
       - S-NODE-04
@@ -420,6 +423,7 @@ roles:
       - S-BC-08
       - S-BC-09
       - S-BC-10
+      - S-BC-13
       - S-WALLET-02
       - S-WALLET-06
       - S-WALLET-07
@@ -511,6 +515,7 @@ roles:
       - S-BC-07
       - S-BC-10
       - S-BC-12
+      - S-BC-13
       - S-NODE-01
       - S-NODE-03
       - S-NODE-04
@@ -611,6 +616,7 @@ roles:
       - S-BC-07
       - S-BC-11
       - S-BC-12
+      - S-BC-13
       - S-PROTO-01
       - S-PROTO-02
       - S-PROTO-03

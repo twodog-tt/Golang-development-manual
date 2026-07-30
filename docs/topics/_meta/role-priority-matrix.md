@@ -1,8 +1,8 @@
 # 角色化优先级与证据标签
 
-> 当前共 **232 篇 published 正文**。角色优先级与证据标签的机器事实源为
+> 当前共 **233 篇 published 正文**。角色优先级与证据标签的机器事实源为
 > [role-evidence.yaml](./role-evidence.yaml)，一致性由
-> `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-30**。
+> `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-07-31**。
 
 ## 先选方向，不再套统一 P0
 
@@ -17,13 +17,13 @@
 
 | 目标岗位 | P0 | P1 | P2 | P0 重点 |
 |----------|---:|---:|---:|---------|
-| 资深 Go 后端 | 62 | 72 | 98 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
-| **AI Agent Platform / Crypto Agent Ecosystem** | **64** | **89** | **79** | 工作流、MCP/A2A、Agent 身份/Commerce、开放平台、Web3 安全执行 |
-| 多链钱包与托管 | 66 | 90 | 76 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
-| 支付与稳定币 | 66 | 97 | 69 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
-| 节点/RPC/Indexer | 73 | 85 | 74 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
-| 交易所工程 | **75** | **105** | **52** | 撮合/WAL、DEX 协议、预测市场 CTF/CLOB、账本与安全上线 |
-| Staff/后端架构师 | **80** | **88** | **64** | 系统设计、DEX/预测市场白板、迁移、IaC/GitOps、安全、跨团队影响 |
+| 资深 Go 后端 | 62 | 72 | 99 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
+| **AI Agent Platform / Crypto Agent Ecosystem** | **64** | **90** | **79** | 工作流、MCP/A2A、Agent 身份/Commerce、开放平台、Web3 安全执行 |
+| 多链钱包与托管 | 66 | 91 | 76 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
+| 支付与稳定币 | 66 | 98 | 69 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
+| 节点/RPC/Indexer | 73 | 86 | 74 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
+| 交易所工程 | **75** | **106** | **52** | 撮合/WAL、DEX 协议、预测市场 CTF/CLOB、账本与安全上线 |
+| Staff/后端架构师 | **80** | **89** | **64** | 系统设计、DEX/预测市场白板、迁移、IaC/GitOps、安全、跨团队影响 |
 
 P0 数量不是“全部逐字通读”。建议先掌握 shared P0 的 30 秒版与不变量，再只进入一个岗位的
 增量 P0；P1 用来应对 JD 特有深挖，P2 只按反馈补洞。
@@ -160,4 +160,4 @@ P0 数量不是“全部逐字通读”。建议先掌握 shared P0 的 30 秒�
 .venv/bin/python scripts/verify_knowledge_metadata.py
 ```
 
-校验会检查 232 个 ID、正文、sources、30 秒版、深挖问答、角色引用和证据标签互斥关系。
+校验会检查 233 个 ID、正文、sources、30 秒版、深挖问答、角色引用和证据标签互斥关系。

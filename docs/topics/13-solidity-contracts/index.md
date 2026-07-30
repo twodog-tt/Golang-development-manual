@@ -29,6 +29,7 @@
 | RPC、索引、签名 | 链上逻辑、资产规则 |
 | [S-BC-09 abigen](../12-blockchain-web3/S-BC-09-abigen-contract-bindings.md) | ABI 由本模块合约产出 |
 | [S-BC-05 索引器](../12-blockchain-web3/S-BC-05-indexer-reorg.md) | 监听本模块定义的事件 |
+| [S-BC-13 Gas/Fee](../12-blockchain-web3/S-BC-13-gas-fee-multichain.md) | 执行 gas 与费用市场；本模块优化的是 gas units |
 
 ## 推荐阅读顺序
 

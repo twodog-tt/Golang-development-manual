@@ -51,7 +51,7 @@ flowchart LR
 |------|-----|---------|--------|------------|-----|
 | 状态 | account | UTXO | account data | account/module store | versioned objects + 支持资产的 address balances |
 | 防重放/freshness | chain ID + nonce | 消费 outpoint | recent blockhash / nonce | chain-id + sequence | tx data；object 路径还绑定 refs |
-| fee | gas limit × fee market | feerate × vbytes | fee/compute budget | gas × gas price/fee | coin object / address balance / 特定 gasless 能力 |
+| fee | gas limit × fee market；L2 常加 L1 data 成分（[S-BC-13](../12-blockchain-web3/S-BC-13-gas-fee-multichain.md)） | feerate × vbytes | fee/compute budget | gas × gas price/fee | coin object / address balance / 特定 gasless 能力 |
 | 并发冲突域 | sender nonce | selected outpoints | writable accounts/blockhash | signer sequence | input objects；或 sender + asset balance domain |
 | 替换 | same nonce policy | RBF/CPFP policy | 通常重建并重签 | chain/mempool specific | 重新构建；object 路径需新 refs，余额路径需重查 effects/余额 |
 

@@ -1,6 +1,6 @@
 # 12 区块链与 Web3
 
-12 篇 | P1 扩展（Web3 / 链上后端 JD） | [返回专题索引](../../topic-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
+13 篇 | P1 扩展（Web3 / 链上后端 JD） | [返回专题索引](../../topic-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
 
 > 面向 **Go 后端** 做链上数据索引、钱包、DApp 中台、交易所/ NFT 业务；偏 **工程落地**，非密码学研究员方向。
 
@@ -18,6 +18,7 @@
 | [S-BC-10](./S-BC-10-mpc-tss-custody.md) | MPC/TSS 与 CEX 托管签名 | ⭐⭐⭐⭐⭐ |
 | [S-BC-11](./S-BC-11-rollup-finality-da-proof-security.md) | Rollup Finality、DA、证明与强制退出 | ⭐⭐⭐⭐⭐ |
 | [S-BC-12](./S-BC-12-cross-chain-message-bridge-security.md) | 跨链消息认证、重放与限额 | ⭐⭐⭐⭐⭐ |
+| [S-BC-13](./S-BC-13-gas-fee-multichain.md) | Gas / Fee 计费与多链费用差异 | ⭐⭐⭐⭐⭐ |
 
 ## 可运行代码
 
@@ -35,5 +36,5 @@
 
 ## 推荐阅读顺序
 
-EVM → RPC → 签名 → ABI 理论 → **abigen 实战** → 索引器 → L2 概览 →
+EVM → **Gas/Fee 与多链费用** → RPC → 签名 → ABI 理论 → **abigen 实战** → 索引器 → L2 概览 →
 **Rollup 安全边界** → **跨链消息安全** → 4337 → DeFi 架构

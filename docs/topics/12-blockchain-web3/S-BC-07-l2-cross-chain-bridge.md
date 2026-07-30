@@ -86,7 +86,7 @@ flowchart TB
 
 ## 深挖问答
 
-1. **L2 Gas 谁付？** → 通常包含 L2 execution fee 与 L1 data/proof 相关费用，支付资产和公式按链而异；4337 Paymaster 可在支持的链上赞助。
+1. **L2 Gas 谁付？** → 通常包含 L2 execution fee 与 L1 data/proof 相关费用，支付资产和公式按链而异；4337 Paymaster 可在支持的链上赞助。计费拆解见 [S-BC-13](./S-BC-13-gas-fee-multichain.md)。
 2. **序列器宕机？** → 部分 rollup 提供经 L1 的强制 inclusion/escape hatch，但延迟、可用性和操作流程各异；后端应暂停依赖即时排序的写操作并展示状态。
 3. **同地址跨链？** → CREATE2 地址同时取决于部署者/工厂地址、salt 和 init-code hash；只有这些输入及链上部署条件一致时才可能得到同一地址，salt 相同本身不够。
 4. **和 [S-BC-06 DeFi](./S-BC-06-defi-backend-patterns.md)？** → 跨链流动性是 DeFi 核心风险点。

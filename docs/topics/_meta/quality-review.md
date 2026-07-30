@@ -1,6 +1,6 @@
 # 知识库质量审查与岗位差距
 
-> 全库 **232 篇**（以 [topics.yaml](topics.yaml) 为准）
+> 全库 **233 篇**（以 [topics.yaml](topics.yaml) 为准）
 >
 > 本轮审查与补强日期：**2026-07-21**
 >
@@ -57,7 +57,7 @@
   异步计佣、佣金账本结算与代理后台 subtree 隔离，并对照 CEX 手续费事实与 DEX Indexer 输入。
 - 第十三阶段按 DEX Tech Lead JD 补充 **3 篇方向定向 P0/P1 正文**：DeFi Staking/
   流动性挖矿/Yield Farming、Uniswap V2/V3 协议深挖、DEX Tech Lead 45 分钟架构白板。
-- 证据标签已覆盖 232 篇：`explanation_only=174`、`illustrative_artifact=31`、
+- 证据标签已覆盖 233 篇：`explanation_only=175`、`illustrative_artifact=31`、
   `deterministic_test=20`、`integration_harness=7`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
@@ -85,7 +85,7 @@
 | 云原生 | 10 |
 | AI 工程 | 14 |
 | 解决方案架构 | 8 |
-| 区块链 Web3 | 12 |
+| 区块链 Web3 | 13 |
 | 多链钱包与托管 | 12 |
 | Web3 支付与稳定币 | 6 |
 | 节点、RPC 与 Staking | 10 |
@@ -94,7 +94,7 @@
 | Solidity | 8 |
 | DEX/CEX/预测市场 | 31 |
 | 交易所微服务 | 6 |
-| **合计** | **232** |
+| **合计** | **233** |
 
 原始 153 题基线中的中间件为 21 题；此前新增 2 篇 MySQL，本阶段再新增 3 篇 PostgreSQL，
 当前数据库与中间件共 26 题。

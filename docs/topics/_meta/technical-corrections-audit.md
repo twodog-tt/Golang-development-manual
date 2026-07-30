@@ -16,7 +16,7 @@
 finality，或把本地示例说成生产验收。该轮方向定向补强结束时全库为 219 篇；新增预测市场
 四篇预测市场专项正文后为 223 篇；新增四篇 Crypto Agent 生态 P0 正文后为 227 篇；再补充
 PancakeSwap V2/V3 方向定向题后为 228 篇；再补充多级代理极差分润专题后为 229 篇；
-再补充 DEX Tech Lead P0（Staking/Farm、Uniswap V2/V3、45min 白板）后，当前为 **232 篇正文**。
+再补充 DEX Tech Lead P0（Staking/Farm、Uniswap V2/V3、45min 白板）以及 Gas/Fee 多链计费篇（S-BC-13）后，当前为 **233 篇正文**。
 
 ## 审计方法与证据边界
 

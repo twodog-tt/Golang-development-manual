@@ -1,6 +1,6 @@
 # 专题索引
 
-> 全库 **232 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
+> 全库 **233 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
 > **⭐ 方向定向**：[角色优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
 > [Web3 交易所重点专题](web3-exchange-wallet-focus.md)
 
@@ -35,7 +35,7 @@
 
 | 模块 | 篇数 | 入口 |
 |------|------|------|
-| 12 区块链与 Web3 | 12 | [12-blockchain-web3/](topics/12-blockchain-web3/index.md) |
+| 12 区块链与 Web3 | 13 | [12-blockchain-web3/](topics/12-blockchain-web3/index.md) |
 | 17 多链钱包与托管 | 12 | [17-multichain-wallet/](topics/17-multichain-wallet/index.md) |
 | 18 Web3 支付与稳定币 | 6 | [18-web3-payments-stablecoin/](topics/18-web3-payments-stablecoin/index.md) |
 | 19 节点、RPC 与 Staking | 10 | [19-node-rpc-staking/](topics/19-node-rpc-staking/index.md) |

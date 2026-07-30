@@ -72,7 +72,7 @@ sources:
 3. **assembly 何时用？** → 库级优化；需双审计。
 4. **L2 Gas 差异？** → 不同 Rollup 会分别计 L2 执行、L1 calldata/blob 或其他 DA
    成本；某些优化在 L1 和 L2 的收益排序不同，必须按目标链测量
-   （[S-BC-07](../12-blockchain-web3/S-BC-07-l2-cross-chain-bridge.md)）。
+   （计费拆解见 [S-BC-13](../12-blockchain-web3/S-BC-13-gas-fee-multichain.md)；L2/桥见 [S-BC-07](../12-blockchain-web3/S-BC-07-l2-cross-chain-bridge.md)）。
 
 ## 反模式
 
