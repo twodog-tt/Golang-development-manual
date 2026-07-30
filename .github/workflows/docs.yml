@@ -32,6 +32,9 @@ jobs:
       - name: Generate topic-quiz data
         run: python scripts/generate_topic_quiz_data.py
 
+      - name: Verify knowledge metadata
+        run: python scripts/verify_knowledge_metadata.py
+
       - name: Generate legacy path redirects
         run: python scripts/generate_redirect_maps.py
 

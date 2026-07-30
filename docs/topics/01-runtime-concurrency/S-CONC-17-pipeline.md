@@ -20,7 +20,7 @@ sources:
 
 > **Pipeline** 用 stage + channel 串联处理；fan-out 让多个 worker 竞争消费，fan-in 把多个结果流合并。`errgroup` 适合管理一组 goroutine 的生命周期和首错取消，但它本身不是结果 fan-in channel。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：数据流经多个处理阶段，每阶段可由 goroutine 并行。
 2. **为什么**：分解复杂流式任务（ETL、聚合 RPC）；清晰背压边界。

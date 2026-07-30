@@ -20,7 +20,7 @@ sources:
 
 > **Worker Pool** 用 **固定数量 goroutine** 消费任务队列，实现 **并发上限与背压**。Go 可用 **buffered channel + N worker** 或 **`semaphore.Weighted`**。生产关键词：**队列长度、拒绝策略、优雅关停**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：生产者投递 Job，池内 worker 并发处理，池大小 = 最大并行度。
 2. **为什么**：防 goroutine 爆炸、保护下游（DB/API）、平滑 CPU。

@@ -21,7 +21,7 @@ sources:
 
 > “稳定币”不是一种统一技术资产。要区分发行人原生 token、bridge wrapped token、合约版本和 chain；同 symbol 不代表同一赎回权或风险。中心化发行稳定币的合约可能具有 mint/burn、pause、denylist/freeze、upgrade 等控制，具体以官方合约和条款为准。跨链也要区分锁定铸造桥与 burn-and-mint 协议；例如 CCTP 通过源链 burn、attestation、目标链 mint 转移原生 USDC，但仍有 finality、attestation、合约、运营和目的链风险。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **资产身份**：issuer + chain + contract/mint/type + version；展示 symbol 只是 UI。
 2. **发行人风险**：储备/赎回、银行与法律实体、合约管理员、冻结、升级、depeg。

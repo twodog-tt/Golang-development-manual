@@ -22,7 +22,7 @@ sources:
 
 > 现代 Ethereum 节点需要 execution client 和 consensus client：EL 执行 EVM、维护交易与状态并提供多数 JSON-RPC，CL 跟踪 PoS 共识和 finalized head；validator 是连接 CL 的可选职责组件。Full node 验证链并维护当前/近期状态，archive node 额外保留每个历史区块对应的状态，主要服务历史 `eth_call`、余额/存储查询和分析。Sync mode、pruning、历史保留与磁盘规模是 client-specific，不能背一个永久固定数字。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **EL/CL 协作**：通过受认证的 Engine API 交换 execution payload 与 forkchoice；两者任一不同步都会影响节点可用性。
 2. **Full vs archive**：full node 通常仍保留历史 blocks/transactions；archive 的关键增量是历史 state 快速可查。

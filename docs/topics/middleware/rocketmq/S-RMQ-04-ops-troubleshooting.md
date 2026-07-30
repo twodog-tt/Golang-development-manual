@@ -20,7 +20,7 @@ sources:
 
 > RocketMQ 线上问题集中在 **消费堆积、重复消费、消息进死信、Broker 磁盘满**。排查路径：**Console 看 diff（堆积量）→ 消费 TPS vs 生产 TPS → 慢消费/失败重试 → DLQ**。生产关键词：**maxReconsumeTimes、%DLQ% 主题、CommitLog 磁盘、resetOffset 慎用**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：消费失败按 **重试级别** 延迟重投（非立即）；超过 `maxReconsumeTimes` 进入 **死信队列 `%DLQ%{consumerGroup}`**；堆积 = 生产 offset − 消费 offset。
 2. **为什么**：下游 DB 慢、Bug 抛异常、Consumer 实例不足、Rebalance 导致短暂停消费都会表现为堆积。

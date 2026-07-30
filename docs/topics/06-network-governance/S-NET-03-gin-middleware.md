@@ -20,7 +20,7 @@ sources:
 
 > Gin 请求走 **Engine → Router → Middleware 链 → Handler**；中间件通过 **`c.Next()`** 驱动后续执行，可在前后插入逻辑。`c.Abort()` 跳过剩余 handler。生产关键词：**Recovery、Auth、TraceID、Timeout、Request-scoped 值**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：`HandlerFunc` 组成的洋葱模型；`router.Use()` 注册全局中间件；路由组 `Group` 可挂局部中间件；`*gin.Context` 封装 request/response 与 key-value。
 2. **为什么**：横切关注点（日志、鉴权、限流）与业务解耦；统一 panic 恢复与 metrics。

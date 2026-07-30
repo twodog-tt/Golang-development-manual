@@ -19,7 +19,7 @@ sources:
 
 > Go `http.Transport` 默认会缓存连接；对 HTTP/1.x，`DefaultMaxIdleConnsPerHost` 为 2，固定高并发下游可能需要调大。**Keep-Alive** 复用 TCP/TLS 握手。生产应复用 `Client/Transport`，并按容量设置 `MaxIdleConnsPerHost`、`MaxConnsPerHost`、`IdleConnTimeout` 和各阶段超时。关键词：**TIME_WAIT、FD 耗尽、HTTP/2 多路复用**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：`http.Transport` 维护 idle 连接缓存；请求完连接放回池供复用；Keep-Alive 是 HTTP/1.1 默认持久连接。
 2. **为什么**：每次新建 TCP+TLS 握手有额外延迟与 CPU 成本；HTTP/1.x 高并发出站调用若每 host 只保留 2 条空闲连接，波峰时会频繁重建连接。

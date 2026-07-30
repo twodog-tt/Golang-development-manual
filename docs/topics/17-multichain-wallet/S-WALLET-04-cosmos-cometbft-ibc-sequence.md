@@ -22,7 +22,7 @@ sources:
 
 > Cosmos SDK 是构建应用链的模块化状态机框架，CometBFT 负责共识与区块生产；不同 Cosmos 链启用的 modules、消息和参数并不相同。普通交易签名会绑定 chain ID、account number、sequence、fee/gas 和 messages，sequence 防重放并约束同一 signer 的并发。IBC 通过链上 light client、connection、channel、packet sequence、timeout 和 acknowledgement 传递已验证消息，relayer 只是搬运 proofs/packets，不是可信托管方。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **应用结构**：`x/bank`、staking、auth、IBC 等 modules 组合成链；不能看到 Cosmos 地址就假设支持同一消息。
 2. **交易**：protobuf 编码，body messages + auth info + signatures；gas limit 与 fee denom 按链配置。

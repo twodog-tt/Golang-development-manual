@@ -24,7 +24,7 @@ sources:
 
 > MPC/TSS 的价值是多个参与方用 key shares 协作产生链可验证签名，正常协议不需要把完整私钥集中到一处；但它不自动解决授权、恶意内部人、备份和可用性。生产要讲清 DKG、share version、threshold/quorum、签名 round、session binding、nonce/preprocessing 安全、reshare 与 key rotation 的区别，以及参与方丢失、网络分区、协议中断后的恢复。任何降级到单私钥都是架构失败。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **DKG**：参与方共同产生 shares 和 public key；具体安全性质取决于协议和威胁模型。
 2. **签名会话**：绑定 algorithm/domain、public key、chain、payload hash、policy version、session ID 和参与方集合。

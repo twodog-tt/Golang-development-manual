@@ -22,7 +22,7 @@ sources:
 
 > 机构金融系统要分开 instruction/message、内部 book of record、custodian/chain movement、clearing obligation、settlement asset 和 legal finality。ISO 20022 是金融业务模型与消息标准，不是资金网络；XML 校验、网络 ACK 或状态消息都不能单独证明钱已最终结算。RWA token 也不天然等于法律所有权，要把发行实体/登记簿、投资者资格、托管、申赎、公司行动、现金腿、链上转移限制和持续对账组成完整生命周期。设计时用不可变 instruction、双分录、DvP/PvP、状态证据和 exception case 管理，不能用一个 `SUCCESS` 覆盖全部阶段。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 ### 必须区分的事实
 

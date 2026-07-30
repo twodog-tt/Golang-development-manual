@@ -21,7 +21,7 @@ sources:
 
 > **ERC-4337** 在不改共识的前提下实现 **智能合约账户**：用户提交 **UserOperation**，**Bundler** 打包为交易调用某个版本的 **EntryPoint**，**Paymaster** 可按策略代付 Gas。Go 后端关键词：**按 EntryPoint 版本构造 UserOp、Bundler RPC、会话密钥、Gas 赞助策略**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：AA = 验证与执行逻辑在智能账户里；可实现批量交易、社交恢复、ECDSA/Passkey/多签/会话密钥等验证方式。它不等于“不再使用私钥”，很多账户仍以 ECDSA 私钥为根权限。
 2. **为什么**：Web3 用户体验（Gasless、一键登录）是后端与 Bundler 协作；钱包类岗位越来越常考 4337。

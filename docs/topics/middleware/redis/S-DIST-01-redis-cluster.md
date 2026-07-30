@@ -20,7 +20,7 @@ sources:
 
 > Redis 部署分 **单机、主从、Sentinel、Cluster** 四档：读多写少用主从+Sentinel 保 HA；数据量/吞吐超单机用 **Cluster 16384 slot 分片**。Go 侧用 `go-redis`，Cluster 客户端需感知 MOVED/ASK 重定向。生产关键词：**slot 迁移、脑裂、连接池、Pipeline 跨 slot 限制**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：Redis 提供多种拓扑——主从复制同步数据，Sentinel 监控主节点故障并自动 failover，Cluster 将 key 按 CRC16 mod 16384 映射到 slot 再分配到节点。
 2. **为什么**：单机有内存与 QPS 上限；主从解决读扩展但不自动切主；Sentinel 补 HA；Cluster 同时解决水平扩展与高可用（每个 master 可挂 slave）。

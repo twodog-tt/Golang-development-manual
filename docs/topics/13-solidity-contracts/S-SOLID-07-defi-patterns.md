@@ -20,7 +20,7 @@ sources:
 
 > DeFi 架构师要懂 **AMM 恒定乘积、Oracle 喂价、闪电贷单 tx 原子性**。Solidity 层定 **价格与清算规则**；Go 层做 **聚合展示与风控**，不能替代链上数学（[S-SOLID-08](./S-SOLID-08-contract-go-boundary.md)）。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：Uniswap 类 x*y=k；Chainlink aggregator；Aave flashLoan callback。
 2. **为什么**：常见深挖「如何设计链上 swap / 如何避免 oracle 操纵」。

@@ -29,7 +29,7 @@ sources:
 
 > 签名 HA 最危险的不是“新节点起不来”，而是新旧 owner 同时可签。控制面租约只能选 leader，必须由 signer 数据面持久化并强制执行单调 epoch/fencing token；授权还要绑定 key、owner、有效期、policy digest、准确 intent digest 和 request ID。签名结果释放前要原子持久化最高 epoch 与幂等记录。Key ceremony 则覆盖生成、备份/份额、激活、轮换、停用、恢复和销毁的参与者与证据；MPC/HSM 改变密钥信任边界，但不会自动提供业务策略、抗重放或 slashing protection。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 远程 signer 应独立验证：
 

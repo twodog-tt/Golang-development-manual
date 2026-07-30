@@ -20,7 +20,7 @@ sources:
 
 > Go 按类型 **alignment** 布局 struct，字段顺序会影响 padding；在 32 位架构上直接对未对齐的裸 `int64/uint64` 使用 64 位 atomic 还可能失败。优先使用会自动保证对齐的 `atomic.Int64/Uint64`。`unsafe` 可绕过类型系统，但必须遵守指针存活、对象边界与对齐规则。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：alignment 是 CPU 高效访问与 atomic 指令的要求；`unsafe` 提供 Sizeof/Alignof/Offsetof 与 Pointer 转换。
 2. **为什么**：序列化、互操作、性能优化需要；误用导致 subtle bug、GC 丢引用、数据 race。

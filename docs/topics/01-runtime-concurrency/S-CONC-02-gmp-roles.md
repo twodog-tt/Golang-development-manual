@@ -25,7 +25,7 @@ sources:
 
 > **G 干活，M 跑腿，P 发工牌**：G 是 goroutine 任务；M 是 OS 线程；P 是逻辑执行槽位，活跃数量等于 `GOMAXPROCS`，持有本地 runq 与 mcache。已知会阻塞的 syscall 路径可主动 handoff P；普通 syscall 先把 P 标成 syscall 状态，持续阻塞时再由 sysmon 尝试 retake。STW 是停止 P 上的 mutator 工作，不是把所有 P “移除”。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**
    - **G（Goroutine）**：用户态协程，含栈（~2KB 起，见 [S-CONC-03](./S-CONC-03-goroutine-stack.md)）、SP/PC、状态、sched 链接；是调度器的**任务单元**。

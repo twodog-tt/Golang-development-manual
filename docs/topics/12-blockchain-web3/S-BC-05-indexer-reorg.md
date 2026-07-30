@@ -24,7 +24,7 @@ sources:
 
 > **索引器** = 持续同步链上 canonical 数据到 DB，供 API 查询。必须校验相邻块 `parentHash`，遇到 **reorg** 时回退到共同祖先并重放。Ethereum PoS 应优先区分 `latest`、`safe`、`finalized`；“固定 N 个确认”只是部分链或 RPC 不支持 finality tag 时的风险策略。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：Worker 从 `lastBlock+1` 扫到 latest，解析 tx/logs 写业务表。
 2. **为什么**：RPC 不适合直接给 C 端高并发查；且需关联链下 userId。

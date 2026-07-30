@@ -21,7 +21,7 @@ sources:
 
 > Transaction manager 把业务 intent 转成可恢复的链上状态机：持久化 intent → 预占 nonce/资源 → build/simulate → 策略签名 → 保存 raw tx → 广播 → receipt → safe/finalized。Nonce 是同一 sender 的冲突域，分配不能只靠每次读 RPC；fee bump 必须建立同 nonce replacement lineage。RPC timeout、mempool missing 和 dropped 都不是最终失败，只有结合旧 raw tx、链上 nonce、receipt 和 replacement 状态才能决定下一步。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **Intent 幂等**：业务 ID + operation 唯一，冻结 to/value/data/chain/policy。
 2. **Nonce manager**：单 writer 或 durable reservation/lease；支持 gap、replacement 和重启恢复。

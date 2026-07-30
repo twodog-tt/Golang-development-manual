@@ -21,7 +21,7 @@ sources:
 
 > 链上数据平台应把 raw canonical evidence、decoded facts 和业务 projections 分层。Backfill 与 realtime 必须重叠一段并用 block hash/tx/log identity 去重，cursor 不能只存高度；reorg 时标记 orphan、回退 projection 并重放。Receipt/log 是协议化数据，trace/state diff 往往是 client-specific 调试输出，需要独立重资源管线和 schema version。ABI/合约升级后要可重解码，不能只保留扁平业务表。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **Raw layer**：block/header、tx、receipt/log、source/provider、ingest version，不可变保留。
 2. **Decode layer**：ABI/type registry 版本化；未知事件先落 raw，后续可 backfill decode。

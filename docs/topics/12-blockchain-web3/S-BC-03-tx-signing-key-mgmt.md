@@ -21,7 +21,7 @@ sources:
 
 > 以太坊交易通常由 secp256k1 ECDSA 授权后广播。生产热钱包要把策略、交易构造、签名和广播分层；HSM/KMS/MPC 只是密钥控制的一部分，还必须限制 chain、to、value、method、额度和 nonce，并保存幂等的已签名结果。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：构造 legacy 或 EIP-2718 typed transaction → 按 chain ID 选择 signer → 签名 → `MarshalBinary` 得到 raw transaction → 广播。
 2. **为什么**：Web3 后端常代用户或平台发链上操作；密钥泄露可能造成不可逆资产损失。

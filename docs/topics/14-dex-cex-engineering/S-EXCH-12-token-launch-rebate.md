@@ -24,7 +24,7 @@ sources:
 > 流动性池；这不是所有发币平台的通用标准。Go 后端应把 canonical 链上状态、
 > 产品规则版本、返佣账本和提现状态机分开，事件只是索引输入，不能忽略 reorg。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：TokenCreated → 内盘交易 → TokenGraduated → 外盘流动性；SplitPayment 分账；Withdrawal 提佣金。
 2. **为什么**：BSC/Ethereum 发币 + 内盘交易平台的典型业务流程。

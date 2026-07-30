@@ -20,7 +20,7 @@ sources:
 
 > 交易所 **成交、链上日志、充提状态** 适合走 **Kafka/RocketMQ** 扇出；**下单风控、余额冻结** 走同步 gRPC。Topic 按 **领域事件** 划分：`trade.matched`、`deposit.confirmed`、`chain.swap`、`withdraw.status`。关键词：**分区键保序、消费幂等、Outbox、DLQ 补账**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：微服务间通过消息中间件传递领域事件，实现解耦与削峰。
 2. **为什么**：成交后要同时驱动账务、行情、风控、大数据；DEX Indexer 吞吐波动大。

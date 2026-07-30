@@ -28,7 +28,7 @@ sources:
 > **重建并重签**，不能修改已签名 bytes；但创建新 attempt 前还要排除旧交易已执行，不能把
 > 单次 status cache miss 当作失败证明。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. 获取符合策略的 recent blockhash，并保存 `lastValidBlockHeight` 等 freshness 证据。
 2. 构造 instruction，明确 program ID、writable/signer accounts、PDA/ATA 与 payer。

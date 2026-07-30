@@ -27,7 +27,7 @@ sources:
 
 > 链数据平台不能按 `block_number` 覆盖，因为 reorg 后同一高度可出现不同 hash。我的分层是：对象存储/lakehouse 保留可重放 raw evidence，canonical control plane 按 parent lineage 提交主链映射，ClickHouse 承担高吞吐分析和热查询。MergeTree 的 `ORDER BY` 决定数据排序与稀疏主索引，主键不保证唯一；`ReplacingMergeTree` 只在后台 merge 时做最终去重，查询正确性不能赌 merge 已发生。容量要用真实压缩率、parts/merge headroom、复制倍数、扫描字节和回填峰值测量，不能只报“每天多少行”。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **事实分层**：raw observation、canonical assignment、finalized watermark、derived serving
    是不同事实，不能揉成一张“最新状态表”。

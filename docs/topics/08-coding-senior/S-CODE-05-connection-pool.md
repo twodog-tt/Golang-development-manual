@@ -21,7 +21,7 @@ sources:
 
 > 连接池既要 **复用昂贵连接**，也要用 **maxOpen** 限制对下游的总连接压力，并用 **maxIdle** 控制保留多少空闲连接。本实现用 idle channel + open-slot semaphore：`Get` 优先复用，未达上限才新建，否则等待归还或 context 取消；`Put` 池满则关闭并释放 slot。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：维护一组已建立连接，borrow / return，避免每次 dial。
 2. **为什么**：DB/TCP 握手成本高；无上限会打爆下游（对比 [S-NET-02 HTTP 连接池](../06-network-governance/S-NET-02-http-connection-pool.md)）。

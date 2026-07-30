@@ -19,7 +19,7 @@ sources:
 
 > Pod 异常三件套：**OOMKilled**（内存超 limit）、**CrashLoopBackOff**（进程反复退出）、**Evicted**（节点磁盘/内存压力驱逐）。Go 服务排查路径：`kubectl describe pod` → Events → 日志 → **pprof heap/goroutine**（[S-MEM-10](../02-memory-gc/S-MEM-10-pprof-heap.md)）。生产关键词：**Last State、Exit Code 137、previous logs、ephemeral debug container**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：kubelet/cgroups 杀容器或驱逐 Pod；CrashLoop 是退避重启循环。
 2. **为什么**：5 年+ 后端必须会线上排障；常见深挖：「Pod 一直 Restart 你怎么查」。

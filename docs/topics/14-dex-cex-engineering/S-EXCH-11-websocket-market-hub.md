@@ -25,7 +25,7 @@ sources:
 > 一个 read pump + 一个唯一 write pump，订阅 registry 则分片或串行管理。
 > 生产关键词：**序号协议、有界发送队列、慢消费者策略、快照恢复、跨 Pod fan-out**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：客户端 SUB `kline:TOKEN:1m` → Hub 注册 → 聚合服务产出 tick → Hub Write。
 2. **为什么**：HTTP 轮询延迟高；交易用户需要 **毫秒级** 推送。

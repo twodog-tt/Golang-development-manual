@@ -26,7 +26,7 @@ sources:
 
 > PostgreSQL 的 `UPDATE` 通常写出新 tuple version，旧版本等到不再被任何快照需要后，才由 `VACUUM` 标记为可复用；普通 `VACUUM` 通常不把文件空间归还操作系统，`VACUUM FULL` 会重写表并持有强锁。索引保存的是指向 heap tuple 的位置，index-only scan 还依赖 visibility map；因此“建了覆盖索引就一定不回表”是错的。排查慢表要把长事务、dead tuple、autovacuum、索引顺序、heap fetch 和查询工作负载放在一起看。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **MVCC 是可见性协议，不是“读写都不加锁”**：每条 tuple 带事务可见性信息；读通常不阻塞普通写，但 DDL、显式锁、唯一性检查和写写冲突仍会等待或失败。
 2. **更新不是原地覆盖的通用模型**：新版本进入 heap，旧版本在没有活跃快照需要后成为 dead tuple。若未修改普通索引所引用的列（BRIN 等 summarizing index 是例外）且同一 heap page 有空间，HOT update 可避免新增普通索引项，但 HOT 不是业务可依赖的保证。

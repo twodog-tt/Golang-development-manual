@@ -29,7 +29,7 @@ sources:
 > 在结果未知时保留 pending，而不是删除 replay 记录。Relayer 只影响传递可用性，不应获得
 > 伪造消息的权限；源链完成、证明可用、目标执行成功是三个独立状态。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **验证模型**：原生 rollup bridge、轻客户端/共识证明、外部验证者/attestation 的信任假设不同。
 2. **事件身份**：仅用 tx hash 不够，一笔交易可发多个事件；至少要 canonical event ID 或协议 nonce。

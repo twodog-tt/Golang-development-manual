@@ -28,7 +28,7 @@ sources:
 > application resend，通常使用新 session sequence，必须与 session retransmission
 > 区分并做业务幂等。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **连接不等于 session**：Logon、消息交换/恢复、Logout 发生在 transport connection
    上，但 session sequence 可跨多次连接延续。

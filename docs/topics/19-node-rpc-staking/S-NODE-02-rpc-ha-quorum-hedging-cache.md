@@ -27,7 +27,7 @@ sources:
 > “构造+签名”。缓存必须 finality-aware：按 block hash 且达到声明安全水位的结果可长缓存，
 > `latest` 和 pending 只能短缓存或不缓存。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **方法分类**：immutable read、head-dependent read、mempool/write、subscription、archive/trace。
 2. **路由**：endpoint capability + health + rate budget + region/client diversity。

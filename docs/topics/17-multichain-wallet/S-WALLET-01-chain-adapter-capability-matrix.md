@@ -23,7 +23,7 @@ sources:
 
 > 多链钱包不能抽象成一个“address + nonce + gas”的万能接口。正确做法是先建立能力矩阵：状态模型、签名方案、交易 freshness/replay、手续费、token 表示、finality、replacement、memo/tag、模拟与索引能力；再用小能力接口组合 adapter。公共领域模型只保留真正共性，链特有字段必须可扩展且可审计，不能为追求统一而丢失 UTXO、blockhash、object reference 等语义。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **能力发现**：每个 chain/network/版本声明 capability，不让业务用链名 `switch` 到处散落。
 2. **职责拆分**：Reader、Builder、Simulator、Signer codec、Broadcaster、Finality tracker 分开。

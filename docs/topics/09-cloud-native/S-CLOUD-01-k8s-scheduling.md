@@ -21,7 +21,7 @@ sources:
 
 > K8s **Scheduler 主要按 resource requests**、亲和性、污点容忍等选择 Node；CPU/memory limits 主要由 kubelet/container runtime 通过 cgroup 执行。Go 服务应验证 **GOMAXPROCS 与有效 CPU 配额**，避免严重不匹配造成 throttling 与尾延迟。Go 1.25+ 在 Linux 容器中默认感知 cgroup CPU limit。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：Scheduler 过滤（Filter）+ 打分（Score）选 Pod 所在 Node；资源可调度性看 requests，limits 决定运行时上限和 QoS 等行为。
 2. **为什么**：5 年+ 后端多数跑 K8s；不懂 limit 会导致 **CPU 节流、OOMKilled、GOMAXPROCS 过大**。

@@ -23,7 +23,7 @@ sources:
 > Indexer 只是可重建投影。关键词：**block lineage、事件 identity、reorg 重算、
 > ABI/部署版本、链上链下信任边界**；UUPS 只是可选升级方案，不是默认答案。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：面向 Meme/Launchpad、链上 Swap、返佣提现类产品的 **端到端技术架构**，不是单讲 AMM 公式。
 2. **为什么**：Web3 交易所岗位常要求「链上+链下都做过」；需证明能 **从合约事件讲到用户看到的 K 线**。
@@ -110,7 +110,7 @@ flowchart LR
 `removed=true` 丢失其历史 lineage
 （[S-BC-05](../12-blockchain-web3/S-BC-05-indexer-reorg.md)）。
 
-### 45 分钟白板答题结构
+### 45 分钟白板讲解结构
 
 1. **澄清（5 min）**：单链还是多链？是否托管用户资产？是否有 CEX 模块？
 2. **链上设计（10 min）**：Factory + Pool + Router；UUPS 升级点（[S-SOLID-04](../13-solidity-contracts/S-SOLID-04-upgradeable-proxy.md)）；Operator/暂停

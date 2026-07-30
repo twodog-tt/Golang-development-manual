@@ -19,7 +19,7 @@ sources:
 
 > 交易所常见 **撮合 → Kafka 成交 topic → 多下游**（账务、风控、行情、WebSocket）。Kafka 做 **持久化事件总线**，Consumer Group 各自 lag 独立。生产关键词：**symbol 分区、consumer lag、HPA 扩缩 rebalance、WS 网关 fan-out**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：撮合引擎产出 `TradeMatched` 事件写 Kafka；下游 Consumer Group 并行消费：账务入账、K 线聚合、推送网关。
 2. **为什么**：解耦撮合与慢路径；可回放补账；比 Redis Pub/Sub **可持久、可重放**（见 [S-NET-05](../../06-network-governance/S-NET-05-websocket-gateway.md)）。

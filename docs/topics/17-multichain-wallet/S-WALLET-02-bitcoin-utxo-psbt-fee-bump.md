@@ -25,7 +25,7 @@ sources:
 
 > Bitcoin 交易消费一个或多个完整 UTXO，并创建新的 outputs；多余价值通常进入 change，手续费等于 inputs 总额减 outputs 总额，工程上按交易 vbytes × feerate 估算。Coin selection 同时权衡手续费、找零、dust、隐私和 UTXO 碎片。PSBT 是多参与方交换未完成交易及签名元数据的容器，不是链上交易格式。未确认交易加速要区分 replacement relay policy（RBF）和后代付费（CPFP），规则受节点版本与策略影响。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **UTXO identity**：`txid + vout`；同一 outpoint 只能被 canonical 链中的一笔交易消费。
 2. **Coin selection**：先 reserve，再构造/签名；并发 worker 不能选择同一 UTXO。

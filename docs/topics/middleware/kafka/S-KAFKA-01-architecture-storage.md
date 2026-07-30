@@ -19,7 +19,7 @@ sources:
 
 > Kafka 是 **分布式 commit log**：Topic 按 **Partition** 水平切分，每条消息追加到分区末尾；**Leader + ISR 副本** 保证可用与一致性。消费并行度 = partition 数；**分区内有序、跨分区无序**。生产关键词：**ISR、HW/LEO、replication.factor、min.insync.replicas**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：Broker 集群存储 Topic；每个 Partition 是一个有序日志（Segment 文件）；Producer 按 key hash 或轮询写入 partition；Consumer Group 按 partition 分配消费。
 2. **为什么**：高吞吐顺序写 + 零拷贝；适合 **日志流、事件总线、CDC**；交易所成交、审计流水常见选型。

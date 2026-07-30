@@ -43,7 +43,7 @@
 
 ### Go 生产工程与基础门槛
 
-| 题 ID | 题目 | 关键技术点 |
+| 文档 ID | 标题 | 关键技术点 |
 |-------|------|------------|
 | ⭐ [S-GOENG-01](topics/16-go-production-engineering/S-GOENG-01-errors-contract-panic-boundary.md) | 错误契约与 Panic 边界 | `Is/As`、wrap、recover fail closed |
 | ⭐ [S-GOENG-03](topics/16-go-production-engineering/S-GOENG-03-testing-table-fake.md) | 单元测试与 Test Double | table、fake、确定性 |
@@ -59,7 +59,7 @@
 
 ### 多链钱包、支付与节点基础设施
 
-| 题 ID | 题目 | 关键技术点 |
+| 文档 ID | 标题 | 关键技术点 |
 |-------|------|------------|
 | ⭐ [S-WALLET-01](topics/17-multichain-wallet/S-WALLET-01-chain-adapter-capability-matrix.md) | Chain Adapter | 能力矩阵、错误抽象 |
 | ⭐ [S-WALLET-02](topics/17-multichain-wallet/S-WALLET-02-bitcoin-utxo-psbt-fee-bump.md) | Bitcoin UTXO/PSBT | Coin selection、RBF/CPFP |
@@ -83,7 +83,7 @@
 
 ### 链上索引与 Web3 Go
 
-| 题 ID | 题目 | 关键技术点 |
+| 文档 ID | 标题 | 关键技术点 |
 |-------|------|------------|
 | ⭐ [S-BC-05](topics/12-blockchain-web3/S-BC-05-indexer-reorg.md) | 链上索引器：扫块、重组与幂等 | block hash lineage、observation 与业务幂等 |
 | ⭐ [S-BC-10](topics/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) | MPC/TSS 与 CEX 托管签名 | 门限签名、提现链路 |
@@ -94,7 +94,7 @@
 
 ### DEX / CEX 业务
 
-| 题 ID | 题目 | 关键技术点 |
+| 文档 ID | 标题 | 关键技术点 |
 |-------|------|------------|
 | ⭐ [S-EXCH-02](topics/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md) | 充值提现与钱包体系 | 多链充提、确认数 |
 | ⭐ [S-EXCH-03](topics/14-dex-cex-engineering/S-EXCH-03-account-ledger.md) | 账户与复式记账 | 账务、返佣 |
@@ -118,9 +118,9 @@
 | ⭐ [S-EXCH-25](topics/14-dex-cex-engineering/S-EXCH-25-prediction-market-oracle-dispute-resolution.md#oral-card) | 预言机与争议仲裁 | 体育/电竞 feed、bond、liveness、source conflict |
 | ⭐ [S-EXCH-26](topics/14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet.md#oral-card) | 安全与主网上线 | 资金不变量、fuzz/invariant、审计、canary |
 
-### 完整架构白板（架构师 / 终面）
+### 完整架构白板（架构师 / 综合演练）
 
-| 题 ID | 题目 | 关键技术点 |
+| 文档 ID | 标题 | 关键技术点 |
 |-------|------|------------|
 | ⭐ [S-EXCH-13](topics/14-dex-cex-engineering/S-EXCH-13-cex-end-to-end-architecture.md) | CEX 端到端交易系统 | 撮合·账务·充提·行情·45min 白板 |
 | ⭐ [S-EXCH-14](topics/14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture.md) | Web3 交易所全栈 | Indexer·K线·WS·返佣·链上链下边界 |
@@ -130,7 +130,7 @@
 
 ### 微服务（交易所场景）
 
-| 题 ID | 题目 | 关键技术点 |
+| 文档 ID | 标题 | 关键技术点 |
 |-------|------|------------|
 | ⭐ [S-MSVC-01](topics/15-microservices-exchange/S-MSVC-01-exchange-microservices-whiteboard.md) | 交易所微服务全链路白板 | CEX+DEX 服务边界·同步/异步选型 |
 | ⭐ [S-MSVC-02](topics/15-microservices-exchange/S-MSVC-02-domain-decomposition.md) | 域拆分与限界上下文 | order/matching/ledger/wallet/indexer |
@@ -141,7 +141,7 @@
 
 ### 合约与 API
 
-| 题 ID | 题目 | 关键技术点 |
+| 文档 ID | 标题 | 关键技术点 |
 |-------|------|------------|
 | ⭐ [S-SOLID-04](topics/13-solidity-contracts/S-SOLID-04-upgradeable-proxy.md) | UUPS 可升级合约 | 灰度迁移/回滚 |
 | ⭐ [S-SOLID-02](topics/13-solidity-contracts/S-SOLID-02-security-reentrancy.md) | 合约安全 | Operator/暂停 |
@@ -152,7 +152,7 @@
 
 ### 数据与稳定性
 
-| 题 ID | 题目 | 关键技术点 |
+| 文档 ID | 标题 | 关键技术点 |
 |-------|------|------------|
 | ⭐ [S-ARCH-04](topics/03-system-design/S-ARCH-04-idempotency.md) | 幂等设计 | 事件、提现重试 |
 | ⭐ [S-DB-05](topics/middleware/mysql/S-DB-05-gorm-pitfalls.md) | GORM 陷阱 | ORM 与事务 |
@@ -165,7 +165,7 @@
 
 ## 延展强化
 
-| 题 ID | 题目 |
+| 文档 ID | 标题 |
 |-------|------|
 | 🔶 [S-EXCH-01](topics/14-dex-cex-engineering/S-EXCH-01-cex-matching-engine.md) | CEX 撮合引擎 |
 | 🔶 [S-EXCH-16](topics/14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position.md) | 永续撮合与仓位引擎 |
@@ -213,7 +213,7 @@
 
 ## 基础回查（12 题）
 
-| 题 ID | 题目 |
+| 文档 ID | 标题 |
 |-------|------|
 | ○ [S-CONC-01](topics/01-runtime-concurrency/S-CONC-01-gmp-overview.md) | GMP 模型 |
 | ○ [S-CONC-05](topics/01-runtime-concurrency/S-CONC-05-channel.md) | Channel |
@@ -230,9 +230,9 @@
 
 ---
 
-## 7 天冲刺计划
+## 7 天学习计划
 
-| 天 | 主题 | 题量 |
+| 天 | 主题 | 篇量 |
 |----|------|------|
 | D1 | Go 工程门槛 | S-GOENG-01/03/04/05、S-CODE-06/07 |
 | D2 | Linux/TCP/资金 SQL 与 PostgreSQL | S-NET-06/07、S-DB-06/07、S-PG-01～03 |

@@ -20,7 +20,7 @@ sources:
 
 > 慢 SQL 治理链路：**slow log 发现 → EXPLAIN 看计划 → 索引/改写 SQL → 验证 rows 与 latency**。重点字段：`type`（访问方式）、`key`（实际索引）、`rows`（估算扫描行）、`Extra`（Using filesort/temporary）。生产关键词：**回表、深分页、隐式转换、统计信息过期**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：执行时间超过 `long_query_time` 的 SQL 记入 slow log；EXPLAIN 展示优化器选择的访问路径，不执行真实查询。
 2. **为什么**：单条慢 SQL 可拖垮连接池，引发雪崩；80% 性能问题来自 20% SQL。

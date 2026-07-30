@@ -22,7 +22,7 @@ sources:
 
 > 支付 intent、链上 transaction 和账本 settlement 是三个不同对象。状态至少区分 awaiting、observed、confirmed/finalized、settled、failed/reversed；链上看到 tx hash 不等于支付完成。创建 API 用商户作用域幂等键，链事件用 chain+tx/log 等唯一键，Webhook 按 event ID 至少一次投递并允许乱序。区块重组或业务退款不能删除原记录，要用状态转换和不可变冲正流水表达。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **Payment intent**：冻结商户、金额、资产、链、收款路由、报价/过期时间和业务幂等键。
 2. **Payment attempt**：记录地址/二维码、链上 observation、tx lineage、少付/多付/错币。

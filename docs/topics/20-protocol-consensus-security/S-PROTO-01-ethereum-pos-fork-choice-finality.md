@@ -27,7 +27,7 @@ sources:
 > 两个 epoch 就无条件最终。长期离线或新同步节点还需要近期 weak-subjectivity
 > checkpoint，避免仅凭旧验证者密钥构造的长程历史。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **Head 与 finality 分工**：LMD-GHOST 选择当前链头；Casper FFG 为 checkpoint
    提供经济最终性，两者不能合成一个“确认数”。

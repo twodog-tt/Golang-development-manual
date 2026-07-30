@@ -19,7 +19,7 @@ sources:
 
 > K8s **Deployment 滚动发布** 用 `maxSurge` / `maxUnavailable` 控制替换速度；**readiness** 控制是否进入 Service 流量，**liveness** 失败会触发重启。**PDB 只约束通过 Eviction API 的部分自愿中断（如 drain），不约束 Deployment 自身滚动更新，也不能阻止非自愿故障。**
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：Deployment 逐步创建新 ReplicaSet Pod、缩旧 Pod；探针由 kubelet 定期 HTTP/TCP/exec 检查。
 2. **为什么**：错误探针 → 502、反复重启、发布雪崩；无 PDB → 节点 drain 时服务全挂。

@@ -24,7 +24,7 @@ sources:
 
 > 高风险迁移先定义 source of truth、不变量和回滚边界，再谈双写或切流。我通常采用 expand → 可重放复制/回填 → shadow compare → 按 cohort 切读 → 切写/冻结旧入口 → contract/decommission。双写如果没有同一事务或 outbox/CDC，只会制造两个真相；应用版本回滚也不能逆转已写入的新 schema、事件或链上副作用。Staff 面要讲清技术门禁、跨团队 owner、风险登记、停止条件和可量化结果，而不是“大家配合完成迁移”。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 迁移前先写五项：
 

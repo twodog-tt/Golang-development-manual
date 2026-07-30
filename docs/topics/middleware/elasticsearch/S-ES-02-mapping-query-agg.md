@@ -19,7 +19,7 @@ sources:
 
 > **Mapping** 定义字段类型：`text`（分词全文）vs `keyword`（精确、聚合）；**Query DSL** 组合 `bool`（must/should/filter）；**Aggregation** 做指标与桶统计。生产关键词：**filter 不评分、nested、高基数 cardinality 慎用**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **Mapping**：上线前定好；改字段类型通常需 **reindex**；`dynamic` 可关防字段爆炸。
 2. **查询**：`match` 全文；`term` 精确 keyword；`range` 范围；`bool` 组合；filter context 不参与相关性评分，符合条件且重复使用的过滤器可能由 Elasticsearch 自动缓存，并非所有 filter 都必然命中缓存。

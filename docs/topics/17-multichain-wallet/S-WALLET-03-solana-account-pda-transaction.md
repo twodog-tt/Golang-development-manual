@@ -23,7 +23,7 @@ sources:
 
 > Solana 的 account 是程序读写状态的容器，包含 lamports、data、owner 等；owner 是可修改该 data、扣减 lamports 的 program，不等于业务资产所有者，其他 program 仍可向 writable account 增加 lamports。交易 message 显式列出账户与读写权限，并带 recent blockhash 作为 freshness；若业务要在它过期后继续，须先核对旧交易历史和业务状态，再用新 blockhash 重建、重签。PDA 是 program + seeds 推导出的无私钥地址，程序通过 runtime 授权“签名”。确认必须区分 processed、confirmed、finalized，不能把 RPC 返回 signature 当作支付完成。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **账户/程序**：程序本身可执行，状态放在独立 accounts；并行执行依赖账户读写集合是否冲突。
 2. **PDA**：off-curve、无私钥；seed 是协议的一部分，要做 domain separation 和版本设计。

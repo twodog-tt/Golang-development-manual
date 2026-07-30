@@ -20,7 +20,7 @@ sources:
 
 > Treasury 的目标不是让每条链余额最多，而是在安全敞口、提现/支付 SLA、手续费和资本占用之间维持目标库存。每个 chain+asset+custody domain 都是独立 liquidity bucket，available、reserved、pending inbound/outbound 和用户负债必须分开。再平衡是带时间、费用、限额和风险的路径规划：优先净额化与批处理，再选择链上转移、issuer burn/mint、交易所或做市渠道，并全程走审批、状态机和对账。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **库存视图**：链上余额不是可花余额；扣除 pending 提现、gas、冻结和风险 buffer。
 2. **目标区间**：每 bucket 设 min/target/max，基于流量预测、补充 lead time 和压力情景。

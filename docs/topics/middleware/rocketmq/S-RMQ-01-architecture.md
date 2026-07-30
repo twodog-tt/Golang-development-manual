@@ -19,7 +19,7 @@ sources:
 
 > RocketMQ 是 **NameServer（路由）+ Broker（存储）+ Producer/Consumer** 的分布式消息中间件。消息按 Topic 分类，Queue 是并行与顺序域。事务、延迟和 FIFO 是其重要能力，但具体 API 与限制要区分 4.x/5.x；Go 客户端也要核对与目标 broker 的兼容矩阵。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：阿里开源 MQ，支持普通/FIFO/事务/延迟消息；NameServer 提供路由发现，Broker 可采用主从、Controller/DLedger 等不同高可用部署，版本与模式要说清。
 2. **为什么**：国内业务、电商、支付场景常见；岗位 JD 写 RocketMQ 时需讲清 **与 Kafka 差异**。

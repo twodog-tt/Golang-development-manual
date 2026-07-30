@@ -20,7 +20,7 @@ sources:
 
 > 交易所内网大量 **gRPC 短链路**（BFF→order、order→risk、wallet→ledger 查询）。服务发现常见：**K8s DNS + Headless Service**、**Consul/etcd**、或 **Mesh（xDS）**。Go 侧必配：**超时、重试（仅幂等）、keepalive、客户端 LB、OTel trace 透传**。关键词：**不用裸 IP、metadata 传 trace_id/user_id**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：微服务实例动态上下线时，调用方如何找到健康实例并完成可靠 RPC。
 2. **为什么**：交易链路 P99 敏感；滚动发布频繁；实例数随行情波动。

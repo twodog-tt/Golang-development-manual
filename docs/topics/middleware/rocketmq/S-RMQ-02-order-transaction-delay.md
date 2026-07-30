@@ -20,7 +20,7 @@ sources:
 
 > **顺序消息**：同一消息组/Queue 内维持 FIFO；**事务消息**：半消息 → 本地事务 → commit/rollback/回查，缩小“写库成功但消息未发”的窗口，最终仍依赖本地事务状态、回查和消费幂等；**延迟消息**要区分 4.x 固定级别与 5.x 定时时间戳及其范围限制。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **顺序**：全局顺序单 Queue（吞吐低）；分区顺序用 ShardingKey hash 到固定 Queue；消费端 **MessageListenerOrderly** 单线程 per Queue。
 2. **事务**：`sendMessageInTransaction` → Broker 存半消息（对消费者不可见）→ 执行本地事务 → `commit` 后可见或 `rollback` 后丢弃；若 broker 没拿到确定结果会**回查**本地事务状态。

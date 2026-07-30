@@ -57,13 +57,17 @@
 | S-SEC-01～04 | Web3 安全工程 | — | [21-security-engineering/](../21-security-engineering/index.md) |
 | S-SEC-02 | Signer Fencing | [S-SEC-02](../21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) | `examples/senior/signerfencing/` |
 | S-SEC-02 | Durable Fence + HSM/MPC | [S-SEC-02](../21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) | `examples/signer-project/` |
-| S-EXCH-01～22 | DEX / CEX 交易所 | — | [14-dex-cex-engineering/](../14-dex-cex-engineering/index.md) |
+| S-EXCH-01～31 | DEX / CEX 交易所 | — | [14-dex-cex-engineering/](../14-dex-cex-engineering/index.md) |
 | S-EXCH-17 | 确定性撮合引擎 | [S-EXCH-17](../14-dex-cex-engineering/S-EXCH-17-runnable-deterministic-matching-engine.md) | `examples/senior/matchingengine/` |
 | S-EXCH-18 | WAL、快照与回放 | [S-EXCH-18](../14-dex-cex-engineering/S-EXCH-18-wal-snapshot-replay.md) | `examples/senior/walreplay/` |
 | S-EXCH-19 | 行情 Gap Recovery | [S-EXCH-19](../14-dex-cex-engineering/S-EXCH-19-market-data-sequence-gap-recovery.md) | `examples/senior/marketdatarecovery/` |
 | S-EXCH-20 | FIX Session 恢复 | [S-EXCH-20](../14-dex-cex-engineering/S-EXCH-20-fix-session-sequence-recovery.md) | `examples/senior/fixsession/` |
 | S-EXCH-21 | STP 自成交防护 | [S-EXCH-21](../14-dex-cex-engineering/S-EXCH-21-self-trade-prevention-surveillance.md) | `examples/senior/matchingengine/` |
 | S-EXCH-22 | 集合竞价与 Benchmark | [S-EXCH-22](../14-dex-cex-engineering/S-EXCH-22-call-auction-performance-validation.md) | `examples/senior/callauction/`, `examples/senior/matchingengine/` |
+| S-EXCH-28 | 多级代理极差分润 | [S-EXCH-28](../14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate.md) | — |
+| S-EXCH-29 | DeFi Staking / LM / Farm | [S-EXCH-29](../14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md) | — |
+| S-EXCH-30 | Uniswap V2/V3 协议 | [S-EXCH-30](../14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md) | — |
+| S-EXCH-31 | DEX Tech Lead 白板 | [S-EXCH-31](../14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md) | — |
 | S-MSVC-01～06 | 微服务（交易所场景） | — | [15-microservices-exchange/](../15-microservices-exchange/index.md) |
 | — | 算法练习 | `algorithm/lc_*` | LeetCode 参考实现 |
 
@@ -72,7 +76,3 @@
 1. 阅读 `docs/topics/` 下对应 Markdown。
 2. 按上表进入代码目录：`go run .` 或 `go test`。
 3. 建议：**先讲清不变量再对照代码**，并补充自己的生产案例。
-| S-EXCH-28 | 多级代理极差分润 | [S-EXCH-28](../14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate.md) | — |
-| S-EXCH-29 | DeFi Staking / LM / Farm | [S-EXCH-29](../14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md) | — |
-| S-EXCH-30 | Uniswap V2/V3 协议 | [S-EXCH-30](../14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md) | — |
-| S-EXCH-31 | DEX Tech Lead 白板 | [S-EXCH-31](../14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md) | — |

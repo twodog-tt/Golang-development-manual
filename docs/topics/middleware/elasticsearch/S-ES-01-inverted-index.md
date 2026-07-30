@@ -19,7 +19,7 @@ sources:
 
 > ES 基于 **Lucene**，核心是 **倒排索引**：词项 → 文档 ID 列表，支持全文检索。数据按 **Index → Type(7.x 前) / 无 type → Document → Field** 组织；分片 **Primary + Replica** 水平扩展。讲解关键词：**分片路由、近实时 NRT、segment merge**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：分布式搜索与分析引擎，JSON 文档存储，REST/HTTP API；Go 用 `olivere/elastic` 或官方 `go-elasticsearch`。
 2. **为什么**：MySQL `LIKE` 与复杂聚合弱；ES 适合 **全文、日志、多维筛选、聚合报表**。

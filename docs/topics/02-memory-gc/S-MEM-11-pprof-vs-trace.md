@@ -20,7 +20,7 @@ sources:
 
 > **CPU profile** 回答「**哪段代码耗 CPU**」，采样统计、可长期开；**execution trace** 回答「**时间线上发生了什么**」——调度、GC STW、网络阻塞、锁等待。生产关键词：**profile 找热点、trace 找毛刺与等待**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：pprof CPU 按周期采样 PC 栈；trace 记录 runtime 事件时间戳（G/P/M、syscall、GC）。
 2. **为什么**：CPU 不高但 P99 高 → profile 无效，需 trace 看等待；CPU 100% → profile 直达热点。

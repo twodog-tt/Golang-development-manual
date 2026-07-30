@@ -23,7 +23,7 @@ sources:
 
 > **gRPC** 通常使用 HTTP/2 + Protobuf，强类型、支持双向流与多路复用，适合 **内部微服务**。**REST/JSON** 人类可读、浏览器友好、生态广，适合 **对外 API/BFF**。Go 可用 `google.golang.org/grpc`；需要同时服务浏览器和多种 RPC 协议时可考虑 **Connect**。生产关键词：**超时、重试幂等、负载均衡、TLS/mTLS**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：gRPC 是 RPC 框架，IDL 定义 service/method，二进制 Protobuf 序列化；REST 以资源为中心，HTTP 动词 + JSON，常 OpenAPI 描述。
 2. **为什么**：内网高 QPS、低延迟、流式推送选 gRPC；公网开放平台、调试成本、CDN 缓存选 REST。

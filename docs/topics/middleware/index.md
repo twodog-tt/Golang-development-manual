@@ -2,7 +2,7 @@
 
 按 **MySQL / PostgreSQL / Redis / Kafka / RocketMQ / RabbitMQ / Elasticsearch** 分类，便于按岗位场景或技术栈浏览。
 
-| 类型 | 题数 | 入口 |
+| 类型 | 篇数 | 入口 |
 |------|------|------|
 | [MySQL + GORM](./mysql/index.md) | 7 | 索引、MVCC、复杂 SQL、资金表、锁与 GORM |
 | [PostgreSQL](./postgresql/index.md) | 3 | MVCC/VACUUM、SSI/锁、WAL/复制与 pgx |

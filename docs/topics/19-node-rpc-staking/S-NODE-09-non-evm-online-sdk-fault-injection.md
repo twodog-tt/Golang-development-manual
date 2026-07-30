@@ -31,7 +31,7 @@ sources:
 
 > 非 EVM 在线集成必须保留每条链自己的提交、执行、最终性和资源失效语义。Solana `sendTransaction` 成功只表示 RPC 接受，仍要查 status/commitment 与 blockhash expiry；Cosmos `sync` 只等 CheckTx，不能当成已进块执行；Aptos 要区分 pending 与 committed 的 `success/vm_status`；Sui 以 transaction effects 判断执行，checkpoint 是可选的索引/证据边界而不是所有业务的协议最终性前提。所有链在广播超时或暂时 `not found` 时都先进入 UNKNOWN，查询或重播同一 signed bytes；成功与失败使用对称的最终性门槛，只有证明过期并重读 sequence/blockhash/object 等资源后才能重建。若“已证明过期”后又出现入链证据，应冻结调查重复副作用风险。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 统一 adapter 只能统一 orchestration contract，不能抹平语义：
 

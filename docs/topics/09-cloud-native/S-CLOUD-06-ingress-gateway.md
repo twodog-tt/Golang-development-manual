@@ -19,7 +19,7 @@ sources:
 
 > **南北向流量** 从公网进入集群：可用传统 **Ingress** 或 **Gateway API**。Go 服务通常通过 ClusterIP 接入网关。TLS、超时、body 限制、WebSocket 和 gRPC 的具体配置取决于 controller；Gateway API 可用 HTTPRoute/GRPCRoute 表达标准化路由，不能把某个 nginx annotation 当成 Kubernetes 通用能力。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：Ingress Controller 把外部 HTTP(S) 路由到 Service；Gateway API 用 Gateway + HTTPRoute 替代注解魔法。
 2. **为什么**：常见深挖 Ingress vs Service LoadBalancer、如何做灰度 path、WebSocket 怎么配。

@@ -17,7 +17,7 @@
     | **学**一条能力主线 | [Go 生产工程](topics/16-go-production-engineering/index.md) · [Web3/DEX](web3-exchange-wallet-focus.md) · [AI Agent](topics/10-ai-engineering/index.md) |
     | **练**可运行证据 | 下方「可验证项目证据」· [`examples/`](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples) |
 
-    **DEX Tech Lead 快链**（协议终面）：
+    **DEX Tech Lead 快链**（协议综合演练）：
     [S-EXCH-31 白板](topics/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md) →
     [S-EXCH-30 Uniswap V2/V3](topics/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md) →
     [S-EXCH-29 Staking/Farm](topics/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md)

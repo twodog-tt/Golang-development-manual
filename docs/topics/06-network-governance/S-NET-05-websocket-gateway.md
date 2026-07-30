@@ -20,7 +20,7 @@ sources:
 
 > **WebSocket** 在单连接上提供全双工通信，适合 **实时推送、IM、行情**。网关职责：**连接管理、鉴权、心跳、广播/房间、与 MQ 桥接**。Go 常用 **gorilla/websocket** 或 **github.com/coder/websocket**（原 nhooyr 项目现由 Coder 维护）。生产关键词：**连接上限、水平扩展、跨节点路由、背压、优雅下线**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：HTTP Upgrade 握手后切换 WS 协议；服务端可主动 push；帧类型 Text/Binary/Ping/Pong/Close。
 2. **为什么**：轮询浪费；SSE 仅服务端推且 HTTP/1.1 连接数受限；gRPC stream 浏览器不原生支持。

@@ -21,7 +21,7 @@ sources:
 
 > **N+1**：查 N 条主记录后对每条再查关联，SQL 爆炸。GORM 用 **`Preload`/`Joins`** 预加载；`Find` 嵌套 struct 不会自动加载。**事务陷阱**：`Transaction` 回调和 Hook 中都要沿用 GORM 传入的 `tx`；Hook 的 `tx` 与当前写操作处于同一事务，真正会逃逸的是改用捕获的全局 `DB`。生产关键词：**Session、Clauses、连接池、软删 Scope**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：ORM 便利但易隐藏查询；N+1 是循环访问关联；事务中混用全局 `DB` 与 `tx` 导致部分提交或锁失效。
 2. **为什么**：GORM 不会因访问 struct 字段自动懒加载；N+1 常来自应用在循环里显式再查关联。`Logger`/trace 能暴露多条 SELECT；钩子必须使用传入的 `tx *gorm.DB`。

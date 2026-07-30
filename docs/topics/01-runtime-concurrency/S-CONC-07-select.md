@@ -21,7 +21,7 @@ sources:
 
 > **select** 在多个 channel 操作上择一执行；多路就绪时 **伪随机公平**（`fastrand` 打乱顺序）。**default** 使 select 非阻塞，易 **忙等 CPU** 或 **丢事件**。生产关键词：**超时分支、nil case 禁用、单 select 多 case 持锁范围**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：语法级多路复用；每个 case 必须是 send/recv（含 `case <-ch`）。
 2. **为什么**：避免层层嵌套阻塞；与 context、timer、done 信号统一模式。

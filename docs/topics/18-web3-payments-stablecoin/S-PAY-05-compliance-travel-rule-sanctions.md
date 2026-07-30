@@ -25,7 +25,7 @@ sources:
 
 > 合规系统不是“接一个 KYC API”。KYC/KYB 建立客户、企业和受益所有人身份；制裁筛查判断客户、对手方、地址和地理风险；交易监控发现行为模式；Travel Rule 在适用的虚拟资产转移中交换并保留 originator/beneficiary 信息。工程上要把政策做成版本化 decision service，交易前同步 hold/deny，交易后异步监控与 case management，并保存名单版本、输入证据、决策、人工覆盖和审计链。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **Onboarding**：身份采集、文档/活体、企业注册、UBO、风险评级和周期复审。
 2. **Pre-transaction**：客户/对手方/地址/国家与资产策略，命中后 hold 或 deny。

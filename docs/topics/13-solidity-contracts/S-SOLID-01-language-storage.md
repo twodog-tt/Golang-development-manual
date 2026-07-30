@@ -19,7 +19,7 @@ sources:
 
 > Solidity 运行在 **EVM** 上：数据分 **storage**（持久、贵）、**memory**（临时）、**calldata**（只读入参）。架构师要懂 **storage 槽位、打包、继承线性化**，否则升级合约会 **存储冲突**。与 [S-BC-01 EVM 账户](../12-blockchain-web3/S-BC-01-blockchain-evm-basics.md) 衔接。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：静态类型、面向合约语言；0.8+ 默认溢出检查。
 2. **为什么**：Gas 与安全问题多源于 **错误的数据位置** 和 **storage 布局变更**。

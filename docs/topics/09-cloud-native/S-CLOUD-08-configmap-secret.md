@@ -19,7 +19,7 @@ sources:
 
 > **ConfigMap** 存非敏感配置，**Secret** 存密钥（Base64 非加密）；挂载为 **环境变量** 或 **Volume 文件**。Go 服务推荐：**启动读 env + 可选文件 watch 热更**；Secret **不进镜像**（[S-CLOUD-02](./S-CLOUD-02-docker-multistage.md)）。生产关键词：**12-Factor、Reloader、immutable Secret、敏感配置轮换**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：K8s 原生配置分发；修改 ConfigMap/Secret 不会自动触发 Deployment rollout。环境变量不会变；普通 projected volume 会最终更新；`subPath` 挂载不会收到更新。
 2. **为什么**：常问「改配置要不要发版」；错用 Secret 泄漏、subPath 不更新是常见坑。

@@ -20,7 +20,7 @@ sources:
 
 > 清算是计算各方应收应付，结算是实际转移最终价值；链上确认、内部账本入账和商户出款不是同一个时点。支付账本应双分录、不可变、按资产平衡，available/pending/reserved 分账户表达；错误用 reversal 抵消。对账至少比较内部账本、链/托管事实和支付/银行/provider statement，差异进入 break queue，有 owner、证据、SLA 和调整流水，不能直接改余额“抹平”。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **账本**：每个 transaction 多条 entries，总借贷/正负额按资产为零。
 2. **清算**：按 merchant、currency、周期计算 gross、fee、refund、reserve、net payable。

@@ -20,7 +20,7 @@ sources:
 
 > **OpenTelemetry（OTel）** 统一 Traces、Metrics、Logs 的采集与导出；Go 用 `otel` SDK + **OTLP** 推到 Collector/Jaeger/Prometheus。生产关键词：**W3C traceparent 传播、采样率、高基数 label 控制、与 slog 关联 trace_id**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：OTel 是 CNCF 可观测性标准；Go 通过 `go.opentelemetry.io/otel` 埋点，Exporter 发到后端。
 2. **为什么**：微服务下 **跨服务排障** 靠 Trace；5 年+ 需讲清 **三支柱如何关联**（同一 trace_id 串日志）。

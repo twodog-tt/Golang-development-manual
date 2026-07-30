@@ -20,7 +20,7 @@ sources:
 
 > 调合约 = **ABI 编码 calldata** + 发 tx 或 `eth_call`；监听业务常用 **Event Logs**（`Transfer` 等）。日志是可重组的执行输出，不是脱离区块上下文的状态证明。Go 用 **abigen** 生成绑定。生产关键词：**topics 索引、receipt status、合约地址白名单、finality**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：ABI 描述函数 selector 与参数编码；事件写入 log，indexed 字段进 topics 便于过滤。
 2. **为什么**：后端 90% 工作是与已部署合约交互，不是写 Solidity。

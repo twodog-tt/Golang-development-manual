@@ -22,7 +22,7 @@ sources:
 
 > **STW（Stop The World）** 是 runtime 暂停所有用户 goroutine 以切换 GC 全局阶段的窗口；Go 自 1.5 起以**并发标记**为主，STW 已大幅缩短，但**从未归零**。goroutine 栈主要在并发标记期逐个暂停并扫描，不等于“STW 一次扫完所有栈”。生产关键词：**sweep termination、mark termination、P99 毛刺**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：STW 期间 mutator 不运行，runtime 用它完成 sweep termination、开启/关闭写屏障和切换标记阶段等全局操作。
 2. **为什么**：完全无 STW 的并发 GC 极难；Go 选择「短 STW + 长并发」平衡吞吐与延迟。

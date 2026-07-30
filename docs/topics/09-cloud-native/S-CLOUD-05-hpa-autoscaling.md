@@ -19,7 +19,7 @@ sources:
 
 > **HPA** 根据 CPU、内存或自定义/外部指标自动修改 workload 副本数。CPU `Utilization` 是 **实际 CPU usage / CPU request**，不是除以 limit；未设置 request 时该指标无法正常计算。I/O 型服务通常更适合按 RPS、inflight、队列 lag 等“增加副本后会下降”的指标扩容，延迟可作为保护信号但不宜单独盲目驱动。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：HorizontalPodAutoscaler 周期性读 metrics-server 或 custom metrics API，计算目标副本数。
 2. **为什么**：大促/开盘流量波动；手动扩缩滞后；常见深挖「为什么 CPU 不高却不扩容」。

@@ -22,7 +22,7 @@ sources:
 
 > Ethereum validator 通过 validator signing key 执行 attest、proposal 等职责，withdrawal credentials 控制提款路径，两者不是同一密钥。普通离线会损失奖励/产生 penalty，但 slashing 针对可证明的冲突行为，如双 proposal、双投票或 surround vote。最大工程风险是同一 validator key 在两套活跃实例同时签名；HA 不能做普通 active-active，迁移前必须安全停旧实例并导入 slashing protection history。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **组件**：EL + CL + validator client/remote signer；validator 可与 beacon node 分离。
 2. **职责**：attestation、block proposal、sync committee 等，错过职责与冲突签名后果不同。

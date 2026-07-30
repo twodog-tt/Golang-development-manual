@@ -20,7 +20,7 @@ sources:
 
 > **defer** 注册调用，在函数返回或 panic 展开时按 LIFO 执行。编译器/runtime 可能采用 **open-coded defer**、栈上 `_defer` 或堆上 `_defer`，不能统一描述成“一个堆链表”。Go 1.14 起多数常见 defer 已接近普通调用成本，但循环中 defer 仍会累积到外层函数退出。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：推迟调用到 surrounding function 退出；参数在 defer 语句处求值（除函数字面量闭包延迟读变量）。
 2. **为什么**：保证资源释放（close、Unlock、tx.Rollback）路径统一，避免漏释。

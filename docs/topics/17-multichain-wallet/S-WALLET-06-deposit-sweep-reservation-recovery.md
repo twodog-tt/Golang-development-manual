@@ -27,7 +27,7 @@ sources:
 > sender/asset 额度；Solana 还要管理 writable accounts 与 blockhash。网络超时不代表失败：
 > 必须先按已冻结 payload、raw tx 和链状态查询，再决定重播、替换或释放资源。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **地址分配**：链/network/derivation path/memo-tag 与用户映射唯一；在线系统尽量只持 xpub/地址能力。
 2. **充值**：observed → safe/confirmed → finalized → credited；链上事件和内部账本分离。

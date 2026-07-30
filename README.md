@@ -375,7 +375,7 @@ cd basis/goroutine && go run .
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-docs.txt
 
-# 生成专题自测数据、侧栏导航与 README 题表（新增题目后建议执行）
+# 生成专题自测数据、侧栏导航与 README 专题表（新增专题后建议执行）
 python3 scripts/generate_topic_quiz_data.py
 python3 scripts/generate_nav_pages.py
 python3 scripts/generate_readme_question_table.py
@@ -390,7 +390,7 @@ mkdocs serve   # http://127.0.0.1:8000
 |------|------|
 | [scripts/generate_topic_quiz_data.py](./scripts/generate_topic_quiz_data.py) | 从 `questions.yaml` 生成 `docs/data/questions.json`（专题自测页） |
 | [scripts/generate_redirect_maps.py](./scripts/generate_redirect_maps.py) | 生成 `interview/*` → `topics/*` 旧路径重定向 |
-| [scripts/generate_nav_pages.py](./scripts/generate_nav_pages.py) | 生成 `topics/.pages` 与各模块 `.pages`（三级侧栏题目标题） |
+| [scripts/generate_nav_pages.py](./scripts/generate_nav_pages.py) | 生成 `topics/.pages` 与各模块 `.pages`（三级侧栏专题标题） |
 | [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `questions.yaml` 更新 README 专题全表（序号 + 文档 ID + 标题） |
 | [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 232 篇正文、角色优先级与证据标签一致性 |
 

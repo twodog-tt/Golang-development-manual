@@ -20,7 +20,7 @@ sources:
 
 > **sync.Pool** 是按 P 优化的临时对象缓存，`Get` 随时可能拿不到旧对象。GC 开始时当前 local 会转为 victim、上一轮 victim 被丢弃，因此对象可能跨一轮 GC 被复用，但绝不能把 Pool 当持久缓存或资源池。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：`Get/Put` 复用 `any`；内部 `poolLocal` 数组按 P 分片。
 2. **为什么**：高频短生命周期对象（buffer、临时 slice）降低 GC 负担。

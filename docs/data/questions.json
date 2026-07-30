@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-07-30T12:32:46Z",
+  "generated_at": "2026-07-30T12:47:08Z",
   "count": 232,
   "roles": [
     {
@@ -5323,7 +5323,7 @@
       "module_key": "solution_architecture",
       "resume_focus": false,
       "url": "topics/11-solution-architecture/S-SOL-08-evolution-whiteboard/",
-      "prompt": "架构白板常给 **开放式业务题**（设计 IM / 外卖 / 企业知识平台），45 分钟考察 **澄清 → 估算 → MVP → 扩展 → 非功能 → 演进**。本模板整合 [03 系统设计](../03-system-design/index.md) 单题能力，形成 **完整叙事**；不是新知识点，而是 **白板交付结构**。",
+      "prompt": "架构白板常给 **开放式业务场景**（设计 IM / 外卖 / 企业知识平台），45 分钟练习 **澄清 → 估算 → MVP → 扩展 → 非功能 → 演进**。本模板整合 [03 系统设计](../03-system-design/index.md) 单场景能力，形成 **完整叙事**；不是新知识点，而是 **白板交付结构**。",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p1",

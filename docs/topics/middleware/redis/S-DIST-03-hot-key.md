@@ -19,7 +19,7 @@ sources:
 
 > **热点 Key** 是 QPS 远超平均的单个或少量 key，打满单 Redis 节点/单 CPU。治理：**发现（monitor/hotkeys 采样）→ 拆分（logical shard）→ 本地缓存 + 单飞（singleflight）→ 限流降级**。生产关键词：**大促 SKU、明星用户、配置中心全局 key**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：访问高度倾斜的 key，在 Cluster 中仍落单 slot/单节点，成为瓶颈；表现为一节点 CPU 100%、延迟尖刺、其他 slot 空闲。
 2. **为什么**：业务天然热点（秒杀库存、热搜榜、全站开关）；缓存设计未打散；Pipeline 放大单 key 压力。

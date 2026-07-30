@@ -21,7 +21,7 @@ sources:
 
 > 生产路径：**Solidity → solc 出 ABI/BIN → abigen 生成 Go → Deploy/Call/FilterLogs**。单测用 **simulated.Backend** 不上测试网。与 [S-BC-04 ABI 理论](./S-BC-04-contract-abi-events.md) 配套，本题是 **可运行闭环**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：`abigen` 根据 ABI 生成类型安全的 `SimpleToken` Go 结构体，封装 `transfer`、`FilterTransfer` 等。
 2. **为什么**：手写 RLP/ABI 易错；能说「我们 abigen + simulated 单测覆盖」体现工程化。

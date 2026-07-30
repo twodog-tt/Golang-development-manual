@@ -2,7 +2,7 @@
 
 > 目标读者：**Go 后端** / **Tech Lead** / **区块链+后端架构师**  
 > 假设：已有 3 年以上生产经验，需补齐 **Go 生产工程 + 系统设计 + 多链钱包/支付/节点 / DEX / Agent**  
-> 用法：先定主线 **Go · Web3/DEX · AI Agent** 之一，再选下方冲刺表；完整查阅见 [首页](./index.md) 与 [专题总索引](./topic-catalog.md)。
+> 用法：先定主线 **Go · Web3/DEX · AI Agent** 之一，再选下方学习计划；完整查阅见 [首页](./index.md) 与 [专题总索引](./topic-catalog.md)。
 
 ## 角色化 P0：共享门槛 + 一个岗位增量
 
@@ -18,7 +18,7 @@
 | 交易所工程 | **75** | 撮合/WAL、DEX 协议、预测市场、账本与风控 |
 | Staff/后端架构师 | **80** | 技术战略、跨团队迁移、发布与风险治理 |
 
-完整题号、P1/P2 与证据标签见
+完整文档 ID、P1/P2 与证据标签见
 [角色化优先级矩阵](./topics/_meta/role-priority-matrix.md)；依赖关系见
 [知识图谱](./topics/_meta/p0-knowledge-graph.md)。
 
@@ -58,18 +58,18 @@
 
 ---
 
-## 冲刺版（4 周，在职）
+## 4 周学习计划（在职）
 
 | 周 | 模块 | 阅读 | 练习 | 自测 |
 |----|------|------|------|------|
-| W1 | Go 语言 + 生产工程 | 01 核心 10 题 + [16 全部](./topics/16-go-production-engineering/index.md) | `go test -race`、错误/接口重构 | 画 GMP；讲 error 与 panic 边界 |
+| W1 | Go 语言 + 生产工程 | 01 核心 10 篇 + [16 全部](./topics/16-go-production-engineering/index.md) | `go test -race`、错误/接口重构 | 画 GMP；讲 error 与 panic 边界 |
 | W2 | 内存 + 手写 + Linux/SQL | 02 高频 + S-CODE-06/07 + S-NET-06/07 + S-DB-06/07 + S-PG-01~03 | 跑 5 个新示例、读 heap profile | 手写有界批处理；排查一次 TCP/SQL |
 | W3 | [系统设计](./topics/03-system-design/index.md) | 21 篇 | 每篇 15min 结构化输出 | 秒杀/幂等/缓存/实时数据各 1 篇讲解 |
 | W4 | 目标岗位主线 + 综合演练 | 按角色矩阵只选一个增量 P0 | 证据标签为 test/harness 的篇才运行；2 场综合演练 | 深挖问答不停顿 3 层 |
 
 ### 每日建议（工作日 1.5h）
 
-- 40min：精读 2 篇 P0 文档（含追问链）
+- 40min：精读 2 篇 P0 文档（含深挖问答）
 - 30min：跑/改 1 段关联代码
 - 20min：讲解「30 秒版 + 1 个生产例子」
 
@@ -81,17 +81,17 @@
 |----|------|
 | 1 | 01 并发 + 02 内存高频 |
 | 2 | [16 Go 生产工程](./topics/16-go-production-engineering/index.md) + [08 编码练习](./topics/08-coding-senior/index.md) |
-| 3-4 | 03 系统设计 21 题 + 容量估算模板 |
+| 3-4 | 03 系统设计 21 篇 + 容量估算模板 |
 | 5 | [网络](./topics/06-network-governance/index.md) + [MySQL](./topics/middleware/mysql/index.md) + [PostgreSQL](./topics/middleware/postgresql/index.md) |
 | 6 | Redis/Kafka/RocketMQ/ES + Terraform/Helm/GitOps |
 | 7 | 目标岗位专题：普通后端选 11/15；Web3 选 17/18 与四条 SDK 实战；DEX TL 选 14（31/30/29）；Agent 选 10 |
-| 8 | Web3 节点/RPC + 安全工程 + 协议/共识 + Rollup/跨链，或 AI/领导力 + 2 场完整模拟 |
+| 8 | Web3 节点/RPC + 安全工程 + 协议/共识 + Rollup/跨链，或 AI/领导力 + 2 场综合演练 |
 
 ---
 
-## 架构师岗冲刺（6 周，在职）
+## 架构师岗学习计划（6 周，在职）
 
-> 在 **P0 系统设计 21 题** 基础上，专攻 [11 解决方案架构](./topics/11-solution-architecture/index.md) 8 题 + 45min 白板。
+> 在 **P0 系统设计 21 篇** 基础上，专攻 [11 解决方案架构](./topics/11-solution-architecture/index.md) 8 篇 + 45min 白板。
 
 | 周 | 模块 | 阅读 | 练习 | 自测 |
 |----|------|------|------|------|
@@ -99,10 +99,10 @@
 | W2 | [解决方案架构](./topics/11-solution-architecture/index.md) | S-SOL-01～04 | 画上下文图 + 迁移阶段图 | 讲 1 个真实拆分/迁移故事 |
 | W3 | 解决方案架构 + 中间件 | S-SOL-05～08 + middleware | 多租户 + Outbox 方案讲解 | 45min 白板演练 ×1 |
 | W4 | 领导力 + 云原生 | S-LEAD-01~05 + S-CLOUD-04/07/09/10 | ADR + 迁移门禁各 1 篇 | 架构评审角色扮演 |
-| W5 | AI + 网络（可选） | 10 + 06 各 4 题 | MCP/RAG 架构串联 | 企业知识库综合题 |
-| W6 | 模拟 | 03 + 11 抽题 | 45min 白板 ×2 + 追问 | 录像复盘 |
+| W5 | AI + 网络（可选） | 10 + 06 各 4 篇 | MCP/RAG 架构串联 | 企业知识库综合演练 |
+| W6 | 综合演练 | 03 + 11 抽专题 | 45min 白板 ×2 + 深挖 | 录像复盘 |
 
-**架构师模拟题组合示例**（见 [S-SOL-08](./topics/11-solution-architecture/S-SOL-08-evolution-whiteboard.md)）：
+**架构师综合演练组合示例**（见 [S-SOL-08](./topics/11-solution-architecture/S-SOL-08-evolution-whiteboard.md)）：
 
 - 多租户 SaaS 订单 + 报表：S-SOL-05 + S-SOL-03 + S-ARCH-12
 - 遗留单体迁 Go 微服务：S-SOL-02 + S-SOL-01 + S-ARCH-19
@@ -110,7 +110,7 @@
 
 ---
 
-## 系统设计答题模板（15 分钟）
+## 系统设计讲解模板（15 分钟）
 
 ```
 1. 澄清需求：QPS、读写比、一致性、延迟、可用性
@@ -158,7 +158,7 @@
 
 ---
 
-## Web3 架构师冲刺（6 周）
+## Web3 架构师学习计划（6 周）
 
 | 周 | 模块 | 自测 |
 |----|------|------|
@@ -171,7 +171,7 @@
 
 ---
 
-## 交易所工程师冲刺（4 周）
+## 交易所工程师学习计划（4 周）
 
 分两条轨，按岗位场景二选一（可并行 Shared Go）。
 
@@ -195,7 +195,7 @@
 
 ---
 
-## AI / Crypto Agent 冲刺（4 周，可选）
+## AI / Crypto Agent 学习计划（4 周，可选）
 
 | 周 | 模块 | 自测 |
 |----|------|------|

@@ -20,7 +20,7 @@ sources:
 
 > 链上数据通过 **JSON-RPC 2.0** 访问（HTTP/WebSocket/IPC）。Go 生产用 **go-ethereum/ethclient** 封装；自研网关可用最小 HTTP 客户端。生产关键词：**WS 订阅、限流、多节点 failover、context 超时**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：节点暴露 `eth_*`、`net_*`、`debug_*` 等方法；DApp 后端不跑全节点时常连 Infura/Alchemy/自建。
 2. **为什么**：索引、发交易、读合约都依赖稳定 RPC；5 年+ Go 后端要能写 **可测试** 的 RPC 层。

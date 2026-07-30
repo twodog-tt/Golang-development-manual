@@ -30,7 +30,7 @@ sources:
 > 下的 resources/modules 为核心，传统交易用 sender sequence 防重放与排序，也在演进
 > orderless 等能力。二者的 Move 方言、标准库、token、签名和 API 都应是独立 adapter。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **Sui object**：address-owned、shared、immutable 等 ownership；mutable object version 每次变更推进。
 2. **Aptos resource**：resource 具有线性/稀缺语义，存于全局状态的地址与类型路径下；账户支持 key rotation 等能力。

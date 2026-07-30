@@ -26,7 +26,7 @@ sources:
 > 不代表交易已提交到区块或应用执行成功；“DeliverTx”是旧 ABCI 常见术语，ABCI++ 版本通常
 > 在 `FinalizeBlock` 中产生每笔交易的执行结果，客户端应统一检查 committed tx result。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. 为目标 app 注册 interface registry、消息类型、address prefix 和 TxConfig。
 2. 用官方 `TxBuilder` 设置 `MsgSend`、memo、gas、fee。

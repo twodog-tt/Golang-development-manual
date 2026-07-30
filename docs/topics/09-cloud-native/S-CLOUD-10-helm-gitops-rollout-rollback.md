@@ -26,7 +26,7 @@ sources:
 
 > Helm 主要解决 Kubernetes manifest 的打包、模板与 release 记录；GitOps controller 持续比较 Git 中的期望状态和集群 live state，并主动收敛。Git commit 只是部署意图，不代表资源已健康；回滚也不是一句 `helm rollback`，因为 CRD、数据库迁移、消息格式和外部副作用未必可逆。生产方案要把 immutable artifact、Git 审批、sync wave/hook、健康门禁、prune/self-heal 权限、secret 管理和 expand/contract 数据迁移放在同一条状态机里。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 ```mermaid
 flowchart LR

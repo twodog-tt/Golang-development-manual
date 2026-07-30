@@ -25,7 +25,7 @@ sources:
 > 限制变化自动更新。它不读取 Kubernetes CPU request。不要只看编译器版本，还要看
 > `go.mod` 与 `GODEBUG`。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：设置同时执行 Go 用户代码的最大 P 数；`runtime.GOMAXPROCS(n)` 可动态修改。
 2. **为什么**：并行度影响 CPU 利用、GC assist 并行、锁竞争；与 cgroup quota 不一致时，runtime 以为有 32 核实际只有 2 核可用。

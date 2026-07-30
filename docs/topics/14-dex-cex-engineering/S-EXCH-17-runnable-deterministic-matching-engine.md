@@ -26,7 +26,7 @@ sources:
 > STP 在成交前按受信任账户 scope 执行 cancel-maker/taker/both。相同命令序列从空状态
 > 重放，订单簿、成交 ID 和事件 ID 必须完全相同。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **排序边界**：入口给每个 order book 的下单、撤单分配连续 `sequence`，同一本簿只由一个 writer 应用。
 2. **精度边界**：价格和数量用最小单位整数；`tickSize`、`stepSize` 在入口归一化，禁止热路径

@@ -22,7 +22,7 @@ sources:
 
 > **代理模式**：用户调用稳定的 Proxy 地址，Proxy 用 `delegatecall` 执行 Implementation 代码，状态保存在 Proxy。架构师必讲 **EIP-1967、原子初始化、`_disableInitializers()`、升级鉴权和存储布局兼容**。现代 OpenZeppelin 还应了解 ERC-7201 namespaced storage。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：逻辑与数据分离；Proxy 存 state，Implementation 存 code。
 2. **为什么**：链上 bug 不能 patch；升级是生产必需，但引入 **admin 信任**。

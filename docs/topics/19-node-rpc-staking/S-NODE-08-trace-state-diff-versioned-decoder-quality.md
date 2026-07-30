@@ -22,7 +22,7 @@ sources:
 
 > Receipt/log 是协议化执行结果的一部分，但 `debug_trace*`、call trace 和 state diff 的 API、字段及性能通常是 client/tracer/provider-specific。Geth tracing 通过重执行交易收集信息，因此依赖相应历史状态并可能很重；不能把某 provider 的 trace JSON 当成跨客户端共识数据。数据平台应保存 raw response、chain/block/tx identity、client/tracer/config/version 和 decode version，再归一化为可重建 facts；质量门禁同时做 hash lineage、数量/root、跨源抽样、decoder shadow 和 projection balance proof。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 推荐分层：
 

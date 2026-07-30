@@ -47,7 +47,7 @@ sources:
 > 先画资金与交易主路径，再讲 Indexer/reorg、多链配置版本、安全门禁和团队接口。
 > 细节公式落在 [S-EXCH-30](./S-EXCH-30-uniswap-v2-v3-protocol.md)、激励落在 [S-EXCH-29](./S-EXCH-29-defi-staking-liquidity-mining-yield.md)。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：为「DEX 平台 Tech Lead」准备的 **45 分钟端到端架构叙事**，覆盖协议、后端、前端协作与安全。
 2. **为什么**：JD 要求架构规划、带队、DeFi 核心模块、撮合/同步/性能、风险方案——单题 AMM 不够。
@@ -212,7 +212,7 @@ flowchart LR
 | 题 | 重心 |
 |----|------|
 | [S-EXCH-14](./S-EXCH-14-web3-exchange-fullstack-architecture.md) | Web3 交易产品全栈（索引/K 线/返佣等工程细节） |
-| **本题 S-EXCH-31** | **Tech Lead 终面**：澄清→协议→组织→门禁→取舍的 **45min 叙事骨架** |
+| **本题 S-EXCH-31** | **Tech Lead 综合演练**：澄清→协议→组织→门禁→取舍的 **45min 叙事骨架** |
 
 ## 生产场景（举例）
 

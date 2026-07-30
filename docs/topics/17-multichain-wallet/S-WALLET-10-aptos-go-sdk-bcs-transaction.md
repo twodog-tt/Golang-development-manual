@@ -30,7 +30,7 @@ sources:
 > 本示例是 Go 1.24 的兼容选择，不应说成最新。提交成功后仍要查询 committed
 > transaction 的 `success` 与 VM status。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. 查询账户 sequence、ledger chain ID、gas estimate 和可信 ledger timestamp。
 2. 构造 Entry Function，按 ABI/类型把地址、`u64` 等参数 BCS 序列化。

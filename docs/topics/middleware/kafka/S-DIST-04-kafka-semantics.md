@@ -21,7 +21,7 @@ sources:
 
 > Kafka 消费分 **at-most-once / at-least-once / Kafka 边界内 exactly-once**；Consumer Group 通过 Rebalance 分配 partition。Eager rebalance 会全量 revoke，cooperative 协议只迁移必要分区，但受影响分区仍会出现消费停顿和重复窗口。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：Consumer Group 内多个 consumer 分摊 topic partition；offset 提交决定语义；Rebalance 在成员增减、订阅变化、session 超时时触发 partition 重分配。
 2. **为什么**：水平扩展消费吞吐；partition 内有序、跨 partition 无序；错误 commit 策略导致丢消息或重复。

@@ -22,7 +22,7 @@ sources:
 
 > 节点 SRE 的目标是“跟随正确 canonical/finalized chain 并按方法 SLO 提供数据”，不是进程存活。升级要跟踪协议 fork、EL/CL/client 兼容和数据库迁移，先在非关键/影子节点 canary；快照只缩短恢复时间，必须验证来源、network/genesis、head/finality 和数据库一致性。Pruning、archive/history 是 client-specific 容量策略。Validator key 不能普通 active-active，RPC 节点则应多实例、多 client、独立数据目录。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **发布**：版本矩阵、release notes、fork deadline、canary、回滚与 DB format 兼容。
 2. **恢复**：从 genesis/sync、可信 checkpoint、snapshot/backup 的 RTO/RPO 和验证路径。

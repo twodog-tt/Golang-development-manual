@@ -21,7 +21,7 @@ sources:
 
 > **ERC-20** 同质化代币；**ERC-721** 在单个合约内标识唯一 token id；**ERC-1155** 在同一合约管理多种可同质化或非同质化 token 类型并支持批量操作。架构师选型 + Review **approve/transferFrom、回调、元数据**。Go 索引靠 **Transfer/TransferSingle 事件**（[S-BC-04](../12-blockchain-web3/S-BC-04-contract-abi-events.md)）。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：EIP 接口约定，非强制但生态互操作依赖。
 2. **为什么**：交易所/钱包只认标准；非标 token 导致 Go 后端解析失败。

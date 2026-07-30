@@ -22,7 +22,7 @@ sources:
 
 > DEX 无中心化撮合日志，**K 线来自 canonical Swap/Trade 事件**。窗口由块时间戳归属，但同一窗口内的 open/close 应按链上顺序 `(block_number, transaction_index, log_index)` 决定，不能按 MQ 到达顺序。生产关键词：**精度归一、唯一事件、事务聚合、reorg 重算**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：1m/5m/1h K 线 = 窗口内 open/high/low/close/volume。
 2. **为什么**：链上 DEX 后端核心读模型；与 CEX 撮合日志聚合不同，**数据源是 logs**。

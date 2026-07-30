@@ -25,7 +25,7 @@ sources:
 
 > Terraform state 是“配置地址 ↔ 远端真实对象”的绑定和最近属性快照，不是可随手编辑的缓存；它可能含敏感值，团队使用应放在支持访问控制、加密、版本恢复和适当 locking 的远端后端。`plan` 只是基于当时配置、state、refresh 与 provider 行为计算出的变更提案，不是永不过期的事实。生产变更要固定 provider/module、审查同一份 saved plan、限制权限和 blast radius，并用 `moved`、`import`、`removed` 等声明式迁移记录代替直接改 state。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **State 的职责**：记录 resource address 与 provider 对象身份的绑定、依赖元数据和属性快照。
    同一远端对象不应同时绑定多个 resource address。

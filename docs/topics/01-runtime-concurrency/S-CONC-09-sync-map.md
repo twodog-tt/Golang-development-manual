@@ -20,7 +20,7 @@ sources:
 
 > `sync.Map` 主要优化两类负载：key 只写一次后读很多次，或不同 goroutine 访问彼此不相交的 key 集合。它不是“所有读多写少都更快”，也不提供一致快照；与 `map+Mutex/RWMutex` 必须按真实负载 benchmark。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：并发安全的 `map[any]any`；API：`Load/Store/LoadOrStore/Delete/Range`。
 2. **为什么**：普通 map+Mutex 读也互斥；sync.Map 无锁读路径（命中 read-only）。

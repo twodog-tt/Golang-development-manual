@@ -25,7 +25,7 @@ sources:
 
 > SBOM 回答“产物里有什么”，provenance 回答“由哪个 builder、哪些输入和步骤构建”，签名证明某身份认可了某 digest；三者都不自动证明软件无漏洞或业务上允许部署。生产发布应以不可变 digest 为主键，把 source revision、依赖锁定、测试、SBOM、构建 provenance、签名和环境准入串成验证链。按 SLSA v1.2 Build Track，L1 是存在 provenance，L2 是托管构建平台生成并签名，L3 还要求 hardened build；不要继续背旧版单一 SLSA 1–4。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 | 证据 | 能回答 | 不能单独回答 |
 |------|--------|--------------|

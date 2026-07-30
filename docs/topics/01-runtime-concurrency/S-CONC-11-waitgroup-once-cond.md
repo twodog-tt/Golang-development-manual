@@ -22,7 +22,7 @@ sources:
 
 > **WaitGroup** 等一组 goroutine 结束；**Once** 保证函数至多执行一次；**Cond** 等待锁保护的条件成立。Go 1.25+ 新代码可优先用 `WaitGroup.Go`；兼容旧版本时要在启动 goroutine **之前** `Add`。`Once.Do` 中函数即使 panic，也会被视为已经执行过。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：WG 计数器；Once `sync.Once`；Cond `sync.NewCond(Locker)`。
 2. **为什么**：批任务汇合；单例 init；避免忙等（相比 spin）。

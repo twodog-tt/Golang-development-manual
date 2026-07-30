@@ -52,7 +52,7 @@ sources:
 
 > 有人问「讲讲 Uniswap」时，不要只背 `x*y=k`。要分层讲清：**Factory → Pool/Pair → Router → LP 凭证 → 报价与结算**，并对比 V2/V3 的状态机与后端索引成本。Pancake 等分叉见 [S-EXCH-27](./S-EXCH-27-pancakeswap-v2-v3-differences.md)。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：链上 AMM 协议族；V2 全区间 CPMM，V3 集中流动性 CPMM。
 2. **为什么**：DEX Tech Lead 必备协议素养；决定池设计、路由、激励与安全审计范围。
@@ -163,7 +163,7 @@ flowchart LR
 
 同一 `USDC/ETH` 可同时存在多个 fee 池，路由要选深度与费率最优组合。
 
-### V2 vs V3 对照表（终面用）
+### V2 vs V3 对照表（综合演练）
 
 | 维度 | V2 | V3 |
 |------|----|----|

@@ -30,7 +30,7 @@ sources:
 > 向量证明竞价/连续撮合正确，再固定订单簿深度、交叉率、订单类型和持久化边界，报告
 > p50/p99/p999、allocs、GC 和端到端延迟，并用多次 benchmark + benchstat 比较。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **阶段状态机**：Collection 接单/撤单但不连续成交；Opening/Uncross 冻结或排队新命令；
    Complete 后切回连续交易。

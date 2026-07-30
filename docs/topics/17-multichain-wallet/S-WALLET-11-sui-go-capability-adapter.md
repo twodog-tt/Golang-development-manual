@@ -30,7 +30,7 @@ sources:
 > 不是 Sui nonce，在原子防超额的前提下可允许并发 intent。最终以 transaction
 > effects 为事实，而不是 RPC 接受提交。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **能力发现**：按 network、protocol version、provider 查询 Address Balance、gas mode、GraphQL/gRPC 方法与 gasless asset allowlist。JSON-RPC 已被官方标记 deprecated，并计划于 2026 年 7 月停用；截至 2026-07-18，迁移页公告公共端点 Testnet 在 7 月 6 日当周、Mainnet 在 7 月 20 日当周关闭。私有 provider 的实际时间仍需核对，不能说成“所有端点已经同时停用”。
 2. **资金路径**：明确 `COIN_OBJECTS`、`ADDRESS_BALANCE` 或 `HYBRID`，不能由 worker 临时猜测。

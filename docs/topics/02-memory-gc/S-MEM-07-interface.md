@@ -20,7 +20,7 @@ sources:
 
 > 空接口 **`interface{}`/`any` 是 eface**（type, data）；带方法的接口是 **iface**（itab, data）。**类型断言**需查 itab 或 type 相等，失败走 slow path；**频繁 dynamic dispatch** 阻碍内联。生产关键词：**少 interface 热点、type switch、具体类型 API**。
 
-## 3 分钟版（一面深度）
+## 3 分钟版（精讲深度）
 
 1. **是什么**：interface 值在当前实现中通常由两个机器字组成：类型/方法表信息与数据字；iface 的 itab 描述 `(动态类型, 接口类型)` 的方法表。
 2. **为什么**：实现多态与解耦；潜在代价包括值复制或装箱、间接调用，以及在特定上下文中发生逃逸。
