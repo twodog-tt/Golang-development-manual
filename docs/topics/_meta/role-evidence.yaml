@@ -5,7 +5,7 @@
 #   2. shared.p1 + role.p1（扣除已进入 P0 的题）=> 该岗位 P1
 #   3. 其余 published 题 => 该岗位 P2
 #
-# questions.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
+# topics.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
 
 schema_version: 1
 updated_at: "2026-07-21"

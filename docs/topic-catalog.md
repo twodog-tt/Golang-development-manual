@@ -73,4 +73,4 @@
 9. [S-ARCH-06 缓存三大问题](topics/03-system-design/S-ARCH-06-cache-failure-modes.md)
 10. [S-ARCH-10 MQ 语义](topics/03-system-design/S-ARCH-10-mq-semantics.md)
 
-专题元数据：[questions.yaml](topics/_meta/questions.yaml)
+专题元数据：[topics.yaml](topics/_meta/topics.yaml)

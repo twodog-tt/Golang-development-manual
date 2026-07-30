@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""从 questions.yaml + 专题 Markdown 生成专题自测用的 questions.json。"""
+"""从 topics.yaml + 专题 Markdown 生成专题自测用的 topics.json。"""
 
 from __future__ import annotations
 
@@ -11,10 +11,10 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-YAML_PATH = ROOT / "docs/topics/_meta/questions.yaml"
+YAML_PATH = ROOT / "docs/topics/_meta/topics.yaml"
 ROLE_EVIDENCE_PATH = ROOT / "docs/topics/_meta/role-evidence.yaml"
 TOPICS_DIR = ROOT / "docs/topics"
-OUT_PATH = ROOT / "docs/data/questions.json"
+OUT_PATH = ROOT / "docs/data/topics.json"
 
 MODULE_LABELS: dict[str, str] = {
     "concurrency": "01 并发与运行时",
@@ -211,14 +211,14 @@ def main() -> None:
             }
             for role_key, role in role_config.get("roles", {}).items()
         ],
-        "questions": questions,
+        "topics": questions,
     }
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    print(f"Wrote {len(questions)} questions to {OUT_PATH.relative_to(ROOT)}")
+    print(f"Wrote {len(questions)} topics to {OUT_PATH.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

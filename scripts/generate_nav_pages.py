@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""从 questions.yaml 生成 topics/.pages 与各模块 .pages，启用专题级（三级）导航。"""
+"""从 topics.yaml 生成 topics/.pages 与各模块 .pages，启用专题级（三级）导航。"""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-YAML_PATH = ROOT / "docs/topics/_meta/questions.yaml"
+YAML_PATH = ROOT / "docs/topics/_meta/topics.yaml"
 TOPICS_DIR = ROOT / "docs/topics"
 DOCS_PAGES = ROOT / "docs/.pages"
 

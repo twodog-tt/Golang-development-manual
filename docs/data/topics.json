@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-07-30T12:47:08Z",
+  "generated_at": "2026-07-30T12:55:32Z",
   "count": 232,
   "roles": [
     {
@@ -39,7 +39,7 @@
       "objective": "证明跨团队技术战略、风险治理、渐进迁移和可量化组织影响力。"
     }
   ],
-  "questions": [
+  "topics": [
     {
       "id": "S-AI-01",
       "title": "Go 接入大模型 API：流式、重试、超时",

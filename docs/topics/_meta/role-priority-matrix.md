@@ -6,7 +6,7 @@
 
 ## 先选方向，不再套统一 P0
 
-旧 [questions.yaml](./questions.yaml) 中的全局 P0/P1/P2 保留给导航和历史兼容，但不再代表
+旧 [topics.yaml](./topics.yaml) 中的全局 P0/P1/P2 保留给导航和历史兼容，但不再代表
 所有方向的统一学习顺序。有效优先级按以下规则计算：
 
 ```text

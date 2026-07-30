@@ -204,4 +204,4 @@
 | W3 | S-AI-13~14 + 21 安全 | Agent Commerce、开放平台/Launchpad、威胁模型 |
 | W4 | 16 Go 生产工程 + 综合演练 | 与 Go 工程门禁串联；1 场综合讲解 |
 
-专题索引：[topics/_meta/questions.yaml](./topics/_meta/questions.yaml)
+专题索引：[topics/_meta/topics.yaml](./topics/_meta/topics.yaml)

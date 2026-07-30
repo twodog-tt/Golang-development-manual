@@ -19,7 +19,7 @@
 | 4. Web3 交易所重点专题 | [docs/web3-exchange-wallet-focus.md](./docs/web3-exchange-wallet-focus.md) |
 | 5. 角色化优先级与证据标签 | [docs/topics/_meta/role-priority-matrix.md](./docs/topics/_meta/role-priority-matrix.md) |
 | 6. P0 技术纠错审计 | [docs/topics/_meta/technical-corrections-audit.md](./docs/topics/_meta/technical-corrections-audit.md) |
-| 7. 专题元数据 | [docs/topics/_meta/questions.yaml](./docs/topics/_meta/questions.yaml) |
+| 7. 专题元数据 | [docs/topics/_meta/topics.yaml](./docs/topics/_meta/topics.yaml) |
 | 8. 代码 ↔ 专题映射 | [docs/topics/_meta/mapping.md](./docs/topics/_meta/mapping.md) |
 | 9. 来源与引用规范 | [docs/sources.md](./docs/sources.md) |
 
@@ -388,10 +388,10 @@ mkdocs serve   # http://127.0.0.1:8000
 
 | 脚本 | 作用 |
 |------|------|
-| [scripts/generate_topic_quiz_data.py](./scripts/generate_topic_quiz_data.py) | 从 `questions.yaml` 生成 `docs/data/questions.json`（专题自测页） |
+| [scripts/generate_topic_quiz_data.py](./scripts/generate_topic_quiz_data.py) | 从 `topics.yaml` 生成 `docs/data/topics.json`（专题自测页） |
 | [scripts/generate_redirect_maps.py](./scripts/generate_redirect_maps.py) | 生成 `interview/*` → `topics/*` 旧路径重定向 |
 | [scripts/generate_nav_pages.py](./scripts/generate_nav_pages.py) | 生成 `topics/.pages` 与各模块 `.pages`（三级侧栏专题标题） |
-| [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `questions.yaml` 更新 README 专题全表（序号 + 文档 ID + 标题） |
+| [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `topics.yaml` 更新 README 专题全表（序号 + 文档 ID + 标题） |
 | [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 232 篇正文、角色优先级与证据标签一致性 |
 
 ## 引用来源

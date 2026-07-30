@@ -10,7 +10,7 @@ from typing import Any, Iterable
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-QUESTIONS_PATH = ROOT / "docs/topics/_meta/questions.yaml"
+TOPICS_META_PATH = ROOT / "docs/topics/_meta/topics.yaml"
 ROLE_EVIDENCE_PATH = ROOT / "docs/topics/_meta/role-evidence.yaml"
 TOPICS_DIR = ROOT / "docs/topics"
 TIER_KEYS = {"p0", "p1", "p2"}
@@ -67,13 +67,13 @@ def check_ids(
 
 
 def main() -> None:
-    questions = yaml.safe_load(QUESTIONS_PATH.read_text(encoding="utf-8"))
+    questions = yaml.safe_load(TOPICS_META_PATH.read_text(encoding="utf-8"))
     metadata = yaml.safe_load(ROLE_EVIDENCE_PATH.read_text(encoding="utf-8"))
     rows = list(iter_questions(questions))
     errors: list[str] = []
 
     ids = [item["id"] for _, _, item in rows]
-    check_unique("questions.yaml", ids, errors)
+    check_unique("topics.yaml", ids, errors)
     known_ids = set(ids)
     published_ids = {
         item["id"] for _, _, item in rows if item.get("status") == "published"
@@ -103,7 +103,7 @@ def main() -> None:
         if fm.get("id") != qid:
             errors.append(f"{qid} 与正文 frontmatter id={fm.get('id')} 不一致")
         if fm.get("status") != item.get("status"):
-            errors.append(f"{qid} 的 questions.yaml/status 与正文不一致")
+            errors.append(f"{qid} 的 topics.yaml/status 与正文不一致")
         if not fm.get("sources"):
             errors.append(f"{qid} 缺少 sources，不能标记 source_anchored")
         text = path.read_text(encoding="utf-8")

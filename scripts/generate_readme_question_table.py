@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""从 questions.yaml 生成 README.md 中的专题全表（序号 + 文档 ID + 标题）。"""
+"""从 topics.yaml 生成 README.md 中的专题全表（序号 + 文档 ID + 标题）。"""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-YAML_PATH = ROOT / "docs/topics/_meta/questions.yaml"
+YAML_PATH = ROOT / "docs/topics/_meta/topics.yaml"
 README_PATH = ROOT / "README.md"
 
 TIER_KEYS = {"p0", "p1", "p2"}

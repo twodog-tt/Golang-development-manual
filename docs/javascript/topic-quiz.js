@@ -106,7 +106,7 @@
   }
 
   function dataUrl() {
-    return new URL("data/questions.json", siteBaseUrl()).href;
+    return new URL("data/topics.json", siteBaseUrl()).href;
   }
 
   function markFamiliar(id) {
@@ -247,7 +247,7 @@
       const res = await fetch(dataUrl());
       if (!res.ok) throw new Error(res.statusText);
       const data = await res.json();
-      catalog = data.questions || [];
+      catalog = data.topics || data.questions || [];
       render();
       showQuestion(pickRandom(null));
     } catch (err) {

@@ -108,7 +108,7 @@ localnet/testnet ≠ 主网兼容。完整定义见
 ## 资料、索引与维护
 
 - [专题总索引](topic-catalog.md)
-- [专题元数据 YAML](topics/_meta/questions.yaml)
+- [专题元数据 YAML](topics/_meta/topics.yaml)
 - [角色优先级与证据标签](topics/_meta/role-priority-matrix.md)
 - [代码映射](topics/_meta/mapping.md)
 - [引用来源](sources.md)

@@ -1,6 +1,6 @@
 # 知识库质量审查与岗位差距
 
-> 全库 **232 篇**（以 [questions.yaml](questions.yaml) 为准）
+> 全库 **232 篇**（以 [topics.yaml](topics.yaml) 为准）
 >
 > 本轮审查与补强日期：**2026-07-21**
 >
