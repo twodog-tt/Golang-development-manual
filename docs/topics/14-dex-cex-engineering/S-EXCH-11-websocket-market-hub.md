@@ -14,8 +14,8 @@ sources:
   - https://datatracker.ietf.org/doc/html/rfc6455
 ---
 
-!!! tip "⭐ 重点准备"
-    Web3 交易所 / 钱包方向高频题，见 [重点专题](../../web3-exchange-wallet-focus.md)。
+!!! tip "相关主题"
+    场景地图见 [Web3 交易所与钱包](../../web3-exchange-wallet-focus.md)。
 
 # WebSocket 行情 Hub 与连接治理
 

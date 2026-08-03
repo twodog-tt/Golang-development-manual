@@ -30,7 +30,7 @@
 
 ## 适用场景
 
-- JD 含 **Web3 / 钱包 / L2 / 跨链 / 智能钱包 / 链上数据**
+- 场景涉及 **Web3 / 钱包 / L2 / 跨链 / 智能钱包 / 链上数据**
 - 二面问「L2 和 L1 索引区别」「4337 UserOp」「怎么用 abigen」
 - 与 [S-SOL-03 事件驱动](../11-solution-architecture/S-SOL-03-event-driven-cqrs.md)、[S-ARCH-04 幂等](../03-system-design/S-ARCH-04-idempotency.md) 交叉
 

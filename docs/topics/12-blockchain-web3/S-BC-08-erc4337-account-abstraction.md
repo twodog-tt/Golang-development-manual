@@ -24,7 +24,7 @@ sources:
 ## 3 分钟版（精讲深度）
 
 1. **是什么**：AA = 验证与执行逻辑在智能账户里；可实现批量交易、社交恢复、ECDSA/Passkey/多签/会话密钥等验证方式。它不等于“不再使用私钥”，很多账户仍以 ECDSA 私钥为根权限。
-2. **为什么**：Web3 用户体验（Gasless、一键登录）是后端与 Bundler 协作；钱包类岗位越来越常考 4337。
+2. **为什么**：Web3 用户体验（Gasless、一键登录）依赖后端与 Bundler 协作；4337 是账户抽象的主流工程入口。
 3. **怎么做**：后端不替用户持主私钥；构建 UserOp → 用户/Session 签 → 调 Bundler `eth_sendUserOperation` → 监听 `UserOperationEvent`。
 
 ## 10 分钟版（原理 + 图示）

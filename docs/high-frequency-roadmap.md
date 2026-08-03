@@ -25,7 +25,7 @@
 
 ## 第一周：Go 运行时、并发与内存
 
-目标：先建立资深 Go 岗位的语言基本盘。顺序不要打乱，后面的泄漏和 GC 排查依赖前面的
+目标：先建立资深 Go 工程的语言基本盘。顺序不要打乱，后面的泄漏和 GC 排查依赖前面的
 调度、同步与取消语义。
 
 | 顺序 | 文档 ID | 标题 | 必须讲清 |
@@ -90,8 +90,8 @@
 
 只有当这 18 篇可以闭卷讲清结论与边界，才继续进入：
 
-- [七类方向 P0/P1/P2 与证据标签](topics/_meta/role-priority-matrix.md)
-- [岗位定向 P0 知识图谱](topics/_meta/p0-knowledge-graph.md)
+- [领域能力优先级与证据标签](topics/_meta/role-priority-matrix.md)
+- [领域知识图谱](topics/_meta/p0-knowledge-graph.md)
 - [Web3 交易所与钱包重点专题](web3-exchange-wallet-focus.md)
 - [专题自测](topic-quiz.md)
 

@@ -1,7 +1,7 @@
-# 知识图谱：岗位定向 P0 与方向深挖
+# 知识图谱：领域核心与方向深挖
 
 > 当前共 **233 篇**。实际 P0/P1/P2 以
-> [七类岗位优先级](./role-priority-matrix.md) 为准。本知识库的首选方向是
+> [领域能力优先级](./role-priority-matrix.md) 为准。本知识库的默认深挖方向之一是
 > **AI Agent Platform / Crypto Agent Ecosystem**：先完成 40 篇共享 Go/生产工程门槛，
 > 再补 24 篇 Agent 定向 P0；CEX/DEX、钱包和实时风控不是另一套平行体系，而是证明你能处理
 > 资金、副作用、高吞吐和可恢复数据链路的差异化证据。
@@ -95,7 +95,7 @@ flowchart LR
   A4 --> B9
 ```
 
-### 差异化证据 → 岗位出口
+### 差异化证据 → 能力出口
 
 ```mermaid
 flowchart LR
@@ -135,20 +135,20 @@ flowchart LR
   C5 --> D3
 ```
 
-## 岗位定向 P0 怎么取舍
+## 领域核心怎么取舍
 
 | 优先级 | 知识域 | 为什么进入 P0 | 必须避免的表达 |
 |--------|--------|----------------|----------------|
-| 1 | Go 生产工程与系统基础 | 目标仍是 Go 后端/平台岗位，语言、测试、SQL、网络不能失分 | “用了 Gin/GORM 就等于会 Go 工程化” |
+| 1 | Go 生产工程与系统基础 | 若主攻 Go 后端/平台工程，语言、测试、SQL、网络不能失分 | “用了 Gin/GORM 就等于会 Go 工程化” |
 | 2 | Agent 工作流与 HITL | OctoAgentFlow 最核心、最容易被深挖的 0→1 证据 | “加一个 pending 状态就是人工审核” |
 | 3 | Persona / Memory / Guardrail | 区分普通 LLM API 接入和 Agent Platform | “把全部聊天记录塞进 prompt 就是 Memory” |
-| 4 | MCP/A2A 与 Agent 身份/Commerce | 目标 JD 明确要求跨框架互操作、ERC-8004、x402/8183 和 Agent Economy | “协议能力声明就是身份、授权和业务完成证明” |
-| 5 | 开放平台、SDK 与 Launchpad | 技术经理岗位需要开发者生态、发布治理和商业闭环 | “接了几个框架就等于建成开放平台” |
+| 4 | MCP/A2A 与 Agent 身份/Commerce | 若工程目标明确要求跨框架互操作、ERC-8004、x402/8183 和 Agent Economy | “协议能力声明就是身份、授权和业务完成证明” |
+| 5 | 开放平台、SDK 与 Launchpad | 开放平台工程需要开发者生态、发布治理和商业闭环 | “接了几个框架就等于建成开放平台” |
 | 6 | 外部副作用、OAuth2、成本与观测 | 发布、支付、tool call 都涉及模糊成功和权限边界 | “框架 checkpoint 自动保证 exactly-once” |
 | 7 | CDC/Flink/ES 实时风控 | 连接头部出行平台实时风控经验与 Agent 反馈/画像平台 | “Flink exactly-once 等于 ES 永不重复” |
 | 8 | TRON/TRC20 与多链钱包 | 项目明确有 TRON USDT、CEX 钱包和 MPC/TSS | “TRON 就是换 RPC 的 EVM” |
 | 9 | 交易所状态机与量化指标 | 证明高吞吐、账本、行情和故障恢复深度 | “只报 3k/20k QPS，不说明 workload 和持久化边界” |
-| 10 | Staff 案例 | 架构师岗位需要跨团队决策、迁移和组织影响 | “把模板案例包装成自己做过的生产案例” |
+| 10 | Staff 案例 | 系统演进与跨团队协作需要跨团队决策、迁移和组织影响 | “把模板案例包装成自己做过的生产案例” |
 
 ## Agent 定向 P0 要点速览索引（24/24）
 

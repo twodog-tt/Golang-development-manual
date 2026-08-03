@@ -1,8 +1,8 @@
 # 专题索引
 
 > 全库 **233 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
-> **⭐ 方向定向**：[角色优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
-> [Web3 交易所重点专题](web3-exchange-wallet-focus.md)
+> **⭐ 领域导航**：[领域能力优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
+> [Web3 场景地图](web3-exchange-wallet-focus.md)
 
 ## 基础 · Go 语言与生产工程（48 篇）
 
@@ -51,14 +51,14 @@
 | 07 工程与领导力 | 5 | [07-engineering-leadership/](topics/07-engineering-leadership/index.md) |
 | 10 AI 工程与编程 | 14 | [10-ai-engineering/](topics/10-ai-engineering/index.md) |
 
-## 角色化 P0
+## 领域阅读入口
 
 1. **共享 Go/生产工程门槛**：[16 Go 生产工程](topics/16-go-production-engineering/index.md) → [08 编码练习](topics/08-coding-senior/index.md) → [06 Linux/TCP](topics/06-network-governance/index.md) → [PostgreSQL](topics/middleware/postgresql/index.md) / [MySQL](topics/middleware/mysql/index.md)。
-2. **重点方向 Agent / Crypto Agent**：[10 AI 工程](topics/10-ai-engineering/index.md) → [工作流/HITL](topics/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) → [MCP/A2A](topics/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) → [Agent Commerce](topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) → [开放平台/Launchpad](topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md)。
+2. **AI / Crypto Agent 控制面**：[10 AI 工程](topics/10-ai-engineering/index.md) → [工作流/HITL](topics/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) → [MCP/A2A](topics/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) → [Agent Commerce](topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) → [开放平台/Launchpad](topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md)。
 3. **Web3 证据主线**：[17 多链钱包](topics/17-multichain-wallet/index.md) → [18 支付与稳定币](topics/18-web3-payments-stablecoin/index.md) → [19 节点/RPC](topics/19-node-rpc-staking/index.md)。
 
-完整文档 ID：[角色优先级矩阵](topics/_meta/role-priority-matrix.md)；
-依赖图：[知识图谱](topics/_meta/p0-knowledge-graph.md)。
+完整清单：[领域能力优先级](topics/_meta/role-priority-matrix.md)；
+依赖图：[领域知识图谱](topics/_meta/p0-knowledge-graph.md)。
 
 ## 高频 Top 10
 

@@ -1,6 +1,6 @@
 # 09 云原生（扩展）
 
-10 篇 | 按岗位为 P0～P2 | [返回专题索引](../../topic-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+10 篇 | 云原生与发布工程 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 | ID | 标题 | 频率 |
 |----|------|------|
@@ -17,7 +17,7 @@
 
 ## 适用场景
 
-- 岗位 JD 含 **K8s / 云原生 / SRE / Terraform / Helm / GitOps**
+- 场景涉及 **K8s / 云原生 / SRE / Terraform / Helm / GitOps**
 - 二面问 **部署、镜像、可观测性、排障** 落地细节
 - 与 [S-CONC-04 GOMAXPROCS](../01-runtime-concurrency/S-CONC-04-gomaxprocs.md)、[S-CODE-03 优雅关闭](../08-coding-senior/S-CODE-03-graceful-shutdown.md)、[S-ARCH-15 发布策略](../03-system-design/S-ARCH-15-release-strategy.md) 交叉复习
 

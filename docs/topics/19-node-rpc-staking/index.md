@@ -1,8 +1,8 @@
 # 19 节点、RPC 与 Staking
 
-10 篇 | 节点/Indexer 岗 P0 | [返回专题索引](../../topic-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+10 篇 | 本专题核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
-> 面向节点平台、RPC 网关、Indexer、Relayer、Validator 与链上数据架构岗位，重点是 **状态机、数据正确性和运维边界**。
+> 面向节点平台、RPC 网关、Indexer、Relayer、Validator 与链上数据架构，重点是 **状态机、数据正确性和运维边界**。
 
 | ID | 标题 | 频率 |
 |----|------|------|

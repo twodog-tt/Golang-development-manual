@@ -22,7 +22,7 @@ sources:
 ## 3 分钟版（精讲深度）
 
 1. **是什么**：阿里开源 MQ，支持普通/FIFO/事务/延迟消息；NameServer 提供路由发现，Broker 可采用主从、Controller/DLedger 等不同高可用部署，版本与模式要说清。
-2. **为什么**：国内业务、电商、支付场景常见；岗位 JD 写 RocketMQ 时需讲清 **与 Kafka 差异**。
+2. **为什么**：国内业务、电商、支付场景常见；选用时需讲清 **与 Kafka 的语义与运维差异**。
 3. **怎么做**：Producer 发 `Topic:Tag`；Broker 写 CommitLog + ConsumeQueue 索引；Push/Pull 消费；Consumer Group 内 **集群消费**（一条消息只被一个实例消费）或 **广播消费**。
 
 ## 10 分钟版（原理 + 图示）

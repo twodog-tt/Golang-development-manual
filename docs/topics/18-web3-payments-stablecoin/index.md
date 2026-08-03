@@ -1,6 +1,6 @@
 # 18 Web3 支付与稳定币
 
-6 篇 | 支付/稳定币岗位 P0 | [返回专题索引](../../topic-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+6 篇 | 本专题核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 > 把“链上转账”提升为可运营的支付系统：状态机、稳定币风险、Treasury、双分录、清结算、对账与合规控制。
 

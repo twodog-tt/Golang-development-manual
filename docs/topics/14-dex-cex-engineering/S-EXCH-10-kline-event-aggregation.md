@@ -13,8 +13,8 @@ sources:
   - https://ethereum.org/en/developers/docs/apis/json-rpc/
 ---
 
-!!! tip "⭐ 重点准备"
-    Web3 交易所 / 钱包方向高频题，见 [重点专题](../../web3-exchange-wallet-focus.md)。
+!!! tip "相关主题"
+    场景地图见 [Web3 交易所与钱包](../../web3-exchange-wallet-focus.md)。
 
 # 链上成交事件驱动 K 线与行情聚合
 

@@ -1,6 +1,6 @@
 # 21 Web3 安全工程
 
-4 篇 | 按钱包/节点/Staff 角色为 P0～P1 | [返回专题索引](../../topic-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+4 篇 | 安全工程核心 / 延展 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 > 从“用了 HSM、做了审计”下钻到可验证的安全边界：威胁模型、身份与密钥、签名机 fencing、供应链证明、安全测试和事件响应。
 

@@ -1,6 +1,6 @@
 # 20 协议、共识与安全
 
-4 篇 | P1 深挖（**链基础设施 / 节点 / Protocol Engineer / 架构师** JD） | [返回专题索引](../../topic-catalog.md)
+4 篇 | 协议与共识深挖 | [返回专题索引](../../topic-catalog.md)
 
 > 本模块用于把“会调用节点 RPC”提升到“能解释节点为何接受这条链、何时最终、
 > 数据为何可用、升级为何不会分叉”。重点不是背术语，而是说清 **安全假设、状态机、
@@ -31,7 +31,7 @@
 | [S-BC-11 Rollup 安全边界](../12-blockchain-web3/S-BC-11-rollup-finality-da-proof-security.md) | 深入 blob、KZG、PeerDAS 与 DA 保留 |
 | [S-NODE-06 节点运维](../19-node-rpc-staking/S-NODE-06-node-operations-runbook.md) | 深入 fork activation、迁移与回滚边界 |
 
-## 岗位自测
+## 能力自测
 
 - 能否解释“最新 head 已变化，但 finalized checkpoint 没变”为什么不是共识故障？
 - 能否说明 CometBFT 中 `+2/3 prevote`、`+2/3 precommit` 和 commit 的差异？

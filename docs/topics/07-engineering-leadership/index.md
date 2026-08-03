@@ -1,6 +1,6 @@
 # 07 工程与领导力
 
-5 篇 | Staff/架构岗位 P0 | [返回专题索引](../../topic-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+5 篇 | 工程协作与演进 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 | ID | 标题 | 频率 |
 |----|------|------|

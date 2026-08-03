@@ -1,26 +1,25 @@
 # 5 年+ Go / Agent / Web3 工程学习路线
 
-> 目标读者：**Go 后端** / **Tech Lead** / **区块链+后端架构师**  
-> 假设：已有 3 年以上生产经验，需补齐 **Go 生产工程 + 系统设计 + 多链钱包/支付/节点 / DEX / Agent**  
-> 用法：先定主线 **Go · Web3/DEX · AI Agent** 之一，再选下方学习计划；完整查阅见 [首页](./index.md) 与 [专题总索引](./topic-catalog.md)。
+> 目标读者：有一定生产经验、希望系统补齐 **Go 生产工程 + 系统设计 + Web3 链上基建 / DEX / Agent 控制面** 的工程师。  
+> 用法：先定主线 **Go · Web3 链上基建 · AI Agent** 之一，再选下方学习计划；完整查阅见 [首页](./index.md) 与 [专题总索引](./topic-catalog.md)。
 
-## 角色化 P0：共享门槛 + 一个岗位增量
+## 领域核心：共享门槛 + 一个领域增量
 
-不再使用统一 P0。先并行完成 **shared Go/生产工程门槛**，同时只选择一个目标岗位增量：
+不再使用全库统一核心清单。先完成 **shared Go/生产工程门槛**，同时只选择 **一个** 工程领域增量：
 
-| 轨道 | 有效 P0 | 增量重点 |
+| 轨道 | 核心篇数 | 增量重点 |
 |------|--------:|----------|
-| 资深 Go 后端 | 62 | PostgreSQL/MySQL、消息、网络、IaC/GitOps |
-| AI Agent Platform / Crypto Agent Ecosystem | 64 | 工作流/HITL、MCP/A2A、身份/Commerce、开放平台 |
-| 多链钱包与托管 | 66 | 多链交易、归集、MPC/HSM、恢复 |
+| Go 生产工程 | 62 | PostgreSQL/MySQL、消息、网络、IaC/GitOps |
+| AI / Crypto Agent 控制面 | 64 | 工作流/HITL、MCP/A2A、身份/Commerce、开放平台 |
+| 多链钱包与托管签名 | 66 | 多链交易、归集、MPC/HSM、恢复 |
 | 支付与稳定币 | 66 | 支付状态机、账本、清结算、合规 |
 | 节点/RPC/Indexer | 73 | 共识、canonical 数据、ClickHouse/lakehouse |
 | 交易所工程 | **75** | 撮合/WAL、DEX 协议、预测市场、账本与风控 |
-| Staff/后端架构师 | **80** | 技术战略、跨团队迁移、发布与风险治理 |
+| 系统演进与架构协作 | **80** | 技术战略、跨团队迁移、发布与风险治理 |
 
-完整文档 ID、P1/P2 与证据标签见
-[角色化优先级矩阵](./topics/_meta/role-priority-matrix.md)；依赖关系见
-[知识图谱](./topics/_meta/p0-knowledge-graph.md)。
+完整清单、延展阅读与证据标签见
+[领域能力优先级](./topics/_meta/role-priority-matrix.md)；依赖关系见
+[领域知识图谱](./topics/_meta/p0-knowledge-graph.md)。
 
 ## 能力自检（开始前）
 
@@ -36,7 +35,7 @@
 - [ ] 能区分 PostgreSQL tuple/VACUUM/SSI 与 MySQL undo/MVCC 话术
 - [ ] 能说明 Terraform state/plan 边界与 Helm/GitOps 数据回滚边界
 
-### 架构师岗额外自检
+### 架构协作额外自检
 
 - [ ] 能画 **限界上下文图** 并说明集成关系（[S-SOL-01](./topics/11-solution-architecture/S-SOL-01-bounded-context-ddd.md)）
 - [ ] 能讲 **遗留迁移/绞杀者** 阶段与回滚（[S-SOL-02](./topics/11-solution-architecture/S-SOL-02-strangler-fig-migration.md)）
@@ -65,7 +64,7 @@
 | W1 | Go 语言 + 生产工程 | 01 核心 10 篇 + [16 全部](./topics/16-go-production-engineering/index.md) | `go test -race`、错误/接口重构 | 画 GMP；讲 error 与 panic 边界 |
 | W2 | 内存 + 手写 + Linux/SQL | 02 高频 + S-CODE-06/07 + S-NET-06/07 + S-DB-06/07 + S-PG-01~03 | 跑 5 个新示例、读 heap profile | 手写有界批处理；排查一次 TCP/SQL |
 | W3 | [系统设计](./topics/03-system-design/index.md) | 21 篇 | 每篇 15min 结构化输出 | 秒杀/幂等/缓存/实时数据各 1 篇讲解 |
-| W4 | 目标岗位主线 + 综合演练 | 按角色矩阵只选一个增量 P0 | 证据标签为 test/harness 的篇才运行；2 场综合演练 | 深挖问答不停顿 3 层 |
+| W4 | 目标领域主线 + 综合演练 | 按领域矩阵只选一个增量核心 | 证据标签为 test/harness 的篇才运行；2 场综合演练 | 深挖问答不停顿 3 层 |
 
 ### 每日建议（工作日 1.5h）
 
@@ -84,7 +83,7 @@
 | 3-4 | 03 系统设计 21 篇 + 容量估算模板 |
 | 5 | [网络](./topics/06-network-governance/index.md) + [MySQL](./topics/middleware/mysql/index.md) + [PostgreSQL](./topics/middleware/postgresql/index.md) |
 | 6 | Redis/Kafka/RocketMQ/ES + Terraform/Helm/GitOps |
-| 7 | 目标岗位专题：普通后端选 11/15；Web3 选 17/18 与四条 SDK 实战；DEX TL 选 14（31/30/29）；Agent 选 10 |
+| 7 | 目标领域专题：通用后端选 11/15；Web3 选 17/18 与四条 SDK 实战；DEX 协议选 14（31/30/29）；Agent 选 10 |
 | 8 | Web3 节点/RPC + 安全工程 + 协议/共识 + Rollup/跨链，或 AI/领导力 + 2 场综合演练 |
 
 ---
@@ -142,10 +141,10 @@
 进阶：06 网络 → middleware（MySQL↔PostgreSQL→Redis→MQ→ES）→ 03 系统设计 → 09 云原生
 高阶：11 解决方案架构 → 15 微服务（交易所）
 专题：12 EVM → 17 多链钱包 → 18 支付 → 19 节点/RPC → 20 协议/共识 → 21 安全工程 → 13 Solidity → 14 DEX/CEX
-综合：07 工程领导力 · 10 AI 工程（岗位场景相关时提前）
+综合：07 工程领导力 · 10 AI 工程（场景相关时提前）
 ```
 
-**岗位速查**
+**领域速查**
 
 - **大厂 Go 后端**：01/02/16/08 + 06 + MySQL/PostgreSQL + S-CLOUD-09/10
 - **架构师岗**：03/11 + S-CLOUD-09/10 + S-LEAD-04/05 + 45min 白板
@@ -154,7 +153,7 @@
 - **Web3 架构师**：17 → 18 → 19 → 20 → 21 + 03/11 + 12/13
 - **CEX 交易系统**：14（重点 EXCH-17~22）+ 15 + 17 充提 + 18 账本/对账
 - **DEX Tech Lead**：14（**EXCH-31 → 30 → 29** → 06/27 → 07/08）+ 13（SOLID-02/04/06/07）+ 12（BC-05/07/08）+ LEAD-01/03/04
-- **AI / Crypto Agent**：10（AI-09~14）+ 16 + 21；按岗位场景再补 12/14
+- **AI / Crypto Agent**：10（AI-09~14）+ 16 + 21；按工程场景再补 12/14
 
 ---
 
@@ -173,7 +172,7 @@
 
 ## 交易所工程师学习计划（4 周）
 
-分两条轨，按岗位场景二选一（可并行 Shared Go）。
+分两条轨，按工程场景二选一（可并行 Shared Go）。
 
 ### A. CEX 交易系统
 

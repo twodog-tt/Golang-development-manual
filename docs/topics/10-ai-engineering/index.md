@@ -1,6 +1,6 @@
 # 10 AI 工程与编程
 
-14 篇 | Agent Platform / Crypto Agent 生态岗位 P0 | [返回专题索引](../../topic-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+14 篇 | Agent 控制面核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 > 面向 **AI Agent Platform / Crypto Agent Ecosystem 与 Go 后端** 的工程专题：既覆盖模型接入，
 > 也覆盖可恢复工作流、HITL、Memory、MCP/A2A、Agent 身份与商业协议、开放平台和 Web3
@@ -33,9 +33,9 @@
 
 ## 适用场景
 
-- JD 含 **AI Agent Platform / Crypto Agent / Agent Economy / MCP / A2A / Agent SDK**
-- 二面问「Agent 如何暂停恢复」「审批后如何防重复执行」「Memory 如何隔离与学习」
-- 架构面问「Agent 身份、支付、Marketplace/Launchpad、钱包执行如何分层」
+- 场景涉及 **Agent 工作流 / MCP / A2A / Agent SDK / Agent Commerce**
+- 需要讲清「如何暂停恢复」「审批后如何防重复执行」「Memory 如何隔离与学习」
+- 需要分层「Agent 身份、支付、Marketplace/Launchpad、钱包执行」
 - 与 [S-ARCH-16](../03-system-design/S-ARCH-16-observability.md)、[S-CLOUD-03](../09-cloud-native/S-CLOUD-03-opentelemetry.md)、[S-ES 系列](../middleware/elasticsearch/index.md) 交叉复习
 
 ## 推荐阅读顺序

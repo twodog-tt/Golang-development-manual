@@ -1,10 +1,10 @@
-# 知识库质量审查与岗位差距
+# 知识库质量审查与领域覆盖差距
 
 > 全库 **233 篇**（以 [topics.yaml](topics.yaml) 为准）
 >
 > 本轮审查与补强日期：**2026-07-21**
 >
-> 目标岗位：资深 Golang 开发、后端/解决方案架构师，重点行业为 AI/Crypto Agent、
+> 审查范围：资深 Golang、后端/解决方案架构，重点领域为 AI/Crypto Agent、
 > Web3、交易所、钱包、链基础设施与支付
 >
 > 2026-07-18 已启动角色 P0 深度纠错，首批 25 篇的逐项结果见
@@ -39,7 +39,7 @@
   Solana/Aptos/Sui 节点仍受本机设备/二进制条件约束，不能冒充已验收。
 - 第七阶段新增 **8 篇正文**：PostgreSQL 3 篇、Terraform/IaC 与 Helm/GitOps 2 篇、
   链数据 ClickHouse/lakehouse 1 篇、Staff 技术战略与跨团队迁移 2 篇。全库优先级改为
-  [七类岗位轨道](role-priority-matrix.md)，旧全局 tier 只保留兼容。
+  [七类领域轨道](role-priority-matrix.md)，旧全局 tier 只保留兼容。
 - 第八阶段按候选人简历新增 **4 篇正文**：Agent 工作流/HITL 与可靠发布、Persona/Memory
   与反馈治理、TRON/TRC20 钱包生命周期、CDC/Flink/ES 实时风控数据平台；新增
   `AI Agent Platform / Infrastructure` 首选岗位轨道，并将方向定向 P0 收敛为

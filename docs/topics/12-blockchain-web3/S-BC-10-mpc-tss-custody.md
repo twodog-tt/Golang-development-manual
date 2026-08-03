@@ -15,8 +15,8 @@ sources:
   - https://csrc.nist.gov/projects/threshold-cryptography
 ---
 
-!!! tip "⭐ 重点准备"
-    Web3 交易所 / 钱包方向高频题，见 [重点专题](../../web3-exchange-wallet-focus.md)。
+!!! tip "相关主题"
+    场景地图见 [Web3 交易所与钱包](../../web3-exchange-wallet-focus.md)。
 
 # MPC/TSS 与 CEX 托管签名架构
 
@@ -30,7 +30,7 @@ sources:
 ## 3 分钟版（精讲深度）
 
 1. **是什么**：传统单私钥一旦泄漏会形成单点风险；TSS 让至少 m 个参与方以 key share 协作产生链可验证的普通签名。新密钥通常用 DKG 生成；导入既有私钥是否曾出现完整密钥，取决于具体导入/分片方案，不能一概宣称“从未重构”。
-2. **为什么**：合规与资金安全；CEX 钱包岗必问提现链路。
+2. **为什么**：合规与资金安全；热钱包提现链路必须把审批、intent 与门限签名拆开。
 3. **怎么做**：提现审核通过 → Signer 服务组装 tx → MPC 集群签名 → 广播 → 状态机追踪。
 
 ## 10 分钟版（架构）

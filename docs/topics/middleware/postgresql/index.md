@@ -1,6 +1,6 @@
 # PostgreSQL
 
-3 篇 | Go 后端、支付与 Staff/架构岗位 P0～P1 | [返回中间件索引](../index.md)
+3 篇 | 资金库与高可用核心阅读 | [返回中间件索引](../index.md)
 
 > 重点不是把 MySQL 术语换成 PostgreSQL，而是讲清 **tuple version、VACUUM、SSI、WAL 提交证据、复制滞后和 pgx 连接生命周期**。
 

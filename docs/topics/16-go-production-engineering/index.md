@@ -1,6 +1,6 @@
 # 16 Go 生产工程
 
-6 篇 | 各岗位共享 P0 门槛 | [返回专题索引](../../topic-catalog.md) · [角色优先级](../_meta/role-priority-matrix.md)
+6 篇 | 共享工程门槛 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 > 这一模块不重复 GMP/GC，而是补齐资深 Go 岗更容易暴露短板的 **错误契约、包设计、测试、构建与供应链**。
 
