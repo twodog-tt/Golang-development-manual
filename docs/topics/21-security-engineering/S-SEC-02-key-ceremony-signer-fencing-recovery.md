@@ -190,3 +190,9 @@ etcd 分区但仍能访问 HSM，新副本还可能在 lease 到期后开始另�
 - [SoftHSM2](https://github.com/softhsm/SoftHSMv2)
 - [Taurus multi-party-sig](https://github.com/taurushq-io/multi-party-sig)
 - [S-NODE-03 Validator 与 Slashing](../19-node-rpc-staking/S-NODE-03-validator-staking-slashing-keys.md)
+
+## 相关链接
+
+- [钱包概念地图](../../maps/wallet-custody.md)
+- [MPC/TSS 托管签名](../12-blockchain-web3/S-BC-10-mpc-tss-custody.md)
+- [托管 ≠ MPC](../../maps/confusion-cards.md#custody-vs-mpc)

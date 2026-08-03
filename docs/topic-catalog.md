@@ -1,7 +1,8 @@
 # 专题索引
 
 > 全库 **233 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
-> **⭐ 领域导航**：[领域能力优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
+> **⭐ 领域导航**：[概念地图](maps/index.md) ·
+> [领域能力优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
 > [Web3 场景地图](web3-exchange-wallet-focus.md)
 
 ## 基础 · Go 语言与生产工程（48 篇）

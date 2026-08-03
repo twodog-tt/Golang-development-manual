@@ -200,3 +200,9 @@ func PostTrade(ctx context.Context, tx *gorm.DB, t TradeEvent) error {
 - [S-EXCH-13 CEX 端到端架构](./S-EXCH-13-cex-end-to-end-architecture.md)
 - [AWS Disaster Recovery](https://aws.amazon.com/disaster-recovery/)
 - [Google SRE - SLO](https://sre.google/sre-book/service-level-objectives/)
+
+## 相关链接
+
+- [交易所资金概念地图](../../maps/exchange-funds.md)
+- [账本](./S-EXCH-03-account-ledger.md)
+- [充提钱包](./S-EXCH-02-deposit-withdraw-wallet.md)

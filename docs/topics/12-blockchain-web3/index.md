@@ -1,8 +1,9 @@
 # 12 区块链与 Web3
 
-13 篇 | P1 扩展（Web3 / 链上后端 JD） | [返回专题索引](../../topic-catalog.md) · [重点专题](../../web3-exchange-wallet-focus.md)
+13 篇 | Web3 链上工程 | [返回专题索引](../../topic-catalog.md) · [Web3 场景地图](../../web3-exchange-wallet-focus.md)
 
-> 面向 **Go 后端** 做链上数据索引、钱包、DApp 中台、交易所/ NFT 业务；偏 **工程落地**，非密码学研究员方向。
+> 面向 **Go 后端** 做链上数据索引、钱包、DApp 中台、交易所业务；偏 **工程落地**，非密码学研究员方向。
+> 概念地图：[Indexer](../../maps/indexer-node-data.md) · [钱包/MPC](../../maps/wallet-custody.md)。
 
 | ID | 标题 | 频率 |
 |----|------|------|

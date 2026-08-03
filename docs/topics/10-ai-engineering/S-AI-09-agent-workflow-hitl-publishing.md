@@ -196,3 +196,9 @@ workflow 的最终状态写权限。
 - [OAuth 2.0 Security Best Current Practice](https://www.rfc-editor.org/rfc/rfc9700)
 - 关联：[S-AI-03 Agent 与 Function Calling](./S-AI-03-agent-tool-calling.md)、
   [S-ARCH-04 幂等设计](../03-system-design/S-ARCH-04-idempotency.md)
+
+## 相关链接
+
+- [Agent 控制面概念地图](../../maps/agent-control-plane.md)
+- [钱包执行边界](../../maps/wallet-custody.md)
+- [Persona/Memory](./S-AI-10-persona-memory-feedback-governance.md)

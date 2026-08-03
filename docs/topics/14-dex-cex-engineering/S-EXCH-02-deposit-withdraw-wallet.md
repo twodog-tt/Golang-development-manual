@@ -15,7 +15,8 @@ sources:
 # 充值、提现与链上钱包体系
 
 !!! tip "相关主题"
-    场景地图见 [Web3 交易所与钱包](../../web3-exchange-wallet-focus.md)。
+    概念地图：[钱包与托管](../../maps/wallet-custody.md) · [交易所资金](../../maps/exchange-funds.md)；
+    易混点：[托管 ≠ MPC](../../maps/confusion-cards.md#custody-vs-mpc)。
 
 ## 30 秒版（开场）
 

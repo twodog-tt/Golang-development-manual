@@ -14,6 +14,9 @@ sources:
 
 # 消息队列：至少一次、恰好一次、顺序性
 
+!!! tip "易混点"
+    [MQ at-least-once ≠ 业务 exactly-once](../../maps/confusion-cards.md#mq-vs-idempotency)。
+
 <a id="oral-card"></a>
 
 ## 要点卡

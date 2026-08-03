@@ -2,8 +2,8 @@
 
 31 篇 | 交易所与协议工程 | [返回专题索引](../../topic-catalog.md) · [Web3 场景地图](../../web3-exchange-wallet-focus.md)
 
-> 面向 **CEX 撮合与资金系统（Go）** + **DEX/预测市场链上协议（Solidity）** 工程师，
-> 及 **交易所/预测市场技术负责人** 全栈能力叙事。
+> 面向 **CEX 撮合与资金系统（Go）** + **DEX/预测市场链上协议（Solidity）** 的交易所工程专题。
+> 资金与对账先读：[交易所资金概念地图](../../maps/exchange-funds.md)；钱包出金见 [钱包地图](../../maps/wallet-custody.md)。
 
 ## 完整架构白板（架构师必练）
 

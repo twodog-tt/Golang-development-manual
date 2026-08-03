@@ -131,3 +131,9 @@ func (s *LedgerService) Post(ctx context.Context, bizID string, entries []Entry)
 
 - 本手册 [S-ARCH-04 幂等](../03-system-design/S-ARCH-04-idempotency.md)
 - [Martin Fowler：Accounting Patterns](https://martinfowler.com/eaaDev/AccountingNarrative.html)
+
+## 相关链接
+
+- [交易所资金概念地图](../../maps/exchange-funds.md)
+- [充提钱包](./S-EXCH-02-deposit-withdraw-wallet.md)
+- [对账与 HA](./S-EXCH-15-settlement-ha-disaster-recovery.md)

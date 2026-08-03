@@ -3,15 +3,23 @@ nav:
   - 学习路线: learning-path-senior.md
   - 专题自测: topic-quiz.md
 
+  - 概念地图:
+    - 总览: maps/index.md
+    - 钱包与托管签名: maps/wallet-custody.md
+    - Indexer / 节点数据: maps/indexer-node-data.md
+    - 交易所资金与对账: maps/exchange-funds.md
+    - Agent 控制面: maps/agent-control-plane.md
+    - 易混概念专卡: maps/confusion-cards.md
+
   - 方向与优先级:
-    - 角色优先级与证据: topics/_meta/role-priority-matrix
-    - P0 知识图谱: topics/_meta/p0-knowledge-graph
-    - P0 技术纠错审计: topics/_meta/technical-corrections-audit
+    - 领域能力与证据: topics/_meta/role-priority-matrix
+    - 领域知识图谱: topics/_meta/p0-knowledge-graph
+    - 技术纠错审计: topics/_meta/technical-corrections-audit
 
   - topics
 
   - 参考资料:
-    - Web3 交易所重点专题: web3-exchange-wallet-focus.md
+    - Web3 场景地图: web3-exchange-wallet-focus.md
     - 专题总索引: topic-catalog.md
     - 来源与引用: sources.md
     - 代码与专题映射: topics/_meta/mapping

@@ -98,3 +98,9 @@ Replacement acceptance 是节点 mempool policy，不是 EIP-1559 本身保证�
 - [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559)
 - [Ethereum Proof of Stake](https://ethereum.org/developers/docs/consensus-mechanisms/pos/)
 
+
+## 相关链接
+
+- [钱包概念地图](../../maps/wallet-custody.md)
+- [归集与 reservation](../17-multichain-wallet/S-WALLET-06-deposit-sweep-reservation-recovery.md)
+- [Indexer reorg](../12-blockchain-web3/S-BC-05-indexer-reorg.md)

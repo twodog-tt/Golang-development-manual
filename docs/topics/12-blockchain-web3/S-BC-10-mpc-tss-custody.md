@@ -16,7 +16,8 @@ sources:
 ---
 
 !!! tip "相关主题"
-    场景地图见 [Web3 交易所与钱包](../../web3-exchange-wallet-focus.md)。
+    先分清 [托管 ≠ MPC](../../maps/confusion-cards.md#custody-vs-mpc)；
+    领域地图见 [钱包与托管签名](../../maps/wallet-custody.md)。
 
 # MPC/TSS 与 CEX 托管签名架构
 

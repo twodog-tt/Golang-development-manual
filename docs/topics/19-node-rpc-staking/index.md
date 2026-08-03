@@ -3,6 +3,7 @@
 10 篇 | 本专题核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 > 面向节点平台、RPC 网关、Indexer、Relayer、Validator 与链上数据架构，重点是 **状态机、数据正确性和运维边界**。
+> 先读概念地图：[Indexer / 节点数据](../../maps/indexer-node-data.md) · [投影≠事实](../../maps/confusion-cards.md#indexer-vs-canonical)。
 
 | ID | 标题 | 频率 |
 |----|------|------|

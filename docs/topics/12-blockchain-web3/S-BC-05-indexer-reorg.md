@@ -18,7 +18,8 @@ sources:
 # 链上索引器：扫块、重组与幂等
 
 !!! tip "相关主题"
-    场景地图见 [Web3 交易所与钱包](../../web3-exchange-wallet-focus.md)。
+    先分清 [投影 ≠ 链上事实](../../maps/confusion-cards.md#indexer-vs-canonical)；
+    领域地图见 [Indexer / 节点数据](../../maps/indexer-node-data.md)。
 
 ## 30 秒版（开场）
 
@@ -154,3 +155,10 @@ Worker 用 `context` + graceful shutdown；见 [S-CODE-03 优雅退出](../08-co
 - [PoS 与 finality](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/)
 - [Ethereum PoS 重组与防御](https://ethereum.org/developers/docs/consensus-mechanisms/pos/attack-and-defense/#reorgs)
 - [Ethereum JSON-RPC block tags](https://ethereum.org/en/developers/docs/apis/json-rpc/)
+
+## 相关链接
+
+- [Indexer 概念地图](../../maps/indexer-node-data.md)
+- [投影 ≠ 事实](../../maps/confusion-cards.md#indexer-vs-canonical)
+- [充提入账](../14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md)
+- [MQ 语义](../03-system-design/S-ARCH-10-mq-semantics.md)

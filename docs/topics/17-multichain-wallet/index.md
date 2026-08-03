@@ -3,6 +3,7 @@
 12 篇 | 本专题核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 > 目标不是背更多链名，而是建立一套不会错误泛化的 **Chain Adapter、交易并发、归集、签名和恢复模型**。
+> 先读概念地图：[多链钱包与托管签名](../../maps/wallet-custody.md) · [托管≠MPC](../../maps/confusion-cards.md#custody-vs-mpc)。
 
 | ID | 标题 | 频率 |
 |----|------|------|

@@ -2,9 +2,9 @@
 
 14 篇 | Agent 控制面核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
-> 面向 **AI Agent Platform / Crypto Agent Ecosystem 与 Go 后端** 的工程专题：既覆盖模型接入，
-> 也覆盖可恢复工作流、HITL、Memory、MCP/A2A、Agent 身份与商业协议、开放平台和 Web3
-> 安全执行面，非算法研究员方向。
+> 面向 **AI / Crypto Agent 控制面与 Go 后端** 的工程专题：模型接入、可恢复工作流、HITL、
+> Memory、MCP/A2A、身份/Commerce、开放平台与 Web3 执行边界（非算法研究向）。
+> 先读概念地图：[Agent 控制面](../../maps/agent-control-plane.md)。
 
 | ID | 标题 | 频率 |
 |----|------|------|
