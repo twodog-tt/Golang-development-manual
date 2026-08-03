@@ -51,9 +51,10 @@ flowchart TB
 | 失败 | 正确处理 | 反模式 |
 |------|----------|--------|
 | 入账后 reorg | 冲正分录 + 回退投影 + 按新 canonical 重放 | 改历史流水 |
-| 广播超时 | 保留 raw tx/intent，核对后再同 intent 替换 | 盲目换 nonce 再发无关新单 |
+| 广播超时 | 保留 raw tx/intent，核对后再同 intent 替换；见 [UNKNOWN 决策表](../topics/19-node-rpc-staking/S-NODE-05-relayer-transaction-manager.md#unknown-replacement) | 盲目换 nonce 再发无关新单 |
 | 有 token 无 gas | 归集队列 top-up + reservation | 当普通提现硬发 |
 | 签名方故障 | 会话重开同 intent；已广播走链上核对 | 当作没发生再造一笔 |
+| 归集挤兑提现 | 提现水位 + 优先级 + 熔断；见 [争用](../topics/17-multichain-wallet/S-WALLET-06-deposit-sweep-reservation-recovery.md#sweep-vs-withdraw) | 共享一个「有钱就扫」 |
 
 ## 5. 易混点（本域）
 
@@ -69,7 +70,7 @@ flowchart TB
 | 3 | [MPC/TSS 与 CEX 托管签名架构](../topics/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) | explanation |
 | 4 | [MPC DKG、Reshare 与故障恢复](../topics/17-multichain-wallet/S-WALLET-07-mpc-dkg-reshare-recovery.md) | explanation |
 | 5 | [Key Ceremony、Signer Fencing 与恢复](../topics/21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) | integration_harness（示例，≠真实 HSM 验收） |
-| 6 | [Relayer / Tx Manager](../topics/19-node-rpc-staking/S-NODE-05-relayer-transaction-manager.md) | explanation |
+| 6 | [Relayer / Tx Manager](../topics/19-node-rpc-staking/S-NODE-05-relayer-transaction-manager.md#unknown-replacement) | explanation |
 | 7 | [多链 Chain Adapter 能力矩阵](../topics/17-multichain-wallet/S-WALLET-01-chain-adapter-capability-matrix.md) | explanation |
 | 8 | [Gas/Fee 多链差异](../topics/12-blockchain-web3/S-BC-13-gas-fee-multichain.md) · [TRON/TRC20](../topics/17-multichain-wallet/S-WALLET-12-tron-trc20-resource-transaction.md) | explanation |
 

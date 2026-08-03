@@ -72,9 +72,13 @@ sources: []
 
 ## 发布前自检
 
+完整清单见 [article-structure-checklist.md](./article-structure-checklist.md)。
+
 - [ ] 30 秒版先说范围、不变量和失败边界，没有绝对化结论
-- [ ] 深挖问答至少覆盖一次“为什么不选另一个方案”
+- [ ] 有状态机或对照表；深挖至少一次“为什么不选另一个方案”
 - [ ] `sources` 优先官方规范、源代码或产品文档，并标明版本敏感点
 - [ ] SQL/配置/代码片段与目标版本一致
 - [ ] 有 `code_refs` 只代表关联 artifact；测试/harness/外部验收按中央证据标签声明
+- [ ] tip/note 无求职禁止词（岗位 P0 / 必问 / 简历 / 面试 / JD 含）
 - [ ] Staff/项目案例中的数字来自本人真实证据，模板数字使用占位符
+- [ ] `.venv/bin/python scripts/verify_knowledge_metadata.py` 通过

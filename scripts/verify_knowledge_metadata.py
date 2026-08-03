@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""校验专题元数据、角色化优先级、证据标签与正文的最小一致性。"""
+"""校验专题元数据、领域优先级、证据标签、正文与 tip 禁止词的一致性。"""
 
 from __future__ import annotations
 
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable
@@ -14,6 +15,20 @@ TOPICS_META_PATH = ROOT / "docs/topics/_meta/topics.yaml"
 ROLE_EVIDENCE_PATH = ROOT / "docs/topics/_meta/role-evidence.yaml"
 TOPICS_DIR = ROOT / "docs/topics"
 TIER_KEYS = {"p0", "p1", "p2"}
+
+# tip/note/warning/abstract 导航文案禁止求职口吻（正文论述区不套用）
+ADMONITION_BAN_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
+    ("岗位 P0", re.compile(r"岗位\s*P0")),
+    ("目标岗位", re.compile(r"目标岗位")),
+    ("JD 含", re.compile(r"JD\s*含")),
+    ("必问", re.compile(r"必问")),
+    ("简历", re.compile(r"简历")),
+    ("面试", re.compile(r"面试")),
+)
+ADMONITION_RE = re.compile(
+    r"^!!!\s+(tip|note|warning|abstract)\b[^\n]*\n((?:[ \t]+.*\n|^\n)*)",
+    re.MULTILINE,
+)
 
 
 def iter_questions(
@@ -64,6 +79,17 @@ def check_ids(
     unknown = sorted(set(values) - known_ids)
     if unknown:
         errors.append(f"{name} 引用了未知 ID: {', '.join(unknown)}")
+
+
+def check_admonition_ban_words(qid: str, text: str, errors: list[str]) -> None:
+    for match in ADMONITION_RE.finditer(text):
+        block = match.group(0)
+        for label, pattern in ADMONITION_BAN_PATTERNS:
+            if pattern.search(block):
+                errors.append(
+                    f"{qid} 的 {match.group(1)} 块含禁止词「{label}」"
+                    f"（见 docs/topics/_meta/article-structure-checklist.md）"
+                )
 
 
 def main() -> None:
@@ -119,6 +145,7 @@ def main() -> None:
             errors.append(f"{qid} 缺少 30 秒版")
         if "## 深挖问答" not in text and "## 追问链" not in text:
             errors.append(f"{qid} 缺少深挖问答")
+        check_admonition_ban_words(qid, text, errors)
 
     shared_p0 = list(metadata["shared"].get("p0", []))
     shared_p1 = list(metadata["shared"].get("p1", []))

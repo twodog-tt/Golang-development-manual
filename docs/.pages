@@ -26,4 +26,5 @@ nav:
 
   - 维护工具:
     - 专题撰写模板: topics/_meta/template
+    - 正文结构检查清单: topics/_meta/article-structure-checklist
     - 内容质量审查: topics/_meta/quality-review

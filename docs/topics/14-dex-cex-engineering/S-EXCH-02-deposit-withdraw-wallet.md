@@ -81,6 +81,8 @@ stateDiagram-v2
 - **小额快速充值**：可先展示 provisional 状态，但入账/可提现阈值应按链的概率或
   经济最终性、金额、资产风险和 reorg 历史分层；不存在通用的“主网 12+”
 - **提现拥堵**：动态提 Gas fee；队列 + 用户可选快/慢
+- **BroadcastUnknown**：签名广播后 RPC 超时 → 保留 raw tx 与 intent，多节点核对；
+  决策表见 [S-NODE-05](../19-node-rpc-staking/S-NODE-05-relayer-transaction-manager.md#unknown-replacement)
 - **地址黑名单**：KYT 拦截（[S-EXCH-05](./S-EXCH-05-risk-reconciliation.md)）
 
 ## 深挖问答
@@ -90,6 +92,8 @@ stateDiagram-v2
    独立审批与 signer、异常熔断、冷资产隔离；保险不能替代预防控制。
 3. **内部转账 vs 链上？** → 站内划转只改账务，无链上 tx。
 4. **Go 签名在哪？** → 独立 Signer 服务（[S-BC-03](../12-blockchain-web3/S-BC-03-tx-signing-key-mgmt.md)）。
+5. **BroadcastUnknown 能否换 nonce 重提？** → 不能直接换；先证明旧 attempt 未生效，
+   再做同 intent 的 fee bump / replacement，否则可能双花或双扣。
 
 ## 反模式与事故
 
@@ -98,7 +102,10 @@ stateDiagram-v2
   应使用账务 reservation + 持久化状态机 + payload 幂等 + nonce/UTXO reservation，
   并显式处理 RPC 超时后的 unknown 状态
 - **链上地址无校验** → 错链充值丢失
+- **超时即退款** → 旧交易稍后上链导致资金损失
 
 ## 延伸阅读
 
 - [S-BC-05 索引器与 reorg](../12-blockchain-web3/S-BC-05-indexer-reorg.md)
+- [S-NODE-05 UNKNOWN / replacement](../19-node-rpc-staking/S-NODE-05-relayer-transaction-manager.md#unknown-replacement)
+- [S-WALLET-06 归集与 reservation](../17-multichain-wallet/S-WALLET-06-deposit-sweep-reservation-recovery.md)

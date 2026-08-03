@@ -169,4 +169,5 @@
 .venv/bin/python scripts/verify_knowledge_metadata.py
 ```
 
-校验会检查 233 个 ID、正文、sources、30 秒版、深挖问答、领域引用和证据标签互斥关系。
+校验会检查 233 个 ID、正文、sources、30 秒版、深挖问答、领域引用、证据标签互斥关系，
+以及 tip/note 中的求职禁止词（见 [正文结构检查清单](./article-structure-checklist.md)）。

@@ -13,8 +13,8 @@ sources:
   - https://martinfowler.com/eaaDev/AccountingNarrative.html
 ---
 
-!!! tip "⭐ 重点专题"
-    Web3 交易所 / 钱包方向可对照 [重点专题](../../web3-exchange-wallet-focus.md)；
+!!! tip "相关主题"
+    资金地图见 [交易所资金与对账](../../maps/exchange-funds.md)；
     Launchpad 链上分账与提现见 [S-EXCH-12](./S-EXCH-12-token-launch-rebate.md)。
 
 # CEX/DEX 多级代理：极差费率、计佣账本与后台隔离
@@ -119,6 +119,26 @@ func SplitTierSpread(notional int64, rates []int64 /* 1e8 = 100% */) []int64 {
 4. 同一事务写入 append-only 佣金分录；依赖唯一键做幂等
 5. 退费、撤单部分成交、DEX reorg：发 **冲正分录**，禁止原地改历史金额
 
+<a id="rebate-reversal"></a>
+
+**冲正工作流（退费 / 撤单 / reorg）**
+
+```text
+原佣金分录 (accrued|settled) 
+  → 生成 reverse_commission_id = f(original_id, reason, version)
+  → 追加反向分录（金额相反，关联 original commission_id）
+  → 若尚未提现：扣减可提现/应付
+  → 若已提现：进入追回/挂账/限制提现，不删历史
+  → DEX orphan：先冲正，再按新 canonical 重计（成对可审计）
+```
+
+| 场景 | 正确动作 | 禁止 |
+|------|----------|------|
+| 用户退费 | 按原各级 `commission_id` 逐腿冲正 | `UPDATE balance` 抹平 |
+| 部分撤单 | 只冲正受影响腿 / 比例 | 整笔物理删除后重插且无 lineage |
+| DEX reorg | orphan 标记 → 冲正 → canonical 重放 | 只改余额字段 |
+| 重复计佣 | 唯一键冲突即忽略；已写入则冲正+告警 | 再插一笔「补发」无关联 |
+
 CEX 输入通常来自 [S-EXCH-03](./S-EXCH-03-account-ledger.md) 的手续费事实或 TradeEvent；
 DEX 输入必须先过 [S-BC-05](../12-blockchain-web3/S-BC-05-indexer-reorg.md) 的确认/reorg，
 再进入计佣，否则会把 orphan 成交计成应付佣金。
@@ -181,9 +201,10 @@ DEX 输入必须先过 [S-BC-05](../12-blockchain-web3/S-BC-05-indexer-reorg.md)
 
 1. **极差和固定抽成差在哪？** → 极差发的是费率差价；下级费率上浮会压缩上级空间，而不是永远抽固定成。
 2. **为什么计佣要异步？** → 成交热路径不应同步拆多级账；用事实事件 + 幂等消费者更稳。
-3. **退费怎么处理？** → 按原 `commission_id` 关联发冲正分录，结算前扣减，已提现则进追回/挂账流程。
+3. **退费怎么处理？** → 按原 `commission_id` 关联发冲正分录，结算前扣减，已提现则进追回/挂账流程。详见 [冲正工作流](#rebate-reversal)。
 4. **DEX reorg？** → 先标记 orphan，冲正佣金，再按新 canonical 重放；不能只删余额。
 5. **如何证明没漏隔级数据？** → Admin API 强制 subtree 谓词 + 集成测试覆盖越权查询。
+6. **已提现后才发现 reorg？** → 冲正仍要入账形成负向负债；提现侧走追回/限制，禁止改写历史出金记录。
 
 ## 反模式
 
@@ -203,3 +224,4 @@ DEX 输入必须先过 [S-BC-05](../12-blockchain-web3/S-BC-05-indexer-reorg.md)
 - [S-BC-05 Indexer 与 reorg](../12-blockchain-web3/S-BC-05-indexer-reorg.md)
 - [S-ARCH-04 幂等](../03-system-design/S-ARCH-04-idempotency.md)
 - [S-RAB-01 / Kafka 交易事件总线](../middleware/rabbitmq/S-RAB-01-exchange-async-pipeline.md)
+- [交易所资金概念地图](../../maps/exchange-funds.md)
