@@ -3,13 +3,7 @@ nav:
   - 学习路线: learning-path-senior.md
   - 专题自测: topic-quiz.md
 
-  - 概念地图:
-    - 总览: maps/index.md
-    - 钱包与托管签名: maps/wallet-custody.md
-    - Indexer / 节点数据: maps/indexer-node-data.md
-    - 交易所资金与对账: maps/exchange-funds.md
-    - Agent 控制面: maps/agent-control-plane.md
-    - 易混概念专卡: maps/confusion-cards.md
+  - maps
 
   - 方向与优先级:
     - 领域能力与证据: topics/_meta/role-priority-matrix
