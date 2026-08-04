@@ -24,54 +24,60 @@ sources:
 
 !!! abstract "30 秒回答"
 
-    Go 的 error 是 API 契约，不只是日志字符串。调用方需要分支处理的错误用稳定 sentinel、
-    自定义类型或领域码表达，包装时用 `%w` 保留 cause，再通过 `errors.Is/As` 判断。`panic`
-    只适合程序员错误或无法维持的不变量；`recover` 只能在同一 goroutine 的 defer 中生效，
-    应放在 request/worker 隔离边界，记录栈并让当前工作单元失败，不能恢复后返回成功。
+    Go 里的 `error` 不是随便写的一句话日志，而是告诉调用方「接下来该怎么做」的约定。
+    对方需要按类型处理的错误，用稳定的哨兵错误、自定义类型或业务错误码；往上抛时用
+    `%w` 包住原因，让 `errors.Is` / `errors.As` 还能认出来。`panic` 只留给「程序写坏了」
+    或「没法继续保证正确」的情况；`recover` 只能救**当前这个 goroutine**，而且要放在
+    请求/worker 边界：记日志、记栈，然后让这笔活失败收场，绝不能 recover 完假装成功。
 
 **3 分钟展开**
 
-1. 先按调用方动作分类：业务拒绝、参数错误、可重试依赖故障、取消/超时和内部 bug。
-2. repository/service 保留 cause 并增加 operation 上下文，transport adapter 再映射 HTTP/gRPC
-   状态、MQ retry 或 DLQ。
-3. 只有愿意把底层错误变成公开兼容契约时才 `%w` 暴露；否则转换成自己的领域错误。
-4. 日志由真正处理或丢弃错误的边界记录一次，使用低基数分类码做指标，敏感数据不进入 error。
+1. **先想调用方会怎么做**：余额不足要拒绝、参数错要改请求、数据库抖了要重试、上下文取消要停、
+   内部 bug 要告警——不同类型不能混成一句 `"failed"`。
+2. **层层往上的分工**：仓库层保留原始原因，并写上「在干什么」（比如 debit）；服务层归类成业务含义；
+   HTTP/gRPC/MQ 入口再翻译成状态码、重试或进死信队列。
+3. **什么时候用 `%w`**：只有你愿意把「底层那个错误」也当成对外承诺时才 `%w`；否则转成自己的业务错误，
+   别把数据库/驱动细节泄漏成公共 API。
+4. **日志打一次就够**：谁最终处理或丢掉这个错误，谁打日志；中间层别层层 `log + return`。
+   指标用少量固定分类码，别把整段错误原文塞进标签；密码、私钥绝不能进 error 字符串。
 
 | 记忆槽 | 内容 |
 |--------|------|
-| 三个不变量 | 错误分类决定调用方动作；包装不能破坏 `Is/As`；panic 后当前工作单元不得假装成功 |
-| 手画图 | `repo cause → service classification → HTTP/gRPC/MQ mapping`；旁边画 `panic → boundary → fail closed` |
-| 项目落点 | 链 RPC/HSM/发布 API：区分临时不可用、策略拒绝和内部不一致，分别决定重试、拒绝与告警 |
-| 一个取舍 | 暴露底层 sentinel 方便调用方判断，却会把实现细节变成长期兼容承诺 |
+| 三个不变量 | 错误类型决定调用方动作；包装后还能 `Is/As`；panic 之后这笔活不能假装成功 |
+| 手画图 | `仓库原因 → 业务分类 → HTTP/gRPC/MQ 映射`；旁路画 `panic → 边界 recover → 失败收场` |
+| 项目落点 | 链 RPC / HSM / 发布接口：临时不可用可重试，策略拒绝要明确拒绝，内部不一致要告警并停手 |
+| 一个取舍 | 暴露底层哨兵错误方便判断，但也等于长期兼容承诺，换实现会痛 |
 
 **错误表达**
 
-- ❌ “所有 error 都 `%w` 并每层打印；recover 后返回 nil，服务就不会崩。”
-- ✅ “只暴露稳定契约并在处理边界记录一次；recover 要结束当前工作单元并 fail closed。”
+- ❌ 「所有 error 都 `%w`，每层都打日志；recover 一下返回 nil，服务就不会挂。」
+- ✅ 「只暴露稳定约定，在处理边界打一次日志；recover 后结束当前请求/任务，按失败处理。」
 
-**自测追问**：什么时候不用 `%w`？为什么一个 goroutine 不能 recover 另一个 goroutine 的 panic？
+**自测追问**：什么时候不要用 `%w`？为什么一个 goroutine 救不了另一个 goroutine 的 panic？
 
 ## 10 分钟版（原理 + 图示）
 
+把错误想成「快递单」：下面写真实原因，上面贴「给谁看、该怎么处理」。
+
 ```mermaid
 flowchart LR
-  Repo["Repository error"] --> Wrap["%w + operation context"]
-  Wrap --> Domain["Domain classification"]
-  Domain --> Adapter{"Transport adapter"}
-  Adapter --> HTTP["HTTP status + public code"]
+  Repo["仓库层错误"] --> Wrap["%w + 在做什么"]
+  Wrap --> Domain["业务分类"]
+  Domain --> Adapter{"入口适配"}
+  Adapter --> HTTP["HTTP 状态 + 对外错误码"]
   Adapter --> GRPC["gRPC code"]
-  Adapter --> MQ["retry / DLQ"]
-  Panic["panic"] --> Boundary["goroutine/request boundary recover"]
-  Boundary --> Fail["fail closed + stack + metric"]
+  Adapter --> MQ["重试 / 死信"]
+  Panic["panic"] --> Boundary["请求/worker 边界 recover"]
+  Boundary --> Fail["失败收场 + 栈 + 指标"]
 ```
 
-**稳定契约的三种方式**
+**对外稳定约定的三种写法**
 
 | 方式 | 适合 | 注意 |
 |------|------|------|
-| sentinel `var ErrNotFound` | 少量、稳定、无额外字段 | 暴露后会成为兼容性承诺 |
-| 自定义错误类型 | 需要字段，如 retry-after、资源 ID | 调用方用 `errors.As` |
-| 领域分类码 | 跨进程协议、公开 API | 错误码与内部 cause 分离 |
+| 哨兵错误 `var ErrNotFound` | 就几种固定情况，不需要额外字段 | 一旦公开，换实现也要一直认它 |
+| 自定义错误类型 | 还要带字段，比如多久后可重试、资源 ID | 调用方用 `errors.As` 取出 |
+| 业务错误码 | 给前端/其他服务看的协议 | 对外码和内部原因分开，别把堆栈塞给客户端 |
 
 ```go
 var ErrInsufficientBalance = errors.New("insufficient balance")
@@ -86,57 +92,57 @@ func (e *RetryableError) Unwrap() error { return e.Err }
 
 func debit(ctx context.Context, repo Repository, id string) error {
     if err := repo.Debit(ctx, id); err != nil {
+        // %w：保留原因，方便上层 errors.Is / As
         return fmt.Errorf("debit account %s: %w", id, err)
     }
     return nil
 }
 ```
 
-`errors.Join` 表达“多个错误都发生了”，`errors.Is/As` 会遍历错误树；它不适合替代业务批处理结果，因为调用方通常还需要知道每个 item 的成功/失败。
+`errors.Join` 表示「好几件事同时出错了」，`Is/As` 会顺着错误树找。批量业务（一堆订单里谁成功谁失败）通常还是要逐条结果，不要指望一个 Join 代替明细。
 
-**Typed nil 陷阱**
+**Typed nil 坑（看起来是 nil，其实不是）**
 
 ```go
 func bad() error {
     var e *MyError
-    return e // interface 的动态类型非 nil，因此 error != nil
+    return e // 装进 error 接口后，动态类型不是 nil，所以 err != nil
 }
 ```
 
-应该直接 `return nil`，不要把 nil 指针装入 error interface。
+没有错误时直接 `return nil`，不要把「空的指针」塞进 `error`。
 
 ## 生产场景
 
-- DB 超时：保留 `context.DeadlineExceeded`，adapter 决定返回超时并统计依赖错误。
-- 重复请求：返回稳定的幂等结果或 `ErrConflict`，不能只写 `"duplicate"`。
-- Web3 签名服务：HSM 暂时不可用可重试；策略拒签是业务拒绝；签名不一致属于高危内部错误，应 fail closed。
+- **数据库超时**：保留 `context.DeadlineExceeded` 这类原因，入口决定返回超时，并统计「依赖挂了」。
+- **重复请求**：返回稳定的冲突结果（如 `ErrConflict`），别只返回含糊的 `"duplicate"` 字符串让人去猜。
+- **Web3 签名服务**：HSM 暂时连不上 → 可重试；策略不允许签 → 明确业务拒绝；签名结果对不上 → 高危内部错误，必须失败收场，不能糊弄过去。
 
 ## 排查与工具
 
-- 日志记录 operation、request/trace ID、错误链；敏感参数和私钥材料绝不进入 error。
-- 指标按低基数分类码聚合，错误原文只进日志。
-- panic 记录栈、构建版本与请求 ID，并触发错误率告警；不要对所有 panic 自动重试。
+- 日志带上：在干什么、请求/trace ID、错误链；敏感参数和私钥材料绝不进 error。
+- 指标按少量分类码聚合（超时、拒绝、依赖失败…）；原文只进日志。
+- panic：记栈、构建版本、请求 ID，并告警；不要对所有 panic 自动傻重试。
 
 ## 架构取舍
 
-公开库若 wrap 了某个底层 sentinel，调用方可能依赖它，之后更换底层实现就受兼容性约束。只有希望把底层错误纳入 API 契约时才 `%w`；否则可保留内部日志并返回自己的领域错误。
+公开库如果 `%w` 了某个底层哨兵错误，调用方可能开始依赖它——以后你想换数据库驱动，就得继续「假装」还是那个错误。  
+所以：**只有打算把底层错误也写进对外约定时才 `%w`**；否则内部自己记日志，对外返回自己的业务错误。
 
 ## 深挖问答
 
-1. **什么时候不用 `%w`？** → 不希望暴露底层实现为公共契约时。
-2. **`errors.Is` 和 `==`？** → `Is` 可沿 unwrap/join 树判断；`==` 只比较当前值。
-3. **recover 后能继续吗？** → 被 recover 后，发生 panic 的函数不会从 panic 点继续；
-   控制流按 defer/recover 规则返回到边界。边界应结束当前工作单元，未知不变量被破坏时
-   不能继续提交副作用。
-4. **context 错误要包装吗？** → 可以包装上下文，但必须让 `errors.Is(err, context.Canceled/DeadlineExceeded)` 仍成立。
-5. **错误是否都应打印？** → 在“负责处理或丢弃”的边界打印一次，逐层重复打印会制造噪音。
+1. **什么时候不用 `%w`？** → 不想把底层实现细节变成对外承诺时。
+2. **`errors.Is` 和 `==` 差在哪？** → `Is` 会顺着 unwrap/Join 往下找；`==` 只比当前这一层。
+3. **recover 之后还能从 panic 那一行继续跑吗？** → 不能。控制流回到边界；边界应结束当前请求/任务。程序状态已经可能坏了，别继续写库、转账。
+4. **context 取消/超时要包装吗？** → 可以加上下文说明，但必须保证 `errors.Is(err, context.Canceled)` / `DeadlineExceeded` 仍然为真。
+5. **每一层都要打日志吗？** → 不用。谁负责处理或最终丢掉，谁打一次；层层打印只会刷屏。
 
 ## 反模式与事故
 
-- `if strings.Contains(err.Error(), "duplicate")`：文本变化就破坏逻辑。
-- 每层都 log + return：一条故障生成多份重复日志。
-- `recover()` 后返回 nil：调用方误以为成功，可能造成资金状态错乱。
-- 用 panic 处理用户输入或普通依赖超时。
+- `if strings.Contains(err.Error(), "duplicate")`：文案一改逻辑就挂。
+- 每层都 `log` 再 `return`：一次故障炸出一串重复日志。
+- `recover()` 完返回 `nil`：上层以为成功，资金状态可能已经乱了。
+- 用户输错参数、依赖超时也用 `panic`：把普通失败当成程序崩溃。
 
 ## 延伸阅读
 
