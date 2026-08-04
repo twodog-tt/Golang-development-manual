@@ -2,6 +2,7 @@ title: 20 协议、共识与安全
 collapse_single_pages: false
 nav:
   - index.md
+  - "经典共识 vs 链上共识": S-PROTO-05-classic-vs-onchain-consensus.md
   - "Ethereum PoS 与 Finality": S-PROTO-01-ethereum-pos-fork-choice-finality.md
   - "BFT / CometBFT：轮次、锁、安全性与活性": S-PROTO-02-bft-cometbft-round-lock-safety-liveness.md
   - "Blob / DA / PeerDAS": S-PROTO-03-blob-da-peerdas-security.md

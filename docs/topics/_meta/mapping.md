@@ -53,7 +53,7 @@
 | S-NODE-09 | 非 EVM 生命周期故障注入 | [S-NODE-09](../19-node-rpc-staking/S-NODE-09-non-evm-online-sdk-fault-injection.md) | `examples/senior/txlifecycle/` |
 | S-SOLID-01～08 | Solidity 合约 | — | [13-solidity-contracts/](../13-solidity-contracts/index.md) |
 | S-SOLID-02 | 重入防护合约 | [S-SOLID-02](../13-solidity-contracts/S-SOLID-02-security-reentrancy.md) | `examples/solidity/ReentrancyGuard.sol` |
-| S-PROTO-01～04 | 协议、共识与安全 | — | [20-protocol-consensus-security/](../20-protocol-consensus-security/index.md) |
+| S-PROTO-01～05 | 协议、共识与安全 | — | [20-protocol-consensus-security/](../20-protocol-consensus-security/index.md) |
 | S-SEC-01～04 | Web3 安全工程 | — | [21-security-engineering/](../21-security-engineering/index.md) |
 | S-SEC-02 | Signer Fencing | [S-SEC-02](../21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) | `examples/senior/signerfencing/` |
 | S-SEC-02 | Durable Fence + HSM/MPC | [S-SEC-02](../21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) | `examples/signer-project/` |

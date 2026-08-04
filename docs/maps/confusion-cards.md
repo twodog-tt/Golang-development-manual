@@ -1,6 +1,6 @@
 # 易混概念专卡
 
-> 三条最容易讲错的工程边界。每条给 **一句话结论 → 对照表 → 深读链接**。  
+> 四条最容易讲错的工程边界。每条给 **一句话结论 → 对照表 → 深读链接**。  
 > 返回：[概念地图总览](./index.md)
 
 ---
@@ -59,3 +59,22 @@
 **深读**：[消息队列语义](../topics/03-system-design/S-ARCH-10-mq-semantics.md) ·
 [幂等设计](../topics/03-system-design/S-ARCH-04-idempotency.md) ·
 [Indexer 概念地图](./indexer-node-data.md)
+
+---
+
+<a id="confirmation-vs-commit"></a>
+
+## 4. 业务确认水位 ≠ 中间件 / 链上「提交」
+
+**一句话**：Raft 提交、PoW 的 N 确认、Ethereum finalized、CometBFT height commit 不是同一语义；入账状态机必须写明用的是哪一种。
+
+| | Raft / etcd | PoW N 确认 | Ethereum finalized | CometBFT commit |
+|--|-------------|------------|--------------------|-----------------|
+| 解决什么 | 封闭集群复制 | 概率最终的风险预算 | 经济最终 checkpoint | 高度级 BFT 提交 |
+| 成员 | 已知节点 | 开放算力 | 开放质押 | 已知 validator set |
+| 能否当「绝对不可逆」 | 在 CFT 假设内谈已提交日志 | 否，只是成本阈值 | 冲突属安全事件，非日常回滚 | 冲突破坏 BFT 假设 |
+| 常见误读 | 「写进 etcd = 链上到账」 | 「6 块 = BFT commit」 | 「head 就是最终」 | 「prevote = commit」 |
+
+**深读**：[经典共识 vs 链上共识](../topics/20-protocol-consensus-security/S-PROTO-05-classic-vs-onchain-consensus.md) ·
+[Ethereum PoS / Finality](../topics/20-protocol-consensus-security/S-PROTO-01-ethereum-pos-fork-choice-finality.md) ·
+[CometBFT 轮次与锁](../topics/20-protocol-consensus-security/S-PROTO-02-bft-cometbft-round-lock-safety-liveness.md)

@@ -23,7 +23,7 @@
 | 17 多链钱包与托管 | 12 | Bitcoin、TRON/TRC20、Solana/Cosmos/Aptos/Sui Go 实战、归集 |
 | 18 Web3 支付与稳定币 | 6 | 状态机、稳定币、账本、机构托管、DvP、RWA/ISO 20022 |
 | 19 节点、RPC 与 Staking | 10 | EL/CL、RPC HA、canonical merge、trace、ClickHouse/lakehouse、在线 SDK |
-| 20 协议、共识与安全 | 4 | PoS/BFT、fork choice、PeerDAS、状态迁移 |
+| 20 协议、共识与安全 | 5 | 经典 vs 链上共识、PoS/BFT、fork choice、PeerDAS、状态迁移 |
 | 21 Web3 安全工程 | 4 | 威胁模型、signer fencing、SBOM/provenance、事件响应 |
 | 13 Solidity 与合约 | 8 | 安全、ERC、Proxy、DeFi |
 | 14 DEX / CEX / 预测市场 | 31 | AMM/Uniswap/Pancake、Staking/Farm、DEX TL 白板、撮合/WAL、预测市场 |
@@ -145,6 +145,8 @@
 | Ethereum Execution Specs | https://github.com/ethereum/execution-specs | 执行层升级与 fork 规则 |
 | EIP-4844 / EIP-7594 | https://eips.ethereum.org/EIPS/eip-7594 | Blob、KZG、PeerDAS |
 | CometBFT Consensus Spec | https://github.com/cometbft/cometbft/blob/main/spec/consensus/consensus.md | Round、Prevote、Precommit、Lock |
+| Raft 论文 | https://raft.github.io/raft.pdf | Leader、日志复制、CFT 成员模型 |
+| PBFT 论文 | https://pmg.csail.mit.edu/papers/osdi99.pdf | 拜占庭三阶段与视图变更谱系 |
 | Cosmos SDK Upgrades | https://docs.cosmos.network/sdk/latest/guides/upgrades/upgrade | Upgrade handler 与 store migration |
 | Aptos Go SDK | https://github.com/aptos-labs/aptos-go-sdk | 官方 Go SDK、BCS 与交易签名 |
 | Sui Releases | https://github.com/MystenLabs/sui/releases | 协议版本与 Address Balance 能力演进 |

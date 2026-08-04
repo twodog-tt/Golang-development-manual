@@ -96,7 +96,7 @@
 
 ### 节点、RPC 与 Indexer
 
-优先升级 `S-NODE-01~10`、`S-PROTO-01~04`、Rollup/跨链、非 EVM 链模型与云发布。
+优先升级 `S-NODE-01~10`、`S-PROTO-01~05`、Rollup/跨链、非 EVM 链模型与云发布。
 新增 [S-NODE-10](../19-node-rpc-staking/S-NODE-10-chain-data-clickhouse-lakehouse.md)
 要求能同时解释 parent lineage、ClickHouse MergeTree 和 lakehouse replay。
 

@@ -139,4 +139,5 @@ genesis 比较两条看似都合法的历史，可能无法客观排除长程攻
 - [Beacon Chain fork choice specification](https://github.com/ethereum/consensus-specs/blob/master/specs/phase0/fork-choice.md)
 - [Beacon Chain justification and finalization](https://github.com/ethereum/consensus-specs/blob/master/specs/phase0/beacon-chain.md)
 - [Weak subjectivity specification](https://github.com/ethereum/consensus-specs/blob/master/specs/phase0/weak-subjectivity.md)
+- [S-PROTO-05 经典共识 vs 链上共识](./S-PROTO-05-classic-vs-onchain-consensus.md)
 - [S-NODE-01 Ethereum EL/CL 与同步](../19-node-rpc-staking/S-NODE-01-ethereum-node-architecture-sync.md)

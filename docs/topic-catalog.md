@@ -40,7 +40,7 @@
 | 17 多链钱包与托管 | 12 | [17-multichain-wallet/](topics/17-multichain-wallet/index.md) |
 | 18 Web3 支付与稳定币 | 6 | [18-web3-payments-stablecoin/](topics/18-web3-payments-stablecoin/index.md) |
 | 19 节点、RPC 与 Staking | 10 | [19-node-rpc-staking/](topics/19-node-rpc-staking/index.md) |
-| 20 协议、共识与安全 | 4 | [20-protocol-consensus-security/](topics/20-protocol-consensus-security/index.md) |
+| 20 协议、共识与安全 | 5 | [20-protocol-consensus-security/](topics/20-protocol-consensus-security/index.md) |
 | 21 Web3 安全工程 | 4 | [21-security-engineering/](topics/21-security-engineering/index.md) |
 | 13 Solidity 与合约 | 8 | [13-solidity-contracts/](topics/13-solidity-contracts/index.md) |
 | 14 DEX / CEX / 预测市场 | 31 | [14-dex-cex-engineering/](topics/14-dex-cex-engineering/index.md) |

@@ -130,5 +130,6 @@ CometBFT 通常在每个高度通过多轮投票形成单块 commit，提供快�
 - [CometBFT consensus specification](https://github.com/cometbft/cometbft/blob/main/spec/consensus/consensus.md)
 - [CometBFT Byzantine consensus algorithm](https://docs.cosmos.network/cometbft/latest/spec/consensus/Byzantine-Consensus-Algorithm)
 - [CometBFT validator signing rules](https://docs.cosmos.network/cometbft/latest/spec/consensus/Validator-Signing)
+- [S-PROTO-05 经典共识 vs 链上共识](./S-PROTO-05-classic-vs-onchain-consensus.md)
 - [S-WALLET-04 Cosmos、CometBFT 与 IBC](../17-multichain-wallet/S-WALLET-04-cosmos-cometbft-ibc-sequence.md)
 - [S-PROTO-01 Ethereum PoS 与 Fork Choice](./S-PROTO-01-ethereum-pos-fork-choice-finality.md)

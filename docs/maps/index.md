@@ -9,6 +9,6 @@
 | [Indexer / 节点数据](./indexer-node-data.md) | 游标、lineage、reorg、canonical vs 投影 |
 | [交易所资金与对账](./exchange-funds.md) | 账本、充提、返佣、Vault、对账事实源 |
 | [Agent 控制面](./agent-control-plane.md) | 工作流/HITL、幂等、执行边界、链上支付衔接 |
-| [易混概念专卡](./confusion-cards.md) | 托管≠MPC；投影≠事实；MQ≠业务 exactly-once |
+| [易混概念专卡](./confusion-cards.md) | 托管≠MPC；投影≠事实；MQ≠业务 exactly-once；确认水位≠中间件/链提交 |
 
 相关总入口：[首页](../index.md) · [Web3 场景地图](../web3-exchange-wallet-focus.md) · [专题总索引](../topic-catalog.md)

@@ -849,6 +849,12 @@ p1:
       status: published
       resume_focus: true
       file: 20-protocol-consensus-security/S-PROTO-04-protocol-upgrade-state-migration.md
+    - id: S-PROTO-05
+      title: 经典共识 vs 链上共识：Paxos/Raft/PBFT 与 PoW/PoS/DPoS/BFT
+      frequency: 5
+      status: published
+      resume_focus: true
+      file: 20-protocol-consensus-security/S-PROTO-05-classic-vs-onchain-consensus.md
 
   web3_payments:
     - id: S-PAY-06

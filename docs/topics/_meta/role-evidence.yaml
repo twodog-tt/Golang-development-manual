@@ -300,6 +300,7 @@ roles:
       - S-PROTO-01
       - S-PROTO-02
       - S-PROTO-03
+      - S-PROTO-05
       - S-SOLID-01
       - S-SOLID-02
       - S-SOLID-03
@@ -369,6 +370,7 @@ roles:
       - S-PROTO-01
       - S-PROTO-03
       - S-PROTO-04
+      - S-PROTO-05
       - S-SOL-01
       - S-SOL-02
       - S-SOL-04
@@ -402,6 +404,7 @@ roles:
       - S-PROTO-02
       - S-PROTO-03
       - S-PROTO-04
+      - S-PROTO-05
       - S-WALLET-01
       - S-WALLET-03
       - S-WALLET-04
@@ -525,6 +528,7 @@ roles:
       - S-PROTO-01
       - S-PROTO-03
       - S-PROTO-04
+      - S-PROTO-05
       - S-SEC-03
       - S-SEC-04
       - S-SOL-01
@@ -621,6 +625,7 @@ roles:
       - S-PROTO-02
       - S-PROTO-03
       - S-PROTO-04
+      - S-PROTO-05
       - S-AI-09
       - S-AI-10
 
