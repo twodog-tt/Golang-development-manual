@@ -133,7 +133,7 @@ tools       MCP-compatible discovery and execution
 a2a         remote agent discovery/task adapter
 wallet      quote simulate requestApproval submit getReceipt
 commerce    offer quote pay job dispute refund
-webhooks    signed events cursor replay
+webhooks    signed events 游标回放
 ```
 
 工程要求：

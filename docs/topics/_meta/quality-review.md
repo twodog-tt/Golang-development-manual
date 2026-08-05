@@ -130,7 +130,7 @@
 - Ethereum：补充 typed transaction、EIP-1559、EIP-7702、
   `latest/safe/finalized` 和执行层状态语义。
 - RPC/订阅：WebSocket 只作为实时提示，不是持久消息队列；断线后必须从持久
-  cursor 回补。
+  扫块水位回补。
 - Reorg：从“删除固定 N 个块”改为校验 `parentHash`、寻找共同祖先、回滚派生状态并重放。
 - 身份模型：链上 observation 使用
   `(chain_id, block_hash, tx_hash, log_index)`；业务幂等不能简单把每个

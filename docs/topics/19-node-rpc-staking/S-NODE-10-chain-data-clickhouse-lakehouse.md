@@ -38,7 +38,7 @@ sources:
 4. **去重边界**：ClickHouse primary key 不唯一；ReplacingMergeTree 是 eventual cleanup。
    关键查询用显式版本聚合、经过验证的 `FINAL` 或独立 compacted serving table。
 5. **冷/热分层**：lakehouse 保存长期 raw、schema/snapshot 与可重放文件；ClickHouse 保存热点
-   规范化列和聚合；PostgreSQL/共识 KV 可保存小而关键的 cursor、lease 和 canonical commit。
+   规范化列和聚合；PostgreSQL/共识 KV 可保存小而关键的扫块水位、lease 和 canonical commit。
 
 ## 10 分钟版（端到端数据模型）
 
@@ -185,7 +185,7 @@ evolution 和 time travel。它适合长期 raw、跨引擎回放和批量重算
 |----|----------|----------|
 | Object storage + Iceberg | raw block/trace/event、decoder 输出快照 | 可重放、长期保留、成本 |
 | ClickHouse | 热明细、地址/协议查询、聚合 | ingest lag、查询 P95/P99、扫描字节 |
-| OLTP/control plane | cursor、lease、canonical head、job 状态 | 事务正确性、低延迟写入 |
+| OLTP/control plane | 扫块水位、lease、canonical head、job 状态 | 事务正确性、低延迟写入 |
 
 ## 容量与成本验证
 

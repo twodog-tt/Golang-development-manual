@@ -102,7 +102,7 @@ func ApplySwap(e SwapEvent) error {
 ## 深挖问答
 
 1. **1m K 线边界？** → `[t, t+60s)` 左闭右开，用 canonical block timestamp 归窗；open/close 再按 block/tx/log 顺序。
-2. **历史回补？** → 从 cursor 重扫；与实时流合并要防双计（幂等键）。
+2. **历史回补？** → 从扫块水位重扫；与实时流合并要防双计（幂等键）。
 3. **与 CEX K 线差异？** → CEX 应从撮合的 durable、有序成交事实流聚合，而不是
    直接依赖某台机器的内存；DEX 从 canonical 链上成交投影聚合，额外面对链延迟与 reorg。
 

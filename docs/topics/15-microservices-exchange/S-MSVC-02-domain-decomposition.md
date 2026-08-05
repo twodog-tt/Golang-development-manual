@@ -91,7 +91,7 @@ flowchart LR
 | ledger-svc | 账务 | JournalEntry | 发起链上转账 |
 | wallet-svc | 资金 | Deposit, Withdraw | 撮合订单 |
 | market-svc | 行情 | Ticker, Depth | 资金结算 |
-| indexer-svc | 链上 | ChainCursor, RawLog | 算 K 线 OHLC |
+| indexer-svc | 链上 | ChainWatermark, RawLog | 算 K 线 OHLC |
 | kline-svc | 行情读模型 | KlineBar | 扫链 |
 | risk-svc | 风控 | Rule, Blacklist | 持久化成交 |
 

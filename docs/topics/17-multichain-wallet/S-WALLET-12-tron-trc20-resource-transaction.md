@@ -150,7 +150,7 @@ flowchart LR
 6. 达到业务确认/solidified 水位后入账；索引回滚时 orphan observation，不直接删除账本事实。
 
 第三方历史 API 可用于查询和补偿，但生产充值索引不能只依赖一个 provider 的“账户交易列表”；要保存
-自己的 cursor、原始区块/receipt 证据和 backfill 能力。
+自己的扫块水位、原始区块/receipt 证据和 backfill 能力。
 
 ## 生产场景
 
@@ -158,7 +158,7 @@ flowchart LR
   走 active permission/MPC 签名，广播后按 txID 追踪 execution 和 solidification。
 - **归集**：大量地址有 token 无 TRX/资源时，gas top-up/资源 delegation 是独立资金工作流，
   需要额度、回收和防滥用策略。
-- **充值补扫**：provider 漏事件时按区块 cursor 回扫 TransactionInfo，与 ledger observation 对账，
+- **充值补扫**：provider 漏事件时按区块扫块水位回扫 TransactionInfo，与 ledger observation 对账，
   不以第三方分页 token 作为唯一事实。
 
 ## 排查与工具

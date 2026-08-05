@@ -19,7 +19,7 @@ sources:
 
 ## 30 秒版（开场）
 
-> 链上数据平台应把 raw canonical evidence、decoded facts 和业务 projections 分层。Backfill 与 realtime 必须重叠一段并用 block hash/tx/log identity 去重，cursor 不能只存高度；reorg 时标记 orphan、回退 projection 并重放。Receipt/log 是协议化数据，trace/state diff 往往是 client-specific 调试输出，需要独立重资源管线和 schema version。ABI/合约升级后要可重解码，不能只保留扁平业务表。
+> 链上数据平台应把 raw canonical evidence、decoded facts 和业务 projections 分层。Backfill 与 realtime 必须重叠一段并用 block hash/tx/log identity 去重，扫块水位不能只存高度；reorg 时标记 orphan、回退 projection 并重放。Receipt/log 是协议化数据，trace/state diff 往往是 client-specific 调试输出，需要独立重资源管线和 schema version。ABI/合约升级后要可重解码，不能只保留扁平业务表。
 
 ## 3 分钟版（精讲深度）
 
@@ -79,7 +79,7 @@ OLTP 数据库适合状态与低延迟查询，列式/对象存储适合大规�
 ## 深挖问答
 
 1. **为什么 raw 数据不能删？** → decoder/schema 会升级，业务 projection 需要可重建和审计。
-2. **cursor 只存 block number 行吗？** → 不行，reorg 无法识别 canonical lineage。
+2. **扫块水位只存 block number 行吗？** → 不行，reorg 无法识别 canonical lineage。
 3. **trace 是共识数据吗？** → 执行结果应一致，但 trace API/格式/细节常是 client-specific，需验证。
 4. **如何补漏块？** → range gap scanner + hash continuity + receipt/count/checksum 对账。
 5. **ABI 不知道怎么办？** → raw 落库、标记 unknown，registry 更新后重解码。

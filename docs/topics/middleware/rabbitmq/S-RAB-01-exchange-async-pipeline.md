@@ -91,7 +91,7 @@ for d := range deliveries {
 ## 生产场景
 
 - **监听与写入解耦**：消息成功发布后，队列能吸收消费者写库抖动；它不能修复发布前的 RPC 漏块，
-  所以 indexer 仍需 cursor、补扫和区块证据
+  所以 indexer 仍需扫块水位、补扫和区块证据
 - **与 Kafka 选型**：不要只背吞吐高低；比较路由/投递、保留与重放、顺序范围、消费模型、
   运维经验和实测 workload（[S-RMQ-03](../rocketmq/S-RMQ-03-vs-kafka.md)）
 

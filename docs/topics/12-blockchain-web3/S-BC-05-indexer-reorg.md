@@ -29,14 +29,17 @@ sources:
 
 1. **是什么**：Worker 从 `lastBlock+1` 扫到 latest，解析 tx/logs 写业务表。
 2. **为什么**：RPC 不适合直接给 C 端高并发查；且需关联链下 userId。
-3. **怎么做**：保存块高、块 hash、parent hash 和处理状态；新区块的 `parentHash` 必须等于本地前一 canonical 块的 hash。发现分叉后向前寻找共同祖先，在同一事务中回滚衍生数据与 cursor，再重扫。
+3. **怎么做**：保存块高、块 hash、parent hash 和处理状态；新区块的 `parentHash` 必须等于本地前一 canonical 块的 hash。发现分叉后向前寻找共同祖先，在同一事务中回滚衍生数据与扫块水位，再重扫。
 
 ## 10 分钟版（原理 + 图示）
+
+> **扫块水位（游标）**：索引器持久化的「这条链已处理到哪」进度，不是 IDE/编辑器产品名。
+> 常见字段是 `last_observed` / `last_safe` / `last_finalized`；reorg 时水位回退到共同祖先后再前进。
 
 ```mermaid
 flowchart TB
   subgraph indexer[Indexer Worker]
-    Loop[块高 cursor] --> Fetch[eth_getBlockByNumber]
+    Loop[块高水位] --> Fetch[eth_getBlockByNumber]
     Fetch --> Parse[解析 txs/logs]
     Parse --> DB[(MySQL/Postgres)]
   end
@@ -52,7 +55,7 @@ flowchart TB
 | blocks | chain_id, number, hash, parent_hash, status, processed_at |
 | chain_log_observations | chain_id, block_hash, tx_hash, log_index, payload, canonical |
 | deposits | business_id, chain_id, tx_hash, log_index, current_block_hash, amount, status |
-| cursor | chain_id, last_observed, last_safe, last_finalized |
+| scan_watermark | chain_id, last_observed, last_safe, last_finalized |
 
 要区分两种 identity：
 
@@ -89,7 +92,7 @@ for {
             // 流水不可原地篡改；已产生的资金影响要用冲正流水。
             tx.RevertDerivedAfter(chainID, ancestor.Number)
             tx.MarkBlocksOrphanedAfter(chainID, ancestor.Number)
-            tx.SetObservedCursor(chainID, ancestor.Number)
+            tx.SetObservedWatermark(chainID, ancestor.Number)
             return nil
         })
         continue
@@ -99,7 +102,7 @@ for {
         tx.UpsertObservedBlock(block)
         tx.InsertLogObservations(block) // observation key 包含 block_hash
         tx.ProjectCanonicalEvents(block) // 业务幂等键推进 canonical 状态
-        tx.SetObservedCursor(chainID, block.Number)
+        tx.SetObservedWatermark(chainID, block.Number)
         return nil
     })
 
@@ -116,7 +119,7 @@ for {
 
 - **交易所充值**：先展示 pending，再按链别和金额在 safe/finalized 后 credit；深度 reorg 用冲正流水处理
 - **NFT 铸造索引**：metadata 链下 IPFS + 链上 tokenId
-- **多链**：每链独立 cursor、finality 策略和 worker 池
+- **多链**：每链独立扫块水位、finality 策略和 worker 池
 
 ## 排查与工具
 
@@ -137,7 +140,7 @@ for {
 1. **重组回滚多深？** → 不猜固定深度；一直回退到共同祖先。穿过 safe/finalized 或超过风控上限时升级告警。
 2. **eth_getLogs 范围限制？** → 按 provider 限额分片、重试并校验连续性。历史日志依赖节点保留对应区块体/receipt 与 provider 的历史窗口，不等同于“必须有 archive state”；启用 history pruning 的节点也可能已经删除旧 receipt。
 3. **和 MQ？** → 索引后发 `DepositConfirmed` 事件驱动下游（[S-SOL-03](../11-solution-architecture/S-SOL-03-event-driven-cqrs.md)）。
-4. **并发扫块？** → 单链单 cursor 串行；按段并行需严格顺序合并。
+4. **并发扫块？** → 单链单一扫块水位串行推进；按段并行需严格顺序合并。
 
 ## 反模式与事故
 

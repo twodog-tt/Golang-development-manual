@@ -33,7 +33,7 @@ sources:
 
 - `block_observation(chain_id, hash)`：height、parent hash、payload/receipt root、provider/source、raw location，不可变。
 - `canonical_assignment(chain_id, height)`：当前 hash、assignment version、finality status，可变但保留变更历史。
-- `consumer_cursor`：canonical hash + height + assignment version，不能只存 number。
+- `consumer_watermark`：canonical hash + height + assignment version，不能只存 number。
 - `reorg_event`：common ancestor、orphaned hashes、applied hashes、reason/source evidence。
 
 Realtime 负责低延迟提示，backfill 负责完整性；两者都只能先写 evidence，再由单一 canonicalizer 改 ownership。
@@ -105,7 +105,7 @@ go test -race ./examples/senior/chainmerge/...
 
 ## 生产场景
 
-- WebSocket 断线后从 durable canonical cursor 回补，订阅只负责提示。
+- WebSocket 断线后从持久化的 canonical 扫块水位回补，订阅只负责提示。
 - Archive provider 限流时可暂停 backfill，不影响 realtime evidence；切勿悄悄跳过 receipt。
 - Decoder bug 修复只重建 facts/projection，不改 raw block 和 canonical history。
 - 深 reorg 时按受影响 asset/merchant 冻结派生可用余额，完成 reversal 与对账后恢复。

@@ -174,7 +174,7 @@ Discover(ref) -> Capabilities
 Submit(intent, auth_context) -> RemoteHandle
 Get(remote_handle) -> CanonicalTask
 Cancel(remote_handle, reason) -> CancelReceipt
-Stream(remote_handle, cursor) -> Event
+Stream(remote_handle, resume_token) -> Event
 ```
 
 不要承诺“任何框架零损失互转”。正确做法是：

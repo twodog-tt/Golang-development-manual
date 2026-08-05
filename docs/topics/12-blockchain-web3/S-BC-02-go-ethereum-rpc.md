@@ -83,7 +83,7 @@ go test ./examples/senior/ethrpc/...
 
 ## 深挖问答
 
-1. **HTTP vs WebSocket？** → 查询/可回补轮询常用 HTTP；实时提示可用 WS，但最终正确性仍靠持久 cursor + HTTP 回补。
+1. **HTTP vs WebSocket？** → 查询/可回补轮询常用 HTTP；实时提示可用 WS，但最终正确性仍靠持久扫块水位 + HTTP 回补。
 2. **eth_call 和 tx 区别？** → call 不上链、不改状态、不花 Gas（节点模拟）。
 3. **如何 mock 测试？** → httptest 假 RPC（见 ethrpc 示例）或 interface 抽象 Client。
 4. **Batch RPC？** → JSON-RPC batch 数组；注意部分 provider 限制 batch 大小。

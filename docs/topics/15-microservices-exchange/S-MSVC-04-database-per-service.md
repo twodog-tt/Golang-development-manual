@@ -62,7 +62,7 @@ flowchart LR
     ChainTx[chain_tx]
   end
   subgraph indexer_db
-    Cursor[block_cursor]
+    Watermark[scan_watermark]
     Events[chain_events]
   end
   Wallet[wallet-svc] --> wallet_db

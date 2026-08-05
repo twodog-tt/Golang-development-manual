@@ -77,7 +77,7 @@ flowchart LR
 
 ```text
 source transaction
-  -> domain rows + outbox/cursor
+  -> domain rows + outbox/扫块水位
   -> idempotent relay/CDC
   -> target upsert/append by stable source identity
   -> checkpoint + reconciliation
@@ -138,7 +138,7 @@ Rollback plan 必须写明“回退后由谁继续同步数据”。只切回旧
 
 ### Situation
 
-> 单体 PostgreSQL 同时承担 canonical cursor、raw event、API 点查和全表分析。随着 `[链数/
+> 单体 PostgreSQL 同时承担 canonical 扫块水位、raw event、API 点查和全表分析。随着 `[链数/
 > 日增量]` 增长，backfill 与在线查询互相影响；reorg 修复按高度覆盖，无法保留 fork 证据。
 > 涉及 indexer、数据平台、钱包、风控和 BI `[N]` 个团队。
 
