@@ -3,7 +3,132 @@
 > 5 分钟目标：能说明 **canonical 是事实、索引库是可重建投影**，并讲清 reorg 回退与幂等键各自解决什么。  
 > 返回：[概念地图总览](./index.md)
 
-## 1. 核心对象
+## 0. 这是 CEX，还是 DEX？
+
+**本图是两边共用的链上观察基建**，不是某一种交易所产品专属。  
+Indexer / 节点数据回答：「链上正规链发生了什么、我扫到哪、重组怎么回退」；  
+**CEX 还是 DEX，取决于谁消费这些事件、投影成什么业务表。**
+
+| | CEX 托管场景 | DEX 协议场景 |
+|--|--------------|--------------|
+| 主要看什么 | 充值地址 `Transfer` / 原生转入、提现 tx receipt | Pool/Router 的 Swap、Mint、Burn、Collect 等 |
+| 投影去哪 | 充提状态机 → **账本 credit/debit** | 成交/持仓/TVL/K 线、报价辅助、返佣事实 |
+| 确认水位 | 金额分层：`observed` 展示，`safe`/`finalized` 后可提现入账 | UI 可早展示；清算/返佣/做市对账跟 finality 与规则版本 |
+| 和本仓库其他图 | 下游接 [钱包与托管](./wallet-custody.md)（CEX） | 下游接 [14 DEX/CEX](../topics/14-dex-cex-engineering/index.md) 协议与资金投影 |
+| 共同点 | 扫块水位、`parentHash`、reorg 共祖回退、观察键 vs 业务幂等键、RPC HA | 机制相同；**业务表与入账语义不同** |
+
+Hybrid（CEX 带链上 Swap 展示、DEX 前端 + 托管出金）可以**共用一套 Indexer 内核**，用不同 decoder / topic / 消费者拆开，不要做成「一个大表既当账本又当行情」。
+
+## 1. 总架构图（共用内核 → 分叉消费）
+
+```mermaid
+flowchart TB
+  subgraph chain [各链 Canonical]
+    Blocks[Blocks / Receipts / Logs]
+  end
+
+  subgraph nodes [节点与读路径]
+    RPC[RPC / 节点池<br/>quorum · hedging]
+    WS[WS 订阅仅作提示]
+  end
+
+  subgraph indexer [Indexer 内核 · 本图重点]
+    WM[扫块水位<br/>observed / safe / finalized]
+    Scan[按高度扫块 + parentHash 校验]
+    Obs[观察表<br/>含 block_hash 的 lineage]
+    Proj[幂等投影 / Outbox]
+    Reorg[reorg：共祖 → 回退 → 重放]
+  end
+
+  subgraph cex [CEX 消费]
+    Dep[Deposit / Withdraw 状态机]
+    Led[账本入账 / 冲正]
+    Wallet[托管钱包执行面]
+  end
+
+  subgraph dex [DEX 消费]
+    Swap[Swap / LP 事件投影]
+    Mkt[行情 · 池状态 · K 线]
+    Fee[手续费 / 返佣事实]
+  end
+
+  Blocks --> RPC
+  WS -.->|提示有新头| Scan
+  RPC --> Scan
+  WM --> Scan
+  Scan --> Obs --> Proj
+  Scan --> Reorg --> Scan
+  Proj -->|deposit.confirmed 等| Dep --> Led
+  Dep -.-> Wallet
+  Proj -->|swap.matched 等| Swap --> Mkt
+  Swap --> Fee
+```
+
+**读图顺序**
+
+1. **内核**：RPC 拉块 → 校验血缘 → 写观察 → 投影；reorg 时水位回退并重放。  
+2. **CEX 岔路**：关心「谁的充值地址进了多少、提现是否上链成功」→ 账本与钱包。  
+3. **DEX 岔路**：关心「哪个池成交了多少、LP 份额怎么变」→ 行情与协议投影。  
+4. **WS 不能替代水位**：断线后仍以持久扫块水位 + HTTP/回补为准。
+
+## 2. CEX 使用场景（充提确认）
+
+```mermaid
+sequenceDiagram
+  participant User as 用户
+  participant Chain as 链
+  participant Idx as Indexer
+  participant Led as 账本
+  participant Wal as 钱包/Tx Manager
+
+  User->>Chain: 转入充值地址
+  Chain->>Idx: 扫到 Transfer / value
+  Idx->>Idx: observed → safe/finalized
+  Idx->>Led: deposit.confirmed 幂等
+  Led-->>User: 可用余额 ↑
+
+  User->>Led: 提现申请（冻结）
+  Led->>Wal: 出签广播
+  Wal->>Chain: raw tx
+  Chain->>Idx: receipt / 失败
+  Idx->>Led: 出金确认或冲正
+```
+
+| 场景 | Indexer 职责 | 不要让 Indexer 做的事 |
+|------|--------------|----------------------|
+| 充值 | 认地址/memo、认资产、按 finality 发确认事件 | 直接改用户余额（应走账本分录） |
+| 提现 | 跟踪出金 tx 是否在正规链成功 | 代替风控审批或 MPC 出签 |
+| reorg | 回退投影并通知冲正 | 原地改历史流水数字 |
+
+深读：[S-BC-05](../topics/12-blockchain-web3/S-BC-05-indexer-reorg.md) · [钱包地图](./wallet-custody.md) · [S-EXCH-02](../topics/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md)
+
+## 3. DEX 使用场景（协议事件投影）
+
+```mermaid
+sequenceDiagram
+  participant User as 用户钱包
+  participant Pool as AMM Pool / Router
+  participant Idx as Indexer
+  participant API as 行情/持仓 API
+  participant Reb as 返佣/对账
+
+  User->>Pool: Swap / AddLiquidity
+  Pool->>Idx: Swap / Mint / Burn logs
+  Idx->>Idx: 解码 ABI · 幂等写入 · reorg 安全
+  Idx->>API: 池储备 / 成交 / 持仓投影
+  Idx->>Reb: 可计费手续费事实（canonical）
+```
+
+| 场景 | Indexer 职责 | 不要让 Indexer 做的事 |
+|------|--------------|----------------------|
+| Swap 成交 | 解码 pool/router 事件，保留 `block_hash` lineage | 把 pending 报价当成链上已成交 |
+| LP / 仓位 | 投影份额与 fee growth 等只读视图 | 代替合约存储当最终持仓真理 |
+| 返佣 / 激励 | 提供 canonical 成交与手续费事实 | 在索引库里直接改可提佣金余额 |
+| 假池 / 分叉合约 | 校验 Factory / init code / allowlist | 盲信「名叫 Uniswap 的 pair」 |
+
+深读：[S-EXCH-06](../topics/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity.md) · [S-EXCH-30](../topics/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md) · [S-BC-04](../topics/12-blockchain-web3/S-BC-04-contract-abi-events.md)
+
+## 4. 核心对象
 
 | 对象 | 含义 |
 |------|------|
@@ -14,7 +139,7 @@
 | RPC / 节点池 | 读路径；需 HA、对账、避免单点撒谎 |
 | Relayer / Tx Manager | 写出路径（广播与替换），常与索引确认闭环 |
 
-## 2. 权威事实源
+## 5. 权威事实源
 
 | 问题 | 事实源 |
 |------|--------|
@@ -23,7 +148,7 @@
 | 合约当前状态 | 合约存储 / eth_call 等链上读；投影只是缓存视图 |
 | 消息是否该生效一次 | DB 唯一约束 + 状态机；不是 MQ「恰好一次」保证 |
 
-## 3. 主状态机（可手画）
+## 6. 主状态机（可手画）
 
 ```mermaid
 flowchart LR
@@ -35,21 +160,22 @@ flowchart LR
   Reorg --> Scan
 ```
 
-## 4. 典型失败模式
+## 7. 典型失败模式
 
 | 失败 | 正确处理 | 反模式 |
 |------|----------|--------|
 | reorg | 共祖回退 + 重放 | 只靠唯一键「当没事」 |
 | 重复事件 | 业务幂等键 + 同事务更新 | 假设 MQ exactly-once |
 | RPC 超时/分叉视图 | 多节点核对、确认水位 | 盲信单一 latest |
-| 回补打爆节点 | 限速、批处理、隔离游标 | 无背压全并发扫历史 |
+| 回补打爆节点 | 限速、批处理、隔离扫块水位 | 无背压全并发扫历史 |
+| CEX/DEX 投影混库 | 分 decoder / topic / 消费者 | 一张表既当账本又当行情真理 |
 
-## 5. 易混点（本域）
+## 8. 易混点（本域）
 
 先读 [投影 ≠ 链上事实](./confusion-cards.md#indexer-vs-canonical) 与
 [MQ ≠ 业务 exactly-once](./confusion-cards.md#mq-vs-idempotency)。
 
-## 6. 推荐阅读
+## 9. 推荐阅读
 
 | 顺序 | 文章 | 证据边界 |
 |-----:|------|----------|
@@ -63,8 +189,9 @@ flowchart LR
 
 专题目录：[12 区块链](../topics/12-blockchain-web3/index.md) · [19 节点/RPC](../topics/19-node-rpc-staking/index.md)
 
-## 7. 与相邻域
+## 10. 与相邻域
 
-- 钱包入账/确认消费本域事件 → [钱包与托管](./wallet-custody.md)
-- 行情/返佣消费 canonical 事件 → [交易所资金](./exchange-funds.md)
+- **CEX** 钱包入账/确认消费本域事件 → [钱包与托管](./wallet-custody.md)
+- **CEX/DEX** 资金与返佣消费 canonical 事件 → [交易所资金](./exchange-funds.md)
+- **DEX** 协议机制 → [14 DEX/CEX](../topics/14-dex-cex-engineering/index.md)
 - Agent 若依赖链上状态，只读投影时必须标明可重建 → [Agent 控制面](./agent-control-plane.md)
