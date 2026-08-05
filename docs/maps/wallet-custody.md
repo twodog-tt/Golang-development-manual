@@ -3,7 +3,82 @@
 > 5 分钟目标：能画出充提/归集状态机，说清 **谁是事实源**，并区分 **托管信任模型** 与 **MPC 签名实现**。  
 > 返回：[概念地图总览](./index.md)
 
-## 1. 核心对象
+## 0. 这是 CEX，还是 DEX？
+
+**本图默认场景是 CEX 托管资金链路**：用户把币转到平台地址，余额记在内部账本；提现由平台热/冷钱包出签广播。  
+**不是** DEX 协议工作（AMM / LP / Router / 用户自签 Swap）——那条线看 [14 DEX/CEX](../topics/14-dex-cex-engineering/index.md)（如 [S-EXCH-06](../topics/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity.md)、[S-EXCH-30](../topics/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md)）。
+
+| | 本图（CEX 托管钱包） | DEX 协议侧 |
+|--|---------------------|------------|
+| 资产在哪 | 平台地址池 + 用户账本债权 | 用户钱包或 AMM 池合约 |
+| 谁签名 | 平台 MPC/KMS/HSM（热签）或冷签 | 用户本地签，或 Router 代调合约 |
+| 主流程 | 充值观察 → 入账；提现审批 → 出签 → 广播；归集 | Swap / 加撤池 / 报价与事件索引 |
+| 重叠点 | 都依赖 Indexer、finality、多链差异 | 重叠 ≠ 同一套产品架构 |
+
+去中心化/共管钱包（厂商不能单方面转走）是另一类产品；不要和本图的 CEX 托管热签混称。见 [托管 ≠ MPC](./confusion-cards.md#custody-vs-mpc)。
+
+## 1. CEX 托管钱包架构图
+
+```mermaid
+flowchart TB
+  subgraph users [用户侧]
+    U[CEX App / API]
+  end
+
+  subgraph control [控制面 · 该不该动钱]
+    Risk[风控 / 审批 / 白名单]
+    Policy[Policy + Intent 冻结]
+    Ledger[账本 Ledger<br/>可用 / 冻结 / 冲正]
+  end
+
+  subgraph observe [观察面 · 链上发生了什么]
+    Idx[Indexer<br/>扫块水位 + reorg]
+    RPC[RPC / 节点池]
+  end
+
+  subgraph wallet [钱包执行面 · 怎么把钱转出去]
+    Addr[充值地址池 / HD·memo]
+    Hot[热钱包余额水位]
+    Cold[温冷钱包 / 大额]
+    Adapter[Chain Adapter<br/>按链组交易]
+    Reserve[Reservation<br/>nonce / UTXO / object]
+    TxMgr[Tx Manager<br/>广播 · UNKNOWN · 替换]
+    Signer[Signer Service]
+    MPC[MPC / KMS / HSM]
+  end
+
+  subgraph chain [各链]
+    L1[ETH / TRON / BTC / ...]
+  end
+
+  U -->|充值到平台地址| L1
+  L1 --> RPC --> Idx
+  Idx -->|DepositObserved → Confirmed| Ledger
+  Ledger -->|credit 用户可用| U
+
+  U -->|提现申请| Risk --> Policy
+  Policy -->|冻结账本| Ledger
+  Policy --> Adapter
+  Adapter --> Reserve --> Signer
+  Signer --> MPC
+  MPC -->|已签 raw tx| TxMgr
+  TxMgr -->|广播| L1
+  Idx -->|出金 receipt| Ledger
+  Ledger -->|解冻扣减 / 失败冲正| U
+
+  Addr -.->|余额达阈值| Hot
+  Hot -->|归集 sweep| Adapter
+  Cold -.->|大额出金| Signer
+```
+
+**读图顺序（CEX）**
+
+1. **充值**：链上转入充值地址 → Indexer 观察并按 finality 入账 → 账本 credit（用户看到余额）。  
+2. **提现**：申请 → 风控/审批 → 冻结 Intent → Adapter 组交易 + 预占 → Signer/MPC 出签 → Tx Manager 广播 → 确认后账本扣减。  
+3. **归集**：充值地址/热钱包余额扫入集中地址，补 gas 后再 sweep；与提现争用同一资金池时要水位与优先级。  
+4. **MPC 只在出签框里**：降低热签单点私钥风险，**不改变**「平台能否按规则转走用户托管资产」这一托管模型。
+
+## 2. 核心对象
 
 | 对象 | 含义 |
 |------|------|
@@ -14,7 +89,7 @@
 | Tx Manager | 广播、UNKNOWN、同 intent replacement / fee bump |
 | Chain Adapter | 按链能力矩阵构造交易，禁止统一 `SendTransaction` 幻想 |
 
-## 2. 权威事实源
+## 3. 权威事实源
 
 | 问题 | 事实源 |
 |------|--------|
@@ -23,7 +98,7 @@
 | 该不该转 | **审批 + Policy/Intent**，不是签名集群自己决定 |
 | 交易是否已生效 | 多节点核对 txid/nonce/UTXO/receipt；超时先 **UNKNOWN** |
 
-## 3. 主状态机（可手画）
+## 4. 主状态机（可手画）
 
 ```mermaid
 flowchart TB
@@ -46,7 +121,7 @@ flowchart TB
   end
 ```
 
-## 4. 典型失败模式
+## 5. 典型失败模式
 
 | 失败 | 正确处理 | 反模式 |
 |------|----------|--------|
@@ -56,12 +131,12 @@ flowchart TB
 | 签名方故障 | 会话重开同 intent；已广播走链上核对 | 当作没发生再造一笔 |
 | 归集挤兑提现 | 提现水位 + 优先级 + 熔断；见 [争用](../topics/17-multichain-wallet/S-WALLET-06-deposit-sweep-reservation-recovery.md#sweep-vs-withdraw) | 共享一个「有钱就扫」 |
 
-## 5. 易混点（本域）
+## 6. 易混点（本域）
 
 先读 [托管 ≠ MPC](./confusion-cards.md#custody-vs-mpc)。  
 一句话：**用户托管账户** 描述信任模型；**MPC** 描述平台热签怎么出签。
 
-## 6. 推荐阅读（先这几篇）
+## 7. 推荐阅读（先这几篇）
 
 | 顺序 | 文章 | 证据边界 |
 |-----:|------|----------|
@@ -76,8 +151,9 @@ flowchart TB
 
 专题目录：[17 多链钱包](../topics/17-multichain-wallet/index.md)
 
-## 7. 与相邻域
+## 8. 与相邻域
 
 - 入账观察依赖 [Indexer / 节点数据](./indexer-node-data.md)
 - 余额与冲正进入 [交易所资金与对账](./exchange-funds.md)
 - Agent 若要动钱，必须经本域的 Policy/Signer，见 [Agent 控制面](./agent-control-plane.md)
+- DEX 协议与链上 Swap 不在本图范围 → [14 DEX/CEX](../topics/14-dex-cex-engineering/index.md)

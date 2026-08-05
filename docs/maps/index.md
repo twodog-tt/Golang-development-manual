@@ -5,7 +5,7 @@
 
 | 地图 | 解决什么 |
 |------|----------|
-| [多链钱包与托管签名](./wallet-custody.md) | 充提归集、冷热分层、MPC/KMS、reservation |
+| [多链钱包与托管签名](./wallet-custody.md) | **CEX 托管**充提归集、冷热分层、MPC/KMS、reservation（非 DEX AMM） |
 | [Indexer / 节点数据](./indexer-node-data.md) | 游标、lineage、reorg、canonical vs 投影 |
 | [交易所资金与对账](./exchange-funds.md) | 账本、充提、返佣、Vault、对账事实源 |
 | [Agent 控制面](./agent-control-plane.md) | 工作流/HITL、幂等、执行边界、链上支付衔接 |
