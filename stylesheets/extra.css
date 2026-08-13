@@ -1,0 +1,352 @@
+/* ── 可折叠侧边栏：分组标题与展开指示 ── */
+
+/*
+ * Material 在深层导航下会给「含活跃后代的祖先」打上 md-toggle--indeterminate，
+ * 但同级兄弟分组也会被误标 indeterminate，触发主题规则全部展开。
+ * 仅保留 :checked 或子树含当前页 (.md-nav__link--active) 的展开。
+ */
+@media screen and (min-width: 76.25em) {
+  .md-nav--primary
+    .md-nav__toggle.md-toggle--indeterminate:not(:checked)
+    ~ .md-nav:not(:has(.md-nav__link--active)) {
+    display: grid !important;
+    grid-template-rows: minmax(0rem, 0fr) !important;
+    opacity: 0 !important;
+    visibility: collapse !important;
+    pointer-events: none;
+  }
+
+  .md-nav--primary .md-nav__toggle:checked ~ .md-nav {
+    grid-template-rows: minmax(0.4rem, 1fr) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto;
+  }
+}
+
+/* 一级分组（Go 核心、中间件等）加粗，与叶子节点区分 */
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav__link {
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--md-default-fg-color);
+  margin-top: 0.35rem;
+}
+
+/* 分组标题 hover */
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav__link:hover {
+  color: var(--md-primary-fg-color);
+}
+
+/* 展开/折叠箭头：稍大、更易点 */
+.md-nav--primary .md-nav__item--section > .md-nav__link .md-nav__icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+/* 展开状态箭头旋转（Material 用 checkbox，:checked 即展开） */
+.md-nav--primary .md-nav__item--section > .md-nav__link:has(+ input:checked) .md-nav__icon,
+.md-nav--primary .md-nav__item--section > input:checked ~ .md-nav__link .md-nav__icon {
+  transform: rotate(90deg);
+}
+
+/* 子级缩进与分隔线，层级更清晰 */
+.md-nav--primary .md-nav__item--nested > .md-nav {
+  border-left: 1px solid var(--md-default-fg-color--lightest);
+  margin-left: 0.55rem;
+  padding-left: 0.25rem;
+}
+
+/* 二级分组（如 MySQL、Redis）：避免为了密度继续缩小字号 */
+.md-nav--primary .md-nav__item--section .md-nav__item--section > .md-nav__link {
+  font-weight: 500;
+  font-size: 0.72rem;
+}
+
+/* 当前页高亮 */
+.md-nav__link--active {
+  font-weight: 600;
+}
+
+/*
+ * 叶子节点最多显示两行，紧凑标题写入 title 属性便于悬浮查看；
+ * 正文 H1 与搜索索引仍保留完整题目标题。
+ */
+.md-nav--primary .md-nav__item:not(.md-nav__item--section) > .md-nav__link {
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.md-nav--primary
+  .md-nav__item:not(.md-nav__item--section)
+  > .md-nav__link
+  > .md-ellipsis {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* 全库正文均已发布时，逐条 published 图标没有区分价值。 */
+.md-nav--primary .md-status--published {
+  display: none;
+}
+
+/* 自定义键盘语义后，为折叠标签提供稳定的可见焦点。 */
+.md-nav--primary label.md-nav__link[role="button"]:focus-visible,
+.md-header label.md-header__button[role="button"]:focus-visible {
+  border-radius: 0.15rem;
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+/* ── Mermaid 图表：正文预览、工具栏与全屏缩放查看器 ── */
+
+.diagram-viewer {
+  margin: 1.25rem 0;
+  overflow: hidden;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.45rem;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 0.15rem 0.55rem rgb(15 23 42 / 7%);
+}
+
+.diagram-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.45rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+}
+
+.diagram-toolbar__hint {
+  flex: 1;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.66rem;
+}
+
+.diagram-viewer--complex .diagram-toolbar__hint {
+  color: var(--md-accent-fg-color);
+  font-weight: 600;
+}
+
+.diagram-viewer--complex .diagram-toolbar__hint::before {
+  content: "复杂图 · ";
+}
+
+.diagram-button {
+  min-height: 1.65rem;
+  padding: 0.22rem 0.55rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.3rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font: inherit;
+  font-size: 0.64rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.diagram-button:hover:not(:disabled) {
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+
+.diagram-button:focus-visible,
+.diagram-stage:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+.diagram-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.diagram-stage {
+  position: relative;
+  overflow: auto;
+  padding: 0.8rem;
+  background: #fff;
+  cursor: zoom-in;
+  scrollbar-width: thin;
+}
+
+.diagram-stage > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.diagram-viewer--fallback .diagram-stage {
+  background: var(--md-code-bg-color);
+  cursor: text;
+}
+
+.diagram-viewer--fallback .diagram-stage pre.mermaid-source {
+  max-height: 28rem;
+  margin: 0;
+  overflow: auto;
+  white-space: pre;
+}
+
+.diagram-status {
+  padding: 0.35rem 0.55rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color--light);
+  font-size: 0.62rem;
+}
+
+.diagram-status[data-kind="warning"],
+.diagram-status[data-kind="error"] {
+  color: var(--md-typeset-color);
+  background: color-mix(in srgb, var(--md-code-bg-color) 82%, #f59e0b);
+}
+
+.diagram-dialog {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.diagram-dialog::backdrop {
+  background: rgb(2 6 23 / 72%);
+  backdrop-filter: blur(2px);
+}
+
+.diagram-dialog__shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+}
+
+.diagram-dialog__header {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3rem;
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+  box-shadow: 0 0.1rem 0.4rem rgb(15 23 42 / 10%);
+}
+
+.diagram-dialog__title {
+  flex: 1;
+  margin: 0;
+  overflow: hidden;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.diagram-dialog__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.diagram-dialog__scale {
+  min-width: 3.2rem;
+  color: var(--md-default-fg-color--light);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+.diagram-dialog__viewport {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgb(148 163 184 / 10%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(148 163 184 / 10%) 1px, transparent 1px),
+    #fff;
+  background-size: 1.2rem 1.2rem;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.diagram-dialog__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.diagram-dialog__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  height: max-content;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.diagram-dialog__canvas > svg {
+  display: block;
+}
+
+.diagram-dialog__canvas--source {
+  width: min(64rem, calc(100vw - 2rem));
+}
+
+.diagram-dialog__source {
+  max-height: calc(100dvh - 5rem);
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  border-radius: 0.4rem;
+  background: var(--md-code-bg-color);
+  color: var(--md-code-fg-color);
+  font-size: 0.68rem;
+  white-space: pre;
+  user-select: text;
+}
+
+@media screen and (max-width: 44.99em) {
+  .diagram-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .diagram-toolbar__hint {
+    flex-basis: 100%;
+  }
+
+  .diagram-button {
+    flex: 1;
+    min-height: 2rem;
+  }
+
+  .diagram-dialog__header {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .diagram-dialog__controls .diagram-button {
+    min-width: 2.4rem;
+  }
+
+  .diagram-dialog__title {
+    flex: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram-dialog__canvas {
+    will-change: auto;
+  }
+}
