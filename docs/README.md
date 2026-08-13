@@ -1,6 +1,6 @@
 # Go · Agent · Web3 工程知识库
 
-面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + Web3/区块链架构方向** 的工程知识沉淀（**235 篇正文**）。
+面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + Web3/区块链架构方向** 的工程知识沉淀（**238 篇正文**）。
 
 ## 站点导航（左侧栏）
 

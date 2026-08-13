@@ -92,6 +92,9 @@
 | ⭐ [S-BC-04](topics/12-blockchain-web3/S-BC-04-contract-abi-events.md) | ABI 与事件监听 | Swap/TokenCreated 等 |
 | ⭐ [S-BC-02](topics/12-blockchain-web3/S-BC-02-go-ethereum-rpc.md) | JSON-RPC 与 ethclient | 多链 RPC Client |
 | ⭐ [S-BC-14](topics/12-blockchain-web3/S-BC-14-evm-chains-landscape-integration.md) | EVM 公链全景速览 | L1 / 侧链 / Rollup 分类、finality、费用与 RPC 差异 |
+| ⭐ [S-BC-15](topics/12-blockchain-web3/S-BC-15-evm-chain-identity-verification.md) | EVM 公链身份与可信核验 | chain ID、genesis、活性、验证者、资产证据 |
+| ⭐ [S-BC-16](topics/12-blockchain-web3/S-BC-16-transaction-lifecycle-finality-reorg.md) | 交易生命周期与最终性 | pending、replacement、receipt、canonical、reorg |
+| ⭐ [S-BC-17](topics/12-blockchain-web3/S-BC-17-rpc-node-explorer-ha-runbook.md) | RPC / 浏览器高可用 | 节点分层、健康检查、双上游、502 恢复 |
 | ⭐ [S-BC-13](topics/12-blockchain-web3/S-BC-13-gas-fee-multichain.md) | Gas / Fee 与多链费用 | EIP-1559、L2 L1 data fee、estimateGas |
 | ⭐ [S-BC-03](topics/12-blockchain-web3/S-BC-03-tx-signing-key-mgmt.md) | 交易签名与密钥管理 | KMS/HSM |
 | ⭐ [S-BC-09](topics/12-blockchain-web3/S-BC-09-abigen-contract-bindings.md) | abigen 合约调用 | 合约集成 |

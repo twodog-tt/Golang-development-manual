@@ -1,6 +1,6 @@
 # 领域能力优先级与证据标签
 
-> 当前共 **235 篇 published 正文**。领域优先级与证据标签的机器事实源为
+> 当前共 **238 篇 published 正文**。领域优先级与证据标签的机器事实源为
 > [role-evidence.yaml](./role-evidence.yaml)（文件名历史兼容，语义为 **domain/role 能力切片**），
 > 一致性由 `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-08-13**。
 
@@ -26,13 +26,13 @@
 
 | 工程领域 | 核心 | 延展 | 其余 | 核心重点 |
 |----------|---:|---:|---:|---------|
-| Go 生产工程 | 62 | 73 | 100 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
-| **AI / Crypto Agent 控制面** | **64** | **91** | **80** | 工作流、MCP/A2A、Agent 身份/Commerce、开放平台、Web3 安全执行 |
-| 多链钱包与托管签名 | 66 | 93 | 76 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
-| 支付与稳定币 | 66 | 100 | 69 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
-| 节点 / RPC / Indexer | 75 | 86 | 74 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
-| 交易所工程 | **75** | **108** | **52** | 撮合/WAL、DEX 协议、预测市场 CTF/CLOB、账本与安全上线 |
-| 系统演进与架构协作 | **80** | **91** | **64** | 系统设计、DEX/预测市场白板、迁移、IaC/GitOps、安全、跨团队协作 |
+| Go 生产工程 | 62 | 76 | 100 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
+| **AI / Crypto Agent 控制面** | **64** | **94** | **80** | 工作流、MCP/A2A、Agent 身份/Commerce、开放平台、Web3 安全执行 |
+| 多链钱包与托管签名 | 67 | 95 | 76 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
+| 支付与稳定币 | 67 | 102 | 69 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
+| 节点 / RPC / Indexer | 78 | 86 | 74 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
+| 交易所工程 | **75** | **111** | **52** | 撮合/WAL、DEX 协议、预测市场 CTF/CLOB、账本与安全上线 |
+| 系统演进与架构协作 | **80** | **94** | **64** | 系统设计、DEX/预测市场白板、迁移、IaC/GitOps、安全、跨团队协作 |
 
 核心篇数不是“全部逐字通读”。建议先掌握 shared 核心的 30 秒版与不变量，再只进入
 **一个**领域增量；延展用于该领域深挖，其余正文按项目反馈补洞。
@@ -84,26 +84,26 @@
 
 ### 多链钱包与托管签名
 
-优先升级 `S-WALLET-01~12`、`S-BC-03/05/10/12`、`S-SEC-01/02/04`、
+优先升级 `S-WALLET-01~12`、`S-BC-03/05/10/12/15~17`、`S-SEC-01/02/04`、
 `S-NODE-02/05/09` 和 `S-PAY-03~05`。阅读时必须保留各链 nonce/UTXO/object/sequence、
 提交、执行和 finality 差异；并区分 **托管信任模型** 与 **MPC 签名实现**。
 
 ### 支付与稳定币
 
-优先升级 `S-PAY-01~06`、钱包归集/签名、交易所账本/对账、节点交易管理器和安全控制。
+优先升级 `S-PAY-01~06`、`S-BC-15~17`、钱包归集/签名、交易所账本/对账、节点交易管理器和安全控制。
 核心表达是：**链上 observation、支付 intent、账本事实、scheme/资金腿和法律 finality
 不是同一状态**。
 
 ### 节点、RPC 与 Indexer
 
-优先升级 `S-NODE-01~10`、`S-PROTO-01~05`、Rollup/跨链、非 EVM 链模型与云发布。
+优先升级 `S-NODE-01~10`、`S-PROTO-01~05`、`S-BC-15~17`、Rollup/跨链、非 EVM 链模型与云发布。
 新增 [S-NODE-10](../19-node-rpc-staking/S-NODE-10-chain-data-clickhouse-lakehouse.md)
 要求能同时解释 parent lineage、ClickHouse MergeTree 和 lakehouse replay。
 
 ### 交易所工程
 
 优先升级 `S-EXCH-01~05/10/11/13/15~26`、**`S-EXCH-29/30/31`**、交易所微服务、账本、充提、
-节点交易管理器与 signer 控制。三条工程主线：
+节点交易管理器、`S-BC-15~17` 与 signer 控制。三条工程主线：
 
 - **CEX / 撮合外围与资金**：`S-EXCH-01~05/17~22` + 微服务/账本；性能结论必须附 workload、持久化边界、
   P99/P999 和恢复语义。
@@ -137,7 +137,7 @@
 
 | 标签 | 当前篇数 | 能证明什么 | 不能证明什么 |
 |------|---------:|------------|--------------|
-| `explanation_only` | 174 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
+| `explanation_only` | 180 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
 | `illustrative_artifact` | 31 | 仓库有相关代码或配置 | 测试当前通过、外部系统兼容 |
 | `deterministic_test` | 20 | 有不依赖外部服务的测试/回放门禁 | localnet、硬件或生产行为 |
 | `integration_harness` | 7 | 有 localnet/testnet/HSM/MPC/故障 harness | 每个目标版本都已实跑 |
@@ -151,7 +151,7 @@
 | 标签 | 当前篇数 | 复核方式 |
 |------|---------:|----------|
 | `stable` | 145 | 目标数据库/语言版本使用前抽查 |
-| `version_sensitive` | 73 | 复核官方 release/spec/SDK 文档 |
+| `version_sensitive` | 79 | 复核官方 release/spec/SDK 文档 |
 | `vendor_or_regulatory_sensitive` | 14 | 结合目标厂商、司法辖区和法律/合规意见 |
 
 `vendor_or_regulatory_sensitive` 优先于普通版本敏感；它提醒你对外说明适用范围，而不是套一个
@@ -169,5 +169,5 @@
 .venv/bin/python scripts/verify_knowledge_metadata.py
 ```
 
-校验会检查 235 个 ID、正文、sources、30 秒版、深挖问答、领域引用、证据标签互斥关系，
+校验会检查 238 个 ID、正文、sources、30 秒版、深挖问答、领域引用、证据标签互斥关系，
 以及 tip/note 中的求职禁止词（见 [正文结构检查清单](./article-structure-checklist.md)）。

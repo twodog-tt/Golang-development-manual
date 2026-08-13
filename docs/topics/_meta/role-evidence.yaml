@@ -179,6 +179,9 @@ roles:
       - S-BC-02
       - S-BC-05
       - S-BC-14
+      - S-BC-15
+      - S-BC-16
+      - S-BC-17
 
   ai_agent_platform:
     label: AI Agent Platform / Crypto Agent Ecosystem
@@ -249,6 +252,9 @@ roles:
       - S-BC-05
       - S-BC-13
       - S-BC-14
+      - S-BC-15
+      - S-BC-16
+      - S-BC-17
 
   wallet_custody:
     label: 多链钱包与托管
@@ -270,6 +276,7 @@ roles:
       - S-BC-05
       - S-BC-10
       - S-BC-12
+      - S-BC-16
       - S-SEC-01
       - S-SEC-02
       - S-SEC-04
@@ -290,6 +297,8 @@ roles:
       - S-BC-11
       - S-BC-13
       - S-BC-14
+      - S-BC-15
+      - S-BC-17
       - S-PAY-01
       - S-PAY-02
       - S-PAY-06
@@ -337,6 +346,7 @@ roles:
       - S-BC-05
       - S-BC-10
       - S-BC-12
+      - S-BC-16
       - S-SEC-01
       - S-SEC-02
       - S-SEC-04
@@ -364,6 +374,8 @@ roles:
       - S-BC-11
       - S-BC-13
       - S-BC-14
+      - S-BC-15
+      - S-BC-17
       - S-NODE-01
       - S-NODE-03
       - S-NODE-04
@@ -405,6 +417,9 @@ roles:
       - S-BC-11
       - S-BC-12
       - S-BC-14
+      - S-BC-15
+      - S-BC-16
+      - S-BC-17
       - S-PROTO-01
       - S-PROTO-02
       - S-PROTO-03
@@ -525,6 +540,9 @@ roles:
       - S-BC-12
       - S-BC-13
       - S-BC-14
+      - S-BC-15
+      - S-BC-16
+      - S-BC-17
       - S-NODE-01
       - S-NODE-03
       - S-NODE-04
@@ -628,6 +646,9 @@ roles:
       - S-BC-12
       - S-BC-13
       - S-BC-14
+      - S-BC-15
+      - S-BC-16
+      - S-BC-17
       - S-PROTO-01
       - S-PROTO-02
       - S-PROTO-03

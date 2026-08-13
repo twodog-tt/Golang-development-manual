@@ -16,3 +16,6 @@ nav:
   - "跨链桥认证 / 重放 / 限额": S-BC-12-cross-chain-message-bridge-security.md
   - "Gas / Fee 计费与多链费用差异": S-BC-13-gas-fee-multichain.md
   - "EVM 公链全景速览：L1、侧链、Rollup 与接入差异": S-BC-14-evm-chains-landscape-integration.md
+  - "EVM 公链身份与可信核验": S-BC-15-evm-chain-identity-verification.md
+  - "交易 / Receipt / Finality / Reorg": S-BC-16-transaction-lifecycle-finality-reorg.md
+  - "RPC / 浏览器 HA 与 502 恢复": S-BC-17-rpc-node-explorer-ha-runbook.md

@@ -1,6 +1,6 @@
 # 知识库质量审查与领域覆盖差距
 
-> 全库 **235 篇**（以 [topics.yaml](topics.yaml) 为准）
+> 全库 **238 篇**（以 [topics.yaml](topics.yaml) 为准）
 >
 > 本轮审查与补强日期：**2026-08-13**
 >
@@ -59,7 +59,9 @@
   流动性挖矿/Yield Farming、Uniswap V2/V3 协议深挖、DEX Tech Lead 45 分钟架构白板。
 - 第十四阶段补充 **2 篇解释型正文**：经典共识与链上共识对照（S-PROTO-05），以及
   EVM 独立链、侧链、Optimistic/ZK Rollup 的全景分类与 Go 接入差异（S-BC-14）。
-- 证据标签已覆盖 235 篇：`explanation_only=177`、`illustrative_artifact=31`、
+- 第十五阶段补充 **3 篇解释型正文**：EVM 公链身份与可信核验（S-BC-15）、交易从 pending 到
+  finality/reorg 的完整状态机（S-BC-16），以及 RPC/Blockscout 分层、双上游 HA 与 502 无损恢复（S-BC-17）。
+- 证据标签已覆盖 238 篇：`explanation_only=180`、`illustrative_artifact=31`、
   `deterministic_test=20`、`integration_harness=7`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
@@ -87,7 +89,7 @@
 | 云原生 | 10 |
 | AI 工程 | 14 |
 | 解决方案架构 | 8 |
-| 区块链 Web3 | 14 |
+| 区块链 Web3 | 17 |
 | 多链钱包与托管 | 12 |
 | Web3 支付与稳定币 | 6 |
 | 节点、RPC 与 Staking | 10 |
@@ -96,7 +98,7 @@
 | Solidity | 8 |
 | DEX/CEX/预测市场 | 31 |
 | 交易所微服务 | 6 |
-| **合计** | **235** |
+| **合计** | **238** |
 
 原始 153 题基线中的中间件为 21 题；此前新增 2 篇 MySQL，本阶段再新增 3 篇 PostgreSQL，
 当前数据库与中间件共 26 题。

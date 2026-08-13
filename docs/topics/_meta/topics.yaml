@@ -828,6 +828,21 @@ p1:
       frequency: 5
       status: published
       file: 12-blockchain-web3/S-BC-14-evm-chains-landscape-integration.md
+    - id: S-BC-15
+      title: 如何验证一条 EVM 公链：身份、活性、共识与资产证据
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-15-evm-chain-identity-verification.md
+    - id: S-BC-16
+      title: EVM 交易生命周期：Pending、Receipt、确认、最终性与重组
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-16-transaction-lifecycle-finality-reorg.md
+    - id: S-BC-17
+      title: RPC 节点与区块浏览器：生产架构、高可用与 502 恢复
+      frequency: 5
+      status: published
+      file: 12-blockchain-web3/S-BC-17-rpc-node-explorer-ha-runbook.md
 
   protocol_consensus_security:
     - id: S-PROTO-01
