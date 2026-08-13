@@ -292,10 +292,13 @@ curl -sS -X POST "$EVM_RPC_URL" \
 
 1. [S-BC-01 EVM 基础](./S-BC-01-blockchain-evm-basics.md)：先懂执行层。
 2. **本文**：建立链族与差异地图。
-3. [S-BC-13 Gas / Fee](./S-BC-13-gas-fee-multichain.md) + [S-BC-02 Go RPC](./S-BC-02-go-ethereum-rpc.md)：能接链。
-4. [S-BC-03 签名](./S-BC-03-tx-signing-key-mgmt.md) + [S-BC-04 ABI / Event](./S-BC-04-contract-abi-events.md)：能读写合约。
-5. [S-BC-05 Reorg / Indexer](./S-BC-05-indexer-reorg.md)：能安全消费链上数据。
-6. [S-BC-07 L2 / 桥](./S-BC-07-l2-cross-chain-bridge.md) + [S-BC-11 Rollup 安全](./S-BC-11-rollup-finality-da-proof-security.md)：理解 L2 与跨链安全边界。
+3. [S-BC-15 公链核验](./S-BC-15-evm-chain-identity-verification.md)：先证明目标链身份、活性与信任边界。
+4. [S-BC-16 交易生命周期](./S-BC-16-transaction-lifecycle-finality-reorg.md)：分清 receipt、canonical 与 finality。
+5. [S-BC-17 RPC / 浏览器 HA](./S-BC-17-rpc-node-explorer-ha-runbook.md)：理解节点入口与恢复路径。
+6. [S-BC-13 Gas / Fee](./S-BC-13-gas-fee-multichain.md) + [S-BC-02 Go RPC](./S-BC-02-go-ethereum-rpc.md)：能接链。
+7. [S-BC-03 签名](./S-BC-03-tx-signing-key-mgmt.md) + [S-BC-04 ABI / Event](./S-BC-04-contract-abi-events.md)：能读写合约。
+8. [S-BC-05 Reorg / Indexer](./S-BC-05-indexer-reorg.md)：能安全消费链上数据。
+9. [S-BC-07 L2 / 桥](./S-BC-07-l2-cross-chain-bridge.md) + [S-BC-11 Rollup 安全](./S-BC-11-rollup-finality-da-proof-security.md)：理解 L2 与跨链安全边界。
 
 ## 延伸阅读
 

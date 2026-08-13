@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "generated_at": "2026-08-13T03:31:23Z",
-  "count": 235,
+  "generated_at": "2026-08-13T06:00:18Z",
+  "count": 238,
   "roles": [
     {
       "key": "senior_go_backend",
@@ -1249,6 +1249,81 @@
       "resume_focus": false,
       "url": "topics/12-blockchain-web3/S-BC-14-evm-chains-landscape-integration/",
       "prompt": "**EVM 链不是“一条以太坊换了名字”**。它们通常共享 Solidity、ABI、`0x` 地址、交易签名与一部分 JSON-RPC，但可能使用完全不同的共识、排序器、数据可用性、最终性、费用市场、系统合约和跨链桥。 先按 **独立 L1 / 侧链 / Rollup L2** 分类，再问六件事：谁排序、谁执行、数据放哪、谁确认正确、何时不可逆、资产怎么进出。 Go 后端可以复用 ABI/RPC 基础设施，不能复用一套写死的 chain ID、手续费、确认数、RPC 能力和代币地址。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p1",
+        "payments_stablecoin": "p1",
+        "node_rpc_indexer": "p0",
+        "exchange_engineering": "p1",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-08-13"
+      }
+    },
+    {
+      "id": "S-BC-15",
+      "title": "如何验证一条 EVM 公链：身份、活性、共识与资产证据",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "topics/12-blockchain-web3/S-BC-15-evm-chain-identity-verification/",
+      "prompt": "**Chain ID 不是一条链的全球唯一身份证，也不能证明它是主网或去中心化公链。** 接入前至少核验四层：`chain ID + genesis hash/chain config` 确认身份，连续区块与时间戳确认活性， 验证者/出块者与独立节点确认共识和故障域，`chain + contract address + code/权限` 确认资产。 官网、浏览器和钱包配置属于声明；RPC、区块 lineage、合约字节码属于可复查观测；自己运行节点并与 多个独立来源比对，才是更强证据。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p1",
+        "payments_stablecoin": "p1",
+        "node_rpc_indexer": "p0",
+        "exchange_engineering": "p1",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-08-13"
+      }
+    },
+    {
+      "id": "S-BC-16",
+      "title": "EVM 交易生命周期：Pending、Receipt、确认、最终性与重组",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "topics/12-blockchain-web3/S-BC-16-transaction-lifecycle-finality-reorg/",
+      "prompt": "**拿到 tx hash 不代表节点已长期保存，拿到 receipt 不代表业务可结算，`receipt.status=1` 也不代表区块已最终确认。** 正确状态链是：已签名 → 已广播 → 节点接受/传播 → pending → included → EVM success/revert → canonical → safe/finalized → 业务入账。交易可能被 dropped、同 nonce replacement，已上链块也可能 reorg； 所以必须保存 `txHash + blockNumber + blockHash`，按目标链的 finality 模型推进状态，而不是写死“12 确认”。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p0",
+        "payments_stablecoin": "p0",
+        "node_rpc_indexer": "p0",
+        "exchange_engineering": "p1",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-08-13"
+      }
+    },
+    {
+      "id": "S-BC-17",
+      "title": "RPC 节点与区块浏览器：生产架构、高可用与 502 恢复",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "topics/12-blockchain-web3/S-BC-17-rpc-node-explorer-ha-runbook/",
+      "prompt": "**域名返回 502，通常只说明反向代理没有从上游 RPC 拿到有效响应，不等于整条链停了。** 生产架构要拆分公网网关、普通 full RPC、archive/trace、WebSocket、P2P 共识和 Blockscout indexer； 健康检查不能只看端口和 `eth_chainId`，还要验证 genesis、head 新鲜度/持续推进、sync 状态和多源 hash。 恢复时先保数据：定位 proxy upstream → 查进程/容器、磁盘、OOM、日志、端口 → 本机语义探测 → 核对链身份与同步高度 → 再纳入流量；不要一上来删 `chaindata` 或重新初始化 genesis。",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p1",

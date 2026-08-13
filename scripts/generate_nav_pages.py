@@ -102,6 +102,9 @@ COMPACT_NAV_TITLES: dict[str, str] = {
     # 12 区块链与 Web3
     "S-BC-11": "Rollup Finality / DA / 强制退出",
     "S-BC-12": "跨链桥认证 / 重放 / 限额",
+    "S-BC-15": "EVM 公链身份与可信核验",
+    "S-BC-16": "交易 / Receipt / Finality / Reorg",
+    "S-BC-17": "RPC / 浏览器 HA 与 502 恢复",
     # 14 DEX / CEX 交易所工程
     "S-EXCH-01": "CEX 撮合与订单簿",
     "S-EXCH-02": "充值 / 提现 / 钱包体系",
