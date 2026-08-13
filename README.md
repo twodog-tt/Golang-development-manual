@@ -1,6 +1,6 @@
 # Go · Agent · Web3 工程知识库
 
-面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构** 的工程知识沉淀（**232 篇正文**），并配套可运行示例。
+面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构** 的工程知识沉淀（**235 篇正文**），并配套可运行示例。
 
 **在线阅读**：https://twodog-tt.github.io/Golang-development-manual/
 
@@ -32,7 +32,7 @@
 | **基础 · Go 语言与生产工程** | 01 并发 → 02 内存 → 16 Go 生产工程 → 08 编码练习 | 48 |
 | **进阶 · 网络与中间件** | 06 Linux/TCP/网络 + MySQL/PostgreSQL/Redis/MQ/ES/分布式事务 | 33 |
 | **高阶 · 系统设计与架构** | 03 系统设计 → 09 云原生 → 11 解决方案架构 → **15 微服务（交易所）** | 45 |
-| **专题 · Web3 核心基础设施** | 12 EVM/Rollup/跨链 → 17 多链钱包 → 18 支付 → 19 节点/RPC → 20 协议/共识 → 21 安全工程 → 13 Solidity → 14 交易所/预测市场 | 87 |
+| **专题 · Web3 核心基础设施** | 12 EVM/Rollup/跨链 → 17 多链钱包 → 18 支付 → 19 节点/RPC → 20 协议/共识 → 21 安全工程 → 13 Solidity → 14 交易所/预测市场 | 90 |
 | **综合 · 领导力与 AI** | 07 工程领导力 → 10 AI 工程 | 19 |
 
 ## 模块入口
@@ -66,11 +66,11 @@
 
 | 模块 | 篇数 | 入口 |
 |------|------|------|
-| [12 区块链与 Web3（Go）](./docs/topics/12-blockchain-web3/index.md) | 12 | RPC、索引、Rollup、跨链安全、4337、MPC |
+| [12 区块链与 Web3（Go）](./docs/topics/12-blockchain-web3/index.md) | 14 | EVM 公链全景、RPC、索引、Rollup、跨链安全、4337、MPC |
 | [17 多链钱包与托管](./docs/topics/17-multichain-wallet/index.md) | 12 | BTC、TRON/TRC20、Solana/Cosmos/Aptos/Sui Go 实战、归集、MPC |
 | [18 Web3 支付与稳定币](./docs/topics/18-web3-payments-stablecoin/index.md) | 6 | 支付、账本、合规、机构托管、DvP、RWA/ISO 20022 |
 | [19 节点、RPC 与 Staking](./docs/topics/19-node-rpc-staking/index.md) | 10 | EL/CL、RPC HA、canonical/ClickHouse/lakehouse、非 EVM 在线可靠性 |
-| [20 协议、共识与安全](./docs/topics/20-protocol-consensus-security/index.md) | 4 | PoS/BFT、fork choice、PeerDAS、状态迁移 |
+| [20 协议、共识与安全](./docs/topics/20-protocol-consensus-security/index.md) | 5 | PoS/BFT、fork choice、PeerDAS、状态迁移、经典共识对照 |
 | [21 Web3 安全工程](./docs/topics/21-security-engineering/index.md) | 4 | 威胁模型、signer fencing、SBOM/provenance、事件响应 |
 | [13 Solidity 与合约工程](./docs/topics/13-solidity-contracts/index.md) | 8 | 安全、ERC、Proxy、DeFi |
 | [14 DEX / CEX 交易所工程](./docs/topics/14-dex-cex-engineering/index.md) | 31 | AMM/Uniswap/Pancake、Staking/Farm、DEX TL 白板、撮合/WAL、预测市场 |
@@ -89,7 +89,7 @@
 | [16 Go 生产工程](./docs/topics/16-go-production-engineering/index.md) · [21 安全工程](./docs/topics/21-security-engineering/index.md) | [17 多链钱包](./docs/topics/17-multichain-wallet/index.md) · [18 支付](./docs/topics/18-web3-payments-stablecoin/index.md) | [19 节点/RPC](./docs/topics/19-node-rpc-staking/index.md) · [20 协议/共识](./docs/topics/20-protocol-consensus-security/index.md) | [13 Solidity](./docs/topics/13-solidity-contracts/index.md) · [14 DEX/CEX](./docs/topics/14-dex-cex-engineering/index.md) |
 
 <!-- QUESTION_TABLE_START -->
-## 专题全表（232 篇）
+## 专题全表（235 篇）
 
 > 序号按 **基础 → 进阶 → 高阶 → 专题 → 综合** 排列；文档 ID（如 `S-CONC-01`）。点击标题可跳转至 Markdown 正文。
 
@@ -250,105 +250,108 @@
 | 136 | `S-BC-10` | [MPC/TSS 与 CEX 托管签名架构](./docs/topics/12-blockchain-web3/S-BC-10-mpc-tss-custody.md) |
 | 137 | `S-BC-11` | [Rollup 安全边界：Finality、数据可用性、证明与强制退出](./docs/topics/12-blockchain-web3/S-BC-11-rollup-finality-da-proof-security.md) |
 | 138 | `S-BC-12` | [跨链消息与桥安全：认证、重放、限额与故障恢复](./docs/topics/12-blockchain-web3/S-BC-12-cross-chain-message-bridge-security.md) |
-| 139 | `S-WALLET-01` | [多链钱包 Chain Adapter 与能力矩阵](./docs/topics/17-multichain-wallet/S-WALLET-01-chain-adapter-capability-matrix.md) |
-| 140 | `S-WALLET-02` | [Bitcoin UTXO、Coin Selection、PSBT 与手续费替换](./docs/topics/17-multichain-wallet/S-WALLET-02-bitcoin-utxo-psbt-fee-bump.md) |
-| 141 | `S-WALLET-03` | [Solana 账户模型、PDA 与交易生命周期](./docs/topics/17-multichain-wallet/S-WALLET-03-solana-account-pda-transaction.md) |
-| 142 | `S-WALLET-04` | [Cosmos SDK、CometBFT、IBC 与账户 Sequence](./docs/topics/17-multichain-wallet/S-WALLET-04-cosmos-cometbft-ibc-sequence.md) |
-| 143 | `S-WALLET-05` | [Sui Object 与 Aptos Resource 模型对比](./docs/topics/17-multichain-wallet/S-WALLET-05-sui-aptos-state-model.md) |
-| 144 | `S-WALLET-06` | [充值地址、归集、Nonce/UTXO 预占与恢复](./docs/topics/17-multichain-wallet/S-WALLET-06-deposit-sweep-reservation-recovery.md) |
-| 145 | `S-WALLET-07` | [MPC/TSS 的 DKG、Reshare 与故障恢复](./docs/topics/17-multichain-wallet/S-WALLET-07-mpc-dkg-reshare-recovery.md) |
-| 146 | `S-WALLET-08` | [Solana Go SDK 实战：离线构建、签名与确认状态](./docs/topics/17-multichain-wallet/S-WALLET-08-solana-go-sdk-transaction.md) |
-| 147 | `S-WALLET-09` | [Cosmos SDK Go 实战：TxBuilder、SIGN_MODE_DIRECT 与 Sequence](./docs/topics/17-multichain-wallet/S-WALLET-09-cosmos-go-sdk-sign-mode-direct.md) |
-| 148 | `S-WALLET-10` | [Aptos Go SDK 实战：BCS 交易、域分离签名与执行跟踪](./docs/topics/17-multichain-wallet/S-WALLET-10-aptos-go-sdk-bcs-transaction.md) |
-| 149 | `S-WALLET-11` | [Sui Go 集成实战：Object、Address Balance 与能力演进](./docs/topics/17-multichain-wallet/S-WALLET-11-sui-go-capability-adapter.md) |
-| 150 | `S-WALLET-12` | [TRON / TRC20 钱包：资源、权限与交易生命周期](./docs/topics/17-multichain-wallet/S-WALLET-12-tron-trc20-resource-transaction.md) |
-| 151 | `S-PAY-01` | [Web3 支付状态机、幂等、Webhook 与冲正](./docs/topics/18-web3-payments-stablecoin/S-PAY-01-payment-state-idempotency-reversal.md) |
-| 152 | `S-PAY-02` | [稳定币发行人控制、跨链转移与结算风险](./docs/topics/18-web3-payments-stablecoin/S-PAY-02-stablecoin-issuer-crosschain-risk.md) |
-| 153 | `S-PAY-03` | [Treasury、流动性与多链资金再平衡](./docs/topics/18-web3-payments-stablecoin/S-PAY-03-treasury-liquidity-rebalancing.md) |
-| 154 | `S-PAY-04` | [支付账本、清结算与三方对账](./docs/topics/18-web3-payments-stablecoin/S-PAY-04-ledger-clearing-settlement-reconciliation.md) |
-| 155 | `S-PAY-05` | [KYC/KYB、Travel Rule 与制裁筛查架构](./docs/topics/18-web3-payments-stablecoin/S-PAY-05-compliance-travel-rule-sanctions.md) |
-| 156 | `S-PAY-06` | [机构托管、DvP 清算、RWA 生命周期与 ISO 20022](./docs/topics/18-web3-payments-stablecoin/S-PAY-06-institutional-custody-rwa-iso20022.md) |
-| 157 | `S-NODE-01` | [Ethereum EL/CL、Full/Archive Node 与同步模式](./docs/topics/19-node-rpc-staking/S-NODE-01-ethereum-node-architecture-sync.md) |
-| 158 | `S-NODE-02` | [RPC 高可用：多 Provider、Quorum、Hedging 与缓存](./docs/topics/19-node-rpc-staking/S-NODE-02-rpc-ha-quorum-hedging-cache.md) |
-| 159 | `S-NODE-03` | [Validator、Staking、Slashing 与密钥生命周期](./docs/topics/19-node-rpc-staking/S-NODE-03-validator-staking-slashing-keys.md) |
-| 160 | `S-NODE-04` | [链上数据平台：Backfill、实时流、Trace 与 Schema](./docs/topics/19-node-rpc-staking/S-NODE-04-chain-data-platform.md) |
-| 161 | `S-NODE-05` | [Relayer 与交易管理器：Nonce、Fee、Replacement、Finality](./docs/topics/19-node-rpc-staking/S-NODE-05-relayer-transaction-manager.md) |
-| 162 | `S-NODE-06` | [节点运维：升级、快照、Pruning、监控与 Runbook](./docs/topics/19-node-rpc-staking/S-NODE-06-node-operations-runbook.md) |
-| 163 | `S-NODE-07` | [Canonical Backfill + Realtime Merge 与 Reorg 提交协议](./docs/topics/19-node-rpc-staking/S-NODE-07-canonical-backfill-realtime-merge.md) |
-| 164 | `S-NODE-08` | [Trace、State Diff、版本化 Decoder 与链数据质量](./docs/topics/19-node-rpc-staking/S-NODE-08-trace-state-diff-versioned-decoder-quality.md) |
-| 165 | `S-NODE-09` | [非 EVM 在线 SDK：提交、确认、故障注入与升级兼容](./docs/topics/19-node-rpc-staking/S-NODE-09-non-evm-online-sdk-fault-injection.md) |
-| 166 | `S-NODE-10` | [链数据列存：ClickHouse 建模、Reorg 与 Lakehouse 分层](./docs/topics/19-node-rpc-staking/S-NODE-10-chain-data-clickhouse-lakehouse.md) |
-| 167 | `S-PROTO-01` | [Ethereum PoS、Fork Choice、Finality 与弱主观性](./docs/topics/20-protocol-consensus-security/S-PROTO-01-ethereum-pos-fork-choice-finality.md) |
-| 168 | `S-PROTO-02` | [BFT / CometBFT：轮次、锁、安全性与活性](./docs/topics/20-protocol-consensus-security/S-PROTO-02-bft-cometbft-round-lock-safety-liveness.md) |
-| 169 | `S-PROTO-03` | [Blob、DA 与 PeerDAS：从 EIP-4844 到 Fusaka](./docs/topics/20-protocol-consensus-security/S-PROTO-03-blob-da-peerdas-security.md) |
-| 170 | `S-PROTO-04` | [协议升级、状态迁移与不可回滚边界](./docs/topics/20-protocol-consensus-security/S-PROTO-04-protocol-upgrade-state-migration.md) |
-| 171 | `S-SEC-01` | [Web3 威胁建模、IAM 与信任边界](./docs/topics/21-security-engineering/S-SEC-01-web3-threat-model-iam-trust-boundaries.md) |
-| 172 | `S-SEC-02` | [Key Ceremony、远程签名机 Fencing 与恢复](./docs/topics/21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) |
-| 173 | `S-SEC-03` | [SBOM、SLSA Provenance 与发布准入](./docs/topics/21-security-engineering/S-SEC-03-sbom-provenance-release-admission.md) |
-| 174 | `S-SEC-04` | [Fuzz、Property、Differential Test 与安全事件响应](./docs/topics/21-security-engineering/S-SEC-04-security-testing-incident-response.md) |
-| 175 | `S-SOLID-01` | [Solidity 语言基础与 storage 布局](./docs/topics/13-solidity-contracts/S-SOLID-01-language-storage.md) |
-| 176 | `S-SOLID-02` | [合约安全：重入、权限与 OWASP](./docs/topics/13-solidity-contracts/S-SOLID-02-security-reentrancy.md) |
-| 177 | `S-SOLID-03` | [ERC-20 / 721 / 1155 标准与实现](./docs/topics/13-solidity-contracts/S-SOLID-03-erc-standards.md) |
-| 178 | `S-SOLID-04` | [可升级合约：Proxy / UUPS / 存储槽](./docs/topics/13-solidity-contracts/S-SOLID-04-upgradeable-proxy.md) |
-| 179 | `S-SOLID-05` | [Gas 优化与设计模式](./docs/topics/13-solidity-contracts/S-SOLID-05-gas-optimization.md) |
-| 180 | `S-SOLID-06` | [Foundry 测试与审计清单](./docs/topics/13-solidity-contracts/S-SOLID-06-testing-audit.md) |
-| 181 | `S-SOLID-07` | [DeFi 合约模式：AMM / Oracle / 闪电贷](./docs/topics/13-solidity-contracts/S-SOLID-07-defi-patterns.md) |
-| 182 | `S-SOLID-08` | [合约与 Go 后端架构边界](./docs/topics/13-solidity-contracts/S-SOLID-08-contract-go-boundary.md) |
-| 183 | `S-EXCH-01` | [CEX 撮合引擎与订单簿架构](./docs/topics/14-dex-cex-engineering/S-EXCH-01-cex-matching-engine.md) |
-| 184 | `S-EXCH-02` | [充值、提现与链上钱包体系](./docs/topics/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md) |
-| 185 | `S-EXCH-03` | [账户体系与资金账务（复式记账）](./docs/topics/14-dex-cex-engineering/S-EXCH-03-account-ledger.md) |
-| 186 | `S-EXCH-04` | [合约交易：保证金、强平、资金费率](./docs/topics/14-dex-cex-engineering/S-EXCH-04-futures-margin-liquidation.md) |
-| 187 | `S-EXCH-05` | [风控、反洗钱与对账体系](./docs/topics/14-dex-cex-engineering/S-EXCH-05-risk-reconciliation.md) |
-| 188 | `S-EXCH-06` | [DEX AMM、流动性池与 LP 收益](./docs/topics/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity.md) |
-| 189 | `S-EXCH-07` | [DEX 聚合路由、滑点与 Gas 优化](./docs/topics/14-dex-cex-engineering/S-EXCH-07-aggregator-slippage.md) |
-| 190 | `S-EXCH-08` | [MEV、抢跑与三明治攻击防护](./docs/topics/14-dex-cex-engineering/S-EXCH-08-mev-sandwich.md) |
-| 191 | `S-EXCH-09` | [CEX 与 DEX 混合架构（CeDeFi）](./docs/topics/14-dex-cex-engineering/S-EXCH-09-hybrid-cex-dex.md) |
-| 192 | `S-EXCH-10` | [链上成交事件驱动 K 线与行情聚合](./docs/topics/14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation.md) |
-| 193 | `S-EXCH-11` | [WebSocket 行情 Hub 与连接治理](./docs/topics/14-dex-cex-engineering/S-EXCH-11-websocket-market-hub.md) |
-| 194 | `S-EXCH-12` | [Token 发行平台：毕业、分账与返佣提现](./docs/topics/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate.md) |
-| 195 | `S-EXCH-13` | [CEX 端到端交易系统架构（45 分钟白板）](./docs/topics/14-dex-cex-engineering/S-EXCH-13-cex-end-to-end-architecture.md) |
-| 196 | `S-EXCH-14` | [Web3 交易所全栈架构（链上 DEX + 链下 Go）](./docs/topics/14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture.md) |
-| 197 | `S-EXCH-15` | [交易所清结算、对账与高可用架构](./docs/topics/14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery.md) |
-| 198 | `S-EXCH-16` | [永续合约撮合与仓位引擎架构](./docs/topics/14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position.md) |
-| 199 | `S-EXCH-17` | [Go 可运行确定性撮合引擎：价格时间优先与订单语义](./docs/topics/14-dex-cex-engineering/S-EXCH-17-runnable-deterministic-matching-engine.md) |
-| 200 | `S-EXCH-18` | [撮合 WAL、快照与确定性回放：崩溃一致性实战](./docs/topics/14-dex-cex-engineering/S-EXCH-18-wal-snapshot-replay.md) |
-| 201 | `S-EXCH-19` | [行情序号、快照桥接与 Gap Recovery](./docs/topics/14-dex-cex-engineering/S-EXCH-19-market-data-sequence-gap-recovery.md) |
-| 202 | `S-EXCH-20` | [FIX Session：序号、Resend、Gap Fill 与断线恢复](./docs/topics/14-dex-cex-engineering/S-EXCH-20-fix-session-sequence-recovery.md) |
-| 203 | `S-EXCH-21` | [STP 自成交防护：撮合语义、账户边界与监控合规](./docs/topics/14-dex-cex-engineering/S-EXCH-21-self-trade-prevention-surveillance.md) |
-| 204 | `S-EXCH-22` | [集合竞价与撮合性能验证：清算价、分配和 Benchmark](./docs/topics/14-dex-cex-engineering/S-EXCH-22-call-auction-performance-validation.md) |
-| 205 | `S-EXCH-23` | [预测市场 CTF、Outcome Token 与市场生命周期](./docs/topics/14-dex-cex-engineering/S-EXCH-23-prediction-market-ctf-lifecycle.md) |
-| 206 | `S-EXCH-24` | [CLOB-first 预测市场：EIP-712 订单与链上结算](./docs/topics/14-dex-cex-engineering/S-EXCH-24-prediction-market-clob-eip712-settlement.md) |
-| 207 | `S-EXCH-25` | [预测市场预言机、事件数据源与争议仲裁](./docs/topics/14-dex-cex-engineering/S-EXCH-25-prediction-market-oracle-dispute-resolution.md) |
-| 208 | `S-EXCH-26` | [预测市场安全不变量、测试矩阵与主网上线](./docs/topics/14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet.md) |
-| 209 | `S-EXCH-27` | [PancakeSwap V2 与 V3：AMM、流动性与后端集成差异](./docs/topics/14-dex-cex-engineering/S-EXCH-27-pancakeswap-v2-v3-differences.md) |
-| 210 | `S-EXCH-28` | [CEX/DEX 多级代理：极差费率、计佣账本与后台隔离](./docs/topics/14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate.md) |
-| 211 | `S-EXCH-29` | [DeFi Staking、流动性挖矿与 Yield Farming](./docs/topics/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md) |
-| 212 | `S-EXCH-30` | [Uniswap V2 与 V3 协议机制深挖](./docs/topics/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md) |
-| 213 | `S-EXCH-31` | [DEX Tech Lead 45 分钟架构白板](./docs/topics/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md) |
+| 139 | `S-BC-13` | [Gas / Fee 计费与多链费用差异](./docs/topics/12-blockchain-web3/S-BC-13-gas-fee-multichain.md) |
+| 140 | `S-BC-14` | [EVM 公链全景速览：L1、侧链、Rollup 与接入差异](./docs/topics/12-blockchain-web3/S-BC-14-evm-chains-landscape-integration.md) |
+| 141 | `S-WALLET-01` | [多链钱包 Chain Adapter 与能力矩阵](./docs/topics/17-multichain-wallet/S-WALLET-01-chain-adapter-capability-matrix.md) |
+| 142 | `S-WALLET-02` | [Bitcoin UTXO、Coin Selection、PSBT 与手续费替换](./docs/topics/17-multichain-wallet/S-WALLET-02-bitcoin-utxo-psbt-fee-bump.md) |
+| 143 | `S-WALLET-03` | [Solana 账户模型、PDA 与交易生命周期](./docs/topics/17-multichain-wallet/S-WALLET-03-solana-account-pda-transaction.md) |
+| 144 | `S-WALLET-04` | [Cosmos SDK、CometBFT、IBC 与账户 Sequence](./docs/topics/17-multichain-wallet/S-WALLET-04-cosmos-cometbft-ibc-sequence.md) |
+| 145 | `S-WALLET-05` | [Sui Object 与 Aptos Resource 模型对比](./docs/topics/17-multichain-wallet/S-WALLET-05-sui-aptos-state-model.md) |
+| 146 | `S-WALLET-06` | [充值地址、归集、Nonce/UTXO 预占与恢复](./docs/topics/17-multichain-wallet/S-WALLET-06-deposit-sweep-reservation-recovery.md) |
+| 147 | `S-WALLET-07` | [MPC/TSS 的 DKG、Reshare 与故障恢复](./docs/topics/17-multichain-wallet/S-WALLET-07-mpc-dkg-reshare-recovery.md) |
+| 148 | `S-WALLET-08` | [Solana Go SDK 实战：离线构建、签名与确认状态](./docs/topics/17-multichain-wallet/S-WALLET-08-solana-go-sdk-transaction.md) |
+| 149 | `S-WALLET-09` | [Cosmos SDK Go 实战：TxBuilder、SIGN_MODE_DIRECT 与 Sequence](./docs/topics/17-multichain-wallet/S-WALLET-09-cosmos-go-sdk-sign-mode-direct.md) |
+| 150 | `S-WALLET-10` | [Aptos Go SDK 实战：BCS 交易、域分离签名与执行跟踪](./docs/topics/17-multichain-wallet/S-WALLET-10-aptos-go-sdk-bcs-transaction.md) |
+| 151 | `S-WALLET-11` | [Sui Go 集成实战：Object、Address Balance 与能力演进](./docs/topics/17-multichain-wallet/S-WALLET-11-sui-go-capability-adapter.md) |
+| 152 | `S-WALLET-12` | [TRON / TRC20 钱包：资源、权限与交易生命周期](./docs/topics/17-multichain-wallet/S-WALLET-12-tron-trc20-resource-transaction.md) |
+| 153 | `S-PAY-01` | [Web3 支付状态机、幂等、Webhook 与冲正](./docs/topics/18-web3-payments-stablecoin/S-PAY-01-payment-state-idempotency-reversal.md) |
+| 154 | `S-PAY-02` | [稳定币发行人控制、跨链转移与结算风险](./docs/topics/18-web3-payments-stablecoin/S-PAY-02-stablecoin-issuer-crosschain-risk.md) |
+| 155 | `S-PAY-03` | [Treasury、流动性与多链资金再平衡](./docs/topics/18-web3-payments-stablecoin/S-PAY-03-treasury-liquidity-rebalancing.md) |
+| 156 | `S-PAY-04` | [支付账本、清结算与三方对账](./docs/topics/18-web3-payments-stablecoin/S-PAY-04-ledger-clearing-settlement-reconciliation.md) |
+| 157 | `S-PAY-05` | [KYC/KYB、Travel Rule 与制裁筛查架构](./docs/topics/18-web3-payments-stablecoin/S-PAY-05-compliance-travel-rule-sanctions.md) |
+| 158 | `S-PAY-06` | [机构托管、DvP 清算、RWA 生命周期与 ISO 20022](./docs/topics/18-web3-payments-stablecoin/S-PAY-06-institutional-custody-rwa-iso20022.md) |
+| 159 | `S-NODE-01` | [Ethereum EL/CL、Full/Archive Node 与同步模式](./docs/topics/19-node-rpc-staking/S-NODE-01-ethereum-node-architecture-sync.md) |
+| 160 | `S-NODE-02` | [RPC 高可用：多 Provider、Quorum、Hedging 与缓存](./docs/topics/19-node-rpc-staking/S-NODE-02-rpc-ha-quorum-hedging-cache.md) |
+| 161 | `S-NODE-03` | [Validator、Staking、Slashing 与密钥生命周期](./docs/topics/19-node-rpc-staking/S-NODE-03-validator-staking-slashing-keys.md) |
+| 162 | `S-NODE-04` | [链上数据平台：Backfill、实时流、Trace 与 Schema](./docs/topics/19-node-rpc-staking/S-NODE-04-chain-data-platform.md) |
+| 163 | `S-NODE-05` | [Relayer 与交易管理器：Nonce、Fee、Replacement、Finality](./docs/topics/19-node-rpc-staking/S-NODE-05-relayer-transaction-manager.md) |
+| 164 | `S-NODE-06` | [节点运维：升级、快照、Pruning、监控与 Runbook](./docs/topics/19-node-rpc-staking/S-NODE-06-node-operations-runbook.md) |
+| 165 | `S-NODE-07` | [Canonical Backfill + Realtime Merge 与 Reorg 提交协议](./docs/topics/19-node-rpc-staking/S-NODE-07-canonical-backfill-realtime-merge.md) |
+| 166 | `S-NODE-08` | [Trace、State Diff、版本化 Decoder 与链数据质量](./docs/topics/19-node-rpc-staking/S-NODE-08-trace-state-diff-versioned-decoder-quality.md) |
+| 167 | `S-NODE-09` | [非 EVM 在线 SDK：提交、确认、故障注入与升级兼容](./docs/topics/19-node-rpc-staking/S-NODE-09-non-evm-online-sdk-fault-injection.md) |
+| 168 | `S-NODE-10` | [链数据列存：ClickHouse 建模、Reorg 与 Lakehouse 分层](./docs/topics/19-node-rpc-staking/S-NODE-10-chain-data-clickhouse-lakehouse.md) |
+| 169 | `S-PROTO-01` | [Ethereum PoS、Fork Choice、Finality 与弱主观性](./docs/topics/20-protocol-consensus-security/S-PROTO-01-ethereum-pos-fork-choice-finality.md) |
+| 170 | `S-PROTO-02` | [BFT / CometBFT：轮次、锁、安全性与活性](./docs/topics/20-protocol-consensus-security/S-PROTO-02-bft-cometbft-round-lock-safety-liveness.md) |
+| 171 | `S-PROTO-03` | [Blob、DA 与 PeerDAS：从 EIP-4844 到 Fusaka](./docs/topics/20-protocol-consensus-security/S-PROTO-03-blob-da-peerdas-security.md) |
+| 172 | `S-PROTO-04` | [协议升级、状态迁移与不可回滚边界](./docs/topics/20-protocol-consensus-security/S-PROTO-04-protocol-upgrade-state-migration.md) |
+| 173 | `S-PROTO-05` | [经典共识 vs 链上共识：Paxos/Raft/PBFT 与 PoW/PoS/DPoS/BFT](./docs/topics/20-protocol-consensus-security/S-PROTO-05-classic-vs-onchain-consensus.md) |
+| 174 | `S-SEC-01` | [Web3 威胁建模、IAM 与信任边界](./docs/topics/21-security-engineering/S-SEC-01-web3-threat-model-iam-trust-boundaries.md) |
+| 175 | `S-SEC-02` | [Key Ceremony、远程签名机 Fencing 与恢复](./docs/topics/21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) |
+| 176 | `S-SEC-03` | [SBOM、SLSA Provenance 与发布准入](./docs/topics/21-security-engineering/S-SEC-03-sbom-provenance-release-admission.md) |
+| 177 | `S-SEC-04` | [Fuzz、Property、Differential Test 与安全事件响应](./docs/topics/21-security-engineering/S-SEC-04-security-testing-incident-response.md) |
+| 178 | `S-SOLID-01` | [Solidity 语言基础与 storage 布局](./docs/topics/13-solidity-contracts/S-SOLID-01-language-storage.md) |
+| 179 | `S-SOLID-02` | [合约安全：重入、权限与 OWASP](./docs/topics/13-solidity-contracts/S-SOLID-02-security-reentrancy.md) |
+| 180 | `S-SOLID-03` | [ERC-20 / 721 / 1155 标准与实现](./docs/topics/13-solidity-contracts/S-SOLID-03-erc-standards.md) |
+| 181 | `S-SOLID-04` | [可升级合约：Proxy / UUPS / 存储槽](./docs/topics/13-solidity-contracts/S-SOLID-04-upgradeable-proxy.md) |
+| 182 | `S-SOLID-05` | [Gas 优化与设计模式](./docs/topics/13-solidity-contracts/S-SOLID-05-gas-optimization.md) |
+| 183 | `S-SOLID-06` | [Foundry 测试与审计清单](./docs/topics/13-solidity-contracts/S-SOLID-06-testing-audit.md) |
+| 184 | `S-SOLID-07` | [DeFi 合约模式：AMM / Oracle / 闪电贷](./docs/topics/13-solidity-contracts/S-SOLID-07-defi-patterns.md) |
+| 185 | `S-SOLID-08` | [合约与 Go 后端架构边界](./docs/topics/13-solidity-contracts/S-SOLID-08-contract-go-boundary.md) |
+| 186 | `S-EXCH-01` | [CEX 撮合引擎与订单簿架构](./docs/topics/14-dex-cex-engineering/S-EXCH-01-cex-matching-engine.md) |
+| 187 | `S-EXCH-02` | [充值、提现与链上钱包体系](./docs/topics/14-dex-cex-engineering/S-EXCH-02-deposit-withdraw-wallet.md) |
+| 188 | `S-EXCH-03` | [账户体系与资金账务（复式记账）](./docs/topics/14-dex-cex-engineering/S-EXCH-03-account-ledger.md) |
+| 189 | `S-EXCH-04` | [合约交易：保证金、强平、资金费率](./docs/topics/14-dex-cex-engineering/S-EXCH-04-futures-margin-liquidation.md) |
+| 190 | `S-EXCH-05` | [风控、反洗钱与对账体系](./docs/topics/14-dex-cex-engineering/S-EXCH-05-risk-reconciliation.md) |
+| 191 | `S-EXCH-06` | [DEX AMM、流动性池与 LP 收益](./docs/topics/14-dex-cex-engineering/S-EXCH-06-dex-amm-liquidity.md) |
+| 192 | `S-EXCH-07` | [DEX 聚合路由、滑点与 Gas 优化](./docs/topics/14-dex-cex-engineering/S-EXCH-07-aggregator-slippage.md) |
+| 193 | `S-EXCH-08` | [MEV、抢跑与三明治攻击防护](./docs/topics/14-dex-cex-engineering/S-EXCH-08-mev-sandwich.md) |
+| 194 | `S-EXCH-09` | [CEX 与 DEX 混合架构（CeDeFi）](./docs/topics/14-dex-cex-engineering/S-EXCH-09-hybrid-cex-dex.md) |
+| 195 | `S-EXCH-10` | [链上成交事件驱动 K 线与行情聚合](./docs/topics/14-dex-cex-engineering/S-EXCH-10-kline-event-aggregation.md) |
+| 196 | `S-EXCH-11` | [WebSocket 行情 Hub 与连接治理](./docs/topics/14-dex-cex-engineering/S-EXCH-11-websocket-market-hub.md) |
+| 197 | `S-EXCH-12` | [Token 发行平台：毕业、分账与返佣提现](./docs/topics/14-dex-cex-engineering/S-EXCH-12-token-launch-rebate.md) |
+| 198 | `S-EXCH-13` | [CEX 端到端交易系统架构（45 分钟白板）](./docs/topics/14-dex-cex-engineering/S-EXCH-13-cex-end-to-end-architecture.md) |
+| 199 | `S-EXCH-14` | [Web3 交易所全栈架构（链上 DEX + 链下 Go）](./docs/topics/14-dex-cex-engineering/S-EXCH-14-web3-exchange-fullstack-architecture.md) |
+| 200 | `S-EXCH-15` | [交易所清结算、对账与高可用架构](./docs/topics/14-dex-cex-engineering/S-EXCH-15-settlement-ha-disaster-recovery.md) |
+| 201 | `S-EXCH-16` | [永续合约撮合与仓位引擎架构](./docs/topics/14-dex-cex-engineering/S-EXCH-16-perpetual-matching-position.md) |
+| 202 | `S-EXCH-17` | [Go 可运行确定性撮合引擎：价格时间优先与订单语义](./docs/topics/14-dex-cex-engineering/S-EXCH-17-runnable-deterministic-matching-engine.md) |
+| 203 | `S-EXCH-18` | [撮合 WAL、快照与确定性回放：崩溃一致性实战](./docs/topics/14-dex-cex-engineering/S-EXCH-18-wal-snapshot-replay.md) |
+| 204 | `S-EXCH-19` | [行情序号、快照桥接与 Gap Recovery](./docs/topics/14-dex-cex-engineering/S-EXCH-19-market-data-sequence-gap-recovery.md) |
+| 205 | `S-EXCH-20` | [FIX Session：序号、Resend、Gap Fill 与断线恢复](./docs/topics/14-dex-cex-engineering/S-EXCH-20-fix-session-sequence-recovery.md) |
+| 206 | `S-EXCH-21` | [STP 自成交防护：撮合语义、账户边界与监控合规](./docs/topics/14-dex-cex-engineering/S-EXCH-21-self-trade-prevention-surveillance.md) |
+| 207 | `S-EXCH-22` | [集合竞价与撮合性能验证：清算价、分配和 Benchmark](./docs/topics/14-dex-cex-engineering/S-EXCH-22-call-auction-performance-validation.md) |
+| 208 | `S-EXCH-23` | [预测市场 CTF、Outcome Token 与市场生命周期](./docs/topics/14-dex-cex-engineering/S-EXCH-23-prediction-market-ctf-lifecycle.md) |
+| 209 | `S-EXCH-24` | [CLOB-first 预测市场：EIP-712 订单与链上结算](./docs/topics/14-dex-cex-engineering/S-EXCH-24-prediction-market-clob-eip712-settlement.md) |
+| 210 | `S-EXCH-25` | [预测市场预言机、事件数据源与争议仲裁](./docs/topics/14-dex-cex-engineering/S-EXCH-25-prediction-market-oracle-dispute-resolution.md) |
+| 211 | `S-EXCH-26` | [预测市场安全不变量、测试矩阵与主网上线](./docs/topics/14-dex-cex-engineering/S-EXCH-26-prediction-market-security-testing-mainnet.md) |
+| 212 | `S-EXCH-27` | [PancakeSwap V2 与 V3：AMM、流动性与后端集成差异](./docs/topics/14-dex-cex-engineering/S-EXCH-27-pancakeswap-v2-v3-differences.md) |
+| 213 | `S-EXCH-28` | [CEX/DEX 多级代理：极差费率、计佣账本与后台隔离](./docs/topics/14-dex-cex-engineering/S-EXCH-28-affiliate-tiered-rate-rebate.md) |
+| 214 | `S-EXCH-29` | [DeFi Staking、流动性挖矿与 Yield Farming](./docs/topics/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md) |
+| 215 | `S-EXCH-30` | [Uniswap V2 与 V3 协议机制深挖](./docs/topics/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md) |
+| 216 | `S-EXCH-31` | [DEX Tech Lead 45 分钟架构白板](./docs/topics/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md) |
 
 ### 综合 · 领导力与 AI
 
 | 序号 | 文档 ID | 标题 |
 |------|------|------|
-| 214 | `S-LEAD-01` | [线上事故复盘结构](./docs/topics/07-engineering-leadership/S-LEAD-01-incident-postmortem.md) |
-| 215 | `S-LEAD-02` | [技术债识别与偿还策略](./docs/topics/07-engineering-leadership/S-LEAD-02-tech-debt.md) |
-| 216 | `S-LEAD-03` | [带团队与 Code Review 文化](./docs/topics/07-engineering-leadership/S-LEAD-03-code-review-culture.md) |
-| 217 | `S-LEAD-04` | [Staff 技术战略、无职权影响力与案例表达](./docs/topics/07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case.md) |
-| 218 | `S-LEAD-05` | [跨团队高风险迁移、灰度切换与回滚边界](./docs/topics/07-engineering-leadership/S-LEAD-05-cross-team-migration-case.md) |
-| 219 | `S-AI-01` | [Go 接入大模型 API：流式、重试、超时](./docs/topics/10-ai-engineering/S-AI-01-llm-api-integration.md) |
-| 220 | `S-AI-02` | [RAG 架构：分块、向量检索与 Go 落地](./docs/topics/10-ai-engineering/S-AI-02-rag-architecture.md) |
-| 221 | `S-AI-03` | [AI Agent 与 Function Calling](./docs/topics/10-ai-engineering/S-AI-03-agent-tool-calling.md) |
-| 222 | `S-AI-04` | [Prompt 工程与 Context 窗口管理](./docs/topics/10-ai-engineering/S-AI-04-prompt-context.md) |
-| 223 | `S-AI-05` | [LLM 应用安全：注入、PII、护栏](./docs/topics/10-ai-engineering/S-AI-05-llm-security.md) |
-| 224 | `S-AI-06` | [LLM 可观测性、成本与延迟优化](./docs/topics/10-ai-engineering/S-AI-06-llm-observability-cost.md) |
-| 225 | `S-AI-07` | [Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署](./docs/topics/10-ai-engineering/S-AI-07-mcp-server-go.md) |
-| 226 | `S-AI-08` | [多模态与语音接入：图像、音频在 Go 服务中的工程实践](./docs/topics/10-ai-engineering/S-AI-08-multimodal-voice.md) |
-| 227 | `S-AI-09` | [Agent 工作流、Human-in-the-loop 与可靠发布控制面](./docs/topics/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) |
-| 228 | `S-AI-10` | [Persona、分层 Memory 与反馈学习治理](./docs/topics/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) |
-| 229 | `S-AI-11` | [MCP 与 A2A：Tool、Agent、任务生命周期与跨框架互操作](./docs/topics/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) |
-| 230 | `S-AI-12` | [ERC-8004：Agent 身份、信誉、验证与钱包绑定](./docs/topics/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md) |
-| 231 | `S-AI-13` | [x402、x402b 与 ERC-8183：Agent 支付、托管、争议和对账](./docs/topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) |
-| 232 | `S-AI-14` | [Crypto Agent SDK、开放平台、Marketplace 与 Launchpad 架构](./docs/topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) |
+| 217 | `S-LEAD-01` | [线上事故复盘结构](./docs/topics/07-engineering-leadership/S-LEAD-01-incident-postmortem.md) |
+| 218 | `S-LEAD-02` | [技术债识别与偿还策略](./docs/topics/07-engineering-leadership/S-LEAD-02-tech-debt.md) |
+| 219 | `S-LEAD-03` | [带团队与 Code Review 文化](./docs/topics/07-engineering-leadership/S-LEAD-03-code-review-culture.md) |
+| 220 | `S-LEAD-04` | [Staff 技术战略、无职权影响力与案例表达](./docs/topics/07-engineering-leadership/S-LEAD-04-staff-strategy-influence-case.md) |
+| 221 | `S-LEAD-05` | [跨团队高风险迁移、灰度切换与回滚边界](./docs/topics/07-engineering-leadership/S-LEAD-05-cross-team-migration-case.md) |
+| 222 | `S-AI-01` | [Go 接入大模型 API：流式、重试、超时](./docs/topics/10-ai-engineering/S-AI-01-llm-api-integration.md) |
+| 223 | `S-AI-02` | [RAG 架构：分块、向量检索与 Go 落地](./docs/topics/10-ai-engineering/S-AI-02-rag-architecture.md) |
+| 224 | `S-AI-03` | [AI Agent 与 Function Calling](./docs/topics/10-ai-engineering/S-AI-03-agent-tool-calling.md) |
+| 225 | `S-AI-04` | [Prompt 工程与 Context 窗口管理](./docs/topics/10-ai-engineering/S-AI-04-prompt-context.md) |
+| 226 | `S-AI-05` | [LLM 应用安全：注入、PII、护栏](./docs/topics/10-ai-engineering/S-AI-05-llm-security.md) |
+| 227 | `S-AI-06` | [LLM 可观测性、成本与延迟优化](./docs/topics/10-ai-engineering/S-AI-06-llm-observability-cost.md) |
+| 228 | `S-AI-07` | [Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署](./docs/topics/10-ai-engineering/S-AI-07-mcp-server-go.md) |
+| 229 | `S-AI-08` | [多模态与语音接入：图像、音频在 Go 服务中的工程实践](./docs/topics/10-ai-engineering/S-AI-08-multimodal-voice.md) |
+| 230 | `S-AI-09` | [Agent 工作流、Human-in-the-loop 与可靠发布控制面](./docs/topics/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) |
+| 231 | `S-AI-10` | [Persona、分层 Memory 与反馈学习治理](./docs/topics/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) |
+| 232 | `S-AI-11` | [MCP 与 A2A：Tool、Agent、任务生命周期与跨框架互操作](./docs/topics/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) |
+| 233 | `S-AI-12` | [ERC-8004：Agent 身份、信誉、验证与钱包绑定](./docs/topics/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md) |
+| 234 | `S-AI-13` | [x402、x402b 与 ERC-8183：Agent 支付、托管、争议和对账](./docs/topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) |
+| 235 | `S-AI-14` | [Crypto Agent SDK、开放平台、Marketplace 与 Launchpad 架构](./docs/topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) |
 
 <!-- QUESTION_TABLE_END -->
 ## 可运行代码
@@ -392,7 +395,7 @@ mkdocs serve   # http://127.0.0.1:8000
 | [scripts/generate_redirect_maps.py](./scripts/generate_redirect_maps.py) | 生成 `interview/*` → `topics/*` 旧路径重定向 |
 | [scripts/generate_nav_pages.py](./scripts/generate_nav_pages.py) | 生成 `topics/.pages` 与各模块 `.pages`（三级侧栏专题标题） |
 | [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `topics.yaml` 更新 README 专题全表（序号 + 文档 ID + 标题） |
-| [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 232 篇正文、角色优先级与证据标签一致性 |
+| [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 235 篇正文、角色优先级与证据标签一致性 |
 
 ## 引用来源
 

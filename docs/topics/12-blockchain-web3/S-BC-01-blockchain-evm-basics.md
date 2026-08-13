@@ -120,6 +120,7 @@ flowchart LR
 - **充值**：用户转 ERC20 到平台地址 → 索引器按链的 safe/finalized 能力、资产价值和风控策略入账；固定 N 块只能是显式配置的替代策略
 - **Gas 代付**：元交易 / Paymaster（Account Abstraction）
 - **多 EVM 链**：若使用同一私钥，地址通常相同，但 chain ID、nonce、余额、合约代码和安全假设彼此独立；非 EVM 链的派生与地址格式另论
+- **链族与接入差异**：独立 L1、侧链、Optimistic/ZK Rollup 的全景对照见 [S-BC-14](./S-BC-14-evm-chains-landscape-integration.md)
 
 ## 排查与工具
 

@@ -14,3 +14,5 @@ nav:
   - "MPC/TSS 与 CEX 托管签名架构": S-BC-10-mpc-tss-custody.md
   - "Rollup Finality / DA / 强制退出": S-BC-11-rollup-finality-da-proof-security.md
   - "跨链桥认证 / 重放 / 限额": S-BC-12-cross-chain-message-bridge-security.md
+  - "Gas / Fee 计费与多链费用差异": S-BC-13-gas-fee-multichain.md
+  - "EVM 公链全景速览：L1、侧链、Rollup 与接入差异": S-BC-14-evm-chains-landscape-integration.md

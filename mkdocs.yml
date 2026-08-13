@@ -1,5 +1,5 @@
 site_name: Go · Agent · Web3 工程知识库
-site_description: Go 生产工程、Web3 链上基建与资金链路、AI/Crypto Agent 控制面的开源工程知识库（233 篇）
+site_description: Go 生产工程、Web3 链上基建与资金链路、AI/Crypto Agent 控制面的开源工程知识库（235 篇）
 site_url: https://twodog-tt.github.io/Golang-development-manual/
 repo_url: https://github.com/twodog-tt/Golang-development-manual
 repo_name: twodog-tt/Golang-development-manual
@@ -183,6 +183,7 @@ plugins:
         interview/12-blockchain-web3/S-BC-11-rollup-finality-da-proof-security.md: topics/12-blockchain-web3/S-BC-11-rollup-finality-da-proof-security.md
         interview/12-blockchain-web3/S-BC-12-cross-chain-message-bridge-security.md: topics/12-blockchain-web3/S-BC-12-cross-chain-message-bridge-security.md
         interview/12-blockchain-web3/S-BC-13-gas-fee-multichain.md: topics/12-blockchain-web3/S-BC-13-gas-fee-multichain.md
+        interview/12-blockchain-web3/S-BC-14-evm-chains-landscape-integration.md: topics/12-blockchain-web3/S-BC-14-evm-chains-landscape-integration.md
         interview/12-blockchain-web3/index.md: topics/12-blockchain-web3/index.md
         interview/13-solidity-contracts/S-SOLID-01-language-storage.md: topics/13-solidity-contracts/S-SOLID-01-language-storage.md
         interview/13-solidity-contracts/S-SOLID-02-security-reentrancy.md: topics/13-solidity-contracts/S-SOLID-02-security-reentrancy.md
@@ -274,12 +275,14 @@ plugins:
         interview/20-protocol-consensus-security/S-PROTO-02-bft-cometbft-round-lock-safety-liveness.md: topics/20-protocol-consensus-security/S-PROTO-02-bft-cometbft-round-lock-safety-liveness.md
         interview/20-protocol-consensus-security/S-PROTO-03-blob-da-peerdas-security.md: topics/20-protocol-consensus-security/S-PROTO-03-blob-da-peerdas-security.md
         interview/20-protocol-consensus-security/S-PROTO-04-protocol-upgrade-state-migration.md: topics/20-protocol-consensus-security/S-PROTO-04-protocol-upgrade-state-migration.md
+        interview/20-protocol-consensus-security/S-PROTO-05-classic-vs-onchain-consensus.md: topics/20-protocol-consensus-security/S-PROTO-05-classic-vs-onchain-consensus.md
         interview/20-protocol-consensus-security/index.md: topics/20-protocol-consensus-security/index.md
         interview/21-security-engineering/S-SEC-01-web3-threat-model-iam-trust-boundaries.md: topics/21-security-engineering/S-SEC-01-web3-threat-model-iam-trust-boundaries.md
         interview/21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md: topics/21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md
         interview/21-security-engineering/S-SEC-03-sbom-provenance-release-admission.md: topics/21-security-engineering/S-SEC-03-sbom-provenance-release-admission.md
         interview/21-security-engineering/S-SEC-04-security-testing-incident-response.md: topics/21-security-engineering/S-SEC-04-security-testing-incident-response.md
         interview/21-security-engineering/index.md: topics/21-security-engineering/index.md
+        interview/_meta/article-structure-checklist.md: topics/_meta/article-structure-checklist.md
         interview/_meta/mapping.md: topics/_meta/mapping.md
         interview/_meta/p0-knowledge-graph.md: topics/_meta/p0-knowledge-graph.md
         interview/_meta/quality-review.md: topics/_meta/quality-review.md

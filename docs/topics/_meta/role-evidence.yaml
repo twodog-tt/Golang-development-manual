@@ -8,7 +8,7 @@
 # topics.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
 
 schema_version: 1
-updated_at: "2026-07-31"
+updated_at: "2026-08-13"
 default_priority: p2
 priority_precedence: [p0, p1, p2]
 
@@ -178,6 +178,7 @@ roles:
       - S-BC-01
       - S-BC-02
       - S-BC-05
+      - S-BC-14
 
   ai_agent_platform:
     label: AI Agent Platform / Crypto Agent Ecosystem
@@ -247,6 +248,7 @@ roles:
       - S-PAY-04
       - S-BC-05
       - S-BC-13
+      - S-BC-14
 
   wallet_custody:
     label: 多链钱包与托管
@@ -287,6 +289,7 @@ roles:
       - S-BC-09
       - S-BC-11
       - S-BC-13
+      - S-BC-14
       - S-PAY-01
       - S-PAY-02
       - S-PAY-06
@@ -360,6 +363,7 @@ roles:
       - S-BC-09
       - S-BC-11
       - S-BC-13
+      - S-BC-14
       - S-NODE-01
       - S-NODE-03
       - S-NODE-04
@@ -400,6 +404,7 @@ roles:
       - S-BC-07
       - S-BC-11
       - S-BC-12
+      - S-BC-14
       - S-PROTO-01
       - S-PROTO-02
       - S-PROTO-03
@@ -519,6 +524,7 @@ roles:
       - S-BC-10
       - S-BC-12
       - S-BC-13
+      - S-BC-14
       - S-NODE-01
       - S-NODE-03
       - S-NODE-04
@@ -621,6 +627,7 @@ roles:
       - S-BC-11
       - S-BC-12
       - S-BC-13
+      - S-BC-14
       - S-PROTO-01
       - S-PROTO-02
       - S-PROTO-03

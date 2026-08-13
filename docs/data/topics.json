@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "generated_at": "2026-07-30T12:55:32Z",
-  "count": 232,
+  "generated_at": "2026-08-13T03:31:23Z",
+  "count": 235,
   "roles": [
     {
       "key": "senior_go_backend",
@@ -62,7 +62,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -87,7 +87,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -112,7 +112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -137,7 +137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -162,7 +162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -187,7 +187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -212,7 +212,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -237,7 +237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -262,7 +262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -287,7 +287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -312,7 +312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -337,7 +337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -362,7 +362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -387,7 +387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -412,7 +412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -437,7 +437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -462,7 +462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -487,7 +487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -512,7 +512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -537,7 +537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -562,7 +562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -587,7 +587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -612,7 +612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -637,7 +637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -662,7 +662,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -687,7 +687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -712,7 +712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -737,7 +737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -762,7 +762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -787,7 +787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -812,7 +812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -837,7 +837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -862,7 +862,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -887,7 +887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -912,7 +912,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -923,7 +923,7 @@
       "module_key": "blockchain_web3",
       "resume_focus": false,
       "url": "topics/12-blockchain-web3/S-BC-01-blockchain-evm-basics/",
-      "prompt": "以太坊执行层可视为状态机。传统上区分 **EOA**（由私钥原生授权交易）与 **合约账户**；但 EIP-7702 已允许 EOA 在账户状态中设置持久的代码委托，因此“EOA 永远没有代码、合约账户永远不能主动发起动作”的二分法要加版本语境。Go 后端重点是 nonce、typed transaction、fee、safe/finalized 与 chain ID。",
+      "prompt": "**EVM（Ethereum Virtual Machine）** 是以太坊执行层的确定性虚拟机：给定同一前置世界状态与同一批交易，任何合规客户端算出来的状态转移结果必须一致。 它不是“另一条链”，而是 **怎么执行交易、改账户状态** 的规则引擎；共识（PoS）负责谁出块、哪条链有效，EVM 负责块内交易如何改变状态。 账户上传统区分 **EOA** 与 **合约账户**；EIP-7702 允许 EOA 设置持久代码委托，二分法要加版本语境。Go 后端重点是 nonce、typed transaction、fee、safe/finalized 与 chain ID。",
       "role_priorities": {
         "senior_go_backend": "p1",
         "ai_agent_platform": "p2",
@@ -937,7 +937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -962,7 +962,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -987,7 +987,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1012,7 +1012,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1037,7 +1037,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1062,7 +1062,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1087,7 +1087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1112,7 +1112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1137,7 +1137,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1162,7 +1162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1187,7 +1187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1212,7 +1212,57 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
+      }
+    },
+    {
+      "id": "S-BC-13",
+      "title": "Gas / Fee 计费与多链费用差异",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "topics/12-blockchain-web3/S-BC-13-gas-fee-multichain/",
+      "prompt": "**Gas units** 衡量 EVM 执行与访问资源的消耗；**用户付费** 还要乘上费用市场给出的单价，并在 L2 上叠加 **L1 数据/证明相关费用**。 后端必须拆开三件事：`gasUsed`（执行计量）、`effectiveGasPrice` / tip+baseFee（单价）、以及链特有的 **DA / blob / energy** 附加项。 `eth_estimateGas` 只是当前状态下的模拟上限提示，不是上链保证；跨链不能把一切抽象成 `gasPrice × gasLimit`。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p1",
+        "payments_stablecoin": "p1",
+        "node_rpc_indexer": "p1",
+        "exchange_engineering": "p1",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-08-13"
+      }
+    },
+    {
+      "id": "S-BC-14",
+      "title": "EVM 公链全景速览：L1、侧链、Rollup 与接入差异",
+      "frequency": 5,
+      "module": "12 区块链与 Web3",
+      "module_key": "blockchain_web3",
+      "resume_focus": false,
+      "url": "topics/12-blockchain-web3/S-BC-14-evm-chains-landscape-integration/",
+      "prompt": "**EVM 链不是“一条以太坊换了名字”**。它们通常共享 Solidity、ABI、`0x` 地址、交易签名与一部分 JSON-RPC，但可能使用完全不同的共识、排序器、数据可用性、最终性、费用市场、系统合约和跨链桥。 先按 **独立 L1 / 侧链 / Rollup L2** 分类，再问六件事：谁排序、谁执行、数据放哪、谁确认正确、何时不可逆、资产怎么进出。 Go 后端可以复用 ABI/RPC 基础设施，不能复用一套写死的 chain ID、手续费、确认数、RPC 能力和代币地址。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p1",
+        "payments_stablecoin": "p1",
+        "node_rpc_indexer": "p0",
+        "exchange_engineering": "p1",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1237,7 +1287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1262,7 +1312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1287,7 +1337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1312,7 +1362,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1337,7 +1387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1362,7 +1412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1387,7 +1437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1412,7 +1462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1437,7 +1487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1462,7 +1512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1487,7 +1537,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1512,7 +1562,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1537,7 +1587,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1562,7 +1612,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1587,7 +1637,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1612,7 +1662,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1637,7 +1687,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1662,7 +1712,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1687,7 +1737,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1712,7 +1762,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1737,7 +1787,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1762,7 +1812,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1787,7 +1837,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1812,7 +1862,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1837,7 +1887,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1862,7 +1912,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1887,7 +1937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1912,7 +1962,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1937,7 +1987,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1962,7 +2012,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -1987,7 +2037,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2012,7 +2062,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2037,7 +2087,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2062,7 +2112,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2087,7 +2137,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2112,7 +2162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2137,7 +2187,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2162,7 +2212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2187,7 +2237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2212,7 +2262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2237,7 +2287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2262,7 +2312,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2287,7 +2337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2312,7 +2362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2337,7 +2387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2362,7 +2412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2387,7 +2437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2412,7 +2462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2437,7 +2487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2462,7 +2512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2487,7 +2537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2512,7 +2562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2537,7 +2587,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2562,7 +2612,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2587,7 +2637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2612,7 +2662,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2637,7 +2687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2662,7 +2712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2687,7 +2737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2712,7 +2762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2737,7 +2787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2762,7 +2812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2787,7 +2837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2812,7 +2862,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2837,7 +2887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2862,7 +2912,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2887,7 +2937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2912,7 +2962,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2937,7 +2987,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2962,7 +3012,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -2987,7 +3037,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3012,7 +3062,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3037,7 +3087,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3062,7 +3112,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3087,7 +3137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3112,7 +3162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3137,7 +3187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3162,7 +3212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3187,7 +3237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3212,7 +3262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3237,7 +3287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3262,7 +3312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3287,7 +3337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3312,7 +3362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3337,7 +3387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3362,7 +3412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3387,7 +3437,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3412,7 +3462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3437,7 +3487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3462,7 +3512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3487,7 +3537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3512,7 +3562,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3537,7 +3587,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3562,7 +3612,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3587,7 +3637,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3612,7 +3662,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3637,7 +3687,7 @@
         "basis": "experience_pattern",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3662,7 +3712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3687,7 +3737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3712,7 +3762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3737,7 +3787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3762,7 +3812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3787,7 +3837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3812,7 +3862,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3837,7 +3887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3862,7 +3912,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3887,7 +3937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3912,7 +3962,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3937,7 +3987,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3962,7 +4012,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -3987,7 +4037,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4012,7 +4062,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4037,7 +4087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4062,7 +4112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4087,7 +4137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4112,7 +4162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4137,7 +4187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4162,7 +4212,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4187,7 +4237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4212,7 +4262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4237,7 +4287,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4262,7 +4312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4287,7 +4337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4312,7 +4362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4337,7 +4387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4362,7 +4412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4387,7 +4437,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4412,7 +4462,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4423,7 +4473,7 @@
       "module_key": "node_rpc_staking",
       "resume_focus": true,
       "url": "topics/19-node-rpc-staking/S-NODE-04-chain-data-platform/",
-      "prompt": "链上数据平台应把 raw canonical evidence、decoded facts 和业务 projections 分层。Backfill 与 realtime 必须重叠一段并用 block hash/tx/log identity 去重，cursor 不能只存高度；reorg 时标记 orphan、回退 projection 并重放。Receipt/log 是协议化数据，trace/state diff 往往是 client-specific 调试输出，需要独立重资源管线和 schema version。ABI/合约升级后要可重解码，不能只保留扁平业务表。",
+      "prompt": "链上数据平台应把 raw canonical evidence、decoded facts 和业务 projections 分层。Backfill 与 realtime 必须重叠一段并用 block hash/tx/log identity 去重，扫块水位不能只存高度；reorg 时标记 orphan、回退 projection 并重放。Receipt/log 是协议化数据，trace/state diff 往往是 client-specific 调试输出，需要独立重资源管线和 schema version。ABI/合约升级后要可重解码，不能只保留扁平业务表。",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p2",
@@ -4437,7 +4487,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4462,7 +4512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4487,7 +4537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4512,7 +4562,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4537,7 +4587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4562,7 +4612,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4587,7 +4637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4612,7 +4662,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4637,7 +4687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4662,7 +4712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4687,7 +4737,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4712,7 +4762,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4737,7 +4787,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4762,7 +4812,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4787,7 +4837,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4812,7 +4862,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4837,7 +4887,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4862,7 +4912,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4887,7 +4937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4912,7 +4962,32 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
+      }
+    },
+    {
+      "id": "S-PROTO-05",
+      "title": "经典共识 vs 链上共识：Paxos/Raft/PBFT 与 PoW/PoS/DPoS/BFT",
+      "frequency": 5,
+      "module": "20 协议、共识与安全",
+      "module_key": "protocol_consensus_security",
+      "resume_focus": true,
+      "url": "topics/20-protocol-consensus-security/S-PROTO-05-classic-vs-onchain-consensus/",
+      "prompt": "经典共识（Paxos / Raft / PBFT）解决**已知成员、可运维替换**的复制与故障；链上共识 （PoW / PoS / DPoS / 链上 BFT）还要处理**开放或可替换验证者、经济激励、分叉选择与 最终性语义**。etcd 的 Raft 线性一致、Bitcoin 的 N 确认、Ethereum 的 finalized、 CometBFT 的 height commit **不是同一水位**；业务入账必须按链的最终性模型分层，不能 把中间件共识词直接套到链上确认。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p1",
+        "payments_stablecoin": "p1",
+        "node_rpc_indexer": "p0",
+        "exchange_engineering": "p1",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4937,7 +5012,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4962,7 +5037,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -4987,7 +5062,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5012,7 +5087,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5037,7 +5112,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5062,7 +5137,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5087,7 +5162,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5112,7 +5187,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5137,7 +5212,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5162,7 +5237,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5187,7 +5262,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5212,7 +5287,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5237,7 +5312,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5262,7 +5337,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5287,7 +5362,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5312,7 +5387,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5337,7 +5412,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5362,7 +5437,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5387,7 +5462,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5412,7 +5487,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5437,7 +5512,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5462,7 +5537,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5487,7 +5562,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5512,7 +5587,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5537,7 +5612,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5562,7 +5637,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5587,7 +5662,7 @@
         "basis": "source_anchored",
         "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5612,7 +5687,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5637,7 +5712,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5662,7 +5737,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5687,7 +5762,7 @@
         "basis": "source_anchored",
         "reproducibility": "illustrative_artifact",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5712,7 +5787,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5737,7 +5812,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5762,7 +5837,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5787,7 +5862,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5812,7 +5887,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "vendor_or_regulatory_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     },
     {
@@ -5837,7 +5912,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-07-21"
+        "reviewed_at": "2026-08-13"
       }
     }
   ]
