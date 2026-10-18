@@ -71,7 +71,9 @@ def verify(report, serve=False):
                     command += ["server", "start-dev", "--ip", "0.0.0.0", "--db-filename", "/tmp/temporal.db"]
                 capture(command)
                 containers.append(name)
-            wait(lambda: subprocess.run(["docker", "exec", pg, "pg_isready", "-U", "lab"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0, "PostgreSQL")
+            # The image's temporary init server accepts Unix sockets before it
+            # shuts down. Only the final server accepts TCP connections.
+            wait(lambda: subprocess.run(["docker", "exec", pg, "pg_isready", "-h", "127.0.0.1", "-U", "lab"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0, "PostgreSQL TCP")
             wait(lambda: subprocess.run(["docker", "exec", temporal, "temporal", "operator", "namespace", "list"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0, "Temporal")
             pg_port = capture(["docker", "port", pg, "5432/tcp"]).split(":")[-1]
             temporal_port = capture(["docker", "port", temporal, "7233/tcp"]).split(":")[-1]

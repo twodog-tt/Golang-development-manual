@@ -13,8 +13,8 @@
     "real Temporal history replay passes and incompatible workflow is rejected",
     "wallet unbinding revokes sessions and challenges without deleting ledger facts"
   ],
-  "run_id": "stablecoin-ops-b8ac8c787142",
-  "checked_at": "2026-10-18T18:13:37Z",
+  "run_id": "stablecoin-ops-6b6fbbb3f96e",
+  "checked_at": "2026-10-18T18:17:34Z",
   "go": "go version go1.24.3 darwin/arm64",
   "node": "v22.15.0",
   "images": {
@@ -45,6 +45,6 @@
     "examples/stablecoin-ops/internal/ops/schema.sql": "7df4020be019aa57e3fa71100ecc37c42e4b6b54c353bcdaa1e6fc4505bb3060",
     "examples/stablecoin-ops/internal/ops/store.go": "d5fa55727a2f88c8d323ec20e5e171024aad928924f83a33b1a9584294aac18a",
     "examples/stablecoin-ops/internal/ops/workflow.go": "26b0227e6d3624c0b838364b4032677ed91911968a081e2ec70724115f40804d",
-    "examples/stablecoin-ops/verify.py": "088991046662f07e752a9b604d0969b835fbec7e23668ef336ec72d1d878f096"
+    "examples/stablecoin-ops/verify.py": "02007f5375444ffe9b6ec4f173f78eed64bbaba5547bf8c4e041adc613fe578e"
   }
 }
