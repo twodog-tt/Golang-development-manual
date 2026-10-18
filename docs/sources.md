@@ -6,7 +6,7 @@
 > [领域能力优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
 > 代码映射：[topics/_meta/mapping.md](topics/_meta/mapping.md)
 
-## 知识库覆盖范围（238 篇）
+## 知识库覆盖范围（242 篇）
 
 | 模块 | 篇数 | 说明 |
 |------|------|------|
@@ -14,14 +14,14 @@
 | 02 内存与 GC | 15 | 三色标记、逃逸、sync.Pool |
 | 16 Go 生产工程 | 6 | 错误契约、接口、测试、工具链、供应链 |
 | 03 系统设计 | 21 | 秒杀、缓存、MQ、多活、SLO、CDC/Flink 实时风控 |
-| 中间件与数据库 | 26 | MySQL、PostgreSQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
+| 中间件与数据库 | 28 | MySQL、PostgreSQL、Redis、Kafka、RocketMQ、ES、分布式事务 |
 | 06 网络与服务治理 | 7 | Linux/epoll/TCP、gRPC、Gin、JWT、WebSocket |
 | 08 编码练习 | 7 | LRU、限流、连接池、Singleflight、有界批处理 |
-| 10 AI 工程与编程 | 14 | 工作流/HITL、MCP/A2A、ERC-8004、x402/ERC-8183、开放平台/Launchpad |
+| 10 AI 工程与编程 | 15 | 工作流/HITL、MCP/A2A、ERC-8004、x402/ERC-8183、开放平台/Launchpad |
 | 11 解决方案架构 | 8 | DDD、演进、评审、白板 |
 | 12 区块链与 Web3（Go） | 17 | EVM 公链全景与身份核验、交易/finality/reorg、RPC/浏览器 HA、索引、Gas/Fee、Rollup/DA、跨链消息、4337、MPC |
 | 17 多链钱包与托管 | 12 | Bitcoin、TRON/TRC20、Solana/Cosmos/Aptos/Sui Go 实战、归集 |
-| 18 Web3 支付与稳定币 | 6 | 状态机、稳定币、账本、机构托管、DvP、RWA/ISO 20022 |
+| 18 Web3 支付与稳定币 | 7 | 状态机、稳定币、账本、机构托管、DvP、RWA/ISO 20022 |
 | 19 节点、RPC 与 Staking | 10 | EL/CL、RPC HA、canonical merge、trace、ClickHouse/lakehouse、在线 SDK |
 | 20 协议、共识与安全 | 5 | 经典 vs 链上共识、PoS/BFT、fork choice、PeerDAS、状态迁移 |
 | 21 Web3 安全工程 | 4 | 威胁模型、signer fencing、SBOM/provenance、事件响应 |

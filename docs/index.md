@@ -1,7 +1,7 @@
 # Go · Agent · Web3 工程知识库
 
 面向 **Go 生产工程、Web3 链上基建与资金链路、AI / Crypto Agent 控制面** 的开源工程知识沉淀，
-共 **238 篇正文**，并配套可运行示例。
+共 **242 篇正文**，并配套可运行示例。
 
 > **三条并列主线**（按工程场景选用，不必线性通读）：
 >
@@ -70,6 +70,7 @@
 
 | 项目证据 | 知识入口 | 仓库实现 | 当前证据边界 |
 |----------|----------|----------|--------------|
+| Agent 评测与资金可靠性 | [Agent 门禁](topics/10-ai-engineering/S-AI-15-agent-evaluation-release-gates.md) · [账本实战](topics/18-web3-payments-stablecoin/S-PAY-07-postgresql-double-entry-ledger-lab.md) · [Outbox/Inbox](topics/middleware/distributed/S-DIST-06-outbox-inbox-fault-lab.md) · [PITR](topics/middleware/postgresql/S-PG-04-pitr-restore-drill.md) | [统一验证脚本](https://github.com/twodog-tt/Golang-development-manual/blob/master/scripts/verify_reliability_examples.sh) | 离线轨迹门禁 + PostgreSQL/Redis 故障演练；不代表模型质量或生产验收 |
 | 确定性撮合与崩溃恢复 | [撮合引擎](topics/14-dex-cex-engineering/S-EXCH-17-runnable-deterministic-matching-engine.md) · [WAL 回放](topics/14-dex-cex-engineering/S-EXCH-18-wal-snapshot-replay.md) | [matchingengine](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/matchingengine) · [walreplay](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/walreplay) | `deterministic_test`：证明确定性语义与恢复测试，不冒充生产性能 |
 | 多副本 Signer Fence 与签名后端 | [Key Ceremony 与 Fencing](topics/21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) | [signer-project](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/signer-project) | `integration_harness`：覆盖 etcd、PKCS#11/SoftHSM、跨进程 FROST；不等于真实硬件验收 |
 | 四条非 EVM 链 Adapter | [多链钱包专题](topics/17-multichain-wallet/index.md) | [Solana/Cosmos/Aptos/Sui](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/non-evm-sdk) | `integration_harness`：覆盖 fixture、故障与兼容门禁；testnet/localnet 不等于生产 |
@@ -100,7 +101,7 @@ localnet/testnet ≠ 主网兼容。完整定义见
 | 类型 | 篇数 | 重点 |
 |------|-----:|------|
 | [MySQL + GORM](topics/middleware/mysql/index.md) | 7 | 索引、MVCC、复杂 SQL、资金表与锁 |
-| [PostgreSQL](topics/middleware/postgresql/index.md) | 3 | VACUUM/索引、SSI/锁、WAL/HA/pgx |
+| [PostgreSQL](topics/middleware/postgresql/index.md) | 4 | VACUUM/索引、SSI/锁、WAL/HA/pgx |
 | [Redis](topics/middleware/redis/index.md) | 3 | 集群、分布式锁、热点 Key |
 | [Kafka](topics/middleware/kafka/index.md) | 4 | 架构、Producer 与消费语义 |
 | [RocketMQ](topics/middleware/rocketmq/index.md) | 4 | 架构、事务/顺序/延迟与排障 |

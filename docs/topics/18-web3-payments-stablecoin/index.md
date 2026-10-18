@@ -1,6 +1,6 @@
 # 18 Web3 支付与稳定币
 
-6 篇 | 本专题核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
+7 篇 | 本专题核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 > 把“链上转账”提升为可运营的支付系统：状态机、稳定币风险、Treasury、双分录、清结算、对账与合规控制。
 
@@ -12,6 +12,7 @@
 | [S-PAY-04](./S-PAY-04-ledger-clearing-settlement-reconciliation.md) | 支付账本、清结算与三方对账 | ⭐⭐⭐⭐⭐ |
 | [S-PAY-05](./S-PAY-05-compliance-travel-rule-sanctions.md) | KYC/KYB、Travel Rule 与制裁筛查架构 | ⭐⭐⭐⭐⭐ |
 | [S-PAY-06](./S-PAY-06-institutional-custody-rwa-iso20022.md) | 机构托管、DvP 清算、RWA 生命周期与 ISO 20022 | ⭐⭐⭐⭐⭐ |
+| [S-PAY-07](./S-PAY-07-postgresql-double-entry-ledger-lab.md) | PostgreSQL 双分录账本：并发扣款、冻结冲正与故障验证 | ⭐⭐⭐⭐⭐ |
 
 ## 可运行代码
 

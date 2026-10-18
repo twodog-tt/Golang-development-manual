@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from pathlib import Path
+import re
 
 import yaml
 
@@ -107,7 +108,7 @@ def build_table(by_key: dict[str, list[dict]]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def patch_readme(table_block: str) -> None:
+def patch_readme(table_block: str, by_key: dict[str, list[dict]]) -> None:
     readme = README_PATH.read_text(encoding="utf-8")
     if MARKER_START in readme and MARKER_END in readme:
         before = readme.split(MARKER_START)[0]
@@ -118,6 +119,29 @@ def patch_readme(table_block: str) -> None:
         if anchor not in readme:
             raise SystemExit(f"README anchor not found: {anchor}")
         new_readme = readme.replace(anchor, table_block + "\n" + anchor)
+    # Summary counts use the same metadata as the table, so adding a topic cannot
+    # leave the module/group overview silently stale.
+    total = sum(len(items) for items in by_key.values())
+    new_readme = re.sub(r"\*\*\d+ 篇正文\*\*", f"**{total} 篇正文**", new_readme)
+    new_readme = re.sub(r"校验 \d+ 篇正文", f"校验 {total} 篇正文", new_readme)
+    for group, modules in MODULE_ORDER:
+        count = sum(len(by_key.get(key, [])) for _, key in modules)
+        pattern = rf"^(\| \*\*{re.escape(group)}\*\* \| [^\n]*? \| )\d+( \|)$"
+        new_readme = re.sub(pattern, lambda m: f"{m[1]}{count}{m[2]}", new_readme, flags=re.MULTILINE)
+    counts_by_dir: dict[str, int] = defaultdict(int)
+    for items in by_key.values():
+        for item in items:
+            directory = str(Path(item["file"]).parent)
+            counts_by_dir[directory] += 1
+            if directory.startswith("middleware/"):
+                counts_by_dir["middleware"] += 1
+    for directory, count in counts_by_dir.items():
+        pattern = rf"^(\| \[[^\n]+?\]\(\./docs/topics/{re.escape(directory)}/index\.md\) \| )\d+( \|[^\n]*)$"
+        new_readme = re.sub(pattern, lambda m: f"{m[1]}{count}{m[2]}", new_readme, flags=re.MULTILINE)
+    for label, key in [("MySQL", "mysql"), ("PostgreSQL", "postgresql"), ("Redis", "redis"),
+                       ("Kafka", "kafka"), ("RocketMQ", "rocketmq"), ("RabbitMQ", "rabbitmq"),
+                       ("ES", "elasticsearch"), ("分布式事务", "distributed")]:
+        new_readme = re.sub(rf"{label}\(\d+\)", f"{label}({len(by_key.get(key, []))})", new_readme)
     README_PATH.write_text(new_readme, encoding="utf-8")
 
 
@@ -128,7 +152,7 @@ def main() -> None:
         by_key[chain[-1]].append(item)
 
     table_block = build_table(by_key)
-    patch_readme(table_block)
+    patch_readme(table_block, by_key)
     total = table_block.count("| `S-")
     print(f"Updated {README_PATH.relative_to(ROOT)} ({total} topics)")
 

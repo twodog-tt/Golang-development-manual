@@ -7,4 +7,5 @@ nav:
   - "Treasury、流动性与多链资金再平衡": S-PAY-03-treasury-liquidity-rebalancing.md
   - "支付账本、清结算与三方对账": S-PAY-04-ledger-clearing-settlement-reconciliation.md
   - "KYC/KYB、Travel Rule 与制裁筛查架构": S-PAY-05-compliance-travel-rule-sanctions.md
+  - "PostgreSQL 双分录账本：并发扣款、冻结冲正与故障验证": S-PAY-07-postgresql-double-entry-ledger-lab.md
   - "机构托管 / RWA / ISO 20022": S-PAY-06-institutional-custody-rwa-iso20022.md

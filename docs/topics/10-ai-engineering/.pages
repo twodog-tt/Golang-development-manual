@@ -16,3 +16,4 @@ nav:
   - "ERC-8004 身份 / 信誉 / 验证": S-AI-12-erc8004-agent-identity-reputation-validation.md
   - "x402 / ERC-8183 Commerce": S-AI-13-x402-erc8183-agent-commerce.md
   - "Agent 开放平台 / Launchpad": S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md
+  - "Agent 评测、任务轨迹与发布回归门禁": S-AI-15-agent-evaluation-release-gates.md

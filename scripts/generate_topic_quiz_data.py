@@ -157,7 +157,7 @@ def evidence_for(qid: str, frontmatter: dict, config: dict) -> dict[str, str]:
         "basis": basis,
         "reproducibility": reproducibility_label,
         "volatility": volatility_label,
-        "reviewed_at": config["updated_at"],
+        "reviewed_at": frontmatter.get("reviewed_at", config.get("reviewed_at", config["updated_at"])),
     }
 
 

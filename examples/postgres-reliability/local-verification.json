@@ -1,0 +1,65 @@
+{
+  "run_id": "4fe1557bc600",
+  "postgres_version": "PostgreSQL 17.11 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit",
+  "verified_at": "2026-10-18T12:45:15.772720+00:00",
+  "image_ids": {
+    "postgres:17-alpine": "sha256:25a89970a83255ae96484d709005bb35aa71f7455f941bc1634514f31c5d5c62",
+    "redis:7.4-alpine": "sha256:ec4f171e9ff071bb2a1c936057d3be00206069b028b6c0d61df2477e1dd02c42"
+  },
+  "source_sha256": {
+    "schema.sql": "f783ed47e76346bd343f10c5cdaa06ab85b8e325d211121c9a052fea663085f7",
+    "consumer.sql": "f995f76f8eb1bb74b40c78389048c0dcff8faf4a1553a3f96ce49583b4dd99ff",
+    "verify.py": "b96878ffe1c77401c6af7a3e7bad40872dbcfe9b4aabecb422a083b123ea5cd2"
+  },
+  "scenarios": [
+    {
+      "scenario": "idempotency-payload-binding",
+      "passed": true,
+      "concurrent_retries": 4
+    },
+    {
+      "scenario": "concurrent-insufficient-funds",
+      "passed": true,
+      "accepted": 1,
+      "rejected": 1
+    },
+    {
+      "scenario": "freeze-release-reversal-and-commit-guards",
+      "passed": true
+    },
+    {
+      "scenario": "backend-termination-rolls-back-ledger-and-outbox",
+      "passed": true
+    },
+    {
+      "scenario": "balance-drift-detected-and-rebuilt-from-entries",
+      "passed": true
+    },
+    {
+      "scenario": "outbox-relay-crash-after-broker-ack",
+      "passed": true,
+      "stream_messages": 2,
+      "business_events": 1
+    },
+    {
+      "scenario": "inbox-rollback-and-crash-before-xack",
+      "passed": true,
+      "projection_count": 1,
+      "pending": 0
+    },
+    {
+      "scenario": "pitr-restores-before-delete",
+      "passed": true,
+      "journal_count": 9,
+      "bob_balance_atomic": 120,
+      "recovery_seconds": 1.089
+    },
+    {
+      "scenario": "missing-wal-fails-before-recovery-target",
+      "passed": true,
+      "missing_segment": "000000010000000000000004",
+      "pg_ctl_exit": 1
+    }
+  ],
+  "passed": true
+}

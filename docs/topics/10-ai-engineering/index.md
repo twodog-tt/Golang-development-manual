@@ -1,6 +1,6 @@
 # 10 AI 工程与编程
 
-14 篇 | Agent 控制面核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
+15 篇 | Agent 控制面核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 > 面向 **AI / Crypto Agent 控制面与 Go 后端** 的工程专题：模型接入、可恢复工作流、HITL、
 > Memory、MCP/A2A、身份/Commerce、开放平台与 Web3 执行边界（非算法研究向）。
@@ -22,6 +22,7 @@
 | [S-AI-12](./S-AI-12-erc8004-agent-identity-reputation-validation.md) | ERC-8004：Agent 身份、信誉与验证 | ⭐⭐⭐⭐⭐ |
 | [S-AI-13](./S-AI-13-x402-erc8183-agent-commerce.md) | x402/x402b/ERC-8183：Agent Commerce | ⭐⭐⭐⭐⭐ |
 | [S-AI-14](./S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) | Crypto Agent 开放平台与 Launchpad | ⭐⭐⭐⭐⭐ |
+| [S-AI-15](./S-AI-15-agent-evaluation-release-gates.md) | Agent 评测、任务轨迹与发布回归门禁 | ⭐⭐⭐⭐⭐ |
 
 ## 可运行代码
 

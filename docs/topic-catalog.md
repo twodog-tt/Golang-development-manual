@@ -1,6 +1,6 @@
 # 专题索引
 
-> 全库 **238 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
+> 全库 **242 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
 > **⭐ 领域导航**：[概念地图](maps/index.md) ·
 > [领域能力优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
 > [Web3 场景地图](web3-exchange-wallet-focus.md)
@@ -14,14 +14,14 @@
 | 16 Go 生产工程 | 6 | [16-go-production-engineering/](topics/16-go-production-engineering/index.md) |
 | 08 编码练习 | 7 | [08-coding-senior/](topics/08-coding-senior/index.md) |
 
-## 进阶 · 网络与中间件（33 篇）
+## 进阶 · 网络与中间件（35 篇）
 
 | 模块 | 篇数 | 入口 |
 |------|------|------|
 | 06 网络与服务治理 | 7 | [06-network-governance/](topics/06-network-governance/index.md) |
-| 中间件与数据库 | 26 | [middleware/](topics/middleware/index.md) |
+| 中间件与数据库 | 28 | [middleware/](topics/middleware/index.md) |
 
-中间件子目录：MySQL(7)、PostgreSQL(3)、Redis(3)、Kafka(4)、RocketMQ(4)、RabbitMQ(1)、ES(3)、分布式事务(1)。
+中间件子目录：MySQL(7)、PostgreSQL(4)、Redis(3)、Kafka(4)、RocketMQ(4)、RabbitMQ(1)、ES(3)、分布式事务(2)。
 
 ## 高阶 · 系统设计与架构（45 篇）
 
@@ -32,25 +32,25 @@
 | 11 解决方案架构 | 8 | [11-solution-architecture/](topics/11-solution-architecture/index.md) |
 | 15 微服务（交易所场景） | 6 | [15-microservices-exchange/](topics/15-microservices-exchange/index.md) |
 
-## 专题 · Web3 核心基础设施（93 篇）
+## 专题 · Web3 核心基础设施（94 篇）
 
 | 模块 | 篇数 | 入口 |
 |------|------|------|
 | 12 区块链与 Web3 | 17 | [12-blockchain-web3/](topics/12-blockchain-web3/index.md) |
 | 17 多链钱包与托管 | 12 | [17-multichain-wallet/](topics/17-multichain-wallet/index.md) |
-| 18 Web3 支付与稳定币 | 6 | [18-web3-payments-stablecoin/](topics/18-web3-payments-stablecoin/index.md) |
+| 18 Web3 支付与稳定币 | 7 | [18-web3-payments-stablecoin/](topics/18-web3-payments-stablecoin/index.md) |
 | 19 节点、RPC 与 Staking | 10 | [19-node-rpc-staking/](topics/19-node-rpc-staking/index.md) |
 | 20 协议、共识与安全 | 5 | [20-protocol-consensus-security/](topics/20-protocol-consensus-security/index.md) |
 | 21 Web3 安全工程 | 4 | [21-security-engineering/](topics/21-security-engineering/index.md) |
 | 13 Solidity 与合约 | 8 | [13-solidity-contracts/](topics/13-solidity-contracts/index.md) |
 | 14 DEX / CEX / 预测市场 | 31 | [14-dex-cex-engineering/](topics/14-dex-cex-engineering/index.md) |
 
-## 综合 · 领导力与 AI（19 篇）
+## 综合 · 领导力与 AI（20 篇）
 
 | 模块 | 篇数 | 入口 |
 |------|------|------|
 | 07 工程与领导力 | 5 | [07-engineering-leadership/](topics/07-engineering-leadership/index.md) |
-| 10 AI 工程与编程 | 14 | [10-ai-engineering/](topics/10-ai-engineering/index.md) |
+| 10 AI 工程与编程 | 15 | [10-ai-engineering/](topics/10-ai-engineering/index.md) |
 
 ## 领域阅读入口
 

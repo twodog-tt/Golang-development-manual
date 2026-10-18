@@ -160,6 +160,7 @@ plugins:
         interview/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md: topics/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md
         interview/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md: topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md
         interview/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md: topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md
+        interview/10-ai-engineering/S-AI-15-agent-evaluation-release-gates.md: topics/10-ai-engineering/S-AI-15-agent-evaluation-release-gates.md
         interview/10-ai-engineering/index.md: topics/10-ai-engineering/index.md
         interview/11-solution-architecture/S-SOL-01-bounded-context-ddd.md: topics/11-solution-architecture/S-SOL-01-bounded-context-ddd.md
         interview/11-solution-architecture/S-SOL-02-strangler-fig-migration.md: topics/11-solution-architecture/S-SOL-02-strangler-fig-migration.md
@@ -184,6 +185,9 @@ plugins:
         interview/12-blockchain-web3/S-BC-12-cross-chain-message-bridge-security.md: topics/12-blockchain-web3/S-BC-12-cross-chain-message-bridge-security.md
         interview/12-blockchain-web3/S-BC-13-gas-fee-multichain.md: topics/12-blockchain-web3/S-BC-13-gas-fee-multichain.md
         interview/12-blockchain-web3/S-BC-14-evm-chains-landscape-integration.md: topics/12-blockchain-web3/S-BC-14-evm-chains-landscape-integration.md
+        interview/12-blockchain-web3/S-BC-15-evm-chain-identity-verification.md: topics/12-blockchain-web3/S-BC-15-evm-chain-identity-verification.md
+        interview/12-blockchain-web3/S-BC-16-transaction-lifecycle-finality-reorg.md: topics/12-blockchain-web3/S-BC-16-transaction-lifecycle-finality-reorg.md
+        interview/12-blockchain-web3/S-BC-17-rpc-node-explorer-ha-runbook.md: topics/12-blockchain-web3/S-BC-17-rpc-node-explorer-ha-runbook.md
         interview/12-blockchain-web3/index.md: topics/12-blockchain-web3/index.md
         interview/13-solidity-contracts/S-SOLID-01-language-storage.md: topics/13-solidity-contracts/S-SOLID-01-language-storage.md
         interview/13-solidity-contracts/S-SOLID-02-security-reentrancy.md: topics/13-solidity-contracts/S-SOLID-02-security-reentrancy.md
@@ -259,6 +263,7 @@ plugins:
         interview/18-web3-payments-stablecoin/S-PAY-04-ledger-clearing-settlement-reconciliation.md: topics/18-web3-payments-stablecoin/S-PAY-04-ledger-clearing-settlement-reconciliation.md
         interview/18-web3-payments-stablecoin/S-PAY-05-compliance-travel-rule-sanctions.md: topics/18-web3-payments-stablecoin/S-PAY-05-compliance-travel-rule-sanctions.md
         interview/18-web3-payments-stablecoin/S-PAY-06-institutional-custody-rwa-iso20022.md: topics/18-web3-payments-stablecoin/S-PAY-06-institutional-custody-rwa-iso20022.md
+        interview/18-web3-payments-stablecoin/S-PAY-07-postgresql-double-entry-ledger-lab.md: topics/18-web3-payments-stablecoin/S-PAY-07-postgresql-double-entry-ledger-lab.md
         interview/18-web3-payments-stablecoin/index.md: topics/18-web3-payments-stablecoin/index.md
         interview/19-node-rpc-staking/S-NODE-01-ethereum-node-architecture-sync.md: topics/19-node-rpc-staking/S-NODE-01-ethereum-node-architecture-sync.md
         interview/19-node-rpc-staking/S-NODE-02-rpc-ha-quorum-hedging-cache.md: topics/19-node-rpc-staking/S-NODE-02-rpc-ha-quorum-hedging-cache.md
@@ -290,6 +295,7 @@ plugins:
         interview/_meta/technical-corrections-audit.md: topics/_meta/technical-corrections-audit.md
         interview/_meta/template.md: topics/_meta/template.md
         interview/middleware/distributed/S-DIST-05-distributed-transaction.md: topics/middleware/distributed/S-DIST-05-distributed-transaction.md
+        interview/middleware/distributed/S-DIST-06-outbox-inbox-fault-lab.md: topics/middleware/distributed/S-DIST-06-outbox-inbox-fault-lab.md
         interview/middleware/distributed/index.md: topics/middleware/distributed/index.md
         interview/middleware/elasticsearch/S-ES-01-inverted-index.md: topics/middleware/elasticsearch/S-ES-01-inverted-index.md
         interview/middleware/elasticsearch/S-ES-02-mapping-query-agg.md: topics/middleware/elasticsearch/S-ES-02-mapping-query-agg.md
@@ -312,6 +318,7 @@ plugins:
         interview/middleware/postgresql/S-PG-01-mvcc-vacuum-indexes.md: topics/middleware/postgresql/S-PG-01-mvcc-vacuum-indexes.md
         interview/middleware/postgresql/S-PG-02-isolation-locking-ledger.md: topics/middleware/postgresql/S-PG-02-isolation-locking-ledger.md
         interview/middleware/postgresql/S-PG-03-wal-replication-pgx-ha.md: topics/middleware/postgresql/S-PG-03-wal-replication-pgx-ha.md
+        interview/middleware/postgresql/S-PG-04-pitr-restore-drill.md: topics/middleware/postgresql/S-PG-04-pitr-restore-drill.md
         interview/middleware/postgresql/index.md: topics/middleware/postgresql/index.md
         interview/middleware/rabbitmq/S-RAB-01-exchange-async-pipeline.md: topics/middleware/rabbitmq/S-RAB-01-exchange-async-pipeline.md
         interview/middleware/rabbitmq/index.md: topics/middleware/rabbitmq/index.md

@@ -1,6 +1,6 @@
 # PostgreSQL
 
-3 篇 | 资金库与高可用核心阅读 | [返回中间件索引](../index.md)
+4 篇 | 资金库与高可用核心阅读 | [返回中间件索引](../index.md)
 
 > 重点不是把 MySQL 术语换成 PostgreSQL，而是讲清 **tuple version、VACUUM、SSI、WAL 提交证据、复制滞后和 pgx 连接生命周期**。
 
@@ -9,6 +9,7 @@
 | [S-PG-01](./S-PG-01-mvcc-vacuum-indexes.md) | MVCC、VACUUM、可见性与索引设计 | ⭐⭐⭐⭐⭐ |
 | [S-PG-02](./S-PG-02-isolation-locking-ledger.md) | 隔离级别、锁与资金写入 | ⭐⭐⭐⭐⭐ |
 | [S-PG-03](./S-PG-03-wal-replication-pgx-ha.md) | WAL、复制、故障切换与 pgx 连接治理 | ⭐⭐⭐⭐⭐ |
+| [S-PG-04](./S-PG-04-pitr-restore-drill.md) | PostgreSQL 恢复演练：误删、PITR 与 WAL 缺失验证 | ⭐⭐⭐⭐⭐ |
 
 ## 推荐顺序
 

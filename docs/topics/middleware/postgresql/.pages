@@ -5,3 +5,4 @@ nav:
   - "PostgreSQL MVCC / VACUUM": S-PG-01-mvcc-vacuum-indexes.md
   - "PostgreSQL 隔离级别、锁与资金写入": S-PG-02-isolation-locking-ledger.md
   - "PostgreSQL WAL / 复制 / pgx": S-PG-03-wal-replication-pgx-ha.md
+  - "PostgreSQL 恢复演练：误删、PITR 与 WAL 缺失验证": S-PG-04-pitr-restore-drill.md

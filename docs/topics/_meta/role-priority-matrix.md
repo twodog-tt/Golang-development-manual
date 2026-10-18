@@ -1,8 +1,8 @@
 # 领域能力优先级与证据标签
 
-> 当前共 **238 篇 published 正文**。领域优先级与证据标签的机器事实源为
+> 当前共 **242 篇 published 正文**。领域优先级与证据标签的机器事实源为
 > [role-evidence.yaml](./role-evidence.yaml)（文件名历史兼容，语义为 **domain/role 能力切片**），
-> 一致性由 `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-08-13**。
+> 一致性由 `scripts/verify_knowledge_metadata.py` 校验。更新时间：**2026-10-18**。
 
 本页回答两件事：
 
@@ -26,13 +26,13 @@
 
 | 工程领域 | 核心 | 延展 | 其余 | 核心重点 |
 |----------|---:|---:|---:|---------|
-| Go 生产工程 | 62 | 76 | 100 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
-| **AI / Crypto Agent 控制面** | **64** | **94** | **80** | 工作流、MCP/A2A、Agent 身份/Commerce、开放平台、Web3 安全执行 |
-| 多链钱包与托管签名 | 67 | 95 | 76 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
-| 支付与稳定币 | 67 | 102 | 69 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
-| 节点 / RPC / Indexer | 78 | 86 | 74 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
-| 交易所工程 | **75** | **111** | **52** | 撮合/WAL、DEX 协议、预测市场 CTF/CLOB、账本与安全上线 |
-| 系统演进与架构协作 | **80** | **94** | **64** | 系统设计、DEX/预测市场白板、迁移、IaC/GitOps、安全、跨团队协作 |
+| Go 生产工程 | 64 | 76 | 102 | Go/运行时、测试、网络、PostgreSQL/MySQL、消息、IaC/GitOps |
+| **AI / Crypto Agent 控制面** | **67** | **94** | **81** | 工作流、MCP/A2A、Agent 身份/Commerce、开放平台、Web3 安全执行 |
+| 多链钱包与托管签名 | 70 | 95 | 77 | 多链交易、TRON、归集、MPC/HSM、签名控制、恢复 |
+| 支付与稳定币 | 70 | 102 | 70 | 支付状态机、账本、TRC20、清结算、合规、机构资金 |
+| 节点 / RPC / Indexer | 80 | 86 | 76 | 节点/共识、canonical 数据、列存、非 EVM 兼容 |
+| 交易所工程 | **78** | **111** | **53** | 撮合/WAL、DEX 协议、预测市场 CTF/CLOB、账本与安全上线 |
+| 系统演进与架构协作 | **84** | **94** | **64** | 系统设计、DEX/预测市场白板、迁移、IaC/GitOps、安全、跨团队协作 |
 
 核心篇数不是“全部逐字通读”。建议先掌握 shared 核心的 30 秒版与不变量，再只进入
 **一个**领域增量；延展用于该领域深挖，其余正文按项目反馈补洞。
@@ -48,7 +48,7 @@
 | 数据库 | 复杂 SQL、资金表、PostgreSQL 并发/WAL/HA |
 | 系统设计 | 幂等、一致性、消息语义、订单状态机、可观测、SLO、容量与 ADR |
 
-这约 40 篇解决「资深 Go 工程师基本盘」。领域增量解决「这类系统特有的正确性与边界」。
+这约 42 篇解决「资深 Go 工程师基本盘」。领域增量解决「这类系统特有的正确性与边界」。
 
 ## 七个领域增量
 
@@ -139,8 +139,8 @@
 |------|---------:|------------|--------------|
 | `explanation_only` | 180 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
 | `illustrative_artifact` | 31 | 仓库有相关代码或配置 | 测试当前通过、外部系统兼容 |
-| `deterministic_test` | 20 | 有不依赖外部服务的测试/回放门禁 | localnet、硬件或生产行为 |
-| `integration_harness` | 7 | 有 localnet/testnet/HSM/MPC/故障 harness | 每个目标版本都已实跑 |
+| `deterministic_test` | 21 | 有不依赖外部服务的测试/回放门禁 | localnet、硬件或生产行为 |
+| `integration_harness` | 10 | 有 localnet/testnet/HSM/MPC/故障 harness | 每个目标版本都已实跑 |
 | `external_acceptance` | 0 | 真实厂商/生产环境的具名验收 | — |
 
 高等级只表示证据类型更接近外部环境，不表示题目更重要。当前 `external_acceptance=0` 是刻意的
@@ -150,8 +150,8 @@
 
 | 标签 | 当前篇数 | 复核方式 |
 |------|---------:|----------|
-| `stable` | 145 | 目标数据库/语言版本使用前抽查 |
-| `version_sensitive` | 79 | 复核官方 release/spec/SDK 文档 |
+| `stable` | 146 | 目标数据库/语言版本使用前抽查 |
+| `version_sensitive` | 82 | 复核官方 release/spec/SDK 文档 |
 | `vendor_or_regulatory_sensitive` | 14 | 结合目标厂商、司法辖区和法律/合规意见 |
 
 `vendor_or_regulatory_sensitive` 优先于普通版本敏感；它提醒你对外说明适用范围，而不是套一个
@@ -169,5 +169,5 @@
 .venv/bin/python scripts/verify_knowledge_metadata.py
 ```
 
-校验会检查 238 个 ID、正文、sources、30 秒版、深挖问答、领域引用、证据标签互斥关系，
+校验会检查 242 个 ID、正文、sources、30 秒版、深挖问答、领域引用、证据标签互斥关系，
 以及 tip/note 中的求职禁止词（见 [正文结构检查清单](./article-structure-checklist.md)）。

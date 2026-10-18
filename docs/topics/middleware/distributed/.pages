@@ -3,3 +3,4 @@ collapse_single_pages: false
 nav:
   - index.md
   - "分布式事务 TCC vs Saga": S-DIST-05-distributed-transaction.md
+  - "Outbox 与 Inbox：真实消息重投和事务故障实战": S-DIST-06-outbox-inbox-fault-lab.md

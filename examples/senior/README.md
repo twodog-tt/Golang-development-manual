@@ -27,6 +27,15 @@
 | S-PAY-01 | [paymentstate/](paymentstate/) | 支付状态机、重复事件与冲正 | `go test ./paymentstate/...` |
 | S-NODE-02 | [rpcpool/](rpcpool/) | Hedged read 与取消 | `go test -race ./rpcpool/...` |
 
+## 评测、账本、消息与恢复演练
+
+| 文档 ID | 目录 | 命令 |
+|---------|------|------|
+| S-AI-15 | [agenteval/](agenteval/) | `go test -race ./agenteval/...` |
+| S-PAY-07 / S-DIST-06 / S-PG-04 | [PostgreSQL/Redis 演练](../postgres-reliability/) | 仓库根目录运行 `python3 examples/postgres-reliability/verify.py` |
+
+完整验证：仓库根目录执行 `bash scripts/verify_reliability_examples.sh`。
+
 ## 交易所与跨链安全
 
 | 文档 ID | 目录 | 说明 | 测试 |

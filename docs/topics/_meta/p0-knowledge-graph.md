@@ -1,16 +1,16 @@
 # 知识图谱：领域核心与方向深挖
 
-> 当前共 **238 篇**。实际 P0/P1/P2 以
+> 当前共 **242 篇**。实际 P0/P1/P2 以
 > [领域能力优先级](./role-priority-matrix.md) 为准。本知识库的默认深挖方向之一是
-> **AI Agent Platform / Crypto Agent Ecosystem**：先完成 40 篇共享 Go/生产工程门槛，
-> 再补 24 篇 Agent 定向 P0；CEX/DEX、钱包和实时风控不是另一套平行体系，而是证明你能处理
+> **AI Agent Platform / Crypto Agent Ecosystem**：先完成 42 篇共享 Go/生产工程门槛，
+> 再补 25 篇 Agent 定向 P0；CEX/DEX、钱包和实时风控不是另一套平行体系，而是证明你能处理
 > 资金、副作用、高吞吐和可恢复数据链路的差异化证据。
 >
 > 图中箭头表示学习与表达依赖，不表示线上系统只能按该拓扑部署。
 
-## 共享 P0 要点速览索引（40/40）
+## 共享核心阅读索引（42 篇）
 
-以下链接直接进入各题正文开头的要点速览，正文后半部分保留原理、生产场景、排查与深挖。
+原有 40 篇链接直接进入要点速览；新增两篇实战从 30 秒版进入，正文保留原理、排查与故障验收。
 
 - **并发与调度（9）**：
   [S-CONC-01](../01-runtime-concurrency/S-CONC-01-gmp-overview.md#oral-card) ·
@@ -50,6 +50,9 @@
   [S-DB-07](../middleware/mysql/S-DB-07-financial-schema-locking.md#oral-card) ·
   [S-PG-02](../middleware/postgresql/S-PG-02-isolation-locking-ledger.md#oral-card) ·
   [S-PG-03](../middleware/postgresql/S-PG-03-wal-replication-pgx-ha.md#oral-card)
+- **可靠消息与数据库恢复（2）**：
+  [S-DIST-06 Outbox/Inbox](../middleware/distributed/S-DIST-06-outbox-inbox-fault-lab.md) ·
+  [S-PG-04 PITR 演练](../middleware/postgresql/S-PG-04-pitr-restore-drill.md)
 - **架构方法论（8）**：
   [S-ARCH-04](../03-system-design/S-ARCH-04-idempotency.md#oral-card) ·
   [S-ARCH-05](../03-system-design/S-ARCH-05-consistency-tradeoff.md#oral-card) ·

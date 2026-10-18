@@ -1,8 +1,8 @@
 # 知识库质量审查与领域覆盖差距
 
-> 全库 **238 篇**（以 [topics.yaml](topics.yaml) 为准）
+> 全库 **242 篇**（以 [topics.yaml](topics.yaml) 为准）
 >
-> 本轮审查与补强日期：**2026-08-13**
+> 本轮补强日期：**2026-10-18**（本次仅新增四篇及示例，未重新审查全部旧文）
 >
 > 审查范围：资深 Golang、后端/解决方案架构，重点领域为 AI/Crypto Agent、
 > Web3、交易所、钱包、链基础设施与支付
@@ -61,8 +61,9 @@
   EVM 独立链、侧链、Optimistic/ZK Rollup 的全景分类与 Go 接入差异（S-BC-14）。
 - 第十五阶段补充 **3 篇解释型正文**：EVM 公链身份与可信核验（S-BC-15）、交易从 pending 到
   finality/reorg 的完整状态机（S-BC-16），以及 RPC/Blockscout 分层、双上游 HA 与 502 无损恢复（S-BC-17）。
-- 证据标签已覆盖 238 篇：`explanation_only=180`、`illustrative_artifact=31`、
-  `deterministic_test=20`、`integration_harness=7`、`external_acceptance=0`。
+- 第十六阶段补充 **4 篇可验证正文**：Agent 离线轨迹评测与回归门禁（S-AI-15）、PostgreSQL 双分录账本（S-PAY-07）、Outbox/Inbox 消息故障实战（S-DIST-06）、PITR 误删及缺 WAL 验证（S-PG-04）。Agent 正反例与 race 测试通过；PostgreSQL/Redis 9 个场景实际通过。统一入口为 `bash scripts/verify_reliability_examples.sh`。Agent 为离线评分器，数据库/Broker 为一次性容器，不声称模型质量、HA 或生产验收。
+- 证据标签已覆盖 242 篇：`explanation_only=180`、`illustrative_artifact=31`、
+  `deterministic_test=21`、`integration_harness=10`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
 - 当前知识库的优势是 **Go 核心、分布式系统、中间件、EVM/Solidity、CEX/DEX 架构广度**。
@@ -82,26 +83,26 @@
 | Go 内存与 GC | 15 |
 | Go 生产工程 | 6 |
 | 系统设计 | 21 |
-| 数据库与中间件 | 26 |
+| 数据库与中间件 | 28 |
 | 网络治理 | 7 |
 | 工程领导力 | 5 |
 | 资深编码练习 | 7 |
 | 云原生 | 10 |
-| AI 工程 | 14 |
+| AI 工程 | 15 |
 | 解决方案架构 | 8 |
 | 区块链 Web3 | 17 |
 | 多链钱包与托管 | 12 |
-| Web3 支付与稳定币 | 6 |
+| Web3 支付与稳定币 | 7 |
 | 节点、RPC 与 Staking | 10 |
 | 协议、共识与安全 | 5 |
 | Web3 安全工程 | 4 |
 | Solidity | 8 |
 | DEX/CEX/预测市场 | 31 |
 | 交易所微服务 | 6 |
-| **合计** | **238** |
+| **合计** | **242** |
 
 原始 153 题基线中的中间件为 21 题；此前新增 2 篇 MySQL，本阶段再新增 3 篇 PostgreSQL，
-当前数据库与中间件共 26 题。
+随后新增 Outbox/Inbox 与 PITR 演练各 1 题，当前数据库与中间件共 28 题。
 
 ## 已修正的主要技术问题
 

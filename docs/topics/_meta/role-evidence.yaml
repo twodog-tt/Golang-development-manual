@@ -8,7 +8,8 @@
 # topics.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
 
 schema_version: 1
-updated_at: "2026-08-13"
+updated_at: "2026-10-18"
+reviewed_at: "2026-08-13" # Old articles retain their last review date; new articles override in frontmatter.
 default_priority: p2
 priority_precedence: [p0, p1, p2]
 
@@ -54,6 +55,8 @@ shared:
     - S-ARCH-17
     - S-ARCH-18
     - S-ARCH-20
+    - S-DIST-06
+    - S-PG-04
   p1:
     - S-CONC-02
     - S-CONC-03
@@ -211,6 +214,7 @@ roles:
       - S-SEC-04
       - S-SOL-05
       - S-WALLET-12
+      - S-AI-15
     p1:
       - S-AI-02
       - S-AI-08
@@ -287,6 +291,7 @@ roles:
       - S-PAY-04
       - S-PAY-05
       - S-PROTO-04
+      - S-PAY-07
     p1:
       - S-BC-01
       - S-BC-02
@@ -354,6 +359,7 @@ roles:
       - S-NODE-05
       - S-SOL-03
       - S-SOL-06
+      - S-PAY-07
     p1:
       - S-WALLET-02
       - S-WALLET-03
@@ -511,6 +517,7 @@ roles:
       - S-NODE-05
       - S-SEC-01
       - S-SEC-02
+      - S-PAY-07
     p1:
       - S-EXCH-06
       - S-EXCH-07
@@ -608,6 +615,8 @@ roles:
       - S-MSVC-04
       - S-PG-01
       - S-ARCH-21
+      - S-AI-15
+      - S-PAY-07
     p1:
       - S-SOL-04
       - S-SOL-05
@@ -693,6 +702,7 @@ evidence:
       - S-NODE-02
       - S-NODE-07
       - S-SEC-04
+      - S-AI-15
     integration_harness:
       - S-WALLET-07
       - S-WALLET-08
@@ -701,6 +711,9 @@ evidence:
       - S-WALLET-11
       - S-NODE-09
       - S-SEC-02
+      - S-PAY-07
+      - S-DIST-06
+      - S-PG-04
     external_acceptance: []
     labels:
       explanation_only: 只有结构化解释、SQL 或配置片段，不代表运行验收。
@@ -730,6 +743,8 @@ evidence:
       - S-EXCH-26
       - S-EXCH-27
       - S-EXCH-30
+      - S-PG-04
+      - S-DIST-06
     vendor_or_regulatory_sensitive:
       - S-PAY-02
       - S-PAY-05

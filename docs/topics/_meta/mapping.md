@@ -70,6 +70,10 @@
 | S-EXCH-31 | DEX Tech Lead 白板 | [S-EXCH-31](../14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md) | — |
 | S-MSVC-01～06 | 微服务（交易所场景） | — | [15-microservices-exchange/](../15-microservices-exchange/index.md) |
 | — | 算法练习 | `algorithm/lc_*` | LeetCode 参考实现 |
+| S-PG-04 | [PostgreSQL 恢复演练：误删、PITR 与 WAL 缺失验证](../middleware/postgresql/S-PG-04-pitr-restore-drill.md) | `examples/postgres-reliability/` | 离线评测门禁 / 真实数据库与 Broker 故障演练，见示例 README |
+| S-PAY-07 | [PostgreSQL 双分录账本：并发扣款、冻结冲正与故障验证](../18-web3-payments-stablecoin/S-PAY-07-postgresql-double-entry-ledger-lab.md) | `examples/postgres-reliability/` | 离线评测门禁 / 真实数据库与 Broker 故障演练，见示例 README |
+| S-DIST-06 | [Outbox 与 Inbox：真实消息重投和事务故障实战](../middleware/distributed/S-DIST-06-outbox-inbox-fault-lab.md) | `examples/postgres-reliability/` | 离线评测门禁 / 真实数据库与 Broker 故障演练，见示例 README |
+| S-AI-15 | [Agent 评测、任务轨迹与发布回归门禁](../10-ai-engineering/S-AI-15-agent-evaluation-release-gates.md) | `examples/senior/agenteval/` | 离线评测门禁 / 真实数据库与 Broker 故障演练，见示例 README |
 
 ## 使用方式
 
