@@ -54,7 +54,7 @@
 
 ### AI / Crypto Agent 控制面
 
-在 shared 核心之外，新增约 24 篇领域定向核心：
+在 shared 核心之外，新增约 25 篇领域定向核心：
 
 | 能力域 | 核心题号 | 项目证据 |
 |--------|----------|----------|
@@ -63,6 +63,7 @@
 | 工作流与人工控制 | `S-AI-09` | Review Queue、Execution Queue、Publishing Pipeline |
 | Persona/Memory | `S-AI-04/10` | Bot/Scene Context、反馈规则再注入 |
 | 安全与成本 | `S-AI-05/06`、`S-SEC-01/04` | Guardrail、注入隔离、token/cost、事件响应 |
+| 评测与发布门禁 | `S-AI-15` | 离线任务轨迹、完整性校验、安全硬门禁与回归比较 |
 | Agent 身份与商业协议 | `S-AI-12/13` | ERC-8004、x402/x402b、ERC-8183、支付/托管/对账 |
 | 开放生态与 Launchpad | `S-AI-14` | SDK、发布治理、Marketplace、钱包执行和 Agent Launchpad |
 | 平台控制面 | `S-ARCH-08/09/15`、`S-NET-04` | 限额、熔断、版本兼容、OAuth2/凭据 |

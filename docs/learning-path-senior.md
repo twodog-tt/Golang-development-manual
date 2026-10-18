@@ -9,13 +9,13 @@
 
 | 轨道 | 核心篇数 | 增量重点 |
 |------|--------:|----------|
-| Go 生产工程 | 62 | PostgreSQL/MySQL、消息、网络、IaC/GitOps |
-| AI / Crypto Agent 控制面 | 64 | 工作流/HITL、MCP/A2A、身份/Commerce、开放平台 |
-| 多链钱包与托管签名 | 66 | 多链交易、归集、MPC/HSM、恢复 |
-| 支付与稳定币 | 66 | 支付状态机、账本、清结算、合规 |
-| 节点/RPC/Indexer | 73 | 共识、canonical 数据、ClickHouse/lakehouse |
-| 交易所工程 | **75** | 撮合/WAL、DEX 协议、预测市场、账本与风控 |
-| 系统演进与架构协作 | **80** | 技术战略、跨团队迁移、发布与风险治理 |
+| Go 生产工程 | 64 | PostgreSQL/MySQL、消息、网络、IaC/GitOps |
+| AI / Crypto Agent 控制面 | 67 | 工作流/HITL、MCP/A2A、身份/Commerce、开放平台 |
+| 多链钱包与托管签名 | 70 | 多链交易、归集、MPC/HSM、恢复 |
+| 支付与稳定币 | 70 | 支付状态机、账本、清结算、合规 |
+| 节点/RPC/Indexer | 80 | 共识、canonical 数据、ClickHouse/lakehouse |
+| 交易所工程 | **78** | 撮合/WAL、DEX 协议、预测市场、账本与风控 |
+| 系统演进与架构协作 | **84** | 技术战略、跨团队迁移、发布与风险治理 |
 
 完整清单、延展阅读与证据标签见
 [领域能力优先级](./topics/_meta/role-priority-matrix.md)；依赖关系见

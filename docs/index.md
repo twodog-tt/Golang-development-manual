@@ -106,7 +106,7 @@ localnet/testnet ≠ 主网兼容。完整定义见
 | [Kafka](topics/middleware/kafka/index.md) | 4 | 架构、Producer 与消费语义 |
 | [RocketMQ](topics/middleware/rocketmq/index.md) | 4 | 架构、事务/顺序/延迟与排障 |
 | [Elasticsearch](topics/middleware/elasticsearch/index.md) | 3 | 倒排索引、DSL 与数据同步 |
-| [分布式事务](topics/middleware/distributed/index.md) | 1 | TCC / Saga |
+| [分布式事务](topics/middleware/distributed/index.md) | 2 | TCC / Saga、Outbox/Inbox 故障实战 |
 
 ## 资料、索引与维护
 

@@ -67,7 +67,7 @@
 
 ```mermaid
 flowchart LR
-  subgraph A["主线 A：共享资深 Go 门槛（40 篇）"]
+  subgraph A["主线 A：共享资深 Go 门槛（42 篇）"]
     A1["错误契约 / 包边界<br/>S-GOENG-01/02"]
     A2["测试 / Race / 构建 / 供应链<br/>S-GOENG-03~06"]
     A3["并发 / 背压 / 手写<br/>S-CONC · S-CODE"]
@@ -77,7 +77,7 @@ flowchart LR
     A1 --> A2 --> A3 --> A4 --> A5 --> A6
   end
 
-  subgraph B["主线 B：Agent / Crypto Agent 定向 P0（24 篇）"]
+  subgraph B["主线 B：Agent / Crypto Agent 定向 P0（25 篇）"]
     B1["LLM API / Tool / MCP<br/>S-AI-01/03/07"]
     B2["MCP / A2A 互操作<br/>S-AI-11"]
     B3["Workflow / HITL / 发布<br/>S-AI-09"]
@@ -85,7 +85,7 @@ flowchart LR
     B5["Guardrail / 安全<br/>S-AI-05 · S-SEC-01/04"]
     B6["身份 / Commerce<br/>S-AI-12/13"]
     B7["开放平台 / Launchpad<br/>S-AI-14"]
-    B8["成本 / 版本 / OAuth2 / 多租户<br/>S-AI-06 · S-ARCH-08/09/15 · S-NET-04 · S-SOL-05"]
+    B8["成本 / 评测 / 版本 / OAuth2 / 多租户<br/>S-AI-06/15 · S-ARCH-08/09/15 · S-NET-04 · S-SOL-05"]
     B9["CDC / Flink / MQ / ES<br/>S-ARCH-21 · S-KAFKA-02 · S-RAB-01 · S-ES-03"]
     B1 --> B2 --> B3
     B1 --> B4 --> B3
@@ -153,11 +153,11 @@ flowchart LR
 | 9 | 交易所状态机与量化指标 | 证明高吞吐、账本、行情和故障恢复深度 | “只报 3k/20k QPS，不说明 workload 和持久化边界” |
 | 10 | Staff 案例 | 系统演进与跨团队协作需要跨团队决策、迁移和组织影响 | “把模板案例包装成自己做过的生产案例” |
 
-## Agent 定向 P0 要点速览索引（24/24）
+## Agent 定向核心阅读索引（25 篇）
 
-以下链接直接进入正文要点速览；建议按组内顺序复习，每题先闭卷讲 30 秒，再展开 3 分钟。
+原有专题链接进入正文要点速览，新增评测专题从 30 秒版进入；建议按组内顺序复习，每题先闭卷讲 30 秒，再展开 3 分钟。
 
-- **AI / Crypto Agent 核心（12）**：
+- **AI / Crypto Agent 核心（13）**：
   [S-AI-01](../10-ai-engineering/S-AI-01-llm-api-integration.md#oral-card) ·
   [S-AI-03](../10-ai-engineering/S-AI-03-agent-tool-calling.md#oral-card) ·
   [S-AI-04](../10-ai-engineering/S-AI-04-prompt-context.md#oral-card) ·
@@ -169,7 +169,8 @@ flowchart LR
   [S-AI-11](../10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md#oral-card) ·
   [S-AI-12](../10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md#oral-card) ·
   [S-AI-13](../10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md#oral-card) ·
-  [S-AI-14](../10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md#oral-card)
+  [S-AI-14](../10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md#oral-card) ·
+  [S-AI-15](../10-ai-engineering/S-AI-15-agent-evaluation-release-gates.md)
 - **平台控制面（5）**：
   [S-ARCH-08](../03-system-design/S-ARCH-08-rate-limiting.md#oral-card) ·
   [S-ARCH-09](../03-system-design/S-ARCH-09-circuit-breaker.md#oral-card) ·
