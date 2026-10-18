@@ -1,6 +1,6 @@
 # 18 Web3 支付与稳定币
 
-7 篇 | 本专题核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
+11 篇 | 本专题核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 > 把“链上转账”提升为可运营的支付系统：状态机、稳定币风险、Treasury、双分录、清结算、对账与合规控制。
 
@@ -14,11 +14,17 @@
 | [S-PAY-06](./S-PAY-06-institutional-custody-rwa-iso20022.md) | 机构托管、DvP 清算、RWA 生命周期与 ISO 20022 | ⭐⭐⭐⭐⭐ |
 | [S-PAY-07](./S-PAY-07-postgresql-double-entry-ledger-lab.md) | PostgreSQL 双分录账本：并发扣款、冻结冲正与故障验证 | ⭐⭐⭐⭐⭐ |
 
+| [S-PAY-08](./S-PAY-08-temporal-money-workflows.md) | Temporal 资金长流程：审批、恢复、补偿与版本回放 | ⭐⭐⭐⭐⭐ |
+| [S-PAY-09](./S-PAY-09-wallet-auth-siwe.md) | 钱包登录与账号绑定：SIWE、合约验签和会话撤销 | ⭐⭐⭐⭐⭐ |
+| [S-PAY-10](./S-PAY-10-go-typescript-web3-integration.md) | Go 与 TypeScript Web3 联调：精度、消息签名和支付 API | ⭐⭐⭐⭐⭐ |
+| [S-PAY-11](./S-PAY-11-stablecoin-channel-operations.md) | 稳定币渠道与资金运营：未知状态、Webhook、退款和对账闭环 | ⭐⭐⭐⭐⭐ |
+
 ## 可运行代码
 
 | 题 ID | 目录 | 命令 |
 |-------|------|------|
 | S-PAY-01 | `examples/senior/paymentstate/` | `go test ./examples/senior/paymentstate/...` |
+| S-PAY-08~11 | `examples/stablecoin-ops/` | `python3 examples/stablecoin-ops/verify.py` |
 
 ## 推荐顺序
 

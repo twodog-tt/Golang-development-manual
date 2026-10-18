@@ -106,6 +106,22 @@ def main() -> None:
     }
 
     docs: dict[str, dict[str, Any]] = {}
+    # The metadata count and human-facing module headers must agree.
+    module_counts = Counter(
+        str(Path(item["file"]).parent)
+        for _, _, item in rows
+        if item.get("status") == "published" and item.get("file")
+    )
+    for directory, expected in module_counts.items():
+        index = TOPICS_DIR / directory / "index.md"
+        if index.exists():
+            match = re.search(r"(?m)^(\d+) 篇 \|", index.read_text(encoding="utf-8"))
+            if match and int(match.group(1)) != expected:
+                errors.append(f"{directory}/index.md 篇数应为 {expected}，实际为 {match.group(1)}")
+    for name in ("README.md", "docs/README.md", "docs/index.md"):
+        match = re.search(r"(\d+) 篇正文", (ROOT / name).read_text(encoding="utf-8"))
+        if not match or int(match.group(1)) != len(published_ids):
+            errors.append(f"{name} 正文总数应为 {len(published_ids)}")
     for tier, chain, item in rows:
         qid = item["id"]
         if tier not in TIER_KEYS:
