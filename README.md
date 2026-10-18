@@ -2,7 +2,7 @@
 
 面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + 区块链/Web3 架构** 的工程知识沉淀（**242 篇正文**），并配套可运行示例。
 
-**在线阅读**：https://twodog-tt.github.io/Golang-development-manual/
+**在线阅读**：https://knowledgebase.wenyiapp.cn/
 
 ![gopher](./gopher.png)
 

@@ -1,2 +1,5 @@
 site/
 .venv/
+
+# MkDocs Python hook cache
+__pycache__/

@@ -1,0 +1,27 @@
+{% macro render(node, path, level) %}
+  {% if node.children %}
+    {% set ns = namespace(index=none) %}
+    {% for child in node.children %}{% if child.is_index and ns.index is none %}{% set ns.index=child %}{% endif %}{% endfor %}
+    <li class="md-nav__item md-nav__item--nested {% if node.active %}md-nav__item--active{% endif %}">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="{{ path }}" {% if node.active %}checked{% endif %}>
+      {% if ns.index %}
+        <div class="md-nav__link md-nav__container">
+          <a class="md-nav__link {% if ns.index == page %}md-nav__link--active{% endif %}" href="{{ ns.index.url | url }}"><span class="md-ellipsis">{{ node.title | library_nav_title }}</span></a>
+          <label class="md-nav__link" for="{{ path }}" id="{{ path }}_label" aria-label="展开{{ node.title | library_nav_title }}"><span class="md-nav__icon md-icon"></span></label>
+        </div>
+      {% else %}
+        <label class="md-nav__link" for="{{ path }}" id="{{ path }}_label"><span class="md-ellipsis">{{ node.title | library_nav_title }}</span><span class="md-nav__icon md-icon"></span></label>
+      {% endif %}
+      <nav class="md-nav" data-md-level="{{ level }}" aria-labelledby="{{ path }}_label">
+        <label class="md-nav__title" for="{{ path }}">{{ node.title | library_nav_title }}</label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          {% for child in node.children %}{% if child != ns.index %}{{ render(child, path ~ '_' ~ loop.index, level+1) }}{% endif %}{% endfor %}
+        </ul>
+      </nav>
+    </li>
+  {% else %}
+    <li class="md-nav__item {% if node == page %}md-nav__item--active{% endif %}">
+      <a href="{{ node.url | url }}" class="md-nav__link {% if node == page %}md-nav__link--active{% endif %}" {% if node == page %}aria-current="page"{% endif %} title="{{ node.title }}"><span class="md-ellipsis">{{ node.title | library_nav_title }}</span></a>
+    </li>
+  {% endif %}
+{% endmacro %}

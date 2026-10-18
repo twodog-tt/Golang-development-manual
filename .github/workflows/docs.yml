@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths:
       - 'docs/**'
+      - 'overrides/**'
       - 'scripts/**'
       - 'mkdocs.yml'
       - 'requirements-docs.txt'
@@ -39,7 +40,7 @@ jobs:
         run: python scripts/generate_redirect_maps.py
 
       - name: Build site
-        run: mkdocs build
+        run: mkdocs build --strict
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4

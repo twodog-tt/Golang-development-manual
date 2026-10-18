@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <script>document.documentElement.classList.add({{ ('library-home' if page and page.is_homepage else 'library-reader') | tojson }});</script>
+{% endblock %}
+
+{% block content %}
+  {% if page and page.is_homepage %}
+    {% include "partials/library-home.html" %}
+  {% elif library_article %}
+    <nav class="library-breadcrumb" aria-label="面包屑导航">
+      <a href="{{ 'topic-catalog/' | url }}">知识目录</a>
+      <span aria-hidden="true">/</span>
+      {% if library_module %}<a href="{{ library_module.url | url }}">{{ library_module.title | library_nav_title }}</a>{% endif %}
+    </nav>
+    <div class="library-article" data-library-article>
+      {{ page.content }}
+    </div>
+    <div class="library-article-meta" data-library-meta>
+      <span>{{ page.meta.id }}</span>
+      <span class="library-meta-separator" aria-hidden="true">·</span>
+      <span>复核于 <time datetime="{{ library_reviewed_at }}">{{ library_reviewed_at | replace('-', '.') }}</time></span>
+      <div class="library-tags">
+        {% for tag in page.meta.tags[:3] %}<span>{{ library_tag_labels.get(tag, tag) }}</span>{% endfor %}
+      </div>
+    </div>
+  {% else %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
+{% block footer %}
+  {% if not page or not page.is_homepage %}{{ super() }}{% endif %}
+  <footer class="library-footer md-grid">
+    <a href="{{ nav.homepage.url | url }}">松绿书房 <span>工程知识库</span></a>
+    <span>Go · Agent · Web3 <span aria-hidden="true">/</span> {{ config.extra.library.count }} 篇工程知识</span>
+    <a href="{{ 'sources/' | url }}">来源与引用</a>
+  </footer>
+{% endblock %}

@@ -1,0 +1,73 @@
+<div class="library-home-content">
+  <section class="library-intro" aria-labelledby="go-agent-web3">
+    <p class="library-eyebrow">Go · Agent · Web3</p>
+    <h1 id="go-agent-web3">工程知识库</h1>
+    <p class="library-intro-text">系统整理工程经验，让每一次查阅都有依据。</p>
+    <button class="library-home-search" type="button" data-library-search aria-label="搜索文章、专题或关键词" aria-keyshortcuts="Meta+K Control+K">
+      <span class="md-icon">{% include ".icons/material/magnify.svg" %}</span>
+      <span>搜索文章、专题或关键词…</span><kbd>⌘ K</kbd>
+    </button>
+    <p class="library-count">{{ config.extra.library.count }} 篇正文 <span aria-hidden="true">·</span> 三条工程主线</p>
+  </section>
+
+  <section class="library-tracks" aria-label="三条工程主线">
+    <div class="library-track">
+      <span class="library-track-label">GO</span>
+      <h2>Go 生产工程</h2>
+      <p>运行时、并发、网络、数据库、消息与可观测，构建稳定可运行的生产系统。</p>
+      <ul>
+        <li><a href="{{ 'topics/16-go-production-engineering/' | url }}">Go 语言与生产工程<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+        <li><a href="{{ 'topics/middleware/' | url }}">进阶 · 网络与中间件<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+        <li><a href="{{ 'topics/03-system-design/' | url }}">高阶 · 系统设计与架构<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+        <li><a href="{{ 'topics/08-coding-senior/' | url }}">实战 · 工具与实践<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+      </ul>
+    </div>
+    <div class="library-track">
+      <span class="library-track-label">AGENT</span>
+      <h2>AI Agent 工程</h2>
+      <p>Agent 工作流、MCP/A2A、身份与 Commerce，连接开放平台与执行边界。</p>
+      <ul>
+        <li><a href="{{ 'topics/10-ai-engineering/' | url }}">Agent 基础与架构<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+        <li><a href="{{ 'topics/10-ai-engineering/S-AI-07-mcp-server-go/' | url }}">核心能力与工具链<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+        <li><a href="{{ 'topics/10-ai-engineering/S-AI-15-agent-evaluation-release-gates/' | url }}">评测与发布门禁<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+        <li><a href="{{ 'topics/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing/' | url }}">场景实践与案例<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+      </ul>
+    </div>
+    <div class="library-track">
+      <span class="library-track-label">WEB3</span>
+      <h2>Web3 基础设施</h2>
+      <p>合约、索引、钱包、支付、节点、交易所与资金闭环，面向真实工程场景。</p>
+      <ul>
+        <li><a href="{{ 'topics/17-multichain-wallet/' | url }}">钱包与托管签名<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+        <li><a href="{{ 'topics/14-dex-cex-engineering/' | url }}">交易所资金与对账<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+        <li><a href="{{ 'topics/18-web3-payments-stablecoin/' | url }}">支付与稳定币<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+        <li><a href="{{ 'topics/19-node-rpc-staking/' | url }}">节点、RPC 与 Staking<span class="md-icon">{% include ".icons/material/chevron-right.svg" %}</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="library-discovery">
+    <section class="library-recent" aria-labelledby="library-recent-title">
+      <div class="library-section-heading"><h2 id="library-recent-title">最近更新</h2><a href="{{ 'topic-catalog/' | url }}">查看全部 {{ config.extra.library.count }} 篇<span class="md-icon">{% include ".icons/material/arrow-right.svg" %}</span></a></div>
+      <div class="library-article-list">
+        {% for item in library_featured %}
+          <a class="library-article-row" href="{{ item.url | url }}">
+            <span class="library-category">{{ item.label }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            <time datetime="{{ item.date }}">{{ item.date | replace('-', '.') }}</time>
+            <span class="md-icon">{% include ".icons/material/arrow-right.svg" %}</span>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+    <section class="library-learning" aria-labelledby="library-learning-title">
+      <div class="library-section-heading"><h2 id="library-learning-title">学习路线</h2><a href="{{ 'learning-path-senior/' | url }}">完整路线<span class="md-icon">{% include ".icons/material/arrow-right.svg" %}</span></a></div>
+      <ol>
+        <li><a href="{{ 'topics/16-go-production-engineering/' | url }}"><strong>Go 生产工程</strong><span>语言基础、工程实践与性能排查</span></a></li>
+        <li><a href="{{ 'topics/03-system-design/' | url }}"><strong>系统设计</strong><span>分布式系统、数据一致性与架构取舍</span></a></li>
+        <li><a href="{{ 'topics/_meta/role-priority-matrix/' | url }}"><strong>领域实践</strong><span>Agent 应用、Web3 基础设施与资金系统</span></a></li>
+      </ol>
+    </section>
+  </div>
+</div>

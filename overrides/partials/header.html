@@ -1,0 +1,21 @@
+<header class="md-header library-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="主导航">
+    <label class="md-header__button md-icon library-menu" for="__drawer" aria-label="打开知识目录">{% include ".icons/material/menu.svg" %}</label>
+    <a href="{{ nav.homepage.url | url }}" class="library-brand" aria-label="松绿书房 · 工程知识库首页" data-md-component="logo">
+      <span class="library-brand-icon">{% include ".icons/fontawesome/solid/book-open.svg" %}</span>
+      <strong>松绿书房</strong><span class="library-brand-subtitle">工程知识库</span>
+    </a>
+    <div class="library-topnav">
+      <a href="{{ 'topic-catalog/' | url }}" {% if page and page.file.src_uri == 'topic-catalog.md' %}aria-current="page"{% endif %}>知识目录</a>
+      <a href="{{ 'learning-path-senior/' | url }}" {% if page and page.file.src_uri == 'learning-path-senior.md' %}aria-current="page"{% endif %}>学习路线</a>
+      <a href="{{ 'topic-quiz/' | url }}" {% if page and page.file.src_uri == 'topic-quiz.md' %}aria-current="page"{% endif %}>专题自测</a>
+    </div>
+    <div class="library-header-actions">
+      <button class="md-header__button md-icon library-search-trigger" type="button" data-library-search aria-label="搜索知识库" aria-keyshortcuts="Meta+K Control+K">{% include ".icons/material/magnify.svg" %}</button>
+      <a class="md-header__button md-icon" href="{{ config.repo_url }}" aria-label="查看 GitHub 仓库" title="GitHub">{% include ".icons/fontawesome/brands/github.svg" %}</a>
+      {% include "partials/palette.html" %}
+      {% include "partials/javascripts/palette.html" %}
+    </div>
+    {% if "material/search" in config.plugins %}{% include "partials/search.html" %}{% endif %}
+  </nav>
+</header>

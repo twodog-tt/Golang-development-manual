@@ -1,0 +1,25 @@
+{% import "partials/library-nav-item.html" as item with context %}
+<nav class="md-nav md-nav--primary library-nav" aria-label="知识目录" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">知识目录</label>
+  <ul class="md-nav__list" data-md-scrollfix>
+    <li class="md-nav__item"><a class="md-nav__link" href="{{ nav.homepage.url | url }}">首页</a></li>
+    <li class="md-nav__item"><a class="md-nav__link" href="{{ 'learning-path-senior/' | url }}">学习路线</a></li>
+    <li class="md-nav__item"><a class="md-nav__link" href="{{ 'topic-quiz/' | url }}">专题自测</a></li>
+    {% for shelf in library_shelves %}
+      <li class="md-nav__item md-nav__item--nested library-shelf {% if shelf.active %}md-nav__item--active{% endif %}">
+        <input class="md-nav__toggle md-toggle" type="checkbox" id="library_shelf_{{ loop.index }}" {% if shelf.active %}checked{% endif %}>
+        <label class="md-nav__link library-shelf-title" for="library_shelf_{{ loop.index }}" id="library_shelf_{{ loop.index }}_label">{{ shelf.title }}<span class="md-nav__icon md-icon"></span></label>
+        <nav class="md-nav" data-md-level="1" aria-labelledby="library_shelf_{{ loop.index }}_label">
+          <label class="md-nav__title" for="library_shelf_{{ loop.index }}">{{ shelf.title }}</label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            {% set shelf_index = loop.index %}
+            {% for child in shelf.children %}{{ item.render(child, 'library_' ~ shelf_index ~ '_' ~ loop.index, 2) }}{% endfor %}
+          </ul>
+        </nav>
+      </li>
+    {% endfor %}
+    <li class="md-nav__item library-nav-secondary"><a class="md-nav__link" href="{{ 'maps/' | url }}">概念地图</a></li>
+    <li class="md-nav__item"><a class="md-nav__link" href="{{ 'topics/_meta/role-priority-matrix/' | url }}">领域优先级与证据</a></li>
+    <li class="md-nav__item"><a class="md-nav__link" href="{{ 'sources/' | url }}">来源与引用</a></li>
+  </ul>
+</nav>
