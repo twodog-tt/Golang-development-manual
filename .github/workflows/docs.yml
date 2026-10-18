@@ -3,21 +3,23 @@ name: Deploy Docs
 on:
   push:
     branches: [master]
-    paths:
-      - 'docs/**'
-      - 'overrides/**'
-      - 'scripts/**'
-      - 'mkdocs.yml'
-      - 'requirements-docs.txt'
-      - '.github/workflows/docs.yml'
   workflow_dispatch:
+
+concurrency:
+  group: knowledgebase-production
+  cancel-in-progress: false
 
 permissions:
   contents: write
 
 jobs:
   deploy:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DEPLOY_HOST: 123.57.48.214
+      RELEASE: ${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,7 +30,13 @@ jobs:
           python-version: '3.12'
 
       - name: Install MkDocs
-        run: pip install -r requirements-docs.txt
+        run: pip install -r requirements-docs.txt -r deploy/aliyun/requirements-smoke.txt
+
+      - name: Test deployment validation and rollback
+        run: python -m unittest discover -s deploy/aliyun/tests -v
+
+      - name: Install smoke-test browser
+        run: python -m playwright install --with-deps chromium
 
       - name: Generate topic-quiz data
         run: python scripts/generate_topic_quiz_data.py
@@ -41,6 +49,57 @@ jobs:
 
       - name: Build site
         run: mkdocs build --strict
+
+      - name: Package release
+        id: package
+        run: |
+          checksum=$(python deploy/aliyun/package.py --release "$RELEASE")
+          echo "checksum=$checksum" >> "$GITHUB_OUTPUT"
+
+      - name: Configure restricted deployment SSH
+        env:
+          DEPLOY_KEY: ${{ secrets.ALIYUN_DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.ALIYUN_DEPLOY_KNOWN_HOSTS }}
+        run: |
+          test -n "$DEPLOY_KEY" && test -n "$DEPLOY_KNOWN_HOSTS"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/knowledgebase
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/knowledgebase ~/.ssh/known_hosts
+
+      - name: Deploy to Aliyun
+        id: aliyun
+        env:
+          CHECKSUM: ${{ steps.package.outputs.checksum }}
+        run: |
+          ssh -i ~/.ssh/knowledgebase -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 \
+            kbdeploy@"$DEPLOY_HOST" "deploy $RELEASE $CHECKSUM" < release.tar.gz
+
+      - name: Check public home, article and search
+        id: smoke
+        run: python deploy/aliyun/smoke.py --release "$RELEASE"
+
+      - name: Roll back failed production checks
+        if: ${{ failure() && steps.aliyun.outcome == 'success' && steps.smoke.outcome == 'failure' }}
+        run: |
+          ssh -i ~/.ssh/knowledgebase -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 \
+            kbdeploy@"$DEPLOY_HOST" "rollback $RELEASE"
+          curl --fail --silent --show-error --retry 2 --max-time 30 \
+            https://knowledgebase.wenyiapp.cn/release-manifest.json
+
+      - name: Save production check evidence
+        if: ${{ always() && steps.smoke.outcome != 'skipped' && steps.smoke.outcome != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-smoke-${{ github.run_id }}-${{ github.run_attempt }}
+          path: smoke-results/
+          retention-days: 14
+
+      - name: Remove deployment key
+        if: always()
+        run: rm -f ~/.ssh/knowledgebase
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
