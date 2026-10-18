@@ -59,11 +59,25 @@ def check(base, release, output):
             expect(results).to_contain_text("没有找到符合条件的结果")
             query.press("Escape")
             expect(page.get_by_role("button", name="搜索知识库", exact=True)).to_be_focused()
+            new_articles = {
+                "S-PAY-08-temporal-money-workflows": "Temporal 资金长流程",
+                "S-PAY-09-wallet-auth-siwe": "钱包登录与账号绑定",
+                "S-PAY-10-go-typescript-web3-integration": "Go 与 TypeScript Web3 联调",
+                "S-PAY-11-stablecoin-channel-operations": "稳定币渠道与资金运营",
+            }
+            for slug, title in new_articles.items():
+                response = page.goto("/topics/18-web3-payments-stablecoin/" + slug + "/", wait_until="domcontentloaded")
+                assert response.status == 200, slug
+                expect(page.locator(".library-article h1")).to_contain_text(title)
+            page.get_by_role("button", name="搜索知识库", exact=True).click()
+            query.fill("Temporal")
+            expect(results.locator('a[href*="S-PAY-08-temporal-money-workflows/"]').first).to_be_visible()
             assert not errors, "Browser script errors: " + str(errors)
             (output / "result.json").write_text(json.dumps({
                 "result": "passed", "release": release,
                 "checks": ["home", "release", "article", "canonical", "toc", "code",
-                           "english_search", "chinese_search", "empty_search", "focus", "page_errors"],
+                           "english_search", "chinese_search", "empty_search", "focus", "page_errors",
+                           "stablecoin_articles", "temporal_search"],
             }, indent=2) + "\n")
             print("Production browser checks passed: " + release)
         except Exception:

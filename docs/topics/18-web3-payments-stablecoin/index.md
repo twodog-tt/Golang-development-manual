@@ -23,3 +23,14 @@
 ## 推荐顺序
 
 支付状态机 → 双分录与对账 → 稳定币风险 → Treasury → 合规控制 → 机构托管/DvP/RWA/ISO 20022。
+
+## 稳定币支付与资金运营项目
+
+四篇共用 Go + TypeScript + PostgreSQL + Temporal 本地项目，按流程、身份、联调、运营顺序阅读：
+
+- [Temporal 资金长流程：审批、恢复、补偿与版本回放](S-PAY-08-temporal-money-workflows.md)
+- [钱包登录与账号绑定：SIWE、合约验签和会话撤销](S-PAY-09-wallet-auth-siwe.md)
+- [Go 与 TypeScript Web3 联调：精度、消息签名和支付 API](S-PAY-10-go-typescript-web3-integration.md)
+- [稳定币渠道与资金运营：未知状态、Webhook、退款和对账闭环](S-PAY-11-stablecoin-channel-operations.md)
+
+[项目与一键验证](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops)：真实本地数据库和 Workflow Server，渠道为模拟夹具，不接真实资金。

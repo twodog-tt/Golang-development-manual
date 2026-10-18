@@ -8,7 +8,7 @@
 # topics.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
 
 schema_version: 1
-updated_at: "2026-10-18"
+updated_at: "2026-10-19"
 reviewed_at: "2026-08-13" # Old articles retain their last review date; new articles override in frontmatter.
 default_priority: p2
 priority_precedence: [p0, p1, p2]
@@ -150,6 +150,10 @@ roles:
       - S-ARCH-08
       - S-ARCH-09
     p1:
+      - S-PAY-08
+      - S-PAY-09
+      - S-PAY-10
+      - S-PAY-11
       - S-RMQ-01
       - S-RMQ-02
       - S-RMQ-03
@@ -216,6 +220,9 @@ roles:
       - S-WALLET-12
       - S-AI-15
     p1:
+      - S-PAY-08
+      - S-PAY-09
+      - S-PAY-10
       - S-AI-02
       - S-AI-08
       - S-SOL-01
@@ -264,6 +271,8 @@ roles:
     label: 多链钱包与托管
     objective: 保留链特有交易语义，并把签名、策略、恢复和资金生命周期讲成一个控制系统。
     p0:
+      - S-PAY-09
+      - S-PAY-10
       - S-WALLET-01
       - S-WALLET-02
       - S-WALLET-03
@@ -293,6 +302,8 @@ roles:
       - S-PROTO-04
       - S-PAY-07
     p1:
+      - S-PAY-08
+      - S-PAY-11
       - S-BC-01
       - S-BC-02
       - S-BC-04
@@ -332,6 +343,10 @@ roles:
     label: 支付与稳定币
     objective: 串起支付状态机、账本、链确认、清结算、合规和机构资金边界。
     p0:
+      - S-PAY-08
+      - S-PAY-09
+      - S-PAY-10
+      - S-PAY-11
       - S-PAY-01
       - S-PAY-02
       - S-PAY-03
@@ -446,6 +461,8 @@ roles:
       - S-CLOUD-09
       - S-CLOUD-10
     p1:
+      - S-PAY-09
+      - S-PAY-10
       - S-BC-01
       - S-BC-03
       - S-BC-04
@@ -519,6 +536,10 @@ roles:
       - S-SEC-02
       - S-PAY-07
     p1:
+      - S-PAY-08
+      - S-PAY-09
+      - S-PAY-10
+      - S-PAY-11
       - S-EXCH-06
       - S-EXCH-07
       - S-EXCH-08
@@ -618,6 +639,10 @@ roles:
       - S-AI-15
       - S-PAY-07
     p1:
+      - S-PAY-08
+      - S-PAY-09
+      - S-PAY-10
+      - S-PAY-11
       - S-SOL-04
       - S-SOL-05
       - S-CLOUD-01
@@ -704,6 +729,10 @@ evidence:
       - S-SEC-04
       - S-AI-15
     integration_harness:
+      - S-PAY-08
+      - S-PAY-09
+      - S-PAY-10
+      - S-PAY-11
       - S-WALLET-07
       - S-WALLET-08
       - S-WALLET-09
@@ -732,6 +761,9 @@ evidence:
       - S-PROTO-
       - S-CLOUD-
     version_sensitive:
+      - S-PAY-08
+      - S-PAY-09
+      - S-PAY-10
       - S-CONC-04
       - S-CONC-20
       - S-ARCH-21
@@ -746,6 +778,7 @@ evidence:
       - S-PG-04
       - S-DIST-06
     vendor_or_regulatory_sensitive:
+      - S-PAY-11
       - S-PAY-02
       - S-PAY-05
       - S-PAY-06

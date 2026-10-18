@@ -1,5 +1,5 @@
 site_name: Go · Agent · Web3 工程知识库
-site_description: Go 生产工程、Web3 链上基建与资金链路、AI/Crypto Agent 控制面的开源工程知识库（242 篇）
+site_description: Go 生产工程、Web3 链上基建与资金链路、AI/Crypto Agent 控制面的开源工程知识库（246 篇）
 site_url: https://knowledgebase.wenyiapp.cn/
 repo_url: https://github.com/twodog-tt/Golang-development-manual
 repo_name: twodog-tt/Golang-development-manual
@@ -271,6 +271,10 @@ plugins:
         interview/18-web3-payments-stablecoin/S-PAY-05-compliance-travel-rule-sanctions.md: topics/18-web3-payments-stablecoin/S-PAY-05-compliance-travel-rule-sanctions.md
         interview/18-web3-payments-stablecoin/S-PAY-06-institutional-custody-rwa-iso20022.md: topics/18-web3-payments-stablecoin/S-PAY-06-institutional-custody-rwa-iso20022.md
         interview/18-web3-payments-stablecoin/S-PAY-07-postgresql-double-entry-ledger-lab.md: topics/18-web3-payments-stablecoin/S-PAY-07-postgresql-double-entry-ledger-lab.md
+        interview/18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md: topics/18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md
+        interview/18-web3-payments-stablecoin/S-PAY-09-wallet-auth-siwe.md: topics/18-web3-payments-stablecoin/S-PAY-09-wallet-auth-siwe.md
+        interview/18-web3-payments-stablecoin/S-PAY-10-go-typescript-web3-integration.md: topics/18-web3-payments-stablecoin/S-PAY-10-go-typescript-web3-integration.md
+        interview/18-web3-payments-stablecoin/S-PAY-11-stablecoin-channel-operations.md: topics/18-web3-payments-stablecoin/S-PAY-11-stablecoin-channel-operations.md
         interview/18-web3-payments-stablecoin/index.md: topics/18-web3-payments-stablecoin/index.md
         interview/19-node-rpc-staking/S-NODE-01-ethereum-node-architecture-sync.md: topics/19-node-rpc-staking/S-NODE-01-ethereum-node-architecture-sync.md
         interview/19-node-rpc-staking/S-NODE-02-rpc-ha-quorum-hedging-cache.md: topics/19-node-rpc-staking/S-NODE-02-rpc-ha-quorum-hedging-cache.md

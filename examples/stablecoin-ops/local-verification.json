@@ -1,0 +1,50 @@
+{
+  "result": "passed",
+  "checks": [
+    "viem-to-Go SIWE message bytes and EOA verification",
+    "altered scope, expired nonce and concurrent nonce replay rejected",
+    "integer precision, concurrent idempotency, intent conflict, tenant isolation and logout",
+    "response loss, signed webhook failures, duplicate/out-of-order events, real legacy worker SIGKILL and upgrade restart, exactly-one journal and merchant Inbox",
+    "refund response loss, retry recovery and single accounting reversal",
+    "durable approval timer expires without external transfer",
+    "unknown outcome enters review, cannot refund, query-only reconciliation recovers it",
+    "post-settlement provider reversal, stale confirmation and refund protection",
+    "expired quote rejected and admin-injected balance drift detected",
+    "real Temporal history replay passes and incompatible workflow is rejected",
+    "wallet unbinding revokes sessions and challenges without deleting ledger facts"
+  ],
+  "run_id": "stablecoin-ops-b8ac8c787142",
+  "checked_at": "2026-10-18T18:13:37Z",
+  "go": "go version go1.24.3 darwin/arm64",
+  "node": "v22.15.0",
+  "images": {
+    "postgres:17-alpine": "sha256:25a89970a83255ae96484d709005bb35aa71f7455f941bc1634514f31c5d5c62",
+    "temporalio/temporal:1.5.1": "sha256:bb46e6004f442ebd2e4e7a327bd9760be104b5edb4f838b9bf4b2351d3736b17"
+  },
+  "scope": "Local PostgreSQL/Temporal, real Go and viem client; mock channel and ERC-1271 RPC fixture; no real tokens or external PSP",
+  "source_sha256": {
+    "examples/stablecoin-ops/.gitignore": "8d5b8c4810b356f491cb1145f7f52107d4edcc1934eb5a0d79e98fee3d173995",
+    "examples/stablecoin-ops/README.md": "98a9c5278ef678e66bfcdc5db22a805941333448ab0f942edc1c391689e1623e",
+    "examples/stablecoin-ops/client/package-lock.json": "229515d27430a36488fd7cadd00cf384b3607a5a67de5e399084e1e521f346f1",
+    "examples/stablecoin-ops/client/package.json": "f5028a864f54ec6890a9d852e5e61ff58656c872c2391d65c79a58fbbde8ece0",
+    "examples/stablecoin-ops/client/src/cli.ts": "22be69cb4d97ae3367a208b6139031af6318727e546072def073ad9b5184e7ef",
+    "examples/stablecoin-ops/client/src/client.ts": "ad858a6be4b57e292d7cbf5c6d2ac9381b4adfd17739eb98c5c0060437cd0de0",
+    "examples/stablecoin-ops/client/src/integration.ts": "e642fa4dd3bd57fad6e69839a4594d6e8128bf2952fe443ca8732491eb6040bd",
+    "examples/stablecoin-ops/client/tsconfig.json": "03cb054cb95552dfea9cfb81dd950290ba67b5a2220d3e91fde3c30998e3c005",
+    "examples/stablecoin-ops/cmd/api/main.go": "052e7738992a34819d5e88e79061b8bd85e824c078e7525ce2f452d87e631a6c",
+    "examples/stablecoin-ops/cmd/history/main.go": "802605f14698e065e37fad36ea345389e16a48c16b1cf03546d8c349adf2a3ba",
+    "examples/stablecoin-ops/cmd/provider/main.go": "b29aaeb41f6d8e796d93dd035ec75534c41dad3c399a399d90ea6d27d0f90f46",
+    "examples/stablecoin-ops/cmd/worker/main.go": "823116c3f47fbb4d0a329617bf73dde688a6d498327e8d9ea7d5c479a9802978",
+    "examples/stablecoin-ops/go.mod": "029dca895e8a27fc2840e77af910cfaf3f96d0e328322e2316654e7acdcd6bb1",
+    "examples/stablecoin-ops/go.sum": "5be8be2209f4e28798beff14f49336dae7897bc3307c70738a9819626eecd93e",
+    "examples/stablecoin-ops/internal/ops/auth.go": "fb3302f618602df5bb602ae84085288f71c6f0cb766df31f442bbbabb688cfb7",
+    "examples/stablecoin-ops/internal/ops/channel.go": "c130c7502949a957f9ae4de4ad21b5007484eb289e68084337a502df9fdd6202",
+    "examples/stablecoin-ops/internal/ops/config.go": "b13b368642829a273338b7c4c8388107a38306bed4a39e942cb14af890b8079f",
+    "examples/stablecoin-ops/internal/ops/http.go": "434be6a5b0e2c8d6a4e3b5b55482c6004911544c5aa9ac5604a67161518e9906",
+    "examples/stablecoin-ops/internal/ops/ops_test.go": "551028f7f9f1925286169d88c29e32427ecd5e756c93e2043d642f3445bdcbdd",
+    "examples/stablecoin-ops/internal/ops/schema.sql": "7df4020be019aa57e3fa71100ecc37c42e4b6b54c353bcdaa1e6fc4505bb3060",
+    "examples/stablecoin-ops/internal/ops/store.go": "d5fa55727a2f88c8d323ec20e5e171024aad928924f83a33b1a9584294aac18a",
+    "examples/stablecoin-ops/internal/ops/workflow.go": "26b0227e6d3624c0b838364b4032677ed91911968a081e2ec70724115f40804d",
+    "examples/stablecoin-ops/verify.py": "088991046662f07e752a9b604d0969b835fbec7e23668ef336ec72d1d878f096"
+  }
+}

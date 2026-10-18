@@ -29,6 +29,32 @@ jobs:
         with:
           python-version: '3.12'
 
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: examples/stablecoin-ops/go.mod
+          cache-dependency-path: examples/stablecoin-ops/go.sum
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: examples/stablecoin-ops/client/package-lock.json
+
+      - name: Verify stablecoin project and failure recovery
+        run: |
+          docker pull postgres:17-alpine
+          docker pull temporalio/temporal:1.5.1
+          python examples/stablecoin-ops/verify.py --report /tmp/stablecoin-ops-ci/result.json
+
+      - name: Save stablecoin verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stablecoin-ops-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/stablecoin-ops-ci/
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Install MkDocs
         run: pip install -r requirements-docs.txt -r deploy/aliyun/requirements-smoke.txt
 

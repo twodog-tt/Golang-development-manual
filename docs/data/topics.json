@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "generated_at": "2026-10-18T12:40:00Z",
-  "count": 242,
+  "generated_at": "2026-10-18T17:38:04Z",
+  "count": 246,
   "roles": [
     {
       "key": "senior_go_backend",
@@ -4938,6 +4938,106 @@
         "reproducibility": "integration_harness",
         "volatility": "stable",
         "reviewed_at": "2026-10-18"
+      }
+    },
+    {
+      "id": "S-PAY-08",
+      "title": "Temporal 资金长流程：审批、恢复、补偿与版本回放",
+      "frequency": 5,
+      "module": "18 Web3 支付与稳定币",
+      "module_key": "web3_payments",
+      "resume_focus": false,
+      "url": "topics/18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows/",
+      "prompt": "Temporal 持久化 Workflow 历史，Worker 重启后通过确定性重放继续执行。它不能替代业务幂等或保证渠道只收一次钱。本项目把人工审批、渠道提交、查询、账本过账和商户通知串成流程；Activity 的外部副作用各有稳定业务 ID，状态未知进入人工核对，不自动重新付款。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p1",
+        "payments_stablecoin": "p0",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p1",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "integration_harness",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-10-19"
+      }
+    },
+    {
+      "id": "S-PAY-09",
+      "title": "钱包登录与账号绑定：SIWE、合约验签和会话撤销",
+      "frequency": 5,
+      "module": "18 Web3 支付与稳定币",
+      "module_key": "web3_payments",
+      "resume_focus": false,
+      "url": "topics/18-web3-payments-stablecoin/S-PAY-09-wallet-auth-siwe/",
+      "prompt": "钱包登录证明对指定消息的签名能力，不代表有权付款或管理任意商户。服务端生成绑定 domain、URI、chain、地址、nonce 和有效期的 SIWE 消息；验证后原子消费 nonce，再签发短期会话。EOA 与合约钱包采用不同验证路径，租户来自服务端绑定关系，解绑必须撤销会话而保留账本。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p0",
+        "payments_stablecoin": "p0",
+        "node_rpc_indexer": "p1",
+        "exchange_engineering": "p1",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "integration_harness",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-10-19"
+      }
+    },
+    {
+      "id": "S-PAY-10",
+      "title": "Go 与 TypeScript Web3 联调：精度、消息签名和支付 API",
+      "frequency": 5,
+      "module": "18 Web3 支付与稳定币",
+      "module_key": "web3_payments",
+      "resume_focus": false,
+      "url": "topics/18-web3-payments-stablecoin/S-PAY-10-go-typescript-web3-integration/",
+      "prompt": "Go 与 TypeScript 的边界需要明确金额、地址、消息字节和错误契约。本项目用 viem 生成签名，Go 验证 SIWE 并执行业务；所有原子金额以十进制字符串通过 JSON，TypeScript 用 bigint，Go 用受限 int64，拒绝隐式舍入和浮点数。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p0",
+        "payments_stablecoin": "p0",
+        "node_rpc_indexer": "p1",
+        "exchange_engineering": "p1",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "integration_harness",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-10-19"
+      }
+    },
+    {
+      "id": "S-PAY-11",
+      "title": "稳定币渠道与资金运营：未知状态、Webhook、退款和对账闭环",
+      "frequency": 5,
+      "module": "18 Web3 支付与稳定币",
+      "module_key": "web3_payments",
+      "resume_focus": false,
+      "url": "topics/18-web3-payments-stablecoin/S-PAY-11-stablecoin-channel-operations/",
+      "prompt": "渠道请求、链上/支付确认、内部过账和商户通知是不同事实。运营系统应能查清每个支付的当前状态、渠道证据、账本分录与通知进度；提交超时进入未知状态处理，不能自动重新付款。本项目用一个本地渠道夹具串起确认、双分录、商户通知、退款、异常恢复与漂移检测。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p1",
+        "payments_stablecoin": "p0",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p1",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "integration_harness",
+        "volatility": "vendor_or_regulatory_sensitive",
+        "reviewed_at": "2026-10-19"
       }
     },
     {

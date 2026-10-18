@@ -1,6 +1,6 @@
 # 专题索引
 
-> 全库 **242 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
+> 全库 **246 篇**。左侧导航按 **基础 → 进阶 → 高阶 → 专题 → 综合** 组织；本页为速查表。
 > **⭐ 领域导航**：[概念地图](maps/index.md) ·
 > [领域能力优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
 > [Web3 场景地图](web3-exchange-wallet-focus.md)
@@ -32,13 +32,13 @@
 | 11 解决方案架构 | 8 | [11-solution-architecture/](topics/11-solution-architecture/index.md) |
 | 15 微服务（交易所场景） | 6 | [15-microservices-exchange/](topics/15-microservices-exchange/index.md) |
 
-## 专题 · Web3 核心基础设施（94 篇）
+## 专题 · Web3 核心基础设施（98 篇）
 
 | 模块 | 篇数 | 入口 |
 |------|------|------|
 | 12 区块链与 Web3 | 17 | [12-blockchain-web3/](topics/12-blockchain-web3/index.md) |
 | 17 多链钱包与托管 | 12 | [17-multichain-wallet/](topics/17-multichain-wallet/index.md) |
-| 18 Web3 支付与稳定币 | 7 | [18-web3-payments-stablecoin/](topics/18-web3-payments-stablecoin/index.md) |
+| 18 Web3 支付与稳定币 | 11 | [18-web3-payments-stablecoin/](topics/18-web3-payments-stablecoin/index.md) |
 | 19 节点、RPC 与 Staking | 10 | [19-node-rpc-staking/](topics/19-node-rpc-staking/index.md) |
 | 20 协议、共识与安全 | 5 | [20-protocol-consensus-security/](topics/20-protocol-consensus-security/index.md) |
 | 21 Web3 安全工程 | 4 | [21-security-engineering/](topics/21-security-engineering/index.md) |

@@ -11,8 +11,8 @@
 |------|--------:|----------|
 | Go 生产工程 | 64 | PostgreSQL/MySQL、消息、网络、IaC/GitOps |
 | AI / Crypto Agent 控制面 | 67 | 工作流/HITL、MCP/A2A、身份/Commerce、开放平台 |
-| 多链钱包与托管签名 | 70 | 多链交易、归集、MPC/HSM、恢复 |
-| 支付与稳定币 | 70 | 支付状态机、账本、清结算、合规 |
+| 多链钱包与托管签名 | 72 | 多链交易、归集、MPC/HSM、恢复 |
+| 支付与稳定币 | 74 | 支付状态机、账本、清结算、合规 |
 | 节点/RPC/Indexer | 80 | 共识、canonical 数据、ClickHouse/lakehouse |
 | 交易所工程 | **78** | 撮合/WAL、DEX 协议、预测市场、账本与风控 |
 | 系统演进与架构协作 | **84** | 技术战略、跨团队迁移、发布与风险治理 |
@@ -204,3 +204,7 @@
 | W4 | 16 Go 生产工程 + 综合演练 | 与 Go 工程门禁串联；1 场综合讲解 |
 
 专题索引：[topics/_meta/topics.yaml](./topics/_meta/topics.yaml)
+
+## 稳定币支付项目路径
+
+按 [Temporal 流程](topics/18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md) → [钱包登录](topics/18-web3-payments-stablecoin/S-PAY-09-wallet-auth-siwe.md) → [Go/TypeScript 联调](topics/18-web3-payments-stablecoin/S-PAY-10-go-typescript-web3-integration.md) → [渠道运营](topics/18-web3-payments-stablecoin/S-PAY-11-stablecoin-channel-operations.md) 阅读并运行统一故障验证，复用既有双分录账本。

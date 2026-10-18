@@ -1,0 +1,12 @@
+{
+  "name": "stablecoin-ops-client",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "ops": "node dist/cli.js",
+    "verify": "node dist/integration.js"
+  },
+  "dependencies": { "viem": "2.57.7" },
+  "devDependencies": { "typescript": "5.8.3", "@types/node": "22.15.3" }
+}
