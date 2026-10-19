@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-19T02:08:12Z",
+  "generated_at": "2026-10-19T04:27:33Z",
   "count": 249,
   "roles": [
     {
@@ -2612,7 +2612,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-10-18"
+        "reviewed_at": "2026-10-19"
       }
     },
     {
@@ -4937,7 +4937,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-08-13"
+        "reviewed_at": "2026-10-19"
       }
     },
     {
@@ -5012,7 +5012,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "stable",
-        "reviewed_at": "2026-10-18"
+        "reviewed_at": "2026-10-19"
       }
     },
     {
@@ -5162,7 +5162,7 @@
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "stable",
-        "reviewed_at": "2026-08-13"
+        "reviewed_at": "2026-10-19"
       }
     },
     {
@@ -5212,7 +5212,7 @@
         "basis": "source_anchored",
         "reproducibility": "integration_harness",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-10-18"
+        "reviewed_at": "2026-10-19"
       }
     },
     {

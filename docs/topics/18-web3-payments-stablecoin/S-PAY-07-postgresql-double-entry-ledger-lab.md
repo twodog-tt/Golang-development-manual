@@ -7,8 +7,8 @@ frequency: 5
 go_version: "1.24+"
 tags: [ledger, postgresql, double-entry, idempotency, reconciliation]
 status: published
-reviewed_at: "2026-10-18"
-code_refs: [examples/postgres-reliability/schema.sql, examples/postgres-reliability/verify.py]
+reviewed_at: "2026-10-19"
+code_refs: [examples/postgres-reliability/schema.sql, examples/postgres-reliability/pg_fault.py, examples/postgres-reliability/debit.sql, examples/postgres-reliability/verify.py]
 sources:
   - https://www.postgresql.org/docs/17/explicit-locking.html
   - https://www.postgresql.org/docs/17/ddl-constraints.html
@@ -83,11 +83,16 @@ python3 examples/postgres-reliability/verify.py --only ledger
 | 余额 100 的账户并发支付两笔 80 | 只允许一笔，剩余 20 |
 | 冻结后重复解冻、另一 ID 再次冲正 | 同 ID 幂等；第二次冲正被唯一约束拒绝 |
 | 转账函数执行后、COMMIT 前终止连接 | journal、分录、余额、Outbox 全部回滚 |
+| 真实 COMMIT 成功回包被协议夹具丢弃 | 调用端得到 unknown；独立连接先查原 journal，再四路重试同 ID，余额只变一次，journal/entries/Outbox 为 1/2/1 |
+| 收款余额已全部使用后发起冲正 | 余额不足拒绝，失败冲正不留下 journal/entries/Outbox |
+| 单账户扣款传负数、零、小数、NULL 或超额 | debit.sql 拒绝且 version 不变；25 原子单位合法扣款才生效 |
 | 无分录 journal 尝试 COMMIT | 延迟约束拒绝提交 |
 | 管理员制造余额 +1 的漂移 | drift 视图检出；隔离写入后从分录重建归零 |
 
 记录 `business_id`、journal ID、账户、币种、金额、SQLSTATE 和事务耗时；监控余额差异、
 锁等待、失败比例与 Outbox 最老年龄。日志不记录敏感用户资料。
+
+`pg_fault.py` 经 docker-exec/nc 管道直接读取 PostgreSQL v3 协议，只有故障注入器看到 `CommandComplete(COMMIT)`，业务调用端只收到 unknown；它不是在 COMMIT 前杀连接，也不是把普通 SQL 错误假装成已提交。夹具限定为本次容器的 trust 连接，不提供通用数据库客户端。报告启动时清除旧文件，选定场景与清理全部成功后原子发布；`--only ledger` 为 8 组，完整入口为 17 组。
 
 ## 架构取舍
 

@@ -1,17 +1,26 @@
 {
-  "run_id": "4fe1557bc600",
+  "run_id": "e3de69a3e589",
+  "selection": "all",
   "postgres_version": "PostgreSQL 17.11 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit",
-  "verified_at": "2026-10-18T12:45:15.772720+00:00",
+  "verified_at": "2026-10-19T04:30:20.720665+00:00",
   "image_ids": {
     "postgres:17-alpine": "sha256:25a89970a83255ae96484d709005bb35aa71f7455f941bc1634514f31c5d5c62",
     "redis:7.4-alpine": "sha256:ec4f171e9ff071bb2a1c936057d3be00206069b028b6c0d61df2477e1dd02c42"
   },
   "source_sha256": {
     "schema.sql": "f783ed47e76346bd343f10c5cdaa06ab85b8e325d211121c9a052fea663085f7",
-    "consumer.sql": "f995f76f8eb1bb74b40c78389048c0dcff8faf4a1553a3f96ce49583b4dd99ff",
-    "verify.py": "b96878ffe1c77401c6af7a3e7bad40872dbcfe9b4aabecb422a083b123ea5cd2"
+    "consumer.sql": "4462a021d7f902a73809e67bc58a2179217a25763850786695861460b0a52eed",
+    "debit.sql": "828873f2669695c90226b15307fd1588a9ae1b57a7298880fa47e9f1ba5cab33",
+    "pg_fault.py": "791c8a2d375277c6a9d17c90fca701ab5c9d9d244d22e835ce2c2af650156a28",
+    "verify.py": "5a068cb446e0ca0ef1cfa0f7ec040bee1ae6d3781aac10af754e09a679fc5cfd",
+    "test_verify.py": "745ddf1f130e8d1f17d6f4199fa25847674135f523137253ef4089589053470c"
   },
   "scenarios": [
+    {
+      "scenario": "debit-rejects-negative-zero-fraction-null-and-overspend",
+      "passed": true,
+      "rejected": 5
+    },
     {
       "scenario": "idempotency-payload-binding",
       "passed": true,
@@ -32,6 +41,18 @@
       "passed": true
     },
     {
+      "scenario": "commit-ack-loss-queries-and-retries-original-intent",
+      "passed": true,
+      "retries": 4,
+      "journals": 1,
+      "entries": 2,
+      "outbox": 1
+    },
+    {
+      "scenario": "insufficient-reversal-rolls-back-all-facts",
+      "passed": true
+    },
+    {
       "scenario": "balance-drift-detected-and-rebuilt-from-entries",
       "passed": true
     },
@@ -48,11 +69,47 @@
       "pending": 0
     },
     {
+      "scenario": "concurrent-inbox-same-content",
+      "passed": true,
+      "workers": 8,
+      "applied": 1,
+      "duplicates": 7
+    },
+    {
+      "scenario": "concurrent-inbox-conflicting-content",
+      "passed": true,
+      "winners": 1,
+      "duplicates": 3,
+      "conflicts": 4
+    },
+    {
+      "scenario": "published-message-loss-reconciles-from-outbox-and-inbox",
+      "passed": true,
+      "repaired": 1,
+      "projection_count": 1
+    },
+    {
+      "scenario": "unknown-payout-keeps-reserve-and-reconciles-original-id",
+      "passed": true,
+      "reserved_while_unknown": 25,
+      "external_effects": 1
+    },
+    {
       "scenario": "pitr-restores-before-delete",
       "passed": true,
-      "journal_count": 9,
-      "bob_balance_atomic": 120,
-      "recovery_seconds": 1.089
+      "journal_count": 17,
+      "bob_balance_atomic": 145,
+      "recovery_seconds": 1.191
+    },
+    {
+      "scenario": "pitr-reconciles-published-inbox-pel-and-external-receipts",
+      "passed": true,
+      "replayed_events": 2,
+      "external_effects": 2,
+      "pending": 0,
+      "repeated_replay_safe": true,
+      "replay_commit_ack_loss": true,
+      "financial_journals_unchanged": true
     },
     {
       "scenario": "missing-wal-fails-before-recovery-target",

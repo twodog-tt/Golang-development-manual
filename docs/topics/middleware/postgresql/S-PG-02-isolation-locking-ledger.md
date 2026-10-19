@@ -7,6 +7,7 @@ frequency: 5
 go_version: "1.24+"
 tags: [postgresql, transaction, isolation, ssi, lock, deadlock, ledger, idempotency]
 status: published
+reviewed_at: "2026-10-19"
 resume_focus: true
 code_refs: []
 sources:
@@ -67,12 +68,18 @@ SET available = available - $1,
 WHERE tenant_id = $2
   AND account_id = $3
   AND currency = $4
+  AND $1 > 0
+  AND $1 = trunc($1)
   AND available >= $1
 RETURNING available, version;
 ```
 
-返回 0 行表示余额不足、对象不存在或并发条件已变化。它比“先 `SELECT` 余额，再 `UPDATE`”
+`$1` 按未舍入的 `numeric` 绑定，先校验正整数原子金额；负数、零、小数和 NULL 都不更新。不能先转为 `numeric(38,0)` 或整数再校验，否则小数可能已经被舍入。驱动和 API 还应限制输入长度、金额上限和资产精度。
+
+返回 0 行表示金额无效、余额不足、对象不存在或并发条件已变化。它比“先 `SELECT` 余额，再 `UPDATE`”
 更稳，因为判断和写入在同一条语句内完成。
+
+同一条语句保存在 [debit.sql](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/postgres-reliability/debit.sql)。运行 `python3 examples/postgres-reliability/verify.py --only ledger`，真实 PostgreSQL 验证 `-10/0/0.4/NULL/101` 均保持余额 100、version 0，合法扣款 25 后才变为 75、version 1。
 
 表级约束仍应兜底：
 

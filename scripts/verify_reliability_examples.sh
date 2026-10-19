@@ -16,6 +16,7 @@ if [[ $# -gt 1 || ( $# -eq 1 && "$1" != "--offline" ) ]]; then
 fi
 task_tmp="$(mktemp -d)"
 trap 'rm -rf "$task_tmp"' EXIT
+python3 -m unittest discover -s examples/postgres-reliability -p 'test_verify.py'
 env -u GOROOT "$GO_BIN" test -race ./examples/senior/agenteval/...
 env -u GOROOT "$GO_BIN" build -o "$task_tmp/eval" ./examples/senior/agenteval/cmd/eval
 "$task_tmp/eval" > "$task_tmp/good.json"

@@ -7,6 +7,7 @@ frequency: 5
 go_version: "1.22+"
 tags: [ledger, clearing, settlement, reconciliation, double-entry]
 status: published
+reviewed_at: "2026-10-19"
 resume_focus: true
 code_refs: []
 sources:
@@ -24,7 +25,7 @@ sources:
 
 1. **账本**：每个 transaction 多条 entries，总借贷/正负额按资产为零。
 2. **清算**：按 merchant、currency、周期计算 gross、fee、refund、reserve、net payable。
-3. **结算**：生成 payout instruction，预占资金，外部转移，确认后完成；失败释放或重试。
+3. **结算**：生成稳定 payout ID 并预占资金；外部确认执行后完成结算。只有明确证明未执行且不会再执行，才允许释放；超时、断连、not-found 和重试耗尽都属于结果未知，继续预占并查询原业务 ID，不换 ID 重建付款。
 4. **对账**：transaction-level matching + balance proof，识别 timing、duplicate、missing、
    amount/fee mismatch；链确认、托管入账、银行不可撤销性和法律 finality 要分别定义，不能共用
    一个含糊的 `settled=true`。
@@ -69,6 +70,7 @@ flowchart LR
 
 - 链上已付但账本缺失：索引/outbox 故障，补投同一幂等事件。
 - 账本已结算但 payout 未发：状态机恢复，资金仍 reserved。
+- 外部已执行但回包丢失：保持 unknown/reserved，按原 payout ID 查询；确认后只完成原预占的结算，不再次付款。可运行夹具在 `python3 examples/postgres-reliability/verify.py --only outbox` 中：独立 Redis 接收回执暂不可读时释放被拒绝、25 原子单位继续冻结，恢复回执后同 ID 重试只产生一次外部效果和结算 journal。它是故障夹具，不是银行/真实 PSP 适配器。
 - provider 少结 fee：break 进入财务/运营 case，调整需审批。
 - reorg 穿过入账水位：冻结关联可用余额，写 reversal 并升级风险事件。
 

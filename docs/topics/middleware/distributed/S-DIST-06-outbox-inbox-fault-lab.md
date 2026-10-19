@@ -7,7 +7,7 @@ frequency: 5
 go_version: "1.24+"
 tags: [outbox, inbox, redis-streams, postgresql, idempotency]
 status: published
-reviewed_at: "2026-10-18"
+reviewed_at: "2026-10-19"
 code_refs: [examples/postgres-reliability/schema.sql, examples/postgres-reliability/consumer.sql, examples/postgres-reliability/verify.py]
 sources:
   - https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html
@@ -88,12 +88,19 @@ python3 examples/postgres-reliability/verify.py --only outbox
 | 提交消费事务后不 XACK | Inbox/投影已提交，PEL 未清 | reclaim 后消费返回重复，不再累加 |
 | 新 entry 携带相同业务 ID | Broker ID 不同 | 去重仍然生效 |
 | 相同业务 ID 修改金额 | Inbox 已存在原 payload | 报 identity conflict，不静默吞掉 |
+| 八路并发消费同一 ID/内容 | 实际数据库唯一键竞争 | 一次应用、七次重复，投影只增加一次 |
+| 两种金额各四路争同一 ID | 首个提交者绑定 payload | 一次应用、三次同内容重复、四次内容冲突；投影与胜出的原 payload 一致 |
+| published=true 后 Broker entry 被删除 | Outbox 留存但目标消费者 Inbox 缺失 | 按原 ID/payload 补投；再次补投仍只应用一次，PEL 清零 |
 
 脚本用 `XCLAIM` 且 idle=0 精确触发重投，便于快速验证；生产应按处理时长与租约设置合理 idle，
 结合 `XPENDING`/`XAUTOCLAIM` 防止活跃 worker 被过早抢占。只读 `>` 不会自动接管其他 worker 的 pending。
 
 观测 Outbox 最老年龄、未发布量、PEL 最老年龄、重投次数、Inbox 冲突、投影水位与死信数量。
 不能只看消费吞吐：吞吐正常时，也可能有一条资金事件长期卡住。
+
+消息丢失用例实际 `XDEL` 未消费的 entry；修复针对已知投影与单事件，核对权威 Outbox 和指定 consumer_id 的 Inbox 后补投。它不把 published 标记当作消费证明，也不把 Inbox 缺失泛化为“任意外部付款都未执行”。有外部副作用时，还需该系统的稳定幂等身份与独立回执。
+
+同入口另有出款结果未知夹具：Redis 接收方已执行，回执暂不可读时原预占仍在，不能释放；回执恢复后查询/重试原 ID，效果只发生一次。`--only outbox` 共 6 组；数据库恢复后的 Inbox 回退与安全重放另见 [PITR 演练](../postgresql/S-PG-04-pitr-restore-drill.md)。报告会清除旧成功记录，全部选定验证和清理成功后才原子写出。
 
 ## 架构取舍
 
