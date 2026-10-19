@@ -36,7 +36,7 @@ jobs:
             examples/stablecoin-ops/go.sum
             examples/onchain-execution/go.sum
 
-      - name: Verify Agent evaluation gates offline
+      - name: Verify Agent evaluation, workflow and MCP/A2A offline
         run: bash scripts/verify_reliability_examples.sh --offline
 
       - uses: actions/setup-node@v4

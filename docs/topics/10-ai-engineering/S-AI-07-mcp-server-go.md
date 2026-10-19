@@ -4,7 +4,7 @@ title: Go 实现 MCP Server：工具暴露与 stdio/HTTP 部署
 module: ai-engineering
 level: senior
 frequency: 5
-go_version: "1.22+"
+go_version: "1.24.2+"
 tags: [mcp, model-context-protocol, tools, stdio, go-sdk]
 status: published
 code_refs: [examples/senior/mcp]
@@ -60,7 +60,7 @@ flowchart LR
   Tools --> API[内部 HTTP / DB]
 ```
 
-**官方 SDK 最小 Tool（与本仓库示例一致）**
+**官方 SDK Tool handler（与本仓库 `greet` 返回契约一致）**
 
 ```go
 type greetInput struct {
@@ -70,18 +70,21 @@ type greetOutput struct {
     Greeting string `json:"greeting"`
 }
 
-func greet(ctx context.Context, req *mcp.CallToolRequest, in greetInput) (
+func greet(_ context.Context, _ *mcp.CallToolRequest, in greetInput) (
     *mcp.CallToolResult, greetOutput, error,
 ) {
-    return nil, greetOutput{Greeting: "Hello, " + in.Name}, nil
-}
-
-server := mcp.NewServer(&mcp.Implementation{Name: "my-svc", Version: "1.0.0"}, nil)
-mcp.AddTool(server, &mcp.Tool{Name: "greet", Description: "打招呼"}, greet)
-if err := server.Run(ctx, &mcp.StdioTransport{}); err != nil {
-    return err
+    name := in.Name
+    if name == "" {
+        name = "friend"
+    }
+    return nil, greetOutput{Greeting: fmt.Sprintf("Hello, %s (from Go MCP)", name)}, nil
 }
 ```
+
+这只是 handler 片段，不能直接当完整可执行程序。本例通过 `server.New(Config{Authority: a, LocalToken: token})`
+注册带鉴权包装的工具；`greet` 要求 `greet` scope，`get_order` 要求 `orders:read`。
+stdio 的 token 由可信启动器配置，HTTP 的 token 来自每次请求的 Authorization header，均在工具执行前重新验证；
+身份不能从模型参数或 `_meta` 读取。完整程序及运行命令见下方。
 
 **传输方式选型**
 
@@ -99,7 +102,8 @@ if err := server.Run(ctx, &mcp.StdioTransport{}); err != nil {
     "golang-manual": {
       "command": "go",
       "args": ["run", "./examples/senior/mcp/"],
-      "cwd": "/path/to/Golang-development-manual"
+      "cwd": "/path/to/Golang-development-manual",
+      "env": {"MCP_DEMO_TOKEN": "local-demo-secret"}
     }
   }
 }
@@ -130,8 +134,8 @@ if err := server.Run(ctx, &mcp.StdioTransport{}); err != nil {
 ## 深挖问答
 
 1. **和 Function Calling 区别？** → FC 在模型 API 内；MCP 是 **宿主↔服务** 标准协议，可跨进程/跨语言。
-2. **Tool 返回什么？** → 结构化 JSON（`AddTool` Out 类型）或 `TextContent`；错误用 `IsError` 或业务字段。
-3. **如何做鉴权？** → HTTP 传输按 MCP authorization 与部署环境采用 OAuth/mTLS，校验 token audience/resource 与 Origin 防 DNS rebinding；本地 HTTP 只绑定 loopback。stdio 从环境/宿主取得凭证，但 Tool 内仍按最终用户与资源做授权。
+2. **Tool 返回什么？** → 结构化 JSON（`AddTool` Out 类型）或 `TextContent`；工具执行失败用 `IsError=true`；协议/参数错误与业务结果分开处理。本例订单不可见和不存在统一返回 `order unavailable`。
+3. **如何做鉴权？** → HTTP 的 OAuth profile 按 MCP authorization 实现资源服务器；mTLS 可作为额外部署保护，不能替代 OAuth 发现/授权语义。校验 token audience/resource 与 Origin 防 DNS rebinding；本地 HTTP 只绑定 loopback。stdio 从环境/宿主取得凭证，但 Tool 内仍按最终用户与资源做授权。
 4. **资源 Resources 与 Tool？** → Resource 只读暴露文件/URI；Tool 可执行副作用。
 
 ## 反模式与事故
@@ -145,14 +149,37 @@ if err := server.Run(ctx, &mcp.StdioTransport{}); err != nil {
 
 ## 代码示例
 
-本仓库可运行示例：
+需要 **Go 1.24.2+**，依赖固定为官方 `go-sdk v1.4.0`。在仓库根目录运行：
 
 ```bash
-go test ./examples/senior/mcp/internal/server/...
-go run ./examples/senior/mcp/
+go test -race ./examples/senior/mcp/...
+MCP_DEMO_TOKEN=local-demo-secret go run ./examples/senior/mcp/
+MCP_DEMO_TOKEN=local-demo-secret go run ./examples/senior/mcp/ -transport http
+# 包括真实 stdio 子进程、A2A CLI 和已有 Agent 恢复门禁
+bash scripts/verify_reliability_examples.sh --offline
 ```
 
-实现见 `examples/senior/mcp/internal/server/server.go`：`greet`、`get_order` 两个演示 Tool。
+HTTP 默认仅监听 `127.0.0.1:8088`，拒绝非 loopback 地址。每个请求校验 audience、有效期与当前凭据，
+存在 Origin 时执行精确允许列表；会话绑定 tenant+subject，不能凭 session ID 跳过认证。空闲会话过期返回 404，
+客户端重新 initialize，不能因此自动重放写工具。处理器给后端传播超时/取消，后端必须协作处理 context。
+
+实现见 [完整运行与故障矩阵](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/mcp)。两个演示工具为 `greet`、`get_order`；
+订单按受信租户隔离，`10001` 属于 tenant-a，`10002` 属于 tenant-b。返回金额为整数最小单位
+`amount_minor=9900`，不使用浮点金额。读不到与不存在都返回相同的工具执行错误，避免订单存在性泄露。
+
+| 故障验证 | 期望 |
+|---|---|
+| 输入缺失/类型错误、模型附加 tenant_id、未知工具 | 拒绝，不进入查询 |
+| 跨租户、scope 降权、过期/错 audience/撤销 token | 拒绝，已有 session 同样检查 |
+| 输出 Schema、structuredContent 与兼容 TextContent | Schema 存在，返回值一致；精确检查 greet 默认名字 |
+| 后端超时、客户端取消 | context 传到后端，无无限等待 |
+| 缺认证、恶意 Origin、会话盗用、会话过期/重建 | 401/403/404；重新握手成功 |
+| 真实 stdio 进程 | 明确版本握手、纯协议 stdout、EOF 正常退出 |
+
+**证据边界**：bearer 身份表和订单为本地夹具；没有 OAuth 登录/签发/JWKS/introspection 服务。
+资源元数据中的 `issuer.example.invalid` 是占位符，不代表授权服务器可用。内存测试使用 SDK 默认 `2025-06-18`，
+HTTP 和真实 stdio 检查显式请求 `2025-11-25`；没有将其扩大为所有版本、sampling/elicitation 或真实宿主的兼容验收。
+带副作用调用的 UNKNOWN 与 receipt 恢复见 [MCP/A2A 实战](./S-AI-11-mcp-a2a-vendor-neutral-interoperability.md)。
 
 ## 延伸阅读
 

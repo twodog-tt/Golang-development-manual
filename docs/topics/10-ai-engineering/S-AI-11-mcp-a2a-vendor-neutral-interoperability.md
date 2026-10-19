@@ -4,14 +4,15 @@ title: MCP 与 A2A：Tool、Agent、任务生命周期与跨框架互操作
 module: ai-engineering
 level: architect
 frequency: 5
-go_version: "1.22+"
+go_version: "1.24.2+"
 tags: [mcp, a2a, interoperability, agent-card, task-lifecycle, conformance]
 status: published
 resume_focus: true
-code_refs: []
+code_refs: [examples/senior/a2a]
 sources:
   - https://modelcontextprotocol.io/specification/2025-11-25
   - https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization
+  - https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation
   - https://a2a-protocol.org/latest/
   - https://github.com/a2aproject/A2A/blob/main/docs/specification.md
 ---
@@ -117,8 +118,15 @@ A2A 把远端 Agent 视为黑盒：客户端不需要知道其 prompt、memory �
 - **Streaming/Push**：长任务的增量结果或异步通知。
 
 任务状态必须被当作远端事实投影，而不是本地 worker 状态。客户端收到超时、流中断或 push
-丢失时，应通过稳定 task id 查询；本地 `CANCEL_REQUESTED` 也不等于远端已经
-`CANCELED`。A2A 规范和 SDK 仍会演进，讲解时应先讲状态不变量，再按目标版本说明字段。
+丢失时，**已取得 task id** 才能按该 ID 查询；首次提交响应丢失时，远端虽已创建任务，本地可能完全没有 ID。
+此时保持持久 `UNKNOWN`：只有事先约定的远端持久去重/查询契约才能允许恢复，不能编造 task id，
+也不能因为 A2A 有 `messageId` 就假定重复消息一定被去重。没有契约则进入人工核对。
+本地 `CANCEL_REQUESTED` 不等于远端已经 `CANCELED`，`CANCELED` 也不自动证明过去的外部效果被撤销。
+
+本文运行夹具按 **A2A HTTP+JSON 1.0 限定子集**说明字段，显式发送 `A2A-Version: 1.0`；
+不将 0.3 的对象结构、1.0 的字段和 SDK 默认行为混用。`input-required`、`auth-required` 为可继续的中断态，
+`completed/failed/canceled/rejected` 为终态。直接返回 Message 的服务不创建 Task，不应合成远端 task ID。
+“流已关闭”也不是通用的任务完成证明，应查询远端快照确认。
 
 ### 三类 ID 必须分开
 
@@ -141,8 +149,10 @@ remote_id   = 远端 tool execution / A2A task / provider object
 | `payload_digest` | 防止重试时经济语义漂移 |
 | `status + receipt_digest` | 对账和审计 |
 
-只保存 trace 而不保存远端 task/object ID，进程重启后就无法区分“请求未到达”和“任务已创建但
-响应丢失”。
+发请求前先保存 owner、原始完整消息、稳定 messageId、payload digest 和 UNKNOWN 预留，返回后再保存远端 task/object ID。
+只保存 trace 或只在收到 task ID 后才记账，都无法覆盖“远端创建但响应丢失”。本地与远端不能原子提交。
+如果已知 task 的后续消息处于 UNKNOWN，非终态快照也不能证明这条消息未被接受；无去重契约就继续隔离，
+有契约才可重发持久化的原消息。重试必须遵守去重记录保留期，过期后转人工核对。
 
 ### 身份、授权与信任
 
@@ -165,18 +175,42 @@ flowchart TB
 - **主体传播要显式**：记录 end user、calling agent、service principal、tenant 和代表关系，
   防止 confused deputy。
 
+### 每个任务操作与任务内授权
+
+认证和业务权限必须在每次请求重新检查，覆盖 Send/Get/List/Cancel/Subscribe、Push 配置与扩展 Card。
+远端 task ID、contextId、路由 tenant 都不是登录凭据；查询条件为空也只能列出当前主体有权访问的任务。
+授权绑定 tenant+subject+task+operation，同租户其他用户也不能自动接管任务。对不可见与不存在资源返回一致结果，
+且应先检查 ownership，再解析回调 URL 或执行外部请求。
+
+收到 `auth-required` 只表示需要授权，不是批准。通过带外受信通道取得审批/凭据，绑定目标 owner、
+操作、完整参数摘要、任务版本、有效期及撤销条件；执行前重新检查调用者与审批者权限。后续消息不自动继承审批。
+`input-required` 的补充输入若改变操作语义，必须使旧审批失效。MCP 的 form elicitation 不应用来收集密码/token；
+需要敏感授权时采用受信的 URL/带外流程，且不改变 MCP client 自己访问 MCP server 的 bearer 授权。
+
+### Push：先验证来源，再将通知当作核对提示
+
+发送方校验回调 HTTPS URL，拒绝私网、loopback、link-local、保留地址和混合 DNS；连接时重新验证并固定目标 IP，
+禁用环境代理与重定向，防止注册时安全、连接时转向内网。接收方校验专用认证、预期 task/context/tenant，
+先持久化 Inbox 再 ACK，处理重复、冲突、乱序和 ACK 丢失。不能仅凭一条 `completed` 通知放行支付/发布。
+本例的 delivery_id/revision 是显式本地 metadata 契约，标准 A2A 并未保证这种去重字段；最终经认证 GET 核对任务。
+
 ### vendor-neutral Adapter 怎么设计
 
 内部最小接口可以是：
 
 ```text
-Discover(ref) -> Capabilities
-Submit(intent, auth_context) -> RemoteHandle
-Get(remote_handle) -> CanonicalTask
-Cancel(remote_handle, reason) -> CancelReceipt
-Stream(remote_handle, resume_token) -> Event
+Discover(ref, auth_context) -> Capabilities
+Submit(intent, auth_context) -> DirectMessage | RemoteTaskHandle
+Continue(remote_handle, message, auth_context) -> DirectMessage | RemoteTaskHandle
+Get(remote_handle, auth_context) -> CanonicalTask
+Cancel(remote_handle, reason, auth_context) -> CanonicalTask
+Subscribe(remote_handle, auth_context) -> Events | Unsupported
+Recover(remote_handle, auth_context) -> Snapshot
+Replay(remote_handle, cursor, auth_context) -> Events | Unsupported
 ```
 
+接口中的 auth_context 由可信适配层取得，不能来自模型参数。只有显式协商的回放扩展才能使用 cursor；
+不支持时查询快照，并明确快照不补全所有历史事件。本例 `RecoverStream` 仅支持无游标的快照核对。
 不要承诺“任何框架零损失互转”。正确做法是：
 
 1. 定义稳定的 canonical core：身份引用、输入、状态、artifact、错误、usage 和 receipt。
@@ -245,6 +279,37 @@ Stream(remote_handle, resume_token) -> Event
 - Adapter 丢弃未知扩展字段后仍返回成功，导致金额、时限或验收语义变化。
 - 把框架 checkpoint 当成远端 Agent 与外部工具的一次执行证明。
 - 所有协议升级直接覆盖运行中任务，恢复时使用了新状态语义。
+
+## 可运行示例与故障验证
+
+[本地实战与人工核对流程](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/a2a) 使用 Go 标准库、loopback HTTP、
+独立的本地/远端文件日志；需要 **Go 1.24.2+ 和 Unix 文件锁**，不使用真实模型、外部 Agent 或发布账号。
+
+```bash
+go test -race ./examples/senior/mcp/... ./examples/senior/a2a/...
+task_dir="$(mktemp -d)"
+go run ./examples/senior/a2a/cmd/demo -dir "$task_dir" -step demo
+bash scripts/verify_reliability_examples.sh --offline
+```
+
+正常夹具模拟独立调用者和 reviewer，预期 `TASK_STATE_COMPLETED`、`effects=1`，重复运行不增加效果数。
+分步 submit/status 后，人工核对输出的 action/payload/digest/revision，再显式传入 approve，最后 continue。
+没有明确审批摘要和版本时 CLI 拒绝批准。失败退出 2，真实崩溃注入退出 77；准确退出码应使用构建后的二进制。
+
+| 覆盖项 | 故障断言 |
+|---|---|
+| 首次提交丢失响应 | UNKNOWN 在发请求前持久化；有持久去重契约找回同任务，无契约保持隔离 |
+| 各任务操作 | get/list/cancel/subscribe/Push 配置/后续消息检查 owner、tenant、scope 与撤销 |
+| 中断与人工审批 | Message/Task 分支、input/auth-required、自审/跨租户/过期/撤销/旧 digest 或版本拒绝，编辑重新审批 |
+| 进程重启与并发 | 3 次真实子进程退出；同 intent 并发不重复创建，已完成效果计数不增加 |
+| 流恢复 | 非空游标明确拒绝；快照核对与终态保护 |
+| 回调 | 认证、task/context/tenant 绑定、持久 Inbox、ACK 丢失、重复/乱序不直接推进任务 |
+| SSRF | 私网/特殊地址、混合 DNS、连接前 DNS 改变、真实 TLS、禁止代理和重定向 |
+| 传输/输出 | MCP 参数/结构化输出/超时取消，A2A 版本、消息 oneof 和内部数据不泄露 |
+
+统一脚本已纳入这些测试和 CLI 流程；现有 Actions 调用该脚本，因此下次正常运行会执行这些门禁。
+这里只报告本地执行证据，不声称已运行远程 CI。文件日志只证明单机恢复边界；远端 effect 是同日志内的计数，
+不能扩大为真实下游 exactly-once、生产授权服务器或完整跨 SDK conformance。标准自动 Push 与 streaming 均未宣告支持；回调配置在显式 `/fixture/tasks/...` 本地扩展下演练，不能冒充标准 Push 验收。分页与扩展范围见示例 README。
 
 ## 延伸阅读
 

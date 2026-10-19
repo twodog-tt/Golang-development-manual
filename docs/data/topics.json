@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-19T05:53:10Z",
+  "generated_at": "2026-10-19T06:47:06Z",
   "count": 249,
   "roles": [
     {
@@ -210,7 +210,7 @@
       },
       "evidence": {
         "basis": "source_anchored",
-        "reproducibility": "illustrative_artifact",
+        "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
         "reviewed_at": "2026-08-13"
       }
@@ -310,7 +310,7 @@
       },
       "evidence": {
         "basis": "source_anchored",
-        "reproducibility": "explanation_only",
+        "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
         "reviewed_at": "2026-08-13"
       }

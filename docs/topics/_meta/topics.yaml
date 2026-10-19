@@ -783,6 +783,7 @@ p1:
       status: published
       resume_focus: true
       file: 10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md
+      code_refs: [examples/senior/a2a]
     - id: S-AI-12
       title: ERC-8004：Agent 身份、信誉、验证与钱包绑定
       frequency: 5

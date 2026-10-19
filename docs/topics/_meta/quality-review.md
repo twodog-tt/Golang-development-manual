@@ -66,8 +66,8 @@
 - 第十八阶段补充 **3 篇集成正文**：交易执行网关（S-NODE-11）、Indexer 查询与数据质量（S-NODE-12）、DeFi 协议接入（S-EXCH-32），共用 `examples/onchain-execution`。真实 Anvil/Uniswap V2/PostgreSQL、进程重启、替换交易、坏日志、数据库回滚与重组共 10 组验证；仅本地合成资产，不代表公链资金或生产验收。
 - 第十九阶段将既有 **7 篇正文** 接成支付到 DeFi 的端到端实战：真实本地收款 reference、独立索引/支付库、Temporal 冻结与兑换、多资产同事务入账和持续重组审计，7 组集成故障验证；保留原两套验证入口。未新增 published 正文，总量仍为 **249 篇**，不扩大为公链或生产验收。
 - 第二十阶段复核端到端资金正确性：修复旧证据重试、通知故障停止审计、无 intent 阻断收款审计、冲正余额不足缺少持久人工状态，以及重组后的 nonce 缺口；增加 merchant/signer 隔离和版本分支验证，将端到端故障矩阵扩至 **12 组**。正文仍 **249 篇**，正常资金对账与故意保留待核对敞口的破坏性场景分别说明，不扩大为生产金融验收。
-- 证据标签已覆盖 249 篇：`explanation_only=180`、`illustrative_artifact=31`、
-  `deterministic_test=21`、`integration_harness=17`、`external_acceptance=0`。
+- 证据标签已覆盖 249 篇：`explanation_only=176`、`illustrative_artifact=30`、
+  `deterministic_test=26`、`integration_harness=17`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
 - 当前知识库的优势是 **Go 核心、分布式系统、中间件、EVM/Solidity、CEX/DEX 架构广度**。
@@ -388,3 +388,5 @@
 - 2026-10-19 Agent 评测复审：严格拒绝 critical 等声明字段缺失/null、重复 JSON 键、大小写别名与尾随 JSON；baseline/candidate 同时绑定 suite revision 和内容摘要，报告补实际 policy、基线版本/得分及两份制品哈希。补 **21 项 CLI 场景**及输入/摘要/报告回归测试，宽松阈值下单独验证 UNKNOWN、审批与预算硬门禁；临时副本移除关键任务或预算门禁均被测试检出。race、vet 和离线统一入口通过，工作流已配置同一离线检查；本次仅本地验证，未运行远程 CI 或部署。仍为固定轨迹评分器，published 总量 **249 篇**不变。
 
 - 2026-10-19 Agent 工作流与审批修复：S-AI-03/05/09 关联同一标准库文件持久化夹具，补审批身份/账号/凭据/版本绑定、原子审批编辑、UNKNOWN/lease 接管、完整工具历史与持久化预算、OAuth 轮换未知隔离和版本 CAS。**18 组**控制面与恢复测试（另有崩溃子进程入口）及分步 CLI 正常/回包丢失流程通过，含 **4 次**真实子进程边界退出；race、vet、统一离线入口、元数据校验和严格文档构建通过。发布总量仍 **249 篇**，deterministic_test 由 21 增至 **24 篇**；仅本地 fixture 证据，不代表真实模型、厂商协议或生产认证验收。
+
+- 2026-10-19 MCP/A2A 授权与恢复修复：S-AI-07 补可信身份、逐工具授权、stdio/HTTP 与 session 恢复；S-AI-11 关联独立本地/远端持久日志夹具，覆盖首次响应丢失、逐操作 owner/tenant/scope 校验、Message/Task 分支、审批 digest/revision/有效期、UNKNOWN 恢复和回调安全。**25 组**测试（不含崩溃 helper）与真实 stdio/A2A CLI 通过，含 **3 类**子进程退出边界、回调 ACK 丢失、DNS 变更/特殊地址/重定向故障验证及本地 TLS 正例。race、vet、统一离线门禁、元数据与严格文档构建通过；正文仍 **249 篇**，deterministic_test 从 24 增至 **26 篇**。A2A 为 HTTP+JSON 1.0 限定子集，未声明标准自动 Push/事件回放；OAuth issuer、订单和发布效果均为本地夹具；上述结果为本地验证记录，远程 CI 与发布状态另行核对。

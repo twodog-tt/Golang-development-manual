@@ -752,6 +752,8 @@ evidence:
       - S-AI-03
       - S-AI-05
       - S-AI-09
+      - S-AI-07
+      - S-AI-11
     integration_harness:
       - S-NODE-11
       - S-NODE-12

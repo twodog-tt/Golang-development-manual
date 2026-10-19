@@ -397,9 +397,12 @@ cd basis/goroutine && go run .
 ```bash
 # 完整运行需要 Docker 与本地 postgres:17-alpine / redis:7.4-alpine 镜像
 bash scripts/verify_reliability_examples.sh
-# 仅 Agent 离线评分器与正反例门禁
+# Agent 评测、审批恢复、MCP/A2A 授权与故障门禁（无需 Docker）
 bash scripts/verify_reliability_examples.sh --offline
 ```
+
+MCP/A2A 的运行与故障验证见 [MCP stdio/HTTP](./examples/senior/mcp/README.md) 和
+[A2A 授权与恢复](./examples/senior/a2a/README.md)。包含可信租户、逐操作授权、审批参数绑定、UNKNOWN、回调来源与 SSRF 验证；均为本地限定夹具。
 
 ## 稳定币支付与资金运营项目
 
@@ -436,6 +439,7 @@ mkdocs serve   # http://127.0.0.1:8000
 | [scripts/generate_redirect_maps.py](./scripts/generate_redirect_maps.py) | 生成 `interview/*` → `topics/*` 旧路径重定向 |
 | [scripts/generate_nav_pages.py](./scripts/generate_nav_pages.py) | 生成 `topics/.pages` 与各模块 `.pages`（三级侧栏专题标题） |
 | [scripts/generate_readme_question_table.py](./scripts/generate_readme_question_table.py) | 从 `topics.yaml` 更新 README 专题全表（序号 + 文档 ID + 标题） |
+| [scripts/verify_mcp_a2a.py](./scripts/verify_mcp_a2a.py) | 检查构建后的 MCP stdio 与 A2A CLI 正常/故障流程；由统一可靠性脚本调用 |
 | [scripts/verify_knowledge_metadata.py](./scripts/verify_knowledge_metadata.py) | 校验 249 篇正文、角色优先级与证据标签一致性 |
 
 ## 引用来源

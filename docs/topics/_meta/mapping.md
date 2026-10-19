@@ -33,7 +33,8 @@
 | S-AI-01 | 流式 LLM Mock | [S-AI-01](../10-ai-engineering/S-AI-01-llm-api-integration.md) | `examples/senior/llmclient/` |
 | S-AI-02 | 简易 RAG | [S-AI-02](../10-ai-engineering/S-AI-02-rag-architecture.md) | `examples/senior/rag/` |
 | S-AI-03 / 05 / 09 | 受控工具、授权与人工审批恢复 | [Agent 工作流](../10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) | `examples/senior/agentworkflow/` · `go test -race ./examples/senior/agentworkflow/...` |
-| S-AI-07 | MCP Server | [S-AI-07](../10-ai-engineering/S-AI-07-mcp-server-go.md) | `examples/senior/mcp/` |
+| S-AI-07 | MCP Server：stdio/HTTP 授权与恢复 | [S-AI-07](../10-ai-engineering/S-AI-07-mcp-server-go.md) | `examples/senior/mcp/` |
+| S-AI-11 | A2A 授权、人工核对与持久恢复 | [S-AI-11](../10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) | `examples/senior/a2a/` |
 | S-SOL-01～08 | 解决方案架构 | — | [11-solution-architecture/](../11-solution-architecture/index.md) |
 | S-BC-01～13 | 区块链 Web3 | — | [12-blockchain-web3/](../12-blockchain-web3/index.md) |
 | S-BC-02 | JSON-RPC 客户端 | [S-BC-02](../12-blockchain-web3/S-BC-02-go-ethereum-rpc.md) | `examples/senior/ethrpc/` |
