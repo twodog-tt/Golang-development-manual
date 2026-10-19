@@ -135,6 +135,9 @@ export async function runRecoveryLab(h){
  start('worker');const closureIDs=['release:','reorg:'].map(x=>x+missing.id);
  await until(()=>one('SELECT count(*) FROM lab.outbox WHERE event_id=ANY($1::text[]) AND NOT published',[closureIDs]),v=>v.count==='0','closed-case notifications');
  assert.equal((await one('SELECT count(*) FROM ops.merchant_inbox WHERE event_id=ANY($1::text[])',[closureIDs])).count,'2');
+ // Notification delivery does not prove the independent recovery audit completed.
+ // Reach that prerequisite before isolating the missing-fence release gate.
+ await until(()=>one('SELECT monitor_started,monitor_checked FROM ops.recovery_plans WHERE id=$1',[retire.id]),v=>v.monitor_started&&v.monitor_checked,'closed-case recovery audit');
  await h.chainDB.query('DELETE FROM retired_intents WHERE id=$1',['convert_'+missing.id]);
  await assert.rejects(()=>plan('release-signer','signer'),/fence/);
  await h.chainDB.query('INSERT INTO retired_intents(id,plan) VALUES($1,$2)',['convert_'+missing.id,retire.id]);

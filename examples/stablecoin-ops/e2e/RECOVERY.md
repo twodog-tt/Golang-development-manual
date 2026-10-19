@@ -19,6 +19,8 @@ python3 examples/stablecoin-ops/e2e/verify.py --recovery \
 | 恢复后实际执行 | 两个数据库和 signer 均恢复后，新订单真实付款并完成 V2 兑换，验证恢复后的账户可以继续工作 |
 | 从未创建的意图 | 有 hold 但没有 intent/attempt，Paid 被移除；先在 chain 库封存固定意图 ID，再在支付库冲正。支付 COMMIT 故障后封存仍生效，旧 Create 409；同计划重试完成关闭且分录/通知各一份，封存丢失时拒绝解封，最终托管/账本一致 |
 
+“从未创建的意图”故障验证先等待该计划的 `monitor_started` 和 `monitor_checked` 均为 true，再移除封存行并断言 fence 门禁拒绝解封。商户 Inbox 已收件只证明通知完成，不能替代独立恢复审计完成；这两个前置条件需要分别核对。
+
 [一次本地验证记录](recovery/local-verification.json) 与 CI 制品保留运行证据。报告只在全部断言成功后生成，并记录两模块源码哈希与实际工具版本。本轮所有资产均为本地合成 Token；取消消耗本地测试 ETH，未实现 gas 账本。
 
 ## 可交互演练
