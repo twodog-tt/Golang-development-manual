@@ -4,14 +4,15 @@ title: Go 接入大模型 API：流式、重试、超时
 module: ai-engineering
 level: senior
 frequency: 5
-go_version: "1.22+"
+go_version: "1.24.2+"
 tags: [llm, openai, streaming, http, resilience]
 status: published
-code_refs: []
+reviewed_at: "2026-10-19"
+code_refs: [examples/senior/llmclient, examples/senior/knowledge-demo]
 sources:
   - https://developers.openai.com/api/docs/guides/streaming-responses
   - https://developers.openai.com/api/docs/guides/function-calling
-  - https://pkg.go.dev/github.com/sashabaranov/go-openai
+  - https://github.com/openai/openai-go
   - https://go.dev/blog/context
 ---
 
@@ -75,6 +76,7 @@ if err != nil {
 }
 defer stream.Close()
 
+completed := false
 for stream.Next() {
     switch event := stream.Event().(type) {
     case TextDelta:
@@ -84,12 +86,15 @@ for stream.Next() {
     case ToolArgumentsDone:
         toolQueue <- event // 仍须 schema、授权和业务校验
     case ResponseCompleted:
+        completed = true
         usage.Record(event.Usage)
     case ResponseFailed:
         return event.Err
     }
 }
-return stream.Err()
+if err := stream.Err(); err != nil { return err }
+if !completed { return ErrIncompleteStream } // EOF 不代表成功
+return nil
 ```
 
 当前 OpenAI Responses API 常见事件包括 `response.created`、`response.output_text.delta`、
@@ -123,7 +128,7 @@ chunk 与 `[DONE]` 是另一套 surface。若不用 SDK，自写 SSE decoder 还
 
 | 方案 | 适用 |
 |------|------|
-| 官方 SDK（go-openai 等） | 快速上线、兼容性好 |
+| 官方 SDK（openai/openai-go） | 按锁定版本使用官方 API；社区 sashabaranov/go-openai 另行验证兼容性 |
 | 自封装 `LLMClient` 接口 | 多厂商切换、单测 mock |
 | 网关代理（LiteLLM 等） | 统一鉴权、限流、审计 |
 
@@ -131,10 +136,10 @@ chunk 与 `[DONE]` 是另一套 surface。若不用 SDK，自写 SSE decoder 还
 
 ## 深挖问答
 
-1. **用户断开连接还要不要继续调模型？** → 监听 `ctx.Done()`，取消上游请求省成本。
+1. **用户断开连接还要不要继续调模型？** → 监听 `ctx.Done()` 并取消上游；是否停止计算或计费取决于 provider，不能保证退款。
 2. **429 怎么处理？** → 读 `Retry-After`；在总 deadline 内退避加 jitter；限制本地并发/队列并按配额治理，不能用轮换 key 绕过服务条款。
 3. **和 gRPC 流对比？** → 多数 SaaS 仍是 HTTPS+SSE；自建 Triton 可用 gRPC streaming。
-4. **超时设多少？** → 交互 30～60s；后台任务可更长；**TTFT** 单独告警。
+4. **超时设多少？** → 按业务 SLO 和 provider 能力分配总时长、首事件和空闲预算；**TTFT** 单独告警。
 
 ## 反模式与事故
 
@@ -145,18 +150,45 @@ chunk 与 `[DONE]` 是另一套 surface。若不用 SDK，自写 SSE decoder 还
 
 ## 代码示例
 
-本仓库 Mock 实现：`examples/senior/llmclient/`（`go test ./examples/senior/llmclient/...`）。
+接口与仓库实际代码一致，`Usage.Known` 区分报告用量与估算/未知：
 
 ```go
-type ChatClient interface {
-    StreamChat(ctx context.Context, req ChatRequest, w io.Writer) error
-    Complete(ctx context.Context, req ChatRequest) (ChatResponse, error)
+type Client interface {
+    Complete(ctx context.Context, messages []Message) (string, Usage, error)
+    StreamChat(ctx context.Context, messages []Message, onChunk StreamHandler) (Usage, error)
 }
 ```
+
+本地运行（Go 1.24.2+，从仓库根目录执行，无密钥）：
+
+```bash
+go test -race ./examples/senior/llmclient/...
+go run ./examples/senior/knowledge-demo
+```
+
+[`llmclient` 示例说明](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/llmclient)
+包含按词输出的 `MockClient` 和真实 HTTP 的 `LocalHTTPClient`。后者只接受 **HTTP + 字面量 loopback IP**，
+禁用代理与重定向，不发送密钥；协议固定为仓库 `local-text-sse-v1` 文本夹具，借用 Responses typed events 的
+文本/终止语义，**请求结构不兼容完整 Responses API，也不执行工具事件**。实际 provider 应使用锁定版本的
+SDK/adapter 做独立契约验收；此处没有真实模型、生成质量或计费验收。
+
+| 故障验证 | 预期 |
+|----------|------|
+| LF / CRLF / CR、注释、BOM、多行 data | 按空行分帧，拼接文本后校验 terminal usage |
+| EOF / `[DONE]` / failed / incomplete / error / 非法 JSON / 不支持的工具事件 | 返回错误，不冒充完整成功，不自动重试 |
+| 首片段后断线或下游 callback 失败 | `StreamError` 保留 request ID、Partial；Complete 不返回部分答案 |
+| HTTP 429 且夹具明确声明 before-generation | 最多 1～5 次尝试；遵守 Retry-After、退避、jitter 和总 deadline |
+| 429 无拒绝证据、5xx、网络故障 | 可能已生成；默认不重试，用量保持未知 |
+| 无 usage / 缺字段 / cached input 超过 input | 无 usage 时 Known=false；畸形 usage 报错，不能记零成本 |
+| 超大输入/事件/总流、取消/超时、重定向到外部 | 有界拒绝；取消关闭请求；不跟随重定向 |
+
+示例总时长最多 5 秒，输入 64 KiB、单行/事件 64 KiB、总流 1 MiB，HTTP 响应头等待最多 2 秒；
+这些是本地夹具参数，不是生产默认值。每次 HTTP attempt 各发一次观测事件，重试等待被取消不虚构新 attempt。
+`MockClient` 的词数估算标注 `Source=mock-word-count, Known=false`，不能作真实 token 账单。
 
 ## 延伸阅读
 
 - [OpenAI Streaming API Responses](https://developers.openai.com/api/docs/guides/streaming-responses)
 - [OpenAI Function Calling](https://developers.openai.com/api/docs/guides/function-calling)
-- [go-openai](https://github.com/sashabaranov/go-openai)
+- [官方 OpenAI Go SDK](https://github.com/openai/openai-go)
 - [Go Context](https://go.dev/blog/context)

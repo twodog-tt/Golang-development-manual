@@ -29,10 +29,13 @@
 | S-CODE-05 | 连接池 | [S-CODE-05](../08-coding-senior/S-CODE-05-connection-pool.md) | `examples/senior/connpool/` |
 | S-CODE-06 | Singleflight 缓存 | [S-CODE-06](../08-coding-senior/S-CODE-06-singleflight-cache.md) | `examples/senior/singleflightcache/` |
 | S-CODE-07 | 有界批处理 | [S-CODE-07](../08-coding-senior/S-CODE-07-bounded-batch-executor.md) | `examples/senior/batchexec/` |
-| S-AI-01～06 | AI 工程 | — | [10-ai-engineering/](../10-ai-engineering/index.md) |
-| S-AI-01 | 流式 LLM Mock | [S-AI-01](../10-ai-engineering/S-AI-01-llm-api-integration.md) | `examples/senior/llmclient/` |
-| S-AI-02 | 简易 RAG | [S-AI-02](../10-ai-engineering/S-AI-02-rag-architecture.md) | `examples/senior/rag/` |
+| S-AI-01～15 | AI 工程 | — | [10-ai-engineering/](../10-ai-engineering/index.md) |
+| S-AI-01 | 本地 HTTP/SSE 与未知结果 | [S-AI-01](../10-ai-engineering/S-AI-01-llm-api-integration.md) | `examples/senior/llmclient/` |
+| S-AI-02 | 授权词项召回与无证据拒答 | [S-AI-02](../10-ai-engineering/S-AI-02-rag-architecture.md) | `examples/senior/rag/` |
 | S-AI-03 / 05 / 09 | 受控工具、授权与人工审批恢复 | [Agent 工作流](../10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) | `examples/senior/agentworkflow/` · `go test -race ./examples/senior/agentworkflow/...` |
+| S-AI-06 | 缓存边界与 attempt 成本 | [S-AI-06](../10-ai-engineering/S-AI-06-llm-observability-cost.md) | `examples/senior/llmops/` |
+| S-AI-10 | Memory 审批、删除与恢复 | [S-AI-10](../10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) | `examples/senior/agentmemory/` |
+| S-AI-01 / 02 / 06 / 10 | 综合本地演示 | [AI 工程](../10-ai-engineering/index.md) | `go run ./examples/senior/knowledge-demo` |
 | S-AI-07 | MCP Server：stdio/HTTP 授权与恢复 | [S-AI-07](../10-ai-engineering/S-AI-07-mcp-server-go.md) | `examples/senior/mcp/` |
 | S-AI-11 | A2A 授权、人工核对与持久恢复 | [S-AI-11](../10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) | `examples/senior/a2a/` |
 | S-SOL-01～08 | 解决方案架构 | — | [11-solution-architecture/](../11-solution-architecture/index.md) |

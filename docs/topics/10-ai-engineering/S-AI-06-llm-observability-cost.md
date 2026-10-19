@@ -4,10 +4,11 @@ title: LLM 可观测性、成本与延迟优化
 module: ai-engineering
 level: senior
 frequency: 4
-go_version: "1.22+"
+go_version: "1.24.2+"
 tags: [observability, cost, latency, caching, llmops]
 status: published
-code_refs: []
+reviewed_at: "2026-10-19"
+code_refs: [examples/senior/llmops, examples/senior/knowledge-demo]
 sources:
   - https://github.com/open-telemetry/semantic-conventions-genai
   - https://langfuse.com/docs
@@ -57,12 +58,16 @@ sources:
 
 ```mermaid
 flowchart LR
-  Req[请求] --> Router[意图/复杂度路由]
-  Router -->|简单| Small[小模型]
-  Router -->|复杂| Large[大模型]
-  Small --> Cache[(Prompt/语义缓存)]
-  Large --> Cache
-  Cache --> OTel[OTel + 成本看板]
+  Req[请求] --> Auth[身份与 namespace 授权]
+  Auth --> Lookup{版本/权限/TTL 内的语义缓存}
+  Lookup -->|命中| Answer[返回已验证答案]
+  Lookup -->|未命中| Router[模型路由]
+  Router --> Provider[模型请求：provider 内部 prompt caching]
+  Provider --> Validate[成功终止 + 用量 + 当前授权复核]
+  Validate --> Write[写入可复用答案缓存]
+  Write --> Answer
+  Provider -.每次 attempt 含失败与未知用量.-> OTel[任务与调用分别观测]
+  Answer -.cache hit / task outcome.-> OTel
 ```
 
 **核心指标**
@@ -144,18 +149,34 @@ GenAI semantic conventions 已迁移到 OpenTelemetry 的独立仓库，仍在�
 
 ## 代码示例
 
-与 [S-CLOUD-03 OpenTelemetry](../09-cloud-native/S-CLOUD-03-opentelemetry.md) 结合：同一 `trace_id` 串起 API → RAG → LLM → Tool。
+与 [S-CLOUD-03 OpenTelemetry](../09-cloud-native/S-CLOUD-03-opentelemetry.md) 结合时，同一 trace 串起 API → RAG → LLM → Tool。
+**应用答案缓存命中绕过模型**；provider prompt cache 在模型请求内部复用前缀，仍然发生模型调用和输出生成，二者指标不能混算。
 
-```go
-tokenCounter, err := meter.Int64Counter("gen_ai.client.token.usage")
-if err != nil {
-    return err
-}
-tokenCounter.Add(ctx, int64(tokens), metric.WithAttributes(
-    attribute.String("gen_ai.request.model", model),
-    attribute.String("gen_ai.token.type", "input"), // 应与项目采用的 semconv 版本对齐
-))
+```bash
+go test -race ./examples/senior/llmops/... ./examples/senior/llmclient/...
+go run ./examples/senior/knowledge-demo
 ```
+
+[`llmops` 示例与故障表](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/llmops)
+仅演示可信宿主配置的只读 FAQ：按词集合重叠匹配候选，**不是真实 embedding 或生产语义等价判定**。
+完整 namespace、subject、issuer/auth revision、policy、prompt/model/corpus version 和 TTL 都先于相似度检查；
+缓存命中和生成完成后再次检查活跃授权。问句由宿主限制在可复用 FAQ 场景，涉及否定、实时状态、工具副作用或质量未经评测的问题不得照搬。
+数据/提示/模型变化须更新对应版本；本地缓存最多 128 条、TTL 最多一小时，没有并发请求合并或跨进程一致性承诺。
+
+| 故障验证 | 预期 |
+|----------|------|
+| `refund policy` 与 `policy refund` | 第二次命中，模型生成次数仍为一次 |
+| tenant/bot/scene/subject/identity/policy/auth revision 或版本变化、TTL 到期 | 在任何相似度比较之前排除旧条目，重新生成 |
+| 缓存命中前撤销身份，生成过程中撤权 | 返回拒绝；失败/失权答案不写入缓存 |
+| 429 本地拒绝后成功 | 一个逻辑任务、两个 HTTP attempts；每次尝试各记一份 usage/outcome |
+| 断流/超时/无 usage、Mock 词数 | unknown 计数增加；已知成本只是小计，完整总成本仍待对账 |
+| cached input > input、负值或整数溢出 | 拒绝错误成本并计 unknown，不能产生低价/负价/回绕总额 |
+
+计费夹具采用命名费率 `teaching-v1`（非实际价格）：input 每 token 2 微美元、cached input 1、output 3。
+若 input=10、cached input=4、output=2，则已知成本是 `(10-4)*2 + 4*1 + 2*3 = 22` 微美元。
+**cached input 是 input 子集**，不能再把全部 input 与 cached input 重复计费。
+`KnownMicroUSD` 与 `Unknown` 必须一起看；未知并不等于免费，已知失败用量仍计入小计。
+费用按 attempt 累积，逻辑 task/cache hit/generation 单独计数；本例不接 OTel exporter，不记录 prompt/token 密钥正文，也不声称真实 provider 账单验收。
 
 ## 延伸阅读
 

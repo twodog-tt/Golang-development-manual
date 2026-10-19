@@ -50,9 +50,9 @@ flowchart LR
 
 | 顺序 | 文章 | 证据边界 |
 |-----:|------|----------|
-| 1 | [Agent 工作流、HITL 与可靠发布](../topics/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) | explanation |
-| 2 | [Persona、Memory 与反馈治理](../topics/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) | explanation |
-| 3 | [LLM 应用安全](../topics/10-ai-engineering/S-AI-05-llm-security.md) · [成本可观测](../topics/10-ai-engineering/S-AI-06-llm-observability-cost.md) | explanation |
+| 1 | [Agent 工作流、HITL 与可靠发布](../topics/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) | deterministic_test（本地限定夹具） |
+| 2 | [Persona、Memory 与反馈治理](../topics/10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) | deterministic_test（本地限定夹具） |
+| 3 | [LLM 应用安全](../topics/10-ai-engineering/S-AI-05-llm-security.md) · [成本可观测](../topics/10-ai-engineering/S-AI-06-llm-observability-cost.md) | deterministic_test（本地限定夹具） |
 | 4 | [Go LLM API](../topics/10-ai-engineering/S-AI-01-llm-api-integration.md) · [Tool Calling](../topics/10-ai-engineering/S-AI-03-agent-tool-calling.md) | deterministic_test（llmclient 等） |
 | 5 | [MCP Server](../topics/10-ai-engineering/S-AI-07-mcp-server-go.md) · [MCP/A2A 互操作](../topics/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) | deterministic_test（本地 MCP/A2A 限定夹具；非完整协议验收） |
 | 6 | [Agent Commerce](../topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) · [开放平台/Launchpad](../topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) | explanation |

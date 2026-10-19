@@ -9,10 +9,13 @@ type Message struct {
 	Content string
 }
 
-// Usage 记录 token 用量（Mock 按字符估算）。
+// Usage separates reported usage from a mock word-count estimate. Cached input is a subset of input.
 type Usage struct {
-	PromptTokens     int
-	CompletionTokens int
+	Known             bool
+	Source            string
+	CachedInputTokens int
+	PromptTokens      int
+	CompletionTokens  int
 }
 
 // StreamHandler 消费流式文本片段；返回 error 可中止生成。

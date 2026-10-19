@@ -62,6 +62,7 @@ func (m *MockClient) StreamChat(ctx context.Context, messages []Message, onChunk
 	}
 
 	return Usage{
+		Source:           "mock-word-count",
 		PromptTokens:     promptTokens,
 		CompletionTokens: len(words),
 	}, nil

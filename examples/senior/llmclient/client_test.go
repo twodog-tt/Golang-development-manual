@@ -22,6 +22,9 @@ func TestMockClient_StreamChat(t *testing.T) {
 	if got != "hello world from mock" {
 		t.Fatalf("got %q", got)
 	}
+	if usage.Known || usage.Source != "mock-word-count" {
+		t.Fatal("mock estimate reported as known", usage)
+	}
 	if usage.PromptTokens != 1 {
 		t.Fatalf("prompt tokens: %d", usage.PromptTokens)
 	}

@@ -4,11 +4,12 @@ title: Persona、分层 Memory 与反馈学习治理
 module: ai-engineering
 level: architect
 frequency: 5
-go_version: "1.22+"
+go_version: "1.24.2+"
 tags: [agent, persona, memory, context, feedback, governance, multitenancy]
 status: published
+reviewed_at: "2026-10-19"
 resume_focus: true
-code_refs: []
+code_refs: [examples/senior/agentmemory, examples/senior/knowledge-demo]
 sources:
   - https://docs.langchain.com/oss/python/concepts/memory
   - https://docs.langchain.com/oss/python/langgraph/add-memory
@@ -63,7 +64,7 @@ flowchart LR
   Profile[(account profile)] --> Retrieve
   Content[(content library)] --> Retrieve
   Trend[(trend / recent output)] --> Retrieve
-  Memory[(approved memories / rules)] --> Retrieve
+  Memory[(active memories / rules)] --> Retrieve
   Policy --> Assemble[context assembler + token budget]
   Thread --> Assemble
   Retrieve --> Assemble
@@ -71,7 +72,9 @@ flowchart LR
   Model --> Trace[(run snapshot)]
   Feedback[user / reviewer feedback] --> Candidate[candidate rule]
   Candidate --> Validate[dedupe / evidence / policy review]
-  Validate --> Memory
+  Validate --> Approved[approved revision]
+  Approved --> Activate[授权复核后启用]
+  Activate --> Memory
 ```
 
 ### Memory 分层
@@ -101,7 +104,7 @@ memory_item:
   id, namespace, kind, canonical_fact
   source_refs[], evidence_count
   confidence_score, confidence_method
-  status(candidate|active|rejected|retired)
+  status(candidate|approved|active|rejected|retired)
   valid_from, expires_at
   policy_version, created_by, reviewed_by
 ```
@@ -172,7 +175,7 @@ stateDiagram-v2
 - **社媒运营**：按 Bot/Scene 聚合账号画像、素材、趋势、最近输出和审核反馈，避免不同品牌语气串线。
 - **客服 Agent**：用户偏好可以跨会话，订单事实必须实时查询 tool，不能被旧 memory 覆盖。
 - **多租户平台**：同一用户属于多个 workspace 时，memory scope 不能只用 `user_id`。
-- **规则升级**：新 policy 先 shadow 评估，再对部分 Bot 启用；旧 run 保留旧版本恢复能力。
+- **规则升级**：新 policy 先 shadow 评估，再对部分 Bot 启用；旧 run 保留审计引用；恢复时仍按当前授权、删除和退役状态重查，不能复活已失效规则。
 
 ## 排查与工具
 
@@ -204,7 +207,7 @@ snapshot，不要只看最终回答。
 1. **Memory 和数据库有什么区别？** → Memory 是用途与生命周期概念，底层可以是 SQL、Redis、文档库或向量索引；权威事实仍需明确 system of record。
 2. **用户说“以后都自动发布”能否写入 Persona？** → 不能直接写；这是权限/风险策略变化，应走显式授权与审批。
 3. **怎么防旧反馈污染？** → 有效期、来源、版本、冲突规则、退役状态和定期复核。
-4. **删掉用户数据后向量索引怎么办？** → 删除主记录同时发删除事件，索引异步清理并有审计/补偿扫描。
+4. **删掉用户数据后向量索引怎么办？** → 主记录先持久化 tombstone/版本并发清理事件；读路径查主记录拒绝旧索引/缓存/历史引用，之后异步清理并审计。
 5. **为什么不直接把所有 memory top-k？** → top-k 仍可能越权、过期、冲突；先过滤 namespace/policy，再排序和裁剪。
 6. **如何评价学习规则有效？** → 离线回放 + shadow/小流量，对 edit rate、风险事件和业务质量做前后比较。
 
@@ -216,6 +219,34 @@ snapshot，不要只看最终回答。
 - Persona 没有版本，线上回答变化后无法解释是哪次配置导致。
 - 把余额、授权和发布状态写成长文本 memory，读取到过期事实。
 - 只删除数据库记录，不处理缓存、向量索引、trace 和备份保留策略。
+
+## 可运行示例与故障验证
+
+```bash
+go test -race ./examples/senior/agentmemory/...
+go run ./examples/senior/knowledge-demo
+```
+
+[`agentmemory` 运行说明](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/agentmemory)
+用单机 JSON 主记录、文件锁、fsync/原子 rename，以及同文件 Outbox 任务模拟规则与索引/缓存投影。
+角色由可信宿主的 `Authority` 注入；普通请求或模型不能自行授予权限。写入、审批、启用、删除分别检查角色和完整 namespace。
+作者不得自审；审批绑定内容/来源/期限/policy/版本摘要，启用前重查 reviewer 授权和当前 policy。
+任何实质编辑都增加版本、回到 candidate 并清除旧批准；retired/rejected 终态不能直接复活，回滚需创建新 ID 并重新审核。
+
+| 故障验证 | 预期 |
+|----------|------|
+| 未批准直接启用、作者自审、旧摘要/版本、并发编辑 | 拒绝；并发编辑只有一个版本可成功 |
+| 规则过期、policy 不符、审批者/操作者撤权 | 拒绝启用；旧上下文凭据不能继续使用 |
+| 授权服务重建、审批身份 revision 碰巧相同 | issuer 随机世代不同，旧待启用批准失效；重新编辑并审核 |
+| active 规则编辑、retired 直接启用 | 编辑后读不到旧 active 规则；终态必须走新规则审核 |
+| 主记录已删除，但缓存/索引/历史保存旧 ID+version | 先按权威 tombstone 拒绝读取，无需等待清理完成 |
+| 投影写入后 ACK 丢失/独立子进程退出，再次启动 | 持久待处理任务可重放，结果幂等；旧任务不能清掉新 active 版本 |
+| 损坏状态文件 | 失败关闭，不能把丢失审批/删除状态当空库继续运行 |
+
+删除会在主记录原子写入 tombstone、增加版本并清除正文/来源；派生投影可能暂留旧文本，但所有公开读取都经过主记录。
+历史 run 只保存 ID+version 的引用，重放必须通过 `Resolve`；**已复制到外部的原始 prompt/快照不受此演示自动清理**。
+生产需覆盖外部向量库、trace、备份/保留策略和删除完成审计，不能把 tombstone 当物理介质擦除证明。
+授权表在内存、规则在本地磁盘，重建授权表使未启用批准失效；此例不提供生产 IAM、多机文件系统锁或分布式投影验收。
 
 ## 延伸阅读
 

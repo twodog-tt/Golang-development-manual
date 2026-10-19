@@ -4,10 +4,11 @@ title: RAG 架构：分块、向量检索与 Go 落地
 module: ai-engineering
 level: senior
 frequency: 5
-go_version: "1.22+"
+go_version: "1.24.2+"
 tags: [rag, embedding, vector-db, retrieval]
 status: published
-code_refs: []
+reviewed_at: "2026-10-19"
+code_refs: [examples/senior/rag, examples/senior/knowledge-demo]
 sources:
   - https://www.pinecone.io/learn/retrieval-augmented-generation/
   - https://python.langchain.com/docs/concepts/rag/
@@ -33,10 +34,13 @@ flowchart LR
   Doc[PDF/Markdown] --> Chunk[分块 + 元数据]
   Chunk --> Embed[Embedding API]
   Embed --> VDB[(向量库 ES/Milvus/pgvector)]
-  Q[用户问题] --> QEmbed[Query Embedding]
-  QEmbed --> VDB
-  VDB --> TopK[Top-K 片段]
-  TopK --> Prompt[Prompt 组装]
+  Q[用户问题] --> Auth[身份与 namespace 授权]
+  Auth --> QEmbed[Query Embedding]
+  QEmbed -->|带 ACL/policy/期限过滤| VDB
+  VDB --> TopK[阈值与 Top-K 片段]
+  TopK --> Evidence{是否有足够证据}
+  Evidence -->|无| Refuse[资料中未找到]
+  Evidence -->|有| Prompt[受控 Prompt 组装]
   Prompt --> LLM[大模型]
   LLM --> Ans[带引用的回答]
 ```
@@ -110,13 +114,33 @@ func (s *RAGService) Answer(ctx context.Context, q string, userID string) (strin
 
 ## 代码示例
 
-与 [S-ES-01 倒排索引](../middleware/elasticsearch/S-ES-01-inverted-index.md) 结合：生产可用 ES `dense_vector`；本仓库教学示例：
+生产可将 [S-ES-01 倒排索引](../middleware/elasticsearch/S-ES-01-inverted-index.md) 与 dense vector 组合。
+仓库示例使用**稀疏词项余弦召回**：汉字连续串切相邻双字，英文按词；不再使用整句中文哈希，也不宣称是语义 embedding。
+`怎么退款` 与退款片段有正分关联，`火星轨道周期` 无证据时直接返回“资料中未找到”，不调用模型。
 
 ```bash
-go test ./examples/senior/rag/...
+go test -race ./examples/senior/rag/...
+go run ./examples/senior/knowledge-demo
 ```
 
-`examples/senior/rag/` 演示分块、哈希向量、Top-K 检索与 `llmclient.MockClient` 编排。
+[`rag` 源码与故障表](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/rag)
+实际接口是 `Service.Answer(ctx, scope, question)`；上文生产向量编排代码为伪代码。
+可信宿主从 `Authority.Context` 注入身份，`Scope` 同时绑定 tenant/bot/scene/subject type/subject ID；
+客户端不能通过随意填 tenant 或 user 获得授权。片段的 policy、期限、Readers 资源 ACL 必须在评分前通过。
+`Readers` 为空表示 namespace 中所有已授权 reader，非空则限定具体 subject；分数为零永远不进入 Top-K。
+
+| 故障验证 | 预期 |
+|----------|------|
+| 打乱入库顺序，查询中文退款 | 只返回正分退款片段，测试不依赖第一条碰巧相关 |
+| 不相关问题、相似度最高但无权读取的片段 | 无命中直接拒答，模型调用次数为零 |
+| 跨 tenant/bot/subject、无身份、过期片段、policy 不符 | 检索拒绝或候选排除，越权数据不进 prompt |
+| 调用模型过程中删除来源、撤销授权或取消请求 | 返回答案前重查主记录版本和授权；不给出旧答案或证据 |
+| 零/NaN/无限阈值、非法 Top-K、超大问题/上下文 | 明确错误；防止无阈值兜底和预算失控 |
+| 模型失败、片段含“修改权限/调用工具” | 不交付部分失败答案；资料只作 JSON 数据，示例没有工具执行能力 |
+
+此例 `MockClient` 只验证编排、拒答与输入边界，不能证明真实模型抗注入、引用正确或 groundedness。
+中文双字和词项重叠不能处理全部分词/同义词问题；生产阈值、召回率、答案质量仍须标注集评测。
+授权校验与本地数据版本检查定义操作边界；已向外部模型发送的数据无法靠撤销“收回”。
 
 ## 延伸阅读
 

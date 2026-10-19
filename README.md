@@ -397,12 +397,16 @@ cd basis/goroutine && go run .
 ```bash
 # 完整运行需要 Docker 与本地 postgres:17-alpine / redis:7.4-alpine 镜像
 bash scripts/verify_reliability_examples.sh
-# Agent 评测、审批恢复、MCP/A2A 授权与故障门禁（无需 Docker）
+# Agent 评测、审批、MCP/A2A、RAG/Memory/HTTP/成本故障门禁（无需 Docker）
 bash scripts/verify_reliability_examples.sh --offline
 ```
 
 MCP/A2A 的运行与故障验证见 [MCP stdio/HTTP](./examples/senior/mcp/README.md) 和
 [A2A 授权与恢复](./examples/senior/a2a/README.md)。包含可信租户、逐操作授权、审批参数绑定、UNKNOWN、回调来源与 SSRF 验证；均为本地限定夹具。
+
+RAG/Memory/模型接入/缓存成本：`go run ./examples/senior/knowledge-demo`，见
+[综合演示与故障矩阵](./examples/senior/knowledge-demo/README.md)。包含无证据拒答、资源授权、规则审批与删除恢复、
+HTTP/SSE 断流/重试，以及缓存命中绕过模型和未知费用；无需密钥，仅本地夹具。
 
 ## 稳定币支付与资金运营项目
 
