@@ -41,39 +41,16 @@ type Run struct {
 	Latency int64  `json:"latency_ms"`
 }
 
-// UnmarshalJSON requires explicit observations. Missing/null telemetry is not a
-// free run, and a missing tool trace is not evidence that no tools executed.
-func (r *Run) UnmarshalJSON(data []byte) error {
-	var fields map[string]json.RawMessage
-	if err := json.Unmarshal(data, &fields); err != nil {
-		return err
-	}
-	for _, name := range []string{"id", "status", "result", "calls", "cost_microusd", "latency_ms"} {
-		value, exists := fields[name]
-		if !exists || bytes.Equal(bytes.TrimSpace(value), []byte("null")) {
-			return fmt.Errorf("run requires non-null %q", name)
-		}
-	}
-	type wireRun Run
-	var wire wireRun
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	if err := decoder.Decode(&wire); err != nil {
-		return err
-	}
-	*r = Run(wire)
-	return nil
-}
-
 type Artifact struct {
 	Version         string `json:"version"`
 	DatasetRevision string `json:"dataset_revision"`
+	DatasetSHA256   string `json:"dataset_sha256"`
 	Runs            []Run  `json:"runs"`
 }
 
 type Policy struct {
-	MinSuccess    float64
-	MaxRegression float64
+	MinSuccess    float64 `json:"min_success"`
+	MaxRegression float64 `json:"max_regression"`
 }
 
 type Result struct {
@@ -86,6 +63,12 @@ type Result struct {
 type Report struct {
 	Version          string   `json:"version"`
 	DatasetSHA256    string   `json:"dataset_sha256"`
+	DatasetRevision  string   `json:"dataset_revision"`
+	Policy           Policy   `json:"policy"`
+	BaselineVersion  string   `json:"baseline_version"`
+	BaselineSuccess  float64  `json:"baseline_success_rate"`
+	BaselineSHA256   string   `json:"baseline_sha256"`
+	CandidateSHA256  string   `json:"candidate_sha256"`
 	SuccessRate      float64  `json:"success_rate"`
 	CriticalFailures int      `json:"critical_failures"`
 	BudgetFailures   int      `json:"budget_failures"`
@@ -97,26 +80,72 @@ type Report struct {
 }
 
 func canonical(raw json.RawMessage) ([]byte, error) {
+	if err := checkJSON(raw); err != nil {
+		return nil, err
+	}
 	var value any
 	d := json.NewDecoder(bytes.NewReader(raw))
 	d.UseNumber()
 	if err := d.Decode(&value); err != nil {
 		return nil, err
 	}
-	// Unmarshal rejects a trailing JSON value as well.
-	if !json.Valid(raw) {
-		return nil, fmt.Errorf("invalid JSON arguments")
-	}
 	return json.Marshal(value)
 }
 
-func score(s Suite, a Artifact) (Report, error) {
-	r := Report{Version: a.Version}
-	if s.Revision == "" || len(s.Cases) == 0 || a.Version == "" || a.DatasetRevision != s.Revision {
-		return r, fmt.Errorf("nonempty suite/version and matching dataset revision required")
+func contentSHA256(v any) (string, error) {
+	encoded, err := json.Marshal(v)
+	if err != nil {
+		return "", err
 	}
-	encoded, _ := json.Marshal(s)
-	r.DatasetSHA256 = fmt.Sprintf("%x", sha256.Sum256(encoded))
+	encoded, err = canonical(encoded)
+	if err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%x", sha256.Sum256(encoded)), nil
+}
+
+// SuiteSHA256 hashes the validated structured suite: object key order and
+// whitespace are ignored, while array order and number representations remain.
+// Capture this digest with the run; do not rebind an old artifact after editing a suite.
+func SuiteSHA256(s Suite) (string, error) {
+	if s.Revision == "" || len(s.Cases) == 0 {
+		return "", fmt.Errorf("nonempty suite revision and cases required")
+	}
+	seen := make(map[string]bool)
+	for _, c := range s.Cases {
+		if c.ID == "" || seen[c.ID] || c.Slice == "" || c.WantStatus == "" || c.MaxCost < 0 || c.MaxLatency <= 0 {
+			return "", fmt.Errorf("invalid or duplicate case %q", c.ID)
+		}
+		seen[c.ID] = true
+		allowed := make(map[string]bool)
+		for _, name := range c.AllowedTools {
+			if name == "" || allowed[name] {
+				return "", fmt.Errorf("invalid or duplicate allowed tool: %s", c.ID)
+			}
+			allowed[name] = true
+		}
+		for _, call := range c.WantCalls {
+			if !allowed[call.Name] {
+				return "", fmt.Errorf("invalid golden tool: %s", c.ID)
+			}
+			if _, err := canonical(call.Args); err != nil {
+				return "", fmt.Errorf("case %s: %w", c.ID, err)
+			}
+		}
+	}
+	return contentSHA256(s)
+}
+
+func score(s Suite, a Artifact) (Report, error) {
+	r := Report{Version: a.Version, DatasetRevision: s.Revision}
+	digest, err := SuiteSHA256(s)
+	if err != nil {
+		return r, err
+	}
+	if a.Version == "" || a.DatasetRevision != s.Revision || a.DatasetSHA256 != digest {
+		return r, fmt.Errorf("nonempty version and matching dataset revision/SHA-256 required")
+	}
+	r.DatasetSHA256 = digest
 	runs := make(map[string]Run)
 	for _, run := range a.Runs {
 		if _, exists := runs[run.ID]; exists {
@@ -130,14 +159,9 @@ func score(s Suite, a Artifact) (Report, error) {
 	if len(runs) != len(s.Cases) {
 		return r, fmt.Errorf("coverage mismatch: want %d runs, got %d", len(s.Cases), len(runs))
 	}
-	seen := make(map[string]bool)
 	passed := 0
 	var latencies []int64
 	for _, c := range s.Cases {
-		if c.ID == "" || seen[c.ID] || c.Slice == "" || c.WantStatus == "" || c.MaxCost < 0 || c.MaxLatency <= 0 {
-			return r, fmt.Errorf("invalid or duplicate case %q", c.ID)
-		}
-		seen[c.ID] = true
 		run, exists := runs[c.ID]
 		if !exists {
 			return r, fmt.Errorf("missing case %s", c.ID)
@@ -156,14 +180,6 @@ func score(s Suite, a Artifact) (Report, error) {
 			}
 			if _, err := canonical(call.Args); err != nil {
 				return r, fmt.Errorf("case %s: %w", c.ID, err)
-			}
-		}
-		for _, call := range c.WantCalls {
-			if !allowed[call.Name] {
-				return r, fmt.Errorf("invalid golden tool: %s", c.ID)
-			}
-			if _, err := canonical(call.Args); err != nil {
-				return r, err
 			}
 		}
 		if run.Status != c.WantStatus || run.Result != c.WantResult {
@@ -225,6 +241,17 @@ func Compare(s Suite, baseline, candidate Artifact, p Policy) (Report, error) {
 	r, err := score(s, candidate)
 	if err != nil {
 		return r, fmt.Errorf("candidate: %w", err)
+	}
+	r.Policy = p
+	r.BaselineVersion = b.Version
+	r.BaselineSuccess = b.SuccessRate
+	r.BaselineSHA256, err = contentSHA256(baseline)
+	if err != nil {
+		return r, fmt.Errorf("baseline digest: %w", err)
+	}
+	r.CandidateSHA256, err = contentSHA256(candidate)
+	if err != nil {
+		return r, fmt.Errorf("candidate digest: %w", err)
 	}
 	if r.CriticalFailures > 0 {
 		r.GateReasons = append(r.GateReasons, "critical/safety failure")

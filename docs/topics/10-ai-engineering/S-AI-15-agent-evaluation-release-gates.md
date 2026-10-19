@@ -7,7 +7,7 @@ frequency: 5
 go_version: "1.24+"
 tags: [agent, evaluation, regression, safety, release-gate]
 status: published
-reviewed_at: "2026-10-18"
+reviewed_at: "2026-10-19"
 code_refs: [examples/senior/agenteval, scripts/verify_reliability_examples.sh]
 sources:
   - https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
@@ -22,7 +22,7 @@ sources:
 ## 3 分钟版（精讲深度）
 
 1. **先定义成功**：每个任务给出可信期望结果、允许工具、精确参数、终态与预算；不能只看回答是否通顺。
-2. **再冻结比较条件**：suite revision、内容 SHA-256、模型/Prompt/工具 schema/策略版本与运行环境形成一次评测记录。缺失、重复、额外 case 或版本不匹配都拒绝评分。
+2. **再冻结比较条件**：本例要求两份制品同时匹配 suite revision 和内容 SHA-256，报告保存实际阈值、baseline 版本/成功率及两份制品摘要。生产另需保存模型/Prompt/工具 schema/评分器版本与运行环境。缺失、重复、额外 case 或套件绑定不匹配都拒绝评分。
 3. **最后分层门禁**：安全关键 case 零失败，预算不超限，成功率达到下限且相对 baseline 回退不超容忍值。真实模型需多次重复与人工复核，固定 fixture 不能证明模型可靠性。
 
 ## 10 分钟版（原理 + 图示）
@@ -42,19 +42,23 @@ flowchart LR
 | 对象 | 本例字段或规则 | 生产扩展 |
 |------|----------------|----------|
 | Suite | revision、case ID、slice、critical、want status/result/calls | 保留测试来源、脱敏输入、参考事实、判分器版本 |
-| Artifact | version、dataset revision、完整 runs | 版本引用应不可变，记录模型、Prompt、工具与策略版本 |
+| Artifact | version、dataset revision/SHA-256、完整 runs | 版本引用应不可变，记录模型、Prompt、工具与策略版本 |
 | 工具轨迹 | 名称、顺序、JSON 参数 | 由执行网关采集，区分 proposed/authorized/executed，不信任模型自报 |
-| 结果 | 逐 case 原因、成功率、关键失败数、预算失败数、总成本、P95 | 按租户、任务类型与风险切片，观察分布和置信区间 |
+| 结果 | 逐 case 原因、成功率、关键/预算失败数、总成本、P95、实际 policy、baseline 版本/得分与两份制品哈希 | 按租户、任务类型与风险切片，观察分布和置信区间 |
 | 门禁 | 默认成功率 1、回退容忍 0、关键失败 0 | 阈值来自业务风险和历史基线，不直接照搬教学默认值 |
 
 示例包含五类 case：余额查询、提示注入、跨租户访问、支付超时保留 UNKNOWN、等待审批。
 候选轨迹即使输出正确文字，只要额外调用了未授权工具，也会失败。JSON 对象键顺序不影响比较；
 数组顺序、工具顺序与业务参数必须一致。数字参数按记录表示比较；生产金额建议使用原子单位整数或规范化十进制字符串。
 
-**成功率的分母是整个冻结任务集。** 少运行一个失败 case 不能提高得分。套件内容 SHA-256 随报告输出；
-每条轨迹必须显式提供成本、延迟和工具调用列表，缺失/null 或字段拼写错误按输入错误拒绝；不能按零成本或零调用评分。
+**成功率的分母是整个冻结任务集。** 少运行一个失败 case 不能提高得分。两份轨迹制品必须保存采集时的套件 SHA-256，评分时与当前 suite 内容核验，摘要也随报告输出；
+Suite、Case、Artifact、Run、Call 的声明字段全部必填且非 null，包括 `critical:false`、空的允许工具/期望调用/实际调用列表。
+不能因缺失 `critical` 把安全任务降为普通失败，也不能按零成本或零调用补齐缺失观测。
+解析前递归拒绝重复 JSON 键，包括参数嵌套对象/数组、转义后同名键；未知字段、大小写别名与尾随 JSON 同样按输入错误拒绝。
 工具调用数量不符时，仍检查实际执行的调用参数，避免通过缩短轨迹绕过租户/收款方约束。
-本例计算的是结构化套件的哈希，不是制品签名，revision 相同也不能替代内容核验与可信 CI 制品存储。
+本例的套件与制品摘要均是结构化内容 SHA-256：忽略对象键顺序/空白，保留数组顺序及工具参数数字表示，不是文件字节哈希或制品签名。
+revision 相同而预算/规则改变时，旧轨迹会被拒绝；应重新运行采集，不能给旧轨迹事后更换摘要。
+哈希不能证明轨迹来源可信，仍需可信执行面与不可变制品存储，生产还应归档评分器源码/构建版本。
 
 本例的 exact-match 适合状态机、金额、授权和结构化工具协议，不适合自由文本答案的所有合理表达。
 开放式回答可组合引用核验、领域规则、经过人工校准的模型判分器；模型判分也有偏差，应保存解释和抽检结果。
@@ -72,6 +76,8 @@ flowchart LR
 ```bash
 # 在仓库根目录执行
 go test -race ./examples/senior/agenteval/...
+# 在采集轨迹前冻结套件，将摘要存入制品的 dataset_sha256
+go run ./examples/senior/agenteval/cmd/eval -suite-hash
 go run ./examples/senior/agenteval/cmd/eval
 go run ./examples/senior/agenteval/cmd/eval \
   -candidate examples/senior/agenteval/testdata/candidate-unsafe.json
@@ -80,6 +86,16 @@ go run ./examples/senior/agenteval/cmd/eval \
 最后一条应失败，JSON 中 `gate_passed=false`，原因包含未授权工具与关键失败。
 编译后的 CLI 返回码：0 通过、1 门禁拒绝、2 输入或配置错误；`go run` 本身会包装程序退出状态。
 统一验证脚本会检查正例及负例退出码，而不是把“命令跑完”当成门禁生效。
+旧格式制品缺少 `dataset_sha256` 时返回 2；应基于冻结套件重新生成，不会自动为旧运行补绑。
+
+### 故障验证与报告复核
+
+- **输入错误**：关键标记/遥测/空列表字段缺失或 null、重复键、未知字段和尾随 JSON 返回 2，不能生成通过报告。
+- **套件错配**：分别验证 baseline/candidate 缺失或错误摘要，以及相同 revision 下更改预算后拒绝旧制品；对象键重排不应误拒绝。
+- **独立硬门禁**：把成功率下限放宽到 0.5、回退容忍放宽到 1，UNKNOWN 误报成功和审批绕过仍必须返回 1；成本/延迟超限也必须独立拒绝。仅在默认成功率 1 下断言失败，无法证明硬门禁有效。
+- **可复核报告**：`version` 是 candidate 版本；保留 `policy`、`baseline_version`、`baseline_success_rate`、`baseline_sha256`、`candidate_sha256` 和套件绑定。不同阈值应反映在 policy 中，制品内容变化应反映在对应哈希中。
+
+仓库工作流在构建前调用 `bash scripts/verify_reliability_examples.sh --offline`，执行 race 测试、CLI 故障测试及编译后二进制正反例退出码检查；该步骤不启动 Docker，也不执行线上操作。
 
 ## 架构取舍
 

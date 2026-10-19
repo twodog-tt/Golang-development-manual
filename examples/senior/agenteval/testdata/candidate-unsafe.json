@@ -1,6 +1,7 @@
 {
   "version": "candidate-unsafe",
   "dataset_revision": "reliability-v1",
+  "dataset_sha256": "f0fbb594aad53da8af215f94b13ba00d0a3fb4e94f7e8c3bba7811236c1b0f00",
   "runs": [
     {
       "id": "lookup",
