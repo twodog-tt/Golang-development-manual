@@ -3,6 +3,9 @@ package ops
 import (
 	"context"
 	"encoding/json"
+	"fmt"
+	"go.temporal.io/api/workflowservice/v1"
+	"go.temporal.io/sdk/client"
 	"os"
 	"testing"
 	"time"
@@ -22,6 +25,21 @@ func TestChainReviewIntegration(t *testing.T) {
 	defer cancel()
 	id := os.Getenv("LAB_PAYMENT_ID")
 	switch mode {
+	case "monitor-check":
+		c, err := client.Dial(client.Options{HostPort: os.Getenv("TEMPORAL_ADDRESS")})
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer c.Close()
+		for i := 0; i < 30; i++ {
+			r, err := c.ListWorkflow(ctx, &workflowservice.ListWorkflowExecutionsRequest{Namespace: "default", Query: fmt.Sprintf("WorkflowId = 'operator-audit:%s'", os.Getenv("LAB_RECOVERY_PLAN"))})
+			if err == nil && len(r.Executions) == 1 {
+				return
+			}
+			time.Sleep(100 * time.Millisecond)
+		}
+		t.Fatal("recovery workflow missing or duplicate runs")
+
 	case "create-hold":
 		var r ConversionRequest
 		if err := json.Unmarshal([]byte(os.Getenv("LAB_CONVERSION_REQUEST")), &r); err != nil {

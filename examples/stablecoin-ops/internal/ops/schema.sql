@@ -20,3 +20,12 @@ CREATE TABLE ops.conversions (
  output bigint, evidence jsonb, audit_evidence jsonb
 );
 INSERT INTO lab.accounts VALUES ('channel_clearing','USDC',1000000000000,1000000000000);
+
+CREATE TABLE ops.recovery_plans (
+ id text PRIMARY KEY, digest text NOT NULL, document jsonb NOT NULL,
+ expires timestamptz NOT NULL, applied boolean NOT NULL DEFAULT false,
+ operator text, ticket text, result jsonb,
+ payment text NOT NULL REFERENCES ops.payments(id),
+ needs_monitor boolean NOT NULL DEFAULT false, monitor_started boolean NOT NULL DEFAULT false,
+ monitor_checked boolean NOT NULL DEFAULT false
+);

@@ -204,3 +204,15 @@ func TestChainMonitorDoesNotMaskSettlementFailure(t *testing.T) {
 		t.Fatalf("masked ledger failure: audits=%d error=%v", audits.Load(), env.GetWorkflowError())
 	}
 }
+
+func TestRecoveryAuditCannotAcknowledgeFailedAudit(t *testing.T) {
+	var suite testsuite.WorkflowTestSuite
+	env := suite.NewTestWorkflowEnvironment()
+	var marked atomic.Int32
+	env.RegisterActivityWithOptions(func(context.Context, string) (string, error) { return "", context.DeadlineExceeded }, activity.RegisterOptions{Name: "AuditChain"})
+	env.RegisterActivityWithOptions(func(context.Context, string) error { marked.Add(1); return nil }, activity.RegisterOptions{Name: "MarkRecoveryAudited"})
+	env.ExecuteWorkflow(RecoveryAuditWorkflow, "plan", "payment")
+	if env.GetWorkflowError() == nil || marked.Load() != 0 {
+		t.Fatal("failed audit acknowledged recovery")
+	}
+}

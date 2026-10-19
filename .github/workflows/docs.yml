@@ -89,6 +89,18 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
+      - name: Verify operator recovery and signer isolation
+        run: python examples/stablecoin-ops/e2e/verify.py --recovery --report /tmp/payment-recovery-ci/result.json
+
+      - name: Save operator recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payment-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/payment-recovery-ci/
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Install MkDocs
         run: pip install -r requirements-docs.txt -r deploy/aliyun/requirements-smoke.txt
 

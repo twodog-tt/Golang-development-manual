@@ -132,6 +132,13 @@ func (a *App) Create(ctx context.Context, id string, r Request) error {
 	if _, err = tx.Exec(ctx, "SELECT pg_advisory_xact_lock(31337001)"); err != nil {
 		return err
 	}
+	var retired bool
+	if err = tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM retired_intents WHERE id=$1)", id).Scan(&retired); err != nil {
+		return err
+	}
+	if retired {
+		return ErrConflict
+	}
 	var old string
 	err = tx.QueryRow(ctx, "SELECT payload FROM intents WHERE id=$1", id).Scan(&old)
 	if err == nil {
@@ -219,7 +226,7 @@ func (a *App) Broadcast(ctx context.Context, id string) error {
 	if err != nil {
 		return err
 	}
-	if state == "mined" || state == "confirmed" || state == "reverted" || state == "orphaned_review" {
+	if state == "mined" || state == "confirmed" || state == "reverted" || state == "cancelled" || state == "orphaned_review" {
 		return ErrConflict
 	}
 	if _, err = a.authorizeSigner(ctx, guard); err != nil {
@@ -337,7 +344,7 @@ func (a *App) Reconcile(ctx context.Context, id string) (Intent, error) {
 	if err = tx.QueryRow(ctx, "SELECT nonce,state,block_hash,review_required FROM intents WHERE id=$1", id).Scan(&out.Nonce, &out.State, &out.BlockHash, &out.ReviewRequired); err != nil {
 		return out, err
 	}
-	rows, err := tx.Query(ctx, "SELECT hash FROM attempts WHERE intent=$1 ORDER BY seq", id)
+	rows, err := tx.Query(ctx, "SELECT hash FROM (SELECT hash,seq FROM attempts WHERE intent=$1 UNION ALL SELECT hash,2147483647 AS seq FROM intent_cancellations WHERE intent=$1) all_attempts ORDER BY seq", id)
 	if err != nil {
 		return out, err
 	}
@@ -354,6 +361,12 @@ func (a *App) Reconcile(ctx context.Context, id string) (Intent, error) {
 	if err = rows.Err(); err != nil {
 		return out, err
 	}
+	var cancellationHash string
+	err = tx.QueryRow(ctx, "SELECT hash FROM intent_cancellations WHERE intent=$1", id).Scan(&cancellationHash)
+	if err != nil && !errors.Is(err, pgx.ErrNoRows) {
+		return out, err
+	}
+	err = nil
 	var found *types.Receipt
 	for _, h := range out.Hashes {
 		r, e := a.RPC.TransactionReceipt(ctx, common.HexToHash(h))
@@ -368,8 +381,10 @@ func (a *App) Reconcile(ctx context.Context, id string) (Intent, error) {
 			return out, e
 		}
 		if header.Hash() == r.BlockHash {
+			if found != nil && found.TxHash != r.TxHash {
+				return out, ErrConflict
+			}
 			found = r
-			break
 		}
 	}
 	if found != nil {
@@ -381,15 +396,20 @@ func (a *App) Reconcile(ctx context.Context, id string) (Intent, error) {
 		if head.Number.Cmp(found.BlockNumber) < 0 {
 			return out, errors.New("RPC head behind receipt")
 		}
+		newCancellation := cancellationHash == found.TxHash.Hex() && (out.BlockHash == nil || *out.BlockHash != found.BlockHash.Hex() || out.State != "cancelled")
+		changedInclusion := out.BlockHash != nil && *out.BlockHash != found.BlockHash.Hex()
+		out.ReviewRequired = out.ReviewRequired || newCancellation || changedInclusion
 		out.State = "mined"
 		if found.Status == 0 {
 			out.State = "reverted"
+		} else if cancellationHash == found.TxHash.Hex() {
+			out.State = "cancelled"
 		} else if head.Number.Uint64()-found.BlockNumber.Uint64()+1 >= 2 {
 			out.State = "confirmed"
 		}
 		hash := found.BlockHash.Hex()
 		out.BlockHash = &hash
-		_, err = tx.Exec(ctx, "UPDATE intents SET state=$2,block_hash=$3,block_height=$4 WHERE id=$1", id, out.State, hash, found.BlockNumber.Int64())
+		_, err = tx.Exec(ctx, "UPDATE intents SET state=$2,block_hash=$3,block_height=$4,review_required=review_required OR $5 WHERE id=$1", id, out.State, hash, found.BlockNumber.Int64(), newCancellation || changedInclusion)
 	} else if out.BlockHash != nil {
 		out.State = "orphaned_review"
 		out.ReviewRequired = true

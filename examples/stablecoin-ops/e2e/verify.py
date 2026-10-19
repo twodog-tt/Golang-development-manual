@@ -25,7 +25,7 @@ run, capture, wait, port = base.run, base.capture, base.wait, base.port
 IMAGES = ("postgres:17-alpine", "temporalio/temporal:1.5.1")
 
 
-def verify(report, serve):
+def verify(report, serve, recovery=False):
     if report:
         report.unlink(missing_ok=True)
     anvil = shutil.which("anvil")
@@ -68,7 +68,7 @@ def verify(report, serve):
                        API_URL=f"http://127.0.0.1:{api_port}", APP_ORIGIN=f"http://127.0.0.1:{api_port}",
                        CHAIN_GATEWAY_URL=f"http://127.0.0.1:{gateway_port}", CHANNEL_URL=f"http://127.0.0.1:{provider_port}",
                        ANVIL_URL=f"http://127.0.0.1:{anvil_port}", LAB_CHANNEL_SECRET=secrets.token_hex(32),
-                       LAB_OUTPUT=tmp, LAB_SERVE="1" if serve else "", APPROVAL_SECONDS="300", OBSERVE_SECONDS="90",
+                       LAB_OUTPUT=tmp, LAB_SERVE="1" if serve else "", LAB_RECOVERY="1" if recovery else "", APPROVAL_SECONDS="300", OBSERVE_SECONDS="90",
                        LEDGER_ASSET="LABUSD", OUTPUT_LEDGER_ASSET="LABDAI")
             sql = (REPO / "examples/postgres-reliability/schema.sql").read_text() + (OPS / "internal/ops/schema.sql").read_text()
             sql = sql.replace("'USDC'", "'LABUSD'")
@@ -95,7 +95,7 @@ INSERT INTO lab.accounts VALUES
             # The JS harness checks chain identity before deploying any contracts.
             integration = subprocess.Popen(["node", "payment-e2e.mjs"], cwd=CHAIN / "client", env=env, start_new_session=True)
             try:
-                code = integration.wait(timeout=None if serve else 300)
+                code = integration.wait(timeout=None if serve else 420)
                 if code:
                     raise subprocess.CalledProcessError(code, "payment end-to-end integration")
             finally:
@@ -143,8 +143,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path)
     parser.add_argument("--serve", action="store_true")
+    parser.add_argument("--recovery", action="store_true", help="run operator recovery scenarios; combine with --serve for an isolated case")
     args = parser.parse_args()
     try:
-        verify(args.report, args.serve)
+        verify(args.report, args.serve, args.recovery)
     except KeyboardInterrupt:
         print("Local payment lab stopped")

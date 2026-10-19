@@ -9,6 +9,8 @@ tags: [stablecoin, channel, webhook, reconciliation, operations, refund]
 status: published
 reviewed_at: "2026-10-19"
 code_refs:
+  - examples/onchain-execution/client/recovery.mjs
+  - examples/stablecoin-ops/e2e/RECOVERY.md
   - examples/stablecoin-ops/e2e/verify.py
   - examples/stablecoin-ops/README.md
   - examples/stablecoin-ops/verify.py
@@ -124,6 +126,8 @@ python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.j
 ### 端到端重组恢复的人工边界
 
 端到端实战将数据库暂时失败的 `conversion=review` 与链证据异常的 `payment=review_chain` 分开。后者保存 `audit_evidence`、保留实际记账阶段，暂停同商户新增冻结和发送；普通 reconcile/resume 不得把它恢复为 settled。输出已消费导致余额不足时，补偿 SAVEPOINT 撤销整组冲正，再持久化人工核对状态，不能部分冲正或因 Activity 一直重试而不留下告警状态。完整的 12 组验证见 [端到端运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
+
+新增 [人工恢复手册](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/stablecoin-ops/e2e/RECOVERY.md) 与独立 5 组演练：计划绑定资金事实、过期和批准身份，按 rebind/确认取消后原子冲正/无意图先封存分别处理。支付库 COMMIT 同时保存恢复审计任务；签名账户只有在两库核对完成、监控已持久启动、nonce 与托管负债一致后才能受控解封。状态恢复与账户解封是两次有审计记录的决定，任何未知敞口继续隔离。
 
 
 ## 深挖问答

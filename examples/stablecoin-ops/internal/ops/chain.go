@@ -94,6 +94,11 @@ func currentDeposit(ctx context.Context, id, amount string) (ChainEvidence, erro
 // All authorization and quarantine paths take the merchant lock before payment
 // row locks. Another invoice cannot start a spend while reorg review commits.
 func lockMerchant(ctx context.Context, tx pgx.Tx, id string) error {
+	// Operator recovery takes the exclusive maintenance gate before either DB's
+	// writer locks. All online financial paths take its shared side first.
+	if _, err := tx.Exec(ctx, "SELECT pg_advisory_xact_lock_shared(31337009)"); err != nil {
+		return err
+	}
 	_, err := tx.Exec(ctx, "SELECT pg_advisory_xact_lock(hashtextextended(merchant,31337)) FROM ops.payments WHERE id=$1", id)
 	return err
 }
@@ -120,6 +125,9 @@ func (s *Store) ChainEvent(ctx context.Context, id string) (Event, error) {
 		return Event{}, err
 	}
 	defer tx.Rollback(ctx)
+	if _, err = tx.Exec(ctx, "SELECT pg_advisory_xact_lock_shared(31337009)"); err != nil {
+		return Event{}, err
+	}
 	var e Event
 	var n int64
 	var previous string
@@ -482,6 +490,12 @@ func (a *Activities) auditChain(ctx context.Context, id string) (string, error) 
 	}
 	if hasConversion && deposit.Epoch != execution.Epoch {
 		return "", ErrConflict
+	}
+	if cstate == "recovered_cancelled" {
+		var old ChainEvidence
+		if json.Unmarshal(previous, &old) != nil || !sameObservation(old, execution) || (execution.State != "cancelled" && execution.State != "retired") {
+			return quarantine()
+		}
 	}
 	if cstate == "settled" || cstate == "released" {
 		var old ChainEvidence

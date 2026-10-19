@@ -1,0 +1,110 @@
+{
+  "result": "passed",
+  "checks": [
+    {
+      "name": "operator_rebind_immutable_expiry_idempotent_commit_loss_and_audit_restart",
+      "result": "passed",
+      "detail": {
+        "payment": "64ea77facca9a59c3c132534b7449ec46aa63236ac4b4ad8",
+        "plan": "159c60ba-ced4-4d95-862d-591e5449a9f9",
+        "release": "6dbb8031-3507-4022-bfed-0f9b8d6ef53e"
+      }
+    },
+    {
+      "name": "same_nonce_cancellation_durable_raw_unknown_send_restart_and_depth_gate",
+      "result": "passed",
+      "detail": {
+        "payment": "b9f9aa3a117f977f151935b9d06c444dc26018cfb213349f",
+        "hash": "0xad62736dae008083eb6d5cb63431bb78c117308383d1a48bd097dd3d262b6cac",
+        "plan": "c62a0141-5e0b-4e9d-aab9-3192deb76fd3"
+      }
+    },
+    {
+      "name": "atomic_compensation_parallel_approval_outbox_and_safe_signer_release",
+      "result": "passed",
+      "detail": {
+        "payment": "b9f9aa3a117f977f151935b9d06c444dc26018cfb213349f",
+        "plan": "459ffc0a-30d9-4954-9941-d1b344d8a3d4",
+        "release": "4303de48-d0dd-4e35-b734-bc3746aa0c9f"
+      }
+    },
+    {
+      "name": "new_payment_conversion_after_both_databases_and_signer_recover",
+      "result": "passed",
+      "detail": {
+        "payment": "04d8240742d76e096fb82f34a6964d2ed5c65efc253ac06a"
+      }
+    },
+    {
+      "name": "never_created_intent_fence_survives_other_database_failure_and_closes_once",
+      "result": "passed",
+      "detail": {
+        "payment": "a5a1ef26968a8ee64779df3e5c4be08946d7a46567a78d33",
+        "plan": "8a04b48f-d1e8-469f-8781-d2b7eacfd958"
+      }
+    }
+  ],
+  "scope": "Local operator plans, actual same-nonce cancellation, separate payment/chain database commits, durable Temporal audit restart, synthetic assets only",
+  "run_id": "payment-e2e-eb33285dd31d",
+  "checked_at": "2026-10-19T03:29:57Z",
+  "go": "go version go1.24.3 darwin/arm64",
+  "node": "v22.15.0",
+  "anvil": "anvil Version: 1.4.4-stable\nCommit SHA: 05794498bf47257b144e2e2789a1d5bf8566be0e\nBuild Timestamp: 2025-11-03T23:46:57.847015000Z (1762213617)\nBuild Profile: maxperf",
+  "images": {
+    "postgres:17-alpine": "sha256:25a89970a83255ae96484d709005bb35aa71f7455f941bc1634514f31c5d5c62",
+    "temporalio/temporal:1.5.1": "sha256:bb46e6004f442ebd2e4e7a327bd9760be104b5edb4f838b9bf4b2351d3736b17"
+  },
+  "source_sha256": {
+    "examples/stablecoin-ops/.gitignore": "8d5b8c4810b356f491cb1145f7f52107d4edcc1934eb5a0d79e98fee3d173995",
+    "examples/stablecoin-ops/README.md": "bb17d0125b3a52a85ad617d2a57d7b8c1525b2e47ae62611b7c372d866d3c75f",
+    "examples/stablecoin-ops/client/package-lock.json": "229515d27430a36488fd7cadd00cf384b3607a5a67de5e399084e1e521f346f1",
+    "examples/stablecoin-ops/client/package.json": "f5028a864f54ec6890a9d852e5e61ff58656c872c2391d65c79a58fbbde8ece0",
+    "examples/stablecoin-ops/client/src/cli.ts": "22be69cb4d97ae3367a208b6139031af6318727e546072def073ad9b5184e7ef",
+    "examples/stablecoin-ops/client/src/client.ts": "3792ed345b291fc911c60d2432b9cc92f26f453233d03e4dee9048498e50e441",
+    "examples/stablecoin-ops/client/src/integration.ts": "e642fa4dd3bd57fad6e69839a4594d6e8128bf2952fe443ca8732491eb6040bd",
+    "examples/stablecoin-ops/client/tsconfig.json": "03cb054cb95552dfea9cfb81dd950290ba67b5a2220d3e91fde3c30998e3c005",
+    "examples/stablecoin-ops/cmd/api/main.go": "052e7738992a34819d5e88e79061b8bd85e824c078e7525ce2f452d87e631a6c",
+    "examples/stablecoin-ops/cmd/history/main.go": "802605f14698e065e37fad36ea345389e16a48c16b1cf03546d8c349adf2a3ba",
+    "examples/stablecoin-ops/cmd/provider/main.go": "b29aaeb41f6d8e796d93dd035ec75534c41dad3c399a399d90ea6d27d0f90f46",
+    "examples/stablecoin-ops/cmd/worker/main.go": "d8e0008f1a13c8697b0c8abbdd23c16d631fef824d13542985d71c8511326371",
+    "examples/stablecoin-ops/e2e/README.md": "965fdb15ee684bf664bf397f1d5ea3ddab501ebab89f0064cdc1c0aef29c269d",
+    "examples/stablecoin-ops/e2e/RECOVERY.md": "bbf37becf369833c77bb18f53f98c5cbfc06310ab5fba4fa9b8983cc2108258c",
+    "examples/stablecoin-ops/e2e/verify.py": "d7062fcff1be83c4738d511548978727cf33ff600d564c8b2720f4b838be87ac",
+    "examples/stablecoin-ops/go.mod": "029dca895e8a27fc2840e77af910cfaf3f96d0e328322e2316654e7acdcd6bb1",
+    "examples/stablecoin-ops/go.sum": "5be8be2209f4e28798beff14f49336dae7897bc3307c70738a9819626eecd93e",
+    "examples/stablecoin-ops/internal/ops/auth.go": "fb3302f618602df5bb602ae84085288f71c6f0cb766df31f442bbbabb688cfb7",
+    "examples/stablecoin-ops/internal/ops/chain.go": "0e1c710e5790b5882a856ead053053819e8a91e838ecf7c47a2bdd47f75d4a72",
+    "examples/stablecoin-ops/internal/ops/chain_integration_test.go": "76601c643bc9ba4792d6ae306e785d87148d56fd1d2082b870ed444f47c52dc2",
+    "examples/stablecoin-ops/internal/ops/channel.go": "f28502bc962a260702d7b4ceef4ceb67d9c4eef29b7adfc1d726aabbad96b617",
+    "examples/stablecoin-ops/internal/ops/config.go": "b13b368642829a273338b7c4c8388107a38306bed4a39e942cb14af890b8079f",
+    "examples/stablecoin-ops/internal/ops/http.go": "1eaaa9f5b4cfe1e46e505b3ff2db684a50914549b100c4b061ef1444f7fa5df3",
+    "examples/stablecoin-ops/internal/ops/ops_test.go": "e2d5781d8afdc195b8bd38e39c87ef4877349ae8cf7bf530b19c83fef935937d",
+    "examples/stablecoin-ops/internal/ops/recovery.go": "0f350c2cf1d8fcfbefc59ecd0ba46826dfc6bc6991d6d973a7ebf4728b8adf87",
+    "examples/stablecoin-ops/internal/ops/schema.sql": "4146a6d1573692e2e6b601be988dc7121ee1f8eafe08d7507567e101a8fe2622",
+    "examples/stablecoin-ops/internal/ops/store.go": "eb044be22d3e57f388b79a78f8c87c1f327dd41d19bbe4eabfa1041df833faaf",
+    "examples/stablecoin-ops/internal/ops/workflow.go": "9667517115ab3c068667ca7deae19f12571572b48193df56f07bb56c1f0f343b",
+    "examples/stablecoin-ops/verify.py": "02007f5375444ffe9b6ec4f173f78eed64bbaba5547bf8c4e041adc613fe578e",
+    "examples/onchain-execution/.gitignore": "f67e50b2e2f697682e3890215379c535cf718f356709e1f51a468428ce02489e",
+    "examples/onchain-execution/README.md": "d6d5155087eb6f78c1a551bbf22b8725d12e6e1e1bdf0aac5bb893f9117bddf3",
+    "examples/onchain-execution/client/PaymentReceiver.sol": "7b6df412b65e2b70460ed76e82066d64b6f03d7d517d76fa06fb460ff21e80f8",
+    "examples/onchain-execution/client/Token.sol": "2a0245a4c1d579a0c81b9ed14425a2a490598382407b2754514f7e612c14f4a5",
+    "examples/onchain-execution/client/integration.mjs": "6ca0fbef78e2389d837c79a4c8a7da3a61e3d00c3687036669b87c6605165a01",
+    "examples/onchain-execution/client/package-lock.json": "96797523b344bc27127c85ecda03b1e7a6435f70d063d38c50a05aefe8f9d429",
+    "examples/onchain-execution/client/package.json": "452e54602c3705e003b44d36a5a741860671da15d75c8884471d0efc6ee1a83f",
+    "examples/onchain-execution/client/payment-cli.mjs": "4962b7b4489dba89dfb3b74e775484ab69e15b6ffcea097257de358b9f3f8289",
+    "examples/onchain-execution/client/payment-e2e.mjs": "07361fc847938338dc1814e0509408f471ada63dc2ed81194ff56721e849994f",
+    "examples/onchain-execution/client/payment-recovery-tests.mjs": "91d2732455e56d89c31179405f261f6635b07044aee1f7960aabc26ec45b7848",
+    "examples/onchain-execution/client/recovery.mjs": "2e06f4da15590d0d1926f8dad21f1bb49b04f82a8466b7717cd0757056e5a8c7",
+    "examples/onchain-execution/cmd/server/main.go": "09839d4f54de9ffe973e1062c4ef5575d2ef7b198ee96cb493a9e211bc55d21a",
+    "examples/onchain-execution/go.mod": "e99ea1591d51a8393b9821f4900fb424b9c2048f44dfc00972d2ad287303e0a7",
+    "examples/onchain-execution/go.sum": "837549e154c0808e5c859293d3b5706c2c805357c99a186c326e91c7b81ebe02",
+    "examples/onchain-execution/internal/lab/evidence.go": "92f76ec90aef0e447d9a6673b82ae5b12d2c8438508bb23ba2e4b4f86d360d7c",
+    "examples/onchain-execution/internal/lab/gateway.go": "e89308c371e49b4bb69fd6027779013b17344f2077361207b32089b83fff1685",
+    "examples/onchain-execution/internal/lab/http.go": "23a4f849cdf419ee0357602d1c5120c9f3c322676cf04618e1d8b1a65cc685e2",
+    "examples/onchain-execution/internal/lab/indexer.go": "cd5daf8d696574994d9812a71b0308561ec34bcecfb52fe6eb2bf988abfa14eb",
+    "examples/onchain-execution/internal/lab/lab_test.go": "d137d8c6624877878f794d9d4bbe4ea773c4a06308901343824b04e7a10a529c",
+    "examples/onchain-execution/internal/lab/schema.sql": "b3bd03e8b50daca707d398edd6980d98b7061a53900b874b789101090e6777fb",
+    "examples/onchain-execution/verify.py": "297141bc76d6903fedaf7b6afbd9ba81edc36e199003c06e821e3c6b37d4c675",
+    "examples/postgres-reliability/schema.sql": "f783ed47e76346bd343f10c5cdaa06ab85b8e325d211121c9a052fea663085f7"
+  }
+}

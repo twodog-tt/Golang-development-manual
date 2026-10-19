@@ -20,6 +20,8 @@ python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.j
 
 原独立故障入口继续保留，负责提价、游标、ABI 等底层验证；两种入口的 Token decimals 和账务覆盖不同。
 
+新增 [人工恢复实战](../stablecoin-ops/e2e/RECOVERY.md)：计划批准、同 nonce 取消、固定意图封存，以及两库/资金核对后的 signer 解封；独立 5 组可运行验证。
+
 ## 一键运行
 
 需要 Go 1.24.2+、Node 22、npm、Python 3.10+、Docker，以及 **Foundry v1.4.4 的 Anvil**。已安装 foundryup 的机器可执行 `foundryup --install v1.4.4`；安装说明见 [Foundry 官方文档](https://www.getfoundry.sh/introduction/installation/)。运行器检查 Anvil 版本，不自动安装工具或拉取镜像。

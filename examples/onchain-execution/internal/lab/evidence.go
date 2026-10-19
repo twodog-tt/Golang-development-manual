@@ -91,6 +91,18 @@ func (a *App) Deposit(ctx context.Context, id string) (Evidence, error) {
 func (a *App) Execution(ctx context.Context, id string) (Evidence, error) {
 	out := Evidence{Reference: id, State: "pending", Token: a.Config.TokenOut}
 	intent, err := a.Reconcile(ctx, id)
+	if errors.Is(err, pgx.ErrNoRows) {
+		var retired bool
+		if err = a.DB.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM retired_intents WHERE id=$1)", id).Scan(&retired); err != nil {
+			return out, err
+		}
+		if !retired {
+			return out, pgx.ErrNoRows
+		}
+		out.State = "retired"
+		err = a.DB.QueryRow(ctx, "SELECT height,epoch FROM index_meta WHERE id=1").Scan(&out.Indexed, &out.Epoch)
+		return out, err
+	}
 	if err != nil {
 		return out, err
 	}
@@ -128,6 +140,10 @@ func (a *App) Execution(ctx context.Context, id string) (Evidence, error) {
 	// The rollback path also requires an indexed canonical failure receipt.
 	if out.Indexed-out.Height+1 < 2 {
 		return out, nil
+	}
+	if intent.State == "cancelled" {
+		out.State = "cancelled"
+		return out, tx.Commit(ctx)
 	}
 	if intent.State == "reverted" {
 		out.State = "reverted"

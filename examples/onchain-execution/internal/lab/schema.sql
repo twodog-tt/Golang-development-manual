@@ -28,3 +28,18 @@ INSERT INTO index_meta(id) VALUES(1) ON CONFLICT DO NOTHING;
 CREATE TABLE IF NOT EXISTS quality_errors (
  id bigserial PRIMARY KEY, observed_at timestamptz NOT NULL DEFAULT now(), detail text NOT NULL
 );
+
+-- Local operator-only capabilities; no HTTP mutation endpoint is exposed.
+CREATE TABLE IF NOT EXISTS intent_cancellations (
+ intent text PRIMARY KEY REFERENCES intents(id), hash text UNIQUE NOT NULL,
+ raw bytea NOT NULL, nonce bigint NOT NULL, gas_price numeric(78,0) NOT NULL,
+ plan text UNIQUE NOT NULL
+);
+CREATE TABLE IF NOT EXISTS retired_intents (
+ id text PRIMARY KEY, plan text NOT NULL, at timestamptz NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS recovery_plans (
+ id text PRIMARY KEY, digest text NOT NULL, document jsonb NOT NULL,
+ expires timestamptz NOT NULL, applied boolean NOT NULL DEFAULT false,
+ operator text, ticket text, result jsonb
+);

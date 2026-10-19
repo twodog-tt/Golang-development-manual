@@ -9,6 +9,8 @@ tags: [execution-gateway, nonce, replacement, receipt, anvil, fault-injection]
 status: published
 reviewed_at: "2026-10-19"
 code_refs:
+  - examples/onchain-execution/client/recovery.mjs
+  - examples/stablecoin-ops/e2e/RECOVERY.md
   - examples/stablecoin-ops/e2e/verify.py
   - examples/onchain-execution/internal/lab/gateway.go
   - examples/onchain-execution/internal/lab/schema.sql
@@ -137,7 +139,7 @@ PostgreSQL 锁适合这个单 signer 教学模型；大量账户应按 signer �
 
 ### 重组后的 nonce 缺口
 
-端到端验证发现：已分配且曾包含的交易被重组移除后，节点 pending nonce 可以回落，但数据库高水位仍然更大。直接分配 max(nonce)+1 会把新交易卡在缺口后；自动重用旧 nonce 也可能与原签名冲突。示例现在对 unresolved orphaned_review 或 pending nonce 回落到已有包含位置暂停整个 signer 的新建意图、广播及提价，等待核对全部 attempt。广播与 reconcile 共用 advisory lock；端到端故障组验证重组后新意图 409 且 attempt 不增加。review_required 独立持久化，原签名后来重新包含也不自动解封；独立 harness 真实重广播原文并确认后验证新 intent 仍被拒绝。该保护没有实现自动解封或 nonce 取消服务。
+端到端验证发现：已分配且曾包含的交易被重组移除后，节点 pending nonce 可以回落，但数据库高水位仍然更大。直接分配 max(nonce)+1 会把新交易卡在缺口后；自动重用旧 nonce 也可能与原签名冲突。示例现在对 unresolved orphaned_review 或 pending nonce 回落到已有包含位置暂停整个 signer 的新建意图、广播及提价，等待核对全部 attempt。广播与 reconcile 共用 advisory lock；端到端故障组验证重组后新意图 409 且 attempt 不增加。review_required 独立持久化，原签名后来重新包含也不自动解封；独立 harness 真实重广播原文并确认后验证新 intent 仍被拒绝。该保护没有自动解封。新增本地 [人工恢复手册](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/stablecoin-ops/e2e/RECOVERY.md) 提供计划批准后的同 nonce 取消：给自身 0 value、原文先持久化，再广播/核对已知 winner，确认取消前不释放资金。新意图封存屏障与受控 signer 解封分别持久化；旧签名重新包含、取消未知、nonce 缺口、业务未核对等情形继续隔离。
 
 ## 深挖问答
 

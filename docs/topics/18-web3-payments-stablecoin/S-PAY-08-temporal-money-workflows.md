@@ -9,6 +9,8 @@ tags: [temporal, workflow, payment, recovery, idempotency]
 status: published
 reviewed_at: "2026-10-19"
 code_refs:
+  - examples/onchain-execution/client/recovery.mjs
+  - examples/stablecoin-ops/e2e/RECOVERY.md
   - examples/stablecoin-ops/e2e/verify.py
   - examples/stablecoin-ops/README.md
   - examples/stablecoin-ops/verify.py
@@ -140,6 +142,22 @@ node examples/onchain-execution/client/payment-cli.mjs demo 10
 12 组实际集成验证覆盖收款缺 Paid、Worker 重启、广播成功但响应丢失、gateway/worker SIGKILL、缺 Swap 时维持冻结、跨资产 COMMIT 抛错与同意图恢复、实际 reverted 后释放冻结、错误金额不入账、已结算 Paid/Swap 重组后的顺序冲正，以及真实 custody/账本/未归属资金对账。新增验证通知重试耗尽仍审计、输出已消费时整组冲正回滚与商户暂停换币、新分支不足确认深度拒绝旧证据、旧 Activity 参数不能再次入账/释放，以及无 intent 的冻结仍能识别收款重组。通知持久化后丢 ACK 仍只有一个 Inbox。详细断言与逐组证据见运行指南及本次报告。
 
 错误金额占用 reference、spend 在其他分支仍存在、资金已被消费或长期结果未知都不能自动退款；本例会拒绝入账或进入独立的 review_chain、保留原记账阶段并暂停该商户后续换币，需人工核对；普通数据库失败的 conversion=review 仍可在 payment=settled 且证据一致时 resume。chain 模式禁用旧模拟退款接口和模拟 webhook；没有实现真实链上退款、gas 会计或生产资产托管。
+
+<div id="operator-recovery"></div>
+
+### 人工核对与安全恢复
+
+`review_chain` / `review_required` 的解封需要完整恢复决定。新增本地操作员 CLI：`inspect` 查看两库与 canonical 证据；`plan rebind|cancel|compensate|release-signer TARGET --out FILE` 保存计划；人工阅读后 `apply FILE --operator NAME --ticket ID`。计划绑定事实与过期时间，执行时重新核验；禁止直接清除状态标记。
+
+```bash
+python3 examples/stablecoin-ops/e2e/verify.py --recovery --report /tmp/payment-recovery/result.json
+# 构造可交互的隔离案例，按输出的 lab.env 继续操作：
+python3 examples/stablecoin-ops/e2e/verify.py --recovery --serve
+```
+
+5 组恢复验证覆盖计划篡改/过期、原分录核对、真实同 nonce 取消及未知回包、跨资产原子冲正、跨库封存先提交、审计启动 ACK 丢失，以及解封后新的真实付款/兑换。取消必须先持久签名，再等待 canonical 确认；无 intent 时先写不可自动撤销的退休屏障。恢复提交同时写入审计启动任务，Worker 重启后也能补启动。完整命令、支持/拒绝矩阵与证据见 [人工恢复运行手册](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/stablecoin-ops/e2e/RECOVERY.md)。
+
+普通支付/链上/端到端的 11/10/12 组入口保留，恢复入口独立 5 组，总计 38 组集成场景。解封须所有相关业务已核对、无 pending/nonce 缺口、托管与账本一致。已经冲正又重新出现的兑换、未知 nonce、余额不足和事实缺失仍然隔离；本例不自动生成新 nonce 或改写账本绕过人工判断。
 
 ## 架构取舍
 

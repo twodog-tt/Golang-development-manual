@@ -104,13 +104,20 @@ def check(base, release, output):
             page.get_by_role("button", name="搜索知识库", exact=True).click()
             query.fill("端到端实战")
             expect(results.locator('a[href*="S-PAY-08-temporal-money-workflows/"]').first).to_be_visible()
+            query.press("Escape")
+            page.goto("/topics/18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows/#operator-recovery", wait_until="domcontentloaded")
+            assert page.locator("#operator-recovery").count() == 1
+            expect(page.get_by_role("heading", name="人工核对与安全恢复")).to_be_visible()
+            expect(page.locator(".library-article a[href*='e2e/RECOVERY.md']").first).to_be_visible()
+            expect(page.locator(".library-article")).to_contain_text("release-signer")
+            page.screenshot(path=str(output / "operator-recovery.png"))
             assert not errors, "Browser script errors: " + str(errors)
             (output / "result.json").write_text(json.dumps({
                 "result": "passed", "release": release,
                 "checks": ["home", "release", "article", "canonical", "toc", "code",
                            "english_search", "chinese_search", "empty_search", "focus", "page_errors",
                            "stablecoin_articles", "temporal_search", "onchain_articles",
-                           "execution_search", "indexer_search", "defi_search", "payment_e2e_section", "payment_e2e_search"],
+                           "execution_search", "indexer_search", "defi_search", "payment_e2e_section", "payment_e2e_search", "operator_recovery_section"],
             }, indent=2) + "\n")
             print("Production browser checks passed: " + release)
         except Exception:

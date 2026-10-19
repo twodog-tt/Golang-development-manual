@@ -107,7 +107,11 @@ try{
  const convert=async(p,q)=>client.call('/payments/'+p.id+'/convert','POST',q??await quote(p));
  const balance=async id=>BigInt((await one('SELECT balance::text FROM lab.accounts WHERE id=$1',[id])).balance);
 
- if(env.LAB_SERVE==='1'){
+ if(env.LAB_RECOVERY==='1'){
+  const {runRecoveryLab}=await import('./payment-recovery-tests.mjs');
+  await runRecoveryLab({env,pc,rpc,read,token,tokenB,trader,query,one,balance,client,makePayment,convert,converted,paymentState,pay,quote,gateway,stop,start,startGateway,pauseMiner,resumeMiner:()=>{mining=true;},fork,checkActivity,mark,until,pause,output,chainDB,dropNextSend:()=>{dropSend=true;}});
+  if(env.LAB_SERVE!=='1')fs.writeFileSync(path.join(output,'payment-e2e.json'),JSON.stringify({result:'passed',checks,scope:'Local operator plans, actual same-nonce cancellation, separate payment/chain database commits, durable Temporal audit restart, synthetic assets only'},null,2)+'\n');
+ }else if(env.LAB_SERVE==='1'){
   const keys=['API_URL','ANVIL_URL','PAYMENT_ASSET','LAB_RECEIVER','CHAIN_TOKEN_IN','CHAIN_GATEWAY_URL'];
   fs.writeFileSync(path.join(output,'lab.env'),keys.map(k=>`export ${k}='${env[k]}'`).join('\n')+'\n',{mode:0o600});
   console.log(`Fresh local session: source ${path.join(output,'lab.env')}\nnode examples/onchain-execution/client/payment-cli.mjs demo 10\nPress Enter or Ctrl-C to stop.`);

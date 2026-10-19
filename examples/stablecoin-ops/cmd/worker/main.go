@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"example.com/stablecoin-ops/internal/ops"
 	"go.temporal.io/sdk/client"
 	"go.temporal.io/sdk/worker"
@@ -28,7 +29,11 @@ func main() {
 	w.RegisterWorkflow(ops.ChainPaymentWorkflow)
 	w.RegisterWorkflow(ops.ChainReconcileWorkflow)
 	w.RegisterWorkflow(ops.ConversionWorkflow)
+	w.RegisterWorkflow(ops.RecoveryAuditWorkflow)
 	w.RegisterActivity(&ops.Activities{Store: s, Channel: ops.Channel{URL: ops.Env("CHANNEL_URL", "http://127.0.0.1:8082"), Token: ops.Env("LAB_CHANNEL_SECRET", "")}})
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	go s.RunRecoveryMonitors(ctx, c)
 	if err = w.Run(worker.InterruptCh()); err != nil {
 		log.Fatal(err)
 	}

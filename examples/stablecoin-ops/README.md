@@ -22,6 +22,8 @@ python3 examples/stablecoin-ops/e2e/verify.py --serve
 
 下方是继续保留的模拟渠道模式，其退款、回调、旧历史回放测试与新端到端模式分别说明。
 
+新增 [人工核对与安全恢复](e2e/RECOVERY.md)，重点处理 review_chain、同 nonce 取消、跨库封存和签名账户受控解封，独立 5 组故障验证。
+
 ## 一键故障验证
 
 需要 Go 1.24.2+、Node 22、npm、Python 3.10+、Docker。先显式拉取镜像，运行器不会自行拉取：

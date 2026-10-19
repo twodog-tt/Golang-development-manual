@@ -81,7 +81,7 @@ func (s *Store) Create(ctx context.Context, merchant, key, amount, asset string)
 	if len(key) < 1 || len(key) > 100 || asset != PaymentAsset() {
 		return Payment{}, errors.New("invalid idempotency key or asset")
 	}
-	p, err := scanPayment(s.DB.QueryRow(ctx, "INSERT INTO ops.payments(id,merchant,idem,amount,asset,quote_expires) VALUES($1,$2,$3,$4,$5,now()+interval '15 minutes') ON CONFLICT(merchant,idem) DO UPDATE SET idem=EXCLUDED.idem RETURNING "+columns, ID(), merchant, key, n, asset))
+	p, err := scanPayment(s.DB.QueryRow(ctx, "WITH gate AS (SELECT pg_advisory_xact_lock_shared(31337009)) INSERT INTO ops.payments(id,merchant,idem,amount,asset,quote_expires) SELECT $1,$2,$3,$4,$5,now()+interval '15 minutes' FROM gate WHERE true ON CONFLICT(merchant,idem) DO UPDATE SET idem=EXCLUDED.idem RETURNING "+columns, ID(), merchant, key, n, asset))
 	if err == nil && (p.Amount != amount || p.Asset != asset) {
 		err = ErrConflict
 	}
@@ -89,7 +89,7 @@ func (s *Store) Create(ctx context.Context, merchant, key, amount, asset string)
 }
 func (s *Store) State(ctx context.Context, id, state string) error {
 	// Never let an old Workflow retry overwrite an irreversible ledger state.
-	_, err := s.DB.Exec(ctx, "UPDATE ops.payments SET state=$2 WHERE id=$1 AND state NOT IN ('settled','refunded','refund_pending','review_reversed','review_chain')", id, state)
+	_, err := s.DB.Exec(ctx, "WITH gate AS (SELECT pg_advisory_xact_lock_shared(31337009)) UPDATE ops.payments SET state=$2 FROM gate WHERE id=$1 AND state NOT IN ('settled','refunded','refund_pending','review_reversed','review_chain','recovered_closed')", id, state)
 	return err
 }
 func (s *Store) Fault(ctx context.Context, name string) bool {
@@ -110,6 +110,9 @@ func (s *Store) Ingest(ctx context.Context, e Event) error {
 		return err
 	}
 	defer tx.Rollback(ctx)
+	if _, err = tx.Exec(ctx, "SELECT pg_advisory_xact_lock_shared(31337009)"); err != nil {
+		return err
+	}
 	var amount, seq int64
 	var asset, state, previous string
 	err = tx.QueryRow(ctx, "SELECT amount,asset,sequence,state,provider_state FROM ops.payments WHERE id=$1 FOR UPDATE", e.Payment).Scan(&amount, &asset, &seq, &state, &previous)

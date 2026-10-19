@@ -106,7 +106,7 @@ SIWE / merchant scope
 
 未知发送、索引故障和未观察到交易不是释放资金的证据。数据库提交失败后的 conversion=review，且 payment 仍为 settled 时，修复依赖后可以 resume 原意图。已入账证据改变、释放依据被重组移除、spend 仍存在或冲正余额不足时，进入独立的 payment=review_chain，保存 audit_evidence，保留 conversion 的实际记账阶段。此状态禁止自动 reconcile/resume，也暂停该商户所有订单的新增冻结和发送；不会通过重复 convert 复活流程。审计在补偿 SAVEPOINT 内原子冲正，任一步失败撤销整组，再持久化人工核对状态。
 
-review_chain 不提供自动解除入口。需要核对 canonical 分支、原始回执、全部签名 attempt、钱包和账本敞口，制定人工修复再恢复商户。本例不自动生成新 nonce、新订单或改 deadline 绕过审查。后 4 组破坏性测试故意保留待核对敞口，只断言冻结/隔离/无重复记账及投影无漂移；不能把它们称作最终托管资金已经全部匹配。通知单笔按 created_at 投递，商户 Inbox 按 event_id 去重；这不等于多个并发投递者的全局严格有序消费。
+review_chain 不提供自动解除入口；新增 [人工核对与安全恢复](RECOVERY.md) 提供 inspect → 持久化计划 → 批准执行 → 重启审计 → signer 解封的受控流程和独立 5 组故障验证。需要核对 canonical 分支、原始回执、全部签名 attempt、钱包和账本敞口，再按可恢复分支处理商户。本例不自动生成新 nonce、新订单或改 deadline 绕过审查。后 4 组破坏性测试故意保留待核对敞口，只断言冻结/隔离/无重复记账及投影无漂移；不能把它们称作最终托管资金已经全部匹配。通知单笔按 created_at 投递，商户 Inbox 按 event_id 去重；这不等于多个并发投递者的全局严格有序消费。
 
 ## 范围与上线前工作
 
