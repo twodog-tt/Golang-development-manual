@@ -10,6 +10,16 @@ viem 部署固定版本 Uniswap V2 + 合成 ERC20 → 注入流动性
   → raw 证据 / canonical 映射 / 原子水位 → 快照游标查询
 ```
 
+## 与稳定币支付接通
+
+新增 [完整端到端项目](../stablecoin-ops/e2e/README.md)，钱包通过实际 PaymentReceiver 付款后，接通支付入账、冻结、兑换、索引确认、双资产过账和商户 Inbox。
+
+```bash
+python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.json
+```
+
+原独立故障入口继续保留，负责提价、游标、ABI 等底层验证；两种入口的 Token decimals 和账务覆盖不同。
+
 ## 一键运行
 
 需要 Go 1.24.2+、Node 22、npm、Python 3.10+、Docker，以及 **Foundry v1.4.4 的 Anvil**。已安装 foundryup 的机器可执行 `foundryup --install v1.4.4`；安装说明见 [Foundry 官方文档](https://www.getfoundry.sh/introduction/installation/)。运行器检查 Anvil 版本，不自动安装工具或拉取镜像。
@@ -73,6 +83,6 @@ curl -X POST http://127.0.0.1:实际端口/index/sync -d '{}'
 
 两块确认只演示业务深度阈值，不是 Ethereum PoS finality。Anvil rollback 是可控本地分支测试，不能替代 EL/CL、多 Provider、L2 sequencer、跨节点网络分区与 finalized 冲突验收。Indexer 用单一节点的 logs 与 receipts 交叉核对，可检测两接口不一致，不能识别同一节点一致伪造或同时漏报；上生产需独立来源、根/证明验证和覆盖率审计。
 
-游标是透明编码，不是授权凭据；生产需请求作用域、过滤条件绑定与签名，限制历史快照和查询预算。raw 通过应用的 append-only 路径保留，数据库 lab 角色仍可修改；生产需最小权限和不可变存储策略。这里只解码两类事件，没有余额账本、价格 API、ClickHouse、无限历史回填或自动调度。
+游标是透明编码，不是授权凭据；生产需请求作用域、过滤条件绑定与签名，限制历史快照和查询预算。raw 通过应用的 append-only 路径保留，数据库 lab 角色仍可修改；生产需最小权限和不可变存储策略。独立入口读取两类事件；e2e 入口可选配置第三类 Paid，提供 /quote 和收款/执行证据接口，支付侧另有账本和调度。本模块仍未实现 ClickHouse 或无限历史回填。
 
 池内报价用于确定性测试，未实现独立价格源、价格偏离上限、MEV 保护或跨协议最佳路由。生产还需审核 Token 行为、授权额度与撤销、模拟区块新鲜度、交易费用总额上限、EIP-1559/L2 费用模型、权限与资金风险，不应直接运行这个公开测试签名器。

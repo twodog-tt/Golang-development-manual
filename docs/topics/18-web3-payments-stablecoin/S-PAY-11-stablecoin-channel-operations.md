@@ -9,6 +9,7 @@ tags: [stablecoin, channel, webhook, reconciliation, operations, refund]
 status: published
 reviewed_at: "2026-10-19"
 code_refs:
+  - examples/stablecoin-ops/e2e/verify.py
   - examples/stablecoin-ops/README.md
   - examples/stablecoin-ops/verify.py
   - examples/stablecoin-ops/client/src/integration.ts
@@ -94,9 +95,31 @@ python3 examples/stablecoin-ops/verify.py --report /tmp/stablecoin-ops.json
 
 交互模式使用 `verify.py --serve`，按项目 README 初始化回环环境，再使用 CLI 的 `create / approve / get / refund / reconcile / notify / ops`。模拟渠道由隔离数据库 fixture 控制，没有连接任何真实厂商或资金账户。
 
+## 链上收款与 DeFi 运营的会计闭环
+
+[端到端入口](S-PAY-08-temporal-money-workflows.md#payment-e2e) 已把原四篇支付项目与交易执行、Indexer、DeFi 三篇接起来。运行器启动独立的支付库和索引库，真实 PaymentReceiver 收款、Uniswap V2 执行；不使用模拟渠道的手工 confirmed SQL。
+
+| 事实 | 账务动作 | 不能做的事 |
+|---|---|---|
+| Paid 订单引用/Token/金额一致且已索引深度足够 | LABUSD 收款入账 + Outbox | 仅凭钱包总余额认领订单 |
+| 已结算订单发起兑换 | merchant → held，参数和冻结同事务 | 并发重复冻结或换请求参数 |
+| 广播响应未知 / 索引质量故障 | 保持冻结，查询原 intent/attempt | 将超时当作失败并退款 |
+| canonical 成功 + 已索引 Swap/输入输出 Transfer | LABUSD 换出、LABDAI 实际输出换入及状态同事务 | 跨币种相加平账、按报价提前入账 |
+| canonical reverted 且已被索引 | 反向 hold 释放；原收款仍 settled | 虚构输出到账或外部退款 |
+| 已结算 Paid 与 Swap 被重组移除 | 先冲正输出、换出和冻结，再冲正收款 | 删除旧分录或自动重发新 nonce |
+| 收款消失但 spend 仍存在 / 状态不一致 | 保留分录与资金 review，人工核对 | 假定兑换资产已经返回 |
+
+链证据保存在 ops.events / conversion.evidence，冲正观察另存 audit_evidence。持续审计重扫 canonical 数据，只追加幂等反向 journal，不改旧账。通知以原 event ID 重投，审计也扫描未发布的链路 Outbox；收件后丢 ACK 不造成第二次经济动作。
+
+```bash
+python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.json
+```
+
+7 组故障与 custody 对账见 [完整运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。错误金额的 1 原子单位进入“未归属”核对项，不算商户收入。clearing/dex_output 的有限期初余额是账务夹具，不是偿付证明。chain 模式拒绝旧模拟退款和 webhook，未实现真实退款、部分兑换、提币、gas 费用会计及已消费余额的自动冲正。
+
 ## 架构取舍
 
-教学夹具将业务、渠道与商户 Inbox 放在同一 PostgreSQL，但经独立 HTTP 进程交互；它可以验证明确的进程与网络响应窗口，不能证明跨数据库、跨机房或跨组织一致性。生产适配器应独立凭据、权限和审计，先完成 sandbox 验收再讨论生产范围。
+原模式将业务、模拟渠道与商户 Inbox 放在同一 PostgreSQL；新端到端模式另有独立索引数据库，经 HTTP 与支付系统交互。它可以验证明确的进程与网络响应窗口，不能证明跨数据库、跨机房或跨组织一致性。生产适配器应独立凭据、权限和审计，先完成 sandbox 验收再讨论生产范围。
 
 ## 深挖问答
 
@@ -114,7 +137,7 @@ python3 examples/stablecoin-ops/verify.py --report /tmp/stablecoin-ops.json
 
 ## 证据边界与相关链接
 
-单资产、全额退款、模拟渠道；没有少付/多付自动处理、真实 USDC、银行通道、FX、合规验收或生产资金 SLA。参考项目 [README](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops)，配套 [Temporal](S-PAY-08-temporal-money-workflows.md)、[钱包登录](S-PAY-09-wallet-auth-siwe.md)、[SDK 联调](S-PAY-10-go-typescript-web3-integration.md)、[已有账本](S-PAY-07-postgresql-double-entry-ledger-lab.md) 和 [支付状态机](S-PAY-01-payment-state-idempotency-reversal.md)。
+原独立模式为单资产、全额退款和模拟渠道；新增模式实际接本地链收款/兑换、双资产账本。两种模式都没有少付/多付自动处置、真实 USDC、银行通道、FX、合规验收或生产资金 SLA。参考项目 [README](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops)，配套 [Temporal](S-PAY-08-temporal-money-workflows.md)、[钱包登录](S-PAY-09-wallet-auth-siwe.md)、[SDK 联调](S-PAY-10-go-typescript-web3-integration.md)、[已有账本](S-PAY-07-postgresql-double-entry-ledger-lab.md) 和 [支付状态机](S-PAY-01-payment-state-idempotency-reversal.md)。
 
 ## 延伸阅读
 

@@ -9,6 +9,7 @@ tags: [defi, uniswap-v2, viem, allowance, slippage, integration, anvil]
 status: published
 reviewed_at: "2026-10-19"
 code_refs:
+  - examples/stablecoin-ops/e2e/verify.py
   - examples/onchain-execution/client/integration.mjs
   - examples/onchain-execution/client/Token.sol
   - examples/onchain-execution/internal/lab/gateway.go
@@ -110,7 +111,7 @@ deadline 由链上时间定义，不以用户电脑时钟作为最终执行判�
 - Indexer 对目标 Token Transfer 和 Pair Swap 进行 ABI/receipt 对照并写入 canonical 投影。
 - reorg 移除该分支后，旧 raw 仍在，查询不再当作当前有效成交。
 
-当前只断言该路径的输出余额和事件，不提供全池资产负债表、LP 收益、手续费归因或多资产资金账本。若连接 [稳定币资金运营](../18-web3-payments-stablecoin/S-PAY-11-stablecoin-channel-operations.md)，应以 canonical/finality 策略驱动幂等入账，不能从 WebSocket 一条 Swap 直接确认清算。两个示例项目目前各自运行，尚未自动桥接资金和账本。
+原独立入口断言输出余额和事件；新增端到端入口补齐支付与双资产账本，仍不提供全池资产负债表、LP 收益或手续费归因。若连接 [稳定币资金运营](../18-web3-payments-stablecoin/S-PAY-11-stablecoin-channel-operations.md)，应以 canonical/finality 策略驱动幂等入账，不能从 WebSocket 一条 Swap 直接确认清算。两个独立入口继续保留，新的 e2e 入口已经接通实际收款、执行、索引和账务。
 
 ## 生产场景
 
@@ -132,6 +133,22 @@ python3 examples/onchain-execution/verify.py --report /tmp/onchain-execution/res
 ```
 
 [项目 README](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/onchain-execution) 说明工具版本、接口和证据边界。自动报告包含真实协议部署地址、Router hash、输出金额、replacement 交易、数据质量错误和 reorg 保留数量。全组还会真正 SIGKILL/restart Go 服务、制造 PostgreSQL 写入失败，不只调用纯内存模型。
+
+## 稳定币支付到 DeFi 资金运营的完整项目
+
+[端到端实战](../18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md#payment-e2e) 已实际接通前四篇支付项目：商户 SIWE 登录 → 钱包支付带订单引用的 LABUSD → Indexer 验证 → 支付账本入账 → 资金冻结 → 本课网关执行 V2 swap → 根据 canonical 实际输出记 LABDAI → Outbox/商户 Inbox。
+
+新入口使用两种 6 位小数合成稳定币；本篇原独立入口继续验证 6→18 位小数。10 LABUSD 的输入与实际 LABDAI 输出分别记两笔同资产零和 journal，swap-in、swap-out 和 conversion 状态一次 COMMIT，不能用不同币种金额抵消。价格、手续费和舍入造成的输出差异由实际 Transfer 金额体现，本例未实现独立价格保护或收益归因。
+
+```bash
+python3 examples/stablecoin-ops/e2e/verify.py --serve
+# source 输出的临时 lab.env 后：
+node examples/onchain-execution/client/payment-cli.mjs demo 10
+```
+
+可独立 `create/approve/pay/show/convert`。自动验证另用 `--report /tmp/payment-e2e/result.json`；7 组覆盖从缺日志、响应未知、进程中断到跨资产回滚、实际 reverted 和已结算全链路 reorg。指南与接口见 [项目说明](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
+
+支付和兑换都是本地实际 EVM 调用，不是模型模拟；Token、RPC 和资金场景仍是教学夹具。chain 模式不执行旧模拟退款，没有公链资产托管、真实稳定币风险或线上 DeFi 验收。
 
 ## 架构取舍
 

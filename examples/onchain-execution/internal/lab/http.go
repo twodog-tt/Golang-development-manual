@@ -38,6 +38,27 @@ func (a *App) Handler() http.Handler {
 		}
 	}
 	reply := func(w http.ResponseWriter, v any) error { return json.NewEncoder(w).Encode(v) }
+	mux.HandleFunc("GET /quote", wrap(func(w http.ResponseWriter, r *http.Request) error {
+		out, err := a.Quote(r.Context(), r.URL.Query().Get("amount"))
+		if err != nil {
+			return err
+		}
+		return reply(w, out)
+	}))
+	mux.HandleFunc("GET /evidence/deposits/{id}", wrap(func(w http.ResponseWriter, r *http.Request) error {
+		out, err := a.Deposit(r.Context(), r.PathValue("id"))
+		if err != nil {
+			return err
+		}
+		return reply(w, out)
+	}))
+	mux.HandleFunc("GET /evidence/executions/{id}", wrap(func(w http.ResponseWriter, r *http.Request) error {
+		out, err := a.Execution(r.Context(), r.PathValue("id"))
+		if err != nil {
+			return err
+		}
+		return reply(w, out)
+	}))
 	mux.HandleFunc("GET /health", wrap(func(w http.ResponseWriter, r *http.Request) error {
 		var height, epoch, quality int64
 		var hash string

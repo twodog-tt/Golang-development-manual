@@ -29,11 +29,13 @@ var idPattern = regexp.MustCompile(`^[a-zA-Z0-9_-]{1,64}$`)
 var ErrConflict = errors.New("intent conflict")
 
 type Config struct {
-	Router         common.Address `json:"router"`
-	TokenIn        common.Address `json:"token_in"`
-	TokenOut       common.Address `json:"token_out"`
-	Pair           common.Address `json:"pair"`
-	RouterCodeHash common.Hash    `json:"router_code_hash"`
+	Router           common.Address `json:"router"`
+	TokenIn          common.Address `json:"token_in"`
+	TokenOut         common.Address `json:"token_out"`
+	Pair             common.Address `json:"pair"`
+	RouterCodeHash   common.Hash    `json:"router_code_hash"`
+	Receiver         common.Address `json:"receiver"`
+	ReceiverCodeHash common.Hash    `json:"receiver_code_hash"`
 }
 type Request struct {
 	Amount   string `json:"amount"`
@@ -41,11 +43,12 @@ type Request struct {
 	Deadline int64  `json:"deadline"`
 }
 type Intent struct {
-	ID        string   `json:"id"`
-	Nonce     uint64   `json:"nonce"`
-	State     string   `json:"state"`
-	Hashes    []string `json:"hashes"`
-	BlockHash *string  `json:"block_hash"`
+	ID          string   `json:"id"`
+	Nonce       uint64   `json:"nonce"`
+	State       string   `json:"state"`
+	Hashes      []string `json:"hashes"`
+	BlockHash   *string  `json:"block_hash"`
+	Transaction string   `json:"transaction"`
 }
 type App struct {
 	DB     *pgxpool.Pool
@@ -76,6 +79,15 @@ func (a *App) CheckChain(ctx context.Context) error {
 	}
 	if len(code) == 0 || crypto.Keccak256Hash(code) != a.Config.RouterCodeHash {
 		return errors.New("router bytecode mismatch")
+	}
+	if a.Config.Receiver != (common.Address{}) {
+		code, err = a.RPC.CodeAt(ctx, a.Config.Receiver, nil)
+		if err != nil {
+			return err
+		}
+		if len(code) == 0 || crypto.Keccak256Hash(code) != a.Config.ReceiverCodeHash {
+			return errors.New("receiver bytecode mismatch")
+		}
 	}
 	return nil
 }
@@ -325,6 +337,7 @@ func (a *App) Reconcile(ctx context.Context, id string) (Intent, error) {
 		}
 	}
 	if found != nil {
+		out.Transaction = found.TxHash.Hex()
 		head, e := a.RPC.HeaderByNumber(ctx, nil)
 		if e != nil {
 			return out, e

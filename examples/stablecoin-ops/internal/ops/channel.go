@@ -94,7 +94,7 @@ func Provider(s *Store, token string) http.Handler {
 			return
 		}
 		n, err := Amount(p.Amount)
-		if err != nil || p.Asset != Asset {
+		if err != nil || p.Asset != PaymentAsset() {
 			fail(w, 400)
 			return
 		}
@@ -129,6 +129,15 @@ func Provider(s *Store, token string) http.Handler {
 		write(w, e)
 	})
 	mux.HandleFunc("GET /transfers/{id}", func(w http.ResponseWriter, r *http.Request) {
+		if ChainMode() {
+			e, err := s.ChainEvent(r.Context(), r.PathValue("id"))
+			if err != nil {
+				fail(w, 503)
+				return
+			}
+			write(w, e)
+			return
+		}
 		var e Event
 		var n int64
 		e.Payment = r.PathValue("id")
@@ -142,6 +151,10 @@ func Provider(s *Store, token string) http.Handler {
 		write(w, e)
 	})
 	mux.HandleFunc("POST /refunds/{id}", func(w http.ResponseWriter, r *http.Request) {
+		if ChainMode() {
+			fail(w, 409)
+			return
+		}
 		tag, err := s.DB.Exec(r.Context(), "UPDATE ops.channel SET refunded=true WHERE id=$1 AND state='confirmed'", r.PathValue("id"))
 		if err != nil || tag.RowsAffected() != 1 {
 			fail(w, 409)

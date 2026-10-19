@@ -77,6 +77,7 @@
 | S-NODE-11 | [交易执行网关实战：持久签名、Nonce、提价与状态恢复](../19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) | `examples/onchain-execution/` | Anvil / Uniswap V2 / PostgreSQL 集成故障验证 |
 | S-NODE-12 | [Indexer 查询服务实战：快照游标、数据质量与 Reorg 回放](../19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) | `examples/onchain-execution/` | Anvil / Uniswap V2 / PostgreSQL 集成故障验证 |
 | S-EXCH-32 | [DeFi 协议接入实战：Uniswap V2 报价、授权、执行与事件核对](../14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md) | `examples/onchain-execution/` | Anvil / Uniswap V2 / PostgreSQL 集成故障验证 |
+| S-PAY-08～11 / S-NODE-11～12 / S-EXCH-32 | [支付到 DeFi 端到端](../18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md#payment-e2e) | `examples/stablecoin-ops/e2e/` | 独立数据库、实际本地收款与兑换、跨资产过账、重组顺序冲正 |
 
 ## 使用方式
 

@@ -8,12 +8,25 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"go.temporal.io/sdk/activity"
 	"go.temporal.io/sdk/testsuite"
+	"go.temporal.io/sdk/workflow"
 	"net/http"
 	"net/http/httptest"
 	"strings"
+	"sync/atomic"
 	"testing"
 	"time"
 )
+
+func TestChainMonitorBoundsHistoryWithContinueAsNew(t *testing.T) {
+	var suite testsuite.WorkflowTestSuite
+	env := suite.NewTestWorkflowEnvironment()
+	var audits atomic.Int32
+	env.RegisterActivityWithOptions(func(context.Context, string) (string, error) { audits.Add(1); return "settled", nil }, activity.RegisterOptions{Name: "AuditChain"})
+	env.ExecuteWorkflow(ChainPaymentWorkflow, ChainInput{Input: Input{Payment: Payment{ID: "bounded-monitor"}}, Monitor: true})
+	if !workflow.IsContinueAsNewError(env.GetWorkflowError()) || audits.Load() != 50 {
+		t.Fatalf("unbounded audit history: count=%d error=%v", audits.Load(), env.GetWorkflowError())
+	}
+}
 
 func TestAmountAndWebhookBoundaries(t *testing.T) {
 	for _, v := range []string{"0", "-1", "1.1", "01", "1e6", "9223372036854775808"} {

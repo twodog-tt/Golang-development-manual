@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/jackc/pgx/v5"
@@ -15,6 +16,9 @@ import (
 )
 
 const Asset = "31337:0x1111111111111111111111111111111111111111:USDC:6"
+
+func PaymentAsset() string { return Env("PAYMENT_ASSET", Asset) }
+func LedgerAsset() string  { return Env("LEDGER_ASSET", "USDC") }
 
 var ErrConflict = errors.New("idempotency or state conflict")
 var ErrDenied = errors.New("not found or forbidden")
@@ -29,12 +33,13 @@ type Payment struct {
 	QuoteExpires time.Time `json:"quote_expires"`
 }
 type Event struct {
-	ID       string `json:"id"`
-	Payment  string `json:"payment"`
-	Amount   string `json:"amount_atomic"`
-	Asset    string `json:"asset"`
-	State    string `json:"state"`
-	Sequence int64  `json:"sequence"`
+	ID       string         `json:"id"`
+	Payment  string         `json:"payment"`
+	Amount   string         `json:"amount_atomic"`
+	Asset    string         `json:"asset"`
+	State    string         `json:"state"`
+	Sequence int64          `json:"sequence"`
+	Evidence *ChainEvidence `json:"evidence,omitempty"`
 }
 
 func ID() string {
@@ -73,7 +78,7 @@ func (s *Store) Create(ctx context.Context, merchant, key, amount, asset string)
 	if err != nil {
 		return Payment{}, err
 	}
-	if len(key) < 1 || len(key) > 100 || asset != Asset {
+	if len(key) < 1 || len(key) > 100 || asset != PaymentAsset() {
 		return Payment{}, errors.New("invalid idempotency key or asset")
 	}
 	p, err := scanPayment(s.DB.QueryRow(ctx, "INSERT INTO ops.payments(id,merchant,idem,amount,asset,quote_expires) VALUES($1,$2,$3,$4,$5,now()+interval '15 minutes') ON CONFLICT(merchant,idem) DO UPDATE SET idem=EXCLUDED.idem RETURNING "+columns, ID(), merchant, key, n, asset))
@@ -113,6 +118,17 @@ func (s *Store) Ingest(ctx context.Context, e Event) error {
 	}
 	if n != amount || e.Asset != asset {
 		return ErrConflict
+	}
+	if ChainMode() {
+		if e.Evidence == nil || e.Evidence.Reference != e.Payment {
+			return ErrConflict
+		}
+		if e.State == "confirmed" && (e.Evidence.State != "confirmed" || e.Evidence.Amount != e.Amount || !strings.EqualFold(e.Evidence.Token, Env("CHAIN_TOKEN_IN", "")) || e.Evidence.Indexed-e.Evidence.Height+1 < 2) {
+			return ErrConflict
+		}
+		if e.State == "reversed" && e.Evidence.State != "orphaned" {
+			return ErrConflict
+		}
 	}
 	raw, _ := json.Marshal(e)
 	var inserted string
@@ -173,7 +189,7 @@ func (s *Store) Settle(ctx context.Context, id string) error {
 	if observed != "confirmed" || state == "refunded" || state == "review_reversed" || state == "refund_pending" {
 		return ErrConflict
 	}
-	if _, err = tx.Exec(ctx, "SELECT lab.transfer($1,'channel_clearing',$2,'USDC',$3)", "settle:"+id, merchant, amount); err != nil {
+	if _, err = tx.Exec(ctx, "SELECT lab.transfer($1,'channel_clearing',$2,$3,$4)", "settle:"+id, merchant, LedgerAsset(), amount); err != nil {
 		return err
 	}
 	if _, err = tx.Exec(ctx, "UPDATE ops.payments SET state='settled' WHERE id=$1", id); err != nil {

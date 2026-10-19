@@ -261,3 +261,5 @@
 ## 链上执行与 DeFi 项目入口
 
 按 [交易执行网关](topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与质量](topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [Uniswap V2 接入](topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md) 补齐从业务意图到 canonical 查询的链路。项目在本地合成资产上运行，不等价于真实资金或生产协议验收。
+
+端到端可运行入口：[稳定币支付与 DeFi 资金运营](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)，覆盖真实本地链收款、双资产账本和重组顺序冲正。

@@ -94,13 +94,23 @@ def check(base, release, output):
                 expect(results.locator('a[href*="' + slug + '/"]').first).to_be_visible()
                 page.screenshot(path=str(output / (slug + "-search.png")))
                 query.press("Escape")
+            response = page.goto("/topics/18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows/#payment-e2e", wait_until="domcontentloaded")
+            assert response.status == 200
+            assert page.locator("#payment-e2e").count() == 1
+            expect(page.get_by_role("heading", name="端到端实战：支付到链上兑换")).to_be_visible()
+            expect(page.locator(".library-article")).to_contain_text("swap-in")
+            expect(page.locator(".library-article a[href*='stablecoin-ops/e2e']").first).to_be_visible()
+            page.screenshot(path=str(output / "payment-e2e.png"))
+            page.get_by_role("button", name="搜索知识库", exact=True).click()
+            query.fill("端到端实战")
+            expect(results.locator('a[href*="S-PAY-08-temporal-money-workflows/"]').first).to_be_visible()
             assert not errors, "Browser script errors: " + str(errors)
             (output / "result.json").write_text(json.dumps({
                 "result": "passed", "release": release,
                 "checks": ["home", "release", "article", "canonical", "toc", "code",
                            "english_search", "chinese_search", "empty_search", "focus", "page_errors",
                            "stablecoin_articles", "temporal_search", "onchain_articles",
-                           "execution_search", "indexer_search", "defi_search"],
+                           "execution_search", "indexer_search", "defi_search", "payment_e2e_section", "payment_e2e_search"],
             }, indent=2) + "\n")
             print("Production browser checks passed: " + release)
         except Exception:

@@ -29,10 +29,10 @@ def on_config(config):
         "featured": [
             {"id": qid, "label": label, "description": description}
             for qid, label, description in [
+                ("S-PAY-08", "Web3", "支付到 DeFi：收款、冻结、实际兑换与账本冲正。"),
                 ("S-NODE-11", "Web3", "持久签名、Nonce 提价与进程中断恢复。"),
                 ("S-NODE-12", "Go", "快照分页、日志质量门禁与链重组回放。"),
                 ("S-EXCH-32", "Web3", "真实本地 Uniswap V2 报价、授权与执行核对。"),
-                ("S-PAY-08", "Web3", "审批、持久计时器、Worker 恢复与历史回放。"),
             ] if qid in topics
         ],
     }
@@ -109,7 +109,7 @@ def on_page_context(context, page, config, nav):
         topic = library["topics"][item["id"]]
         target = next((p for p in nav.pages if p.file.src_uri == "topics/" + topic["file"]), None)
         if target:
-            featured.append({**item, "url": target.url, "title": ("Agent 评测与发布门禁" if item["id"] == "S-AI-15" else topic["title"].split("：", 1)[0]),
+            featured.append({**item, "url": target.url + ("#payment-e2e" if item["id"] == "S-PAY-08" else ""), "title": ({"S-AI-15": "Agent 评测与发布门禁", "S-PAY-08": "支付到 DeFi 端到端实战"}.get(item["id"], topic["title"].split("：", 1)[0])),
                              "date": str(target.meta.get("reviewed_at", library["reviewed_at"]))})
     context["library_featured"] = featured
     return context

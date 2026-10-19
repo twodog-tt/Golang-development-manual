@@ -211,4 +211,6 @@
 
 ## 链上执行与数据服务实战
 
-在稳定币支付与资金运营项目之后，按 [交易执行网关](topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与质量](topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md) 完成一轮。用本地合成资产演示签名恢复、同 nonce 提价、滑点失败、快照分页和重组；保留本次验证报告，说明仍未覆盖的公链/真实资产边界。两个项目目前独立运行。
+在稳定币支付与资金运营项目之后，按 [交易执行网关](topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与质量](topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md) 完成一轮。用本地合成资产演示签名恢复、同 nonce 提价、滑点失败、快照分页和重组；保留本次验证报告，说明仍未覆盖的公链/真实资产边界。新增 [端到端入口](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e) 已将钱包收款、账本冻结、实际兑换、索引证据和冲正接通。
+
+端到端可运行入口：[稳定币支付与 DeFi 资金运营](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)，覆盖真实本地链收款、双资产账本和重组顺序冲正。

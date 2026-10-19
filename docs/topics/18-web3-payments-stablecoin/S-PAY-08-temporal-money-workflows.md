@@ -9,6 +9,7 @@ tags: [temporal, workflow, payment, recovery, idempotency]
 status: published
 reviewed_at: "2026-10-19"
 code_refs:
+  - examples/stablecoin-ops/e2e/verify.py
   - examples/stablecoin-ops/README.md
   - examples/stablecoin-ops/verify.py
   - examples/stablecoin-ops/client/src/integration.ts
@@ -80,6 +81,66 @@ python3 examples/stablecoin-ops/verify.py --report /tmp/stablecoin-ops.json
 
 实际验证：旧 Worker 进程 SIGKILL、新 Worker 接续、提交响应丢失、持久审批超时、账本提交后响应丢失、真实历史正向回放，以及不兼容流程的负向回放。SDK 单测另验证新流程审批与 Activity 重试，不能将单测时间跳跃等同于服务端持久性验证。
 
+<div id="payment-e2e"></div>
+
+## 端到端实战：支付到链上兑换
+
+这次将支付项目与交易网关、Indexer 和 Uniswap V2 真正接通。原模拟渠道验证入口保留；新模式的收款由钱包向本地 PaymentReceiver 付款，Indexer 证明订单引用、Token、金额与确认深度，随后才进入账本。不是由测试脚本把渠道数据库改成 confirmed。
+
+```mermaid
+flowchart LR
+  W[SIWE 商户会话 + 钱包付款] --> P[Paid 订单引用事件]
+  P --> I[Indexer raw + canonical + checkpoint]
+  I --> C[渠道证据 / ops.events Inbox]
+  C --> L[LABUSD 入账 + Outbox]
+  L --> H[同事务创建兑换意图 + 冻结]
+  H --> G[Go 网关 / 持久签名 / 广播]
+  G --> U[Uniswap V2 实际执行]
+  U --> I
+  I --> S[实际输出 / 双资产过账]
+  S --> N[Outbox → 商户 Inbox]
+  I --> A[持续审计 / Reorg 冲正]
+  A --> L
+```
+
+### 一键运行与逐步交互
+
+需要原项目依赖与 Anvil 1.4.4；链固定 Cancun/31337，LABUSD 和 LABDAI 都为 6 位小数。仓库根目录执行：
+
+```bash
+docker pull postgres:17-alpine
+docker pull temporalio/temporal:1.5.1
+python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.json
+
+# 启动全新交互环境，不先运行重组故障矩阵
+python3 examples/stablecoin-ops/e2e/verify.py --serve
+# 另一终端 source 运行器输出的临时 lab.env 后：
+node examples/onchain-execution/client/payment-cli.mjs demo 10
+```
+
+`demo` 完成 SIWE 登录、建单、审批、钱包授权/付款、等待入账、请求报价、兑换与输出入账。也可逐步 `create KEY AMOUNT`、`approve ID`、`pay ID`、`show ID`、`convert ID`。完整工具、接口、恢复与故障矩阵见 [端到端运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
+
+### 不能省略的提交边界
+
+| 边界 | 持久身份 / 判定 |
+|---|---|
+| 支付收款 | payment ID 写入 bytes32 reference；Paid 的 reference/amount/Token 与订单一致 |
+| 收款过账 | ops.events 保存不可变链证据；settle journal 与 Outbox 同事务 |
+| 资金冻结 | 一个订单只有一个 conversion；hold journal 与不可变请求同事务，intent 固定 convert_paymentID |
+| 链上执行 | 原文先持久化；响应未知、进程中断后仍查询原 nonce/hash/attempt |
+| 输出入账 | 已索引 canonical Swap + 输入/输出 Transfer；swap-in、swap-out、conversion 状态同事务 |
+| 后续审计 | ChainPaymentWorkflow 入账后持续查询，50 轮 ContinueAsNew；重组只冲正，不自动重发 |
+
+各币种分别平衡；不把 10 LABUSD 输入写成 10 LABDAI 输出。输出使用实际链上金额字符串，最小输出只是一条拒绝条件。节点观察、chain 数据库与支付数据库不构成跨系统 ACID；持续审计处理观察后重组窗口。
+
+新模式使用单独的 ChainPaymentWorkflow / ConversionWorkflow / ChainReconcileWorkflow，原 PaymentWorkflow 的命令顺序与 approval-audit 历史版本分支保留。原历史正负回放继续由旧 harness 验证；新监控的 ContinueAsNew 另有 SDK 时间跳跃测试，不夸大成生产滚动升级验收。
+
+### 故障与验收
+
+7 组实际集成验证覆盖收款缺 Paid、Worker 重启、广播成功但响应丢失、gateway/worker SIGKILL、缺 Swap 时维持冻结、跨资产 COMMIT 抛错与同意图恢复、实际 reverted 后释放冻结、错误金额不入账、已结算 Paid/Swap 重组后的顺序冲正，以及真实 custody/账本/未归属资金对账。通知持久化后丢 ACK 仍只有一个 Inbox。详细断言与逐组证据见运行指南及本次报告。
+
+错误金额占用 reference、spend 在其他分支仍存在、资金已被消费或长期结果未知都不能自动退款；本例会拒绝入账或保留 review/冻结，需人工核对。chain 模式禁用旧模拟退款接口和模拟 webhook；没有实现真实链上退款、gas 会计或生产资产托管。
+
 ## 架构取舍
 
 简单、短时任务可用数据库状态机与队列；当流程跨人工操作、分钟以上等待、外部请求和多阶段恢复时，再评估 Temporal。Activity 重试不是分布式事务，渠道、账本和通知仍分别定义幂等键。
@@ -100,7 +161,7 @@ python3 examples/stablecoin-ops/verify.py --report /tmp/stablecoin-ops.json
 
 ## 证据边界与相关链接
 
-`integration_harness`：真实本地 Temporal、PostgreSQL 与进程中断，渠道和商户为本地 HTTP 夹具，没有真实稳定币转账或生产验收。继续阅读 [钱包身份](S-PAY-09-wallet-auth-siwe.md)、[SDK 联调](S-PAY-10-go-typescript-web3-integration.md)、[渠道运营](S-PAY-11-stablecoin-channel-operations.md) 与 [既有账本](S-PAY-07-postgresql-double-entry-ledger-lab.md)。
+`integration_harness`：原模式覆盖真实本地 Temporal/PostgreSQL 与模拟渠道；新端到端模式另覆盖实际本地链收款/兑换、双资产账本及持续审计。商户为 HTTP 夹具，没有公链资金或生产验收。继续阅读 [钱包身份](S-PAY-09-wallet-auth-siwe.md)、[SDK 联调](S-PAY-10-go-typescript-web3-integration.md)、[渠道运营](S-PAY-11-stablecoin-channel-operations.md) 与 [既有账本](S-PAY-07-postgresql-double-entry-ledger-lab.md)。
 
 ## 延伸阅读
 

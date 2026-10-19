@@ -9,6 +9,7 @@ tags: [indexer, postgres, canonical, cursor, data-quality, reorg]
 status: published
 reviewed_at: "2026-10-19"
 code_refs:
+  - examples/stablecoin-ops/e2e/verify.py
   - examples/onchain-execution/internal/lab/indexer.go
   - examples/onchain-execution/internal/lab/schema.sql
   - examples/onchain-execution/client/integration.mjs
@@ -130,6 +131,20 @@ python3 examples/onchain-execution/verify.py --serve
 
 这些判定写入逐组 JSON 报告；链 rollback 为本地故障夹具，不模拟完整 PoS 网络 fork choice。
 
+## 从查询结果到支付/兑换证据
+
+[端到端项目](../18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md#payment-e2e) 新增可选 PaymentReceiver allowlist 与 Paid(bytes32,address,uint256) decoder。第一个 indexed 字段是完整 bytes32 订单引用，不能套地址 padding 校验；第二个才是付款地址。Receiver 运行时代码哈希与 Router 一样按本次可信部署配置校验，普通独立示例仍只读取原两类事件。
+
+`/evidence/deposits/{id}` 在 repeatable-read 快照内检查 raw/canonical 映射和确认深度，输出订单引用、实际金额、Token、tx/block、indexed 与 epoch。`/evidence/executions/{id}` 交叉验证 receipt 与已索引 Swap/输入输出 Transfer。资金系统使用这两个明确证据接口，不抓分页 API 猜某笔订单是否到账。
+
+观察水位会增长，同一渠道 sequence 的事件内容却必须固定：provider 保留首次该状态证据，ops.events Inbox 将其作为不可变事件。否则只因 indexed_height 增长，同 event ID 就会变成“不同 payload”冲突。后续 reorg 是新状态/审计证据，不能修改旧事件。
+
+```bash
+python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.json
+```
+
+[7 组故障验证](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e) 删除真实 RPC 的 Paid 或 Swap，确认支付/输出水位门禁有效；重组后保留旧 raw 并触发资金冲正。仍是单节点、局部事件覆盖和非原子跨系统观察，不能据此证明公链 finality 或数据源独立可信。
+
 ## 架构取舍
 
 本例选择“坏批次停住”，没有隔离坏日志后继续推进。继续推进需要额外表达 holes、隔离事件覆盖率和补偿水位，否则“已到 head”会掩盖数据缺口。单事务整批回放易验证，但大回填需限制事务大小、锁时长和 RPC 预算。
@@ -154,6 +169,6 @@ python3 examples/onchain-execution/verify.py --serve
 
 ## 证据边界与延伸阅读
 
-证据等级 `integration_harness`；范围是本地单链、两 Token/一 Pair、两类事件与显式同步 API，没有高可用调度、全链 schema 覆盖或生产吞吐验收。前置阅读 [Canonical merge](S-NODE-07-canonical-backfill-realtime-merge.md)、[Trace 与 Decoder](S-NODE-08-trace-state-diff-versioned-decoder-quality.md)，后续连到 [DeFi 实战](../14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md)。
+证据等级 `integration_harness`；独立入口范围是本地单链、两 Token/一 Pair、两类事件与显式同步 API；新端到端入口另接 Paid 和资金系统，没有高可用调度、全链 schema 覆盖或生产吞吐验收。前置阅读 [Canonical merge](S-NODE-07-canonical-backfill-realtime-merge.md)、[Trace 与 Decoder](S-NODE-08-trace-state-diff-versioned-decoder-quality.md)，后续连到 [DeFi 实战](../14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md)。
 
 规范来源：[EIP-234 blockHash logs](https://eips.ethereum.org/EIPS/eip-234)、[EIP-1898 hash-scoped state](https://eips.ethereum.org/EIPS/eip-1898)、[PostgreSQL repeatable read](https://www.postgresql.org/docs/17/transaction-iso.html)。

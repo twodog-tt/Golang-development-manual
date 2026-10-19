@@ -42,3 +42,5 @@ python3 examples/onchain-execution/verify.py --report /tmp/onchain-execution/res
 ```
 
 单链合成资产教学范围，详见项目 README 的工具版本与故障矩阵。
+
+与支付项目接通的 [端到端运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e) 提供从钱包收款、资金冻结到兑换入账/重组冲正的一键验证与逐步 CLI。

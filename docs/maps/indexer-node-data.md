@@ -242,3 +242,5 @@ flowchart LR
 ## 本地链查询项目
 
 [交易执行网关](../topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与数据质量](../topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](../topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md)：真实 Anvil/Uniswap V2/PostgreSQL 集成，验证快照游标、坏日志停水位、数据库回滚和 reorg 保留 raw。
+
+端到端可运行入口：[稳定币支付与 DeFi 资金运营](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)，覆盖真实本地链收款、双资产账本和重组顺序冲正。

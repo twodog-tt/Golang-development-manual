@@ -40,3 +40,7 @@
 - [稳定币渠道与资金运营：未知状态、Webhook、退款和对账闭环](S-PAY-11-stablecoin-channel-operations.md)
 
 [项目与一键验证](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops)：真实本地数据库和 Workflow Server，渠道为模拟夹具，不接真实资金。
+
+## 支付到 DeFi 端到端实战
+
+[完整链路](S-PAY-08-temporal-money-workflows.md#payment-e2e) 将四篇支付与 NODE-11/12、EXCH-32 接通。钱包真实支付本地合成 Token，经过 canonical 索引、账本冻结与实际 V2 兑换，最终双资产入账/商户通知；7 组端到端故障验证。

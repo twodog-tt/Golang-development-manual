@@ -62,6 +62,11 @@ func API(auth Auth, temporal client.Client, secret string, approvalSeconds, obse
 		write(w, map[string]string{"token": token})
 	})
 	mux.HandleFunc("POST /webhook", func(w http.ResponseWriter, r *http.Request) {
+		// Chain mode only accepts indexed onchain observations, not mock events.
+		if ChainMode() {
+			fail(w, 409)
+			return
+		}
 		r.Body = http.MaxBytesReader(w, r.Body, 32768)
 		raw, err := io.ReadAll(r.Body)
 		if err != nil || !VerifyWebhook(secret, r.Header.Get("X-Timestamp"), r.Header.Get("X-Signature"), raw, time.Now()) {
@@ -140,7 +145,13 @@ func API(auth Auth, temporal client.Client, secret string, approvalSeconds, obse
 			}
 			return
 		}
-		if start(w, r, "pay:"+p.ID, PaymentWorkflow, Input{p, approvalSeconds, observeSeconds}) {
+		var fn any = PaymentWorkflow
+		var input any = Input{p, approvalSeconds, observeSeconds}
+		if ChainMode() {
+			fn = ChainPaymentWorkflow
+			input = ChainInput{Input: Input{p, approvalSeconds, observeSeconds}}
+		}
+		if start(w, r, "pay:"+p.ID, fn, input) {
 			write(w, p)
 		}
 	})
@@ -169,6 +180,10 @@ func API(auth Auth, temporal client.Client, secret string, approvalSeconds, obse
 		write(w, map[string]bool{"approved": true})
 	})
 	protected.HandleFunc("POST /payments/{id}/refund", func(w http.ResponseWriter, r *http.Request) {
+		if ChainMode() {
+			fail(w, 409)
+			return
+		}
 		p, err := store.Get(r.Context(), r.Header.Get("X-Merchant-Internal"), r.PathValue("id"))
 		if err != nil {
 			fail(w, 404)
@@ -190,6 +205,60 @@ func API(auth Auth, temporal client.Client, secret string, approvalSeconds, obse
 		}
 		write(w, result)
 	})
+	protected.HandleFunc("GET /payments/{id}/conversion-quote", func(w http.ResponseWriter, r *http.Request) {
+		p, err := store.Get(r.Context(), r.Header.Get("X-Merchant-Internal"), r.PathValue("id"))
+		if err != nil {
+			fail(w, 404)
+			return
+		}
+		if p.State != "settled" {
+			fail(w, 409)
+			return
+		}
+		var quote map[string]any
+		if err = chainCall(r.Context(), "GET", "/quote?amount="+p.Amount, nil, &quote); err != nil {
+			fail(w, 503)
+			return
+		}
+		write(w, quote)
+	})
+	protected.HandleFunc("GET /payments/{id}/conversion", func(w http.ResponseWriter, r *http.Request) {
+		out, err := store.Conversion(r.Context(), r.Header.Get("X-Merchant-Internal"), r.PathValue("id"))
+		if err != nil {
+			fail(w, 404)
+			return
+		}
+		write(w, out)
+	})
+	protected.HandleFunc("POST /payments/{id}/convert", func(w http.ResponseWriter, r *http.Request) {
+		var request ConversionRequest
+		if !decode(w, r, &request) {
+			return
+		}
+		id := r.PathValue("id")
+		if err := store.CreateConversion(r.Context(), r.Header.Get("X-Merchant-Internal"), id, request); err != nil {
+			fail(w, 409)
+			return
+		}
+		if start(w, r, "convert:"+id, ConversionWorkflow, id) {
+			write(w, map[string]string{"workflow": "convert:" + id})
+		}
+	})
+	protected.HandleFunc("POST /payments/{id}/conversion/resume", func(w http.ResponseWriter, r *http.Request) {
+		id := r.PathValue("id")
+		c, err := store.Conversion(r.Context(), r.Header.Get("X-Merchant-Internal"), id)
+		if err != nil {
+			fail(w, 404)
+			return
+		}
+		if c.State != "review" {
+			fail(w, 409)
+			return
+		}
+		if start(w, r, "reconcile:convert:"+id, ConversionWorkflow, id) {
+			write(w, map[string]bool{"resuming": true})
+		}
+	})
 	protected.HandleFunc("POST /payments/{id}/reconcile", func(w http.ResponseWriter, r *http.Request) {
 		p, err := store.Get(r.Context(), r.Header.Get("X-Merchant-Internal"), r.PathValue("id"))
 		if err != nil {
@@ -200,7 +269,11 @@ func API(auth Auth, temporal client.Client, secret string, approvalSeconds, obse
 			fail(w, 409)
 			return
 		}
-		if start(w, r, "reconcile:"+p.ID, ReconcileWorkflow, p) {
+		var fn any = ReconcileWorkflow
+		if ChainMode() {
+			fn = ChainReconcileWorkflow
+		}
+		if start(w, r, "reconcile:"+p.ID, fn, p) {
 			write(w, map[string]bool{"reconciling": true})
 		}
 	})

@@ -9,7 +9,7 @@
 > **定位**：Go 运行时与系统设计 + 链上工程（Solidity）+ 链下工程（Go RPC/索引）+ 解决方案架构 + 微服务治理 + AI 工程。  
 > **⭐ Web3 交易所 / 钱包方向**：[docs/web3-exchange-wallet-focus.md](./docs/web3-exchange-wallet-focus.md)
 
-新增链上实战阅读顺序：[交易执行网关](./docs/topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与数据质量](./docs/topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](./docs/topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md)。三篇共用 Anvil / Uniswap V2 / PostgreSQL 本地项目；与稳定币支付项目分别运行，未自动桥接真实资金。
+新增链上实战阅读顺序：[交易执行网关](./docs/topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与数据质量](./docs/topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](./docs/topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md)。现已与稳定币支付项目接通：钱包收款 → 索引验证 → 账本 → 冻结 → V2 兑换 → 双资产入账与通知。[端到端运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。仅使用本地合成资产。
 
 ## 快速开始
 

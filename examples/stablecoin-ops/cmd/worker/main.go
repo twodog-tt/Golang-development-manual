@@ -25,6 +25,9 @@ func main() {
 	w.RegisterWorkflow(ops.RefundWorkflow)
 	w.RegisterWorkflow(ops.ReconcileWorkflow)
 	w.RegisterWorkflow(ops.NotifyWorkflow)
+	w.RegisterWorkflow(ops.ChainPaymentWorkflow)
+	w.RegisterWorkflow(ops.ChainReconcileWorkflow)
+	w.RegisterWorkflow(ops.ConversionWorkflow)
 	w.RegisterActivity(&ops.Activities{Store: s, Channel: ops.Channel{URL: ops.Env("CHANNEL_URL", "http://127.0.0.1:8082"), Token: ops.Env("LAB_CHANNEL_SECRET", "")}})
 	if err = w.Run(worker.InterruptCh()); err != nil {
 		log.Fatal(err)

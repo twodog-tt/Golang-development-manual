@@ -16,7 +16,7 @@ export type Payment = { id: string; amount_atomic: string; asset: string; state:
 export class OpsClient {
   token = '';
   account;
-  constructor(readonly base: string, key: Hex = fixtureKey) { this.account = privateKeyToAccount(key); }
+  constructor(readonly base: string, key: Hex = fixtureKey, readonly paymentAsset: string = asset) { this.account = privateKeyToAccount(key); }
   async request(path: string, method = 'GET', body?: unknown, extra: Record<string,string> = {}) {
     return fetch(this.base + path, {method, headers: {'Content-Type':'application/json', ...(this.token ? {Authorization:'Bearer ' + this.token} : {}), ...extra}, body: body === undefined ? undefined : JSON.stringify(body)});
   }
@@ -40,7 +40,7 @@ export class OpsClient {
     const result = await this.call<{token:string}>('/login','POST',{id:challenge.id,signature});
     this.token = result.token;
   }
-  create(key: string, value: string) {return this.call<Payment>('/payments','POST',{amount_atomic:atomic(value),asset},{'Idempotency-Key':key});}
+  create(key: string, value: string) {return this.call<Payment>('/payments','POST',{amount_atomic:atomic(value),asset:this.paymentAsset},{'Idempotency-Key':key});}
   get(id: string) {return this.call<Payment>('/payments/' + id);}
   approve(id: string) {return this.call('/payments/' + id + '/approve','POST');}
   refund(id: string) {return this.call('/payments/' + id + '/refund','POST');}

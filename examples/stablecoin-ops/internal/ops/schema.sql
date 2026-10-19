@@ -13,5 +13,10 @@ CREATE TABLE ops.audit(id bigserial PRIMARY KEY, payment text NOT NULL, action t
 CREATE TABLE ops.faults(name text PRIMARY KEY, remaining integer NOT NULL);
 CREATE TABLE ops.merchant_inbox(event_id text PRIMARY KEY, payload jsonb NOT NULL);
 -- This is a local channel fixture, not an implementation of a regulated PSP.
-CREATE TABLE ops.channel(id text PRIMARY KEY, amount bigint NOT NULL, asset text NOT NULL, state text NOT NULL DEFAULT 'pending', sequence bigint NOT NULL DEFAULT 0, refunded boolean NOT NULL DEFAULT false);
+CREATE TABLE ops.channel(id text PRIMARY KEY, amount bigint NOT NULL, asset text NOT NULL, state text NOT NULL DEFAULT 'pending', sequence bigint NOT NULL DEFAULT 0, refunded boolean NOT NULL DEFAULT false, evidence jsonb);
+CREATE TABLE ops.conversions (
+ payment text PRIMARY KEY REFERENCES ops.payments(id), intent text UNIQUE NOT NULL,
+ request jsonb NOT NULL, state text NOT NULL DEFAULT 'held',
+ output bigint, evidence jsonb, audit_evidence jsonb
+);
 INSERT INTO lab.accounts VALUES ('channel_clearing','USDC',1000000000000,1000000000000);

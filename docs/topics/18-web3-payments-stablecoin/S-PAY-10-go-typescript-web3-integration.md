@@ -9,6 +9,7 @@ tags: [typescript, viem, go, siwe, integration, precision]
 status: published
 reviewed_at: "2026-10-19"
 code_refs:
+  - examples/stablecoin-ops/e2e/verify.py
   - examples/stablecoin-ops/README.md
   - examples/stablecoin-ops/verify.py
   - examples/stablecoin-ops/client/src/integration.ts
@@ -87,7 +88,21 @@ npm run ops -- ops
 python3 examples/stablecoin-ops/verify.py --report /tmp/stablecoin-ops.json
 ```
 
-编译检查、签名成功/失败、超 JS 安全整数、舍入拒绝、并发幂等、租户隔离均在真实 Go API + PostgreSQL 上验证。项目当前 SDK 实战范围是钱包消息签名和资金 API；没有声称已经验证真实合约 ABI 调用、交易签名或 SDK 在所有链上的兼容性。
+编译检查、签名成功/失败、超 JS 安全整数、舍入拒绝、并发幂等、租户隔离均在真实 Go API + PostgreSQL 上验证。原独立入口验证钱包消息签名和资金 API；新增端到端入口实际验证本地合约 ABI、交易签名与支付/兑换闭环，仍不声称 SDK 在所有链上的兼容性。
+
+## 从 SDK 联调到端到端支付/换币
+
+原入口继续验证 Go/viem 消息字节和支付 API；新增入口实际部署合约并签交易：
+
+```bash
+python3 examples/stablecoin-ops/e2e/verify.py --serve
+# source 输出的 lab.env 后，在仓库根目录运行：
+node examples/onchain-execution/client/payment-cli.mjs demo 10
+```
+
+客户端按本次部署的 PAYMENT_ASSET 建单，不再把默认的模拟资产地址带入真实本地链。CLI 使用 bigint 发送原子金额，conversion.output_atomic 保持十进制字符串，返回 intent、tx hash、block hash、已索引高度和 epoch。原独立协议示例保留 6→18 decimals 的精度验证；端到端资金运营则固定为两种 6 decimals 合成稳定币。
+
+`convert` 先读取受保护报价，再提交 min_out/deadline；后端固定输入金额和收款路径，同一订单不同参数返回冲突。Create 或广播响应未知时查询原 ID，不重新执行 demo 生成另一订单。`show ID` 检查 payment 与 conversion，数据库故障后的 review 可在核对事实并修复依赖后调用 conversion/resume。完整命令和 7 组故障见 [运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
 
 ## 架构取舍
 
@@ -109,7 +124,7 @@ Go 承载资金约束和后端流程，TypeScript 用于钱包 SDK 与运营联�
 
 ## 证据边界与相关链接
 
-这是可运行 Go/viem 互操作项目，未接真实钱包扩展、真实链或真实 USDC。继续阅读 [钱包身份](S-PAY-09-wallet-auth-siwe.md)、[资金流程](S-PAY-08-temporal-money-workflows.md)、[渠道运营](S-PAY-11-stablecoin-channel-operations.md)。
+这是可运行 Go/viem 互操作项目，新端到端模式接本地 EVM；未接钱包扩展、公链资金或真实 USDC。继续阅读 [钱包身份](S-PAY-09-wallet-auth-siwe.md)、[资金流程](S-PAY-08-temporal-money-workflows.md)、[渠道运营](S-PAY-11-stablecoin-channel-operations.md)。
 
 ## 延伸阅读
 

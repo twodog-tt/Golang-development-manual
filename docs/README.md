@@ -2,7 +2,7 @@
 
 面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + Web3/区块链架构方向** 的工程知识沉淀（**249 篇正文**）。
 
-新增链上实战阅读顺序：[交易执行网关](topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与数据质量](topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md)。三篇共用 Anvil / Uniswap V2 / PostgreSQL 本地项目；与稳定币支付项目分别运行，未自动桥接真实资金。
+新增链上实战阅读顺序：[交易执行网关](topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与数据质量](topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md)。现已与稳定币支付项目接通：钱包收款 → 索引验证 → 账本 → 冻结 → V2 兑换 → 双资产入账与通知。[端到端运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。仅使用本地合成资产。
 
 ## 站点导航（左侧栏）
 

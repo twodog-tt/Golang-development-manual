@@ -18,24 +18,34 @@ import (
 
 var transfer = crypto.Keccak256Hash([]byte("Transfer(address,address,uint256)"))
 var swap = crypto.Keccak256Hash([]byte("Swap(address,uint256,uint256,uint256,uint256,address)"))
+var paid = crypto.Keccak256Hash([]byte("Paid(bytes32,address,uint256)"))
 
 func (a *App) relevant(l types.Log) bool {
 	if len(l.Topics) == 0 {
 		return false
 	}
-	return ((l.Address == a.Config.TokenIn || l.Address == a.Config.TokenOut) && l.Topics[0] == transfer) || (l.Address == a.Config.Pair && l.Topics[0] == swap)
+	return ((l.Address == a.Config.TokenIn || l.Address == a.Config.TokenOut) && l.Topics[0] == transfer) || (l.Address == a.Config.Pair && l.Topics[0] == swap) || (a.Config.Receiver != (common.Address{}) && l.Address == a.Config.Receiver && l.Topics[0] == paid)
 }
 func Decode(l types.Log) (string, error) {
 	if l.Removed || len(l.Topics) != 3 {
 		return "", errors.New("removed log or invalid topic count")
 	}
 	// Indexed addresses must be ABI-padded; do not silently truncate poison data.
-	for _, t := range l.Topics[1:] {
+	addresses := l.Topics[1:]
+	if l.Topics[0] == paid {
+		addresses = l.Topics[2:]
+	}
+	for _, t := range addresses {
 		if strings.Trim(hexPrefix(t.Bytes()[:12]), "0") != "" {
 			return "", errors.New("noncanonical address padding")
 		}
 	}
 	switch l.Topics[0] {
+	case paid:
+		if len(l.Data) != 32 {
+			return "", errors.New("Paid payload must be 32 bytes")
+		}
+		return "paid", nil
 	case transfer:
 		if len(l.Data) != 32 {
 			return "", errors.New("Transfer payload must be 32 bytes")
@@ -130,7 +140,11 @@ func (a *App) Sync(ctx context.Context) error {
 		}
 		blockHash := block.Hash()
 		// Hash-scoped logs avoid an accidental mix of two branches at one height.
-		logs, e := a.RPC.FilterLogs(ctx, ethereum.FilterQuery{BlockHash: &blockHash, Addresses: []common.Address{a.Config.TokenIn, a.Config.TokenOut, a.Config.Pair}, Topics: [][]common.Hash{{transfer, swap}}})
+		addresses := []common.Address{a.Config.TokenIn, a.Config.TokenOut, a.Config.Pair}
+		if a.Config.Receiver != (common.Address{}) {
+			addresses = append(addresses, a.Config.Receiver)
+		}
+		logs, e := a.RPC.FilterLogs(ctx, ethereum.FilterQuery{BlockHash: &blockHash, Addresses: addresses, Topics: [][]common.Hash{{transfer, swap, paid}}})
 		if e != nil {
 			return e
 		}

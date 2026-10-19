@@ -77,6 +77,18 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
+      - name: Verify payment to DeFi end-to-end recovery
+        run: python examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e-ci/result.json
+
+      - name: Save payment end-to-end evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payment-e2e-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/payment-e2e-ci/
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Install MkDocs
         run: pip install -r requirements-docs.txt -r deploy/aliyun/requirements-smoke.txt
 

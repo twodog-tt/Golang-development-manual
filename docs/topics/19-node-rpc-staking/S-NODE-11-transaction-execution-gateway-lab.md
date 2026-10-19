@@ -9,6 +9,7 @@ tags: [execution-gateway, nonce, replacement, receipt, anvil, fault-injection]
 status: published
 reviewed_at: "2026-10-19"
 code_refs:
+  - examples/stablecoin-ops/e2e/verify.py
   - examples/onchain-execution/internal/lab/gateway.go
   - examples/onchain-execution/internal/lab/schema.sql
   - examples/onchain-execution/client/integration.mjs
@@ -90,7 +91,7 @@ deadline 必须处于 `(head.time, head.time+3600]`；金额为正原子整数�
 
 ## 生产场景
 
-稳定币支付项目确认渠道付款后，运营方可能需要执行池内换币或资金调拨。支付订单 ID 不应直接等价于某个 tx hash：审批、执行、receipt、最终资金事实分别关联，链上结果未知时冻结自动重建，明确人工恢复责任人。接入上一轮 [资金工作流](../18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md) 时，可将 intent ID 作为 Activity 幂等键，但本课两个可运行项目尚未共享数据库或自动相互调用。
+稳定币支付项目确认渠道付款后，运营方可能需要执行池内换币或资金调拨。支付订单 ID 不应直接等价于某个 tx hash：审批、执行、receipt、最终资金事实分别关联，链上结果未知时冻结自动重建，明确人工恢复责任人。接入上一轮 [资金工作流](../18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md) 时，可将 intent ID 作为 Activity 幂等键，现已通过独立支付库/索引库和 HTTP 证据接口接通；详见下方端到端实战。
 
 ## 排查与工具
 
@@ -115,6 +116,18 @@ python3 examples/onchain-execution/verify.py --report /tmp/onchain-execution/res
 - snapshot/revert 移除已 confirmed 的交易，状态变为 orphaned_review，广播接口拒绝自动重发。
 
 报告中保存实际 hash、nonce、胜出 attempt 和资产原子余额差。脚本任一断言失败都非零退出；代码存在只说明可审计，运行成功以本次报告/CI 为准。
+
+## 接入稳定币支付与冻结资金
+
+[完整端到端实战](../18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md#payment-e2e) 已将上游订单、资金冻结与本课网关接通。intent 固定为 convert_paymentID；换币参数与 hold journal 在支付库同事务创建，Temporal Activity 只使用这份参数请求网关。支付 API 与网关库之间没有分布式事务，恢复靠持久意图、既有链事实和幂等过账。
+
+新增 `/quote` 和 `/evidence/executions/{id}`：后者要求 canonical receipt 已被 Indexer 覆盖，并核对指定 Pair 的 Swap、精确输入及收款人的实际输出 Transfer。达到两块演示深度才向资金系统返回 confirmed；reverted 同样须已索引，结果未知时保持冻结。orphaned_review 还要确认旧 block 已离开索引 canonical 映射，才能作为补偿观察。
+
+```bash
+python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.json
+```
+
+7 组验证中，先广播后丢响应并 SIGKILL gateway/worker，恢复后仍只有一个 attempt 和一次兑换入账；缺 Swap 时不释放冻结；数据库过账失败后 resume 原 intent。前面的独立示例仍负责同 nonce 提价验证，完整运行范围见 [端到端指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
 
 ## 架构取舍
 

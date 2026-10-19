@@ -64,6 +64,7 @@
 - 第十六阶段补充 **4 篇可验证正文**：Agent 离线轨迹评测与回归门禁（S-AI-15）、PostgreSQL 双分录账本（S-PAY-07）、Outbox/Inbox 消息故障实战（S-DIST-06）、PITR 误删及缺 WAL 验证（S-PG-04）。Agent 正反例与 race 测试通过；PostgreSQL/Redis 9 个场景实际通过。统一入口为 `bash scripts/verify_reliability_examples.sh`。Agent 为离线评分器，数据库/Broker 为一次性容器，不声称模型质量、HA 或生产验收。
 - 第十七阶段补充 **4 篇集成正文**：Temporal 资金流程、SIWE 身份与会话、Go/TypeScript 联调、稳定币渠道运营，统一项目 `examples/stablecoin-ops`。真实本地 PostgreSQL/Temporal 与 Worker 中断/版本回放已验证；渠道、商户与 ERC-1271 RPC 为夹具，不使用真实资金。
 - 第十八阶段补充 **3 篇集成正文**：交易执行网关（S-NODE-11）、Indexer 查询与数据质量（S-NODE-12）、DeFi 协议接入（S-EXCH-32），共用 `examples/onchain-execution`。真实 Anvil/Uniswap V2/PostgreSQL、进程重启、替换交易、坏日志、数据库回滚与重组共 10 组验证；仅本地合成资产，不代表公链资金或生产验收。
+- 第十九阶段将既有 **7 篇正文** 接成支付到 DeFi 的端到端实战：真实本地收款 reference、独立索引/支付库、Temporal 冻结与兑换、多资产同事务入账和持续重组审计，7 组集成故障验证；保留原两套验证入口。未新增 published 正文，总量仍为 **249 篇**，不扩大为公链或生产验收。
 - 证据标签已覆盖 249 篇：`explanation_only=180`、`illustrative_artifact=31`、
   `deterministic_test=21`、`integration_harness=17`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。

@@ -11,6 +11,17 @@ Go API + Temporal Worker + PostgreSQL + viem TypeScript CLI，复用 `examples/p
     → 退款工作流 / 异常查询恢复 / 账实漂移检查
 ```
 
+## 支付到 DeFi 的端到端入口
+
+新增 [完整运行指南](e2e/README.md)：真实本地链收款、索引证据、冻结、V2 兑换、双资产入账、通知和重组冲正。
+
+```bash
+python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.json
+python3 examples/stablecoin-ops/e2e/verify.py --serve
+```
+
+下方是继续保留的模拟渠道模式，其退款、回调、旧历史回放测试与新端到端模式分别说明。
+
 ## 一键故障验证
 
 需要 Go 1.24.2+、Node 22、npm、Python 3.10+、Docker。先显式拉取镜像，运行器不会自行拉取：
@@ -75,7 +86,7 @@ npm run ops -- reconcile PAYMENT_ID
 npm run ops -- notify PAYMENT_ID
 ```
 
-CLI 每次通过本地夹具钱包登录，token 仅留在进程内；服务端只存 token 摘要。夹具私钥 1/2 是公开测试数据，不能充值真实资产。`Asset` 是 chain 31337 上的合成地址，未部署真实 USDC；此项目不接真实链、不持有用户私钥、不发送真实资金。
+CLI 每次通过本地夹具钱包登录，token 仅留在进程内；服务端只存 token 摘要。夹具私钥 1/2 是公开测试数据，不能充值真实资产。`Asset` 是 chain 31337 上的合成地址，未部署真实 USDC；该独立模拟渠道入口不接链；新增 e2e 入口实际接本地 Anvil 与合成 Token，仍不接公网或真实资金。
 
 ## 配置和接口
 
