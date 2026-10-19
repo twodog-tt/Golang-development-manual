@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-19T07:46:40Z",
+  "generated_at": "2026-10-19T09:53:23Z",
   "count": 249,
   "roles": [
     {
@@ -135,9 +135,9 @@
       },
       "evidence": {
         "basis": "source_anchored",
-        "reproducibility": "explanation_only",
+        "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-08-13"
+        "reviewed_at": "2026-10-19"
       }
     },
     {
@@ -223,7 +223,7 @@
       "module_key": "ai_engineering",
       "resume_focus": false,
       "url": "topics/10-ai-engineering/S-AI-08-multimodal-voice/",
-      "prompt": "多模态 = 同一对话里传 **文本 + 图片 + 音频**；Go 后端负责 **上传校验、转码、流式转发、计费**。语音链路常见 **ASR（Whisper）→ LLM → TTS**。生产关键词：**multipart 限大小、base64 vs 对象存储 URL、实时语音 WebSocket**。",
+      "prompt": "多模态服务可处理文本、图像与音频，但输入格式、流协议和完成语义取决于具体 API。 Go 后端先鉴权并校验媒体与资源预算，再调用对应 adapter；文本 SSE、二进制音频 body、WebSocket/WebRTC 分开处理。 语音可采用 ASR → LLM → TTS 链式流程，也可用原生音频模型；选择依据是质量、时延、成本和恢复需求。",
       "role_priorities": {
         "senior_go_backend": "p2",
         "ai_agent_platform": "p1",
@@ -235,9 +235,9 @@
       },
       "evidence": {
         "basis": "source_anchored",
-        "reproducibility": "explanation_only",
+        "reproducibility": "deterministic_test",
         "volatility": "version_sensitive",
-        "reviewed_at": "2026-08-13"
+        "reviewed_at": "2026-10-19"
       }
     },
     {

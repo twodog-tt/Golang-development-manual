@@ -31,8 +31,10 @@
 | S-AI-01 | `examples/senior/llmclient/` | `go test -race ./examples/senior/llmclient/...` |
 | S-AI-02 | `examples/senior/rag/` | `go test -race ./examples/senior/rag/...` |
 | S-AI-03 / 05 / 09 | `examples/senior/agentworkflow/` | `go test -race ./examples/senior/agentworkflow/...` · `go run ./examples/senior/agentworkflow/cmd/demo -dir "$(mktemp -d)"` |
+| S-AI-04 | `examples/senior/promptcontext/` | `go test -race ./examples/senior/promptcontext/...` · `go run ./examples/senior/promptcontext/cmd/demo` |
 | S-AI-06 | `examples/senior/llmops/` | `go test -race ./examples/senior/llmops/...` |
 | S-AI-07 | `examples/senior/mcp/` | `go test -race ./examples/senior/mcp/...` · `MCP_DEMO_TOKEN=local-demo-secret go run ./examples/senior/mcp/` |
+| S-AI-08 | `examples/senior/mediaio/` | `go test -race -timeout 30s ./examples/senior/mediaio/...` · `go run ./examples/senior/mediaio/cmd/demo` |
 | S-AI-10 | `examples/senior/agentmemory/` | `go test -race ./examples/senior/agentmemory/...` |
 | S-AI-11 | `examples/senior/a2a/` | `go test -race ./examples/senior/a2a/...` · `go run ./examples/senior/a2a/cmd/demo -dir "$(mktemp -d)" -step demo` |
 | S-AI-15 | `examples/senior/agenteval/` | `go test -race ./examples/senior/agenteval/...` · `go run ./examples/senior/agenteval/cmd/eval` |

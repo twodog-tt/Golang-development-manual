@@ -2,7 +2,7 @@
 
 > 全库 **249 篇**（以 [topics.yaml](topics.yaml) 为准）
 >
-> 本轮补强日期：**2026-10-19**（本次修复 AI 工程入口及四篇既有正文，未新增文章或重新审查全库）
+> 本轮补强日期：**2026-10-19**（本次修复 Prompt/Context 与多模态/语音两篇既有正文，未新增文章或重新审查全库）
 >
 > 审查范围：资深 Golang、后端/解决方案架构，重点领域为 AI/Crypto Agent、
 > Web3、交易所、钱包、链基础设施与支付
@@ -66,8 +66,8 @@
 - 第十八阶段补充 **3 篇集成正文**：交易执行网关（S-NODE-11）、Indexer 查询与数据质量（S-NODE-12）、DeFi 协议接入（S-EXCH-32），共用 `examples/onchain-execution`。真实 Anvil/Uniswap V2/PostgreSQL、进程重启、替换交易、坏日志、数据库回滚与重组共 10 组验证；仅本地合成资产，不代表公链资金或生产验收。
 - 第十九阶段将既有 **7 篇正文** 接成支付到 DeFi 的端到端实战：真实本地收款 reference、独立索引/支付库、Temporal 冻结与兑换、多资产同事务入账和持续重组审计，7 组集成故障验证；保留原两套验证入口。未新增 published 正文，总量仍为 **249 篇**，不扩大为公链或生产验收。
 - 第二十阶段复核端到端资金正确性：修复旧证据重试、通知故障停止审计、无 intent 阻断收款审计、冲正余额不足缺少持久人工状态，以及重组后的 nonce 缺口；增加 merchant/signer 隔离和版本分支验证，将端到端故障矩阵扩至 **12 组**。正文仍 **249 篇**，正常资金对账与故意保留待核对敞口的破坏性场景分别说明，不扩大为生产金融验收。
-- 证据标签已覆盖 249 篇：`explanation_only=172`、`illustrative_artifact=30`、
-  `deterministic_test=30`、`integration_harness=17`、`external_acceptance=0`。
+- 证据标签已覆盖 249 篇：`explanation_only=170`、`illustrative_artifact=30`、
+  `deterministic_test=32`、`integration_harness=17`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
 - 当前知识库的优势是 **Go 核心、分布式系统、中间件、EVM/Solidity、CEX/DEX 架构广度**。
@@ -392,3 +392,5 @@
 - 2026-10-19 MCP/A2A 授权与恢复修复：S-AI-07 补可信身份、逐工具授权、stdio/HTTP 与 session 恢复；S-AI-11 关联独立本地/远端持久日志夹具，覆盖首次响应丢失、逐操作 owner/tenant/scope 校验、Message/Task 分支、审批 digest/revision/有效期、UNKNOWN 恢复和回调安全。**25 组**测试（不含崩溃 helper）与真实 stdio/A2A CLI 通过，含 **3 类**子进程退出边界、回调 ACK 丢失、DNS 变更/特殊地址/重定向故障验证及本地 TLS 正例。race、vet、统一离线门禁、元数据与严格文档构建通过；正文仍 **249 篇**，deterministic_test 从 24 增至 **26 篇**。A2A 为 HTTP+JSON 1.0 限定子集，未声明标准自动 Push/事件回放；OAuth issuer、订单和发布效果均为本地夹具；上述结果为本地验证记录，远程 CI 与发布状态另行核对。
 
 - 2026-10-19 AI 工程五项复审修复：修正专题入口 MCP token 与遗漏运行命令；S-AI-02 改为中文双字/英文词项正分召回，授权先于评分、无证据不调模型，并补撤权/删除后的返回校验；S-AI-10 统一 approved 状态，补内容/版本绑定审批、编辑撤批、主记录 tombstone 与索引/缓存/历史引用删除恢复；S-AI-01 对齐实际 Client，新增 loopback 文本 HTTP/SSE 夹具，验证显式终止、受限重试、取消、超限与未知用量；S-AI-06 分开应用答案缓存命中与 provider prompt caching，补权限/版本/TTL先于相似度和逐 attempt 成本未知处理。五个示例包合计 **30 组**顶层测试（含原有 Mock 测试及综合CLI测试），含真实子进程投影落盘后退出/ACK丢失恢复；race、vet、统一离线入口、元数据检查和严格文档构建通过。正文总数仍 **249 篇**，deterministic_test 从26增至 **30 篇**，explanation_only=172、illustrative_artifact=30、integration_harness=17；只作本地夹具证据，不调用真实模型、生产IAM或外部索引服务，本次未提交、推送或部署。
+
+- 2026-10-19 Prompt/Context 与多模态/语音八项修复：S-AI-04 增加完整历史组预算及最终格式化后的二次计数，绑定scope/身份/计数器版本，拒绝孤立工具结果与未完成调用；统一真实客户端适配接口，完成/refusal/incomplete来自可信typed结果，业务JSON严格拒绝缺/null/重复/未知键与非法值。S-AI-08 补嵌套媒体oneof、真实loopback multipart/ASR/二进制PCM转发、上传资源与临时文件治理、分片时间偏移及精确去重、语音播放/打断/ACK/新会话epoch隔离，并改写OCR价格/准确率、文件ASR费用和私有化数据驻留的绝对结论。提交前复审还补齐计数途中版本变化、ASR必填/重复键、继承Content-Length清理、旧播放回调及历史session复用防护。两组示例合计 **33 组**顶层测试，含net.Pipe阻塞写、真实HTTP音频截断/多余数据的下游失败、上传读deadline及探测失败/超时清理；两条CLI、race、vet、统一离线入口、元数据及严格文档构建通过。正文仍 **249 篇**，deterministic_test从30增至 **32 篇**，explanation_only=170、illustrative_artifact=30、integration_harness=17。计数器/ASR/TTS/实时会话为明确限定的本地夹具，没有真实模型tokenizer/质量/账单、任意codec沙箱、生产IAM或WebRTC/WebSocket互通验收；以上为提交前本地验证范围。

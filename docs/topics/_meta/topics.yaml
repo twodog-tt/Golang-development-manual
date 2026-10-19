@@ -742,6 +742,7 @@ p1:
       frequency: 4
       status: published
       file: 10-ai-engineering/S-AI-04-prompt-context.md
+      code_refs: [examples/senior/promptcontext]
     - id: S-AI-05
       title: LLM 应用安全：注入、PII、护栏
       frequency: 5
@@ -765,6 +766,7 @@ p1:
       frequency: 4
       status: published
       file: 10-ai-engineering/S-AI-08-multimodal-voice.md
+      code_refs: [examples/senior/mediaio]
     - id: S-AI-09
       title: Agent 工作流、Human-in-the-loop 与可靠发布控制面
       frequency: 5

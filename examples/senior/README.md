@@ -21,7 +21,9 @@
 | S-AI-01 | [llmclient/](llmclient/) | 本地 HTTP/SSE、终止语义、重试与未知用量 | `go test ./llmclient/...` |
 | S-AI-02 | [rag/](rag/) | 中文词项召回、授权隔离与无证据拒答 | `go test ./rag/...` |
 | S-AI-03 / 05 / 09 | [agentworkflow/](agentworkflow/) | 审批绑定、工具循环、预算与崩溃/UNKNOWN/凭据恢复 | `go test -race ./agentworkflow/...` |
+| S-AI-04 | [promptcontext/](promptcontext/) | 完整历史组预算、typed状态与严格意图解析 | `go test -race ./promptcontext/...` · `go run ./promptcontext/cmd/demo` |
 | S-AI-06 | [llmops/](llmops/) | 授权与版本先于缓存相似度、逐 attempt 成本 | `go test -race ./llmops/...` |
+| S-AI-08 | [mediaio/](mediaio/) | 媒体oneof/上传、ASR/PCM、打断与恢复 | `go test -race -timeout 30s ./mediaio/...` · `go run ./mediaio/cmd/demo` |
 | S-AI-10 | [agentmemory/](agentmemory/) | 审批版本、编辑撤批、删除传播与持久恢复 | `go test -race ./agentmemory/...` |
 | S-AI-01 / 02 / 06 / 10 | [knowledge-demo/](knowledge-demo/) | 四篇综合本地演示 | `go run ./knowledge-demo` |
 | S-AI-07 | [mcp/](mcp/) | MCP stdio/HTTP、可信身份、工具授权与会话恢复 | `go test -race ./mcp/...` · `MCP_DEMO_TOKEN=local-demo-secret go run ./mcp/` |

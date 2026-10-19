@@ -33,7 +33,9 @@
 | S-AI-01 | 本地 HTTP/SSE 与未知结果 | [S-AI-01](../10-ai-engineering/S-AI-01-llm-api-integration.md) | `examples/senior/llmclient/` |
 | S-AI-02 | 授权词项召回与无证据拒答 | [S-AI-02](../10-ai-engineering/S-AI-02-rag-architecture.md) | `examples/senior/rag/` |
 | S-AI-03 / 05 / 09 | 受控工具、授权与人工审批恢复 | [Agent 工作流](../10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) | `examples/senior/agentworkflow/` · `go test -race ./examples/senior/agentworkflow/...` |
+| S-AI-04 | Prompt/Context 完整组预算与严格结构化结果 | [S-AI-04](../10-ai-engineering/S-AI-04-prompt-context.md) | `examples/senior/promptcontext/` |
 | S-AI-06 | 缓存边界与 attempt 成本 | [S-AI-06](../10-ai-engineering/S-AI-06-llm-observability-cost.md) | `examples/senior/llmops/` |
+| S-AI-08 | 多模态上传/ASR/PCM 与语音恢复 | [S-AI-08](../10-ai-engineering/S-AI-08-multimodal-voice.md) | `examples/senior/mediaio/` |
 | S-AI-10 | Memory 审批、删除与恢复 | [S-AI-10](../10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) | `examples/senior/agentmemory/` |
 | S-AI-01 / 02 / 06 / 10 | 综合本地演示 | [AI 工程](../10-ai-engineering/index.md) | `go run ./examples/senior/knowledge-demo` |
 | S-AI-07 | MCP Server：stdio/HTTP 授权与恢复 | [S-AI-07](../10-ai-engineering/S-AI-07-mcp-server-go.md) | `examples/senior/mcp/` |

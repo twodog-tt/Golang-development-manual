@@ -397,7 +397,7 @@ cd basis/goroutine && go run .
 ```bash
 # 完整运行需要 Docker 与本地 postgres:17-alpine / redis:7.4-alpine 镜像
 bash scripts/verify_reliability_examples.sh
-# Agent 评测、审批、MCP/A2A、RAG/Memory/HTTP/成本故障门禁（无需 Docker）
+# Agent 评测、审批、MCP/A2A、RAG/Memory/Prompt/媒体/成本故障门禁（无需 Docker）
 bash scripts/verify_reliability_examples.sh --offline
 ```
 
@@ -407,6 +407,14 @@ MCP/A2A 的运行与故障验证见 [MCP stdio/HTTP](./examples/senior/mcp/READM
 RAG/Memory/模型接入/缓存成本：`go run ./examples/senior/knowledge-demo`，见
 [综合演示与故障矩阵](./examples/senior/knowledge-demo/README.md)。包含无证据拒答、资源授权、规则审批与删除恢复、
 HTTP/SSE 断流/重试，以及缓存命中绕过模型和未知费用；无需密钥，仅本地夹具。
+
+Prompt/Context 与多模态/语音新增本地运行与故障验证，见
+[上下文与严格结构化结果](./examples/senior/promptcontext/README.md)、[媒体上传与音频恢复](./examples/senior/mediaio/README.md)。
+
+```bash
+go run ./examples/senior/promptcontext/cmd/demo
+go run ./examples/senior/mediaio/cmd/demo
+```
 
 ## 稳定币支付与资金运营项目
 

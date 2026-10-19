@@ -58,6 +58,9 @@ flowchart LR
 | 6 | [Agent Commerce](../topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) · [开放平台/Launchpad](../topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) | explanation |
 | 7 | 动钱时必读：[钱包概念地图](./wallet-custody.md) · [托管≠MPC](./confusion-cards.md#custody-vs-mpc) | — |
 
+补充可运行阅读：[Prompt 与 Context](../topics/10-ai-engineering/S-AI-04-prompt-context.md)、
+[多模态与语音](../topics/10-ai-engineering/S-AI-08-multimodal-voice.md)，证据为本地确定性夹具测试，非真实模型或网络协议验收。
+
 专题目录：[10 AI 工程](../topics/10-ai-engineering/index.md)
 
 ## 6. 与相邻域

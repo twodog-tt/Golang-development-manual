@@ -17,10 +17,12 @@ fi
 task_tmp="$(mktemp -d)"
 trap 'rm -rf "$task_tmp"' EXIT
 python3 -m unittest discover -s examples/postgres-reliability -p 'test_verify.py'
-env -u GOROOT "$GO_BIN" test -race ./examples/senior/agenteval/... ./examples/senior/agentworkflow/... ./examples/senior/mcp/... ./examples/senior/a2a/... ./examples/senior/llmclient/... ./examples/senior/rag/... ./examples/senior/agentmemory/... ./examples/senior/llmops/... ./examples/senior/knowledge-demo/...
+env -u GOROOT "$GO_BIN" test -race ./examples/senior/agenteval/... ./examples/senior/agentworkflow/... ./examples/senior/mcp/... ./examples/senior/a2a/... ./examples/senior/llmclient/... ./examples/senior/rag/... ./examples/senior/agentmemory/... ./examples/senior/llmops/... ./examples/senior/knowledge-demo/... ./examples/senior/promptcontext/... ./examples/senior/mediaio/...
 env -u GOROOT "$GO_BIN" build -o "$task_tmp/mcp" ./examples/senior/mcp
 env -u GOROOT "$GO_BIN" build -o "$task_tmp/a2a" ./examples/senior/a2a/cmd/demo
 env -u GOROOT "$GO_BIN" run ./examples/senior/knowledge-demo
+env -u GOROOT "$GO_BIN" run ./examples/senior/promptcontext/cmd/demo
+env -u GOROOT "$GO_BIN" run ./examples/senior/mediaio/cmd/demo
 python3 scripts/verify_mcp_a2a.py --mcp "$task_tmp/mcp" --a2a "$task_tmp/a2a"
 env -u GOROOT "$GO_BIN" build -o "$task_tmp/workflow" ./examples/senior/agentworkflow/cmd/demo
 python3 - "$task_tmp" <<'PY'
