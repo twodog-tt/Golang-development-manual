@@ -20,6 +20,7 @@
 |-------|------|------|------|
 | S-AI-01 | [llmclient/](llmclient/) | 流式 LLM Client Mock | `go test ./llmclient/...` |
 | S-AI-02 | [rag/](rag/) | 简易 RAG（分块 + 检索） | `go test ./rag/...` |
+| S-AI-03 / 05 / 09 | [agentworkflow/](agentworkflow/) | 审批绑定、工具循环、预算与崩溃/UNKNOWN/凭据恢复 | `go test -race ./agentworkflow/...` |
 | S-AI-07 | [mcp/](mcp/) | MCP Server（stdio） | `go test ./mcp/...` · `go run ./mcp/` |
 | S-BC-02 | [ethrpc/](ethrpc/) | 以太坊 JSON-RPC 客户端 | `go test ./ethrpc/...` |
 | S-BC-09 | [erc20bind/](erc20bind/) | abigen + simulated 部署转账 | `go test ./erc20bind/...` |

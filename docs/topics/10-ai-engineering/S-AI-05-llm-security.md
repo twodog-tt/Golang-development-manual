@@ -4,10 +4,11 @@ title: LLM 应用安全：注入、PII、护栏
 module: ai-engineering
 level: senior
 frequency: 5
-go_version: "1.22+"
+go_version: "1.24.2+"
 tags: [security, prompt-injection, pii, guardrails]
 status: published
-code_refs: []
+reviewed_at: "2026-10-19"
+code_refs: [examples/senior/agentworkflow]
 sources:
   - https://owasp.org/www-project-top-10-for-large-language-model-applications/
   - https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/content-filter
@@ -85,16 +86,24 @@ flowchart TD
 **Go 侧权限示例**
 
 ```go
-func (e *ToolExecutor) Run(ctx context.Context, user User, tool string, args map[string]any) error {
-    if !e.rbac.Can(user, tool) {
-        return ErrForbidden
-    }
-    if e.dangerous[tool] && !user.ConfirmedAction(ctx, tool, args) {
-        return ErrNeedConfirmation
-    }
-    return e.registry[tool].Run(ctx, args)
+// ctx 必须来自可信身份适配层；call 中的 tenant/account/reviewer 声明不授予权限。
+func ExecuteReviewedPublish(ctx context.Context, e agentworkflow.Engine,
+    provider agentworkflow.Provider, call agentworkflow.ToolCall,
+) (string, error) {
+    return e.PublishTool(provider)(ctx, call)
 }
 ```
+
+完整实现与测试见 `examples/senior/agentworkflow/`：工具名 allowlist、租户/provider/账号级执行权限、
+凭据主体与 scope、不可变 proposal 内容和版本、审批人当前角色、审批摘要/有效期/撤销状态均在代码层检查。
+fixture 强制发起人与审批人分离；执行前再检查，编辑使旧审批失效。`Authority` 的 bearer→身份表是服务端夹具，
+不是真实登录服务；生产必须由验证过的会话/token 注入身份。批准请求不能自填 reviewer 充当已认证审批人。
+测试覆盖伪造身份、跨租户、账号/凭据替换、角色撤销、审批编辑竞态和 UNKNOWN 恢复。
+
+```bash
+go test -race ./examples/senior/agentworkflow/...
+```
+
 
 ## 生产场景
 

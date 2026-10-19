@@ -4,11 +4,12 @@ title: Agent 工作流、Human-in-the-loop 与可靠发布控制面
 module: ai-engineering
 level: architect
 frequency: 5
-go_version: "1.22+"
+go_version: "1.24.2+"
 tags: [agent, workflow, hitl, review-queue, publishing, idempotency, oauth2]
 status: published
 resume_focus: true
-code_refs: []
+reviewed_at: "2026-10-19"
+code_refs: [examples/senior/agentworkflow, scripts/verify_reliability_examples.sh]
 sources:
   - https://openai.github.io/openai-agents-python/human_in_the_loop/
   - https://docs.langchain.com/oss/python/langgraph/interrupts
@@ -65,16 +66,21 @@ stateDiagram-v2
   PendingReview --> Draft: edit / request changes
   PendingReview --> ReadyToExecute: approve proposal hash
   PendingReview --> Rejected: reject
-  ReadyToExecute --> Executing: durable claim
-  Executing --> Succeeded: provider fact confirmed
-  Executing --> Unknown: timeout / connection lost
+  ReadyToExecute --> Claimed: durable claim
+  Claimed --> ReadyToExecute: expired and never dispatched
+  Claimed --> Unknown: persist uncertainty before send
+  Unknown --> Succeeded: provider fact confirmed
+  Unknown --> Unknown: timeout / crash / expired dispatched lease
   Unknown --> Succeeded: reconcile found
-  Unknown --> ReadyToExecute: proven safe retry
+  Unknown --> ReadyToExecute: fenced local owner + valid approval + provider same-key guarantee
   Unknown --> ManualRecovery: ambiguous
-  Executing --> Failed: definitive failure
+  Unknown --> Failed: provider proves non-execution and closes request
 ```
 
 ### 五类持久化对象
+
+下表是生产逻辑对象划分。教学 fixture 把 proposal、approval、execution job 合并保存在同一原子记录中，run 独立保存；
+固定为单人审批的 publish/v1，不实现低风险自动审批、分布式队列、日配额/cooldown 或自动退避调度。
 
 | 对象 | 关键字段 | 不变量 |
 |------|----------|--------|
@@ -91,15 +97,19 @@ stateDiagram-v2
 
 ```text
 approval_subject =
-  tenant_id
-  + action_type
-  + canonical_args_hash
-  + content_hash
-  + policy_version
-  + credential_scope
+  tenant_id + provider + account_id + credential_subject + credential_scope
+  + proposal_id + proposal_version + intent_key
+  + tool_name + tool_schema_version + workflow_version + policy_version
+  + canonical_args_hash + content_hash
 ```
 
-- 审批应绑定 tool call/proposal 的稳定 ID，而不是只绑定一次自然语言对话。
+这里表示有类型、无歧义的结构化摘要，不是直接拼接可变长字符串。fixture 的 publish 参数固定为 Text，
+`Proposal.Digest()` 对有类型结构体编码计算 SHA-256；Tool/Workflow/Policy 仅支持 v1，未知版本拒绝执行。
+
+- 审批绑定稳定 proposal/version 与精确业务 intent，不能只绑定对话或 OAuth scope；相同 scope 不能区分两个发布账号。
+- reviewer 身份从可信认证上下文取得，并检查 tenant/provider/account/tool 的 review 权限；fixture 强制禁止自批。记录 reviewer 名字不等于完成鉴权。
+- 审批记录保存摘要、reviewer、expires/revoked；执行时同时复核执行者与审批人的当前权限、凭据主体/scope 和审批有效性。审批与编辑由原子事务串行化，重复批准只产生一份有效记录。
+- 未派发前的撤销阻止执行；派发标记落盘后已进入外部不确定窗口，撤销只能阻止后续新尝试，不能承诺撤回在途 HTTP 请求。确认旧操作成功仍须如实记录 receipt，补偿另建 action。
 - pause 前发生的副作用必须幂等；否则 resume 可能重复执行。
 - checkpoint 记录的是可恢复状态，不是业务事实的唯一来源；外部发布结果仍需 reconcile。
 - workflow/prompt/tool schema 升级后，旧 run 要么按旧版本恢复，要么显式迁移，不能静默套用新语义。
@@ -123,7 +133,11 @@ flowchart LR
 - 本地 `tenant + account + intent_key` 唯一；
 - proposal、审批和 payload hash 冻结；
 - provider 支持幂等键时传稳定键；不支持时保存 request fingerprint 和返回对象 ID；
-- 网络超时先查询，只有证明未创建或 provider 明确支持同键重放时才自动重试；
+- 派发前先持久化 UNKNOWN/intent/payload。worker 在发送前后、provider 已接受后或写 receipt 前崩溃，接管者都不能把“本地无 receipt”当成未执行；
+- 过期且从未进入派发的 claim 可返回 ready；已派发的 claim 接管后仍为 unknown。推进本地 epoch 只能拒绝旧 worker 提交本地状态，不能阻止它稍后在外部产生效果；
+- 网络超时先查询；not-found/404/索引延迟不证明旧在途请求将来不会成功。不支持幂等的 provider 查询未命中时进入 manual，禁止自动重发；
+- 只有 provider 明确保证同一作用域、同 intent、同 payload 且幂等保留期覆盖整个恢复窗口，才可在本地 owner 已封存、审批仍有效时显式同键重试。本例不自动根据“未找到”解锁重试；
+- 明确失败必须证明未执行且该请求以后也不会生效。request fingerprint 只帮助查找，不能替代 provider 幂等或最终拒绝凭据；
 - 重试使用指数退避、jitter、`Retry-After`、租户配额和账号 cooldown；
 - 撤回、删除、退款等补偿是新 action，不篡改历史状态。
 
@@ -131,7 +145,10 @@ flowchart LR
 
 - access/refresh token 加密存储，日志和 prompt 中禁止出现明文；
 - scope 最小化，按 tenant/account 隔离，记录授权主体与过期时间；
-- refresh 也要 singleflight/分布式互斥，避免多 worker 同时轮换导致 token 失效；
+- refresh 先按凭据记录互斥，并持久化 refreshing/attempt/version；不能持锁跨 provider 网络调用；
+- provider 已轮换但回包丢失，或进程在新 token 落盘前崩溃，会留下未知结果。互斥无法修复此窗口；本例隔离为 reauth_required，禁止重放旧 refresh token，待可信新授权恢复；
+- 新 token 保存要用 credential version + attempt 的 CAS，迟到响应不能覆盖后来的重新授权。正常轮换不改变 credential_subject；重新授权变更主体时，旧审批不再有效；
+- provider 的重放检测可能撤销活跃 refresh token，不能把 invalid_grant 当成普通瞬时网络错误。本地 fixture 只模拟轮换/旧 token 拒绝，不声称实现完整 token family 撤销；
 - `401` 不等于无限 refresh；区分过期、撤销、scope 不足和账号风控；
 - OAuth2 安全实践会演进，讲解时不要背死 provider 的固定有效期或限额。
 
@@ -145,6 +162,30 @@ flowchart LR
 4. 批准结果通过事务内 outbox 生成 Execution Job。
 5. worker claim 后检查账号授权、日配额、cooldown 和内容版本，再调用发布 API。
 6. timeout 进入 `unknown`；reconciler 查询平台对象，确认后写 receipt，无法判定则人工处理。
+
+## 可运行示例与故障验证
+
+```bash
+# 仓库根目录；Linux/macOS、Go 1.24.2+；只运行本地 fixture
+go test -race ./examples/senior/agentworkflow/...
+go run ./examples/senior/agentworkflow/cmd/demo -dir "$(mktemp -d)"
+bash scripts/verify_reliability_examples.sh --offline
+```
+
+正常流程依次经历 `pending → ready → claimed → unknown → succeeded`；unknown 在调用前落盘，成功回执随后消除不确定性。
+run 的 paused 与 job 的 unknown 是两种独立状态，恢复 run 不会直接给 job 授权。
+[示例 README](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/agentworkflow) 提供分步 plan/approve/run/reconcile 命令，
+可以制造“外部接受但回包丢失”，看到 `external_effects=1`、模型轮数保持不变，对账后再恢复，副作用仍为 1。
+
+测试实际覆盖：伪造/跨租户审批、账号/凭据/版本替换、自批、审批过期/撤销、角色变更、并发 approve/edit/claim；
+旧 worker 在租约接管后仍迟到调用外部、not-found 后禁止非幂等重发、同键重试、错误回执拒绝；
+真实子进程在发送前、外部接受后、run 输出落盘前和 refresh 轮换后直接退出，再重新打开状态文件恢复。
+还覆盖完整工具调用历史、100 次调用批量预算、恢复后累计预算和并发 Continue。
+
+**证据边界**：标准库 JSON 文件 + Unix 文件锁/原子替换演示持久化与并发边界，外部 provider 使用独立文件。
+它不是生产数据库/分布式锁、真实 OAuth 服务、OpenAI/LangGraph SDK 兼容测试或模型质量验收；
+凭据文件只含 NONSECRET 标记，不得保存真实 token。生产需事务数据库、加密凭据库、可信认证入口及 provider 特定幂等/查询契约。
+框架恢复的语义也要单测：例如 LangGraph 的 interrupt 会从节点开头重跑，不能认为只从下一行继续。
 
 ## 排查与工具
 
@@ -177,7 +218,7 @@ workflow 的最终状态写权限。
 3. **任务超时能否直接重试？** → 不能一概而论；先判断外部副作用是否可能已经发生。
 4. **HITL 框架是否自动保证一次执行？** → 不保证；checkpoint 解决恢复，副作用仍需幂等与对账。
 5. **reviewer 编辑内容怎么办？** → 生成新 proposal/version，重新过 guardrail；旧审批不能沿用。
-6. **Execution Queue 为什么需要 fencing？** → lease 过期不代表旧 worker 已停止，epoch 可阻止过期 owner 提交新状态。
+6. **Execution Queue 为什么需要 fencing？** → epoch 可阻止过期 owner 提交本地状态；外部 API 若不验证该 token，旧 worker 仍可能产生副作用，因此还需要 provider 幂等或保守对账/人工恢复。
 
 ## 反模式与事故
 

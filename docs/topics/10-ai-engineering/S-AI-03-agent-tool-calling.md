@@ -4,10 +4,11 @@ title: AI Agent 与 Function Calling
 module: ai-engineering
 level: senior
 frequency: 5
-go_version: "1.22+"
+go_version: "1.24.2+"
 tags: [agent, function-calling, tools, mcp]
 status: published
-code_refs: []
+reviewed_at: "2026-10-19"
+code_refs: [examples/senior/agentworkflow, scripts/verify_reliability_examples.sh]
 sources:
   - https://developers.openai.com/api/docs/guides/function-calling
   - https://modelcontextprotocol.io/
@@ -64,35 +65,34 @@ flowchart TD
   LLM2 -->|还有 tool_calls| Exec
 ```
 
-**Agent 循环（Go）**
+**受控循环入口（Go，完整实现见 `examples/senior/agentworkflow/runner.go`）**
 
 ```go
-func (a *Agent) Run(ctx context.Context, messages []Message) (string, error) {
-    for step := 0; step < a.maxSteps; step++ {
-        resp, err := a.llm.Chat(ctx, messages, a.toolSchemas)
-        if err != nil { return "", err }
-
-        if len(resp.ToolCalls) == 0 {
-            return resp.Content, nil
-        }
-
-        for _, tc := range resp.ToolCalls {
-            if err := a.schemas.Validate(tc.Name, tc.Args); err != nil {
-                return "", fmt.Errorf("invalid tool arguments: %w", err)
-            }
-            if !a.policy.Allow(tc.Name, tc.Args) {
-                return "", fmt.Errorf("tool denied: %s", tc.Name)
-            }
-            out, err := a.tools.Execute(ctx, tc.Name, tc.Args)
-            if err != nil {
-                out = safeToolError(err) // 不把内部堆栈、SQL、凭证回送给模型
-            }
-            messages = append(messages, toolResultMessage(tc.ID, out))
-        }
+// ctx 的身份来自可信适配层的 Authority.Context，不从模型参数取 user/tenant。
+func RunReviewedAgent(ctx context.Context, e agentworkflow.Engine,
+    model agentworkflow.Model, provider agentworkflow.Provider,
+    runID string, limits agentworkflow.Limits,
+) (string, error) {
+    runner := agentworkflow.Runner{
+        Engine: e, Model: model,
+        Reserve: agentworkflow.Reservation{Tokens: 2, Cost: 2},
+        Tool: e.PublishTool(provider),
     }
-    return "", ErrMaxStepsExceeded
+    if err := runner.Start(ctx, runID, "发布已核对内容", limits); err != nil {
+        return "", err
+    }
+    return runner.Continue(ctx, runID)
 }
 ```
+
+`Start` 只负责首次建立不可变的 run 输入/总预算；恢复已有 run 调用 `Continue`，不重新计算 deadline 或重置预算。
+这里的 token/cost 数字是离线 fixture 的保守预留单位，不是模型价格或真实用量。
+
+- 每轮先持久化模型请求预算和 pending 标记，再调用模型；完整保留 reasoning/message/function-call 项和原 call ID，然后逐个追加对应结果。真实 SDK 适配器必须保留原始输出项，或显式使用隔离到本 run 的服务端响应续接。本例的 `Item` 是离线协议夹具，不冒充厂商 wire 格式。
+- `maxSteps` 只限制模型轮数。还要限制整个 run 的工具尝试数、token/cost 和绝对 deadline。100 个调用超过剩余工具配额时，整批在第一个工具执行前拒绝；cost 则逐次预留，预算不足时保留已完成前缀。
+- 工具执行遇到 `ErrApproval` 或 `ErrUnknown`，立即暂停并保留 pending call；不把超时包装成普通错误交给模型重规划。恢复时同一 call/intent 先查持久化执行记录，UNKNOWN 必须先核对事实。
+- 模型请求本身超时或进程在模型响应落盘前崩溃时，预算仍已扣留，run 保持 `ModelPending` 并拒绝自动重发。本例保守停止，生产需按模型 provider 契约核对或人工终止，不能为省预算直接清标记。
+- file lock 保证同一 run 只有一个 `Continue`；进程退出后锁自动释放。身份校验、审批、业务 intent 与外部事实仍由独立控制面负责。
 
 **Tool 设计原则**
 
@@ -140,7 +140,21 @@ func (a *Agent) Run(ctx context.Context, messages []Message) (string, error) {
 - **工具返回巨大 JSON** → 撑爆 context；要摘要或分页
 - 只依赖模型生成的 JSON Schema 合法性 → 类型合法不代表当前用户有权执行，也不代表金额、资源状态等业务约束合法
 
-## 代码示例
+## 可运行流程与故障验证
+
+```bash
+# 仓库根目录；Go 1.24.2+，Linux/macOS，无 API key、Docker 或真实外部调用
+go test -race ./examples/senior/agentworkflow/...
+go run ./examples/senior/agentworkflow/cmd/demo -dir "$(mktemp -d)"
+bash scripts/verify_reliability_examples.sh --offline
+```
+
+正常流程会先暂停审批，再由 fixture reviewer 批准并恢复；输出 `external_effects=1`、`job_status=succeeded`。
+[示例 README](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/agentworkflow) 给出分步审批与“已接受但回包丢失”的命令；
+测试覆盖完整消息历史、伪造工具结果、UNKNOWN 不重规划、单批 100 次调用拦截、恢复后预算不重置、并发恢复和真实子进程退出。
+这是本地固定模型/发布工具的控制面验证，不是模型质量、厂商 SDK 兼容或生产 OAuth 验收。
+
+## 工具接口示意
 
 OpenAI `tools` 字段与 `tool_choice: auto`；Anthropic Claude `tools` 类似。Go 侧统一抽象：
 

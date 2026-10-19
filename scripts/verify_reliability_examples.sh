@@ -17,7 +17,35 @@ fi
 task_tmp="$(mktemp -d)"
 trap 'rm -rf "$task_tmp"' EXIT
 python3 -m unittest discover -s examples/postgres-reliability -p 'test_verify.py'
-env -u GOROOT "$GO_BIN" test -race ./examples/senior/agenteval/...
+env -u GOROOT "$GO_BIN" test -race ./examples/senior/agenteval/... ./examples/senior/agentworkflow/...
+env -u GOROOT "$GO_BIN" build -o "$task_tmp/workflow" ./examples/senior/agentworkflow/cmd/demo
+python3 - "$task_tmp" <<'PY'
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+root = Path(sys.argv[1])
+
+def step(name, action, *args):
+    result = subprocess.run([str(root / 'workflow'), '-dir', str(root / name), '-step', action, *args], capture_output=True, text=True, check=True)
+    return json.loads(result.stdout)
+
+normal = step('normal', 'demo')
+if normal['job_status'] != 'succeeded' or normal['run_status'] != 'succeeded' or normal['external_effects'] != 1:
+    raise SystemExit('Workflow normal fixture failed')
+for action in ['init', 'plan', 'approve']:
+    step('lost-reply', action)
+for args in [('-lose-reply',), ()]:
+    unknown = step('lost-reply', 'run', *args)
+    if unknown['job_status'] != 'unknown' or unknown['external_effects'] != 1 or unknown['model_requests'] != 1:
+        raise SystemExit('Unknown workflow replanned or duplicated an external effect')
+step('lost-reply', 'reconcile')
+recovered = step('lost-reply', 'run')
+if recovered['job_status'] != 'succeeded' or recovered['run_status'] != 'succeeded' or recovered['external_effects'] != 1 or recovered['model_requests'] != 2:
+    raise SystemExit('Workflow receipt recovery failed')
+print('PASS: workflow approval pause, reply loss, repeated resume and reconciliation; external effects=1')
+PY
 env -u GOROOT "$GO_BIN" build -o "$task_tmp/eval" ./examples/senior/agenteval/cmd/eval
 "$task_tmp/eval" > "$task_tmp/good.json"
 python3 - "$task_tmp" <<'PY'

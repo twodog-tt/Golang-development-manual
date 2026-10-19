@@ -736,6 +736,7 @@ p1:
       frequency: 5
       status: published
       file: 10-ai-engineering/S-AI-03-agent-tool-calling.md
+      code_refs: [examples/senior/agentworkflow]
     - id: S-AI-04
       title: Prompt 工程与 Context 窗口管理
       frequency: 4
@@ -746,6 +747,7 @@ p1:
       frequency: 5
       status: published
       file: 10-ai-engineering/S-AI-05-llm-security.md
+      code_refs: [examples/senior/agentworkflow]
     - id: S-AI-06
       title: LLM 可观测性、成本与延迟优化
       frequency: 4
@@ -768,6 +770,7 @@ p1:
       status: published
       resume_focus: true
       file: 10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md
+      code_refs: [examples/senior/agentworkflow]
     - id: S-AI-10
       title: Persona、分层 Memory 与反馈学习治理
       frequency: 5
