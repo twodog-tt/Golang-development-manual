@@ -1,7 +1,7 @@
 # Go · Agent · Web3 工程知识库
 
 面向 **Go 生产工程、Web3 链上基建与资金链路、AI / Crypto Agent 控制面** 的开源工程知识沉淀，
-共 **246 篇正文**，并配套可运行示例。
+共 **249 篇正文**，并配套可运行示例。
 
 > **三条并列主线**（按工程场景选用，不必线性通读）：
 >
@@ -32,6 +32,8 @@
 
 > **图表操作**：正文中的架构图和时序图支持点击全屏、滚轮或双指缩放、拖拽、重置、
 > 新标签打开与复制 Mermaid 源码。
+
+新增链上实战阅读顺序：[交易执行网关](topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与数据质量](topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md)。三篇共用 Anvil / Uniswap V2 / PostgreSQL 本地项目；与稳定币支付项目分别运行，未自动桥接真实资金。
 
 ## 1. 按工程领域浏览
 
@@ -70,6 +72,7 @@
 
 | 项目证据 | 知识入口 | 仓库实现 | 当前证据边界 |
 |----------|----------|----------|--------------|
+| 链上执行与数据服务 | [交易网关](topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) · [Indexer 查询](topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) · [DeFi 接入](topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md) | [onchain-execution](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/onchain-execution) | 真实本地 Uniswap V2/Anvil、Go 进程故障、PostgreSQL 回滚与链重组；合成资产 |
 | 稳定币支付与资金运营 | [流程](topics/18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md) · [钱包身份](topics/18-web3-payments-stablecoin/S-PAY-09-wallet-auth-siwe.md) · [SDK 联调](topics/18-web3-payments-stablecoin/S-PAY-10-go-typescript-web3-integration.md) · [渠道运营](topics/18-web3-payments-stablecoin/S-PAY-11-stablecoin-channel-operations.md) | [stablecoin-ops](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops) | 本地 PostgreSQL/Temporal、模拟渠道、进程中断与版本回放；不接真实资金 |
 | Agent 评测与资金可靠性 | [Agent 门禁](topics/10-ai-engineering/S-AI-15-agent-evaluation-release-gates.md) · [账本实战](topics/18-web3-payments-stablecoin/S-PAY-07-postgresql-double-entry-ledger-lab.md) · [Outbox/Inbox](topics/middleware/distributed/S-DIST-06-outbox-inbox-fault-lab.md) · [PITR](topics/middleware/postgresql/S-PG-04-pitr-restore-drill.md) | [统一验证脚本](https://github.com/twodog-tt/Golang-development-manual/blob/master/scripts/verify_reliability_examples.sh) | 离线轨迹门禁 + PostgreSQL/Redis 故障演练；不代表模型质量或生产验收 |
 | 确定性撮合与崩溃恢复 | [撮合引擎](topics/14-dex-cex-engineering/S-EXCH-17-runnable-deterministic-matching-engine.md) · [WAL 回放](topics/14-dex-cex-engineering/S-EXCH-18-wal-snapshot-replay.md) | [matchingengine](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/matchingengine) · [walreplay](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/walreplay) | `deterministic_test`：证明确定性语义与恢复测试，不冒充生产性能 |

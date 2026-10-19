@@ -245,7 +245,7 @@
 | D2 | Linux/TCP/资金 SQL 与 PostgreSQL | S-NET-06/07、S-DB-06/07、S-PG-01～03 |
 | D3 | 多链钱包与 SDK | S-WALLET-01/02/06/07/08～12 |
 | D4 | 支付、账本、机构托管与 RWA | S-PAY-01～06 |
-| D5 | 节点、链数据与非 EVM 在线可靠性 | S-NODE-01/02/04～10 |
+| D5 | 节点、链数据与非 EVM 在线可靠性 | S-NODE-01/02/04～12 |
 | D6 | 安全/协议或交易深挖（按当前问题选） | S-SEC-01～04 + S-PROTO-01～04 + S-BC-11/12，或 S-EXCH-17～22 |
 | D7 | 架构与 Staff 综合演练 | S-CLOUD-09/10 + S-LEAD-04/05；完成交易平台 45min 白板 |
 
@@ -257,3 +257,7 @@
 2. **架构决策**：为什么 WebSocket 优先、为什么 MQ 拆链路、为什么 N 确认  
 3. **故障案例**：reorg 回滚 / 提现重试 / RPC 抖动 — 怎么发现、怎么修  
 4. **指标**：lag、P99、连接数、对账差异率
+
+## 链上执行与 DeFi 项目入口
+
+按 [交易执行网关](topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与质量](topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [Uniswap V2 接入](topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md) 补齐从业务意图到 canonical 查询的链路。项目在本地合成资产上运行，不等价于真实资金或生产协议验收。

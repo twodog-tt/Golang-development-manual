@@ -965,6 +965,18 @@ p1:
       status: published
       resume_focus: true
       file: 19-node-rpc-staking/S-NODE-10-chain-data-clickhouse-lakehouse.md
+    - id: S-NODE-11
+      title: 交易执行网关实战：持久签名、Nonce、提价与状态恢复
+      frequency: 5
+      status: published
+      file: 19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md
+      code_refs: [examples/onchain-execution]
+    - id: S-NODE-12
+      title: Indexer 查询服务实战：快照游标、数据质量与 Reorg 回放
+      frequency: 5
+      status: published
+      file: 19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md
+      code_refs: [examples/onchain-execution]
 
   security_engineering:
     - id: S-SEC-01
@@ -1224,6 +1236,12 @@ p1:
       status: published
       resume_focus: true
       file: 14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md
+    - id: S-EXCH-32
+      title: DeFi 协议接入实战：Uniswap V2 报价、授权、执行与事件核对
+      frequency: 5
+      status: published
+      file: 14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md
+      code_refs: [examples/onchain-execution]
   microservices_exchange:
     - id: S-MSVC-01
       title: 交易所微服务全链路架构白板（CEX + DEX）

@@ -24,7 +24,8 @@ def check(base, release, output):
             response = page.goto("/", wait_until="networkidle")
             assert response.status == 200, "Homepage HTTP status"
             expect(page.get_by_role("heading", name="工程知识库", exact=True)).to_be_visible()
-            expect(page.locator(".library-count")).to_contain_text(re.compile(r"\d+ 篇正文"))
+            expected_count = json.loads(Path("docs/data/topics.json").read_text())["count"]
+            expect(page.locator(".library-count")).to_contain_text(str(expected_count) + " 篇正文")
             manifest = context.request.get("/release-manifest.json")
             assert manifest.ok and manifest.json()["release"] == release, "Stale production release"
             page.screenshot(path=str(output / "home.png"), full_page=True)
@@ -72,12 +73,34 @@ def check(base, release, output):
             page.get_by_role("button", name="搜索知识库", exact=True).click()
             query.fill("Temporal")
             expect(results.locator('a[href*="S-PAY-08-temporal-money-workflows/"]').first).to_be_visible()
+            query.press("Escape")
+            onchain_articles = {
+                "19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab": "交易执行网关实战",
+                "19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab": "Indexer 查询服务实战",
+                "14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab": "DeFi 协议接入实战",
+            }
+            for slug, title in onchain_articles.items():
+                article_path = "/topics/" + slug + "/"
+                response = page.goto(article_path, wait_until="domcontentloaded")
+                assert response.status == 200, slug
+                expect(page.locator(".library-article h1")).to_contain_text(title)
+                assert page.locator('link[rel="canonical"]').get_attribute("href") == base.rstrip("/") + article_path
+            page.screenshot(path=str(output / "defi-article.png"))
+            for term, slug in [("交易执行网关", "S-NODE-11-transaction-execution-gateway-lab"),
+                               ("Indexer 查询", "S-NODE-12-indexer-query-data-quality-lab"),
+                               ("DeFi 协议接入", "S-EXCH-32-defi-protocol-integration-lab")]:
+                page.get_by_role("button", name="搜索知识库", exact=True).click()
+                query.fill(term)
+                expect(results.locator('a[href*="' + slug + '/"]').first).to_be_visible()
+                page.screenshot(path=str(output / (slug + "-search.png")))
+                query.press("Escape")
             assert not errors, "Browser script errors: " + str(errors)
             (output / "result.json").write_text(json.dumps({
                 "result": "passed", "release": release,
                 "checks": ["home", "release", "article", "canonical", "toc", "code",
                            "english_search", "chinese_search", "empty_search", "focus", "page_errors",
-                           "stablecoin_articles", "temporal_search"],
+                           "stablecoin_articles", "temporal_search", "onchain_articles",
+                           "execution_search", "indexer_search", "defi_search"],
             }, indent=2) + "\n")
             print("Production browser checks passed: " + release)
         except Exception:

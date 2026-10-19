@@ -1,8 +1,8 @@
 # 知识库质量审查与领域覆盖差距
 
-> 全库 **246 篇**（以 [topics.yaml](topics.yaml) 为准）
+> 全库 **249 篇**（以 [topics.yaml](topics.yaml) 为准）
 >
-> 本轮补强日期：**2026-10-19**（本次仅新增四篇及示例，未重新审查全部旧文）
+> 本轮补强日期：**2026-10-19**（本次新增三篇及示例，未重新审查全部旧文）
 >
 > 审查范围：资深 Golang、后端/解决方案架构，重点领域为 AI/Crypto Agent、
 > Web3、交易所、钱包、链基础设施与支付
@@ -63,8 +63,9 @@
   finality/reorg 的完整状态机（S-BC-16），以及 RPC/Blockscout 分层、双上游 HA 与 502 无损恢复（S-BC-17）。
 - 第十六阶段补充 **4 篇可验证正文**：Agent 离线轨迹评测与回归门禁（S-AI-15）、PostgreSQL 双分录账本（S-PAY-07）、Outbox/Inbox 消息故障实战（S-DIST-06）、PITR 误删及缺 WAL 验证（S-PG-04）。Agent 正反例与 race 测试通过；PostgreSQL/Redis 9 个场景实际通过。统一入口为 `bash scripts/verify_reliability_examples.sh`。Agent 为离线评分器，数据库/Broker 为一次性容器，不声称模型质量、HA 或生产验收。
 - 第十七阶段补充 **4 篇集成正文**：Temporal 资金流程、SIWE 身份与会话、Go/TypeScript 联调、稳定币渠道运营，统一项目 `examples/stablecoin-ops`。真实本地 PostgreSQL/Temporal 与 Worker 中断/版本回放已验证；渠道、商户与 ERC-1271 RPC 为夹具，不使用真实资金。
-- 证据标签已覆盖 246 篇：`explanation_only=180`、`illustrative_artifact=31`、
-  `deterministic_test=21`、`integration_harness=14`、`external_acceptance=0`。
+- 第十八阶段补充 **3 篇集成正文**：交易执行网关（S-NODE-11）、Indexer 查询与数据质量（S-NODE-12）、DeFi 协议接入（S-EXCH-32），共用 `examples/onchain-execution`。真实 Anvil/Uniswap V2/PostgreSQL、进程重启、替换交易、坏日志、数据库回滚与重组共 10 组验证；仅本地合成资产，不代表公链资金或生产验收。
+- 证据标签已覆盖 249 篇：`explanation_only=180`、`illustrative_artifact=31`、
+  `deterministic_test=21`、`integration_harness=17`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
 - 当前知识库的优势是 **Go 核心、分布式系统、中间件、EVM/Solidity、CEX/DEX 架构广度**。
@@ -94,13 +95,13 @@
 | 区块链 Web3 | 17 |
 | 多链钱包与托管 | 12 |
 | Web3 支付与稳定币 | 11 |
-| 节点、RPC 与 Staking | 10 |
+| 节点、RPC 与 Staking | 12 |
 | 协议、共识与安全 | 5 |
 | Web3 安全工程 | 4 |
 | Solidity | 8 |
-| DEX/CEX/预测市场 | 31 |
+| DEX/CEX/预测市场 | 32 |
 | 交易所微服务 | 6 |
-| **合计** | **242** |
+| **合计** | **249** |
 
 原始 153 题基线中的中间件为 21 题；此前新增 2 篇 MySQL，本阶段再新增 3 篇 PostgreSQL，
 随后新增 Outbox/Inbox 与 PITR 演练各 1 题，当前数据库与中间件共 28 题。

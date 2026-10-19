@@ -32,13 +32,35 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: examples/stablecoin-ops/go.mod
-          cache-dependency-path: examples/stablecoin-ops/go.sum
+          cache-dependency-path: |
+            examples/stablecoin-ops/go.sum
+            examples/onchain-execution/go.sum
 
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
-          cache-dependency-path: examples/stablecoin-ops/client/package-lock.json
+          cache-dependency-path: |
+            examples/stablecoin-ops/client/package-lock.json
+            examples/onchain-execution/client/package-lock.json
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.4.4
+
+      - name: Verify execution, indexer and DeFi failure recovery
+        run: |
+          docker pull postgres:17-alpine
+          python examples/onchain-execution/verify.py --report /tmp/onchain-execution-ci/result.json
+
+      - name: Save onchain verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: onchain-execution-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/onchain-execution-ci/
+          if-no-files-found: ignore
+          retention-days: 14
 
       - name: Verify stablecoin project and failure recovery
         run: |

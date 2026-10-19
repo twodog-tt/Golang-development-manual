@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "generated_at": "2026-10-18T17:38:04Z",
-  "count": 246,
+  "generated_at": "2026-10-19T01:19:38Z",
+  "count": 249,
   "roles": [
     {
       "key": "senior_go_backend",
@@ -3466,6 +3466,31 @@
       }
     },
     {
+      "id": "S-EXCH-32",
+      "title": "DeFi 协议接入实战：Uniswap V2 报价、授权、执行与事件核对",
+      "frequency": 5,
+      "module": "14 DEX / CEX",
+      "module_key": "dex_cex_engineering",
+      "resume_focus": false,
+      "url": "topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab/",
+      "prompt": "接入 DeFi 需要把协议身份、资产精度、报价区块、授权范围、minOut/deadline、交易回执和最终余额串起来。我用锁定版本的真实 Uniswap V2 构建产物部署到 Anvil，viem 获取指定 block hash 的报价，Go 网关模拟并持久签名，最后用 Swap、Transfer 和余额差核对成交。故障验证覆盖零授权、过期参数、滑点不足，以及模拟后储备改变导致实际 reverted。池内报价只用于本地确定性测试，不能冒充独立价格保护。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p1",
+        "payments_stablecoin": "p1",
+        "node_rpc_indexer": "p1",
+        "exchange_engineering": "p0",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "integration_harness",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-10-19"
+      }
+    },
+    {
       "id": "S-GOENG-01",
       "title": "错误契约、Wrapping 与 Panic 边界",
       "frequency": 5,
@@ -4763,6 +4788,56 @@
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
         "reviewed_at": "2026-08-13"
+      }
+    },
+    {
+      "id": "S-NODE-11",
+      "title": "交易执行网关实战：持久签名、Nonce、提价与状态恢复",
+      "frequency": 5,
+      "module": "19 节点、RPC 与 Staking",
+      "module_key": "node_rpc_staking",
+      "resume_focus": false,
+      "url": "topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab/",
+      "prompt": "交易网关的核心不是包一层 sendTransaction，而是把业务意图、nonce 和每次签名 attempt 持久化。先提交签名原文，再广播；RPC 超时只能说明结果未知，恢复时查原 hash，重试仍用原字节。同 nonce 提价创建新 attempt，保留替换关系。只有 canonical receipt 才能驱动 mined/reverted，确认深度达到业务阈值才进入 confirmed；已确认交易被重组移除则停止自动动作，进入人工核对。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p0",
+        "payments_stablecoin": "p0",
+        "node_rpc_indexer": "p0",
+        "exchange_engineering": "p0",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "integration_harness",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-10-19"
+      }
+    },
+    {
+      "id": "S-NODE-12",
+      "title": "Indexer 查询服务实战：快照游标、数据质量与 Reorg 回放",
+      "frequency": 5,
+      "module": "19 节点、RPC 与 Staking",
+      "module_key": "node_rpc_staking",
+      "resume_focus": false,
+      "url": "topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab/",
+      "prompt": "Indexer API 返回的是带水位的 canonical 投影，不是链本身。我的最小实现保留按 block hash 标识的 raw 区块和日志，用独立 canonical 映射决定当前有效分支，raw、映射和 checkpoint 在同一个数据库事务提交。查询第一页固定高度/hash/epoch，后续用 keyset 游标读同一快照；新增区块不混页，reorg 改变 epoch 后旧游标返回 409。日志缺失或 ABI 不符时停止推进，并保留独立质量诊断。",
+      "role_priorities": {
+        "senior_go_backend": "p1",
+        "ai_agent_platform": "p1",
+        "wallet_custody": "p1",
+        "payments_stablecoin": "p1",
+        "node_rpc_indexer": "p0",
+        "exchange_engineering": "p0",
+        "staff_architect": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "integration_harness",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-10-19"
       }
     },
     {

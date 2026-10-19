@@ -1,0 +1,126 @@
+{
+  "result": "passed",
+  "checks": [
+    {
+      "name": "real_uniswap_v2_deployment",
+      "result": "passed",
+      "detail": {
+        "factory": "0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9",
+        "router": "0xdc64a140aa3e981100a9beca4e685f962f0cf6c9",
+        "pair": "0xFa803697c45c71b3f0a249DB2a17D9bF2507eEEA",
+        "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+        "router_code_hash": "0x631adc6675093d3c50839593ad4d4a9d46c96ff4d4878b10677babb18266ae78"
+      }
+    },
+    {
+      "name": "durable_intent_concurrency_response_loss_process_restart",
+      "result": "passed",
+      "detail": {
+        "nonce": 1,
+        "hash": "0x4eca174c59b9853d7eecf19081e20f6c820ce86a5d566ec82d03b8af578fddf0",
+        "swaps": 1,
+        "atomic_output": "99690060900928177"
+      }
+    },
+    {
+      "name": "same_nonce_fee_replacement",
+      "result": "passed",
+      "detail": {
+        "nonce": 2,
+        "hashes": [
+          "0x5c86fdf76fcd21f4a7ea233745a80ea9f86f1cb6f2c9b0fc44b8dca08609611c",
+          "0x53ae0258d2963ffcedb90280060f2ecabc59892034c2a7b9e6824f054b94c703"
+        ],
+        "winner": "0x53ae0258d2963ffcedb90280060f2ecabc59892034c2a7b9e6824f054b94c703"
+      }
+    },
+    {
+      "name": "concurrent_distinct_nonce_allocation",
+      "result": "passed",
+      "detail": {
+        "nonces": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "all_mined": true
+      }
+    },
+    {
+      "name": "fail_closed_chain_precision_allowance_deadline_slippage",
+      "result": "passed",
+      "detail": {
+        "invalid_intents": 0
+      }
+    },
+    {
+      "name": "simulation_success_inclusion_revert",
+      "result": "passed",
+      "detail": {
+        "state": "reverted",
+        "output_balance_unchanged": true
+      }
+    },
+    {
+      "name": "indexer_snapshot_keyset_pagination",
+      "result": "passed",
+      "detail": {
+        "snapshot_height": 21,
+        "events": 26,
+        "new_head": 22
+      }
+    },
+    {
+      "name": "rpc_log_omission_and_poison",
+      "result": "passed",
+      "detail": {
+        "quality_errors": 2,
+        "checkpoint_unchanged": true
+      }
+    },
+    {
+      "name": "postgres_batch_rollback_and_replay",
+      "result": "passed",
+      "detail": {
+        "raw_and_checkpoint_atomic": true
+      }
+    },
+    {
+      "name": "canonical_reorg_raw_retention_cursor_invalidation",
+      "result": "passed",
+      "detail": {
+        "old_block": "0x4efcf269f4baa512b14c9b20a73827aa7a61ce82dc8f7724643b2a9e50de71ac",
+        "raw_logs_retained": 3,
+        "epoch": 1,
+        "orphaned_intent": "review"
+      }
+    }
+  ],
+  "scope": "Actual local Anvil EVM, pinned Uniswap V2 artifacts, synthetic ERC20, real PostgreSQL and Go process; no public network or real funds",
+  "run_id": "onchain-execution-65a9a89beaa3",
+  "checked_at": "2026-10-19T01:25:34Z",
+  "anvil": "anvil Version: 1.4.4-stable\nCommit SHA: 05794498bf47257b144e2e2789a1d5bf8566be0e\nBuild Timestamp: 2025-11-03T23:46:57.847015000Z (1762213617)\nBuild Profile: maxperf",
+  "go": "go version go1.24.3 darwin/arm64",
+  "node": "v22.15.0",
+  "image": {
+    "postgres:17-alpine": "sha256:25a89970a83255ae96484d709005bb35aa71f7455f941bc1634514f31c5d5c62"
+  },
+  "source_sha256": {
+    ".gitignore": "f67e50b2e2f697682e3890215379c535cf718f356709e1f51a468428ce02489e",
+    "README.md": "bd2355c7915aa3bd5b6121522b94aef09e08c3e3ee52e647d2fed141cea5b447",
+    "client/Token.sol": "2a0245a4c1d579a0c81b9ed14425a2a490598382407b2754514f7e612c14f4a5",
+    "client/integration.mjs": "91b760a291c82bf73a54d878881116cf6b58eb19bb1c4cbb64f8d66d7149e71c",
+    "client/package-lock.json": "96797523b344bc27127c85ecda03b1e7a6435f70d063d38c50a05aefe8f9d429",
+    "client/package.json": "452e54602c3705e003b44d36a5a741860671da15d75c8884471d0efc6ee1a83f",
+    "cmd/server/main.go": "09839d4f54de9ffe973e1062c4ef5575d2ef7b198ee96cb493a9e211bc55d21a",
+    "go.mod": "e99ea1591d51a8393b9821f4900fb424b9c2048f44dfc00972d2ad287303e0a7",
+    "go.sum": "837549e154c0808e5c859293d3b5706c2c805357c99a186c326e91c7b81ebe02",
+    "internal/lab/gateway.go": "13bdd15ed9f8c2d3cb87567679023c1dcc88a1b278f86e78c9ffa6b185f01918",
+    "internal/lab/http.go": "b1f29d02788241c2db83a0a370d9e6348e45fe310b0374bca08a2c71227d5711",
+    "internal/lab/indexer.go": "fa249fee506bcab03fe0c5a6b4749beaa6e34df653e215a1fc832824ae23abfb",
+    "internal/lab/lab_test.go": "647ddf9854a5fee0d39ea5d14211a1be4efe4953d5b0aaba786c5ba180b1a3e9",
+    "internal/lab/schema.sql": "2a06f758f9713bfae4a1ba64432d7e1b0c6d11b5f5e897116cf17a1c363c35a2",
+    "verify.py": "297141bc76d6903fedaf7b6afbd9ba81edc36e199003c06e821e3c6b37d4c675"
+  }
+}

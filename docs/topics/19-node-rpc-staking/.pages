@@ -12,3 +12,5 @@ nav:
   - "Trace / State Diff / Decoder": S-NODE-08-trace-state-diff-versioned-decoder-quality.md
   - "非 EVM SDK 故障注入与兼容": S-NODE-09-non-evm-online-sdk-fault-injection.md
   - "ClickHouse / Reorg / Lakehouse": S-NODE-10-chain-data-clickhouse-lakehouse.md
+  - "交易执行网关实战": S-NODE-11-transaction-execution-gateway-lab.md
+  - "Indexer 查询服务实战": S-NODE-12-indexer-query-data-quality-lab.md

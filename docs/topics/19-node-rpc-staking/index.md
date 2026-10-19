@@ -1,6 +1,6 @@
 # 19 节点、RPC 与 Staking
 
-10 篇 | 本专题核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
+12 篇 | 本专题核心阅读 | [返回专题索引](../../topic-catalog.md) · [领域能力优先级](../_meta/role-priority-matrix.md)
 
 > 面向节点平台、RPC 网关、Indexer、Relayer、Validator 与链上数据架构，重点是 **状态机、数据正确性和运维边界**。
 > 先读概念地图：[Indexer / 节点数据](../../maps/indexer-node-data.md) · [投影≠事实](../../maps/confusion-cards.md#indexer-vs-canonical)。
@@ -17,6 +17,8 @@
 | [S-NODE-08](./S-NODE-08-trace-state-diff-versioned-decoder-quality.md) | Trace、State Diff、版本化 Decoder 与链数据质量 | ⭐⭐⭐⭐⭐ |
 | [S-NODE-09](./S-NODE-09-non-evm-online-sdk-fault-injection.md) | 非 EVM 在线 SDK：提交、确认、故障注入与升级兼容 | ⭐⭐⭐⭐⭐ |
 | [S-NODE-10](./S-NODE-10-chain-data-clickhouse-lakehouse.md) | ClickHouse、Reorg 与 Lakehouse 分层 | ⭐⭐⭐⭐⭐ |
+| [S-NODE-11](./S-NODE-11-transaction-execution-gateway-lab.md) | 交易执行网关实战：持久签名、Nonce、提价与状态恢复 | ⭐⭐⭐⭐⭐ |
+| [S-NODE-12](./S-NODE-12-indexer-query-data-quality-lab.md) | Indexer 查询服务实战：快照游标、数据质量与 Reorg 回放 | ⭐⭐⭐⭐⭐ |
 
 ## 可运行代码
 
@@ -29,4 +31,14 @@
 ## 推荐顺序
 
 节点架构 → RPC HA → Validator 安全 → 数据平台 → Canonical Merge → Trace/Decoder/质量 →
-ClickHouse/Lakehouse → Relayer → 非 EVM 在线生命周期 → 节点运维。
+ClickHouse/Lakehouse → 交易网关实战 → 查询与质量实战 → Relayer → 非 EVM 在线生命周期 → 节点运维。
+
+## 链上执行与数据服务项目
+
+[可运行项目](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/onchain-execution)：Go + PostgreSQL + Anvil 上的真实 Uniswap V2，覆盖交易恢复、同 nonce 提价、数据质量、快照分页与重组。
+
+```bash
+python3 examples/onchain-execution/verify.py --report /tmp/onchain-execution/result.json
+```
+
+单链合成资产教学范围，详见项目 README 的工具版本与故障矩阵。

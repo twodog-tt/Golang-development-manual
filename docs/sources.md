@@ -6,7 +6,7 @@
 > [领域能力优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
 > 代码映射：[topics/_meta/mapping.md](topics/_meta/mapping.md)
 
-## 知识库覆盖范围（246 篇）
+## 知识库覆盖范围（249 篇）
 
 | 模块 | 篇数 | 说明 |
 |------|------|------|
@@ -22,11 +22,11 @@
 | 12 区块链与 Web3（Go） | 17 | EVM 公链全景与身份核验、交易/finality/reorg、RPC/浏览器 HA、索引、Gas/Fee、Rollup/DA、跨链消息、4337、MPC |
 | 17 多链钱包与托管 | 12 | Bitcoin、TRON/TRC20、Solana/Cosmos/Aptos/Sui Go 实战、归集 |
 | 18 Web3 支付与稳定币 | 11 | 状态机、账本、Temporal、SIWE、Go/viem、渠道与资金运营、机构托管 |
-| 19 节点、RPC 与 Staking | 10 | EL/CL、RPC HA、canonical merge、trace、ClickHouse/lakehouse、在线 SDK |
+| 19 节点、RPC 与 Staking | 12 | EL/CL、RPC HA、canonical merge、trace、ClickHouse/lakehouse、在线 SDK |
 | 20 协议、共识与安全 | 5 | 经典 vs 链上共识、PoS/BFT、fork choice、PeerDAS、状态迁移 |
 | 21 Web3 安全工程 | 4 | 威胁模型、signer fencing、SBOM/provenance、事件响应 |
 | 13 Solidity 与合约 | 8 | 安全、ERC、Proxy、DeFi |
-| 14 DEX / CEX / 预测市场 | 31 | AMM/Uniswap/Pancake、Staking/Farm、DEX TL 白板、撮合/WAL、预测市场 |
+| 14 DEX / CEX / 预测市场 | 32 | AMM/Uniswap/Pancake、Staking/Farm、DEX TL 白板、撮合/WAL、预测市场 |
 | 15 微服务（交易所场景） | 6 | 服务拆分、gRPC、数据隔离、网关、事件总线 |
 | 07 工程与领导力 | 5 | 复盘、技术债、Code Review、Staff 战略与迁移 |
 | 09 云原生 | 10 | K8s、Docker、OTel、Terraform、Helm/GitOps |

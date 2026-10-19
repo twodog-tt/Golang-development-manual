@@ -47,7 +47,7 @@
 | S-WALLET-11 | Sui 能力与预占 | [S-WALLET-11](../17-multichain-wallet/S-WALLET-11-sui-go-capability-adapter.md) | `examples/non-evm-sdk/sui/` |
 | S-PAY-01～06 | Web3 支付与稳定币 | — | [18-web3-payments-stablecoin/](../18-web3-payments-stablecoin/index.md) |
 | S-PAY-01 | 支付状态机 | [S-PAY-01](../18-web3-payments-stablecoin/S-PAY-01-payment-state-idempotency-reversal.md) | `examples/senior/paymentstate/` |
-| S-NODE-01～09 | 节点、RPC 与 Staking | — | [19-node-rpc-staking/](../19-node-rpc-staking/index.md) |
+| S-NODE-01～12 | 节点、RPC 与 Staking | — | [19-node-rpc-staking/](../19-node-rpc-staking/index.md) |
 | S-NODE-02 | Hedged RPC Pool | [S-NODE-02](../19-node-rpc-staking/S-NODE-02-rpc-ha-quorum-hedging-cache.md) | `examples/senior/rpcpool/` |
 | S-NODE-07 | Canonical Chain Merge | [S-NODE-07](../19-node-rpc-staking/S-NODE-07-canonical-backfill-realtime-merge.md) | `examples/senior/chainmerge/` |
 | S-NODE-09 | 非 EVM 生命周期故障注入 | [S-NODE-09](../19-node-rpc-staking/S-NODE-09-non-evm-online-sdk-fault-injection.md) | `examples/senior/txlifecycle/` |
@@ -57,7 +57,7 @@
 | S-SEC-01～04 | Web3 安全工程 | — | [21-security-engineering/](../21-security-engineering/index.md) |
 | S-SEC-02 | Signer Fencing | [S-SEC-02](../21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) | `examples/senior/signerfencing/` |
 | S-SEC-02 | Durable Fence + HSM/MPC | [S-SEC-02](../21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) | `examples/signer-project/` |
-| S-EXCH-01～31 | DEX / CEX 交易所 | — | [14-dex-cex-engineering/](../14-dex-cex-engineering/index.md) |
+| S-EXCH-01～32 | DEX / CEX 交易所 | — | [14-dex-cex-engineering/](../14-dex-cex-engineering/index.md) |
 | S-EXCH-17 | 确定性撮合引擎 | [S-EXCH-17](../14-dex-cex-engineering/S-EXCH-17-runnable-deterministic-matching-engine.md) | `examples/senior/matchingengine/` |
 | S-EXCH-18 | WAL、快照与回放 | [S-EXCH-18](../14-dex-cex-engineering/S-EXCH-18-wal-snapshot-replay.md) | `examples/senior/walreplay/` |
 | S-EXCH-19 | 行情 Gap Recovery | [S-EXCH-19](../14-dex-cex-engineering/S-EXCH-19-market-data-sequence-gap-recovery.md) | `examples/senior/marketdatarecovery/` |
@@ -74,6 +74,9 @@
 | S-PAY-07 | [PostgreSQL 双分录账本：并发扣款、冻结冲正与故障验证](../18-web3-payments-stablecoin/S-PAY-07-postgresql-double-entry-ledger-lab.md) | `examples/postgres-reliability/` | 离线评测门禁 / 真实数据库与 Broker 故障演练，见示例 README |
 | S-DIST-06 | [Outbox 与 Inbox：真实消息重投和事务故障实战](../middleware/distributed/S-DIST-06-outbox-inbox-fault-lab.md) | `examples/postgres-reliability/` | 离线评测门禁 / 真实数据库与 Broker 故障演练，见示例 README |
 | S-AI-15 | [Agent 评测、任务轨迹与发布回归门禁](../10-ai-engineering/S-AI-15-agent-evaluation-release-gates.md) | `examples/senior/agenteval/` | 离线评测门禁 / 真实数据库与 Broker 故障演练，见示例 README |
+| S-NODE-11 | [交易执行网关实战：持久签名、Nonce、提价与状态恢复](../19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) | `examples/onchain-execution/` | Anvil / Uniswap V2 / PostgreSQL 集成故障验证 |
+| S-NODE-12 | [Indexer 查询服务实战：快照游标、数据质量与 Reorg 回放](../19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) | `examples/onchain-execution/` | Anvil / Uniswap V2 / PostgreSQL 集成故障验证 |
+| S-EXCH-32 | [DeFi 协议接入实战：Uniswap V2 报价、授权、执行与事件核对](../14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md) | `examples/onchain-execution/` | Anvil / Uniswap V2 / PostgreSQL 集成故障验证 |
 
 ## 使用方式
 

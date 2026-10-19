@@ -1,6 +1,6 @@
 # 14 DEX / CEX 交易所工程
 
-31 篇 | 交易所与协议工程 | [返回专题索引](../../topic-catalog.md) · [Web3 场景地图](../../web3-exchange-wallet-focus.md)
+32 篇 | 交易所与协议工程 | [返回专题索引](../../topic-catalog.md) · [Web3 场景地图](../../web3-exchange-wallet-focus.md)
 
 > 面向 **CEX 撮合与资金系统（Go）** + **DEX/预测市场链上协议（Solidity）** 的交易所工程专题。
 > 资金与对账先读：[交易所资金概念地图](../../maps/exchange-funds.md)；钱包出金见 [钱包地图](../../maps/wallet-custody.md)。
@@ -61,6 +61,7 @@
 
 | ID | 标题 | 频率 |
 |----|------|------|
+| [S-EXCH-32](./S-EXCH-32-defi-protocol-integration-lab.md) | DeFi 协议接入实战：Uniswap V2 报价、授权、执行与事件核对 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-06](./S-EXCH-06-dex-amm-liquidity.md) | DEX AMM 与流动性池设计 | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-30](./S-EXCH-30-uniswap-v2-v3-protocol.md#oral-card) | **Uniswap V2/V3 协议机制深挖** | ⭐⭐⭐⭐⭐ |
 | [S-EXCH-27](./S-EXCH-27-pancakeswap-v2-v3-differences.md#oral-card) | PancakeSwap V2/V3：池、LP 与后端集成差异 | ⭐⭐⭐⭐⭐ |
@@ -115,3 +116,13 @@
 - **DEX Tech Lead**：能在 **45 分钟**讲清协议权威、激励会计、链下投影、多链门禁与带队机制（EXCH-31/30/29）
 - **预测市场**：能从规则冻结、CTF、签名订单、CLOB、链上结算讲到争议兑付与主网门禁
 - **架构师**：能在 **45 分钟**内画完 CEX 或 Web3 全栈，并讲清对账与 HA（EXCH-13/14/15）
+
+## 链上执行与数据服务项目
+
+[可运行项目](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/onchain-execution)：Go + PostgreSQL + Anvil 上的真实 Uniswap V2，覆盖交易恢复、同 nonce 提价、数据质量、快照分页与重组。
+
+```bash
+python3 examples/onchain-execution/verify.py --report /tmp/onchain-execution/result.json
+```
+
+单链合成资产教学范围，详见项目 README 的工具版本与故障矩阵。

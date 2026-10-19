@@ -1,5 +1,5 @@
 site_name: Go · Agent · Web3 工程知识库
-site_description: Go 生产工程、Web3 链上基建与资金链路、AI/Crypto Agent 控制面的开源工程知识库（246 篇）
+site_description: Go 生产工程、Web3 链上基建与资金链路、AI/Crypto Agent 控制面的开源工程知识库（249 篇）
 site_url: https://knowledgebase.wenyiapp.cn/
 repo_url: https://github.com/twodog-tt/Golang-development-manual
 repo_name: twodog-tt/Golang-development-manual
@@ -236,6 +236,7 @@ plugins:
         interview/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md: topics/14-dex-cex-engineering/S-EXCH-29-defi-staking-liquidity-mining-yield.md
         interview/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md: topics/14-dex-cex-engineering/S-EXCH-30-uniswap-v2-v3-protocol.md
         interview/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md: topics/14-dex-cex-engineering/S-EXCH-31-dex-tech-lead-whiteboard.md
+        interview/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md: topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md
         interview/14-dex-cex-engineering/index.md: topics/14-dex-cex-engineering/index.md
         interview/15-microservices-exchange/S-MSVC-01-exchange-microservices-whiteboard.md: topics/15-microservices-exchange/S-MSVC-01-exchange-microservices-whiteboard.md
         interview/15-microservices-exchange/S-MSVC-02-domain-decomposition.md: topics/15-microservices-exchange/S-MSVC-02-domain-decomposition.md
@@ -286,6 +287,8 @@ plugins:
         interview/19-node-rpc-staking/S-NODE-08-trace-state-diff-versioned-decoder-quality.md: topics/19-node-rpc-staking/S-NODE-08-trace-state-diff-versioned-decoder-quality.md
         interview/19-node-rpc-staking/S-NODE-09-non-evm-online-sdk-fault-injection.md: topics/19-node-rpc-staking/S-NODE-09-non-evm-online-sdk-fault-injection.md
         interview/19-node-rpc-staking/S-NODE-10-chain-data-clickhouse-lakehouse.md: topics/19-node-rpc-staking/S-NODE-10-chain-data-clickhouse-lakehouse.md
+        interview/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md: topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md
+        interview/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md: topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md
         interview/19-node-rpc-staking/index.md: topics/19-node-rpc-staking/index.md
         interview/20-protocol-consensus-security/S-PROTO-01-ethereum-pos-fork-choice-finality.md: topics/20-protocol-consensus-security/S-PROTO-01-ethereum-pos-fork-choice-finality.md
         interview/20-protocol-consensus-security/S-PROTO-02-bft-cometbft-round-lock-safety-liveness.md: topics/20-protocol-consensus-security/S-PROTO-02-bft-cometbft-round-lock-safety-liveness.md

@@ -238,3 +238,7 @@ flowchart LR
 - **CEX/DEX** 资金与返佣消费 canonical 事件 → [交易所资金](./exchange-funds.md)
 - **DEX** 协议机制 → [14 DEX/CEX](../topics/14-dex-cex-engineering/index.md)
 - Agent 若依赖链上状态，只读投影时必须标明可重建 → [Agent 控制面](./agent-control-plane.md)
+
+## 本地链查询项目
+
+[交易执行网关](../topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与数据质量](../topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](../topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md)：真实 Anvil/Uniswap V2/PostgreSQL 集成，验证快照游标、坏日志停水位、数据库回滚和 reorg 保留 raw。

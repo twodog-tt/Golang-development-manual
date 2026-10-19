@@ -11,10 +11,10 @@
 |------|--------:|----------|
 | Go 生产工程 | 64 | PostgreSQL/MySQL、消息、网络、IaC/GitOps |
 | AI / Crypto Agent 控制面 | 67 | 工作流/HITL、MCP/A2A、身份/Commerce、开放平台 |
-| 多链钱包与托管签名 | 72 | 多链交易、归集、MPC/HSM、恢复 |
-| 支付与稳定币 | 74 | 支付状态机、账本、清结算、合规 |
-| 节点/RPC/Indexer | 80 | 共识、canonical 数据、ClickHouse/lakehouse |
-| 交易所工程 | **78** | 撮合/WAL、DEX 协议、预测市场、账本与风控 |
+| 多链钱包与托管签名 | 73 | 多链交易、归集、MPC/HSM、恢复 |
+| 支付与稳定币 | 75 | 支付状态机、账本、清结算、合规 |
+| 节点/RPC/Indexer | 82 | 共识、canonical 数据、ClickHouse/lakehouse |
+| 交易所工程 | **81** | 撮合/WAL、DEX 协议、预测市场、账本与风控 |
 | 系统演进与架构协作 | **84** | 技术战略、跨团队迁移、发布与风险治理 |
 
 完整清单、延展阅读与证据标签见
@@ -149,7 +149,7 @@
 - **大厂 Go 后端**：01/02/16/08 + 06 + MySQL/PostgreSQL + S-CLOUD-09/10
 - **架构师岗**：03/11 + S-CLOUD-09/10 + S-LEAD-04/05 + 45min 白板
 - **Web3 钱包/支付**：16 → 17 → 18 → 21 + 12 索引/签名
-- **节点/RPC/Indexer**：06 → 19（含 NODE-10）→ 20 → 21 + 12 索引 + 09 云原生
+- **节点/RPC/Indexer**：06 → 19（含 NODE-10～12）→ 20 → 21 + 12 索引 + 09 云原生
 - **Web3 架构师**：17 → 18 → 19 → 20 → 21 + 03/11 + 12/13
 - **CEX 交易系统**：14（重点 EXCH-17~22）+ 15 + 17 充提 + 18 账本/对账
 - **DEX Tech Lead**：14（**EXCH-31 → 30 → 29** → 06/27 → 07/08）+ 13（SOLID-02/04/06/07）+ 12（BC-05/07/08）+ LEAD-01/03/04
@@ -208,3 +208,7 @@
 ## 稳定币支付项目路径
 
 按 [Temporal 流程](topics/18-web3-payments-stablecoin/S-PAY-08-temporal-money-workflows.md) → [钱包登录](topics/18-web3-payments-stablecoin/S-PAY-09-wallet-auth-siwe.md) → [Go/TypeScript 联调](topics/18-web3-payments-stablecoin/S-PAY-10-go-typescript-web3-integration.md) → [渠道运营](topics/18-web3-payments-stablecoin/S-PAY-11-stablecoin-channel-operations.md) 阅读并运行统一故障验证，复用既有双分录账本。
+
+## 链上执行与数据服务实战
+
+在稳定币支付与资金运营项目之后，按 [交易执行网关](topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与质量](topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md) 完成一轮。用本地合成资产演示签名恢复、同 nonce 提价、滑点失败、快照分页和重组；保留本次验证报告，说明仍未覆盖的公链/真实资产边界。两个项目目前独立运行。

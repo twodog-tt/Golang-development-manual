@@ -1,6 +1,6 @@
 # 知识图谱：领域核心与方向深挖
 
-> 当前共 **246 篇**。实际 P0/P1/P2 以
+> 当前共 **249 篇**。实际 P0/P1/P2 以
 > [领域能力优先级](./role-priority-matrix.md) 为准。本知识库的默认深挖方向之一是
 > **AI Agent Platform / Crypto Agent Ecosystem**：先完成 42 篇共享 Go/生产工程门槛，
 > 再补 25 篇 Agent 定向 P0；CEX/DEX、钱包和实时风控不是另一套平行体系，而是证明你能处理

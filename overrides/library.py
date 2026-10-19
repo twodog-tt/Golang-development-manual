@@ -29,10 +29,10 @@ def on_config(config):
         "featured": [
             {"id": qid, "label": label, "description": description}
             for qid, label, description in [
+                ("S-NODE-11", "Web3", "持久签名、Nonce 提价与进程中断恢复。"),
+                ("S-NODE-12", "Go", "快照分页、日志质量门禁与链重组回放。"),
+                ("S-EXCH-32", "Web3", "真实本地 Uniswap V2 报价、授权与执行核对。"),
                 ("S-PAY-08", "Web3", "审批、持久计时器、Worker 恢复与历史回放。"),
-                ("S-PAY-09", "Web3", "一次性钱包登录、合约验签和会话撤销。"),
-                ("S-PAY-10", "Go", "Go 与 viem 签名联调及原子金额精度验证。"),
-                ("S-PAY-11", "Web3", "渠道未知状态、商户通知、退款与对账闭环。"),
             ] if qid in topics
         ],
     }
