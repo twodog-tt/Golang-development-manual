@@ -89,13 +89,10 @@ func (a *App) Deposit(ctx context.Context, id string) (Evidence, error) {
 }
 
 func (a *App) Execution(ctx context.Context, id string) (Evidence, error) {
-	out := Evidence{State: "pending", Token: a.Config.TokenOut}
+	out := Evidence{Reference: id, State: "pending", Token: a.Config.TokenOut}
 	intent, err := a.Reconcile(ctx, id)
 	if err != nil {
 		return out, err
-	}
-	if intent.BlockHash == nil {
-		return out, nil
 	}
 	tx, err := a.DB.BeginTx(ctx, pgx.TxOptions{IsoLevel: pgx.RepeatableRead, AccessMode: pgx.ReadOnly})
 	if err != nil {
@@ -104,6 +101,9 @@ func (a *App) Execution(ctx context.Context, id string) (Evidence, error) {
 	defer tx.Rollback(ctx)
 	if err = tx.QueryRow(ctx, "SELECT height,epoch FROM index_meta WHERE id=1").Scan(&out.Indexed, &out.Epoch); err != nil {
 		return out, err
+	}
+	if intent.BlockHash == nil {
+		return out, tx.Commit(ctx)
 	}
 	out.Transaction = intent.Transaction
 	if intent.State == "orphaned_review" {

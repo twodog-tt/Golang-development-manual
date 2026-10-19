@@ -89,7 +89,7 @@ func (s *Store) Create(ctx context.Context, merchant, key, amount, asset string)
 }
 func (s *Store) State(ctx context.Context, id, state string) error {
 	// Never let an old Workflow retry overwrite an irreversible ledger state.
-	_, err := s.DB.Exec(ctx, "UPDATE ops.payments SET state=$2 WHERE id=$1 AND state NOT IN ('settled','refunded','refund_pending','review_reversed')", id, state)
+	_, err := s.DB.Exec(ctx, "UPDATE ops.payments SET state=$2 WHERE id=$1 AND state NOT IN ('settled','refunded','refund_pending','review_reversed','review_chain')", id, state)
 	return err
 }
 func (s *Store) Fault(ctx context.Context, name string) bool {
@@ -157,6 +157,14 @@ func (s *Store) Ingest(ctx context.Context, e Event) error {
 			return ErrConflict
 		}
 		// A provider reversal is an accounting reversal, not an outbound refund.
+		if e.State == "reversed" && state == "settled" && ChainMode() {
+			// The audit coordinates all assets and any conversion. A channel
+			// retry must not bypass that compensation boundary.
+			if _, err = tx.Exec(ctx, "UPDATE ops.payments SET provider_state='reversed',sequence=$2 WHERE id=$1", e.Payment, e.Sequence); err != nil {
+				return err
+			}
+			return tx.Commit(ctx)
+		}
 		if e.State == "reversed" && state == "settled" {
 			if _, err = tx.Exec(ctx, "SELECT lab.reverse_transfer($1,$2)", "reorg:"+e.Payment, "settle:"+e.Payment); err != nil {
 				return err
@@ -177,6 +185,11 @@ func (s *Store) Settle(ctx context.Context, id string) error {
 		return err
 	}
 	defer tx.Rollback(ctx)
+	if ChainMode() {
+		if err = lockMerchant(ctx, tx, id); err != nil {
+			return err
+		}
+	}
 	var state, observed, merchant string
 	var amount int64
 	err = tx.QueryRow(ctx, "SELECT state,provider_state,merchant,amount FROM ops.payments WHERE id=$1 FOR UPDATE", id).Scan(&state, &observed, &merchant, &amount)
@@ -186,13 +199,22 @@ func (s *Store) Settle(ctx context.Context, id string) error {
 	if state == "settled" {
 		return tx.Commit(ctx)
 	}
-	if observed != "confirmed" || state == "refunded" || state == "review_reversed" || state == "refund_pending" {
+	if observed != "confirmed" || (state != "created" && state != "pending" && state != "review") {
 		return ErrConflict
+	}
+	var evidence any
+	if ChainMode() {
+		e, proofErr := currentDeposit(ctx, id, strconv.FormatInt(amount, 10))
+		if proofErr != nil {
+			return proofErr
+		}
+		raw, _ := json.Marshal(e)
+		evidence = raw
 	}
 	if _, err = tx.Exec(ctx, "SELECT lab.transfer($1,'channel_clearing',$2,$3,$4)", "settle:"+id, merchant, LedgerAsset(), amount); err != nil {
 		return err
 	}
-	if _, err = tx.Exec(ctx, "UPDATE ops.payments SET state='settled' WHERE id=$1", id); err != nil {
+	if _, err = tx.Exec(ctx, "UPDATE ops.payments SET state='settled',settlement_evidence=$2 WHERE id=$1", id, evidence); err != nil {
 		return err
 	}
 	if _, err = tx.Exec(ctx, "INSERT INTO ops.audit(payment,action) VALUES($1,'settled')", id); err != nil {

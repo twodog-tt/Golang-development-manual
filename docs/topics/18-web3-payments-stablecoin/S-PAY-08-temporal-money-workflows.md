@@ -125,21 +125,21 @@ node examples/onchain-execution/client/payment-cli.mjs demo 10
 | 边界 | 持久身份 / 判定 |
 |---|---|
 | 支付收款 | payment ID 写入 bytes32 reference；Paid 的 reference/amount/Token 与订单一致 |
-| 收款过账 | ops.events 保存不可变链证据；settle journal 与 Outbox 同事务 |
+| 收款过账 | ops.events 保存不可变链证据；入账时重核 canonical 并持久化 settlement_evidence；settle 与 Outbox 同事务 |
 | 资金冻结 | 一个订单只有一个 conversion；hold journal 与不可变请求同事务，intent 固定 convert_paymentID |
 | 链上执行 | 原文先持久化；响应未知、进程中断后仍查询原 nonce/hash/attempt |
 | 输出入账 | 已索引 canonical Swap + 输入/输出 Transfer；swap-in、swap-out、conversion 状态同事务 |
-| 后续审计 | ChainPaymentWorkflow 入账后持续查询，50 轮 ContinueAsNew；重组只冲正，不自动重发 |
+| 后续审计 | ChainPaymentWorkflow 入账后持续查询，通知失败仍审计，50 轮 ContinueAsNew；冲正失败或证据变化进入 review_chain，不自动重发 |
 
 各币种分别平衡；不把 10 LABUSD 输入写成 10 LABDAI 输出。输出使用实际链上金额字符串，最小输出只是一条拒绝条件。节点观察、chain 数据库与支付数据库不构成跨系统 ACID；持续审计处理观察后重组窗口。
 
-新模式使用单独的 ChainPaymentWorkflow / ConversionWorkflow / ChainReconcileWorkflow，原 PaymentWorkflow 的命令顺序与 approval-audit 历史版本分支保留。原历史正负回放继续由旧 harness 验证；新监控的 ContinueAsNew 另有 SDK 时间跳跃测试，不夸大成生产滚动升级验收。
+新模式使用单独的 ChainPaymentWorkflow / ConversionWorkflow / ChainReconcileWorkflow，原 PaymentWorkflow 的命令顺序与 approval-audit 历史版本分支保留。原历史正负回放继续由旧 harness 验证；新监控的 ContinueAsNew 与 chain-monitor-after-notify 新旧分支另有 SDK 时间跳跃测试，不夸大成生产滚动升级验收。
 
 ### 故障与验收
 
-7 组实际集成验证覆盖收款缺 Paid、Worker 重启、广播成功但响应丢失、gateway/worker SIGKILL、缺 Swap 时维持冻结、跨资产 COMMIT 抛错与同意图恢复、实际 reverted 后释放冻结、错误金额不入账、已结算 Paid/Swap 重组后的顺序冲正，以及真实 custody/账本/未归属资金对账。通知持久化后丢 ACK 仍只有一个 Inbox。详细断言与逐组证据见运行指南及本次报告。
+12 组实际集成验证覆盖收款缺 Paid、Worker 重启、广播成功但响应丢失、gateway/worker SIGKILL、缺 Swap 时维持冻结、跨资产 COMMIT 抛错与同意图恢复、实际 reverted 后释放冻结、错误金额不入账、已结算 Paid/Swap 重组后的顺序冲正，以及真实 custody/账本/未归属资金对账。新增验证通知重试耗尽仍审计、输出已消费时整组冲正回滚与商户暂停换币、新分支不足确认深度拒绝旧证据、旧 Activity 参数不能再次入账/释放，以及无 intent 的冻结仍能识别收款重组。通知持久化后丢 ACK 仍只有一个 Inbox。详细断言与逐组证据见运行指南及本次报告。
 
-错误金额占用 reference、spend 在其他分支仍存在、资金已被消费或长期结果未知都不能自动退款；本例会拒绝入账或保留 review/冻结，需人工核对。chain 模式禁用旧模拟退款接口和模拟 webhook；没有实现真实链上退款、gas 会计或生产资产托管。
+错误金额占用 reference、spend 在其他分支仍存在、资金已被消费或长期结果未知都不能自动退款；本例会拒绝入账或进入独立的 review_chain、保留原记账阶段并暂停该商户后续换币，需人工核对；普通数据库失败的 conversion=review 仍可在 payment=settled 且证据一致时 resume。chain 模式禁用旧模拟退款接口和模拟 webhook；没有实现真实链上退款、gas 会计或生产资产托管。
 
 ## 架构取舍
 

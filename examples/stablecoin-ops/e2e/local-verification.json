@@ -5,7 +5,7 @@
       "name": "wallet_payment_indexer_gate_worker_restart_ledger_inbox",
       "result": "passed",
       "detail": {
-        "payment": "ee050d3e9f7bb5ba166e147666b0e8f08a3618332055e9e5",
+        "payment": "1e742073e40c386a77c5dc6aab40ade1388e1c67b81f5e4d",
         "asset": "31337:0x5fbdb2315678afecb367f032d93f642f64180aa3:LABUSD:6",
         "amount": "100000000"
       }
@@ -14,7 +14,7 @@
       "name": "payment_to_defi_response_loss_restart_indexer_delay_atomic_settlement",
       "result": "passed",
       "detail": {
-        "intent": "convert_ee050d3e9f7bb5ba166e147666b0e8f08a3618332055e9e5",
+        "intent": "convert_1e742073e40c386a77c5dc6aab40ade1388e1c67b81f5e4d",
         "nonce": "1",
         "output": "99690060",
         "evidence": {
@@ -25,9 +25,9 @@
           "amount": "99690060",
           "height": 59,
           "indexed": 82,
-          "reference": "",
-          "block_hash": "0xea054bd32567826733e6badf19da41237ff40f4837d514e930de0a186b23a5f2",
-          "transaction": "0x7f72f4bd53bd70f8f0a53f224ce0db2d60989cdaeb171669cbf61f413e704d07"
+          "reference": "convert_1e742073e40c386a77c5dc6aab40ade1388e1c67b81f5e4d",
+          "block_hash": "0x5d1d1d32362c74e28f2b1aacfd16e919e27476c431ff47ef6e5b2f0688dacd9b",
+          "transaction": "0x7d5814d62c0f19305694e2b9a48d33009c4fff41da6d7d28af5de1386ca024f7"
         }
       }
     },
@@ -35,8 +35,8 @@
       "name": "cross_asset_commit_rollback_and_same_intent_resume",
       "result": "passed",
       "detail": {
-        "payment": "960a534a4c87a9e3795b7fd8be18532f3ae4aedf88ecb630",
-        "intent": "convert_960a534a4c87a9e3795b7fd8be18532f3ae4aedf88ecb630",
+        "payment": "55d18f67ac43b95c736778ee7aae70b4a96e8e35161e824a",
+        "intent": "convert_55d18f67ac43b95c736778ee7aae70b4a96e8e35161e824a",
         "output": "19935621"
       }
     },
@@ -44,8 +44,8 @@
       "name": "canonical_revert_releases_hold_without_refund_or_output_credit",
       "result": "passed",
       "detail": {
-        "payment": "a8d0149d3bf92fec7133063a0a583983e670c593af96434b",
-        "hash": "0x6932a8ce7ddc31e4deccc036a3d19da982086da1321fc1a7560e92c4f708a20a"
+        "payment": "f6528ae51988118cd467f1a21ce102b6588799441ed7666d",
+        "hash": "0x2504d0cf832adf92b51f0b186179da5bbd32c680b5763d69d0ac140a0adedbf2"
       }
     },
     {
@@ -56,31 +56,6 @@
       }
     },
     {
-      "name": "post_settlement_reorg_compensates_conversion_then_payment_once",
-      "result": "passed",
-      "detail": {
-        "payment": "33367c443c763651755e4cb0182eb5f123eeee2c38a309e3",
-        "reversals": [
-          "undo-out:33367c443c763651755e4cb0182eb5f123eeee2c38a309e3",
-          "undo-in:33367c443c763651755e4cb0182eb5f123eeee2c38a309e3",
-          "release:33367c443c763651755e4cb0182eb5f123eeee2c38a309e3",
-          "reorg:33367c443c763651755e4cb0182eb5f123eeee2c38a309e3"
-        ],
-        "original_evidence": {
-          "epoch": 0,
-          "input": "5000000",
-          "state": "confirmed",
-          "token": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
-          "amount": "3462831",
-          "height": 121,
-          "indexed": 124,
-          "reference": "",
-          "block_hash": "0x7553afeafec47c4d179462cac0fa448335038a38c7cb494a04127be51b06e547",
-          "transaction": "0x39ea8073d8344e54d2731a6c0161376df10980f0e9f368864e433684108ed8c5"
-        }
-      }
-    },
-    {
       "name": "custody_ledger_reconciliation_and_per_asset_balancing",
       "result": "passed",
       "detail": {
@@ -88,6 +63,67 @@
         "custody_out": "119625681",
         "held": "0",
         "unallocated": "1"
+      }
+    },
+    {
+      "name": "post_settlement_reorg_compensates_conversion_then_payment_once",
+      "result": "passed",
+      "detail": {
+        "payment": "142db2378eb5a74f1e7810fcd7cfeb4f4495f8cc12465f1f",
+        "reversals": [
+          "undo-out:142db2378eb5a74f1e7810fcd7cfeb4f4495f8cc12465f1f",
+          "undo-in:142db2378eb5a74f1e7810fcd7cfeb4f4495f8cc12465f1f",
+          "release:142db2378eb5a74f1e7810fcd7cfeb4f4495f8cc12465f1f",
+          "reorg:142db2378eb5a74f1e7810fcd7cfeb4f4495f8cc12465f1f"
+        ],
+        "original_evidence": {
+          "epoch": 0,
+          "input": "5000000",
+          "state": "confirmed",
+          "token": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
+          "amount": "3462796",
+          "height": 152,
+          "indexed": 155,
+          "reference": "convert_142db2378eb5a74f1e7810fcd7cfeb4f4495f8cc12465f1f",
+          "block_hash": "0xceba1471b764ee0bec2b87132325b7c403760a349235160a48b15e1231e20b96",
+          "transaction": "0x52973b79cdc8059f7aa77dd01ee6ef0453200f390cc309dbbfe9d9b868fdc072"
+        }
+      }
+    },
+    {
+      "name": "notification_outage_does_not_stop_reorg_monitor",
+      "result": "passed",
+      "detail": {
+        "payment": "124a3309da26189b109095793033b0dd3046b4b31574a15a"
+      }
+    },
+    {
+      "name": "consumed_output_atomic_rollback_and_merchant_quarantine",
+      "result": "passed",
+      "detail": {
+        "payment": "2564a6f4820fc4251a42ead2aa5cf1bb3c7f40864e372aaf",
+        "output": "2770267"
+      }
+    },
+    {
+      "name": "replaced_unconfirmed_deposit_cannot_reuse_confirmed_inbox",
+      "result": "passed",
+      "detail": {
+        "payment": "f1bd10f828171df05308b6b9e6f20ec272d2bb7510145a64"
+      }
+    },
+    {
+      "name": "orphaned_success_cannot_settle_from_stale_activity_argument",
+      "result": "passed",
+      "detail": {
+        "payment": "116860c82e5a687c6c62ce14784e83933a400da0d45dc221"
+      }
+    },
+    {
+      "name": "missing_intent_does_not_hide_orphaned_deposit_or_release_hold",
+      "result": "passed",
+      "detail": {
+        "payment": "861d14617dfbe911f1bf3b05348e48d1c0c1f596a12ef04f"
       }
     }
   ],
@@ -101,8 +137,8 @@
     "receiver_code_hash": "0x511b28119ed32177a370b34a814f94a457121eb17e932826462ba2073f5ccc2b"
   },
   "scope": "Actual local payment reference contract, synthetic stablecoins, Uniswap V2, Go payment/gateway/worker, separate PostgreSQL databases, Temporal and merchant Inbox; no public-chain funds or PSP",
-  "run_id": "payment-e2e-d6d5bec7990d",
-  "checked_at": "2026-10-19T02:10:31Z",
+  "run_id": "payment-e2e-7c46820b293a",
+  "checked_at": "2026-10-19T02:52:37Z",
   "go": "go version go1.24.3 darwin/arm64",
   "node": "v22.15.0",
   "anvil": "anvil Version: 1.4.4-stable\nCommit SHA: 05794498bf47257b144e2e2789a1d5bf8566be0e\nBuild Timestamp: 2025-11-03T23:46:57.847015000Z (1762213617)\nBuild Profile: maxperf",
@@ -123,38 +159,39 @@
     "examples/stablecoin-ops/cmd/history/main.go": "802605f14698e065e37fad36ea345389e16a48c16b1cf03546d8c349adf2a3ba",
     "examples/stablecoin-ops/cmd/provider/main.go": "b29aaeb41f6d8e796d93dd035ec75534c41dad3c399a399d90ea6d27d0f90f46",
     "examples/stablecoin-ops/cmd/worker/main.go": "fe6dda2cf37c4aac750118a970713ec324f91935797b76975396b43ea7255635",
-    "examples/stablecoin-ops/e2e/README.md": "288cdfd8ce48ab03411dabf0c0a2182f896aa3be1e13822491f9354a4f695a21",
-    "examples/stablecoin-ops/e2e/verify.py": "3221afb282e4041b57a441e87a5be6ac2d9e12b634ef32a219195daf009bd64f",
+    "examples/stablecoin-ops/e2e/README.md": "492a7a1cf69cd828ef1eb07ba3c7b16608a219bd8a06c3d39b9a24969cb1da5f",
+    "examples/stablecoin-ops/e2e/verify.py": "b1e32db63f56fc1049875a8f7db0de965851744691dce4495a6d1dd8ac7f0a4d",
     "examples/stablecoin-ops/go.mod": "029dca895e8a27fc2840e77af910cfaf3f96d0e328322e2316654e7acdcd6bb1",
     "examples/stablecoin-ops/go.sum": "5be8be2209f4e28798beff14f49336dae7897bc3307c70738a9819626eecd93e",
     "examples/stablecoin-ops/internal/ops/auth.go": "fb3302f618602df5bb602ae84085288f71c6f0cb766df31f442bbbabb688cfb7",
-    "examples/stablecoin-ops/internal/ops/chain.go": "fcfca22583b101fded93cc0e677d16070f656b0c1e2ea54cb97b37a3e4945d29",
+    "examples/stablecoin-ops/internal/ops/chain.go": "2aa8fe623e251562375eccec32dfd2a02e56c93c02e39e003e1aee7975729c2d",
+    "examples/stablecoin-ops/internal/ops/chain_integration_test.go": "fb3244e13255a6cecacba3b11afb11e8e0c0a1a8c41b399902a086fc1f29a11f",
     "examples/stablecoin-ops/internal/ops/channel.go": "f28502bc962a260702d7b4ceef4ceb67d9c4eef29b7adfc1d726aabbad96b617",
     "examples/stablecoin-ops/internal/ops/config.go": "b13b368642829a273338b7c4c8388107a38306bed4a39e942cb14af890b8079f",
-    "examples/stablecoin-ops/internal/ops/http.go": "4b1d0fb94a8ba53fa6118f09c8668e5ae51c5e1de2eed4a7eaa42455b6731137",
-    "examples/stablecoin-ops/internal/ops/ops_test.go": "7946cb2d8272f7b6f81200c2353ce809bfcc763e73d84a3ce05021abbeb74b7d",
-    "examples/stablecoin-ops/internal/ops/schema.sql": "7b4486836ce281ee46a4b37cc2c76d4e21f2cfc524a24ad5c26d733b2cc74b27",
-    "examples/stablecoin-ops/internal/ops/store.go": "86bcbf7dbbb72c5e21c49b95b8bff5f16856854d27bb5a1b9192c3417c6bb406",
-    "examples/stablecoin-ops/internal/ops/workflow.go": "26b0227e6d3624c0b838364b4032677ed91911968a081e2ec70724115f40804d",
+    "examples/stablecoin-ops/internal/ops/http.go": "1eaaa9f5b4cfe1e46e505b3ff2db684a50914549b100c4b061ef1444f7fa5df3",
+    "examples/stablecoin-ops/internal/ops/ops_test.go": "ab1b6c789bef143313711757335e27807eccb92bcdac79b4ab04d2490d8ffa04",
+    "examples/stablecoin-ops/internal/ops/schema.sql": "4238d62c03c1a40858c8285716af576747486caf3cd756705c0013d5cf2a4134",
+    "examples/stablecoin-ops/internal/ops/store.go": "e83c782615c0e714a67a4a0c434c530c84434ab5113c3e2cd80c89f3c7b24bbc",
+    "examples/stablecoin-ops/internal/ops/workflow.go": "9667517115ab3c068667ca7deae19f12571572b48193df56f07bb56c1f0f343b",
     "examples/stablecoin-ops/verify.py": "02007f5375444ffe9b6ec4f173f78eed64bbaba5547bf8c4e041adc613fe578e",
     "examples/onchain-execution/.gitignore": "f67e50b2e2f697682e3890215379c535cf718f356709e1f51a468428ce02489e",
-    "examples/onchain-execution/README.md": "b20f9f3511f02a31d77cb0190578c3fc0756939d2c62ccdf6edcd09e8c5a7a18",
+    "examples/onchain-execution/README.md": "b4484b8c834bf33a965b07b93dce93d67b67dbe687f83bb5b13bf5768c1ddd06",
     "examples/onchain-execution/client/PaymentReceiver.sol": "7b6df412b65e2b70460ed76e82066d64b6f03d7d517d76fa06fb460ff21e80f8",
     "examples/onchain-execution/client/Token.sol": "2a0245a4c1d579a0c81b9ed14425a2a490598382407b2754514f7e612c14f4a5",
-    "examples/onchain-execution/client/integration.mjs": "91b760a291c82bf73a54d878881116cf6b58eb19bb1c4cbb64f8d66d7149e71c",
+    "examples/onchain-execution/client/integration.mjs": "6ca0fbef78e2389d837c79a4c8a7da3a61e3d00c3687036669b87c6605165a01",
     "examples/onchain-execution/client/package-lock.json": "96797523b344bc27127c85ecda03b1e7a6435f70d063d38c50a05aefe8f9d429",
     "examples/onchain-execution/client/package.json": "452e54602c3705e003b44d36a5a741860671da15d75c8884471d0efc6ee1a83f",
     "examples/onchain-execution/client/payment-cli.mjs": "4962b7b4489dba89dfb3b74e775484ab69e15b6ffcea097257de358b9f3f8289",
-    "examples/onchain-execution/client/payment-e2e.mjs": "b0fe24579904106c7557985791f90e7dc444293b804dfaeda46842478d7fca17",
+    "examples/onchain-execution/client/payment-e2e.mjs": "853d9d5169386260e565238f3c400d5c478e6f61a3ee30ae482c7a9a36ae6082",
     "examples/onchain-execution/cmd/server/main.go": "09839d4f54de9ffe973e1062c4ef5575d2ef7b198ee96cb493a9e211bc55d21a",
     "examples/onchain-execution/go.mod": "e99ea1591d51a8393b9821f4900fb424b9c2048f44dfc00972d2ad287303e0a7",
     "examples/onchain-execution/go.sum": "837549e154c0808e5c859293d3b5706c2c805357c99a186c326e91c7b81ebe02",
-    "examples/onchain-execution/internal/lab/evidence.go": "397f422ead1027c796b1eb92314b532a7a877fc295de0c66af52dfcac1f6512c",
-    "examples/onchain-execution/internal/lab/gateway.go": "6b0dce9ec24d28edd75e70032ac213755a830317b4eaba852418d250edb9f524",
+    "examples/onchain-execution/internal/lab/evidence.go": "9b0c53a76abf0054649fa7d33a9bc7bac3389aadd146cac18b75bc8e8dd2e9be",
+    "examples/onchain-execution/internal/lab/gateway.go": "efc75cc42fc7f25b8e7a88ef43c6297a720e5e9477260f2f584a58f6dc4c0e9d",
     "examples/onchain-execution/internal/lab/http.go": "23a4f849cdf419ee0357602d1c5120c9f3c322676cf04618e1d8b1a65cc685e2",
     "examples/onchain-execution/internal/lab/indexer.go": "cd5daf8d696574994d9812a71b0308561ec34bcecfb52fe6eb2bf988abfa14eb",
     "examples/onchain-execution/internal/lab/lab_test.go": "d137d8c6624877878f794d9d4bbe4ea773c4a06308901343824b04e7a10a529c",
-    "examples/onchain-execution/internal/lab/schema.sql": "2a06f758f9713bfae4a1ba64432d7e1b0c6d11b5f5e897116cf17a1c363c35a2",
+    "examples/onchain-execution/internal/lab/schema.sql": "2331d1905cb3c47fbe0869a0f2b89b0477051ce93bdf1d9ca43819c4d0310a36",
     "examples/onchain-execution/verify.py": "297141bc76d6903fedaf7b6afbd9ba81edc36e199003c06e821e3c6b37d4c675",
     "examples/postgres-reliability/schema.sql": "f783ed47e76346bd343f10c5cdaa06ab85b8e325d211121c9a052fea663085f7"
   }

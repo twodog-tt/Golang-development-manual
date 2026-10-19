@@ -43,4 +43,4 @@
 
 ## 支付到 DeFi 端到端实战
 
-[完整链路](S-PAY-08-temporal-money-workflows.md#payment-e2e) 将四篇支付与 NODE-11/12、EXCH-32 接通。钱包真实支付本地合成 Token，经过 canonical 索引、账本冻结与实际 V2 兑换，最终双资产入账/商户通知；7 组端到端故障验证。
+[完整链路](S-PAY-08-temporal-money-workflows.md#payment-e2e) 将四篇支付与 NODE-11/12、EXCH-32 接通。钱包真实支付本地合成 Token，经过 canonical 索引、账本冻结与实际 V2 兑换，最终双资产入账/商户通知；12 组端到端故障验证。

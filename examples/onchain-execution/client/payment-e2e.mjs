@@ -50,6 +50,13 @@ function start(name,extra={}){
 async function stop(name){const child=children.get(name);if(child && child.exitCode===null && child.signalCode===null){const done=once(child,'exit');child.kill('SIGKILL');await done;}children.delete(name);}
 async function startGateway(){start('gateway',{DATABASE_URL:env.CHAIN_DATABASE_URL,LISTEN_ADDR:new URL(env.CHAIN_GATEWAY_URL).host});await until(()=>gateway('/health'),v=>v.chain===31337,'gateway ready');}
 async function pauseMiner(){mining=false;if(miningPromise)await miningPromise;}
+async function checkActivity(mode,p,extra={}) {
+ const child=spawn(env.LAB_CHAIN_TEST_BIN,['-test.run=^TestChainReviewIntegration$','-test.v'],{env:{...env,LAB_CHAIN_REVIEW_CASE:mode,LAB_PAYMENT_ID:p.id,...extra},stdio:'inherit'});
+ const [code]=await once(child,'exit');assert.equal(code,0,'Activity regression '+mode);
+}
+async function fork(snapshot) {
+ await pauseMiner();assert.equal(await rpc('evm_revert',[snapshot]),true);await rpc('anvil_dropAllTransactions');await rpc('evm_increaseTime',[11]);await rpc('anvil_mine',['0x3']);
+}
 const mark=(name,detail)=>{checks.push({name,result:'passed',detail});console.log('PASS',name);};
 try{
  await until(()=>pc.getChainId(),v=>v===31337,'local Anvil');
@@ -91,7 +98,7 @@ try{
  miner=setInterval(()=>{if(mining && !miningPromise){miningPromise=rpc('anvil_mine',['0x1']).finally(()=>{miningPromise=undefined;});}},350);
  const client=new OpsClient(env.API_URL,fixtureKey,env.PAYMENT_ASSET),other=new OpsClient(env.API_URL,fixtureKey2,env.PAYMENT_ASSET);
  await client.login();await other.login();
- const paymentState=(id,state)=>until(()=>client.get(id),v=>v.state===state,'payment '+state);
+ const paymentState=(id,state,scope=client)=>until(()=>scope.get(id),v=>v.state===state,'payment '+state);
  const conversion=id=>client.call('/payments/'+id+'/conversion');
  const converted=(id,state='settled')=>until(()=>conversion(id),v=>v.state===state,'conversion '+state,50);
  const pay=async p=>write(pw,receiver,receiverBuild.abi,'pay',[padHex('0x'+p.id,{size:32}),BigInt(p.amount_atomic)]);
@@ -169,7 +176,30 @@ try{
  await pause(1800);assert.notEqual((await client.get(bad.id)).state,'settled');assert.equal((await one('SELECT count(*) FROM lab.journals WHERE id=$1',['settle:'+bad.id])).count,'0');
  mark('mismatched_deposit_and_tenant_cannot_credit',{unallocated_atomic:'1'});
 
+ const held=BigInt((await one("SELECT COALESCE(sum(balance),0)::text AS total FROM lab.accounts WHERE id LIKE 'held:%'")).total);
+ const custodyIn=await read(tokenA,token.abi,'balanceOf',[trader.address]),custodyOut=await read(tokenB,token.abi,'balanceOf',[trader.address]);
+ assert.equal(custodyIn,await balance('merchant_a')+held+1n);assert.equal(custodyOut,await balance('merchant_a:out'));
+ assert.equal((await one('SELECT count(*) FROM lab.balance_drift')).count,'0');
+ assert.equal((await one('SELECT count(*) FROM (SELECT journal_id,currency FROM lab.entries GROUP BY journal_id,currency HAVING sum(delta)<>0) q')).count,'0');
+ mark('custody_ledger_reconciliation_and_per_asset_balancing',{custody_in:custodyIn.toString(),custody_out:custodyOut.toString(),held:held.toString(),unallocated:'1'});
+
+ // Prepare all real signed spends before any destructive fork. The gateway
+ // must refuse new nonce allocation after the first unresolved reorg.
+ const spent=await makePayment('consumed-output','4');
+ const b=await other.create('stale-execution','2');await other.approve(b.id);await paymentState(b.id,'pending',other);await pay(b);await paymentState(b.id,'settled',other);
+ const missing=await other.create('missing-intent','1');await other.approve(missing.id);await paymentState(missing.id,'pending',other);
+ await pauseMiner();const missingSnapshot=await rpc('evm_snapshot');mining=true;await pay(missing);await paymentState(missing.id,'settled',other);
+ await pauseMiner();const spentSnapshot=await rpc('evm_snapshot');mining=true;
+ await convert(spent);const spentConversion=await converted(spent.id);
+ const missingTerms=await other.call('/payments/'+missing.id+'/conversion-quote');
+ await checkActivity('create-hold',missing,{LAB_MERCHANT:'merchant_b',LAB_CONVERSION_REQUEST:JSON.stringify({min_out:missingTerms.min_out,deadline:missingTerms.deadline})});
+ const bTerms=await other.call('/payments/'+b.id+'/conversion-quote');
+ await checkActivity('create-hold',b,{LAB_MERCHANT:'merchant_b',LAB_CONVERSION_REQUEST:JSON.stringify({min_out:bTerms.min_out,deadline:bTerms.deadline})});
+ await gateway('/intents/convert_'+b.id,{amount:b.amount_atomic,min_out:bTerms.min_out,deadline:bTerms.deadline});await gateway('/intents/convert_'+b.id+'/broadcast',{});await rpc('anvil_mine',['0x2']);await gateway('/index/sync',{});
+ const oldSuccess=await gateway('/evidence/executions/convert_'+b.id);assert.equal(oldSuccess.state,'confirmed');
+
  const beforeIn=await balance('merchant_a'),beforeOut=await balance('merchant_a:out');
+ const preReorgCustodyIn=await read(tokenA,token.abi,'balanceOf',[trader.address]),preReorgCustodyOut=await read(tokenB,token.abi,'balanceOf',[trader.address]);
  await pauseMiner();const snapshot=await rpc('evm_snapshot');mining=true;
  const reorg=await makePayment('full-reorg','5');await convert(reorg);const beforeReorg=await converted(reorg.id);
  await until(()=>one("SELECT count(*) FROM lab.outbox WHERE event_id=$1 AND published",['swap-out:'+reorg.id]),v=>v.count==='1','pre-reorg notification');
@@ -178,19 +208,78 @@ try{
  assert.equal(await rpc('evm_revert',[snapshot]),true);await rpc('anvil_dropAllTransactions');await rpc('evm_increaseTime',[9]);await rpc('anvil_mine',['0x3']);mining=true;start('worker');
  await paymentState(reorg.id,'review_reversed');await converted(reorg.id,'review_reversed');
  assert.equal(await balance('merchant_a'),beforeIn);assert.equal(await balance('merchant_a:out'),beforeOut);
+ assert.equal(await read(tokenA,token.abi,'balanceOf',[trader.address]),preReorgCustodyIn);assert.equal(await read(tokenB,token.abi,'balanceOf',[trader.address]),preReorgCustodyOut);
  const reversals=['undo-out:','undo-in:','release:','reorg:'].map(p=>p+reorg.id);
  await until(()=>one('SELECT count(*) FROM lab.outbox WHERE event_id=ANY($1::text[]) AND published',[reversals]),v=>v.count==='4','reorg notifications');
  assert.equal((await one('SELECT count(*) FROM ops.merchant_inbox WHERE event_id=ANY($1::text[])',[reversals])).count,'4');
  assert.equal((await chainDB.query('SELECT count(*) FROM attempts WHERE intent=$1',[beforeReorg.intent])).rows[0].count,'1');
  assert.equal((await one('SELECT count(*) FROM lab.journals WHERE id=ANY($1::text[])',[reversals])).count,'4');
+ const attemptsBefore=(await chainDB.query('SELECT count(*) FROM attempts')).rows[0].count;
+ await gateway('/intents/unsafe-after-reorg',{amount:'1000000',min_out:'1',deadline:Number(await deadline())},409);
+ assert.equal((await chainDB.query('SELECT count(*) FROM attempts')).rows[0].count,attemptsBefore);
  mark('post_settlement_reorg_compensates_conversion_then_payment_once',{payment:reorg.id,reversals,original_evidence:beforeReorg.evidence});
 
- const held=BigInt((await one("SELECT COALESCE(sum(balance),0)::text AS total FROM lab.accounts WHERE id LIKE 'held:%'")).total);
- const custodyIn=await read(tokenA,token.abi,'balanceOf',[trader.address]),custodyOut=await read(tokenB,token.abi,'balanceOf',[trader.address]);
- assert.equal(custodyIn,await balance('merchant_a')+held+1n);assert.equal(custodyOut,await balance('merchant_a:out'));
+
+ // A delivery outage must not terminate the financial monitor. Revert an
+ // already credited payment after the initial Notify retries have exhausted.
+ await pauseMiner();const notifySnapshot=await rpc('evm_snapshot');mining=true;
+ await query("INSERT INTO ops.faults(name,remaining) VALUES('notify_response_lost',100) ON CONFLICT(name) DO UPDATE SET remaining=100");
+ const notifyPayment=await makePayment('notification-audit-outage','3');await pause(4200);
+ await fork(notifySnapshot);mining=true;
+ await paymentState(notifyPayment.id,'review_reversed');
+ await query("UPDATE ops.faults SET remaining=0 WHERE name='notify_response_lost'");
+ await until(()=>one('SELECT count(*) FROM lab.outbox WHERE event_id=$1 AND published',['reorg:'+notifyPayment.id]),v=>v.count==='1','notification retry after financial recovery');
+ mark('notification_outage_does_not_stop_reorg_monitor',{payment:notifyPayment.id});
+
+ // Remove both prepared spends after all signing has finished.
+ await stop('worker');
+ await query("INSERT INTO lab.accounts VALUES('consumed_output','LABDAI',0,0)");
+ const totalOut=await balance('merchant_a:out');
+ await query("SELECT lab.transfer('fixture-consumed-output','merchant_a:out','consumed_output','LABDAI',$1)",[totalOut.toString()]);
+ await fork(spentSnapshot);
+ await checkActivity('audit',spent,{LAB_EXPECT_STATE:'review_chain'});
+ const untouched=['undo-out:','undo-in:','release:'].map(x=>x+spent.id);
+ assert.equal((await one('SELECT count(*) FROM lab.journals WHERE id=ANY($1::text[])',[untouched])).count,'0');
+ assert.equal((await conversion(spent.id)).state,'settled');
+ assert.match((await one("SELECT audit_evidence->>'compensation_error' AS error FROM ops.payments WHERE id=$1",[spent.id])).error,/insufficient funds/);
+ assert.equal((await client.request('/payments/'+spent.id+'/reconcile','POST')).status,409);
+ assert.equal((await client.request('/payments/'+spent.id+'/conversion/resume','POST')).status,409);
+ assert.equal((await client.request('/payments/'+first.id+'/convert','POST',terms)).status,409);
+ await checkActivity('submit-rejected',rollback);
+ mark('consumed_output_atomic_rollback_and_merchant_quarantine',{payment:spent.id,output:spentConversion.output_atomic});
+
+ // Restore only the fixture's internal transfer; this does not clear the
+ // quarantine. Remaining cases construct existing Activities' inputs directly.
+ await query("SELECT lab.reverse_transfer('fixture-restore-output','fixture-consumed-output')");
+ // A provider has already observed confirmation, but the branch is replaced
+ // with the same reference in a block that has only one confirmation.
+ start('worker');
+ const stale=await client.create('stale-deposit','2');await client.approve(stale.id);await paymentState(stale.id,'pending');await stop('worker');
+ await pauseMiner();const depositSnapshot=await rpc('evm_snapshot');await pay(stale);await rpc('anvil_mine',['0x2']);
+ await checkActivity('observe',stale);
+ await fork(depositSnapshot);await pay(stale);
+ await checkActivity('settle-rejected',stale);
+ assert.equal((await one('SELECT count(*) FROM lab.journals WHERE id=$1',['settle:'+stale.id])).count,'0');
+ mark('replaced_unconfirmed_deposit_cannot_reuse_confirmed_inbox',{payment:stale.id});
+
+ // Both prepared spends were removed by spentSnapshot. Retry the old
+ // success proof directly; no new authorization is created after quarantine.
+ await checkActivity('stale-finish',b,{LAB_OLD_EVIDENCE:JSON.stringify({...oldSuccess,state:'reverted',amount:'',input:''})});
+ await checkActivity('stale-finish',b,{LAB_OLD_EVIDENCE:JSON.stringify(oldSuccess)});
+ assert.equal(await balance('held:'+b.id),2000000n);assert.equal(await balance('merchant_b:out'),0n);
+ assert.equal((await one('SELECT count(*) FROM lab.journals WHERE id=$1',['swap-out:'+b.id])).count,'0');
+ mark('orphaned_success_cannot_settle_from_stale_activity_argument',{payment:b.id});
+
+ // A hold exists but Submit never reached the gateway. Losing the deposit must
+ // still quarantine it; a 404 execution proof must not suppress the audit.
+ await fork(missingSnapshot);
+ await checkActivity('audit',missing,{LAB_EXPECT_STATE:'review_chain'});
+ await checkActivity('submit-rejected',missing);
+ assert.equal((await chainDB.query('SELECT count(*) FROM intents WHERE id=$1',['convert_'+missing.id])).rows[0].count,'0');
+ assert.equal(await balance('held:'+missing.id),1000000n);
+ assert.equal((await client.request('/payments/'+missing.id+'/conversion/resume','POST')).status,404);
+ mark('missing_intent_does_not_hide_orphaned_deposit_or_release_hold',{payment:missing.id});
  assert.equal((await one('SELECT count(*) FROM lab.balance_drift')).count,'0');
- assert.equal((await one('SELECT count(*) FROM (SELECT journal_id,currency FROM lab.entries GROUP BY journal_id,currency HAVING sum(delta)<>0) q')).count,'0');
- mark('custody_ledger_reconciliation_and_per_asset_balancing',{custody_in:custodyIn.toString(),custody_out:custodyOut.toString(),held:held.toString(),unallocated:'1'});
  fs.writeFileSync(path.join(output,'payment-e2e.json'),JSON.stringify({result:'passed',checks,contracts:config,scope:'Actual local payment reference contract, synthetic stablecoins, Uniswap V2, Go payment/gateway/worker, separate PostgreSQL databases, Temporal and merchant Inbox; no public-chain funds or PSP'},null,2)+'\n');
 
  }

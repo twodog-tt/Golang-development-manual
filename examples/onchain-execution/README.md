@@ -46,7 +46,7 @@ python3 examples/onchain-execution/verify.py --report /tmp/onchain-execution/res
 | 查询快照 | 固定高度/hash，读下一页期间新增区块并同步；全量分页无重复/缺失且不混入新快照 |
 | RPC 数据质量 | 代理删掉一个 Transfer 或篡改其 ABI payload；receipt 交叉校验或解码拒绝，水位不前移，持久化质量错误 |
 | 数据库原子性 | canonical 写入触发器抛错；raw 和水位全部回滚，删除故障触发器后重扫成功 |
-| 链重组 | Anvil snapshot/revert 创建另一分支；旧 raw 保留、canonical 排除旧成交、epoch 增加、旧游标 409，旧 confirmed 意图进入 orphaned_review 且禁止自动重发 |
+| 链重组 | Anvil snapshot/revert 创建另一分支；旧 raw 保留、canonical 排除旧成交、epoch 增加、旧游标 409，旧 confirmed 意图进入 orphaned_review；真实重新广播原签名被包含后，review_required 仍保留，新意图 409 |
 
 `--report` 开始时删除该路径的旧报告，只在整组成功后写 `result=passed`，包含运行 ID、工具版本、镜像 ID、逐组事实和源文件 SHA-256。`local-verification.json` 是一次本地记录，不能当作每个环境都成功的证明。
 
@@ -79,7 +79,7 @@ curl -X POST http://127.0.0.1:实际端口/index/sync -d '{}'
 
 本例仅绑定回环 IP，使用公开 Anvil 测试私钥，**不可充值真实资产**。没有身份认证、租户隔离、KMS/HSM、访问限流或资金审批；静态知识站只部署文档，不上线此 API。单链、单签名账户、单 Router、单池、单向 exact-input；网关固定 calldata 路径与收款人，校验 chain ID 和 Router 代码哈希。业务幂等键是本地全局 key，生产必须增加租户作用域。
 
-签名账户必须由网关独占。示例故障夹具在已无 pending 意图时才直接用该账户执行 approve；生产不能让另一个钱包应用并发占用 nonce。签名原文先入库，恢复只认相同 intent/nonce/attempt；不自动释放 nonce、不自动跳过 stuck gap、不在 reorg 后自动创建新意图。
+签名账户必须由网关独占。示例故障夹具在已无 pending 意图时才直接用该账户执行 approve；生产不能让另一个钱包应用并发占用 nonce。签名原文先入库，恢复只认相同 intent/nonce/attempt；新建、广播、提价与 reconcile 共用 signer advisory lock。未解决的 reorg 或 pending nonce 回落会暂停账户授权；review_required 独立持久化，重新包含不会自动解除人工审查。不自动释放 nonce、不自动跳过 stuck gap、不在 reorg 后自动创建新意图。
 
 两块确认只演示业务深度阈值，不是 Ethereum PoS finality。Anvil rollback 是可控本地分支测试，不能替代 EL/CL、多 Provider、L2 sequencer、跨节点网络分区与 finalized 冲突验收。Indexer 用单一节点的 logs 与 receipts 交叉核对，可检测两接口不一致，不能识别同一节点一致伪造或同时漏报；上生产需独立来源、根/证明验证和覆盖率审计。
 

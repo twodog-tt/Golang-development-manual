@@ -251,7 +251,8 @@ func API(auth Auth, temporal client.Client, secret string, approvalSeconds, obse
 			fail(w, 404)
 			return
 		}
-		if c.State != "review" {
+		p, paymentErr := store.Get(r.Context(), r.Header.Get("X-Merchant-Internal"), id)
+		if paymentErr != nil || p.State != "settled" || c.State != "review" {
 			fail(w, 409)
 			return
 		}

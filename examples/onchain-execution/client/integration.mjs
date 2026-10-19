@@ -232,7 +232,14 @@ try{
  assert.equal(Number((await db.query('SELECT count(*) FROM raw_logs WHERE block_hash=$1',[oldBlock])).rows[0].count),oldLogs);
  assert.equal(Number((await db.query('SELECT count(*) FROM raw_logs l JOIN canonical c ON c.hash=l.block_hash WHERE l.block_hash=$1',[oldBlock])).rows[0].count),0);
  const postReorg=await api('/health');assert.equal(postReorg.epoch,1);assert.equal(postReorg.lag,0);
- record('canonical_reorg_raw_retention_cursor_invalidation',{old_block:oldBlock,raw_logs_retained:oldLogs,epoch:postReorg.epoch,orphaned_intent:'review'});
+ // The original signed transaction can be included again by the network.
+ // Record its new fact, but do not silently clear the signer review barrier.
+ const replayRaw=(await db.query("SELECT raw FROM attempts WHERE intent='reorg' ORDER BY seq DESC LIMIT 1")).rows[0].raw;
+ await rpc('eth_sendRawTransaction',['0x'+replayRaw.toString('hex')]);await rpc('anvil_mine',['0x2']);
+ const reincluded=await api('/intents/reorg');assert.equal(reincluded.state,'confirmed');assert.equal(reincluded.review_required,true);
+ await api('/intents/after-reinclusion',await request(),409);
+ assert.equal(Number((await db.query("SELECT count(*) FROM intents WHERE id='after-reinclusion'")).rows[0].count),0);
+ record('canonical_reorg_raw_retention_cursor_invalidation',{old_block:oldBlock,raw_logs_retained:oldLogs,epoch:postReorg.epoch,orphaned_intent:'review',reinclusion_keeps_signer_quarantined:true});
 
  fs.writeFileSync(path.join(output,'integration.json'),JSON.stringify({result:'passed',checks,scope:'Actual local Anvil EVM, pinned Uniswap V2 artifacts, synthetic ERC20, real PostgreSQL and Go process; no public network or real funds'},null,2)+'\n');
  if(process.env.LAB_SERVE==='1'){

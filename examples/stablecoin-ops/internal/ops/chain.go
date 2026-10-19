@@ -71,6 +71,37 @@ func chainCall(ctx context.Context, method, path string, body, out any) error {
 	}
 	return json.NewDecoder(io.LimitReader(response.Body, 1<<20)).Decode(out)
 }
+
+// Compare the financial fact, not the moving head/epoch metadata. A replacement
+// inclusion is a new observation even when the transaction hash is unchanged.
+func sameObservation(a, b ChainEvidence) bool {
+	return a.State == b.State && a.Reference == b.Reference && a.Amount == b.Amount && a.Input == b.Input && strings.EqualFold(a.Token, b.Token) && a.Transaction == b.Transaction && a.BlockHash == b.BlockHash && a.Height == b.Height
+}
+func confirmedDeposit(e ChainEvidence, id, amount string) bool {
+	return e.Reference == id && e.State == "confirmed" && e.Amount == amount && strings.EqualFold(e.Token, Env("CHAIN_TOKEN_IN", "")) && e.BlockHash != "" && e.Transaction != "" && e.Height > 0 && e.Indexed-e.Height+1 >= 2
+}
+func currentDeposit(ctx context.Context, id, amount string) (ChainEvidence, error) {
+	if err := chainCall(ctx, "POST", "/index/sync", struct{}{}, nil); err != nil {
+		return ChainEvidence{}, err
+	}
+	e, err := proof(ctx, "deposits", id)
+	if err == nil && !confirmedDeposit(e, id, amount) {
+		err = ErrConflict
+	}
+	return e, err
+}
+
+// All authorization and quarantine paths take the merchant lock before payment
+// row locks. Another invoice cannot start a spend while reorg review commits.
+func lockMerchant(ctx context.Context, tx pgx.Tx, id string) error {
+	_, err := tx.Exec(ctx, "SELECT pg_advisory_xact_lock(hashtextextended(merchant,31337)) FROM ops.payments WHERE id=$1", id)
+	return err
+}
+func merchantBlocked(ctx context.Context, tx pgx.Tx, merchant string) (bool, error) {
+	var blocked bool
+	err := tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM ops.payments WHERE merchant=$1 AND state='review_chain')", merchant).Scan(&blocked)
+	return blocked, err
+}
 func proof(ctx context.Context, kind, id string) (ChainEvidence, error) {
 	var out ChainEvidence
 	err := chainCall(ctx, "GET", "/evidence/"+kind+"/"+id, nil, &out)
@@ -108,6 +139,8 @@ func (s *Store) ChainEvent(ctx context.Context, id string) (Event, error) {
 		}
 	} else if evidence.State == "orphaned" {
 		e.State = "reversed"
+	} else if e.State == "confirmed" {
+		return e, ErrConflict
 	}
 	raw, _ := json.Marshal(evidence)
 	// A state sequence identifies immutable event content. Moving indexer head
@@ -144,10 +177,22 @@ func (s *Store) CreateConversion(ctx context.Context, merchant, id string, reque
 		return err
 	}
 	defer tx.Rollback(ctx)
+	if err = lockMerchant(ctx, tx, id); err != nil {
+		return err
+	}
+
 	var state string
 	var amount int64
 	if err = tx.QueryRow(ctx, "SELECT state,amount FROM ops.payments WHERE id=$1 AND merchant=$2 FOR UPDATE", id, merchant).Scan(&state, &amount); err != nil {
 		return err
+	}
+	if state != "settled" {
+		return ErrConflict
+	}
+	if blocked, e := merchantBlocked(ctx, tx, merchant); e != nil {
+		return e
+	} else if blocked {
+		return ErrConflict
 	}
 	var same bool
 	err = tx.QueryRow(ctx, "SELECT request=$2::jsonb FROM ops.conversions WHERE payment=$1", id, raw).Scan(&same)
@@ -159,9 +204,6 @@ func (s *Store) CreateConversion(ctx context.Context, merchant, id string, reque
 	}
 	if !errors.Is(err, pgx.ErrNoRows) {
 		return err
-	}
-	if state != "settled" {
-		return ErrConflict
 	}
 	if request.Deadline <= time.Now().Unix() {
 		return errors.New("expired conversion")
@@ -179,20 +221,50 @@ func (s *Store) CreateConversion(ctx context.Context, merchant, id string, reque
 }
 
 func (a *Activities) SubmitConversion(ctx context.Context, id string) error {
-	var amount string
-	var request []byte
-	var intent, state string
-	if err := a.Store.DB.QueryRow(ctx, `SELECT p.amount::text,c.request,c.intent,c.state FROM ops.conversions c JOIN ops.payments p ON p.id=c.payment WHERE c.payment=$1`, id).Scan(&amount, &request, &intent, &state); err != nil {
+	// Serialize local authorization with reorg quarantine. The gateway still
+	// persists signed bytes in its own database before any broadcast.
+	tx, err := a.Store.DB.Begin(ctx)
+	if err != nil {
 		return err
+	}
+	defer tx.Rollback(ctx)
+	if err = lockMerchant(ctx, tx, id); err != nil {
+		return err
+	}
+
+	var amount, merchant, pstate string
+	var stored, request []byte
+	var intent, state string
+	if err = tx.QueryRow(ctx, `SELECT amount::text,merchant,state,settlement_evidence FROM ops.payments WHERE id=$1 FOR UPDATE`, id).Scan(&amount, &merchant, &pstate, &stored); err != nil {
+		return err
+	}
+	if err = tx.QueryRow(ctx, `SELECT request,intent,state FROM ops.conversions WHERE payment=$1 FOR UPDATE`, id).Scan(&request, &intent, &state); err != nil {
+		return err
+	}
+	if pstate != "settled" {
+		return ErrConflict
+	}
+	if blocked, e := merchantBlocked(ctx, tx, merchant); e != nil {
+		return e
+	} else if blocked {
+		return ErrConflict
 	}
 	if state != "held" && state != "review" {
-		return nil
+		return tx.Commit(ctx)
 	}
-	var r ConversionRequest
-	if err := json.Unmarshal(request, &r); err != nil {
+	deposit, err := currentDeposit(ctx, id, amount)
+	if err != nil {
 		return err
 	}
-	if err := chainCall(ctx, "POST", "/intents/"+intent, map[string]any{"amount": amount, "min_out": r.MinOut, "deadline": r.Deadline}, nil); err != nil {
+	var original ChainEvidence
+	if json.Unmarshal(stored, &original) != nil || !sameObservation(original, deposit) {
+		return ErrConflict
+	}
+	var r ConversionRequest
+	if err = json.Unmarshal(request, &r); err != nil {
+		return err
+	}
+	if err = chainCall(ctx, "POST", "/intents/"+intent, map[string]any{"amount": amount, "min_out": r.MinOut, "deadline": r.Deadline}, nil); err != nil {
 		return err
 	}
 	evidence, err := proof(ctx, "executions", intent)
@@ -204,8 +276,10 @@ func (a *Activities) SubmitConversion(ctx context.Context, id string) error {
 			return err
 		}
 	}
-	_, err = a.Store.DB.Exec(ctx, "UPDATE ops.conversions SET state='executing' WHERE payment=$1 AND state='held'", id)
-	return err
+	if _, err = tx.Exec(ctx, "UPDATE ops.conversions SET state='executing' WHERE payment=$1 AND state='held'", id); err != nil {
+		return err
+	}
+	return tx.Commit(ctx)
 }
 func (a *Activities) ObserveConversion(ctx context.Context, id string) (ChainEvidence, error) {
 	if err := chainCall(ctx, "POST", "/index/sync", struct{}{}, nil); err != nil {
@@ -220,16 +294,45 @@ func (a *Activities) FinishConversion(ctx context.Context, id string, e ChainEvi
 		return err
 	}
 	defer tx.Rollback(ctx)
+	if err = lockMerchant(ctx, tx, id); err != nil {
+		return err
+	}
+
 	var paymentState, merchant, state string
 	var amount int64
-	var raw []byte
-	if err = tx.QueryRow(ctx, "SELECT state,merchant,amount FROM ops.payments WHERE id=$1 FOR UPDATE", id).Scan(&paymentState, &merchant, &amount); err != nil {
+	var raw, settled []byte
+	if err = tx.QueryRow(ctx, "SELECT state,merchant,amount,settlement_evidence FROM ops.payments WHERE id=$1 FOR UPDATE", id).Scan(&paymentState, &merchant, &amount, &settled); err != nil {
 		return err
 	}
 	if err = tx.QueryRow(ctx, "SELECT state,request FROM ops.conversions WHERE payment=$1 FOR UPDATE", id).Scan(&state, &raw); err != nil {
 		return err
 	}
+	// Temporal retries carry the original Activity argument; it may now be an
+	// orphan. Re-query the gateway before posting or accepting an idempotent retry.
+	fresh, err := a.ObserveConversion(ctx, id)
+	if err != nil {
+		return err
+	}
+	if !sameObservation(e, fresh) || fresh.Reference != "convert_"+id || fresh.Height <= 0 || fresh.Indexed-fresh.Height+1 < 2 || fresh.BlockHash == "" || fresh.Transaction == "" || !strings.EqualFold(fresh.Token, Env("CHAIN_TOKEN_OUT", "")) {
+		return ErrConflict
+	}
+	deposit, err := currentDeposit(ctx, id, strconv.FormatInt(amount, 10))
+	if err != nil {
+		return err
+	}
+	var originalDeposit ChainEvidence
+	if json.Unmarshal(settled, &originalDeposit) != nil || !sameObservation(originalDeposit, deposit) || fresh.Epoch != deposit.Epoch {
+		return ErrConflict
+	}
 	if state == "settled" || state == "released" {
+		var original []byte
+		if err = tx.QueryRow(ctx, "SELECT evidence FROM ops.conversions WHERE payment=$1", id).Scan(&original); err != nil {
+			return err
+		}
+		var old ChainEvidence
+		if json.Unmarshal(original, &old) != nil || !sameObservation(old, fresh) {
+			return ErrConflict
+		}
 		return tx.Commit(ctx)
 	}
 	if paymentState != "settled" || (state != "held" && state != "executing" && state != "review") {
@@ -315,96 +418,140 @@ func ConversionWorkflow(ctx workflow.Context, id string) error {
 // Audit reads existing observations only. It never submits a swap, refunds or
 // mints a new nonce. The row lock serializes compensation with settlement.
 func (a *Activities) auditChain(ctx context.Context, id string) (string, error) {
-	if err := chainCall(ctx, "POST", "/index/sync", struct{}{}, nil); err != nil {
-		return "", err
-	}
-	deposit, err := proof(ctx, "deposits", id)
-	if err != nil {
-		return "", err
-	}
-	var hasConversion bool
-	if err = a.Store.DB.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM ops.conversions WHERE payment=$1)", id).Scan(&hasConversion); err != nil {
-		return "", err
-	}
-	var execution ChainEvidence
-	if hasConversion {
-		// A missing intent can mean creation has not reached the gateway yet. It
-		// cannot justify releasing a hold or treating an external send as absent.
-		execution, err = proof(ctx, "executions", "convert_"+id)
-		if err != nil {
-			return "", err
-		}
-	}
 	tx, err := a.Store.DB.Begin(ctx)
 	if err != nil {
 		return "", err
 	}
 	defer tx.Rollback(ctx)
-	var pstate string
-	if err = tx.QueryRow(ctx, "SELECT state FROM ops.payments WHERE id=$1 FOR UPDATE", id).Scan(&pstate); err != nil {
+	if err = lockMerchant(ctx, tx, id); err != nil {
+		return "", err
+	}
+
+	var pstate, amount string
+	var settled []byte
+	if err = tx.QueryRow(ctx, "SELECT state,amount::text,settlement_evidence FROM ops.payments WHERE id=$1 FOR UPDATE", id).Scan(&pstate, &amount, &settled); err != nil {
 		return "", err
 	}
 	if pstate != "settled" {
 		return pstate, nil
 	}
 	var cstate string
-	err = tx.QueryRow(ctx, "SELECT state FROM ops.conversions WHERE payment=$1 FOR UPDATE", id).Scan(&cstate)
+	var previous []byte
+	err = tx.QueryRow(ctx, "SELECT state,evidence FROM ops.conversions WHERE payment=$1 FOR UPDATE", id).Scan(&cstate, &previous)
 	if err != nil && !errors.Is(err, pgx.ErrNoRows) {
 		return "", err
 	}
-	reverse := func(journal, original string) error {
-		_, e := tx.Exec(ctx, "SELECT lab.reverse_transfer($1,$2)", journal, original)
-		return e
-	}
-	raw, _ := json.Marshal(map[string]ChainEvidence{"deposit": deposit, "execution": execution})
-	if deposit.State == "orphaned" || execution.State == "orphaned" {
-		if cstate == "settled" {
-			if execution.State != "orphaned" {
-				// The spend survived on another branch or observations disagree. Never
-				// fabricate returned funds: retain all journals and escalate review.
-				if _, err = tx.Exec(ctx, "UPDATE ops.payments SET state='review' WHERE id=$1", id); err != nil {
-					return "", err
-				}
-				if _, err = tx.Exec(ctx, "UPDATE ops.conversions SET state='review',audit_evidence=$2 WHERE payment=$1", id, raw); err != nil {
-					return "", err
-				}
-				return "review", tx.Commit(ctx)
-			}
-			if err = reverse("undo-out:"+id, "swap-out:"+id); err != nil {
-				return "", err
-			}
-			if err = reverse("undo-in:"+id, "swap-in:"+id); err != nil {
-				return "", err
-			}
-			if err = reverse("release:"+id, "hold:"+id); err != nil {
-				return "", err
-			}
-			if _, err = tx.Exec(ctx, "UPDATE ops.conversions SET state='review_reversed',audit_evidence=$2 WHERE payment=$1", id, raw); err != nil {
-				return "", err
-			}
-		} else if cstate != "" && cstate != "released" && cstate != "review_reversed" {
-			if _, err = tx.Exec(ctx, "UPDATE ops.payments SET state='review' WHERE id=$1", id); err != nil {
-				return "", err
-			}
-			if _, err = tx.Exec(ctx, "UPDATE ops.conversions SET state='review',audit_evidence=$2 WHERE payment=$1", id, raw); err != nil {
-				return "", err
-			}
-			return "review", tx.Commit(ctx)
-		}
-		if deposit.State == "orphaned" {
-			if err = reverse("reorg:"+id, "settle:"+id); err != nil {
-				return "", err
-			}
-			if _, err = tx.Exec(ctx, "UPDATE ops.payments SET state='review_reversed',provider_state='reversed',sequence=sequence+1 WHERE id=$1", id); err != nil {
-				return "", err
-			}
-			pstate = "review_reversed"
-		}
-	}
-	if err = tx.Commit(ctx); err != nil {
+	// Read external evidence after locking the local financial phase. Otherwise a
+	// pre-lock pending proof could quarantine a conversion that just committed.
+	hasConversion := cstate != ""
+	if err = chainCall(ctx, "POST", "/index/sync", struct{}{}, nil); err != nil {
 		return "", err
 	}
-	return pstate, nil
+	deposit, err := proof(ctx, "deposits", id)
+	if err != nil {
+		return "", err
+	}
+	var execution ChainEvidence
+	var executionErr error
+	if hasConversion {
+		execution, executionErr = proof(ctx, "executions", "convert_"+id)
+	}
+	var original ChainEvidence
+	if json.Unmarshal(settled, &original) != nil {
+		return "", ErrConflict
+	}
+	observations := map[string]any{"deposit": deposit, "execution": execution, "execution_error": fmt.Sprint(executionErr)}
+	raw, _ := json.Marshal(observations)
+	quarantine := func() (string, error) {
+		if _, err = tx.Exec(ctx, "UPDATE ops.payments SET state='review_chain',audit_evidence=$2 WHERE id=$1", id, raw); err != nil {
+			return "", err
+		}
+		if _, err = tx.Exec(ctx, "UPDATE ops.conversions SET audit_evidence=$2 WHERE payment=$1", id, raw); err != nil {
+			return "", err
+		}
+		return "review_chain", tx.Commit(ctx)
+	}
+	depositChanged := !confirmedDeposit(deposit, id, amount) || !sameObservation(original, deposit)
+	// Missing intent, pending replacement and mixed epochs cannot imply returned
+	// money. They must not hide an already detected loss of the deposit either.
+	if depositChanged && (deposit.State != "orphaned" || (cstate != "" && executionErr != nil)) {
+		return quarantine()
+	}
+	if executionErr != nil {
+		return "", executionErr
+	}
+	if hasConversion && deposit.Epoch != execution.Epoch {
+		return "", ErrConflict
+	}
+	if cstate == "settled" || cstate == "released" {
+		var old ChainEvidence
+		if json.Unmarshal(previous, &old) != nil {
+			return "", ErrConflict
+		}
+		if execution.State != "orphaned" && !sameObservation(old, execution) {
+			return quarantine()
+		}
+		// A failure receipt that was compensated is no longer authoritative after a
+		// reorg. Do not release again, retry the spend, or resurrect the old invoice.
+		if cstate == "released" && execution.State == "orphaned" {
+			return quarantine()
+		}
+	}
+	if deposit.State == "orphaned" || execution.State == "orphaned" {
+		if cstate == "settled" && execution.State != "orphaned" {
+			return quarantine()
+		}
+		if cstate != "" && cstate != "settled" && cstate != "released" && cstate != "review_reversed" {
+			return quarantine()
+		}
+		// Failed compensation (e.g. consumed output) rolls back every financial
+		// change, then records a durable quarantine in the same outer transaction.
+		if _, err = tx.Exec(ctx, "SAVEPOINT compensation"); err != nil {
+			return "", err
+		}
+		compensate := func() error {
+			reverse := func(journal, original string) error {
+				_, e := tx.Exec(ctx, "SELECT lab.reverse_transfer($1,$2)", journal, original)
+				return e
+			}
+			if cstate == "settled" {
+				for _, pair := range [][2]string{{"undo-out:", "swap-out:"}, {"undo-in:", "swap-in:"}, {"release:", "hold:"}} {
+					if e := reverse(pair[0]+id, pair[1]+id); e != nil {
+						return e
+					}
+				}
+				if _, e := tx.Exec(ctx, "UPDATE ops.conversions SET state='review_reversed',audit_evidence=$2 WHERE payment=$1", id, raw); e != nil {
+					return e
+				}
+			}
+			if deposit.State == "orphaned" {
+				if e := reverse("reorg:"+id, "settle:"+id); e != nil {
+					return e
+				}
+				if _, e := tx.Exec(ctx, "UPDATE ops.payments SET state='review_reversed',provider_state='reversed',sequence=sequence+1,audit_evidence=$2 WHERE id=$1", id, raw); e != nil {
+					return e
+				}
+				pstate = "review_reversed"
+			} else {
+				// The deposit survived but a signed swap may reappear. Keep this merchant
+				// quarantined rather than allowing another spend of the returned input.
+				if _, e := tx.Exec(ctx, "UPDATE ops.payments SET state='review_chain',audit_evidence=$2 WHERE id=$1", id, raw); e != nil {
+					return e
+				}
+				pstate = "review_chain"
+			}
+			return nil
+		}
+		if err = compensate(); err != nil {
+			observations["compensation_error"] = err.Error()
+			raw, _ = json.Marshal(observations)
+			if _, rollbackErr := tx.Exec(ctx, "ROLLBACK TO SAVEPOINT compensation"); rollbackErr != nil {
+				return "", rollbackErr
+			}
+			return quarantine()
+		}
+	}
+	return pstate, tx.Commit(ctx)
 }
 
 func (a *Activities) AuditChain(ctx context.Context, id string) (string, error) {
@@ -421,7 +568,7 @@ func (a *Activities) DeliverChainEvents(ctx context.Context, id string) error {
 	for _, prefix := range []string{"settle:", "hold:", "swap-in:", "swap-out:", "release:", "undo-out:", "undo-in:", "reorg:"} {
 		ids = append(ids, prefix+id)
 	}
-	rows, err := a.Store.DB.Query(ctx, "SELECT event_id FROM lab.outbox WHERE NOT published AND event_id=ANY($1::text[]) ORDER BY event_id", ids)
+	rows, err := a.Store.DB.Query(ctx, "SELECT event_id FROM lab.outbox WHERE NOT published AND event_id=ANY($1::text[]) ORDER BY created_at,event_id", ids)
 	if err != nil {
 		return err
 	}
@@ -452,7 +599,8 @@ type ChainInput struct {
 }
 
 func ChainReconcileWorkflow(ctx workflow.Context, p Payment) error {
-	if err := ReconcileWorkflow(ctx, p); err != nil {
+	v := workflow.GetVersion(ctx, "chain-reconcile-after-notify", workflow.DefaultVersion, 1)
+	if err := reconcileWorkflow(ctx, p, v != workflow.DefaultVersion); err != nil {
 		return err
 	}
 	return ChainPaymentWorkflow(ctx, ChainInput{Input: Input{Payment: p}, Monitor: true})
@@ -460,7 +608,10 @@ func ChainReconcileWorkflow(ctx workflow.Context, p Payment) error {
 
 func ChainPaymentWorkflow(ctx workflow.Context, in ChainInput) error {
 	if !in.Monitor {
-		if err := paymentWorkflow(ctx, in.Input, false); err != nil {
+		// Old histories keep their command path. New executions continue the
+		// financial audit even after notification retries have exhausted.
+		v := workflow.GetVersion(ctx, "chain-monitor-after-notify", workflow.DefaultVersion, 1)
+		if err := runPaymentWorkflow(ctx, in.Input, false, v != workflow.DefaultVersion); err != nil {
 			return err
 		}
 	}

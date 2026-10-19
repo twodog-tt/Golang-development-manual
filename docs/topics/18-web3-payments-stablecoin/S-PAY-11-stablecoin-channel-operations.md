@@ -115,11 +115,16 @@ python3 examples/stablecoin-ops/verify.py --report /tmp/stablecoin-ops.json
 python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.json
 ```
 
-7 组故障与 custody 对账见 [完整运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。错误金额的 1 原子单位进入“未归属”核对项，不算商户收入。clearing/dex_output 的有限期初余额是账务夹具，不是偿付证明。chain 模式拒绝旧模拟退款和 webhook，未实现真实退款、部分兑换、提币、gas 费用会计及已消费余额的自动冲正。
+12 组故障与 custody 对账见 [完整运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。错误金额的 1 原子单位进入“未归属”核对项，不算商户收入。clearing/dex_output 的有限期初余额是账务夹具，不是偿付证明。chain 模式拒绝旧模拟退款和 webhook，未实现真实退款、部分兑换、提币、gas 费用会计及已消费余额的自动冲正。
 
 ## 架构取舍
 
 原模式将业务、模拟渠道与商户 Inbox 放在同一 PostgreSQL；新端到端模式另有独立索引数据库，经 HTTP 与支付系统交互。它可以验证明确的进程与网络响应窗口，不能证明跨数据库、跨机房或跨组织一致性。生产适配器应独立凭据、权限和审计，先完成 sandbox 验收再讨论生产范围。
+
+### 端到端重组恢复的人工边界
+
+端到端实战将数据库暂时失败的 `conversion=review` 与链证据异常的 `payment=review_chain` 分开。后者保存 `audit_evidence`、保留实际记账阶段，暂停同商户新增冻结和发送；普通 reconcile/resume 不得把它恢复为 settled。输出已消费导致余额不足时，补偿 SAVEPOINT 撤销整组冲正，再持久化人工核对状态，不能部分冲正或因 Activity 一直重试而不留下告警状态。完整的 12 组验证见 [端到端运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
+
 
 ## 深挖问答
 

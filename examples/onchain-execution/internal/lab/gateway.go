@@ -43,12 +43,13 @@ type Request struct {
 	Deadline int64  `json:"deadline"`
 }
 type Intent struct {
-	ID          string   `json:"id"`
-	Nonce       uint64   `json:"nonce"`
-	State       string   `json:"state"`
-	Hashes      []string `json:"hashes"`
-	BlockHash   *string  `json:"block_hash"`
-	Transaction string   `json:"transaction"`
+	ID             string   `json:"id"`
+	Nonce          uint64   `json:"nonce"`
+	State          string   `json:"state"`
+	Hashes         []string `json:"hashes"`
+	BlockHash      *string  `json:"block_hash"`
+	Transaction    string   `json:"transaction"`
+	ReviewRequired bool     `json:"review_required"`
 }
 type App struct {
 	DB     *pgxpool.Pool
@@ -145,6 +146,10 @@ func (a *App) Create(ctx context.Context, id string, r Request) error {
 	if err = a.CheckChain(ctx); err != nil {
 		return err
 	}
+	nonce, err := a.authorizeSigner(ctx, tx)
+	if err != nil {
+		return err
+	}
 	data, err := a.Data(ctx, r)
 	if err != nil {
 		return err
@@ -152,10 +157,6 @@ func (a *App) Create(ctx context.Context, id string, r Request) error {
 	// Simulation is a preflight, not a promise that inclusion will succeed.
 	if _, err = a.RPC.CallContract(ctx, ethereum.CallMsg{From: a.Sender, To: &a.Config.Router, Gas: 400000, Data: data}, nil); err != nil {
 		return fmt.Errorf("simulation: %w", err)
-	}
-	nonce, err := a.RPC.PendingNonceAt(ctx, a.Sender)
-	if err != nil {
-		return err
 	}
 	var next int64
 	if err = tx.QueryRow(ctx, "SELECT COALESCE(max(nonce)+1,0) FROM intents").Scan(&next); err != nil {
@@ -182,18 +183,47 @@ func (a *App) Create(ctx context.Context, id string, r Request) error {
 	return tx.Commit(ctx)
 }
 
+// Call under the signer advisory lock before allocating, sending or repricing.
+func (a *App) authorizeSigner(ctx context.Context, tx pgx.Tx) (uint64, error) {
+	nonce, err := a.RPC.PendingNonceAt(ctx, a.Sender)
+	if err != nil {
+		return 0, err
+	}
+	// A removed inclusion can reopen a nonce below the local high watermark.
+	// Skipping the gap or reusing its authorization both require explicit review.
+	var unresolved bool
+	if err = tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM intents WHERE review_required OR state='orphaned_review' OR (block_hash IS NOT NULL AND nonce >= $1))", int64(nonce)).Scan(&unresolved); err != nil {
+		return 0, err
+	}
+	if unresolved {
+		return 0, ErrConflict
+	}
+	return nonce, nil
+}
+
 func (a *App) Broadcast(ctx context.Context, id string) error {
 	if err := a.CheckChain(ctx); err != nil {
 		return err
 	}
+	guard, err := a.DB.Begin(ctx)
+	if err != nil {
+		return err
+	}
+	defer guard.Rollback(ctx)
+	if _, err = guard.Exec(ctx, "SELECT pg_advisory_xact_lock(31337001)"); err != nil {
+		return err
+	}
 	var raw []byte
 	var state string
-	err := a.DB.QueryRow(ctx, `SELECT raw,state FROM attempts JOIN intents ON id=intent WHERE id=$1 ORDER BY seq DESC LIMIT 1`, id).Scan(&raw, &state)
+	err = guard.QueryRow(ctx, `SELECT raw,state FROM attempts JOIN intents ON id=intent WHERE id=$1 ORDER BY seq DESC LIMIT 1`, id).Scan(&raw, &state)
 	if err != nil {
 		return err
 	}
 	if state == "mined" || state == "confirmed" || state == "reverted" || state == "orphaned_review" {
 		return ErrConflict
+	}
+	if _, err = a.authorizeSigner(ctx, guard); err != nil {
+		return err
 	}
 	var tx types.Transaction
 	if err = tx.UnmarshalBinary(raw); err != nil {
@@ -203,8 +233,11 @@ func (a *App) Broadcast(ctx context.Context, id string) error {
 		// A timeout, 503, or "already known" is ambiguous. Keep the same signed bytes.
 		return fmt.Errorf("broadcast unknown; reconcile same intent/hash: %w", err)
 	}
-	_, err = a.DB.Exec(ctx, "UPDATE intents SET state='broadcast' WHERE id=$1 AND state='signed'", id)
-	return err
+	_, err = guard.Exec(ctx, "UPDATE intents SET state='broadcast' WHERE id=$1 AND state='signed'", id)
+	if err != nil {
+		return err
+	}
+	return guard.Commit(ctx)
 }
 
 func (a *App) Bump(ctx context.Context, id string) error {
@@ -217,6 +250,9 @@ func (a *App) Bump(ctx context.Context, id string) error {
 	}
 	defer tx.Rollback(ctx)
 	if _, err = tx.Exec(ctx, "SELECT pg_advisory_xact_lock(31337001)"); err != nil {
+		return err
+	}
+	if _, err = a.authorizeSigner(ctx, tx); err != nil {
 		return err
 	}
 	var raw []byte
@@ -298,7 +334,7 @@ func (a *App) Reconcile(ctx context.Context, id string) (Intent, error) {
 	}
 	var out Intent
 	out.ID = id
-	if err = tx.QueryRow(ctx, "SELECT nonce,state,block_hash FROM intents WHERE id=$1", id).Scan(&out.Nonce, &out.State, &out.BlockHash); err != nil {
+	if err = tx.QueryRow(ctx, "SELECT nonce,state,block_hash,review_required FROM intents WHERE id=$1", id).Scan(&out.Nonce, &out.State, &out.BlockHash, &out.ReviewRequired); err != nil {
 		return out, err
 	}
 	rows, err := tx.Query(ctx, "SELECT hash FROM attempts WHERE intent=$1 ORDER BY seq", id)
@@ -356,7 +392,8 @@ func (a *App) Reconcile(ctx context.Context, id string) (Intent, error) {
 		_, err = tx.Exec(ctx, "UPDATE intents SET state=$2,block_hash=$3,block_height=$4 WHERE id=$1", id, out.State, hash, found.BlockNumber.Int64())
 	} else if out.BlockHash != nil {
 		out.State = "orphaned_review"
-		_, err = tx.Exec(ctx, "UPDATE intents SET state=$2 WHERE id=$1", id, out.State)
+		out.ReviewRequired = true
+		_, err = tx.Exec(ctx, "UPDATE intents SET state=$2,review_required=true WHERE id=$1", id, out.State)
 	}
 	if err != nil {
 		return out, err

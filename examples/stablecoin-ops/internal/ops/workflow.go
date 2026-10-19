@@ -17,6 +17,9 @@ const Queue = "stablecoin-ops-v1"
 
 // Recovery only queries existing external facts; it never creates a new transfer.
 func ReconcileWorkflow(ctx workflow.Context, p Payment) error {
+	return reconcileWorkflow(ctx, p, false)
+}
+func reconcileWorkflow(ctx workflow.Context, p Payment, notificationMayFail bool) error {
 	ctx = workflow.WithActivityOptions(ctx, workflow.ActivityOptions{StartToCloseTimeout: 10 * time.Second, RetryPolicy: &temporal.RetryPolicy{InitialInterval: time.Second, MaximumAttempts: 3}})
 	var state string
 	if err := workflow.ExecuteActivity(ctx, "Observe", p.ID).Get(ctx, &state); err != nil {
@@ -26,7 +29,11 @@ func ReconcileWorkflow(ctx workflow.Context, p Payment) error {
 		if err := workflow.ExecuteActivity(ctx, "Settle", p.ID).Get(ctx, nil); err != nil {
 			return err
 		}
-		return workflow.ExecuteActivity(ctx, "Notify", "settle:"+p.ID).Get(ctx, nil)
+		err := workflow.ExecuteActivity(ctx, "Notify", "settle:"+p.ID).Get(ctx, nil)
+		if notificationMayFail {
+			return nil
+		}
+		return err
 	}
 	return nil
 }
@@ -50,6 +57,9 @@ func LegacyPaymentWorkflow(ctx workflow.Context, in Input) error {
 	return paymentWorkflow(ctx, in, true)
 }
 func paymentWorkflow(ctx workflow.Context, in Input, legacy bool) error {
+	return runPaymentWorkflow(ctx, in, legacy, false)
+}
+func runPaymentWorkflow(ctx workflow.Context, in Input, legacy, notificationMayFail bool) error {
 	ctx = workflow.WithActivityOptions(ctx, workflow.ActivityOptions{StartToCloseTimeout: 10 * time.Second, RetryPolicy: &temporal.RetryPolicy{InitialInterval: time.Second, MaximumInterval: 2 * time.Second, MaximumAttempts: 3}})
 	// Keep this marker and its legacy branch when changing in-flight histories.
 	version := workflow.DefaultVersion
@@ -79,7 +89,11 @@ func paymentWorkflow(ctx workflow.Context, in Input, legacy bool) error {
 			if err = workflow.ExecuteActivity(ctx, "Settle", in.Payment.ID).Get(ctx, nil); err != nil {
 				return err
 			}
-			return workflow.ExecuteActivity(ctx, "Notify", "settle:"+in.Payment.ID).Get(ctx, nil)
+			err = workflow.ExecuteActivity(ctx, "Notify", "settle:"+in.Payment.ID).Get(ctx, nil)
+			if notificationMayFail {
+				return nil
+			}
+			return err
 		}
 		if err == nil && state == "reversed" {
 			return workflow.ExecuteActivity(ctx, "SetState", in.Payment.ID, "review").Get(ctx, nil)

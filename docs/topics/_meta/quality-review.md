@@ -65,6 +65,7 @@
 - 第十七阶段补充 **4 篇集成正文**：Temporal 资金流程、SIWE 身份与会话、Go/TypeScript 联调、稳定币渠道运营，统一项目 `examples/stablecoin-ops`。真实本地 PostgreSQL/Temporal 与 Worker 中断/版本回放已验证；渠道、商户与 ERC-1271 RPC 为夹具，不使用真实资金。
 - 第十八阶段补充 **3 篇集成正文**：交易执行网关（S-NODE-11）、Indexer 查询与数据质量（S-NODE-12）、DeFi 协议接入（S-EXCH-32），共用 `examples/onchain-execution`。真实 Anvil/Uniswap V2/PostgreSQL、进程重启、替换交易、坏日志、数据库回滚与重组共 10 组验证；仅本地合成资产，不代表公链资金或生产验收。
 - 第十九阶段将既有 **7 篇正文** 接成支付到 DeFi 的端到端实战：真实本地收款 reference、独立索引/支付库、Temporal 冻结与兑换、多资产同事务入账和持续重组审计，7 组集成故障验证；保留原两套验证入口。未新增 published 正文，总量仍为 **249 篇**，不扩大为公链或生产验收。
+- 第二十阶段复核端到端资金正确性：修复旧证据重试、通知故障停止审计、无 intent 阻断收款审计、冲正余额不足缺少持久人工状态，以及重组后的 nonce 缺口；增加 merchant/signer 隔离和版本分支验证，将端到端故障矩阵扩至 **12 组**。正文仍 **249 篇**，正常资金对账与故意保留待核对敞口的破坏性场景分别说明，不扩大为生产金融验收。
 - 证据标签已覆盖 249 篇：`explanation_only=180`、`illustrative_artifact=31`、
   `deterministic_test=21`、`integration_harness=17`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。

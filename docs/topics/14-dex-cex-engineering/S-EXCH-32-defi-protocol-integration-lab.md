@@ -146,7 +146,7 @@ python3 examples/stablecoin-ops/e2e/verify.py --serve
 node examples/onchain-execution/client/payment-cli.mjs demo 10
 ```
 
-可独立 `create/approve/pay/show/convert`。自动验证另用 `--report /tmp/payment-e2e/result.json`；7 组覆盖从缺日志、响应未知、进程中断到跨资产回滚、实际 reverted 和已结算全链路 reorg。指南与接口见 [项目说明](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
+可独立 `create/approve/pay/show/convert`。自动验证另用 `--report /tmp/payment-e2e/result.json`；12 组覆盖从缺日志、响应未知、进程中断到跨资产回滚、实际 reverted 和已结算全链路 reorg。指南与接口见 [项目说明](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
 
 支付和兑换都是本地实际 EVM 调用，不是模型模拟；Token、RPC 和资金场景仍是教学夹具。chain 模式不执行旧模拟退款，没有公链资产托管、真实稳定币风险或线上 DeFi 验收。
 

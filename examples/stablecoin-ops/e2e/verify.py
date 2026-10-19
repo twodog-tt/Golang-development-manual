@@ -86,6 +86,8 @@ INSERT INTO lab.accounts VALUES
             for name in ("api", "provider", "worker"):
                 run([go, "build", "-o", str(out / name), "./cmd/" + name], cwd=OPS, env=env)
                 env[name.upper() + "_BIN"] = str(out / name)
+            run([go, "test", "-c", "-o", str(out / "chain-review.test"), "./internal/ops"], cwd=OPS, env=env)
+            env["LAB_CHAIN_TEST_BIN"] = str(out / "chain-review.test")
             run([go, "build", "-o", str(out / "gateway"), "./cmd/server"], cwd=CHAIN, env=env)
             env["GATEWAY_BIN"] = str(out / "gateway")
             with (out / "anvil.log").open("w") as log:

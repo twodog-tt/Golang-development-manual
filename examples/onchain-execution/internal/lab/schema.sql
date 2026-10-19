@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS intents (
  id text PRIMARY KEY, payload text NOT NULL, nonce bigint UNIQUE NOT NULL,
- state text NOT NULL DEFAULT 'signed', block_hash text, block_height bigint,
+ state text NOT NULL DEFAULT 'signed', review_required boolean NOT NULL DEFAULT false, block_hash text, block_height bigint,
  created_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE TABLE IF NOT EXISTS attempts (

@@ -143,7 +143,7 @@ python3 examples/onchain-execution/verify.py --serve
 python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.json
 ```
 
-[7 组故障验证](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e) 删除真实 RPC 的 Paid 或 Swap，确认支付/输出水位门禁有效；重组后保留旧 raw 并触发资金冲正。仍是单节点、局部事件覆盖和非原子跨系统观察，不能据此证明公链 finality 或数据源独立可信。
+[12 组故障验证](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e) 删除真实 RPC 的 Paid 或 Swap，确认支付/输出水位门禁有效；重组后保留旧 raw 并触发资金冲正。仍是单节点、局部事件覆盖和非原子跨系统观察，不能据此证明公链 finality 或数据源独立可信。
 
 ## 架构取舍
 

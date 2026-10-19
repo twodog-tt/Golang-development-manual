@@ -127,13 +127,17 @@ python3 examples/onchain-execution/verify.py --report /tmp/onchain-execution/res
 python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.json
 ```
 
-7 组验证中，先广播后丢响应并 SIGKILL gateway/worker，恢复后仍只有一个 attempt 和一次兑换入账；缺 Swap 时不释放冻结；数据库过账失败后 resume 原 intent。前面的独立示例仍负责同 nonce 提价验证，完整运行范围见 [端到端指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
+12 组验证中，先广播后丢响应并 SIGKILL gateway/worker，恢复后仍只有一个 attempt 和一次兑换入账；缺 Swap 时不释放冻结；数据库过账失败后 resume 原 intent。前面的独立示例仍负责同 nonce 提价验证，完整运行范围见 [端到端指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
 
 ## 架构取舍
 
 PostgreSQL 锁适合这个单 signer 教学模型；大量账户应按 signer 分片并维护 lease/fencing、并发预算。数据库失联时必须停止新签名，不能退回内存 nonce。单账户 nonce 串行天然存在队头阻塞，不应该用无界加价或跳 nonce 掩盖问题。
 
 这里没有取消交易、自动释放 nonce 或重组后补发。取消同样是占用同 nonce 的新交易，不是撤销事实；生产应将 cancellation 作为独立受审策略，保证费用、权限和原业务状态一致。
+
+### 重组后的 nonce 缺口
+
+端到端验证发现：已分配且曾包含的交易被重组移除后，节点 pending nonce 可以回落，但数据库高水位仍然更大。直接分配 max(nonce)+1 会把新交易卡在缺口后；自动重用旧 nonce 也可能与原签名冲突。示例现在对 unresolved orphaned_review 或 pending nonce 回落到已有包含位置暂停整个 signer 的新建意图、广播及提价，等待核对全部 attempt。广播与 reconcile 共用 advisory lock；端到端故障组验证重组后新意图 409 且 attempt 不增加。review_required 独立持久化，原签名后来重新包含也不自动解封；独立 harness 真实重广播原文并确认后验证新 intent 仍被拒绝。该保护没有实现自动解封或 nonce 取消服务。
 
 ## 深挖问答
 

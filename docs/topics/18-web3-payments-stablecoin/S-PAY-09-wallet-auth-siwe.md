@@ -90,7 +90,7 @@ TypeScript/Go 联调验证：原消息成功，篡改 URI、过期 nonce、并�
 
 [完整实战](S-PAY-08-temporal-money-workflows.md#payment-e2e) 中，商户登录仍使用原 SIWE 会话；CLI 的 `pay` 另外签署 Token approve 和 PaymentReceiver.pay 交易。登录签名不授予转账权限，付款授权也不等于向 Router 授权。收款钱包和网关签名器是不同账户，Router allowance 由本地运营账户独立配置。
 
-收款合约用订单 ID 的 bytes32 reference 绑定 Paid 事件，后端验证 Token、原子金额和已索引深度，证据写进 ops.events。引用订单不能改变该订单所属商户；兑换、报价和查询都先检查会话商户。7 组 [端到端验证](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e) 包含跨商户请求拒绝和错误金额不入账。
+收款合约用订单 ID 的 bytes32 reference 绑定 Paid 事件，后端验证 Token、原子金额和已索引深度，证据写进 ops.events。引用订单不能改变该订单所属商户；兑换、报价和查询都先检查会话商户。12 组 [端到端验证](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e) 包含跨商户请求拒绝和错误金额不入账。
 
 这是公开测试密钥上的演示：fixture 钱包既用于登录又用于付款，不能据此把 SIWE 会话升级为生产热钱包授权。PaymentReceiver 未在链上注册金额、付款人和到期，错误支付占用 reference 需人工处理；不作为通用支付合约使用。
 

@@ -151,3 +151,56 @@ func TestWorkflowApprovalTimerAndActivityRetry(t *testing.T) {
 		})
 	}
 }
+
+func TestChainMonitorSurvivesNotificationFailure(t *testing.T) {
+	for _, reconcile := range []bool{false, true} {
+		t.Run(map[bool]string{false: "payment", true: "reconcile"}[reconcile], func(t *testing.T) {
+			for _, legacy := range []bool{false, true} {
+				t.Run(map[bool]string{false: "new_monitor", true: "legacy_history"}[legacy], func(t *testing.T) {
+					var suite testsuite.WorkflowTestSuite
+					env := suite.NewTestWorkflowEnvironment()
+					var audits atomic.Int32
+					if legacy {
+						marker := "chain-monitor-after-notify"
+						if reconcile {
+							marker = "chain-reconcile-after-notify"
+						}
+						env.OnGetVersion(marker, workflow.DefaultVersion, 1).Return(workflow.DefaultVersion)
+					}
+					env.RegisterActivityWithOptions(func(context.Context, string) error { return nil }, activity.RegisterOptions{Name: "AuditApproval"})
+					env.RegisterActivityWithOptions(func(context.Context, Payment) error { return nil }, activity.RegisterOptions{Name: "Submit"})
+					env.RegisterActivityWithOptions(func(context.Context, string) (string, error) { return "confirmed", nil }, activity.RegisterOptions{Name: "Observe"})
+					env.RegisterActivityWithOptions(func(context.Context, string) error { return nil }, activity.RegisterOptions{Name: "Settle"})
+					env.RegisterActivityWithOptions(func(context.Context, string) error { return context.DeadlineExceeded }, activity.RegisterOptions{Name: "Notify"})
+					env.RegisterActivityWithOptions(func(context.Context, string) (string, error) { audits.Add(1); return "settled", nil }, activity.RegisterOptions{Name: "AuditChain"})
+					env.RegisterDelayedCallback(func() { env.SignalWorkflow("approve", true) }, time.Second)
+					if reconcile {
+						env.ExecuteWorkflow(ChainReconcileWorkflow, Payment{ID: "notify-outage"})
+					} else {
+						env.ExecuteWorkflow(ChainPaymentWorkflow, ChainInput{Input: Input{Payment: Payment{ID: "notify-outage"}, ApprovalSeconds: 5, ObserveSeconds: 5}})
+					}
+					if legacy {
+						if env.GetWorkflowError() == nil || audits.Load() != 0 {
+							t.Fatalf("changed legacy command path: %d %v", audits.Load(), env.GetWorkflowError())
+						}
+					} else if !workflow.IsContinueAsNewError(env.GetWorkflowError()) || audits.Load() != 50 {
+						t.Fatalf("notification outage stopped audit: %d %v", audits.Load(), env.GetWorkflowError())
+					}
+				})
+			}
+		})
+	}
+}
+
+func TestChainMonitorDoesNotMaskSettlementFailure(t *testing.T) {
+	var suite testsuite.WorkflowTestSuite
+	env := suite.NewTestWorkflowEnvironment()
+	var audits atomic.Int32
+	env.RegisterActivityWithOptions(func(context.Context, string) (string, error) { return "confirmed", nil }, activity.RegisterOptions{Name: "Observe"})
+	env.RegisterActivityWithOptions(func(context.Context, string) error { return context.DeadlineExceeded }, activity.RegisterOptions{Name: "Settle"})
+	env.RegisterActivityWithOptions(func(context.Context, string) (string, error) { audits.Add(1); return "pending", nil }, activity.RegisterOptions{Name: "AuditChain"})
+	env.ExecuteWorkflow(ChainReconcileWorkflow, Payment{ID: "failed-settlement"})
+	if env.GetWorkflowError() == nil || audits.Load() != 0 {
+		t.Fatalf("masked ledger failure: audits=%d error=%v", audits.Load(), env.GetWorkflowError())
+	}
+}

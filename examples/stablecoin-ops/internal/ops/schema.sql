@@ -6,7 +6,7 @@ CREATE TABLE ops.payments(
  id text PRIMARY KEY, merchant text NOT NULL, idem text NOT NULL, amount bigint NOT NULL CHECK(amount>0),
  asset text NOT NULL, quote_expires timestamptz NOT NULL,
  state text NOT NULL DEFAULT 'created', sequence bigint NOT NULL DEFAULT -1,
- provider_state text NOT NULL DEFAULT 'pending', UNIQUE(merchant,idem)
+ provider_state text NOT NULL DEFAULT 'pending', settlement_evidence jsonb, audit_evidence jsonb, UNIQUE(merchant,idem)
 );
 CREATE TABLE ops.events(id text PRIMARY KEY, payload jsonb NOT NULL, payment text NOT NULL REFERENCES ops.payments);
 CREATE TABLE ops.audit(id bigserial PRIMARY KEY, payment text NOT NULL, action text NOT NULL, at timestamptz NOT NULL DEFAULT now(), UNIQUE(payment,action));

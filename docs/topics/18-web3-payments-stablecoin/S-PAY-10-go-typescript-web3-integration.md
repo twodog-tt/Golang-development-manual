@@ -102,7 +102,7 @@ node examples/onchain-execution/client/payment-cli.mjs demo 10
 
 客户端按本次部署的 PAYMENT_ASSET 建单，不再把默认的模拟资产地址带入真实本地链。CLI 使用 bigint 发送原子金额，conversion.output_atomic 保持十进制字符串，返回 intent、tx hash、block hash、已索引高度和 epoch。原独立协议示例保留 6→18 decimals 的精度验证；端到端资金运营则固定为两种 6 decimals 合成稳定币。
 
-`convert` 先读取受保护报价，再提交 min_out/deadline；后端固定输入金额和收款路径，同一订单不同参数返回冲突。Create 或广播响应未知时查询原 ID，不重新执行 demo 生成另一订单。`show ID` 检查 payment 与 conversion，数据库故障后的 review 可在核对事实并修复依赖后调用 conversion/resume。完整命令和 7 组故障见 [运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
+`convert` 先读取受保护报价，再提交 min_out/deadline；后端固定输入金额和收款路径，同一订单不同参数返回冲突。Create 或广播响应未知时查询原 ID，不重新执行 demo 生成另一订单。`show ID` 检查 payment 与 conversion，数据库故障后的 conversion=review 且 payment=settled 时可在修复依赖后调用 conversion/resume；链证据异常的 review_chain 必须人工核对，不能自动 resume。完整命令和 12 组故障见 [运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
 
 ## 架构取舍
 
