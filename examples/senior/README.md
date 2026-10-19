@@ -40,6 +40,7 @@
 |---------|------|------|
 | S-AI-12 | [agenttrust/](agenttrust/) | 安全抓取、钱包证明、信誉撤销与验证重组 | `go test -race -timeout 60s ./agenttrust/...` · `go run ./agenttrust/cmd/demo` |
 | S-AI-13 | [agentcommerce/](agentcommerce/) | 支付签名/请求绑定、UNKNOWN恢复与托管竞态 | `go test -race -timeout 60s ./agentcommerce/...` · `go run ./agentcommerce/cmd/demo` |
+| S-AI-14 | [agentplatform/](agentplatform/) | 发布审批/委托预算/购买权益、Launchpad持久恢复与三语言编码 | `go test -race -timeout 60s ./agentplatform/...` · `go run ./agentplatform/cmd/demo` |
 | S-AI-15 | [agenteval/](agenteval/) | `go test -race ./agenteval/...` |
 | S-PAY-07 / S-DIST-06 / S-PG-04 | [PostgreSQL/Redis 演练](../postgres-reliability/) | 仓库根目录运行 `python3 examples/postgres-reliability/verify.py` |
 

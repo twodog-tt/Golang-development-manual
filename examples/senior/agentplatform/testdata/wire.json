@@ -1,0 +1,194 @@
+[
+  {
+    "name": "over-js-safe-integer",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "expected": {
+      "canonical": "{\"amount\":\"9007199254740993\",\"domain\":\"agent-platform/intent\",\"memo\":\"知识库\",\"operation\":\"pay\",\"tenant\":\"tenant-a\",\"version\":\"1\"}",
+      "digest": "3ea36400b3cf45ea27c6e19cfcb2c9c139663d06124597d919ad08dd0549cb37"
+    }
+  },
+  {
+    "name": "max-uint256",
+    "raw": "{\"amount\": \"115792089237316195423570985008687907853269984665640564039457584007913129639935\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "expected": {
+      "canonical": "{\"amount\":\"115792089237316195423570985008687907853269984665640564039457584007913129639935\",\"domain\":\"agent-platform/intent\",\"memo\":\"知识库\",\"operation\":\"pay\",\"tenant\":\"tenant-a\",\"version\":\"1\"}",
+      "digest": "16fd493e2ce444c18d615aeffacd58e6b22f70f19bb1b722c53444fd949542f2"
+    }
+  },
+  {
+    "name": "reordered-and-escaped",
+    "raw": "{\"version\": \"1\", \"tenant\": \"tenant-a\", \"operation\": \"pay\", \"memo\": \"\\u77e5\\u8bc6\\u5e93\", \"domain\": \"agent-platform/intent\", \"amount\": \"9007199254740993\"}",
+    "expected": {
+      "canonical": "{\"amount\":\"9007199254740993\",\"domain\":\"agent-platform/intent\",\"memo\":\"知识库\",\"operation\":\"pay\",\"tenant\":\"tenant-a\",\"version\":\"1\"}",
+      "digest": "3ea36400b3cf45ea27c6e19cfcb2c9c139663d06124597d919ad08dd0549cb37"
+    }
+  },
+  {
+    "name": "controls-and-html",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\\b\\f\\n\\r\\t\\u0000\\u001f<>/&\\\"\\\\  \", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "expected": {
+      "canonical": "{\"amount\":\"9007199254740993\",\"domain\":\"agent-platform/intent\",\"memo\":\"\\b\\f\\n\\r\\t\\u0000\\u001f<>/&\\\"\\\\  \",\"operation\":\"pay\",\"tenant\":\"tenant-a\",\"version\":\"1\"}",
+      "digest": "7fb7b2074cb6ad399e1396e04da1bc7380b79ca4ea0faf29c526637370c260d0"
+    }
+  },
+  {
+    "name": "surrogate-pair-escape",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\\ud83d\\udcb0\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "expected": {
+      "canonical": "{\"amount\":\"9007199254740993\",\"domain\":\"agent-platform/intent\",\"memo\":\"💰\",\"operation\":\"pay\",\"tenant\":\"tenant-a\",\"version\":\"1\"}",
+      "digest": "c4f3b0244ac30b88a9edf8caa70c0edd07d2bdfaa826452282d7590c0d1e1d08"
+    }
+  },
+  {
+    "name": "unicode-composed",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"é\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "expected": {
+      "canonical": "{\"amount\":\"9007199254740993\",\"domain\":\"agent-platform/intent\",\"memo\":\"é\",\"operation\":\"pay\",\"tenant\":\"tenant-a\",\"version\":\"1\"}",
+      "digest": "527f7a0866473f973a15470a13ff726a91da4218cc7a437441ae1ce801534e44"
+    }
+  },
+  {
+    "name": "unicode-decomposed",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"é\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "expected": {
+      "canonical": "{\"amount\":\"9007199254740993\",\"domain\":\"agent-platform/intent\",\"memo\":\"é\",\"operation\":\"pay\",\"tenant\":\"tenant-a\",\"version\":\"1\"}",
+      "digest": "22245c1b5d2b437d79966f8450e34ac2ce15bc8c2df3148c334e14e044fb76a5"
+    }
+  },
+  {
+    "name": "literal-backslash-u",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\\\\ud800\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "expected": {
+      "canonical": "{\"amount\":\"9007199254740993\",\"domain\":\"agent-platform/intent\",\"memo\":\"\\\\ud800\",\"operation\":\"pay\",\"tenant\":\"tenant-a\",\"version\":\"1\"}",
+      "digest": "581e57323c44999227985e2405a44bf32ca79b3a1f4bd4a602471ceb380c3f00"
+    }
+  },
+  {
+    "name": "empty-memo",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "expected": {
+      "canonical": "{\"amount\":\"9007199254740993\",\"domain\":\"agent-platform/intent\",\"memo\":\"\",\"operation\":\"pay\",\"tenant\":\"tenant-a\",\"version\":\"1\"}",
+      "digest": "4a4d0dd5d2f2bbd641491e276c9dd65ea755cbd2c97db5167011836e30ca8f3d"
+    }
+  },
+  {
+    "name": "zero",
+    "raw": "{\"amount\": \"0\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "negative",
+    "raw": "{\"amount\": \"-1\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "leading-zero",
+    "raw": "{\"amount\": \"01\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "plus",
+    "raw": "{\"amount\": \"+1\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "overflow",
+    "raw": "{\"amount\": \"115792089237316195423570985008687907853269984665640564039457584007913129639936\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "decimal",
+    "raw": "{\"amount\": \"1.0\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "numeric",
+    "raw": "{\"amount\": 9007199254740993, \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "null",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": null, \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "nested",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": {}, \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "unknown-key",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\", \"extra\": \"x\"}",
+    "reject": true
+  },
+  {
+    "name": "wrong-version",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"2\"}",
+    "reject": true
+  },
+  {
+    "name": "wrong-operation",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"deploy\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "wrong-domain",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"other\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "empty-tenant",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"知识库\", \"operation\": \"pay\", \"tenant\": \"\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "long-memo",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "missing-memo",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "duplicate-key",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\\u77e5\\u8bc6\\u5e93\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\",\"amount\":\"1\"}",
+    "reject": true
+  },
+  {
+    "name": "escaped-duplicate-key",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\\u77e5\\u8bc6\\u5e93\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\",\"\\u0061mount\":\"1\"}",
+    "reject": true
+  },
+  {
+    "name": "trailing-object",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\\u77e5\\u8bc6\\u5e93\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}{}",
+    "reject": true
+  },
+  {
+    "name": "trailing-comma",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\\u77e5\\u8bc6\\u5e93\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\",}",
+    "reject": true
+  },
+  {
+    "name": "high-surrogate",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\\ud800\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "low-surrogate",
+    "raw": "{\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\\udc00\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "non-json-whitespace",
+    "raw": " {\"amount\": \"9007199254740993\", \"domain\": \"agent-platform/intent\", \"memo\": \"\\u77e5\\u8bc6\\u5e93\", \"operation\": \"pay\", \"tenant\": \"tenant-a\", \"version\": \"1\"}",
+    "reject": true
+  },
+  {
+    "name": "invalid-utf8",
+    "hex": "ff",
+    "reject": true
+  }
+]

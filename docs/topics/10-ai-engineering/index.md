@@ -39,11 +39,15 @@
 | S-AI-11 | `examples/senior/a2a/` | `go test -race ./examples/senior/a2a/...` · `go run ./examples/senior/a2a/cmd/demo -dir "$(mktemp -d)" -step demo` |
 | S-AI-12 | `examples/senior/agenttrust/` | `go test -race -timeout 60s ./examples/senior/agenttrust/...` · `go run ./examples/senior/agenttrust/cmd/demo` |
 | S-AI-13 | `examples/senior/agentcommerce/` | `go test -race -timeout 60s ./examples/senior/agentcommerce/...` · `go run ./examples/senior/agentcommerce/cmd/demo` |
+| S-AI-14 | `examples/senior/agentplatform/` | `go test -race -timeout 60s ./examples/senior/agentplatform/...` · `go run ./examples/senior/agentplatform/cmd/demo` |
 | S-AI-15 | `examples/senior/agenteval/` | `go test -race ./examples/senior/agenteval/...` · `go run ./examples/senior/agenteval/cmd/eval` |
 
 S-AI-01/02/06/10 的综合演示：`go run ./examples/senior/knowledge-demo`；全部离线故障门禁：
 `bash scripts/verify_reliability_examples.sh --offline`。要求 Go 1.24.2+，持久化示例使用 Linux/macOS 文件锁；
 所有 token、模型、审批者和发布效果均为本地夹具，MCP stdio 命令会等待客户端输入。
+
+S-AI-14 三语言规范化验证另需 Node 22.15+：`python3 examples/senior/agentplatform/wire/verify.py`；
+真实容器边界独立运行 `python3 examples/senior/agentplatform/verify_sandbox.py`，需 Docker 与本地 alpine:3.22.1 镜像。
 
 ## 适用场景
 

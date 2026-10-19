@@ -36,9 +36,6 @@ jobs:
             examples/stablecoin-ops/go.sum
             examples/onchain-execution/go.sum
 
-      - name: Verify Agent evaluation, workflow and MCP/A2A offline
-        run: bash scripts/verify_reliability_examples.sh --offline
-
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -46,6 +43,14 @@ jobs:
           cache-dependency-path: |
             examples/stablecoin-ops/client/package-lock.json
             examples/onchain-execution/client/package-lock.json
+
+      - name: Verify Agent reliability and platform wire contract offline
+        run: bash scripts/verify_reliability_examples.sh --offline
+
+      - name: Verify Agent plugin container isolation
+        run: |
+          docker pull alpine:3.22.1
+          python examples/senior/agentplatform/verify_sandbox.py
 
       - uses: foundry-rs/foundry-toolchain@v1
         with:

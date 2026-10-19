@@ -397,7 +397,8 @@ cd basis/goroutine && go run .
 ```bash
 # 完整运行需要 Docker 与本地 postgres:17-alpine / redis:7.4-alpine 镜像
 bash scripts/verify_reliability_examples.sh
-# Agent 评测、审批、MCP/A2A、RAG/Memory/Prompt/媒体/身份/Commerce/成本故障门禁（无需 Docker）
+# Agent 评测、审批、MCP/A2A、RAG/Memory/Prompt/媒体/身份/Commerce/开放平台/成本故障门禁
+# 需 Go、Python 3、Node 22.15+，无需 Docker
 bash scripts/verify_reliability_examples.sh --offline
 ```
 
@@ -421,6 +422,15 @@ ERC-8004 与 Commerce 的本地运行示例见[身份与信任投影](./examples
 ```bash
 go run ./examples/senior/agenttrust/cmd/demo
 go run ./examples/senior/agentcommerce/cmd/demo
+```
+
+开放平台与 Launchpad 新增[审批、委托、购买权益和持久恢复示例](./examples/senior/agentplatform/README.md)，含19组故障测试、33组三语言编码向量及独立容器隔离探针；仍为本地教学模型。
+
+```bash
+go run ./examples/senior/agentplatform/cmd/demo
+python3 examples/senior/agentplatform/wire/verify.py
+# 容器探针需 Docker 和本地 alpine:3.22.1 镜像，离线门禁不执行此项
+python3 examples/senior/agentplatform/verify_sandbox.py
 ```
 
 ## 稳定币支付与资金运营项目
