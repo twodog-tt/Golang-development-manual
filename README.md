@@ -397,7 +397,7 @@ cd basis/goroutine && go run .
 ```bash
 # 完整运行需要 Docker 与本地 postgres:17-alpine / redis:7.4-alpine 镜像
 bash scripts/verify_reliability_examples.sh
-# Agent 评测、审批、MCP/A2A、RAG/Memory/Prompt/媒体/成本故障门禁（无需 Docker）
+# Agent 评测、审批、MCP/A2A、RAG/Memory/Prompt/媒体/身份/Commerce/成本故障门禁（无需 Docker）
 bash scripts/verify_reliability_examples.sh --offline
 ```
 
@@ -414,6 +414,13 @@ Prompt/Context 与多模态/语音新增本地运行与故障验证，见
 ```bash
 go run ./examples/senior/promptcontext/cmd/demo
 go run ./examples/senior/mediaio/cmd/demo
+```
+
+ERC-8004 与 Commerce 的本地运行示例见[身份与信任投影](./examples/senior/agenttrust/README.md)、[支付授权与托管恢复](./examples/senior/agentcommerce/README.md)。包含真实EOA签名、SSRF/TLS、信誉撤销/验证重组，以及结算未知、进程退出和退款竞态；均为本地夹具，不调用真实付款服务。
+
+```bash
+go run ./examples/senior/agenttrust/cmd/demo
+go run ./examples/senior/agentcommerce/cmd/demo
 ```
 
 ## 稳定币支付与资金运营项目

@@ -38,6 +38,8 @@
 | S-AI-08 | 多模态上传/ASR/PCM 与语音恢复 | [S-AI-08](../10-ai-engineering/S-AI-08-multimodal-voice.md) | `examples/senior/mediaio/` |
 | S-AI-10 | Memory 审批、删除与恢复 | [S-AI-10](../10-ai-engineering/S-AI-10-persona-memory-feedback-governance.md) | `examples/senior/agentmemory/` |
 | S-AI-01 / 02 / 06 / 10 | 综合本地演示 | [AI 工程](../10-ai-engineering/index.md) | `go run ./examples/senior/knowledge-demo` |
+| S-AI-12 | ERC-8004 本地身份与信任投影 | [S-AI-12](../10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md) | `examples/senior/agenttrust/` |
+| S-AI-13 | Commerce 请求授权、UNKNOWN与托管恢复 | [S-AI-13](../10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) | `examples/senior/agentcommerce/` |
 | S-AI-07 | MCP Server：stdio/HTTP 授权与恢复 | [S-AI-07](../10-ai-engineering/S-AI-07-mcp-server-go.md) | `examples/senior/mcp/` |
 | S-AI-11 | A2A 授权、人工核对与持久恢复 | [S-AI-11](../10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) | `examples/senior/a2a/` |
 | S-SOL-01～08 | 解决方案架构 | — | [11-solution-architecture/](../11-solution-architecture/index.md) |

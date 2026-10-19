@@ -55,7 +55,7 @@ flowchart LR
 | 3 | [LLM 应用安全](../topics/10-ai-engineering/S-AI-05-llm-security.md) · [成本可观测](../topics/10-ai-engineering/S-AI-06-llm-observability-cost.md) | deterministic_test（本地限定夹具） |
 | 4 | [Go LLM API](../topics/10-ai-engineering/S-AI-01-llm-api-integration.md) · [Tool Calling](../topics/10-ai-engineering/S-AI-03-agent-tool-calling.md) | deterministic_test（llmclient 等） |
 | 5 | [MCP Server](../topics/10-ai-engineering/S-AI-07-mcp-server-go.md) · [MCP/A2A 互操作](../topics/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) | deterministic_test（本地 MCP/A2A 限定夹具；非完整协议验收） |
-| 6 | [Agent Commerce](../topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) · [开放平台/Launchpad](../topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) | explanation |
+| 6 | [ERC-8004 身份与信任](../topics/10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md) · [Agent Commerce](../topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) · [开放平台/Launchpad](../topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) | S-AI-12/13：deterministic_test（本地限定夹具）；S-AI-14：explanation |
 | 7 | 动钱时必读：[钱包概念地图](./wallet-custody.md) · [托管≠MPC](./confusion-cards.md#custody-vs-mpc) | — |
 
 补充可运行阅读：[Prompt 与 Context](../topics/10-ai-engineering/S-AI-04-prompt-context.md)、

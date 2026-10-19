@@ -7,7 +7,9 @@ frequency: 5
 tags: [x402, x402b, erc-8183, agent-commerce, escrow, payment, reconciliation]
 status: published
 resume_focus: true
-code_refs: []
+go_version: "1.24.2+"
+reviewed_at: "2026-10-19"
+code_refs: [examples/senior/agentcommerce]
 sources:
   - https://github.com/x402-foundation/x402
   - https://docs.cdp.coinbase.com/x402/welcome
@@ -74,7 +76,11 @@ sources:
 三者可以组合，但不是替代关系。例如 A2A Agent 可以先用 x402 支付一次数据查询，也可以为一个
 持续数小时的交付任务创建 ERC-8183 escrow job。
 
-### x402 标准流程
+### x402 v2：先固定机制，再选择流程
+
+本文固定参考 x402仓库revision `faa1c694c66a3732aaabbce93bdae140e521a67d`（2026-10-15），复核于2026-10-19。[版本化规范](https://github.com/x402-foundation/x402/blob/faa1c694c66a3732aaabbce93bdae140e521a67d/specs/x402-specification-v2.md)。HTTP v2的PAYMENT-REQUIRED、PAYMENT-SIGNATURE、PAYMENT-RESPONSE均携带base64 JSON；不能与v1字段/头混用。
+
+下面只画 **authorization flow**，不是所有scheme/network的通用顺序：
 
 ```mermaid
 sequenceDiagram
@@ -96,6 +102,16 @@ sequenceDiagram
   R-->>C: 200 + resource + PAYMENT-RESPONSE
 ```
 
+v2核心还区分以下flow，不能把“先做工作或先结算”只留作任意实现选择：
+
+| paymentFlow | 顺序 | 关键恢复点 |
+|---|---|---|
+| authorization | verify → resource → settle → respond | verify只读，后结算未知时保留原授权与工作结果 |
+| upfront | settle → resource → respond | 首次资金提交失败/未知时不执行资源 |
+| escrow | deposit settle → resource → capture settle → respond | 存入上限不等于最终扣款，分阶段恢复不能重复deposit/capture |
+
+flow由具体network机制及assetTransferMethod声明；未知组合拒绝，不认识的flow不能签名。非authorization flow须显式在要求中传递，不能把任意机制的缺省值猜成authorization。付款本地Engine只支持固定exact/EVM/eip3009/authorization；RunFlow仅验证三类编排顺序，不声明其他网络的实际支付支持。
+
 公开规范允许 Resource Server 自行验证/结算，也可以委托 Facilitator。生产系统要显式选择：
 
 - 使用哪个 Facilitator，还是 self-facilitate；
@@ -110,11 +126,12 @@ sequenceDiagram
 
 ### Scheme 与 Network 必须作为组合能力
 
-当前 x402 Foundation 仓库列出的 scheme 包括 `exact`、`upto` 和 `batch-settlement`，但这是
+所固定revision的scheme规范包含 `exact`、`upto`、`batch-settlement`、`auth-capture` 等；列出规范不代表SDK/Facilitator均已实现，这是
 版本敏感信息。关键设计原则是：
 
 ```text
-capability = protocol_version + scheme + network + asset + facilitator
+capability = protocol_revision + protocol_version + scheme + network
+           + asset + facilitator + assetTransferMethod + paymentFlow
 ```
 
 - `exact`：支付固定金额；
@@ -148,11 +165,24 @@ stateDiagram-v2
 - **Authorized/Verified**：payload 看起来满足要求，不代表链上资金已移动。
 - **Paid/Settled**：支付达到产品要求的链上水位，不代表 Client 已收到资源。
 - **Fulfilled**：资源或服务已交付，不代表财务账、平台费和商户应收已经完成。
-- **Unknown**：任一跨网络边界超时后，先按 payment intent、payload hash、tx hash、sender/
-  nonce 或 Facilitator 查询事实。
+- **Unknown**：保存应用intent、规范化授权digest、network/token/authorizer/authorization nonce、阶段与已知tx hash；经可信适配器查canonical资金事实。EIP-3009的32-byte授权nonce不是Facilitator广播账户的交易nonce，也不能用原始JSON字节hash代替授权身份。
+
+`settlement_pending` 是非终态：Facilitator可返回 `success=false`，同时附非空transaction和network，交易仍可能确认。超时/暂查不到receipt/授权尚未消费都不等于“已证明未结算”，不得生成新nonce重新付款。通用Facilitator接口也不保证存在按业务intent查询的恢复API。
+
+EIP-3009可读authorizationState，但true可能关联使用或取消，必须结合可信token合约的事件、tx与canonical/finality水位区分；最终取消证据才能排除该授权继续付款。对于尚未证实的付款，RPC错误、未确认、reorg或矛盾证据都不能把UNKNOWN提升为成功，不能放款/交付兜底。
+
+恢复用单调递增revision及state/receipt做CAS，防止并发旧查询在状态/回执变化后又回到原值（ABA）时覆盖新结论。一次RPC不可用、暂查不到或未确认结果不自动推翻已有finalized凭证，也不是冲正证据；匹配原tx/block的已确认非canonical证据才触发重组冲正。需要最新链水位的高风险交付须另加freshness gate，本地Result读取已存可信凭证并复查当前grant。已记账支付重组后追加冲正并失效新交付权限；新block重新确认后再追加结算。已经交付的资源无法收回，仍需独立敞口和补偿流程。
 
 HTTP 200、Facilitator success 和链 receipt 都只是不同观察。账本应记录每条资金腿和业务事件，
 并通过对账把观察提升为可结算事实。
+
+### 付款证明不等于资源授权
+
+以exact/EVM/eip3009为例，EIP-712签名覆盖token domain及from/to/value/validAfter/validBefore/nonce，**不覆盖HTTP租户、method、resource URL或body digest**。PaymentPayload外层带resource也不自动使其进入token签名。不能从“付款有效”推出“当前请求者能读取这份私有报告”。
+
+宿主须先认证请求主体和资源归属，创建有界应用intent，将tenant/subject/方法/规范化资源/实际正文digest/报价与授权digest绑定在可信存储；客户端或模型自己填的digest不是证明。每次Execute从实际请求重建绑定并核对，必要时再使用独立应用签名/扩展，但不能宣称token原签名自带这种覆盖。
+
+以应用intent和规范化授权键原子占位，防并发重放与换JSON包装；同一授权不能用于不同intent。响应丢失后，只有当前仍获授权的同一主体/绑定可取原结果；不能拿一个已用付款hash换任意资源。付款前落UNKNOWN，未知期间禁止新付款；外部业务工作亦需独立持久工作流，内存去重不够。
 
 ### x402b 的安全表达
 
@@ -180,13 +210,13 @@ Open x402 Core
 
 ### ERC-8183 状态机
 
-截至本文复核，ERC-8183 页面标记为 **Draft**。它定义 Client、Provider、Evaluator 三个角色
+截至 **2026-10-19**，ERC-8183 页面标记为 **Draft**。它定义 Client、Provider、Evaluator 三个角色
 以及六个状态：
 
 ```mermaid
 stateDiagram-v2
   [*] --> Open
-  Open --> Funded: budget agreed + client funds
+  Open --> Funded: provider set + fund(expectedBudget)
   Open --> Rejected: client rejects
   Funded --> Submitted: provider submits deliverable
   Funded --> Rejected: evaluator rejects
@@ -198,9 +228,15 @@ stateDiagram-v2
 
 | 角色 | 权力 | 风险 |
 |------|------|------|
-| Client | 创建、设定/同意预算、出资 | 恶意拒付诉求、描述模糊 |
+| Client | 创建、Open选定Provider/设预算，fund(expectedBudget)，仅Open可reject | 恶意拒付诉求、描述模糊 |
 | Provider | 协商预算、提交交付物、完成后收款 | 低质量/虚假 deliverable |
 | Evaluator | 对 Submitted 完成或拒绝，Funded 阶段可拒绝 | 偏置、串谋、私钥泄漏、失联 |
+
+`fund(jobId,expectedBudget)` 必须比较当前job.budget，防止读取/审批价格后Provider改价；Provider可在创建时留空，但Client须在Open明确选定后才能出资。不能先读价格再调用一个没有预期值保护的fund冒充同一授权。
+
+到期只使Funded/Submitted可调用claimRefund，**不会自动把状态写成Expired**。规范未给complete设置通用的到期自动禁用规则；若仍为Submitted，Evaluator完成与到期退款可能竞争。按canonical成交顺序只能有一个终态，监控不能仅凭本地时钟判退款成功。退款由任何人触发是推荐实现，但款项始终回Client，具体caller限制须核对目标合约；本地Job采用permissionless触发并额外禁止到期后fund。
+
+接入还要核对实际ABI：当前ERC页面的规范正文要求expectedBudget，而附带reference code的fund签名等细节并不一致。必须固定部署版本并验证行为，不能把复制reference code当成通过规范。
 
 Evaluator 可以是 Client，也可以是第三方地址或验证合约。选择谁不是实现细节，而是商业信任模型：
 
@@ -264,7 +300,7 @@ commerce_intent
 一个 Agent 购买研究报告并执行后续交易：
 
 1. Policy Engine 根据 tenant 日预算和报告价格批准 payment intent。
-2. Agent 收到 402 后校验 network、asset、amount、recipient、resource digest 和过期时间。
+2. Agent收到402后核对固定版本/transferMethod/flow、network、asset、amount、recipient和有效期；宿主另把实际resource/body digest与已认证主体绑定到应用intent，不能假设token签名覆盖它们。
 3. 隔离钱包签署有界 payload；Resource Server 验证并执行/结算。
 4. 报告交付保存 content digest；支付和交付分别进入账本。
 5. 报告若触发链上交易，要新建交易 intent 和独立审批，不能复用购买报告的支付授权。
@@ -306,6 +342,35 @@ commerce_intent
 - x402b 适配器泄漏厂商字段到公共 SDK，无法升级或切换实现。
 - ERC-8183 Evaluator 私钥单点泄漏，攻击者批量完成恶意 job 并释放资金。
 - Hook 升级改变进行中 job 的分账和恢复逻辑，产生不可对账余额。
+
+## 可运行示例与故障验证
+
+从仓库根目录运行，不发送真实付款：
+
+```bash
+go run ./examples/senior/agentcommerce/cmd/demo
+go test -race -timeout 60s ./examples/senior/agentcommerce/...
+bash scripts/verify_reliability_examples.sh --offline
+```
+
+CLI串起真实EIP-3009验签、替换请求拒绝、结算回包丢失、UNKNOWN阻断、重建Engine后查询独立持久账本并返回原结果；另展示三种flow顺序、预算变化拦截和失败Hook下到期退款。
+预期passed=true、settlements=1、ledger_entries=1、unknown_blocked_retry=true、expiry_refund=20。
+[代码、运行说明及完整矩阵](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/agentcommerce)。
+
+| 故障验证 | 预期 |
+|---|---|
+| 签名/金额/收款人/nonce被改、过期/未生效、未知版本/机制/flow | 签名前/验签时拒绝，不产生结算 |
+| 支付签名仍有效但换tenant/主体/resource/method/body/intent | 资源授权拒绝，不把付款当登录 |
+| 16路并发、同授权换intent、响应丢失后重读 | 最多1次effect和1条结算腿，原主体可取原结果 |
+| settle丢包、远端落盘后真实子进程exit73、进程重启 | UNKNOWN不重付，经凭证恢复后交付 |
+| pending/unseen/RPC错、错digest/recipient/nonce、明确取消 | 未证实状态不记成功，取消单独处理 |
+| reorg、重复恢复、旧查询后到与状态/回执ABA | 追加冲正/重新结算，单调revision CAS拒绝旧状态覆盖；暂查不到不伪造冲正 |
+| 重启缺目录/Chain或付款账户改变 | 不跨签名账户执行或恢复 |
+| upfront首次settle失败、escrow deposit/capture失败 | 编排立即停，不执行不允许的后续阶段 |
+| Provider未定、审批后预算变更、越权fund/submit/complete/reject | 拒绝且无资金状态变化 |
+| 精确到期、complete/refund两种顺序及并发、Hook前后失败 | 只释放或退回一次；after失败全回滚；退款不被Hook阻断 |
+
+本地证据为16组测试及1个崩溃helper；持久化仅为Linux/macOS单主机文件锁模型。Job是内存原子模型，LocalChain是独立本地凭证库，均不连接EVM。没有x402 HTTP wire/SDK兼容、真实Facilitator/余额simulate、生产IAM、x402b厂商或已部署ERC-8183验收；RunFlow也不是多阶段支付恢复器。
 
 ## 延伸阅读
 

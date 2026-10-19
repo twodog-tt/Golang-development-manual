@@ -794,12 +794,14 @@ p1:
       status: published
       resume_focus: true
       file: 10-ai-engineering/S-AI-12-erc8004-agent-identity-reputation-validation.md
+      code_refs: [examples/senior/agenttrust]
     - id: S-AI-13
       title: x402、x402b 与 ERC-8183：Agent 支付、托管、争议和对账
       frequency: 5
       status: published
       resume_focus: true
       file: 10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md
+      code_refs: [examples/senior/agentcommerce]
     - id: S-AI-14
       title: Crypto Agent SDK、开放平台、Marketplace 与 Launchpad 架构
       frequency: 5

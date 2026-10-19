@@ -7,7 +7,9 @@ frequency: 5
 tags: [erc-8004, agent-identity, reputation, validation, erc721, erc1271]
 status: published
 resume_focus: true
-code_refs: []
+go_version: "1.24.2+"
+reviewed_at: "2026-10-19"
+code_refs: [examples/senior/agenttrust]
 sources:
   - https://eips.ethereum.org/EIPS/eip-8004
   - https://eips.ethereum.org/EIPS/eip-712
@@ -63,7 +65,7 @@ sources:
 
 ### 先声明规范状态
 
-截至本文复核日期，ERC-8004 在 EIP 页面标记为 **Draft**。Draft 的函数、字段和安全考虑可能继续
+截至 **2026-10-19**，ERC-8004 在 EIP 页面标记为 **Draft**。Draft 的函数、字段和安全考虑可能继续
 变化；讲解时可以研究并设计接入，但不能称为“已最终定稿的 Ethereum 标准”。
 
 ### 三个 Registry 分别提供什么
@@ -115,9 +117,11 @@ agent_ref = namespace + chain_id + identity_registry + agent_id
 
 注册文件可包含 A2A、MCP、Web、ENS、DID 等服务声明。接入时：
 
-- 保存原始 URI、内容 digest、抓取时间、内容类型和解析版本；
-- 对 HTTPS 端点可执行域控制验证，但“控制域名”仍不等于“能力无恶意”；
-- IPFS/content-addressed 内容按 CID 校验，普通 HTTPS 内容保存 hash 防止静默变化；
+- 注册 URI、feedback/validation URI 都是外部输入，先做目标网络与资源限制，再抓取；默认拒绝内网、loopback、link-local/云元数据、CGNAT及保留网段；
+- DNS初检和dial前均核对全部地址，dial固定到已检查IP，TLS验证原域名；禁用环境代理和重定向，限制响应头/正文、压缩、超时及JSON深度，防SSRF、重绑定与资源耗尽；
+- 保存原始 URI、内容 digest、抓取时间、内容类型和解析版本；首次内容hash只是观测指纹，不能使不可信内容变成可信；
+- HTTPS域验证按规范从**端点自己的域**读取 `/.well-known/agent-registration.json` 并核对完整agentRegistry/agentId；同域主注册文件可按规范省略额外检查，但不能拿第三方域的文件证明本域。域控制不等于能力无恶意；
+- IPFS/content-addressed 内容按 CID 校验，普通 HTTPS 内容保存 hash 检测静默变化；本地适配器只实现有界HTTPS，明确拒绝尚未支持的IPFS/data，不把该限制写成规范禁止；
 - 对未知 service 类型保留原始字段，不能错误映射成已支持能力；
 - 对 `active=false`、URI 更新、所有权转移建立失效和重新审核流程。
 
@@ -127,8 +131,12 @@ agent_ref = namespace + chain_id + identity_registry + agent_id
 
 ### agentWallet 的正确边界
 
-规范为 agent wallet 预留 metadata，并要求新钱包通过 EIP-712 或 ERC-1271 证明控制权；身份转移
-时绑定钱包会被清除。这解决“注册项声称的钱包是否获得过控制权证明”，但不解决：
+规范保留 `agentWallet` metadata key，不能通过普通setMetadata/register metadata数组绕过专用入口。**注册时默认等于owner地址**；改绑新钱包时才通过 `setAgentWallet(agentId,newWallet,deadline,signature)` 提交控制权证明，转移后归零，须重新验证。
+
+真实部署须核对实际typed-data type/domain、chain、registry、agentId、deadline、owner/重放规则，不能认为EIP-712本身自带防重放。ERC-1271须由可信链适配器调用目标合约并核对 **0x1626ba7e**；RPC错误不能回退EOA，revert/错误magic/超时都失败，返回后再次确认身份版本未变化。合约签名有效性会随状态改变，不能永久缓存。
+
+本地 `agenttrust.BindingDigest` 使用独立标明的 `LocalAgentBinding/v1`，额外绑定owner revision，做真实EOA验签和1271返回值夹具验证；它不冒充目标ERC-8004部署的签名ABI，也未实现全部operator权限。
+这解决“注册项声称的钱包是否获得过控制权证明”，但不解决：
 
 - 当前 Agent runtime 是否能使用该钱包；
 - 某个 session key 是否仍有效；
@@ -160,6 +168,10 @@ Registry 允许 clientAddress 对 agentId 提交带 value、decimals、tag、URI
 5. 展示样本量、时间窗口、聚合算法版本和置信范围；
 6. 高价值动作不能仅凭公开评分自动放行。
 
+投影还须处理规范的 `revokeFeedback(agentId,feedbackIndex)`：反馈身份由完整Agent引用、clientAddress、feedbackIndex共同确定，撤销后的反馈不进入有效聚合，重组撤回撤销时重新计算；不能只追加NewFeedback。
+`value` 是有符号int128，`valueDecimals` 为0..18，同tag也须先按精度换算；使用整数/有理数，不用浮点或将负值误转无符号数。getSummary要求非空clientAddresses；本地Mean同样强制reviewer集合和tag。链下feedbackHash按Keccak-256核验，不能误用注册缓存的SHA-256指纹。
+本地固定owner投影只验证owner自评拒绝；真实注册表还禁止当前approved operator自评，并须随权限事件更新。
+
 ```text
 trust_decision =
   selected_reviewers
@@ -183,6 +195,10 @@ Agent owner/operator 向指定 validator 请求验证并提交 request URI/hash�
 - 多次 response 是渐进确认、覆盖还是冲突；
 - 证据 URI 是否可用，hash 是否匹配；
 - 验证的是“生成正确”还是只验证“某环境执行过”。
+
+接收规则必须落实：请求由该Agent的owner/operator发起，requestHash承诺实际payload；response只能由请求指定的validator写入，并匹配可信validation registry、完整Agent引用及requestHash，值在0..100。不能把相同输入输出的裸hash拿到另一任务或身份下复用；宿主的承诺内容应包含任务标识、输入输出、代码/模型版本等必要上下文。
+
+同一requestHash允许多次响应。平台须声明更新策略；本地投影按canonical事件顺序采用最新响应（包括100降到0），不取历史最大值。tag只是分类，不天然代表finality，未响应也不当作0分结论；重组撤回响应后失效结果与相关授权，回退至祖先后重放。
 
 Registry 只保证事件和状态按合约规则记录；不能把任意 `response=100` 解释成数学证明。
 
@@ -259,6 +275,32 @@ Agent Marketplace 上架流程：
 - registration file 内容变化但 URL 不变，平台缓存没有 digest 和版本。
 - 将 validation 的自然语言 reason 当成可验证证明，不检查 request/response hash。
 - 把 ERC-8004 Draft 写进不可升级核心业务契约，却没有 Adapter 和迁移策略。
+
+## 可运行示例与故障验证
+
+仓库根目录运行，无公链/资金/模型密钥：
+
+```bash
+go run ./examples/senior/agenttrust/cmd/demo
+go test -race -timeout 60s ./examples/senior/agenttrust/...
+bash scripts/verify_reliability_examples.sh --offline
+```
+
+CLI验证默认owner钱包、EOA改绑与转移清空、元数据目标拒绝、精确均值、反馈撤销、验证降级及祖先回滚。
+预期 `passed=true`、`normalized_mean="1"`、`latest_score=0`、`reorg_restored_score=100`。
+[运行说明与完整故障矩阵](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/agenttrust)。
+
+| 故障验证 | 预期 |
+|---|---|
+| 元数据/私网/映射/保留地址、混合DNS与重绑定、重定向 | 不向非法目标发请求；真实TLS正例保留域验证 |
+| MIME/压缩/正文超限、慢流、digest变化、重复键/身份字段大小写别名或错误类型/过深JSON | 有界失败，内容变化重新审核 |
+| 错chain/registry/agent/owner/revision、过期、转移后回到旧owner | 旧证明不改绑；转移清钱包 |
+| 1271错误magic/revert/查询失败/超时、验签时身份变化 | 失败关闭，不回退EOA或沿用旧状态 |
+| 不同精度/负值/标签、撤销、重复事件、撤销被重组撤回 | 精确聚合、幂等与重算，不计撤销值 |
+| 冒名validator、错registry/ref/任务hash、100降至0、响应重组 | 拒绝错关联；更新/撤回信任投影 |
+| 错parent、同hash不同内容、未知祖先、调用方改原slice | 拒绝冲突，无部分提交或证据篡改 |
+
+证据为本地有限模型：13组测试，真实EOA验签/本地TLS；1271、canonical事件与owner上下文来自可信夹具，不代表RPC、注册合约ABI、完整Identity/operator索引、IPFS互通或生产IAM验收。
 
 ## 延伸阅读
 

@@ -2,7 +2,7 @@
 
 > 全库 **249 篇**（以 [topics.yaml](topics.yaml) 为准）
 >
-> 本轮补强日期：**2026-10-19**（本次修复 Prompt/Context 与多模态/语音两篇既有正文，未新增文章或重新审查全库）
+> 本轮补强日期：**2026-10-19**（本次修复 ERC-8004 与 x402/ERC-8183 Commerce 两篇既有正文，未新增文章或重新审查全库）
 >
 > 审查范围：资深 Golang、后端/解决方案架构，重点领域为 AI/Crypto Agent、
 > Web3、交易所、钱包、链基础设施与支付
@@ -66,8 +66,8 @@
 - 第十八阶段补充 **3 篇集成正文**：交易执行网关（S-NODE-11）、Indexer 查询与数据质量（S-NODE-12）、DeFi 协议接入（S-EXCH-32），共用 `examples/onchain-execution`。真实 Anvil/Uniswap V2/PostgreSQL、进程重启、替换交易、坏日志、数据库回滚与重组共 10 组验证；仅本地合成资产，不代表公链资金或生产验收。
 - 第十九阶段将既有 **7 篇正文** 接成支付到 DeFi 的端到端实战：真实本地收款 reference、独立索引/支付库、Temporal 冻结与兑换、多资产同事务入账和持续重组审计，7 组集成故障验证；保留原两套验证入口。未新增 published 正文，总量仍为 **249 篇**，不扩大为公链或生产验收。
 - 第二十阶段复核端到端资金正确性：修复旧证据重试、通知故障停止审计、无 intent 阻断收款审计、冲正余额不足缺少持久人工状态，以及重组后的 nonce 缺口；增加 merchant/signer 隔离和版本分支验证，将端到端故障矩阵扩至 **12 组**。正文仍 **249 篇**，正常资金对账与故意保留待核对敞口的破坏性场景分别说明，不扩大为生产金融验收。
-- 证据标签已覆盖 249 篇：`explanation_only=170`、`illustrative_artifact=30`、
-  `deterministic_test=32`、`integration_harness=17`、`external_acceptance=0`。
+- 证据标签已覆盖 249 篇：`explanation_only=168`、`illustrative_artifact=30`、
+  `deterministic_test=34`、`integration_harness=17`、`external_acceptance=0`。
   最后一项为零是诚实边界，不把仓库 harness 写成真实厂商或生产验收。
 - 修正目标不是统一文风，而是删除绝对化、版本过时或会导致错误追问答案的表述，并修复相关 Go 示例。
 - 当前知识库的优势是 **Go 核心、分布式系统、中间件、EVM/Solidity、CEX/DEX 架构广度**。
@@ -394,3 +394,5 @@
 - 2026-10-19 AI 工程五项复审修复：修正专题入口 MCP token 与遗漏运行命令；S-AI-02 改为中文双字/英文词项正分召回，授权先于评分、无证据不调模型，并补撤权/删除后的返回校验；S-AI-10 统一 approved 状态，补内容/版本绑定审批、编辑撤批、主记录 tombstone 与索引/缓存/历史引用删除恢复；S-AI-01 对齐实际 Client，新增 loopback 文本 HTTP/SSE 夹具，验证显式终止、受限重试、取消、超限与未知用量；S-AI-06 分开应用答案缓存命中与 provider prompt caching，补权限/版本/TTL先于相似度和逐 attempt 成本未知处理。五个示例包合计 **30 组**顶层测试（含原有 Mock 测试及综合CLI测试），含真实子进程投影落盘后退出/ACK丢失恢复；race、vet、统一离线入口、元数据检查和严格文档构建通过。正文总数仍 **249 篇**，deterministic_test 从26增至 **30 篇**，explanation_only=172、illustrative_artifact=30、integration_harness=17；只作本地夹具证据，不调用真实模型、生产IAM或外部索引服务，本次未提交、推送或部署。
 
 - 2026-10-19 Prompt/Context 与多模态/语音八项修复：S-AI-04 增加完整历史组预算及最终格式化后的二次计数，绑定scope/身份/计数器版本，拒绝孤立工具结果与未完成调用；统一真实客户端适配接口，完成/refusal/incomplete来自可信typed结果，业务JSON严格拒绝缺/null/重复/未知键与非法值。S-AI-08 补嵌套媒体oneof、真实loopback multipart/ASR/二进制PCM转发、上传资源与临时文件治理、分片时间偏移及精确去重、语音播放/打断/ACK/新会话epoch隔离，并改写OCR价格/准确率、文件ASR费用和私有化数据驻留的绝对结论。提交前复审还补齐计数途中版本变化、ASR必填/重复键、继承Content-Length清理、旧播放回调及历史session复用防护。两组示例合计 **33 组**顶层测试，含net.Pipe阻塞写、真实HTTP音频截断/多余数据的下游失败、上传读deadline及探测失败/超时清理；两条CLI、race、vet、统一离线入口、元数据及严格文档构建通过。正文仍 **249 篇**，deterministic_test从30增至 **32 篇**，explanation_only=170、illustrative_artifact=30、integration_harness=17。计数器/ASR/TTS/实时会话为明确限定的本地夹具，没有真实模型tokenizer/质量/账单、任意codec沙箱、生产IAM或WebRTC/WebSocket互通验收；以上为提交前本地验证范围。
+
+- 2026-10-19 ERC-8004 与 Commerce 八项修复：S-AI-12 增加有界HTTPS解析/DNS重绑定与TLS验证、默认owner钱包/独立版本typed-data真实EOA验签及1271失败关闭、精确信誉/撤销/重放和canonical验证降级/回滚；S-AI-13 固定x402规范revision与transferMethod/flow支持矩阵，补真实EIP-3009签名和应用请求授权绑定、单主机持久UNKNOWN/nonce占位、独立结算证据恢复/重组冲正/CAS，以及ERC-8183 expectedBudget、角色、到期竞态和Hook回滚。提交前复核还补齐单调revision防ABA、缺失/未确认观察不伪造冲正、匹配原回执的重组证据、重启付款账户配置和注册声明大小写别名验证。两组共 **29 组**顶层测试，另有 **1 个**真实子进程崩溃helper；包含远端结算落盘后exit73、重启恢复且effect=1、16路并发及complete/refund两种顺序。两条CLI、race、vet、统一离线入口、元数据及严格文档构建通过；正文仍 **249 篇**，deterministic_test从32增至 **34 篇**，explanation_only=168、illustrative_artifact=30、integration_harness=17。EOA签名和TLS为真实本地执行，1271/注册表/Chain/Job及非authorization编排均为明确限定夹具，不证明RPC/部署ABI、x402 HTTP wire/SDK、x402b厂商、生产IAM或真实资金验收；以上为提交前本地验证范围。

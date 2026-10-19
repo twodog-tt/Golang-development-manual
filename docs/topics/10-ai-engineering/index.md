@@ -37,6 +37,8 @@
 | S-AI-08 | `examples/senior/mediaio/` | `go test -race -timeout 30s ./examples/senior/mediaio/...` · `go run ./examples/senior/mediaio/cmd/demo` |
 | S-AI-10 | `examples/senior/agentmemory/` | `go test -race ./examples/senior/agentmemory/...` |
 | S-AI-11 | `examples/senior/a2a/` | `go test -race ./examples/senior/a2a/...` · `go run ./examples/senior/a2a/cmd/demo -dir "$(mktemp -d)" -step demo` |
+| S-AI-12 | `examples/senior/agenttrust/` | `go test -race -timeout 60s ./examples/senior/agenttrust/...` · `go run ./examples/senior/agenttrust/cmd/demo` |
+| S-AI-13 | `examples/senior/agentcommerce/` | `go test -race -timeout 60s ./examples/senior/agentcommerce/...` · `go run ./examples/senior/agentcommerce/cmd/demo` |
 | S-AI-15 | `examples/senior/agenteval/` | `go test -race ./examples/senior/agenteval/...` · `go run ./examples/senior/agenteval/cmd/eval` |
 
 S-AI-01/02/06/10 的综合演示：`go run ./examples/senior/knowledge-demo`；全部离线故障门禁：

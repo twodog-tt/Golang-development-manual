@@ -728,6 +728,8 @@ evidence:
       - explanation_only
     derive_illustrative_artifact_from_nonempty_code_refs: true
     deterministic_test:
+      - S-AI-12
+      - S-AI-13
       - S-AI-04
       - S-AI-08
       - S-AI-01
