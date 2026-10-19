@@ -155,7 +155,7 @@ python3 examples/stablecoin-ops/e2e/verify.py --recovery --report /tmp/payment-r
 python3 examples/stablecoin-ops/e2e/verify.py --recovery --serve
 ```
 
-5 组恢复验证覆盖计划篡改/过期、原分录核对、真实同 nonce 取消及未知回包、跨资产原子冲正、跨库封存先提交、审计启动 ACK 丢失，以及解封后新的真实付款/兑换。取消必须先持久签名，再等待 canonical 确认；无 intent 时先写不可自动撤销的退休屏障。恢复提交同时写入审计启动任务，Worker 重启后也能补启动。完整命令、支持/拒绝矩阵与证据见 [人工恢复运行手册](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/stablecoin-ops/e2e/RECOVERY.md)。
+5 组恢复验证覆盖计划篡改/过期、原分录核对、真实同 nonce 取消及未知回包、跨资产原子冲正、跨库封存先提交、审计启动 ACK 丢失、首次审计耗尽重试后依赖修复/Worker 重启恢复，以及解封后新的真实付款/兑换。取消必须先持久签名，再等待 canonical 确认；无 intent 时先写不可自动撤销的退休屏障。恢复提交同时写入审计启动任务，Worker 持续扫描未通过首次检查的计划；固定 Workflow ID，只有未成功的关闭执行可重启新 run，运行中不另开。启动成功和首次检查成功必须同时成立才能进入解封核对。完整命令、支持/拒绝矩阵与证据见 [人工恢复运行手册](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/stablecoin-ops/e2e/RECOVERY.md)。
 
 普通支付/链上/端到端的 11/10/12 组入口保留，恢复入口独立 5 组，总计 38 组集成场景。解封须所有相关业务已核对、无 pending/nonce 缺口、托管与账本一致。已经冲正又重新出现的兑换、未知 nonce、余额不足和事实缺失仍然隔离；本例不自动生成新 nonce 或改写账本绕过人工判断。
 

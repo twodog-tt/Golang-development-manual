@@ -51,6 +51,31 @@ func TestObservedChainOrphanReturnsToAwaiting(t *testing.T) {
 	}
 }
 
+func TestDuplicateIDBindsEventTypeAndReference(t *testing.T) {
+	p, _ := New("pay_conflict")
+	original := Event{ID: "evt_1", Type: EventFundsObserved, Reference: "tx_A"}
+	if _, err := p.Apply(original); err != nil {
+		t.Fatal(err)
+	}
+	for _, changed := range []Event{
+		{ID: original.ID, Type: EventReversal, Reference: original.Reference},
+		{ID: original.ID, Type: original.Type, Reference: "tx_B"},
+	} {
+		if applied, err := p.Apply(changed); applied || !errors.Is(err, ErrEventConflict) {
+			t.Fatalf("conflicting event accepted: applied=%v err=%v", applied, err)
+		}
+		if p.State != StateObserved || p.Version != 1 {
+			t.Fatal("conflict changed aggregate")
+		}
+	}
+	if applied, err := p.Apply(original); applied || err != nil {
+		t.Fatalf("exact retry rejected: applied=%v err=%v", applied, err)
+	}
+	if applied, err := p.Apply(Event{ID: "evt_2", Type: EventFundsConfirmed, Reference: "tx_A"}); !applied || err != nil {
+		t.Fatalf("conflict poisoned later events: applied=%v err=%v", applied, err)
+	}
+}
+
 func TestSettledPaymentRequiresReversalEvent(t *testing.T) {
 	payment, _ := New("pay_1")
 	for _, event := range []Event{

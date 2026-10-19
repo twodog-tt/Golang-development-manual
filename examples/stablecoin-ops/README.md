@@ -39,7 +39,7 @@ python3 examples/stablecoin-ops/verify.py --report /tmp/stablecoin-ops.json
 | 验证 | 判定 |
 |---|---|
 | SIWE 跨语言 | Go 生成消息，viem 解析重建为完全相同的字节并签名，Go 验签 |
-| 身份负例 | 篡改 URI、过期 nonce、同 nonce 并发登录只成功一次；跨商户读请求拒绝 |
+| 身份负例 | 篡改 URI、过期 nonce、同 nonce 并发登录只成功一次；会话保存签名地址/链/商户；绑定变更后拒绝旧授权，RPC 回包期间解绑不能重新登录；跨商户读请求拒绝 |
 | 合约钱包 | Go 单测使用明确的 RPC fixture；固定 chain/block，错误链、错误 magic、RPC 错误拒绝 |
 | 精度/幂等 | 大于 JS 安全整数的金额字符串不丢精度；多余小数拒绝；八路并发同意图只生成一个支付 |
 | 提交未知 | 渠道已创建但返回 504；Activity 用相同业务 ID 重试，渠道记录仍只有一条 |
@@ -89,6 +89,8 @@ npm run ops -- notify PAYMENT_ID
 ```
 
 CLI 每次通过本地夹具钱包登录，token 仅留在进程内；服务端只存 token 摘要。夹具私钥 1/2 是公开测试数据，不能充值真实资产。`Asset` 是 chain 31337 上的合成地址，未部署真实 USDC；该独立模拟渠道入口不接链；新增 e2e 入口实际接本地 Anvil 与合成 Token，仍不接公网或真实资金。
+
+会话记录签名钱包地址、chain ID、商户和期限；鉴权核对当前钱包/商户绑定，解绑级联清除该钱包会话并撤销商户全部会话。独立运行器自动启用真实 PostgreSQL 身份测试，包括 ERC-1271 RPC 验签与解绑竞争；RPC 本身仍是 fixture。旧会话没有地址证据，应撤销后迁移，不能按商户猜测钱包补填，详见 [旧环境说明](e2e/RECOVERY.md#旧环境)。
 
 ## 配置和接口
 

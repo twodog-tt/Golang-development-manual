@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync, spawn, type ChildProcess } from 'node:child_process';
-import { createHmac } from 'node:crypto';
+import { createHmac, createHash } from 'node:crypto';
 import { openSync, closeSync, writeFileSync } from 'node:fs';
 import { once } from 'node:events';
 import { setTimeout as sleep } from 'node:timers/promises';
@@ -36,6 +36,8 @@ let firstPayment='';
 try {
   let worker=startWorker(true);
   await client.login();await other.login();mark('viem-to-Go SIWE message bytes and EOA verification');
+  const sessionDigest=createHash('sha256').update(client.token).digest('hex');
+  assert.equal(sql(`SELECT address||':'||chain_id::text||':'||merchant FROM ops.sessions WHERE digest=${lit(sessionDigest)}`),client.account.address+':31337:merchant_a');
   const challenge=await client.challenge();
   const bad=await client.account.signMessage({message:challenge.message.replace('URI:','URI: https://evil.example/')});
   assert.equal((await client.request('/login','POST',{id:challenge.id,signature:bad})).status,401);
@@ -113,6 +115,7 @@ try {
   execFileSync(process.env.HISTORY_BIN!,['-id','pay:'+firstPayment,'-out',process.env.LAB_OUTPUT!+'/history-negative.json','-negative'],{env:process.env,stdio:'inherit'});
   mark('real Temporal history replay passes and incompatible workflow is rejected');
   await client.call('/wallets/'+client.account.address,'DELETE');
+  assert.equal(sql(`SELECT count(*) FROM ops.sessions WHERE address=${lit(client.account.address)}`),'0');
   assert.equal((await client.request('/ops')).status,401);
   assert.equal((await client.request('/challenge','POST',{address:client.account.address})).status,401);
   assert.equal(sql(`SELECT count(*) FROM lab.journals WHERE id=${lit('settle:'+payment.id)}`),'1');

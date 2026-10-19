@@ -96,11 +96,23 @@ export async function runRecoveryLab(h){
  await Promise.all(Array.from({length:4},()=>apply(compensation)));
  assert.equal((await one('SELECT count(*) FROM lab.journals WHERE id=ANY($1::text[])',[ids])).count,'3');
  assert.equal((await converted(second.p.id,'recovered_cancelled')).state,'recovered_cancelled');
- start('worker');await until(()=>one('SELECT monitor_started,monitor_checked FROM ops.recovery_plans WHERE id=$1',[compensation.id]),v=>v.monitor_started&&v.monitor_checked,'compensation audit');
+ // Exhaust the first audit's real Temporal Activity retries. A start ACK must
+ // not strand an unchecked plan; restart the process after a failed run too.
+ const journalCount=(await one('SELECT count(*) FROM lab.journals')).count;
+ await query("INSERT INTO ops.faults VALUES('chain_audit_unavailable',100000)");start('worker');
+ await checkActivity('monitor-failed',second.p,{LAB_RECOVERY_PLAN:compensation.id});
+ await stop('worker');
+ const incomplete=await one('SELECT monitor_started,monitor_checked FROM ops.recovery_plans WHERE id=$1',[compensation.id]);
+ assert.equal(incomplete.monitor_started,true);assert.equal(incomplete.monitor_checked,false);
+ await assert.rejects(()=>plan('release-signer','signer'),/audit/);
+ await query("DELETE FROM ops.faults WHERE name='chain_audit_unavailable'");start('worker');
+ await until(()=>one('SELECT monitor_started,monitor_checked FROM ops.recovery_plans WHERE id=$1',[compensation.id]),v=>v.monitor_started&&v.monitor_checked,'compensation audit retry after dependency recovery');
+ await checkActivity('monitor-retried',second.p,{LAB_RECOVERY_PLAN:compensation.id});
+ assert.equal((await one('SELECT count(*) FROM lab.journals')).count,journalCount);
  await until(()=>one('SELECT count(*) FROM lab.outbox WHERE event_id=ANY($1::text[]) AND NOT published',[ids]),v=>v.count==='0','compensation notifications');
  const release2=await plan('release-signer','signer');await cli(release2,{LAB_RECOVERY_FAULT:'commit-response-lost'},false);await cli(release2);
  assert.equal((await gateway('/intents/'+second.c.intent)).review_required,false);
- mark('atomic_compensation_parallel_approval_outbox_and_safe_signer_release',{payment:second.p.id,plan:compensation.id,release:release2.id});
+ mark('atomic_compensation_parallel_approval_outbox_and_safe_signer_release',{payment:second.p.id,plan:compensation.id,release:release2.id,failed_audit_restarted_after_worker_restart:true,no_extra_journals:true});
  resumeMiner();
  const finalHealthy=await makePayment('after-cancellation-recovery','1');await convert(finalHealthy);await converted(finalHealthy.id);
  mark('new_payment_conversion_after_both_databases_and_signer_recover',{payment:finalHealthy.id});

@@ -29,7 +29,7 @@ const ownerWallet=wallet(owner), traderWallet=wallet(trader);
 const db=new pg.Client({connectionString:process.env.DATABASE_URL});await db.connect();
 const output=process.env.LAB_OUTPUT;
 const checks=[];
-let child, proxy, dropSend=false, logFault='', wrongChain=false;
+let child, proxy, dropSend=false, logFault='', wrongChain=false, trackHead=false, headRequests=0;
 const pause=ms=>new Promise(r=>setTimeout(r,ms));
 const rpc=(method,params=[])=>publicClient.request({method,params});
 const read=(address,abi,functionName,args=[],extra={})=>publicClient.readContract({address,abi,functionName,args,...extra});
@@ -78,6 +78,7 @@ try{
   try{
    let body='';for await(const chunk of req)body+=chunk;
    const request=JSON.parse(body);
+   if(trackHead && request.method==='eth_getBlockByNumber' && request.params[0]==='latest')headRequests++;
    const upstream=await fetch(rpcURL,{method:'POST',headers:{'Content-Type':'application/json'},body,signal:AbortSignal.timeout(15000)});
    const value=await upstream.json();
    if(wrongChain && request.method==='eth_chainId')value.result='0x1';
@@ -177,6 +178,23 @@ try{
  // Scan actual block/log/receipt data into real PostgreSQL.
  await Promise.all(Array.from({length:3},()=>api('/index/sync',{})));
  const health=await api('/health');assert.equal(health.lag,0);
+ // Hold the actual writer lock. A waiting batch must not capture a stale head.
+ await db.query('BEGIN');await db.query('SELECT pg_advisory_xact_lock(31337002)');
+ let waitingSync;
+ try{
+  headRequests=0;trackHead=true;waitingSync=api('/index/sync',{});
+  let blocked=false;
+  for(let i=0;i<100;i++){
+   blocked=(await db.query("SELECT EXISTS(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND objid=31337002 AND NOT granted) AS blocked")).rows[0].blocked;
+   if(blocked)break;await pause(20);
+  }
+  assert.equal(blocked,true,'sync did not wait for the writer lock');
+  assert.equal(headRequests,0,'sync read head before acquiring the writer lock');
+  await rpc('anvil_mine',['0x1']);
+ }finally{trackHead=false;await db.query('ROLLBACK');}
+ await waitingSync;
+ const afterWait=await api('/health');
+ assert.equal(afterWait.epoch,health.epoch);assert.equal(afterWait.lag,0);
  const first=await api('/events?limit=2');assert(first.next);
  const fixedHeight=first.snapshot_height;
  await write(ownerWallet,tokenA,tokenABI,'transfer',[trader.address,1n]);
@@ -191,7 +209,7 @@ try{
  }
  const expectedCount=Number((await db.query('SELECT count(*) FROM raw_logs l JOIN canonical c ON c.hash=l.block_hash WHERE l.height <= $1',[fixedHeight])).rows[0].count);
  assert.equal(identities.length,expectedCount);assert.equal(new Set(identities).size,identities.length);
- record('indexer_snapshot_keyset_pagination',{snapshot_height:fixedHeight,events:identities.length,new_head:(await api('/health')).indexed});
+ record('indexer_snapshot_keyset_pagination',{snapshot_height:fixedHeight,events:identities.length,new_head:(await api('/health')).indexed,head_read_after_writer_lock:true});
 
  const checkpoint=(await db.query('SELECT * FROM index_meta')).rows[0];
  await write(ownerWallet,tokenA,tokenABI,'transfer',[trader.address,2n]);

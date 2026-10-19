@@ -35,6 +35,8 @@ sources:
 
 ## 10 分钟版（原理 + 图示）
 
+下表为**独立模拟渠道模式**；其 pending 表示渠道已受理，退款是模拟渠道操作。链上模式的 pending 仅表示等待匹配的链上收款证据，不证明付款已经发生，也不提供下表的退款操作。
+
 | 状态 | 已知事实 | 允许操作 |
 |---|---|---|
 | created | 本地支付意图存在 | 审批，或等待超时 |
@@ -45,6 +47,16 @@ sources:
 | refund_pending | 退款开始，最终结果尚未确认 | 保持原业务 ID 核对与恢复 |
 | refunded | 渠道退款已确认，账本完成反向分录 | 查询与通知补发 |
 | review_reversed | 已结算支付发生 provider reversal，内部已冲正 | 人工处置，禁止再发一次退款 |
+
+链上模式另有以下资金恢复状态，不能只按上表操作：
+
+| 对象/状态 | 已知事实 | 允许操作 |
+|---|---|---|
+| payment=review_chain | 链证据异常或自动补偿失败，原记账阶段保留 | inspect/恢复计划；暂停同商户新增冻结和发送，禁止普通 resume 自动解除 |
+| payment=review_reversed | 收款已因重组冲正 | 人工核对；收款重新出现也不自动入账 |
+| payment=recovered_closed | 人工核对后完成关闭，原收款仍 orphaned | 查询、审计/通知；收款再出现需另行会计调整 |
+| conversion=review | 执行或数据库观察未完成 | 仅 payment=settled 且证据一致时 resume 原意图 |
+| conversion=recovered_cancelled | 已知取消或无意图封存支持的人工补偿完成 | 审计与核对；不重建原兑换 |
 
 ```mermaid
 sequenceDiagram
@@ -71,7 +83,7 @@ sequenceDiagram
 
 ### 退款与冲正
 
-`refund` 是渠道新资金操作，必须确认后再抵消内部余额；provider `reversed` 是收到的外部逆转事实，内部反向过账并进入 review_reversed。两者不能同时作为新的出款指令。本例没有用户消费/提现路径，因此余额可全额反向；生产资金可能已被使用，需冻结、负债/损失账户和人工处置。
+`refund` 是渠道新资金操作，必须确认后再抵消内部余额；provider `reversed` 是收到的外部逆转事实，内部反向过账并进入 review_reversed。两者不能同时作为新的出款指令。原模拟渠道入口没有用户消费/提现路径，故障夹具保留了足够余额供全额反向；不能据此省略余额检查。链上入口则验证输出被占用时整组补偿回滚并进入人工核对；生产资金可能已被使用，需冻结、负债/损失账户和人工处置。
 
 ## 生产场景
 
@@ -85,7 +97,7 @@ sequenceDiagram
 
 `GET /ops` 返回当前商户余额、按期初/分录重建值、drift 和支付/渠道状态；测试还直接检查 journal、Outbox、Inbox。生产需补待处理年龄、投递次数、渠道延迟、积压、退款不确定金额等指标。
 
-本例对账只检查本地账本投影，并展示渠道状态，不包含银行流水、链上余额或真实 PSP 结算文件的三方对账。供应商 webhook、分页、错误码、幂等有效期及签名算法都必须按目标厂商的实际文档适配。
+`GET /ops` 只检查本地账本投影并展示渠道状态。另一个端到端验证/人工解封入口会核对链上 custody 与商户可用、冻结、输出及未归属金额；这仍不包含银行流水或真实 PSP 结算文件的三方对账。供应商 webhook、分页、错误码、幂等有效期及签名算法都必须按目标厂商的实际文档适配。
 
 ## 可运行示例与故障验证
 
@@ -127,7 +139,7 @@ python3 examples/stablecoin-ops/e2e/verify.py --report /tmp/payment-e2e/result.j
 
 端到端实战将数据库暂时失败的 `conversion=review` 与链证据异常的 `payment=review_chain` 分开。后者保存 `audit_evidence`、保留实际记账阶段，暂停同商户新增冻结和发送；普通 reconcile/resume 不得把它恢复为 settled。输出已消费导致余额不足时，补偿 SAVEPOINT 撤销整组冲正，再持久化人工核对状态，不能部分冲正或因 Activity 一直重试而不留下告警状态。完整的 12 组验证见 [端到端运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。
 
-新增 [人工恢复手册](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/stablecoin-ops/e2e/RECOVERY.md) 与独立 5 组演练：计划绑定资金事实、过期和批准身份，按 rebind/确认取消后原子冲正/无意图先封存分别处理。支付库 COMMIT 同时保存恢复审计任务；签名账户只有在两库核对完成、监控已持久启动、nonce 与托管负债一致后才能受控解封。状态恢复与账户解封是两次有审计记录的决定，任何未知敞口继续隔离。
+新增 [人工恢复手册](https://github.com/twodog-tt/Golang-development-manual/blob/master/examples/stablecoin-ops/e2e/RECOVERY.md) 与独立 5 组演练：计划绑定资金事实、过期和批准身份，按 rebind/确认取消后原子冲正/无意图先封存分别处理。支付库 COMMIT 同时保存恢复审计任务；签名账户只有在两库核对完成、`monitor_started=true` 且首次审计/通知排空成功的 `monitor_checked=true`、nonce 与托管负债一致后才能受控解封。首次审计耗尽重试时继续隔离，依赖修复后调度器用同一 Workflow ID 重启失败执行；验证还覆盖中途重启 Worker，保证没有新增资金分录。状态恢复与账户解封是两次有审计记录的决定，任何未知敞口继续隔离。
 
 
 ## 深挖问答

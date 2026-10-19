@@ -1,7 +1,11 @@
 CREATE SCHEMA ops;
 CREATE TABLE ops.wallets(address text PRIMARY KEY, merchant text NOT NULL, kind text NOT NULL CHECK(kind IN ('eoa','erc1271')));
 CREATE TABLE ops.challenges(id text PRIMARY KEY, address text NOT NULL REFERENCES ops.wallets ON DELETE CASCADE, message text NOT NULL, expires timestamptz NOT NULL);
-CREATE TABLE ops.sessions(digest text PRIMARY KEY, merchant text NOT NULL, expires timestamptz NOT NULL);
+CREATE TABLE ops.sessions(
+ digest text PRIMARY KEY, merchant text NOT NULL,
+ address text NOT NULL REFERENCES ops.wallets ON DELETE CASCADE,
+ chain_id bigint NOT NULL CHECK(chain_id=31337), expires timestamptz NOT NULL
+);
 CREATE TABLE ops.payments(
  id text PRIMARY KEY, merchant text NOT NULL, idem text NOT NULL, amount bigint NOT NULL CHECK(amount>0),
  asset text NOT NULL, quote_expires timestamptz NOT NULL,

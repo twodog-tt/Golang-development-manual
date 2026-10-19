@@ -64,8 +64,8 @@ flowchart LR
 
 ### 同步批次
 
-1. 读取节点 head，固定本批目标 hash。
-2. 获取 PostgreSQL 单写者事务锁，从已提交水位向前找共同祖先，最多回退 64 块；超界停止，不能盲删全库。
+1. 开始 PostgreSQL 事务，获取单写者事务锁；锁等待期间不能预读本批目标 head。
+2. 持锁后读取节点 head，固定本批目标 hash，再从已提交水位向前找共同祖先，最多回退 64 块；超界停止，不能盲删全库。否则等待锁的旧请求可能把其他批次刚提交的新水位误判为回退。
 3. 如果旧 canonical 被替换，删除祖先以上映射并增加 epoch；raw 保留。
 4. 逐块检查 parent 连续，按该 blockHash 拉日志，与完整 receipt 集合中的目标日志对比。
 5. ABI 严格验证后写 raw，再写 canonical；最后复查目标高度仍是原 head hash。
@@ -125,6 +125,7 @@ python3 examples/onchain-execution/verify.py --serve
 [项目代码](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/onchain-execution) 使用真实 PostgreSQL 和 Anvil 事件：
 
 - 翻页过程中新增 Transfer 并同步，验证固定快照完整读取且无重复。
+- 先占用真实 PostgreSQL 写锁，再发起同步；从 `pg_locks` 确认请求正在等待，断言尚未读取 head。等待期间挖新块，释放锁后同步到新 head，epoch 不误增。
 - RPC 代理删除 Transfer 或把 payload 改为一个字节，验证水位完全不变，质量错误持久化。
 - 在 canonical INSERT 安装抛错触发器，验证已写 raw 也回滚；去掉触发器后重扫成功。
 - 已索引 Swap 后恢复 Anvil 快照并建立不同分支，验证旧 raw 数量不变、旧 canonical 成交数为零、epoch+1、旧游标返回 409。

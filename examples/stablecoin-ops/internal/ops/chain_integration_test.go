@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"go.temporal.io/api/enums/v1"
 	"go.temporal.io/api/workflowservice/v1"
 	"go.temporal.io/sdk/client"
 	"os"
@@ -25,6 +26,31 @@ func TestChainReviewIntegration(t *testing.T) {
 	defer cancel()
 	id := os.Getenv("LAB_PAYMENT_ID")
 	switch mode {
+	case "monitor-failed", "monitor-retried":
+		c, err := client.Dial(client.Options{HostPort: os.Getenv("TEMPORAL_ADDRESS")})
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer c.Close()
+		for ctx.Err() == nil {
+			r, err := c.ListWorkflow(ctx, &workflowservice.ListWorkflowExecutionsRequest{Namespace: "default", Query: fmt.Sprintf("WorkflowId = 'operator-audit:%s'", os.Getenv("LAB_RECOVERY_PLAN"))})
+			if err == nil {
+				failed, healthy := 0, 0
+				for _, execution := range r.Executions {
+					switch execution.Status {
+					case enums.WORKFLOW_EXECUTION_STATUS_FAILED:
+						failed++
+					case enums.WORKFLOW_EXECUTION_STATUS_RUNNING, enums.WORKFLOW_EXECUTION_STATUS_COMPLETED:
+						healthy++
+					}
+				}
+				if failed > 0 && (mode == "monitor-failed" || healthy == 1) {
+					return
+				}
+			}
+			time.Sleep(100 * time.Millisecond)
+		}
+		t.Fatal("recovery audit did not fail/restart as expected")
 	case "monitor-check":
 		c, err := client.Dial(client.Options{HostPort: os.Getenv("TEMPORAL_ADDRESS")})
 		if err != nil {

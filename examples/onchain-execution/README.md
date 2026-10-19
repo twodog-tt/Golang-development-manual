@@ -45,7 +45,7 @@ python3 examples/onchain-execution/verify.py --report /tmp/onchain-execution/res
 | 并发 nonce | 4 个不同意图并发创建，nonce 唯一且连续；按序广播全部上链 |
 | 前置拒绝 | RPC 返回错误 chain ID、金额小数、过期 deadline、过高 minOut、零 allowance 均不创建意图 |
 | 模拟与执行差异 | 模拟成功后由另一个账户改变池储备；原交易上链 status=0，输出资产余额不变（仍消耗 gas） |
-| 查询快照 | 固定高度/hash，读下一页期间新增区块并同步；全量分页无重复/缺失且不混入新快照 |
+| 查询快照 | 占用真实写锁并从 pg_locks 确认同步请求等待，断言尚未读取 head；等待期间挖块，释放锁后追上新 head 且 epoch 不误增。固定高度/hash，读下一页期间新增区块并同步；全量分页无重复/缺失且不混入新快照 |
 | RPC 数据质量 | 代理删掉一个 Transfer 或篡改其 ABI payload；receipt 交叉校验或解码拒绝，水位不前移，持久化质量错误 |
 | 数据库原子性 | canonical 写入触发器抛错；raw 和水位全部回滚，删除故障触发器后重扫成功 |
 | 链重组 | Anvil snapshot/revert 创建另一分支；旧 raw 保留、canonical 排除旧成交、epoch 增加、旧游标 409，旧 confirmed 意图进入 orphaned_review；真实重新广播原签名被包含后，review_required 仍保留，新意图 409 |

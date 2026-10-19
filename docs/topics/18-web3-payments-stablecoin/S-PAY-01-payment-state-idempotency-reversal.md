@@ -53,6 +53,8 @@ stateDiagram-v2
 
 状态更新用数据库事务 + version/CAS 或行锁；发 MQ/Webhook 用 outbox。不能先发“支付成功”再提交账本。
 
+事件去重还需绑定内容：相同 ID、相同类型和引用是重试；相同 ID 改类型或交易引用必须冲突。示例 `Apply` 保存原 Event，冲突返回 `ErrEventConflict` 且不改变状态/version。它是单线程内存状态机；真实服务须把原 payload/摘要、去重记录与状态更新放在同一持久事务，不能仅加 UNIQUE 后静默忽略不同内容。
+
 **乱序与重复**
 
 Webhook 消费方不应假设 `observed` 一定早于 `settled` 到达。payload 带资源当前状态和事件发生时间/sequence，消费者可按 event ID 去重，必要时回查 payment API 获取权威快照。
@@ -100,6 +102,8 @@ Webhook 消费方不应假设 `observed` 一定早于 `settled` 到达。payload
 ```bash
 go test ./examples/senior/paymentstate/...
 ```
+
+`TestDuplicateIDBindsEventTypeAndReference` 注入同 ID 的不同事件类型、不同交易引用，验证均报冲突且状态/version 不变；原消息重试仍幂等，后续正常事件仍可推进。
 
 ## 延伸阅读
 

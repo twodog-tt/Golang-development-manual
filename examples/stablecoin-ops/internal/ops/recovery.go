@@ -14,7 +14,9 @@ import (
 // Dispatch is retryable across process loss, including a lost StartWorkflow
 // response. It starts only an audit; it cannot submit another payment or swap.
 func (s *Store) DispatchRecoveryMonitors(ctx context.Context, c client.Client) error {
-	rows, err := s.DB.Query(ctx, "SELECT id,payment FROM ops.recovery_plans WHERE applied AND needs_monitor AND NOT monitor_started ORDER BY id")
+	// A successful StartWorkflow ACK is not proof that the first audit completed.
+	// Keep reconciling unchecked plans, including closed runs that exhausted retries.
+	rows, err := s.DB.Query(ctx, "SELECT id,payment FROM ops.recovery_plans WHERE applied AND needs_monitor AND (NOT monitor_started OR NOT monitor_checked) ORDER BY id")
 	if err != nil {
 		return err
 	}
@@ -33,7 +35,7 @@ func (s *Store) DispatchRecoveryMonitors(ctx context.Context, c client.Client) e
 		return err
 	}
 	for _, j := range jobs {
-		_, err = c.ExecuteWorkflow(ctx, client.StartWorkflowOptions{ID: "operator-audit:" + j.id, TaskQueue: Queue, WorkflowIDReusePolicy: enums.WORKFLOW_ID_REUSE_POLICY_REJECT_DUPLICATE}, RecoveryAuditWorkflow, j.id, j.payment)
+		_, err = c.ExecuteWorkflow(ctx, client.StartWorkflowOptions{ID: "operator-audit:" + j.id, TaskQueue: Queue, WorkflowIDReusePolicy: enums.WORKFLOW_ID_REUSE_POLICY_ALLOW_DUPLICATE_FAILED_ONLY}, RecoveryAuditWorkflow, j.id, j.payment)
 		var duplicate *serviceerror.WorkflowExecutionAlreadyStarted
 		if err != nil && !errors.As(err, &duplicate) {
 			return err

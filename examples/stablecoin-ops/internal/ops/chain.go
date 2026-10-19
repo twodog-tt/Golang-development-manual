@@ -569,6 +569,9 @@ func (a *Activities) auditChain(ctx context.Context, id string) (string, error) 
 }
 
 func (a *Activities) AuditChain(ctx context.Context, id string) (string, error) {
+	if a.Store.Fault(ctx, "chain_audit_unavailable") {
+		return "", errors.New("fixture: chain audit dependency unavailable")
+	}
 	state, err := a.auditChain(ctx, id)
 	if err != nil {
 		return state, err

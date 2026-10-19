@@ -8,6 +8,7 @@ import (
 var (
 	ErrInvalidPayment    = errors.New("paymentstate: payment and event IDs are required")
 	ErrInvalidTransition = errors.New("paymentstate: invalid transition")
+	ErrEventConflict     = errors.New("paymentstate: event ID reused with different content")
 )
 
 type State string
@@ -42,7 +43,7 @@ type Payment struct {
 	ID      string
 	State   State
 	Version uint64
-	applied map[string]struct{}
+	applied map[string]Event
 }
 
 func New(id string) (*Payment, error) {
@@ -52,7 +53,7 @@ func New(id string) (*Payment, error) {
 	return &Payment{
 		ID:      id,
 		State:   StateAwaitingFunds,
-		applied: make(map[string]struct{}),
+		applied: make(map[string]Event),
 	}, nil
 }
 
@@ -72,16 +73,20 @@ var transitions = map[transitionKey]State{
 	{StateSettled, EventReversal}:            StateReversed,
 }
 
-// Apply returns false for an already-applied event ID. In a real service the
-// event ID and aggregate version must also be protected by database UNIQUE/CAS.
+// Apply accepts an exact event retry, but rejects conflicting content under the
+// same ID. A real service must persist this binding and the aggregate version
+// atomically, protected by database UNIQUE/CAS.
 func (p *Payment) Apply(event Event) (bool, error) {
 	if p == nil || p.ID == "" || event.ID == "" {
 		return false, ErrInvalidPayment
 	}
 	if p.applied == nil {
-		p.applied = make(map[string]struct{})
+		p.applied = make(map[string]Event)
 	}
-	if _, ok := p.applied[event.ID]; ok {
+	if previous, ok := p.applied[event.ID]; ok {
+		if previous != event {
+			return false, ErrEventConflict
+		}
 		return false, nil
 	}
 
@@ -97,6 +102,6 @@ func (p *Payment) Apply(event Event) (bool, error) {
 
 	p.State = next
 	p.Version++
-	p.applied[event.ID] = struct{}{}
+	p.applied[event.ID] = event
 	return true, nil
 }

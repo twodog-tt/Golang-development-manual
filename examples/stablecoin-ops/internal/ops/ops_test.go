@@ -216,3 +216,27 @@ func TestRecoveryAuditCannotAcknowledgeFailedAudit(t *testing.T) {
 		t.Fatal("failed audit acknowledged recovery")
 	}
 }
+
+func TestRecoveryAuditNewRunCompletesAfterDependencyRecovery(t *testing.T) {
+	var suite testsuite.WorkflowTestSuite
+	var attempts, marked atomic.Int32
+	for _, unavailable := range []bool{true, false} {
+		env := suite.NewTestWorkflowEnvironment()
+		env.RegisterActivityWithOptions(func(context.Context, string) (string, error) {
+			attempts.Add(1)
+			if unavailable {
+				return "", context.DeadlineExceeded
+			}
+			return "recovered_closed", nil
+		}, activity.RegisterOptions{Name: "AuditChain"})
+		env.RegisterActivityWithOptions(func(context.Context, string) error { marked.Add(1); return nil }, activity.RegisterOptions{Name: "MarkRecoveryAudited"})
+		env.ExecuteWorkflow(RecoveryAuditWorkflow, "same-plan", "same-payment")
+		if unavailable {
+			if env.GetWorkflowError() == nil || attempts.Load() != 3 || marked.Load() != 0 {
+				t.Fatal("failed run passed the audit gate")
+			}
+		} else if env.GetWorkflowError() != nil || attempts.Load() != 4 || marked.Load() != 1 {
+			t.Fatalf("new audit run did not recover: attempts=%d marked=%d err=%v", attempts.Load(), marked.Load(), env.GetWorkflowError())
+		}
+	}
+}

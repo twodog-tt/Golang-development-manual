@@ -15,7 +15,7 @@ python3 examples/stablecoin-ops/e2e/verify.py --recovery \
 |---|---|
 | 原分录重新核对 | Swap 重组、输出被占用导致自动冲正失败；归还夹具余额、原始签名被网络重新包含后 rebind。篡改/过期/审批身份冲突拒绝；COMMIT 回包丢失后重试无新分录。Worker 重启、StartWorkflow ACK 丢失仍只有一个真实审计 workflow；余额不符/pending 交易时不能解封 |
 | 同 nonce 取消 | 旧 Swap 缺失，计划过期或新分支使计划失效；取消原文先提交，响应丢失后杀 gateway，再通过 RPC 已接收但 ACK 丢失恢复原 hash。只有确认并索引的取消证据允许冲正，低确认深度与输出余额不足均拒绝 |
-| 原子冲正及签名恢复 | 更新计划触发器抛错，使 undo-out/in/release 和业务状态整组回滚；移除故障后四路并发批准同计划只生成一组分录，Outbox/Inbox 完成交付。解封 COMMIT 回包丢失可重试，持续审计不重新隔离同一个有效取消回执 |
+| 原子冲正及签名恢复 | 更新计划触发器抛错，使 undo-out/in/release 和业务状态整组回滚；移除故障后四路并发批准同计划只生成一组分录。注入审计依赖不可用，真实 Temporal 首次审计耗尽重试后仍不能解封；重启 Worker、修复依赖后同 Workflow ID 新 run 完成审计与 Outbox/Inbox，分录不增加。解封 COMMIT 回包丢失可重试，持续审计不重新隔离同一个有效取消回执 |
 | 恢复后实际执行 | 两个数据库和 signer 均恢复后，新订单真实付款并完成 V2 兑换，验证恢复后的账户可以继续工作 |
 | 从未创建的意图 | 有 hold 但没有 intent/attempt，Paid 被移除；先在 chain 库封存固定意图 ID，再在支付库冲正。支付 COMMIT 故障后封存仍生效，旧 Create 409；同计划重试完成关闭且分录/通知各一份，封存丢失时拒绝解封，最终托管/账本一致 |
 
@@ -56,6 +56,12 @@ node examples/onchain-execution/client/payment-cli.mjs demo 1
 
 如果 apply 显示 COMMIT/广播响应未知，重试**原计划文件、原 operator/ticket**；已经应用的计划返回历史执行回执，不会重新记账或签名。这个回执不代表当前仍健康；再次 inspect 才能查看当前事实。取消计划的原 hash 未确认前，资金与 signer 都继续隔离。
 
+### 首次恢复审计失败时
+
+`monitor_started=true, monitor_checked=false` 表示已经启动但尚未通过首次审计，不能据此解封。先检查 Temporal 中 `operator-audit:PLAN_ID` 的 Activity 错误，修复 RPC、Indexer、数据库或商户通知依赖，保持 Worker 运行。调度器会继续扫描尚未完成首次检查的计划：运行中的执行不另开；失败、超时、取消或终止的执行允许在同一 Workflow ID 下启动新 run；成功完成的执行不重开。停止自动重试应停 Worker，而不是清除资金隔离标记。
+
+每个 run 的 Activity 有三次重试；耗尽后调度器仍会恢复未通过检查的计划。Worker 重启不会丢失这个待办。只有实际审计并排空通知成功，才写 `monitor_checked=true`；它不是持续健康探针，解封还要重新核对全局资金与 nonce。不要重新执行付款/兑换或手改这两个标记。故障矩阵用 `chain_audit_unavailable` 数据库夹具注入依赖失败，记录失败 run，并在修复后验证新 run、原计划和原资金分录保持关联。
+
 ## 支持的恢复决定
 
 | 动作 | 允许的事实 | 改变 |
@@ -74,7 +80,7 @@ node examples/onchain-execution/client/payment-cli.mjs demo 1
 - 每个计划存于对应数据库，并绑定 action/target/全部核对事实、过期时间与 SHA-256。批准必须有 operator/ticket；相同计划并发或丢回包重试只能得到同一回执，不允许换审批身份。
 - 在线资金路径先拿 ops 维护门的 shared lock，再拿商户/订单锁；人工恢复拿 exclusive 维护门，再拿 chain signer 和 index writer lock。网络读取都设超时，不先拿 signer 再反向等待商户锁。
 - 工具验证原文 hash、签名地址、chain ID、nonce、Router calldata、资产路径、原始金额/minOut/deadline。链上证据固定到已提交 canonical 水位，并再次检查锚点仍在当前分支。
-- 支付状态、单调递增的渠道观察序号、当前证据、冲正 journal、Outbox、批准记录与 needs_monitor 同一支付库 COMMIT；旧 Inbox 和原分录继续保留，旧 Observe 重试不能覆盖新修订。Worker 用固定 `operator-audit:PLAN_ID` + RejectDuplicate 启动新的 RecoveryAuditWorkflow，首次成功审计/排空通知后才写 monitor_checked，再接续只审计的监控流程；启动 ACK 丢失会恢复，不重发支付/换币。关闭案例也启动一次审计以排空 Outbox。
+- 支付状态、单调递增的渠道观察序号、当前证据、冲正 journal、Outbox、批准记录与 needs_monitor 同一支付库 COMMIT；旧 Inbox 和原分录继续保留，旧 Observe 重试不能覆盖新修订。Worker 用固定 `operator-audit:PLAN_ID` + `AllowDuplicateFailedOnly` 启动 RecoveryAuditWorkflow，未完成首次检查的计划持续调度；正在运行的不另开，失败执行可以新 run 恢复，成功完成的不重开。首次成功审计/排空通知后才写 monitor_checked，再接续只审计的监控流程；启动 ACK 丢失会恢复，不重发支付/换币。关闭案例也启动一次审计以排空 Outbox。
 - 跨库没有 ACID。无 intent 时先通过独立提交写 `retired_intents`；即使后续支付事务失败，Create 仍被禁止。重试同计划识别自己的封存行。它是一条保守的单向屏障，不会为了回滚而删除。
 - 解封时持两个数据库锁，重新检查全局业务、所有已知 nonce、签名 attempt 和资金对账后，只在 chain 库提交解封与批准回执。取消已确认不会自行解封；解封后同回执不重复隔离，新分支/重新包含会再次隔离。
 
@@ -83,3 +89,5 @@ node examples/onchain-execution/client/payment-cli.mjs demo 1
 ## 旧环境
 
 运行器创建全新 schema。自行保留的旧 lab 环境需备份后增加本次 schema 的 recovery_plans、intent_cancellations、retired_intents，并升级所有参与写入的 gateway/worker；旧进程不认识新屏障，不可混用。没有自动执行现有数据库迁移，也不提供直接 UPDATE review_required/state 的解封脚本。
+
+会话表新增非空 `address` 外键和 `chain_id=31337` 约束；旧会话只有商户，不能可靠回填签名钱包。保留旧数据库时应停 API、撤销旧会话，再按新 schema 迁移并重新登录；不要按商户任意选择钱包回填。新的审计调度策略不改变既有 Workflow 的命令顺序；旧失败审计会以同 Workflow ID 的新 run 恢复。

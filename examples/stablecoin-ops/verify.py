@@ -82,7 +82,7 @@ def verify(report, serve=False):
             password = next(v.split("=", 1)[1] for v in config["Config"]["Env"] if v.startswith("POSTGRES_PASSWORD="))
             env.update(DATABASE_URL=f"postgres://lab:{password}@127.0.0.1:{pg_port}/lab?sslmode=disable", TEMPORAL_ADDRESS="127.0.0.1:" + temporal_port,
                        LAB_CHANNEL_SECRET=secrets.token_hex(32), LAB_PG_CONTAINER=pg, LAB_OUTPUT=tmp,
-                       APPROVAL_SECONDS="300" if serve else "8", OBSERVE_SECONDS="300" if serve else "8")
+                       LAB_AUTH_INTEGRATION="1", APPROVAL_SECONDS="300" if serve else "8", OBSERVE_SECONDS="300" if serve else "8")
             api_port, provider_port = port(), port()
             env.update(API_URL=f"http://127.0.0.1:{api_port}", APP_ORIGIN=f"http://127.0.0.1:{api_port}", CHANNEL_URL=f"http://127.0.0.1:{provider_port}")
             sql = (REPO / "examples/postgres-reliability/schema.sql").read_text() + (ROOT / "internal/ops/schema.sql").read_text()

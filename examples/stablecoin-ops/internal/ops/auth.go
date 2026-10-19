@@ -126,6 +126,12 @@ func (a Auth) Login(ctx context.Context, id, signature string) (string, error) {
 		return "", err
 	}
 	defer tx.Rollback(ctx)
+	// Bind the session to the wallet that signed, and serialize with unbinding.
+	// A binding changed while RPC verification was in flight cannot issue a session.
+	var currentMerchant, currentKind string
+	if err = tx.QueryRow(ctx, "SELECT merchant,kind FROM ops.wallets WHERE address=$1 FOR SHARE", address).Scan(&currentMerchant, &currentKind); err != nil || currentMerchant != merchant || currentKind != kind {
+		return "", ErrDenied
+	}
 	tag, err := tx.Exec(ctx, "DELETE FROM ops.challenges WHERE id=$1 AND expires>now()", id)
 	if err != nil {
 		return "", err
@@ -134,7 +140,7 @@ func (a Auth) Login(ctx context.Context, id, signature string) (string, error) {
 		return "", ErrDenied
 	}
 	token := ID()
-	if _, err = tx.Exec(ctx, "INSERT INTO ops.sessions VALUES($1,$2,now()+interval '15 minutes')", digest(token), merchant); err != nil {
+	if _, err = tx.Exec(ctx, "INSERT INTO ops.sessions(digest,merchant,address,chain_id,expires) VALUES($1,$2,$3,31337,now()+interval '15 minutes')", digest(token), merchant, address); err != nil {
 		return "", err
 	}
 	if err = tx.Commit(ctx); err != nil {
@@ -147,7 +153,7 @@ func (a Auth) Merchant(ctx context.Context, header string) (string, error) {
 		return "", ErrDenied
 	}
 	var merchant string
-	err := a.Store.DB.QueryRow(ctx, "SELECT merchant FROM ops.sessions WHERE digest=$1 AND expires>now()", digest(strings.TrimPrefix(header, "Bearer "))).Scan(&merchant)
+	err := a.Store.DB.QueryRow(ctx, "SELECT s.merchant FROM ops.sessions s JOIN ops.wallets w ON w.address=s.address AND w.merchant=s.merchant WHERE s.digest=$1 AND s.chain_id=31337 AND s.expires>now()", digest(strings.TrimPrefix(header, "Bearer "))).Scan(&merchant)
 	if err != nil {
 		return "", ErrDenied
 	}
