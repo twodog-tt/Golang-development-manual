@@ -1,0 +1,75 @@
+# Web3 交易所 / 钱包方向重点题单
+# priority: p0 必背 | p1 强化 | p2 基础巩固
+
+profile:
+  target: Backend Engineer — Web3 Exchange / DeFi Infrastructure
+  highlights:
+    - DEX：链上索引、RabbitMQ、WebSocket 行情、UUPS 合约、返佣提现
+    - CEX 钱包：多链充提、MPC/TSS、reorg、风控审计
+    - 风控平台：实时风控、ES、RocketMQ、限流熔断
+
+p0_must_prepare:
+  - id: S-BC-05
+  - id: S-BC-10
+  - id: S-BC-04
+  - id: S-BC-02
+  - id: S-BC-03
+  - id: S-BC-09
+  - id: S-EXCH-02
+  - id: S-EXCH-03
+  - id: S-EXCH-05
+  - id: S-EXCH-06
+  - id: S-EXCH-10
+  - id: S-EXCH-11
+  - id: S-EXCH-12
+  - id: S-RAB-01
+  - id: S-SOLID-04
+  - id: S-SOLID-02
+  - id: S-SOLID-08
+  - id: S-NET-05
+  - id: S-NET-03
+  - id: S-ARCH-04
+  - id: S-DB-05
+  - id: S-DB-02
+  - id: S-DIST-01
+  - id: S-DIST-02
+  - id: S-CODE-03
+
+p1_strengthen:
+  - id: S-EXCH-01
+  - id: S-EXCH-07
+  - id: S-EXCH-08
+  - id: S-EXCH-09
+  - id: S-BC-06
+  - id: S-BC-07
+  - id: S-SOLID-03
+  - id: S-SOLID-07
+  - id: S-ARCH-08
+  - id: S-ARCH-09
+  - id: S-ARCH-16
+  - id: S-ARCH-15
+  - id: S-RMQ-02
+  - id: S-RMQ-04
+  - id: S-KAFKA-01
+  - id: S-KAFKA-02
+  - id: S-KAFKA-03
+  - id: S-DIST-04
+  - id: S-ES-01
+  - id: S-ES-03
+  - id: S-CLOUD-04
+  - id: S-LEAD-01
+  - id: S-NET-04
+
+p2_foundation:
+  - id: S-CONC-01
+  - id: S-CONC-05
+  - id: S-CONC-08
+  - id: S-CONC-12
+  - id: S-CONC-13
+  - id: S-MEM-01
+  - id: S-MEM-04
+  - id: S-MEM-10
+  - id: S-ARCH-02
+  - id: S-ARCH-06
+  - id: S-DB-01
+  - id: S-DB-03
