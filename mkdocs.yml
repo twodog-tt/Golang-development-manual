@@ -350,6 +350,8 @@ plugins:
       lang:
         - zh
         - en
+      # Preserve full English terms and code identifiers for prefix queries.
+      pipeline: []
 
 markdown_extensions:
   - admonition

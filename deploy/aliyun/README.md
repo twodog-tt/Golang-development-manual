@@ -13,7 +13,7 @@
 
 每次推送到 `master`，或从 Actions 页面在 `master` 手动运行 `Deploy Docs`，都会严格构建并更新阿里云站点，同时保留原有 gh-pages 发布。其他分支不能通过手动触发发布生产站点。
 
-流程：部署脚本故障测试 → 生成自测数据和重定向 → 元数据校验 → 严格构建 → 生成清单和压缩包 → SSH 上传并逐文件校验 → 原子切换 `current` → Chromium 公网验收 → gh-pages。生产任务串行执行，不取消正在进行的发布。
+流程：部署脚本故障测试 → 生成自测数据和重定向 → 元数据校验 → 严格构建 → 实际 search worker 中英文/代码标识查询验证 → 生成清单和压缩包 → SSH 上传并逐文件校验 → 原子切换 `current` → Chromium 公网验收 → gh-pages。生产任务串行执行，不取消正在进行的发布。
 
 公网验收检查：当前发布编号、首页标题与文章数量、英文 `Outbox` 和中文“双分录”搜索及结果跳转、账本文章正文与 canonical、目录定位、代码复制按钮、无结果提示、搜索退出焦点和浏览器脚本错误。浏览器安装方式遵循 [Playwright CI 文档](https://playwright.dev/python/docs/ci)。每次验收的截图、trace 和 JSON 结果保存为 Actions artifact，保留 14 天。
 

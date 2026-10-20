@@ -130,6 +130,9 @@ jobs:
       - name: Build site
         run: mkdocs build --strict
 
+      - name: Verify built search worker
+        run: node scripts/verify_search.cjs site
+
       - name: Package release
         id: package
         run: |

@@ -62,3 +62,5 @@ Demo 在临时目录创建输入，验证正常准入/重复提交、审批后 i
 输出 `passed=true`、`network_dependencies=0` 和三个案例；任一预期不符即失败。`GOSUMDB=off` 只作用于读取自造模块的子进程，GOVCS 禁用 VCS、GOPROXY 仅指向本地目录，工具自身以 GOPROXY=off 编译，不改变全局 Go 配置。工作区指纹覆盖 go.work 及两个 module 根；根外输入不在检查范围内。
 
 统一入口：`bash scripts/verify_reliability_examples.sh --offline`（该入口的既有三语言检查另需 Node 22.15+）。
+
+文档构建后可运行 `node scripts/verify_search.cjs site`，使用站点实际的 search worker 和中英文语言资源，验证 SBOM、发布准入、完整 Provenance/大小写、代码标识 resolvedDependencies、Outbox、双分录及无结果查询。搜索配置保留完整词项，避免词干处理使完整英文词或代码标识漏检；此项已接入发布前检查，不替代部署后的浏览器验收。
