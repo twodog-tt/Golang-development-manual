@@ -17,6 +17,7 @@
 |-------|------|------|
 | S-SEC-02 | `examples/senior/signerfencing/` | `go test -race ./examples/senior/signerfencing/...` |
 | S-SEC-02 | `examples/signer-project/` | `cd examples/signer-project && go test ./...` |
+| S-SEC-03 | [releaseadmission](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/senior/releaseadmission) | `go test -race -timeout 60s ./examples/senior/releaseadmission/...` · `go run ./examples/senior/releaseadmission/cmd/demo` · `python3 examples/senior/releaseadmission/verify_go_inputs.py` |
 
 ## 推荐顺序
 

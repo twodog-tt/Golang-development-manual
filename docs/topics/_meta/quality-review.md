@@ -2,7 +2,7 @@
 
 > 全库 **249 篇**（以 [topics.yaml](topics.yaml) 为准）
 >
-> 本轮补强日期：**2026-10-19**（本次修复 ERC-8004 与 x402/ERC-8183 Commerce 两篇既有正文，未新增文章或重新审查全库）
+> 本轮补强日期：**2026-10-20**（本次修复 S-SEC-03 SBOM、Provenance 与发布准入既有正文，未新增文章或重新审查全库）
 >
 > 审查范围：资深 Golang、后端/解决方案架构，重点领域为 AI/Crypto Agent、
 > Web3、交易所、钱包、链基础设施与支付
@@ -400,3 +400,5 @@
 - 2026-10-19 开放平台与 Launchpad 八项修复：S-AI-14 区分不可变制品与部署配置审批，补插件拒绝/能力 broker、真实 Ed25519 委托链与祖先预算原子预留、Signer 准入 generation/停用与只读对账、冻结报价/支付事件唯一权益/并发额度、Launchpad 分步持久 UNKNOWN/独立远端回执/revision CAS/重组费用冲正，以及评价证据唯一性/退款重组失权；修正“降低刷量成本”表述。新增 **19 组**顶层测试与1个真实 exit73 子进程 helper、**33 组** Go/Python/TypeScript 共享向量、真实 Linux 容器只读根/无外部路由/凭据隔离/非root/禁提权探针。CLI、race、vet、统一离线入口和元数据检查通过，严格文档构建通过；Node 安装前移以支持本地 wire 门禁，容器验证接入现有 CI 检查步骤，本次未触发远程流程。正文仍 **249 篇**，deterministic_test=**35**、explanation_only=167、illustrative_artifact=30、integration_harness=17，并同步修正证据汇总表中的历史旧统计。控制面/权益/信誉为内存教学模型，Launchpad 为 Unix 单机持久夹具，费用是固定投影；容器探针独立于真实插件框架适配，不代表生产 IAM、SDK/厂商互通、链上发行或真实资金验收。本次未提交、推送或部署。
 
 - 2026-10-19 S-AI-14 发布前复审：补齐同一委托 intent 的实际 scope 绑定、未发布/空 Offer 的显式存在性校验，以及最后一个部署步骤重组时 Reconcile 的明确阻断返回。三项回归子场景均先在旧实现上检出问题，再验证修复通过；仍为19组顶层测试。race/vet、33组三语言向量、真实容器探针、统一离线门禁、元数据与严格文档构建通过；正文与示例说明同步。以上为本地复审记录，远程发布结果另行核对。
+
+- 2026-10-20 S-SEC-03 七项修复：将测试结果接入发布门禁；补真实 DSSE PAE/Ed25519 验签与 issuer/identity/role/environment/builder 信任映射，准确区分 SLSA v1.2 与 provenance/v1，并校验来源、参数和输入；绑定实际 SPDX-2.3 限定配置/扫描报告、平台、工具、数据库和新鲜度；补独立授权的精确风险例外及硬门禁不可豁免；最终 Commit 重验目标/策略/撤销/输入与时效，epoch 防 ABA，回滚执行当前策略。新增 **16 组**顶层测试，包含16路并发、私有证据副本、策略更新、例外撤销/到期和旧 ticket 重启失效；另有 **3 组**完全离线的真实 Go 编译篡改演练，复现 vendor/本地 replace/workspace 改变程序但 go mod verify 仍通过，输入摘要均阻断且重新 vendor 恢复原摘要。CLI、race/vet、统一离线入口、元数据检查、严格文档构建和本地文章/搜索索引检查通过。正文仍 **249 篇**，deterministic_test=**36**、explanation_only=166、illustrative_artifact=30、integration_harness=17。签名真实执行但密钥为公开教学种子，producer/制品/commit 为合成数据，Gate 为内存干运行模型；不证明真实测试/扫描、完整 SPDX 支持、OIDC/Fulcio/Rekor 验证、任何 SLSA 等级或生产部署/链状态验收。本次未提交、推送或部署。

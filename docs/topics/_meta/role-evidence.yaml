@@ -8,7 +8,7 @@
 # topics.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
 
 schema_version: 1
-updated_at: "2026-10-19"
+updated_at: "2026-10-20"
 reviewed_at: "2026-08-13" # Old articles retain their last review date; new articles override in frontmatter.
 default_priority: p2
 priority_precedence: [p0, p1, p2]
@@ -728,6 +728,7 @@ evidence:
       - explanation_only
     derive_illustrative_artifact_from_nonempty_code_refs: true
     deterministic_test:
+      - S-SEC-03
       - S-AI-12
       - S-AI-13
       - S-AI-14

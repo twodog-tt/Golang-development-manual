@@ -140,9 +140,9 @@
 
 | 标签 | 当前篇数 | 能证明什么 | 不能证明什么 |
 |------|---------:|------------|--------------|
-| `explanation_only` | 167 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
+| `explanation_only` | 166 | 结构化答案、SQL/配置与来源 | 代码已运行、环境已验收 |
 | `illustrative_artifact` | 30 | 仓库有相关代码或配置 | 测试当前通过、外部系统兼容 |
-| `deterministic_test` | 35 | 有不依赖外部服务的测试/回放门禁 | localnet、硬件或生产行为 |
+| `deterministic_test` | 36 | 有不依赖外部服务的测试/回放门禁 | localnet、硬件或生产行为 |
 | `integration_harness` | 17 | 有 localnet/testnet/HSM/MPC/故障 harness | 每个目标版本都已实跑 |
 | `external_acceptance` | 0 | 真实厂商/生产环境的具名验收 | — |
 

@@ -397,7 +397,7 @@ cd basis/goroutine && go run .
 ```bash
 # 完整运行需要 Docker 与本地 postgres:17-alpine / redis:7.4-alpine 镜像
 bash scripts/verify_reliability_examples.sh
-# Agent 评测、审批、MCP/A2A、RAG/Memory/Prompt/媒体/身份/Commerce/开放平台/成本故障门禁
+# Agent 评测、审批、MCP/A2A、RAG/Memory/Prompt/媒体/身份/Commerce/开放平台/供应链/成本故障门禁
 # 需 Go、Python 3、Node 22.15+，无需 Docker
 bash scripts/verify_reliability_examples.sh --offline
 ```
@@ -431,6 +431,14 @@ go run ./examples/senior/agentplatform/cmd/demo
 python3 examples/senior/agentplatform/wire/verify.py
 # 容器探针需 Docker 和本地 alpine:3.22.1 镜像，离线门禁不执行此项
 python3 examples/senior/agentplatform/verify_sandbox.py
+```
+
+SBOM、Provenance 与发布准入新增[真实签名与离线输入篡改演练](./examples/senior/releaseadmission/README.md)，覆盖测试证据、身份授权、报告绑定、风险例外及审批后变化；不执行真实部署。
+
+```bash
+go run ./examples/senior/releaseadmission/cmd/demo
+go test -race -timeout 60s ./examples/senior/releaseadmission/...
+python3 examples/senior/releaseadmission/verify_go_inputs.py
 ```
 
 ## 稳定币支付与资金运营项目

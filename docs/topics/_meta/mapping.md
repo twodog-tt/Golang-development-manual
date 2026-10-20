@@ -67,6 +67,7 @@
 | S-SEC-01～04 | Web3 安全工程 | — | [21-security-engineering/](../21-security-engineering/index.md) |
 | S-SEC-02 | Signer Fencing | [S-SEC-02](../21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) | `examples/senior/signerfencing/` |
 | S-SEC-02 | Durable Fence + HSM/MPC | [S-SEC-02](../21-security-engineering/S-SEC-02-key-ceremony-signer-fencing-recovery.md) | `examples/signer-project/` |
+| S-SEC-03 | SBOM/Provenance、例外与最终准入 | [S-SEC-03](../21-security-engineering/S-SEC-03-sbom-provenance-release-admission.md) | `examples/senior/releaseadmission/` |
 | S-EXCH-01～32 | DEX / CEX 交易所 | — | [14-dex-cex-engineering/](../14-dex-cex-engineering/index.md) |
 | S-EXCH-17 | 确定性撮合引擎 | [S-EXCH-17](../14-dex-cex-engineering/S-EXCH-17-runnable-deterministic-matching-engine.md) | `examples/senior/matchingengine/` |
 | S-EXCH-18 | WAL、快照与回放 | [S-EXCH-18](../14-dex-cex-engineering/S-EXCH-18-wal-snapshot-replay.md) | `examples/senior/walreplay/` |

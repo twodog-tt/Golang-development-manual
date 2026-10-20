@@ -63,6 +63,7 @@
 | 文档 ID | 目录 | 说明 | 测试 |
 |-------|------|------|------|
 | S-SEC-02 | [signerfencing/](signerfencing/) | signer-side epoch、owner、policy/intent 与幂等 fencing | `go test -race ./signerfencing/...` |
+| S-SEC-03 | [releaseadmission/](releaseadmission/) | 真实签名、测试/SBOM/扫描绑定、例外与最终准入；离线 vendor/replace/workspace 篡改 | `go test -race -timeout 60s ./releaseadmission/...` · `go run ./releaseadmission/cmd/demo` · `python3 releaseadmission/verify_go_inputs.py` |
 | S-NODE-07 | [chainmerge/](chainmerge/) | hash lineage、overlap、reorg 与 finalized guard | `go test -race ./chainmerge/...` |
 | S-NODE-09 | [txlifecycle/](txlifecycle/) | UNKNOWN、同 bytes 重播、链证据与 provider 分歧 | `go test -race ./txlifecycle/...` |
 
