@@ -1,4 +1,4 @@
-/* 松绿书房 — the reading surface is shared by every Markdown article. */
+/* 知序 — the reading surface is shared by every Markdown article. */
 :root, [data-md-color-scheme="default"] {
   --library-paper: #faf9f6;
   --library-surface: #ffffff;
@@ -72,7 +72,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .library-header .md-header__inner { min-height: 76px; gap: 0; padding: 0 30px; }
 .library-brand { display: inline-flex; align-items: center; gap: 14px; color: var(--library-ink); flex-shrink: 0; }
 .library-brand-icon { display: inline-flex; color: var(--library-green); }
-.library-brand-icon svg { width: 31px; height: 31px; fill: currentColor; }
+.library-brand-icon img { display: block; width: 32px; height: 32px; }
 .library-brand strong { font: 700 25px/1.2 var(--library-serif); letter-spacing: .035em; }
 .library-brand-subtitle { margin-left: 2px; font: 14px/1.4 var(--library-serif); }
 .library-topnav { display: flex; gap: 40px; align-items: center; margin-left: 95px; font-size: 14px; }
@@ -297,7 +297,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   html { scroll-padding-top: 90px; }
   .library-header .md-header__inner { min-height: 64px; padding: 0 10px; }
   .library-brand { gap: 9px; }
-  .library-brand-icon svg { width: 25px; height: 25px; }
+  .library-brand-icon img { width: 28px; height: 28px; }
   .library-brand strong { font-size: 22px; }
   .library-header-actions { margin-left: auto; gap: 0; }
   .library-header-actions .md-header__button { padding: 8px; }

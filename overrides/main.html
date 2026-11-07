@@ -33,7 +33,7 @@
 {% block footer %}
   {% if not page or not page.is_homepage %}{{ super() }}{% endif %}
   <footer class="library-footer md-grid">
-    <a href="{{ nav.homepage.url | url }}">松绿书房 <span>工程知识库</span></a>
+    <a href="{{ nav.homepage.url | url }}">知序 <span>工程知识库</span></a>
     <span>Go · Agent · Web3 <span aria-hidden="true">/</span> {{ config.extra.library.count }} 篇工程知识</span>
     <a href="{{ 'sources/' | url }}">来源与引用</a>
   </footer>

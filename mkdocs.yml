@@ -1,4 +1,4 @@
-site_name: Go · Agent · Web3 工程知识库
+site_name: 知序 · Go · Agent · Web3 工程知识库
 site_description: Go 生产工程、Web3 链上基建与资金链路、AI/Crypto Agent 控制面的开源工程知识库（249 篇）
 site_url: https://knowledgebase.wenyiapp.cn/
 repo_url: https://github.com/twodog-tt/Golang-development-manual
@@ -12,6 +12,8 @@ exclude_docs: |
 theme:
   name: material
   custom_dir: overrides
+  logo: assets/zhixu-logo.svg
+  favicon: assets/zhixu-logo.svg
   font: false
   language: zh
   palette:
