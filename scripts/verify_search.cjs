@@ -45,6 +45,10 @@ const send = message => new Promise((done, reject) => {
     ['resolvedDependencies', article],
     ['Outbox', 'S-DIST-06-outbox-inbox-fault-lab/'],
     ['双分录', 'S-PAY-07-postgresql-double-entry-ledger-lab/'],
+    ['量化开发', 'S-QUANT-01-quant-development-architecture/'],
+    ['回测', 'S-QUANT-04-event-driven-backtesting/'],
+    ['TWAP', 'S-QUANT-05-oms-ems-execution-algorithms/'],
+    ['Kill Switch', 'S-QUANT-06-portfolio-risk-pnl-reconciliation/'],
   ];
   const checks = [];
   for (const [query, target] of queries) {

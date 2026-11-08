@@ -1,6 +1,6 @@
 # Go · Agent · Web3 工程知识库
 
-面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + Web3/区块链架构方向** 的工程知识沉淀（**249 篇正文**）。
+面向 **5 年+ Go 后端 + AI Agent Platform / Crypto Agent Ecosystem + Web3/区块链架构方向** 的工程知识沉淀（**257 篇正文**）。
 
 新增链上实战阅读顺序：[交易执行网关](topics/19-node-rpc-staking/S-NODE-11-transaction-execution-gateway-lab.md) → [Indexer 查询与数据质量](topics/19-node-rpc-staking/S-NODE-12-indexer-query-data-quality-lab.md) → [DeFi 协议接入](topics/14-dex-cex-engineering/S-EXCH-32-defi-protocol-integration-lab.md)。现已与稳定币支付项目接通：钱包收款 → 索引验证 → 账本 → 冻结 → V2 兑换 → 双资产入账与通知。[端到端运行指南](https://github.com/twodog-tt/Golang-development-manual/tree/master/examples/stablecoin-ops/e2e)。仅使用本地合成资产。
 
@@ -10,7 +10,7 @@
 |------|------|
 | 首页 / 学习路线 / 专题自测 | 入口与能力演练 |
 | 方向与优先级 | 角色 P0/P1/P2、知识图谱、纠错审计 |
-| **工程专题** | 基础 Go → 网络中间件 → 系统设计/架构 → Web3 基础设施 → 领导力与 AI |
+| **工程专题** | 基础 Go → 网络中间件 → 系统设计/架构/量化交易 → Web3 基础设施 → 领导力与 AI |
 | 参考资料 | Web3 重点专题、专题总索引、来源、代码映射 |
 | 维护工具 | 撰写模板、质量审查 |
 
@@ -21,6 +21,8 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-docs.txt
 mkdocs serve
 ```
+
+量化开发入口：[22 量化交易工程](topics/22-quant-trading-engineering/index.md)，含学习顺序、八个专题和起步练习设计。
 
 ## 可运行代码
 

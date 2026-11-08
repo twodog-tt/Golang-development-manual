@@ -35,6 +35,7 @@ DIR_TITLES: dict[str, str] = {
     "19-node-rpc-staking": "19 节点、RPC 与 Staking",
     "20-protocol-consensus-security": "20 协议、共识与安全",
     "21-security-engineering": "21 Web3 安全工程",
+    "22-quant-trading-engineering": "22 量化交易工程",
     "middleware": "中间件与数据库",
     "middleware/mysql": "MySQL",
     "middleware/postgresql": "PostgreSQL",
@@ -55,7 +56,7 @@ TOPICS_GROUPS: list[tuple[str, list[str]]] = [
     ("进阶 · 网络与中间件", ["06-network-governance", "middleware"]),
     (
         "高阶 · 系统设计与架构",
-        ["03-system-design", "09-cloud-native", "11-solution-architecture", "15-microservices-exchange"],
+        ["03-system-design", "09-cloud-native", "11-solution-architecture", "15-microservices-exchange", "22-quant-trading-engineering"],
     ),
     (
         "专题 · Web3 核心基础设施",
@@ -99,6 +100,15 @@ ROOT_PAGES = """nav:
 # 仅影响侧栏展示；正文 H1、搜索索引与专题标题继续使用完整 title。
 # 优先覆盖篇数多、术语长、在窄侧栏中容易超过两行的模块。
 COMPACT_NAV_TITLES: dict[str, str] = {
+    # 22 量化交易工程
+    "S-QUANT-01": "量化开发全景与系统架构",
+    "S-QUANT-02": "行情 / 盘口 / 点时数据",
+    "S-QUANT-03": "因子 / 统计 / 样本外验证",
+    "S-QUANT-04": "事件驱动回测与成交模型",
+    "S-QUANT-05": "OMS / EMS / 执行算法",
+    "S-QUANT-06": "组合风控 / PnL / 对账",
+    "S-QUANT-07": "做市 / 套利 / 库存风险",
+    "S-QUANT-08": "Go 交易系统与生产恢复",
     # 12 区块链与 Web3
     "S-BC-11": "Rollup Finality / DA / 强制退出",
     "S-BC-12": "跨链桥认证 / 重放 / 限额",

@@ -29,10 +29,10 @@ def on_config(config):
         "featured": [
             {"id": qid, "label": label, "description": description}
             for qid, label, description in [
-                ("S-PAY-08", "Web3", "支付到 DeFi：收款、冻结、实际兑换与账本冲正。"),
-                ("S-NODE-11", "Web3", "持久签名、Nonce 提价与进程中断恢复。"),
-                ("S-NODE-12", "Go", "快照分页、日志质量门禁与链重组回放。"),
-                ("S-EXCH-32", "Web3", "真实本地 Uniswap V2 报价、授权与执行核对。"),
+                ("S-QUANT-01", "量化", "研究平台、交易系统与 Go/Python/C++ 工程分工。"),
+                ("S-QUANT-04", "量化", "事件时钟、部分成交、交易成本与回测证据边界。"),
+                ("S-QUANT-05", "量化", "订单恢复、撤单竞态与 TWAP/VWAP/POV 执行。"),
+                ("S-QUANT-06", "量化", "账户敞口预占、PnL、对账与停机控制。"),
             ] if qid in topics
         ],
     }

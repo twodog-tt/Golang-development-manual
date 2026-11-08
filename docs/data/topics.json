@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "generated_at": "2026-10-20T10:28:05Z",
-  "count": 249,
+  "generated_at": "2026-11-08T06:34:19Z",
+  "count": 257,
   "roles": [
     {
       "key": "senior_go_backend",
@@ -37,6 +37,11 @@
       "key": "staff_architect",
       "label": "Staff / 后端架构师",
       "objective": "证明跨团队技术战略、风险治理、渐进迁移和可量化组织影响力。"
+    },
+    {
+      "key": "quantitative_development",
+      "label": "量化交易工程",
+      "objective": "建立点时数据、统计验证、回测、订单执行、账户风控与生产恢复的完整工程链路。"
     }
   ],
   "topics": [
@@ -56,7 +61,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -81,7 +87,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -106,7 +113,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -131,7 +139,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -156,7 +165,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -181,7 +191,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -206,7 +217,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -231,7 +243,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -256,7 +269,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -281,7 +295,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -306,7 +321,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -331,7 +347,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -356,7 +373,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -381,7 +399,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -406,7 +425,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -431,7 +451,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -456,7 +477,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -481,7 +503,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -506,7 +529,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -531,7 +555,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -556,7 +581,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -581,7 +607,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -606,7 +633,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -631,7 +659,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -656,7 +685,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -681,7 +711,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -706,7 +737,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -731,7 +763,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -756,7 +789,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -781,7 +815,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -806,7 +841,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -831,7 +867,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -856,7 +893,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -881,7 +919,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -906,7 +945,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -931,7 +971,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -956,7 +997,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -981,7 +1023,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1006,7 +1049,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1031,7 +1075,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1056,7 +1101,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1081,7 +1127,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1106,7 +1153,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1131,7 +1179,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1156,7 +1205,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1181,7 +1231,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1206,7 +1257,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1231,7 +1283,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1256,7 +1309,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1281,7 +1335,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1306,7 +1361,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1331,7 +1387,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1356,7 +1413,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1381,7 +1439,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1406,7 +1465,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1431,7 +1491,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1456,7 +1517,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1481,7 +1543,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1506,7 +1569,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1531,7 +1595,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1556,7 +1621,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1581,7 +1647,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1606,7 +1673,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1631,7 +1699,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1656,7 +1725,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1681,7 +1751,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1706,7 +1777,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1731,7 +1803,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1756,7 +1829,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1781,7 +1855,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1806,7 +1881,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1831,7 +1907,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1856,7 +1933,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1881,7 +1959,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1906,7 +1985,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1931,7 +2011,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1956,7 +2037,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -1981,7 +2063,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2006,7 +2089,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2031,7 +2115,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2056,7 +2141,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2081,7 +2167,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2106,7 +2193,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2131,7 +2219,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2156,7 +2245,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2181,7 +2271,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2206,7 +2297,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2231,7 +2323,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2256,7 +2349,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2281,7 +2375,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2306,7 +2401,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2331,7 +2427,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2356,7 +2453,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2381,7 +2479,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2406,7 +2505,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2431,7 +2531,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2456,7 +2557,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2481,7 +2583,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2506,7 +2609,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2531,7 +2635,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2556,7 +2661,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2581,7 +2687,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2606,7 +2713,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2631,7 +2739,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2656,7 +2765,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2681,7 +2791,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2706,7 +2817,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2731,7 +2843,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2756,7 +2869,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2781,7 +2895,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2806,7 +2921,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2831,7 +2947,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2856,7 +2973,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2881,7 +2999,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2906,7 +3025,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2931,7 +3051,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p0",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2956,7 +3077,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p0",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -2981,7 +3103,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3006,7 +3129,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3031,7 +3155,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3056,7 +3181,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3081,7 +3207,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3106,7 +3233,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3131,7 +3259,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3156,7 +3285,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p0",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3181,7 +3311,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3206,7 +3337,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3231,7 +3363,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3256,7 +3389,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3281,7 +3415,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3306,7 +3441,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3331,7 +3467,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3356,7 +3493,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3381,7 +3519,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3406,7 +3545,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3431,7 +3571,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3456,7 +3597,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3481,7 +3623,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3506,7 +3649,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3531,7 +3675,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3556,7 +3701,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3581,7 +3727,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3606,7 +3753,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3631,7 +3779,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3656,7 +3805,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3681,7 +3831,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3706,7 +3857,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3731,7 +3883,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "experience_pattern",
@@ -3756,7 +3909,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "experience_pattern",
@@ -3781,7 +3935,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "experience_pattern",
@@ -3806,7 +3961,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "experience_pattern",
@@ -3831,7 +3987,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "experience_pattern",
@@ -3856,7 +4013,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3881,7 +4039,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3906,7 +4065,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3931,7 +4091,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3956,7 +4117,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -3981,7 +4143,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4006,7 +4169,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4031,7 +4195,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4056,7 +4221,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4081,7 +4247,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4106,7 +4273,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4131,7 +4299,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4156,7 +4325,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4181,7 +4351,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4206,7 +4377,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4231,7 +4403,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4256,7 +4429,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4281,7 +4455,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4306,7 +4481,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4331,7 +4507,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4356,7 +4533,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4381,7 +4559,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4406,7 +4585,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4431,7 +4611,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4456,7 +4637,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4481,7 +4663,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4506,7 +4689,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4531,7 +4715,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4556,7 +4741,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4581,7 +4767,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4606,7 +4793,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4631,7 +4819,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4656,7 +4845,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4681,7 +4871,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4706,7 +4897,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4731,7 +4923,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4756,7 +4949,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4781,7 +4975,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4806,7 +5001,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4831,7 +5027,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4856,7 +5053,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4881,7 +5079,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4906,7 +5105,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4931,7 +5131,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4956,7 +5157,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -4981,7 +5183,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5006,7 +5209,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5031,7 +5235,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5056,7 +5261,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5081,7 +5287,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5106,7 +5313,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5131,7 +5339,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5156,7 +5365,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5181,7 +5391,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5206,7 +5417,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p0"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5231,7 +5443,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5256,7 +5469,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5281,7 +5495,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5306,7 +5521,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5331,13 +5547,222 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
         "reproducibility": "explanation_only",
         "volatility": "version_sensitive",
         "reviewed_at": "2026-08-13"
+      }
+    },
+    {
+      "id": "S-QUANT-01",
+      "title": "量化开发全景：研究平台、交易系统与 Go/Python/C++ 分工",
+      "frequency": 5,
+      "module": "22 量化交易工程",
+      "module_key": "quant_trading_engineering",
+      "resume_focus": false,
+      "url": "topics/22-quant-trading-engineering/S-QUANT-01-quant-development-architecture/",
+      "prompt": "量化开发把研究想法变成可复现、可监控的研究与交易系统。完整链路是数据 → 特征/信号 → 目标组合 → 风控 → 执行 → 成交/账务 → 归因。工程师需要同时理解软件正确性和市场语义：数据何时可见、订单何时生效、资金何时被占用。回测收益、系统吞吐和实盘收益分别需要证据，不能互相替代。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2",
+        "quantitative_development": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "vendor_or_regulatory_sensitive",
+        "reviewed_at": "2026-11-08"
+      }
+    },
+    {
+      "id": "S-QUANT-02",
+      "title": "量化行情与微观结构：盘口、时间戳、点时数据和质量控制",
+      "frequency": 5,
+      "module": "22 量化交易工程",
+      "module_key": "quant_trading_engineering",
+      "resume_focus": false,
+      "url": "topics/22-quant-trading-engineering/S-QUANT-02-market-data-microstructure/",
+      "prompt": "行情工程需要保存市场事实、到达顺序与当时可见的信息。逐笔成交、最优买卖价、聚合深度和逐单订单簿的语义不同；历史数据还要保留当时的标的集合和修订版本。策略只能使用决策时已可用的数据，盘口断序或行情过期时应停止依赖它新增风险。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2",
+        "quantitative_development": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "vendor_or_regulatory_sensitive",
+        "reviewed_at": "2026-11-08"
+      }
+    },
+    {
+      "id": "S-QUANT-03",
+      "title": "因子研究与统计验证：收益风险、IC、样本外和过拟合",
+      "frequency": 5,
+      "module": "22 量化交易工程",
+      "module_key": "quant_trading_engineering",
+      "resume_focus": false,
+      "url": "topics/22-quant-trading-engineering/S-QUANT-03-factor-research-statistical-validation/",
+      "prompt": "研究从可证伪的假设出发，用当时可用数据生成信号，在时间顺序约束下验证样本外表现。因子相关性、预测准确率和扣除成本后的组合收益是不同指标。每次参数选择都消耗验证信息；反复观察测试集再修改策略，会使它逐渐变成训练集。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2",
+        "quantitative_development": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "stable",
+        "reviewed_at": "2026-11-08"
+      }
+    },
+    {
+      "id": "S-QUANT-04",
+      "title": "事件驱动回测：时钟、成交模型、交易成本与可复现验证",
+      "frequency": 5,
+      "module": "22 量化交易工程",
+      "module_key": "quant_trading_engineering",
+      "resume_focus": false,
+      "url": "topics/22-quant-trading-engineering/S-QUANT-04-event-driven-backtesting/",
+      "prompt": "回测是在历史输入和明确成交假设下运行策略的模拟器。信号产生、订单到达、撮合成交、回报到达与账户更新应有独立事件和时钟。可重复的回测只能证明给定输入和模型下的结果一致，不能证明真实市场会按同样价格、数量和顺序成交。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2",
+        "quantitative_development": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-11-08"
+      }
+    },
+    {
+      "id": "S-QUANT-05",
+      "title": "OMS 与 EMS：订单恢复、撤单竞态和 TWAP/VWAP/POV 执行",
+      "frequency": 5,
+      "module": "22 量化交易工程",
+      "module_key": "quant_trading_engineering",
+      "resume_focus": false,
+      "url": "topics/22-quant-trading-engineering/S-QUANT-05-oms-ems-execution-algorithms/",
+      "prompt": "OMS 管理订单意图、身份、状态、风险预占与审计，EMS 决定如何拆单和路由。网络超时意味着结果未知，撤单请求意味着撤销意图，两者都不能直接释放全部资金或重发新订单。成交回报应幂等记账，重启后先恢复订单与账户事实，再允许新增风险。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2",
+        "quantitative_development": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "vendor_or_regulatory_sensitive",
+        "reviewed_at": "2026-11-08"
+      }
+    },
+    {
+      "id": "S-QUANT-06",
+      "title": "量化组合风控：敞口预占、PnL、资金对账与 Kill Switch",
+      "frequency": 5,
+      "module": "22 量化交易工程",
+      "module_key": "quant_trading_engineering",
+      "resume_focus": false,
+      "url": "topics/22-quant-trading-engineering/S-QUANT-06-portfolio-risk-pnl-reconciliation/",
+      "prompt": "风控需要同时计入已成交持仓、活跃挂单和提交结果未知的订单，并把检查与额度预占放在一致的账户边界内。PnL、可用资金、保证金和风险敞口各有口径。停机控制应能阻止新增风险、追踪撤单与核对，而不是假设调用一次“取消全部”就已经清仓。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2",
+        "quantitative_development": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "vendor_or_regulatory_sensitive",
+        "reviewed_at": "2026-11-08"
+      }
+    },
+    {
+      "id": "S-QUANT-07",
+      "title": "做市与跨市场套利：库存、逆向选择、腿风险和资金成本",
+      "frequency": 4,
+      "module": "22 量化交易工程",
+      "module_key": "quant_trading_engineering",
+      "resume_focus": false,
+      "url": "topics/22-quant-trading-engineering/S-QUANT-07-market-making-arbitrage/",
+      "prompt": "做市通过报价提供流动性，同时承担库存与逆向选择风险；跨市场套利需要处理两条成交腿、资金分布和成本。屏幕上的价差不等于可实现利润，maker 返佣也不能单独证明盈利。工程核心是价格与数量可执行、库存有边界、单腿失败可处置、资金与损益可核对。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2",
+        "quantitative_development": "p1"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "vendor_or_regulatory_sensitive",
+        "reviewed_at": "2026-11-08"
+      }
+    },
+    {
+      "id": "S-QUANT-08",
+      "title": "Go 量化系统生产工程：有界队列、尾延迟、确定性与恢复门禁",
+      "frequency": 5,
+      "module": "22 量化交易工程",
+      "module_key": "quant_trading_engineering",
+      "resume_focus": false,
+      "url": "topics/22-quant-trading-engineering/S-QUANT-08-go-trading-systems-production/",
+      "prompt": "Go 可承担行情接入、交易网关、账户风险和控制面，但交易系统需要定义每段队列、顺序、恢复与尾延迟预算。行情增量和成交回报不能被随意丢弃；重启后必须先恢复订单、持仓和额度。性能结论要附硬件、负载、持续时间与持久化边界，不能把单次内存 benchmark 当作真实交易能力。",
+      "role_priorities": {
+        "senior_go_backend": "p2",
+        "ai_agent_platform": "p2",
+        "wallet_custody": "p2",
+        "payments_stablecoin": "p2",
+        "node_rpc_indexer": "p2",
+        "exchange_engineering": "p2",
+        "staff_architect": "p2",
+        "quantitative_development": "p0"
+      },
+      "evidence": {
+        "basis": "source_anchored",
+        "reproducibility": "explanation_only",
+        "volatility": "version_sensitive",
+        "reviewed_at": "2026-11-08"
       }
     },
     {
@@ -5356,7 +5781,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5381,7 +5807,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5406,7 +5833,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5431,7 +5859,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5456,7 +5885,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5481,7 +5911,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5506,7 +5937,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5531,7 +5963,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5556,7 +5989,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p1"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5581,7 +6015,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5606,7 +6041,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5631,7 +6067,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5656,7 +6093,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5681,7 +6119,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5706,7 +6145,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5731,7 +6171,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5756,7 +6197,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p0"
+        "staff_architect": "p0",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5781,7 +6223,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5806,7 +6249,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5831,7 +6275,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5856,7 +6301,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5881,7 +6327,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5906,7 +6353,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5931,7 +6379,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5956,7 +6405,8 @@
         "payments_stablecoin": "p2",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -5981,7 +6431,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6006,7 +6457,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6031,7 +6483,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6056,7 +6509,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6081,7 +6535,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p2",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6106,7 +6561,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6131,7 +6587,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p0",
-        "staff_architect": "p1"
+        "staff_architect": "p1",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6156,7 +6613,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p1",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6181,7 +6639,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6206,7 +6665,8 @@
         "payments_stablecoin": "p1",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6231,7 +6691,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p0",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",
@@ -6256,7 +6717,8 @@
         "payments_stablecoin": "p0",
         "node_rpc_indexer": "p2",
         "exchange_engineering": "p1",
-        "staff_architect": "p2"
+        "staff_architect": "p2",
+        "quantitative_development": "p2"
       },
       "evidence": {
         "basis": "source_anchored",

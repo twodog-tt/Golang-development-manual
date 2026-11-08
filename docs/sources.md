@@ -6,7 +6,7 @@
 > [领域能力优先级与证据标签](topics/_meta/role-priority-matrix.md) ·
 > 代码映射：[topics/_meta/mapping.md](topics/_meta/mapping.md)
 
-## 知识库覆盖范围（249 篇）
+## 知识库覆盖范围（257 篇）
 
 | 模块 | 篇数 | 说明 |
 |------|------|------|
@@ -28,6 +28,7 @@
 | 13 Solidity 与合约 | 8 | 安全、ERC、Proxy、DeFi |
 | 14 DEX / CEX / 预测市场 | 32 | AMM/Uniswap/Pancake、Staking/Farm、DEX TL 白板、撮合/WAL、预测市场 |
 | 15 微服务（交易所场景） | 6 | 服务拆分、gRPC、数据隔离、网关、事件总线 |
+| 22 量化交易工程 | 8 | 行情与点时数据、统计验证、回测、OMS/EMS、组合风控、做市与生产恢复 |
 | 07 工程与领导力 | 5 | 复盘、技术债、Code Review、Staff 战略与迁移 |
 | 09 云原生 | 10 | K8s、Docker、OTel、Terraform、Helm/GitOps |
 
@@ -206,6 +207,23 @@
 | UMA Optimistic Oracle | https://docs.uma.xyz/protocol-overview/how-does-umas-oracle-work | 提案、bond、liveness、争议仲裁 |
 | FATF 建议 | https://www.fatf-gafi.org/en/topics/fatf-recommendations.html | AML/KYT 合规框架 |
 | 复式记账（百科） | https://en.wikipedia.org/wiki/Double-entry_bookkeeping | 交易所账务 |
+
+### 量化交易工程
+
+| 来源 | 链接 | 用途 |
+|------|------|------|
+| Citadel Quantitative Developer | [职责示例](https://www.citadel.com/careers/details/python-quantitative-developer/) | 研究工具、数据与工程职责；不据此统计招聘趋势 |
+| Optiver Pricing Data | [职责示例](https://www.optiver.com/join-us/jobs/technology/amsterdam/quantitative-developer-pricing-data/) | 定价数据与 C++/Python 协作 |
+| QuantConnect Research Guide | [研究流程](https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/research-guide) | 点时数据、偏差与实验设计 |
+| QuantConnect Fill Models | [成交模型](https://www.quantconnect.com/docs/v2/writing-algorithms/reality-modeling/trade-fills/key-concepts) | 回测成交假设与部分成交 |
+| scikit-learn TimeSeriesSplit | [时间切分](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html) | 时间顺序验证与 gap 的边界 |
+| Andrew W. Lo | [The Statistics of Sharpe Ratios](https://alo.mit.edu/research-page/the-statistics-of-sharpe-ratios/) | Sharpe 估计、年化与统计假设 |
+| FIX Trading Community | [Order State Changes](https://www.fixtrading.org/wp-content/uploads/download-manager-files/Order-State-Changes.pdf) | 成交、撤单与状态优先级 |
+| Interactive Brokers | [TWAP](https://www.interactivebrokers.com/docs/general/order-types/algorithmic-orders/ib-algorithms/twap) · [VWAP](https://www.interactivebrokers.com/docs/general/order-types/algorithmic-orders/ib-algorithms/vwap) | 执行算法与产品约束 |
+| CME Group | [Kill Switch](https://www.cmegroup.com/tools-information/webhelp/globex-credit-controls/Content/Kill-Switch.html) | 停单、撤单与作用范围限制 |
+| Avellaneda–Stoikov | [原始论文](https://math.nyu.edu/~avellane/HighFrequencyTrading.pdf) | 做市库存与模型假设 |
+
+新增 8 篇的资料复核日期为 **2026-11-08**，证据级别为 `explanation_only`。
 
 ## 引用规则
 

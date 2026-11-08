@@ -44,6 +44,7 @@ MODULE_LABELS: dict[str, str] = {
     "node_rpc_staking": "19 节点、RPC 与 Staking",
     "protocol_consensus_security": "20 协议、共识与安全",
     "security_engineering": "21 Web3 安全工程",
+    "quant_trading_engineering": "22 量化交易工程",
 }
 
 TIER_KEYS = {"p0", "p1", "p2"}

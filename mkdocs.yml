@@ -1,5 +1,5 @@
 site_name: 知序 · Go · Agent · Web3 工程知识库
-site_description: Go 生产工程、Web3 链上基建与资金链路、AI/Crypto Agent 控制面的开源工程知识库（249 篇）
+site_description: Go 生产工程、Web3 链上基建与资金链路、AI/Crypto Agent 控制面与量化交易工程的开源知识库（257 篇）
 site_url: https://knowledgebase.wenyiapp.cn/
 repo_url: https://github.com/twodog-tt/Golang-development-manual
 repo_name: twodog-tt/Golang-development-manual
@@ -303,6 +303,15 @@ plugins:
         interview/21-security-engineering/S-SEC-03-sbom-provenance-release-admission.md: topics/21-security-engineering/S-SEC-03-sbom-provenance-release-admission.md
         interview/21-security-engineering/S-SEC-04-security-testing-incident-response.md: topics/21-security-engineering/S-SEC-04-security-testing-incident-response.md
         interview/21-security-engineering/index.md: topics/21-security-engineering/index.md
+        interview/22-quant-trading-engineering/S-QUANT-01-quant-development-architecture.md: topics/22-quant-trading-engineering/S-QUANT-01-quant-development-architecture.md
+        interview/22-quant-trading-engineering/S-QUANT-02-market-data-microstructure.md: topics/22-quant-trading-engineering/S-QUANT-02-market-data-microstructure.md
+        interview/22-quant-trading-engineering/S-QUANT-03-factor-research-statistical-validation.md: topics/22-quant-trading-engineering/S-QUANT-03-factor-research-statistical-validation.md
+        interview/22-quant-trading-engineering/S-QUANT-04-event-driven-backtesting.md: topics/22-quant-trading-engineering/S-QUANT-04-event-driven-backtesting.md
+        interview/22-quant-trading-engineering/S-QUANT-05-oms-ems-execution-algorithms.md: topics/22-quant-trading-engineering/S-QUANT-05-oms-ems-execution-algorithms.md
+        interview/22-quant-trading-engineering/S-QUANT-06-portfolio-risk-pnl-reconciliation.md: topics/22-quant-trading-engineering/S-QUANT-06-portfolio-risk-pnl-reconciliation.md
+        interview/22-quant-trading-engineering/S-QUANT-07-market-making-arbitrage.md: topics/22-quant-trading-engineering/S-QUANT-07-market-making-arbitrage.md
+        interview/22-quant-trading-engineering/S-QUANT-08-go-trading-systems-production.md: topics/22-quant-trading-engineering/S-QUANT-08-go-trading-systems-production.md
+        interview/22-quant-trading-engineering/index.md: topics/22-quant-trading-engineering/index.md
         interview/_meta/article-structure-checklist.md: topics/_meta/article-structure-checklist.md
         interview/_meta/mapping.md: topics/_meta/mapping.md
         interview/_meta/p0-knowledge-graph.md: topics/_meta/p0-knowledge-graph.md

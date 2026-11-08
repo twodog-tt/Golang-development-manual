@@ -111,13 +111,44 @@ def check(base, release, output):
             expect(page.locator(".library-article a[href*='e2e/RECOVERY.md']").first).to_be_visible()
             expect(page.locator(".library-article")).to_contain_text("release-signer")
             page.screenshot(path=str(output / "operator-recovery.png"))
+
+            page.goto("/", wait_until="domcontentloaded")
+            page.locator('.library-tracks a[href*="topics/22-quant-trading-engineering/"]').click()
+            expect(page).to_have_url(base.rstrip("/") + "/topics/22-quant-trading-engineering/")
+            expect(page.get_by_role("heading", name="22 量化交易工程")).to_be_visible()
+            page.screenshot(path=str(output / "quant-module.png"))
+            quant_topics = [topic for topic in json.loads(Path("docs/data/topics.json").read_text())["topics"]
+                            if topic["id"].startswith("S-QUANT-")]
+            assert {topic["id"] for topic in quant_topics} == {
+                f"S-QUANT-{number:02d}" for number in range(1, 9)
+            }, "Incomplete quantitative module metadata"
+            for topic in quant_topics:
+                article_path = "/" + topic["url"]
+                response = page.goto(article_path, wait_until="domcontentloaded")
+                assert response.status == 200, topic["id"]
+                expect(page.locator(".library-article h1")).to_contain_text(topic["title"].split("：", 1)[0])
+                expect(page.locator(".library-article")).to_contain_text("30 秒版")
+                assert page.locator('link[rel="canonical"]').get_attribute("href") == base.rstrip("/") + article_path
+                if topic["id"] == "S-QUANT-04":
+                    page.screenshot(path=str(output / "quant-backtest.png"))
+            for term, slug in [("量化开发", "S-QUANT-01-quant-development-architecture"),
+                               ("回测", "S-QUANT-04-event-driven-backtesting"),
+                               ("TWAP", "S-QUANT-05-oms-ems-execution-algorithms"),
+                               ("Kill Switch", "S-QUANT-06-portfolio-risk-pnl-reconciliation")]:
+                page.get_by_role("button", name="搜索知识库", exact=True).click()
+                query.fill(term)
+                expect(results.locator('a[href*="' + slug + '/"]').first).to_be_visible()
+                page.screenshot(path=str(output / (slug + "-search.png")))
+                query.press("Escape")
             assert not errors, "Browser script errors: " + str(errors)
             (output / "result.json").write_text(json.dumps({
                 "result": "passed", "release": release,
                 "checks": ["home", "release", "article", "canonical", "toc", "code",
                            "english_search", "chinese_search", "empty_search", "focus", "page_errors",
                            "stablecoin_articles", "temporal_search", "onchain_articles",
-                           "execution_search", "indexer_search", "defi_search", "payment_e2e_section", "payment_e2e_search", "operator_recovery_section"],
+                           "execution_search", "indexer_search", "defi_search", "payment_e2e_section", "payment_e2e_search", "operator_recovery_section",
+                           "quant_home_entry", "quant_module", "quant_articles", "quant_canonicals",
+                           "quant_chinese_search", "quant_backtest_search", "quant_execution_search", "quant_risk_search"],
             }, indent=2) + "\n")
             print("Production browser checks passed: " + release)
         except Exception:

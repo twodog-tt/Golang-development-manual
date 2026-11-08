@@ -40,6 +40,7 @@ MODULE_ORDER: list[tuple[str, list[tuple[str, str]]]] = [
         ("09 云原生", "cloud_native"),
         ("11 解决方案架构", "solution_architecture"),
         ("15 微服务（交易所）", "microservices_exchange"),
+        ("22 量化交易工程", "quant_trading_engineering"),
     ]),
     ("专题 · Web3 核心基础设施", [
         ("12 区块链与 Web3", "blockchain_web3"),

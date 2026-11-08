@@ -1290,6 +1290,48 @@ p1:
       resume_focus: true
       file: 15-microservices-exchange/S-MSVC-06-event-bus-async-boundary.md
 
+  quant_trading_engineering:
+    - id: S-QUANT-01
+      title: 量化开发全景：研究平台、交易系统与 Go/Python/C++ 分工
+      frequency: 5
+      status: published
+      file: 22-quant-trading-engineering/S-QUANT-01-quant-development-architecture.md
+    - id: S-QUANT-02
+      title: 量化行情与微观结构：盘口、时间戳、点时数据和质量控制
+      frequency: 5
+      status: published
+      file: 22-quant-trading-engineering/S-QUANT-02-market-data-microstructure.md
+    - id: S-QUANT-03
+      title: 因子研究与统计验证：收益风险、IC、样本外和过拟合
+      frequency: 5
+      status: published
+      file: 22-quant-trading-engineering/S-QUANT-03-factor-research-statistical-validation.md
+    - id: S-QUANT-04
+      title: 事件驱动回测：时钟、成交模型、交易成本与可复现验证
+      frequency: 5
+      status: published
+      file: 22-quant-trading-engineering/S-QUANT-04-event-driven-backtesting.md
+    - id: S-QUANT-05
+      title: OMS 与 EMS：订单恢复、撤单竞态和 TWAP/VWAP/POV 执行
+      frequency: 5
+      status: published
+      file: 22-quant-trading-engineering/S-QUANT-05-oms-ems-execution-algorithms.md
+    - id: S-QUANT-06
+      title: 量化组合风控：敞口预占、PnL、资金对账与 Kill Switch
+      frequency: 5
+      status: published
+      file: 22-quant-trading-engineering/S-QUANT-06-portfolio-risk-pnl-reconciliation.md
+    - id: S-QUANT-07
+      title: 做市与跨市场套利：库存、逆向选择、腿风险和资金成本
+      frequency: 4
+      status: published
+      file: 22-quant-trading-engineering/S-QUANT-07-market-making-arbitrage.md
+    - id: S-QUANT-08
+      title: Go 量化系统生产工程：有界队列、尾延迟、确定性与恢复门禁
+      frequency: 5
+      status: published
+      file: 22-quant-trading-engineering/S-QUANT-08-go-trading-systems-production.md
+
 p2:
   leadership:
     - id: S-LEAD-01

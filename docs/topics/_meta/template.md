@@ -1,7 +1,7 @@
 ---
 id: S-MODULE-NNN
 title: 专题标题
-module: runtime-concurrency | memory-gc | system-design | distributed | database | postgresql | network | leadership | coding | cloud-native | ai-engineering | solution-architecture | blockchain-web3 | solidity-contracts | dex-cex-engineering | go-production-engineering | multichain-wallet | web3-payments-stablecoin | node-rpc-staking | protocol-consensus-security | security-engineering
+module: runtime-concurrency | memory-gc | system-design | distributed | database | postgresql | network | leadership | coding | cloud-native | ai-engineering | solution-architecture | blockchain-web3 | solidity-contracts | dex-cex-engineering | go-production-engineering | multichain-wallet | web3-payments-stablecoin | node-rpc-staking | protocol-consensus-security | security-engineering | quant-trading-engineering
 level: senior
 frequency: 5
 go_version: "1.22+"

@@ -1,7 +1,7 @@
 # Go · Agent · Web3 工程知识库
 
 面向 **Go 生产工程、Web3 链上基建与资金链路、AI / Crypto Agent 控制面** 的开源工程知识沉淀，
-共 **249 篇正文**，并配套可运行示例。
+共 **257 篇正文**，并配套可运行示例。
 
 > **三条并列主线**（按工程场景选用，不必线性通读）：
 >
@@ -42,6 +42,7 @@
 | Go 生产工程 | [16](topics/16-go-production-engineering/index.md) · [01](topics/01-runtime-concurrency/index.md) · [02](topics/02-memory-gc/index.md) | 运行时、测试、性能与生产排障 |
 | 网络与中间件 | [06](topics/06-network-governance/index.md) · [中间件](topics/middleware/index.md) | API、连接、数据库、缓存、消息 |
 | 系统设计与云原生 | [03](topics/03-system-design/index.md) · [09](topics/09-cloud-native/index.md) | 幂等、一致性、发布、可观测与容量 |
+| 量化交易工程 | [22 量化交易工程](topics/22-quant-trading-engineering/index.md) | 行情数据、统计研究、回测、执行、风控与恢复 |
 | 多链钱包与托管签名 | [概念地图](maps/wallet-custody.md) · [17](topics/17-multichain-wallet/index.md) | Adapter、充提归集、MPC/HSM、恢复 |
 | 支付与账本 | [18](topics/18-web3-payments-stablecoin/index.md) · [资金地图](maps/exchange-funds.md) | 支付状态机、清结算、合规边界 |
 | 节点、RPC 与 Indexer | [概念地图](maps/indexer-node-data.md) · [19](topics/19-node-rpc-staking/index.md) | 扫块、reorg、canonical、交易管理 |
@@ -95,6 +96,7 @@ localnet/testnet ≠ 主网兼容。完整定义见
 | **Go 基础与生产工程** | [01 并发](topics/01-runtime-concurrency/index.md) → [02 内存](topics/02-memory-gc/index.md) → [16 Go 生产工程](topics/16-go-production-engineering/index.md) → [08 编码练习](topics/08-coding-senior/index.md) | Go 深度、测试、性能与编码门槛 |
 | **网络与中间件** | [06 网络](topics/06-network-governance/index.md) → [中间件](topics/middleware/index.md) | Linux/TCP、API、gRPC、数据库、缓存与 MQ |
 | **系统与组织架构** | [03 系统设计](topics/03-system-design/index.md) → [09 云原生](topics/09-cloud-native/index.md) → [11 解决方案架构](topics/11-solution-architecture/index.md) → [15 微服务](topics/15-microservices-exchange/index.md) → [07 领导力](topics/07-engineering-leadership/index.md) | 架构白板、K8s、演进、迁移与跨团队协作 |
+| **量化交易工程** | [22 量化交易工程](topics/22-quant-trading-engineering/index.md) | 研究平台、回测、OMS/EMS、风险与低延迟工程 |
 | **AI / Crypto Agent** | [10 AI 工程](topics/10-ai-engineering/index.md) → [工作流/HITL](topics/10-ai-engineering/S-AI-09-agent-workflow-hitl-publishing.md) → [MCP/A2A](topics/10-ai-engineering/S-AI-11-mcp-a2a-vendor-neutral-interoperability.md) → [Agent Commerce](topics/10-ai-engineering/S-AI-13-x402-erc8183-agent-commerce.md) → [开放平台/Launchpad](topics/10-ai-engineering/S-AI-14-crypto-agent-open-platform-marketplace-launchpad.md) | Agent 控制面与生态 |
 | **Web3 基础设施** | [12 EVM](topics/12-blockchain-web3/index.md) → [17 多链钱包](topics/17-multichain-wallet/index.md) → [18 支付](topics/18-web3-payments-stablecoin/index.md) → [19 节点/RPC](topics/19-node-rpc-staking/index.md) → [20 协议/共识](topics/20-protocol-consensus-security/index.md) → [21 安全](topics/21-security-engineering/index.md) → [13 Solidity](topics/13-solidity-contracts/index.md) → [14 交易所](topics/14-dex-cex-engineering/index.md) | 多链、资金、节点、协议、安全、合约与交易 |
 

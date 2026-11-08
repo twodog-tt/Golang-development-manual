@@ -8,7 +8,7 @@
 # topics.yaml 中原有 p0/p1/p2 仅为历史兼容分组，不再代表所有岗位的统一顺序。
 
 schema_version: 1
-updated_at: "2026-10-20"
+updated_at: "2026-11-08"
 reviewed_at: "2026-08-13" # Old articles retain their last review date; new articles override in frontmatter.
 default_priority: p2
 priority_precedence: [p0, p1, p2]
@@ -712,6 +712,38 @@ roles:
       - S-AI-09
       - S-AI-10
 
+  quantitative_development:
+    label: 量化交易工程
+    objective: 建立点时数据、统计验证、回测、订单执行、账户风控与生产恢复的完整工程链路。
+    p0:
+      - S-QUANT-01
+      - S-QUANT-02
+      - S-QUANT-03
+      - S-QUANT-04
+      - S-QUANT-05
+      - S-QUANT-06
+      - S-QUANT-08
+      - S-EXCH-19
+      - S-EXCH-20
+      - S-EXCH-03
+      - S-EXCH-15
+      - S-ARCH-07
+      - S-PG-01
+    p1:
+      - S-QUANT-07
+      - S-EXCH-01
+      - S-EXCH-04
+      - S-EXCH-10
+      - S-EXCH-11
+      - S-EXCH-16
+      - S-EXCH-17
+      - S-EXCH-18
+      - S-EXCH-21
+      - S-EXCH-22
+      - S-NODE-10
+      - S-BC-16
+      - S-EXCH-32
+
 evidence:
   basis:
     default: source_anchored
@@ -800,6 +832,8 @@ evidence:
       - S-PROTO-
       - S-CLOUD-
     version_sensitive:
+      - S-QUANT-04
+      - S-QUANT-08
       - S-EXCH-32
       - S-PAY-08
       - S-PAY-09
@@ -818,6 +852,11 @@ evidence:
       - S-PG-04
       - S-DIST-06
     vendor_or_regulatory_sensitive:
+      - S-QUANT-01
+      - S-QUANT-02
+      - S-QUANT-05
+      - S-QUANT-06
+      - S-QUANT-07
       - S-PAY-11
       - S-PAY-02
       - S-PAY-05
