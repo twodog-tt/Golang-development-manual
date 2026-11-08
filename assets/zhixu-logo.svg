@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">知序</title>
+  <desc id="desc">三段折页组成字母 Z，象征知识的串联与有序积累。</desc>
+  <rect width="64" height="64" rx="15" fill="#3e6955"/>
+  <path d="M16 16h32v7H16z" fill="#faf9f6"/>
+  <path d="M38 23h10L26 41H16z" fill="#c5d7be"/>
+  <path d="M16 41h32v7H16z" fill="#faf9f6"/>
+</svg>
